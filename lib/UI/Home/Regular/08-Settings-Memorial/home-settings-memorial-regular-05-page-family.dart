@@ -55,8 +55,8 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 36, fontFamily: 'NexaRegular'),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
@@ -79,29 +79,31 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
           ListTile(
             leading: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage != ''
             ? CircleAvatar(
+              maxRadius: 40,
               backgroundColor: const Color(0xff888888),
               foregroundImage: NetworkImage('${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage}',),
             )
             : const CircleAvatar(
+              maxRadius: 40,
               backgroundColor: const Color(0xff888888),
               foregroundImage: const AssetImage('assets/icons/user-placeholder.png',),
             ),
             title: Text('${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsFirstName} ${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsLastName}',
               style: TextStyle(
-                fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                fontSize: 20,
                 fontFamily: 'NexaBold',
                 color: const Color(0xff000000),
               ),
             ),
             subtitle: Text('${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsEmail}',
               style: TextStyle(
-                fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                fontSize: 16,
                 fontFamily: 'NexaRegular',
                 color: const Color(0xffBDC3C7),
               ),
             ),
             trailing: MaterialButton(
-              child: Text('Remove', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xffffffff),),),
+              child: Text('Remove', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xffffffff),),),
               shape: const StadiumBorder(side: const BorderSide(color: const Color(0xffE74C3C),),),
               minWidth: SizeConfig.screenWidth! / 3.5,
               splashColor: const Color(0xff04ECFF),
@@ -113,8 +115,8 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
                 bool confirmation = await showDialog(
                   context: context,
                   builder: (_) => AssetGiffyDialog(
-                    description: Text('Are you sure you want to remove this user?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                    description: Text('Are you sure you want to remove this user?', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                     entryAnimation: EntryAnimation.DEFAULT,
                     onlyOkButton: false,
@@ -136,8 +138,8 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                        description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         entryAnimation: EntryAnimation.DEFAULT,
                         buttonOkColor: const Color(0xffff0000),
@@ -151,8 +153,8 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        description: Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',)),
-                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                        description: Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',)),
+                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         entryAnimation: EntryAnimation.DEFAULT,
                         onlyOkButton: true,
@@ -160,6 +162,7 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
                           family = [];
                           familyItemsRemaining = 1;
                           page = 1;
+                          count.value = 0;
                           onLoading();
 
                           Navigator.pop(context, true);
@@ -187,23 +190,17 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
       builder: (_, int countListener, __) => Scaffold(
         appBar: AppBar(
           backgroundColor: const Color(0xff04ECFF),
-          centerTitle: true,
-          title: Row(
-            children: [
-              Text('Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
-              
-              Spacer(),
-            ],
-          ),
+          centerTitle: false,
+          title: Text('Family', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+            icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
             onPressed: (){
               Navigator.pop(context);
             },
           ),
           actions: [
             GestureDetector(
-              child: Center(child: Text('Add Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),),
+              child: Center(child: Text('Add Family', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),),
               onTap: (){
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularSearchUser(isFamily: true, memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)));
               },
@@ -236,7 +233,7 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
 
                 const SizedBox(height: 45,),
 
-                Text('Family list is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+                Text('Family list is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
 
                 SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
               ],

@@ -78,8 +78,8 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                       Expanded(child: Container(),),
 
                       ListTile(
-                        title: Text('Update Details', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-                        subtitle: Text('Update your account details', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                        title: Text('Update Details', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                        subtitle: Text('Update your account details', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                         onTap: (){
                           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserUpdateDetails(userId: widget.userId,)));
                         },
@@ -88,8 +88,8 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                       const Divider(height: 20, color: const Color(0xff888888),),
 
                       ListTile(
-                        subtitle: Text('Change your login password', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
-                        title: Text('Password', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                        title: Text('Password', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                        subtitle: Text('Change your login password', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                         onTap: () async{
                           final sharedPrefs = await SharedPreferences.getInstance();
                           bool socialAppSession = sharedPrefs.getBool('regular-social-app-session') ?? false;
@@ -99,8 +99,8 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                             showDialog(
                               context: context,
                               builder: (_) => AssetGiffyDialog(
-                                description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                 entryAnimation: EntryAnimation.DEFAULT,
                                 buttonOkColor: const Color(0xffff0000),
@@ -125,8 +125,8 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                       const Divider(height: 20, color: const Color(0xff888888),),
 
                       ListTile(
-                        subtitle: Text('Optional informations you can share',style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
-                        title: Text('Other info', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                        title: Text('Other info', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                        subtitle: Text('Optional informations you can share',style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                         onTap: () async{
                           context.loaderOverlay.show();
                           APIRegularShowOtherDetailsStatus result = await apiRegularShowOtherDetailsStatus(userId: widget.userId);
@@ -139,8 +139,8 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                       const Divider(height: 20, color: const Color(0xff888888),),
 
                       ListTile(
-                        subtitle: Text('Control what others see', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
-                        title: Text('Privacy Settings', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                        title: Text('Privacy Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                        subtitle: Text('Control what others see', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                         onTap: () => {},
                       ),
 
@@ -149,11 +149,11 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                       const SizedBox(height: 20,),
 
                       MiscRegularButtonTemplate(
-                        buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                        buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
                         buttonColor: const Color(0xff04ECFF),
                         width: SizeConfig.screenWidth! / 2,
                         buttonText: 'Logout',
-                        height: 45,
+                        height: 50,
                         onPressed: () async{
                           bool logoutResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Log out', content: 'Are you sure you want to logout from this account?', confirmColor_1: const Color(0xff000000), confirmColor_2: const Color(0xff888888),),);
 
@@ -169,8 +169,8 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                  description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                   entryAnimation: EntryAnimation.DEFAULT,
                                   buttonOkColor: const Color(0xffff0000),
@@ -187,13 +187,15 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
 
                       const SizedBox(height: 20,),
 
-                      Text('V.1.1.0', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff888888),),),
+                      Text('V.1.1.0', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff888888),),),
 
                       Expanded(child: Container(),),
                     ],
                   ),
                 ),
-                body: Stack(
+                body: SingleChildScrollView(
+                  physics: ClampingScrollPhysics(),
+                  child: Stack(
                   children: [
                     Container(height: SizeConfig.screenHeight, color: const Color(0xffECF0F1),),
 
@@ -203,85 +205,149 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                         children: [
                           CustomPaint(size: Size.infinite, painter: MiscRegularCurvePainter(),),
 
-                          Positioned(
-                            bottom: 50,
-                            left: (SizeConfig.screenWidth! / 2) - 120,
-                            child: GestureDetector(
-                              onTap: () async{
-                                bool getImage = await getProfileImage();
+                          // Positioned(
+                          //   bottom: 50,
+                          //   left: (SizeConfig.screenWidth! / 2) - 120,
+                          //   child: GestureDetector(
+                          //     onTap: () async{
+                          //       bool getImage = await getProfileImage();
 
-                                if(getImage){
-                                  context.loaderOverlay.show();
-                                  bool result = await apiRegularUpdateUserProfilePicture(image: profileImage.value);
-                                  context.loaderOverlay.hide();
+                          //       if(getImage){
+                          //         context.loaderOverlay.show();
+                          //         bool result = await apiRegularUpdateUserProfilePicture(image: profileImage.value);
+                          //         context.loaderOverlay.hide();
 
-                                  if(result){
-                                    await showDialog(
-                                      context: context,
-                                      builder: (_) => AssetGiffyDialog(
-                                        description: Text('Successfully updated the profile picture.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        entryAnimation: EntryAnimation.DEFAULT,
-                                        onlyOkButton: true,
-                                        onOkButtonPressed: (){
-                                          Navigator.pop(context, true);
-                                        },
-                                      ),
-                                    );
-                                  }else{
-                                    await showDialog(
-                                      context: context,
-                                      builder: (_) => AssetGiffyDialog(
-                                        description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        entryAnimation: EntryAnimation.DEFAULT,
-                                        buttonOkColor: const Color(0xffff0000),
-                                        onlyOkButton: true,
-                                        onOkButtonPressed: (){
-                                          Navigator.pop(context, true);
-                                        },
-                                      ),
-                                    );
-                                  }
-                                }
-                              },
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  Container(
-                                    child: ((){
-                                      if(profileImageListener.path != ''){
-                                        return CircleAvatar(
-                                          radius: 120,
-                                          backgroundColor: const Color(0xff888888),
-                                          foregroundImage: AssetImage(profileImageListener.path),
-                                        );
-                                      }else if(profile.data!.showProfileInformationImage != ''){
-                                        return CircleAvatar(
-                                          radius: 120,
-                                          backgroundColor: const Color(0xff888888),
-                                          foregroundImage: NetworkImage(profile.data!.showProfileInformationImage),
-                                        );
-                                      }else{
-                                        return CircleAvatar(
-                                          radius: 120,
-                                          backgroundColor: const Color(0xff888888),
-                                          foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
-                                        );
-                                      }
-                                    }()),
-                                  ),
+                          //         if(result){
+                          //           await showDialog(
+                          //             context: context,
+                          //             builder: (_) => AssetGiffyDialog(
+                          //               description: Text('Successfully updated the profile picture.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                          //               title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                          //               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          //               entryAnimation: EntryAnimation.DEFAULT,
+                          //               onlyOkButton: true,
+                          //               onOkButtonPressed: (){
+                          //                 Navigator.pop(context, true);
+                          //               },
+                          //             ),
+                          //           );
+                          //         }else{
+                          //           await showDialog(
+                          //             context: context,
+                          //             builder: (_) => AssetGiffyDialog(
+                          //               description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                          //               title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                          //               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          //               entryAnimation: EntryAnimation.DEFAULT,
+                          //               buttonOkColor: const Color(0xffff0000),
+                          //               onlyOkButton: true,
+                          //               onOkButtonPressed: (){
+                          //                 Navigator.pop(context, true);
+                          //               },
+                          //             ),
+                          //           );
+                          //         }
+                          //       }
+                          //     },
+                          //     child: Stack(
+                          //       alignment: Alignment.center,
+                          //       children: [
+                          //         Container(
+                          //           child: ((){
+                          //             if(profileImageListener.path != ''){
+                          //               return CircleAvatar(
+                          //                 radius: 120,
+                          //                 backgroundColor: const Color(0xff888888),
+                          //                 foregroundImage: AssetImage(profileImageListener.path),
+                          //               );
+                          //             }else if(profile.data!.showProfileInformationImage != ''){
+                          //               return CircleAvatar(
+                          //                 radius: 120,
+                          //                 backgroundColor: const Color(0xff888888),
+                          //                 foregroundImage: NetworkImage(profile.data!.showProfileInformationImage),
+                          //               );
+                          //             }else{
+                          //               return CircleAvatar(
+                          //                 radius: 120,
+                          //                 backgroundColor: const Color(0xff888888),
+                          //                 foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
+                          //               );
+                          //             }
+                          //           }()),
+                          //         ),
 
-                                  const Positioned(
-                                    child: const CircleAvatar(radius: 30, backgroundColor: const Color(0xff888888), child: const Icon(Icons.camera, size: 50, color: const Color(0xffffffff),),),
-                                    right: 20,
-                                    top: 0,
-                                  )
-                                ],
+                          //         const Positioned(
+                          //           child: const CircleAvatar(radius: 30, backgroundColor: const Color(0xff888888), child: const Icon(Icons.camera, size: 50, color: const Color(0xffffffff),),),
+                          //           right: 20,
+                          //           top: 0,
+                          //         )
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
+
+                          GestureDetector( // BACKGROUND IMAGE FOR ZOOMING IN
+                            child: Container(
+                              padding: const EdgeInsets.only(bottom: 20.0),
+                              alignment: Alignment.bottomCenter,
+                              child: profile.data!.showProfileInformationImage != ''
+                              ? Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(color: Colors.white, width: 3,),
+                                ),
+                                child: CircleAvatar(
+                                  radius: 100,
+                                  backgroundColor: const Color(0xff888888),
+                                  foregroundImage: NetworkImage(profile.data!.showProfileInformationImage),
+                                ),
+                              )
+                              : const CircleAvatar(
+                                radius: 100, 
+                                backgroundColor: const Color(0xff888888), 
+                                foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                               ),
                             ),
+                            onTap: () async{
+                              bool getImage = await getProfileImage();
+
+                              if(getImage){
+                                context.loaderOverlay.show();
+                                bool result = await apiRegularUpdateUserProfilePicture(image: profileImage.value);
+                                context.loaderOverlay.hide();
+
+                                if(result){
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => AssetGiffyDialog(
+                                      description: Text('Successfully updated the profile picture.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      onlyOkButton: true,
+                                      onOkButtonPressed: (){
+                                        Navigator.pop(context, true);
+                                      },
+                                    ),
+                                  );
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => AssetGiffyDialog(
+                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      buttonOkColor: const Color(0xffff0000),
+                                      onlyOkButton: true,
+                                      onOkButtonPressed: (){
+                                        Navigator.pop(context, true);
+                                      },
+                                    ),
+                                  );
+                                }
+                              }
+                            },
                           ),
                         ],
                       ),
@@ -290,7 +356,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                       child: Padding(
                         padding: const EdgeInsets.only(left: 20),
                         child: IconButton(
-                          icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52),
+                          icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35),
                           onPressed: (){
                             Navigator.of(context).popAndPushNamed('/home/regular');
                           },
@@ -303,11 +369,11 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                         width: SizeConfig.screenWidth,
                         child: Column(
                           children: [
-                            Center(child: Text(profile.data!.showProfileInformationFirstName + ' ' + profile.data!.showProfileInformationLastName, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xff000000),),),),
+                            Center(child: Text(profile.data!.showProfileInformationFirstName + ' ' + profile.data!.showProfileInformationLastName, style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xff000000),),),),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical! * 2.03),
+                            SizedBox(height: 20),
 
-                            Center(child: Text(profile.data!.showProfileInformationEmail, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),),
+                            Center(child: Text(profile.data!.showProfileInformationEmail, style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),),
 
                             const SizedBox(height: 40,),
                           ],
@@ -315,6 +381,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                       ),
                     ),
                   ],
+                ),
                 ),
               );
             }else if(profile.hasError){

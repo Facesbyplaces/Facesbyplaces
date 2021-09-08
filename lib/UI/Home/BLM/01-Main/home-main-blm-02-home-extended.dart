@@ -101,8 +101,8 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
       await showDialog(
         context: context, 
         builder: (_) => AssetGiffyDialog(
-          description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+          description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
           entryAnimation: EntryAnimation.DEFAULT,
           buttonOkColor: const Color(0xffff0000),
@@ -187,19 +187,14 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                         }
                       },
                     ),
-                    title: Text('FacesByPlaces.com', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
+                    title: Text('FacesByPlaces.com', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
                     centerTitle: true,
                     actions: [
-                      GestureDetector(
-                        child: Container(
-                          padding: EdgeInsets.only(right: SizeConfig.blockSizeHorizontal! * 5),
-                          width: SizeConfig.blockSizeHorizontal! * 12.18,
-                          height: SizeConfig.blockSizeVertical! * 4.04,
-                          child: Image.asset('assets/icons/zoom.png',),
-                        ),
-                        onTap: (){
+                      IconButton(
+                        onPressed: (){
                           Navigator.pushNamed(context, '/home/blm/search');
                         },
+                        icon: Image.asset('assets/icons/zoom.png',),
                       ),
                     ],
                   ),
@@ -254,8 +249,10 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                             child: Column(
                               children: [
                                 const Icon(MdiIcons.fire,),
+
                                 const SizedBox(height: 5),
-                                Text('Feed', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaLight'),),
+
+                                Text('Feed', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight'),),
                               ],
                             ),
                           ),
@@ -264,8 +261,10 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                             child: Column(
                               children: [
                                 const Icon(MdiIcons.graveStone),
+
                                 const SizedBox(height: 5),
-                                Text('Memorials', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaLight'),),
+
+                                Text('Memorials', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight'),),
                               ],
                             ),
                           ),
@@ -274,8 +273,10 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                             child: Column(
                               children: [
                                 const Icon(MdiIcons.post),
+                                
                                 const SizedBox(height: 5),
-                                Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaLight'),),
+
+                                Text('Post', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight',),),
                               ],
                             ),
                           ),
@@ -287,8 +288,10 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                 Column(
                                   children: <Widget>[
                                     const Icon(MdiIcons.heart),
+                                    
                                     const SizedBox(height: 5),
-                                    Text('Notification', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaLight'),),
+                                    
+                                    Text('Notification', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight',),),
                                   ],
                                 ),
                                 Positioned(
@@ -412,13 +415,13 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                   Text(
                                     manageDrawer.data!.showProfileInformationFirstName + ' ' + manageDrawer.data!.showProfileInformationLastName,
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                                    style: TextStyle(fontSize: 28, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
                                   ),
 
                                   const SizedBox(height: 45),
 
                                   GestureDetector(
-                                    child: Text('Home', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                                    child: Text('Home', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                                     onTap: (){
                                       Navigator.pop(context);
                                     },
@@ -427,7 +430,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                   const SizedBox(height: 25),
 
                                   GestureDetector(
-                                    child: Text('Create Memorial Page', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                                    child: Text('Create Memorial Page', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                                     onTap: (){
                                       Navigator.pop(context);
                                       Navigator.pushNamed(context, '/home/blm/create-memorial');
@@ -437,7 +440,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                   const SizedBox(height: 20),
 
                                   GestureDetector(
-                                    child: Text('Notification Settings', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                                    child: Text('Notification Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                                     onTap: () async{
                                       context.loaderOverlay.show();
                                       APIBLMShowNotificationStatus result = await apiBLMShowNotificationStatus(userId: manageDrawer.data!.showProfileInformationUserId);
@@ -451,7 +454,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                   const SizedBox(height: 20),
 
                                   GestureDetector(
-                                    child: Text('Profile Settings', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                                    child: Text('Profile Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                                     onTap: () async{
                                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: manageDrawer.data!.showProfileInformationUserId)));
                                     },
@@ -460,7 +463,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                   const SizedBox(height: 20),
 
                                   GestureDetector(
-                                    child: Text('Log Out', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                                    child: Text('Log Out', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                                     onTap: () async{
                                       bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscBLMConfirmDialog(title: 'Log Out', content: 'Are you sure you want to logout from this account?', confirmColor_1: const Color(0xff000000), confirmColor_2: const Color(0xff888888),));
 
@@ -476,8 +479,8 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                           await showDialog(
                                             context: context,
                                             builder: (_) => AssetGiffyDialog(
-                                              description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                              description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                               entryAnimation: EntryAnimation.DEFAULT,
                                               buttonOkColor: const Color(0xffff0000),
@@ -510,7 +513,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                 Expanded(child: Container(),),
 
                                 GestureDetector(
-                                  child: Text('Something went wrong. Please try again.', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaLight', color: const Color(0xffffffff),), textAlign: TextAlign.center,),
+                                  child: Text('Something went wrong. Please try again.', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color:  Color(0xffFFFFFF),), textAlign: TextAlign.center,),
                                   onTap: (){
                                     Navigator.pop(context);
                                   },
@@ -526,7 +529,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                       
                                       const SizedBox(width: 20),
 
-                                      Text('Go back', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                                      Text('Go back', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),),
                                     ],
                                   ),
                                   onTap: (){
@@ -559,12 +562,12 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
 
                             const SizedBox(height: 20),
 
-                            Text('Guest User', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
+                            Text('Guest User', textAlign: TextAlign.center, style: TextStyle(fontSize: 28, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
 
                             const SizedBox(height: 45),
 
                             GestureDetector(
-                              child: Text('Home', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                              child: Text('Home', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                               onTap: (){
                                 Navigator.pop(context);
                               },
@@ -573,7 +576,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                             const SizedBox(height: 25),
 
                             GestureDetector(
-                              child: Text('Sign up or Sign in', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                              child: Text('Sign up or Sign in', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                               onTap: () async{
                                 final sharedPrefs = await SharedPreferences.getInstance();
 

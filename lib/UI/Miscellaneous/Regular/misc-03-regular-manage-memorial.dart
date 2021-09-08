@@ -45,6 +45,9 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
       valueListenable: followButton,
       builder: (_, bool followButtonListener, __) => GestureDetector(
         onTap: () async{
+          print('The pageType is ${widget.pageType}');
+          print('The managed is ${widget.managed}');
+          print('The famOrFriends is ${widget.famOrFriends}');
           if(widget.pageType == 'Memorial'){
             if(widget.managed == true || widget.famOrFriends == true){
               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed: widget.managed, newlyCreated: false,)));

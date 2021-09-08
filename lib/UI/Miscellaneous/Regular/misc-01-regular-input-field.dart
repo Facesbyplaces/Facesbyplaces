@@ -174,12 +174,12 @@ class MiscRegularInputFieldSecurityQuestionsState extends State<MiscRegularInput
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: 'Security Question',
-        labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+        labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
         focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
-          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.2, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+          style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
           value: currentSelection,
           isDense: true,
           onChanged: (String? newValue){
@@ -190,7 +190,7 @@ class MiscRegularInputFieldSecurityQuestionsState extends State<MiscRegularInput
           items: securityQuestions.map((String value){
             return DropdownMenuItem<String>(
               value: value,
-              child: Text(value, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.2, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+              child: Text(value, overflow: TextOverflow.clip, style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
             );
           }).toList(),
         ),
@@ -222,7 +222,7 @@ class MiscRegularInputFieldDateTimeTemplateState extends State<MiscRegularInputF
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: widget.labelText,
-        labelStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: const Color(0xffBDC3C7),),
+        labelStyle: const TextStyle(fontSize: 24, fontWeight: FontWeight.w400, color: const Color(0xffBDC3C7),),
         focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
       ),
       cursorColor: const Color(0xff000000),

@@ -71,8 +71,8 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
@@ -139,23 +139,31 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                         Align(
                           alignment: Alignment.centerLeft,
                           child: IconButton(
-                            icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+                            icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
                             onPressed: (){
                               Navigator.pop(context);
                             },
                           ),
                         ),
 
-                        Spacer(),
-
-                        Container(
-                          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(25),),
-                          width: SizeConfig.blockSizeHorizontal! * 79.06,
-                          child: Row(
-                            children: [
-                              IconButton(
-                                icon: const Icon(Icons.search, color: const Color(0xff888888)),
-                                onPressed: (){
+                        Expanded(
+                          child: TextFormField(
+                            controller: controller,
+                            style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(
+                              enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                              focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                              border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                              hintStyle: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                              contentPadding: const EdgeInsets.all(15.0),
+                              focusColor: const Color(0xffffffff),
+                              fillColor: const Color(0xffffffff),
+                              hintText: 'Search User',
+                              filled: true,
+                              prefixIcon: IconButton(
+                                icon: const Icon(Icons.search, color: const Color(0xff888888), size: 35,),
+                                onPressed: () {
                                   keywords = controller.text;
 
                                   if(controller.text != ''){
@@ -163,46 +171,28 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                                   }
                                 },
                               ),
-                              Expanded(
-                                child: TextFormField(
-                                  controller: controller,
-                                  style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
-                                  keyboardType: TextInputType.text,
-                                  decoration: InputDecoration(
-                                    enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                    focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                    border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                    hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
-                                    contentPadding: const EdgeInsets.all(15.0),
-                                    focusColor: const Color(0xffffffff),
-                                    fillColor: const Color(0xffffffff),
-                                    hintText: 'Search User',
-                                    filled: true,
-                                  ),
-                                  onChanged: (newPlaces){
-                                    keywords = newPlaces;
+                            ),
+                            onChanged: (newPlaces){
+                              keywords = newPlaces;
 
-                                    if(newPlaces != ''){
-                                      itemRemaining = 1;
-                                      page = 1;
-                                      keywords = '';
-                                    }else{
-                                      itemRemaining = 1;
-                                      count.value = 0;
-                                      users = [];
-                                      page = 1;
-                                    }
-                                  },
-                                  onFieldSubmitted: (newPlaces){
-                                    keywords = newPlaces;
+                              if(newPlaces != ''){
+                                itemRemaining = 1;
+                                page = 1;
+                                keywords = '';
+                              }else{
+                                itemRemaining = 1;
+                                count.value = 0;
+                                users = [];
+                                page = 1;
+                              }
+                            },
+                            onFieldSubmitted: (newPlaces){
+                              keywords = newPlaces;
 
-                                    if(newPlaces != ''){
-                                      onLoading();
-                                    }
-                                  },
-                                ),
-                              )
-                            ],
+                              if(newPlaces != ''){
+                                onLoading();
+                              }
+                            },
                           ),
                         ),
 
@@ -230,7 +220,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
 
                     const SizedBox(height: 20,),
 
-                    Text('Search a location to add on your post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                    const Text('Search a user to add on the list', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
 
                     SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
                   ],
@@ -249,15 +239,17 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                     itemBuilder: (c, index) => ListTile(
                       leading: users[index].image != ''
                       ? CircleAvatar(
+                        maxRadius: 40,
                         backgroundColor: const Color(0xff888888),
                         foregroundImage: NetworkImage('${users[index].image}'),
                       )
                       : const CircleAvatar(
+                        maxRadius: 40,
                         backgroundColor: const Color(0xff888888),
                         foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                       ),
-                      title: Text('${users[index].firstName} ${users[index].lastName}'),
-                      subtitle: Text('${users[index].email}',),
+                      title: Text('${users[index].firstName} ${users[index].lastName}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                      subtitle: Text('${users[index].email}', style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                       onTap: () async{
                         if(widget.isFamily){
                           String choice = await showDialog(context: (context), builder: (build) => const MiscRegularRelationshipFromDialog()) ?? '';
@@ -271,8 +263,8 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  entryAnimation: EntryAnimation.DEFAULT, description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                                  entryAnimation: EntryAnimation.DEFAULT, description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                   buttonOkColor: const Color(0xffff0000),
                                   onlyOkButton: true,
@@ -294,8 +286,8 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                             await showDialog(
                               context: context,
                               builder: (_) => AssetGiffyDialog(
-                                description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                 entryAnimation: EntryAnimation.DEFAULT,
                                 buttonOkColor: const Color(0xffff0000),

@@ -156,204 +156,204 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
       builder: (_, int countListener, __) => Container(
         width: SizeConfig.screenWidth,
         child: countListener != 0
-        ? RefreshIndicator(
-          onRefresh: onRefresh,
-          child: ListView.separated(
-            controller: scrollController,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-            physics: const ClampingScrollPhysics(),
-            padding: const EdgeInsets.all(10.0),
-            itemCount: countListener,
-            itemBuilder: (c, i) {
-              return MiscRegularPost(
-                key: ValueKey('$i'),
-                userId: posts[i].userId,
-                postId: posts[i].postId,
-                memorialId: posts[i].memorialId,
-                memorialName: posts[i].memorialName,
-                timeCreated: timeago.format(DateTime.parse(posts[i].timeCreated)),
-                managed: posts[i].managed,
-                joined: posts[i].joined,
-                profileImage: posts[i].profileImage,
-                numberOfComments: posts[i].numberOfComments,
-                numberOfLikes: posts[i].numberOfLikes,
-                likeStatus: posts[i].likeStatus,
-                numberOfTagged: posts[i].numberOfTagged,
-                taggedFirstName: posts[i].taggedFirstName,
-                taggedLastName: posts[i].taggedLastName,
-                taggedId: posts[i].taggedId,
-                pageType: posts[i].pageType,
-                famOrFriends: posts[i].famOrFriends,
-                relationship: posts[i].relationship,
-                location: posts[i].location,
-                latitude: posts[i].latitude,
-                longitude: posts[i].longitude,
-                contents: [
-                  // Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
-                  Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+        ? SafeArea(
+          child: RefreshIndicator(
+            onRefresh: onRefresh,
+            child: ListView.separated(
+              controller: scrollController,
+              separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+              physics: const ClampingScrollPhysics(),
+              padding: const EdgeInsets.all(10.0),
+              itemCount: countListener,
+              itemBuilder: (c, i) {
+                return MiscRegularPost(
+                  key: ValueKey('$i'),
+                  userId: posts[i].userId,
+                  postId: posts[i].postId,
+                  memorialId: posts[i].memorialId,
+                  memorialName: posts[i].memorialName,
+                  timeCreated: timeago.format(DateTime.parse(posts[i].timeCreated)),
+                  managed: posts[i].managed,
+                  joined: posts[i].joined,
+                  profileImage: posts[i].profileImage,
+                  numberOfComments: posts[i].numberOfComments,
+                  numberOfLikes: posts[i].numberOfLikes,
+                  likeStatus: posts[i].likeStatus,
+                  numberOfTagged: posts[i].numberOfTagged,
+                  taggedFirstName: posts[i].taggedFirstName,
+                  taggedLastName: posts[i].taggedLastName,
+                  taggedId: posts[i].taggedId,
+                  pageType: posts[i].pageType,
+                  famOrFriends: posts[i].famOrFriends,
+                  relationship: posts[i].relationship,
+                  location: posts[i].location,
+                  latitude: posts[i].latitude,
+                  longitude: posts[i].longitude,
+                  contents: [
+                    Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
 
-                  posts[i].imagesOrVideos.isNotEmpty
-                  ? Column(
-                    children: [
-                      const SizedBox(height: 20),
+                    posts[i].imagesOrVideos.isNotEmpty
+                    ? Column(
+                      children: [
+                        const SizedBox(height: 20),
 
-                      Container(
-                        child: ((){
-                          if(posts[i].imagesOrVideos.length == 1){
-                            if(lookupMimeType(posts[i].imagesOrVideos[0])?.contains('video') == true){
-                              return BetterPlayer.network('${posts[i].imagesOrVideos[0]}',
-                                betterPlayerConfiguration: BetterPlayerConfiguration(
-                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                  aspectRatio: 16 / 9,
-                                  fit: BoxFit.contain,
+                        Container(
+                          child: ((){
+                            if(posts[i].imagesOrVideos.length == 1){
+                              if(lookupMimeType(posts[i].imagesOrVideos[0])?.contains('video') == true){
+                                return BetterPlayer.network('${posts[i].imagesOrVideos[0]}',
+                                  betterPlayerConfiguration: BetterPlayerConfiguration(
+                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                    aspectRatio: 16 / 9,
+                                    fit: BoxFit.contain,
+                                  ),
+                                );
+                              }else{
+                                return CachedNetworkImage(
+                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  imageUrl: posts[i].imagesOrVideos[0],
+                                  fit: BoxFit.cover,
+                                );
+                              }
+                            }else if(posts[i].imagesOrVideos.length == 2){
+                              return StaggeredGridView.countBuilder(
+                                staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
+                                physics: const NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.zero,
+                                crossAxisSpacing: 4.0,
+                                mainAxisSpacing: 4.0,
+                                crossAxisCount: 4,
+                                shrinkWrap: true,
+                                itemCount: 2,
+                                itemBuilder: (BuildContext context, int index) => lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
+                                ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
+                                  betterPlayerConfiguration: BetterPlayerConfiguration(
+                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                    aspectRatio: 16 / 9,
+                                    fit: BoxFit.contain,
+                                  ),
+                                )
+                                : CachedNetworkImage(
+                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  imageUrl: posts[i].imagesOrVideos[index],
+                                  fit: BoxFit.cover
                                 ),
                               );
                             }else{
-                              return CachedNetworkImage(
-                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                imageUrl: posts[i].imagesOrVideos[0],
-                                fit: BoxFit.cover,
+                              return StaggeredGridView.countBuilder(
+                                staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                                physics: const NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.zero,
+                                crossAxisSpacing: 4.0,
+                                mainAxisSpacing: 4.0,
+                                crossAxisCount: 4,
+                                shrinkWrap: true,
+                                itemCount: 3,
+                                itemBuilder: (BuildContext context, int index) => ((){
+                                  if(index != 1){
+                                    return lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
+                                    ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
+                                      betterPlayerConfiguration: BetterPlayerConfiguration(
+                                        placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                        controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                        aspectRatio: 16 / 9,
+                                        fit: BoxFit.contain,
+                                      ),
+                                    )
+                                    : CachedNetworkImage(
+                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                      imageUrl: posts[i].imagesOrVideos[index],
+                                      fit: BoxFit.cover,
+                                      
+                                    );
+                                  }else{
+                                    return ((){
+                                      if(posts[i].imagesOrVideos.length - 3 > 0){
+                                        if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
+                                          return Stack(
+                                            fit: StackFit.expand,
+                                            children: [
+                                              BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
+                                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                  aspectRatio: 16 / 9,
+                                                  fit: BoxFit.contain,
+                                                ),
+                                              ),
+
+                                              Container(color: const Color(0xff000000).withOpacity(0.5),),
+
+                                              Center(
+                                                child: CircleAvatar(
+                                                  child: Text('${posts[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                  backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                  radius: 25,
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                        }else{
+                                          return Stack(
+                                            fit: StackFit.expand,
+                                            children: [
+                                              CachedNetworkImage(
+                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                imageUrl: posts[i].imagesOrVideos[index],
+                                                fit: BoxFit.cover,
+                                              ),
+
+                                              Container(color: const Color(0xff000000).withOpacity(0.5),),
+
+                                              Center(
+                                                child: CircleAvatar(
+                                                  child: Text('${posts[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                  backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                  radius: 25,
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                        }
+                                      }else{
+                                        if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
+                                          return BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
+                                            betterPlayerConfiguration: BetterPlayerConfiguration(
+                                              placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                              controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                              aspectRatio: 16 / 9,
+                                              fit: BoxFit.contain,
+                                            ),
+                                          );
+                                        }else{
+                                          return CachedNetworkImage(
+                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                            placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                            imageUrl: posts[i].imagesOrVideos[index],
+                                            fit: BoxFit.cover,
+                                          );
+                                        }
+                                      }
+                                    }());
+                                  }
+                                }()),
                               );
                             }
-                          }else if(posts[i].imagesOrVideos.length == 2){
-                            return StaggeredGridView.countBuilder(
-                              staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                              physics: const NeverScrollableScrollPhysics(),
-                              padding: EdgeInsets.zero,
-                              crossAxisSpacing: 4.0,
-                              mainAxisSpacing: 4.0,
-                              crossAxisCount: 4,
-                              shrinkWrap: true,
-                              itemCount: 2,
-                              itemBuilder: (BuildContext context, int index) => lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
-                              ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                betterPlayerConfiguration: BetterPlayerConfiguration(
-                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                  aspectRatio: 16 / 9,
-                                  fit: BoxFit.contain,
-                                ),
-                              )
-                              : CachedNetworkImage(
-                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                imageUrl: posts[i].imagesOrVideos[index],
-                                fit: BoxFit.cover,
-                                
-                              ),
-                            );
-                          }else{
-                            return StaggeredGridView.countBuilder(
-                              staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                              physics: const NeverScrollableScrollPhysics(),
-                              padding: EdgeInsets.zero,
-                              crossAxisSpacing: 4.0,
-                              mainAxisSpacing: 4.0,
-                              crossAxisCount: 4,
-                              shrinkWrap: true,
-                              itemCount: 3,
-                              itemBuilder: (BuildContext context, int index) => ((){
-                                if(index != 1){
-                                  return lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
-                                  ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                    betterPlayerConfiguration: BetterPlayerConfiguration(
-                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                      aspectRatio: 16 / 9,
-                                      fit: BoxFit.contain,
-                                    ),
-                                  )
-                                  : CachedNetworkImage(
-                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                    imageUrl: posts[i].imagesOrVideos[index],
-                                    fit: BoxFit.cover,
-                                    
-                                  );
-                                }else{
-                                  return ((){
-                                    if(posts[i].imagesOrVideos.length - 3 > 0){
-                                      if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
-                                        return Stack(
-                                          fit: StackFit.expand,
-                                          children: [
-                                            BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                              betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                                aspectRatio: 16 / 9,
-                                                fit: BoxFit.contain,
-                                              ),
-                                            ),
-
-                                            Container(color: const Color(0xff000000).withOpacity(0.5),),
-
-                                            Center(
-                                              child: CircleAvatar(
-                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
-                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                radius: 25,
-                                              ),
-                                            ),
-                                          ],
-                                        );
-                                      }else{
-                                        return Stack(
-                                          fit: StackFit.expand,
-                                          children: [
-                                            CachedNetworkImage(
-                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                              imageUrl: posts[i].imagesOrVideos[index],
-                                              fit: BoxFit.cover,
-                                            ),
-
-                                            Container(color: const Color(0xff000000).withOpacity(0.5),),
-
-                                            Center(
-                                              child: CircleAvatar(
-                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
-                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                radius: 25,
-                                              ),
-                                            ),
-                                          ],
-                                        );
-                                      }
-                                    }else{
-                                      if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
-                                        return BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                          betterPlayerConfiguration: BetterPlayerConfiguration(
-                                            placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                            controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                            aspectRatio: 16 / 9,
-                                            fit: BoxFit.contain,
-                                          ),
-                                        );
-                                      }else{
-                                        return CachedNetworkImage(
-                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                          imageUrl: posts[i].imagesOrVideos[index],
-                                          fit: BoxFit.cover,
-                                        );
-                                      }
-                                    }
-                                  }());
-                                }
-                              }()),
-                            );
-                          }
-                        }()),
-                      ),
-                    ],
-                  )
-                  : Container(height: 0),
-                ],
-              );
-            }
+                          }()),
+                        ),
+                      ],
+                    )
+                    : Container(height: 0),
+                  ],
+                );
+              }
+            ),
           ),
         )
         : SingleChildScrollView(

@@ -268,7 +268,7 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
               ),
             ),
             trailing: MaterialButton(
-              child: Text('Make Manager', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.2, fontFamily: 'NexaRegular'),),
+              child: Text('Make Manager', style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular'),),
               shape: const StadiumBorder(side: const BorderSide(color: const Color(0xff04ECFF),),),
               minWidth: SizeConfig.screenWidth! / 3.5,
               splashColor: const Color(0xff04ECFF),
@@ -318,7 +318,7 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        description: Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                        description: Text('Successfully added as an admin.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                         title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         entryAnimation: EntryAnimation.DEFAULT,

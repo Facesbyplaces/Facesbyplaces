@@ -95,14 +95,16 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
       builder: (_, int countListener, __) => Container(
         width: SizeConfig.screenWidth,
         child: countListener != 0
-        ? RefreshIndicator(
-          onRefresh: onRefresh,
-          child: ListView.separated(
-            controller: scrollController,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-            physics: const ClampingScrollPhysics(),
-            itemCount: countListener,
-            itemBuilder: (c, i) => notifications[i],
+        ? SafeArea(
+          child: RefreshIndicator(
+            onRefresh: onRefresh,
+            child: ListView.separated(
+              controller: scrollController,
+              separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+              physics: const ClampingScrollPhysics(),
+              itemCount: countListener,
+              itemBuilder: (c, i) => notifications[i],
+            ),
           ),
         )
         : SingleChildScrollView(
@@ -118,7 +120,7 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
 
                 const SizedBox(height: 45,),
 
-                Text('Notification is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+                Text('Notification is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
 
                 SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
               ],

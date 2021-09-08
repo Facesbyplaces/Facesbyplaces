@@ -85,8 +85,8 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
         await showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            description: Text('Invalid QR Code.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            description: Text('Invalid QR Code.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
@@ -137,8 +137,8 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                   await showDialog(
                     context: context,
                     builder: (_) => AssetGiffyDialog(
-                      description: Text('Successfully shared the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                      description: Text('Successfully shared the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                       entryAnimation: EntryAnimation.DEFAULT,
                       onlyOkButton: true,
@@ -200,9 +200,9 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
 
                                         const Spacer(),
 
-                                        Text('${widget.pageName}', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+                                        Text('${widget.pageName}', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
 
-                                        Text('QR Code', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+                                        Text('QR Code', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
 
                                         const Spacer(),
 
@@ -239,8 +239,8 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                   await showDialog(
                     context: context,
                     builder: (_) => AssetGiffyDialog(
-                      description: Text('Successfully copied the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                      description: Text('Successfully copied the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                       entryAnimation: EntryAnimation.DEFAULT,
                       onlyOkButton: true,
@@ -330,8 +330,8 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
         await showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            description: Text('Invalid QR Code.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',)),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            description: Text('Invalid QR Code.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',)),
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT, 
             buttonOkColor: const Color(0xffff0000),
@@ -382,8 +382,8 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                   await showDialog(
                     context: context,
                     builder: (_) => AssetGiffyDialog(
-                      description: Text('Successfully copied the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                      description: Text('Successfully copied the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                       entryAnimation: EntryAnimation.DEFAULT,
                       onlyOkButton: true,
@@ -483,8 +483,8 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                   await showDialog(
                     context: context,
                     builder: (_) => AssetGiffyDialog(
-                      description: Text('Successfully copied the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                      description: Text('Successfully copied the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                       entryAnimation: EntryAnimation.DEFAULT,
                       onlyOkButton: true,

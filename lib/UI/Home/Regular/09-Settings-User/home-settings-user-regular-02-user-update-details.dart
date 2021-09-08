@@ -52,18 +52,12 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: const Color(0xff04ECFF),
-            title: Row(
-              children: [
-                Text('Account Details', textAlign: TextAlign.left, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff)),),
-
-                Spacer(),
-              ],
-            ),
-            centerTitle: true,
+            title: Text('Account Details', textAlign: TextAlign.left, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff)),),
+            centerTitle: false,
             leading: Builder(
               builder: (BuildContext context){
                 return IconButton(
-                  icon: Icon(Icons.arrow_back,size: SizeConfig.blockSizeVertical! * 3.65,),
+                  icon: Icon(Icons.arrow_back,size: 35,),
                   onPressed: (){
                     Navigator.pop(context);
                   },
@@ -71,120 +65,122 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
               },
             ),
           ),
-          body: FutureBuilder<APIRegularShowAccountDetails>(
-            future: accountDetails,
-            builder: (context, details) {
-              if (details.hasData) {
-                return SingleChildScrollView(
-                  padding: const EdgeInsets.all(20),
-                  physics: const ClampingScrollPhysics(),
-                  child: Column(
-                    children: [
-                      MiscRegularInputFieldTemplate(
-                        key: _key1,
-                        labelText: 'First Name',
-                        displayText: details.data!.showAccountDetailsFirstName,
-                        labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
-                      ),
+          body: SafeArea(
+            child: FutureBuilder<APIRegularShowAccountDetails>(
+              future: accountDetails,
+              builder: (context, details) {
+                if (details.hasData) {
+                  return SingleChildScrollView(
+                    padding: const EdgeInsets.all(20),
+                    physics: const ClampingScrollPhysics(),
+                    child: Column(
+                      children: [
+                        MiscRegularInputFieldTemplate(
+                          key: _key1,
+                          labelText: 'First Name',
+                          displayText: details.data!.showAccountDetailsFirstName,
+                          labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                        ),
 
-                      const SizedBox(height: 20,),
+                        const SizedBox(height: 20,),
 
-                      MiscRegularInputFieldTemplate(
-                        key: _key2,
-                        labelText: 'Last Name',
-                        displayText: details.data!.showAccountDetailsLastName,
-                        labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
-                      ),
+                        MiscRegularInputFieldTemplate(
+                          key: _key2,
+                          labelText: 'Last Name',
+                          displayText: details.data!.showAccountDetailsLastName,
+                          labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                        ),
 
-                      const SizedBox(height: 20,),
+                        const SizedBox(height: 20,),
 
-                      MiscRegularInputFieldTemplate(
-                        key: _key3,
-                        labelText: 'Email Address',
-                        displayText: details.data!.showAccountDetailsEmail,
-                        type: TextInputType.emailAddress,
-                        labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
-                      ),
+                        MiscRegularInputFieldTemplate(
+                          key: _key3,
+                          labelText: 'Email Address',
+                          displayText: details.data!.showAccountDetailsEmail,
+                          type: TextInputType.emailAddress,
+                          labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                        ),
 
-                      const SizedBox(height: 20,),
+                        const SizedBox(height: 20,),
 
-                      MiscRegularPhoneNumberTemplate(
-                        key: _key4,
-                        labelText: 'Phone Number',
-                        displayText: details.data!.showAccountDetailsPhoneNumber,
-                        labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
-                      ),
+                        MiscRegularPhoneNumberTemplate(
+                          key: _key4,
+                          labelText: 'Phone Number',
+                          displayText: details.data!.showAccountDetailsPhoneNumber,
+                          labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                        ),
 
-                      const SizedBox(height: 20,),
+                        const SizedBox(height: 20,),
 
-                      MiscRegularInputFieldSecurityQuestions(
-                        key: _key5,
-                        displayText: details.data!.showAccountDetailsQuestion != '' ? details.data!.showAccountDetailsQuestion : 'What\'s the name of your first dog?',
-                      ),
+                        MiscRegularInputFieldSecurityQuestions(
+                          key: _key5,
+                          displayText: details.data!.showAccountDetailsQuestion != '' ? details.data!.showAccountDetailsQuestion : 'What\'s the name of your first dog?',
+                        ),
 
-                      const SizedBox(height: 80,),
+                        const SizedBox(height: 80,),
 
-                      MiscRegularButtonTemplate(
-                        buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
-                        buttonColor: const Color(0xff04ECFF),
-                        width: SizeConfig.screenWidth! / 2,
-                        buttonText: 'Update',
-                        height: 45,
-                        onPressed: () async{
-                          if(details.data!.showAccountDetailsFirstName != _key1.currentState!.controller.text || details.data!.showAccountDetailsLastName != _key2.currentState!.controller.text || details.data!.showAccountDetailsEmail != _key3.currentState!.controller.text || details.data!.showAccountDetailsPhoneNumber != _key4.currentState!.controller.text || details.data!.showAccountDetailsQuestion != _key5.currentState!.currentSelection){
-                            bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: const Color(0xff04ECFF), confirmColor_2: const Color(0xffFF0000), ),);
+                        MiscRegularButtonTemplate(
+                          buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                          buttonColor: const Color(0xff04ECFF),
+                          width: SizeConfig.screenWidth! / 2,
+                          buttonText: 'Update',
+                          height: 50,
+                          onPressed: () async{
+                            if(details.data!.showAccountDetailsFirstName != _key1.currentState!.controller.text || details.data!.showAccountDetailsLastName != _key2.currentState!.controller.text || details.data!.showAccountDetailsEmail != _key3.currentState!.controller.text || details.data!.showAccountDetailsPhoneNumber != _key4.currentState!.controller.text || details.data!.showAccountDetailsQuestion != _key5.currentState!.currentSelection){
+                              bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: const Color(0xff04ECFF), confirmColor_2: const Color(0xffFF0000), ),);
 
-                            if(confirmResult){
-                              context.loaderOverlay.show();
-                              bool result = await apiRegularUpdateAccountDetails(firstName: _key1.currentState!.controller.text, lastName: _key2.currentState!.controller.text, email: _key3.currentState!.controller.text, phoneNumber: _key4.currentState!.controller.text, question: _key5.currentState!.currentSelection,);
-                              context.loaderOverlay.hide();
+                              if(confirmResult){
+                                context.loaderOverlay.show();
+                                bool result = await apiRegularUpdateAccountDetails(firstName: _key1.currentState!.controller.text, lastName: _key2.currentState!.controller.text, email: _key3.currentState!.controller.text, phoneNumber: _key4.currentState!.controller.text, question: _key5.currentState!.currentSelection,);
+                                context.loaderOverlay.hide();
 
-                              if(result){
-                                await showDialog(
-                                  context: context,
-                                  builder: (_) => AssetGiffyDialog(
-                                    description: Text('Successfully updated the profile picture.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                    title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    entryAnimation: EntryAnimation.DEFAULT,
-                                    onlyOkButton: true,
-                                    onOkButtonPressed: (){
-                                      Navigator.pop(context, true);
-                                    },
-                                  ),
-                                );
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: widget.userId,)));
-                              }else{
-                                await showDialog(
-                                  context: context,
-                                  builder: (_) => AssetGiffyDialog(
-                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    entryAnimation: EntryAnimation.DEFAULT,
-                                    buttonOkColor: const Color(0xffff0000),
-                                    onlyOkButton: true,
-                                    onOkButtonPressed: (){
-                                      Navigator.pop(context, true);
-                                    },
-                                  ),
-                                );
+                                if(result){
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => AssetGiffyDialog(
+                                      description: Text('Successfully updated the profile picture.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      onlyOkButton: true,
+                                      onOkButtonPressed: (){
+                                        Navigator.pop(context, true);
+                                      },
+                                    ),
+                                  );
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: widget.userId,)));
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => AssetGiffyDialog(
+                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      buttonOkColor: const Color(0xffff0000),
+                                      onlyOkButton: true,
+                                      onOkButtonPressed: (){
+                                        Navigator.pop(context, true);
+                                      },
+                                    ),
+                                  );
+                                }
                               }
                             }
-                          }
-                        },
-                      ),
+                          },
+                        ),
 
-                      const SizedBox(height: 20,),
-                    ],
-                  ),
-                );
-              }else if (details.hasError){
-                return Container(height: SizeConfig.screenHeight, child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),),);
-              }else{
-                return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
-              }
-            },
+                        const SizedBox(height: 20,),
+                      ],
+                    ),
+                  );
+                }else if (details.hasError){
+                  return Container(height: SizeConfig.screenHeight, child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),),);
+                }else{
+                  return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
+                }
+              },
+            ),
           ),
         ),
       ),

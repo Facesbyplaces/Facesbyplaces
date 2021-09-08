@@ -408,6 +408,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                         padding: EdgeInsets.zero,
                                                         height: 45,
                                                         onPressed: () async{
+                                                          print('The value of managed in memorial is ${widget.managed}');
                                                           if(widget.managed == true){
                                                             context.loaderOverlay.show();
                                                             APIRegularShowSwitchStatus
@@ -606,33 +607,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                         scrollDirection: Axis.horizontal,
                                                         itemBuilder: (context, index){
                                                           return GestureDetector(
-                                                            child: ((){
-                                                              if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[index])?.contains('video') == true){
-                                                                return Container(
-                                                                  width: 100,
-                                                                  height: 100,
-                                                                  child: BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
-                                                                    betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                                                      aspectRatio: 16 / 9,
-                                                                      fit: BoxFit.contain,
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              }else{
-                                                                return Container(
-                                                                  width: 100,
-                                                                  height: 100,
-                                                                  child: CachedNetworkImage(
-                                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                    imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[index],
-                                                                    fit: BoxFit.cover,
-                                                                  ),
-                                                                );
-                                                              }
-                                                            }()),
                                                             onTap: (){
                                                               showGeneralDialog(
                                                                 context: context,
@@ -719,6 +693,33 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                 },
                                                               );
                                                             },
+                                                            child: ((){
+                                                              if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[index])?.contains('video') == true){
+                                                                return Container(
+                                                                  width: 100,
+                                                                  height: 100,
+                                                                  child: BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
+                                                                    betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                      aspectRatio: 16 / 9,
+                                                                      fit: BoxFit.contain,
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              }else{
+                                                                return Container(
+                                                                  width: 100,
+                                                                  height: 100,
+                                                                  child: CachedNetworkImage(
+                                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                    imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[index],
+                                                                    fit: BoxFit.cover,
+                                                                  ),
+                                                                );
+                                                              }
+                                                            }()),
                                                           );
                                                         },
                                                       ),
@@ -737,6 +738,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                       ),
                                     ],
                                   ),
+
                                   SafeArea(
                                     child: Container(
                                       height: Size.fromHeight(AppBar().preferredSize.height).height + (Size.fromHeight(AppBar().preferredSize.height).height / 2),
@@ -744,16 +746,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         children: [
                                           Expanded(
                                             child: Padding(
-                                              padding:
-                                              const EdgeInsets.only(left: 20.0),
+                                              padding: const EdgeInsets.only(left: 20.0),
                                               child: GestureDetector(
-                                                child: Row(
-                                                  children: [
-                                                    Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
-
-                                                    Text('Back', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
-                                                  ],
-                                                ),
                                                 onTap: (){
                                                   if(widget.newlyCreated == true){
                                                     Route newRoute = MaterialPageRoute(builder: (context) => HomeRegularScreenExtended(newToggleBottom: 1,),);
@@ -762,12 +756,19 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                     Navigator.pop(context);
                                                   }
                                                 },
+                                                child: Row(
+                                                  children: [
+                                                    Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+
+                                                    Text('Back', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),
                                           Expanded(
                                             child: Container(
-                                              padding: const EdgeInsets.only(right: 20.0),
+                                              // padding: const EdgeInsets.only(right: 20.0),
                                               alignment: Alignment.centerRight,
                                               child: widget.managed == true
                                               ? GestureDetector(
@@ -871,6 +872,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                       },
                     ),
                   ),
+                  
                   SliverToBoxAdapter(
                     key: dataKey,
                     child: postCountListener != 0

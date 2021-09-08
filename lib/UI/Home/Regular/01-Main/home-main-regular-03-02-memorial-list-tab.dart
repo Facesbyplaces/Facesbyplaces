@@ -269,15 +269,17 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       builder: (_, int countListener, __) => Container(
         width: SizeConfig.screenWidth,
         child: countListener != 0
-        ? RefreshIndicator(
-          onRefresh: onRefresh,
-          child: ListView.separated(
-            controller: scrollController,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-            itemBuilder: (c, i) => finalMemorials[i],
-            physics: const ClampingScrollPhysics(),
-            itemCount: finalMemorials.length,
+        ? SafeArea(
+          child: RefreshIndicator(
+            onRefresh: onRefresh,
+            child: ListView.separated(
+              controller: scrollController,
+              separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+              itemBuilder: (c, i) => finalMemorials[i],
+              physics: const ClampingScrollPhysics(),
+              itemCount: finalMemorials.length,
+            ),
           ),
         )
         : SingleChildScrollView(

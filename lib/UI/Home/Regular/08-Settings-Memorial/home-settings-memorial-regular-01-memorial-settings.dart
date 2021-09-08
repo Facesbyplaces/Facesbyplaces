@@ -60,37 +60,37 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
             },
           ),
         ),
-        body: Column(
-          children: [
-            Container(
-              height: 70,
-              child: DefaultTabController(
-                length: 2,
-                child: TabBar(
-                  labelColor: const Color(0xff04ECFF),
-                  unselectedLabelColor: const Color(0xff000000),
-                  indicatorColor: const Color(0xff04ECFF),
-                  indicatorSize: TabBarIndicatorSize.label,
-                  tabs: [
-                    Text('Page', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+        body: SafeArea(
+          child: LayoutBuilder(
+            builder: (context, constraint){
+              return SingleChildScrollView(
+                physics: ClampingScrollPhysics(),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constraint.maxHeight),
+                  child: IntrinsicHeight(
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 70,
+                          child: DefaultTabController(
+                            length: 2,
+                            child: TabBar(
+                              labelColor: const Color(0xff04ECFF),
+                              unselectedLabelColor: const Color(0xff000000),
+                              indicatorColor: const Color(0xff04ECFF),
+                              indicatorSize: TabBarIndicatorSize.label,
+                              tabs: [
+                                const Text('Page', style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
 
-                    Text('Privacy', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D)),),
-                  ],
-                  onTap: (int index){
-                    toggle.value = index;
-                  },
-                ),
-              ),
-            ),
-            Expanded(
-              child: SafeArea(
-                child: LayoutBuilder(
-                  builder: (context, constraint){
-                    return SingleChildScrollView(
-                      physics: ClampingScrollPhysics(),
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(minHeight: constraint.maxHeight),
-                        child: IntrinsicHeight(
+                                const Text('Privacy', style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D)),),
+                              ],
+                              onTap: (int index){
+                                toggle.value = index;
+                              },
+                            ),
+                          ),
+                        ),
+                        Expanded(
                           child: Container(
                             child: ((){
                               switch (toggleListener){
@@ -100,13 +100,13 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                             }()),
                           ),
                         ),
-                      ),
-                    );
-                  }
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ],
+              );
+            }
+          ),
         ),
       ),
     );
@@ -114,7 +114,6 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
 
   settingsTab1(int memorialId){
     return Column(
-      // physics: const ClampingScrollPhysics(),
       children: [
         ListTile(
           title: Text('Page Details', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
@@ -173,7 +172,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
 
         ListTile(
           title: Text('Paypal', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
-          subtitle: Text('Manage cards that receives the memorial gifts', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7), ),),
+          subtitle: Text('Manage cards that receives the memorial gifts', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
           tileColor: const Color(0xffffffff),
           onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPaypal(pageId: memorialId)));

@@ -77,11 +77,11 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                       valueListenable: toggle7,
                       builder: (_, bool toggle7Listener, __) => Scaffold(
                         appBar: AppBar(
-                          title: Text('Notification Settings', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
+                          title: Text('Notification Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
                           backgroundColor: const Color(0xff04ECFF),
                           centerTitle: true,
                           leading: IconButton(
-                            icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.65,),
+                            icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
                             onPressed: (){
                               Navigator.pop(context);
                             },
@@ -92,279 +92,281 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                             const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),
                             SingleChildScrollView(
                               physics: const ClampingScrollPhysics(),
-                              padding: const EdgeInsets.all(20.0),
-                              child: Column(
-                                children: [
-                                  Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Expanded(child: Text('New Memorial Page', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
+                                padding: const EdgeInsets.all(20.0),
+                                child: SafeArea(
+                                  child: Column(
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Expanded(child: Text('New Memorial Page', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
 
-                                          Switch(
-                                            value: toggle1Listener,
-                                            activeColor: const Color(0xffFFFFFF),
-                                            activeTrackColor: const Color(0xff3498DB),
-                                            onChanged: (value) async{
-                                              context.loaderOverlay.show();
-                                              bool result = await apiRegularUpdateNotificationMemorial(hide: value);
-                                              context.loaderOverlay.hide();
+                                            Switch(
+                                              value: toggle1Listener,
+                                              activeColor: const Color(0xffFFFFFF),
+                                              activeTrackColor: const Color(0xff3498DB),
+                                              onChanged: (value) async{
+                                                context.loaderOverlay.show();
+                                                bool result = await apiRegularUpdateNotificationMemorial(hide: value);
+                                                context.loaderOverlay.hide();
 
-                                              if(result){
-                                                toggle1.value = value;
-                                              }else{
-                                                await showDialog(
-                                                  context: context,
-                                                  builder: (_) => AssetGiffyDialog(
-                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                    entryAnimation: EntryAnimation.DEFAULT,
-                                                    buttonOkColor: const Color(0xffff0000),
-                                                    onlyOkButton: true,
-                                                    onOkButtonPressed: (){
-                                                      Navigator.pop(context, true);
-                                                    },
-                                                  ),
-                                                );
-                                              }
-                                            },
-                                          ),
-                                        ],
-                                      ),
+                                                if(result){
+                                                  toggle1.value = value;
+                                                }else{
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder: (_) => AssetGiffyDialog(
+                                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                      entryAnimation: EntryAnimation.DEFAULT,
+                                                      buttonOkColor: const Color(0xffff0000),
+                                                      onlyOkButton: true,
+                                                      onOkButtonPressed: (){
+                                                        Navigator.pop(context, true);
+                                                      },
+                                                    ),
+                                                  );
+                                                }
+                                              },
+                                            ),
+                                          ],
+                                        ),
 
-                                      Row(
-                                        children: [
-                                          Expanded(child: Text('New Activities', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
+                                        Row(
+                                          children: [
+                                            Expanded(child: Text('New Activities', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
 
-                                          Switch(
-                                            value: toggle2Listener,
-                                            activeTrackColor: const Color(0xff3498DB),
-                                            activeColor: const Color(0xffFFFFFF),
-                                            onChanged: (value) async{
-                                              context.loaderOverlay.show();
-                                              bool result = await apiRegularUpdateNotificationActivities(hide: value);
-                                              context.loaderOverlay.hide();
+                                            Switch(
+                                              value: toggle2Listener,
+                                              activeTrackColor: const Color(0xff3498DB),
+                                              activeColor: const Color(0xffFFFFFF),
+                                              onChanged: (value) async{
+                                                context.loaderOverlay.show();
+                                                bool result = await apiRegularUpdateNotificationActivities(hide: value);
+                                                context.loaderOverlay.hide();
 
-                                              if(result){
-                                                toggle2.value = value;
-                                              }else{
-                                                await showDialog(
-                                                  context: context,
-                                                  builder: (_) => AssetGiffyDialog(
-                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                    entryAnimation: EntryAnimation.DEFAULT,
-                                                    buttonOkColor: const Color(0xffff0000),
-                                                    onlyOkButton: true,
-                                                    onOkButtonPressed: (){
-                                                      Navigator.pop(context, true);
-                                                    },
-                                                  ),
-                                                );
-                                              }
-                                            },
-                                          ),
-                                        ],
-                                      ),
+                                                if(result){
+                                                  toggle2.value = value;
+                                                }else{
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder: (_) => AssetGiffyDialog(
+                                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                      entryAnimation: EntryAnimation.DEFAULT,
+                                                      buttonOkColor: const Color(0xffff0000),
+                                                      onlyOkButton: true,
+                                                      onOkButtonPressed: (){
+                                                        Navigator.pop(context, true);
+                                                      },
+                                                    ),
+                                                  );
+                                                }
+                                              },
+                                            ),
+                                          ],
+                                        ),
 
-                                      Row(
-                                        children: [
-                                          Expanded(child: Text('Post Likes', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
+                                        Row(
+                                          children: [
+                                            Expanded(child: Text('Post Likes', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
 
-                                          Switch(
-                                            value: toggle3Listener,
-                                            activeTrackColor: const Color(0xff3498DB),
-                                            activeColor: const Color(0xffFFFFFF),
-                                            onChanged: (value) async{
-                                              context.loaderOverlay.show();
-                                              bool result = await apiRegularUpdateNotificationPostLikes(hide: value);
-                                              context.loaderOverlay.hide();
+                                            Switch(
+                                              value: toggle3Listener,
+                                              activeTrackColor: const Color(0xff3498DB),
+                                              activeColor: const Color(0xffFFFFFF),
+                                              onChanged: (value) async{
+                                                context.loaderOverlay.show();
+                                                bool result = await apiRegularUpdateNotificationPostLikes(hide: value);
+                                                context.loaderOverlay.hide();
 
-                                              if(result){
-                                                toggle3.value = value;
-                                              }else{
-                                                await showDialog(
-                                                  context: context,
-                                                  builder: (_) => AssetGiffyDialog(
-                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                    entryAnimation: EntryAnimation.DEFAULT,
-                                                    buttonOkColor: const Color(0xffff0000),
-                                                    onlyOkButton: true,
-                                                    onOkButtonPressed: (){
-                                                      Navigator.pop(context, true);
-                                                    },
-                                                  ),
-                                                );
-                                              }
-                                            },
-                                          ),
-                                        ],
-                                      ),
+                                                if(result){
+                                                  toggle3.value = value;
+                                                }else{
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder: (_) => AssetGiffyDialog(
+                                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                      entryAnimation: EntryAnimation.DEFAULT,
+                                                      buttonOkColor: const Color(0xffff0000),
+                                                      onlyOkButton: true,
+                                                      onOkButtonPressed: (){
+                                                        Navigator.pop(context, true);
+                                                      },
+                                                    ),
+                                                  );
+                                                }
+                                              },
+                                            ),
+                                          ],
+                                        ),
 
-                                      Row(
-                                        children: [
-                                          Expanded(child: Text('Post Comments', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
+                                        Row(
+                                          children: [
+                                            Expanded(child: Text('Post Comments', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
 
-                                          Switch(
-                                            value: toggle4Listener,
-                                            activeTrackColor: const Color(0xff3498DB),
-                                            activeColor: const Color(0xffFFFFFF),
-                                            onChanged: (value) async{
-                                              context.loaderOverlay.show();
-                                              bool result = await apiRegularUpdateNotificationPostComments(hide: value);
-                                              context.loaderOverlay.hide();
+                                            Switch(
+                                              value: toggle4Listener,
+                                              activeTrackColor: const Color(0xff3498DB),
+                                              activeColor: const Color(0xffFFFFFF),
+                                              onChanged: (value) async{
+                                                context.loaderOverlay.show();
+                                                bool result = await apiRegularUpdateNotificationPostComments(hide: value);
+                                                context.loaderOverlay.hide();
 
-                                              if(result){
-                                                toggle4.value = value;
-                                              }else{
-                                                await showDialog(
-                                                  context: context,
-                                                  builder: (_) => AssetGiffyDialog(
-                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                    entryAnimation: EntryAnimation.DEFAULT,
-                                                    buttonOkColor: const Color(0xffff0000),
-                                                    onlyOkButton: true,
-                                                    onOkButtonPressed: (){
-                                                      Navigator.pop(context, true);
-                                                    },
-                                                  ),
-                                                );
-                                              }
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
+                                                if(result){
+                                                  toggle4.value = value;
+                                                }else{
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder: (_) => AssetGiffyDialog(
+                                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                      entryAnimation: EntryAnimation.DEFAULT,
+                                                      buttonOkColor: const Color(0xffff0000),
+                                                      onlyOkButton: true,
+                                                      onOkButtonPressed: (){
+                                                        Navigator.pop(context, true);
+                                                      },
+                                                    ),
+                                                  );
+                                                }
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
 
-                                  SizedBox(height: SizeConfig.blockSizeVertical! * 5.12),
+                                    SizedBox(height: SizeConfig.blockSizeVertical! * 5.12),
 
-                                  Divider(color: Colors.white, thickness: 1,),
+                                    Divider(color: Colors.white, thickness: 1,),
 
-                                  SizedBox(height: SizeConfig.blockSizeVertical! * 5.12),
+                                    SizedBox(height: SizeConfig.blockSizeVertical! * 5.12),
 
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text('Page Invites', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'HelveticaBold', color: const Color(0xff000000),),),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text('Page Invites', style: TextStyle(fontSize: 26, fontFamily: 'HelveticaBold', color: const Color(0xff000000),),),
 
-                                      const SizedBox(height: 10,),
+                                        const SizedBox(height: 10,),
 
-                                      Row(
-                                        children: [
-                                          Expanded(child: Text('Add as Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
+                                        Row(
+                                          children: [
+                                            Expanded(child: Text('Add as Family', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
 
-                                          Switch(
-                                            value: toggle5Listener,
-                                            activeColor: const Color(0xffFFFFFF),
-                                            activeTrackColor: const Color(0xff3498DB),
-                                            onChanged: (value) async{
-                                              context.loaderOverlay.show();
-                                              bool result = await apiRegularUpdateNotificationAddFamily(hide: value);
-                                              context.loaderOverlay.hide();
+                                            Switch(
+                                              value: toggle5Listener,
+                                              activeColor: const Color(0xffFFFFFF),
+                                              activeTrackColor: const Color(0xff3498DB),
+                                              onChanged: (value) async{
+                                                context.loaderOverlay.show();
+                                                bool result = await apiRegularUpdateNotificationAddFamily(hide: value);
+                                                context.loaderOverlay.hide();
 
-                                              if(result){
-                                                toggle5.value = value;
-                                              }else{
-                                                await showDialog(
-                                                  context: context,
-                                                  builder: (_) => AssetGiffyDialog(
-                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                    entryAnimation: EntryAnimation.DEFAULT,
-                                                    buttonOkColor: const Color(0xffff0000),
-                                                    onlyOkButton: true,
-                                                    onOkButtonPressed: (){
-                                                      Navigator.pop(context, true);
-                                                    },
-                                                  ),
-                                                );
-                                              }
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                      
-                                      Row(
-                                        children: [
-                                          Expanded(child: Text('Add as Friend', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),)),
+                                                if(result){
+                                                  toggle5.value = value;
+                                                }else{
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder: (_) => AssetGiffyDialog(
+                                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                      entryAnimation: EntryAnimation.DEFAULT,
+                                                      buttonOkColor: const Color(0xffff0000),
+                                                      onlyOkButton: true,
+                                                      onOkButtonPressed: (){
+                                                        Navigator.pop(context, true);
+                                                      },
+                                                    ),
+                                                  );
+                                                }
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                        
+                                        Row(
+                                          children: [
+                                            Expanded(child: Text('Add as Friend', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),)),
 
-                                          Switch(
-                                            value: toggle6Listener,
-                                            activeColor: const Color(0xffFFFFFF),
-                                            activeTrackColor: const Color(0xff3498DB),
-                                            onChanged: (value) async{
-                                              context.loaderOverlay.show();
-                                              bool result = await apiRegularUpdateNotificationAddFriends(hide: value);
-                                              context.loaderOverlay.hide();
+                                            Switch(
+                                              value: toggle6Listener,
+                                              activeColor: const Color(0xffFFFFFF),
+                                              activeTrackColor: const Color(0xff3498DB),
+                                              onChanged: (value) async{
+                                                context.loaderOverlay.show();
+                                                bool result = await apiRegularUpdateNotificationAddFriends(hide: value);
+                                                context.loaderOverlay.hide();
 
-                                              if(result){
-                                                toggle6.value = value;
-                                              }else{
-                                                await showDialog(
-                                                  context: context,
-                                                  builder: (_) => AssetGiffyDialog(
-                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                    entryAnimation: EntryAnimation.DEFAULT,
-                                                    buttonOkColor: const Color(0xffff0000),
-                                                    onlyOkButton: true,
-                                                    onOkButtonPressed: (){
-                                                      Navigator.pop(context, true);
-                                                    },
-                                                  ),
-                                                );
-                                              }
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Expanded(child: Text('Add as Page Admin', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),)),
+                                                if(result){
+                                                  toggle6.value = value;
+                                                }else{
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder: (_) => AssetGiffyDialog(
+                                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                      entryAnimation: EntryAnimation.DEFAULT,
+                                                      buttonOkColor: const Color(0xffff0000),
+                                                      onlyOkButton: true,
+                                                      onOkButtonPressed: (){
+                                                        Navigator.pop(context, true);
+                                                      },
+                                                    ),
+                                                  );
+                                                }
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(child: Text('Add as Page Admin', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),)),
 
-                                          Switch(
-                                            value: toggle7Listener,
-                                            activeColor: const Color(0xffFFFFFF),
-                                            activeTrackColor: const Color(0xff3498DB),
-                                            onChanged: (value) async{
-                                              context.loaderOverlay.show();
-                                              bool result = await apiRegularUpdateNotificationAddAdmin(hide: value);
-                                              context.loaderOverlay.hide();
+                                            Switch(
+                                              value: toggle7Listener,
+                                              activeColor: const Color(0xffFFFFFF),
+                                              activeTrackColor: const Color(0xff3498DB),
+                                              onChanged: (value) async{
+                                                context.loaderOverlay.show();
+                                                bool result = await apiRegularUpdateNotificationAddAdmin(hide: value);
+                                                context.loaderOverlay.hide();
 
-                                              if(result){
-                                                toggle7.value = value;
-                                              }else{
-                                                await showDialog(
-                                                  context: context,
-                                                  builder: (_) => AssetGiffyDialog(
-                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                    entryAnimation: EntryAnimation.DEFAULT,
-                                                    buttonOkColor: const Color(0xffff0000),
-                                                    onlyOkButton: true,
-                                                    onOkButtonPressed: (){
-                                                      Navigator.pop(context, true);
-                                                    },
-                                                  ),
-                                                );
-                                              }
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                                if(result){
+                                                  toggle7.value = value;
+                                                }else{
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder: (_) => AssetGiffyDialog(
+                                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                      entryAnimation: EntryAnimation.DEFAULT,
+                                                      buttonOkColor: const Color(0xffff0000),
+                                                      onlyOkButton: true,
+                                                      onOkButtonPressed: (){
+                                                        Navigator.pop(context, true);
+                                                      },
+                                                    ),
+                                                  );
+                                                }
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],

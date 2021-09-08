@@ -101,8 +101,8 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
@@ -177,396 +177,391 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
         builder: (_, List<BLMMainPagesFeeds> feedsListener, __) => ValueListenableBuilder(
           valueListenable: count,
           builder: (_, int countListener, __) => countListener != 0
-          ? RefreshIndicator(
-            onRefresh: onRefresh,
-            child: ListView.separated(
-              controller: scrollController,
-              separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-              physics: const ClampingScrollPhysics(),
-              padding: const EdgeInsets.all(10.0),
-              itemCount: countListener,
-              itemBuilder: (c, i){
-                return feedsListener[i].pageType == 'Blm'
-                ? MiscBLMPost(
-                  key: ValueKey('$i'),
-                  userId: feedsListener[i].userId,
-                  postId: feedsListener[i].postId,
-                  memorialId: feedsListener[i].memorialId,
-                  memorialName: feedsListener[i].memorialName,
-                  timeCreated: timeago.format(DateTime.parse(
-                  feedsListener[i].timeCreated)),
-                  managed: feedsListener[i].managed,
-                  joined: feedsListener[i].joined,
-                  profileImage: feedsListener[i].profileImage,
-                  numberOfComments: feedsListener[i].numberOfComments,
-                  numberOfLikes: feedsListener[i].numberOfLikes,
-                  likeStatus: feedsListener[i].likeStatus,
-                  numberOfTagged: feedsListener[i].numberOfTagged,
-                  taggedFirstName: feedsListener[i].taggedFirstName,
-                  taggedLastName: feedsListener[i].taggedLastName,
-                  taggedId: feedsListener[i].taggedId,
-                  pageType: feedsListener[i].pageType,
-                  famOrFriends: feedsListener[i].famOrFriends,
-                  relationship: feedsListener[i].relationship,
-                  location: feedsListener[i].location,
-                  latitude: feedsListener[i].latitude,
-                  longitude: feedsListener[i].longitude,
-                  contents: [
-                    Container(alignment: Alignment.centerLeft, child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+          ? SafeArea(
+            child: RefreshIndicator(
+              onRefresh: onRefresh,
+              child: ListView.separated(
+                controller: scrollController,
+                separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+                physics: const ClampingScrollPhysics(),
+                padding: const EdgeInsets.all(10.0),
+                itemCount: countListener,
+                itemBuilder: (c, i){
+                  return feedsListener[i].pageType == 'Blm'
+                  ? MiscBLMPost(
+                    key: ValueKey('$i'),
+                    userId: feedsListener[i].userId,
+                    postId: feedsListener[i].postId,
+                    memorialId: feedsListener[i].memorialId,
+                    memorialName: feedsListener[i].memorialName,
+                    timeCreated: timeago.format(DateTime.parse(
+                    feedsListener[i].timeCreated)),
+                    managed: feedsListener[i].managed,
+                    joined: feedsListener[i].joined,
+                    profileImage: feedsListener[i].profileImage,
+                    numberOfComments: feedsListener[i].numberOfComments,
+                    numberOfLikes: feedsListener[i].numberOfLikes,
+                    likeStatus: feedsListener[i].likeStatus,
+                    numberOfTagged: feedsListener[i].numberOfTagged,
+                    taggedFirstName: feedsListener[i].taggedFirstName,
+                    taggedLastName: feedsListener[i].taggedLastName,
+                    taggedId: feedsListener[i].taggedId,
+                    pageType: feedsListener[i].pageType,
+                    famOrFriends: feedsListener[i].famOrFriends,
+                    relationship: feedsListener[i].relationship,
+                    location: feedsListener[i].location,
+                    latitude: feedsListener[i].latitude,
+                    longitude: feedsListener[i].longitude,
+                    contents: [
+                      Container(alignment: Alignment.centerLeft, child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
 
-                    feedsListener[i].imagesOrVideos.isNotEmpty
-                    ? Column(
-                      children: [
-                        const SizedBox(height: 20),
+                      feedsListener[i].imagesOrVideos.isNotEmpty
+                      ? Column(
+                        children: [
+                          const SizedBox(height: 20),
 
-                        Container(
-                          child: ((){
-                            if(feedsListener[i].imagesOrVideos.length == 1){
-                              if(lookupMimeType(feedsListener[i].imagesOrVideos[0])?.contains('video') == true){
-                                return BetterPlayer.network('${feedsListener[i].imagesOrVideos[0]}',
-                                  betterPlayerConfiguration: BetterPlayerConfiguration(
-                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                    aspectRatio: 16 / 9,
-                                    fit: BoxFit.contain,
+                          Container(
+                            child: ((){
+                              if(feedsListener[i].imagesOrVideos.length == 1){
+                                if(lookupMimeType(feedsListener[i].imagesOrVideos[0])?.contains('video') == true){
+                                  return BetterPlayer.network('${feedsListener[i].imagesOrVideos[0]}',
+                                    betterPlayerConfiguration: BetterPlayerConfiguration(
+                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                      aspectRatio: 16 / 9,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  );
+                                }else{
+                                  return CachedNetworkImage(
+                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                    imageUrl: feedsListener[i].imagesOrVideos[0],
+                                    fit: BoxFit.cover,
+                                  );
+                                }
+                              }else if(feedsListener[i].imagesOrVideos.length == 2){
+                                return StaggeredGridView.countBuilder(
+                                  staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  padding: EdgeInsets.zero,
+                                  crossAxisSpacing: 4.0,
+                                  mainAxisSpacing: 4.0,
+                                  crossAxisCount: 4,
+                                  shrinkWrap: true,
+                                  itemBuilder: (BuildContext context, int index) => lookupMimeType(feedsListener[i].imagesOrVideos[index])?.contains('video') == true
+                                  ? BetterPlayer.network('${feedsListener[i].imagesOrVideos[index]}',
+                                    betterPlayerConfiguration: BetterPlayerConfiguration(
+                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                      aspectRatio: 16 / 9,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  )
+                                  : CachedNetworkImage(
+                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                    imageUrl: feedsListener[i].imagesOrVideos[index],
+                                    fit: BoxFit.cover,
                                   ),
                                 );
                               }else{
-                                return CachedNetworkImage(
-                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                  imageUrl: feedsListener[i].imagesOrVideos[0],
-                                  fit: BoxFit.cover,
+                                return StaggeredGridView.countBuilder(
+                                  staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  padding: EdgeInsets.zero,
+                                  crossAxisSpacing: 4.0,
+                                  mainAxisSpacing: 4.0,
+                                  crossAxisCount: 4,
+                                  shrinkWrap: true,
+                                  itemCount: 3,
+                                  itemBuilder: (BuildContext context, int index) => 
+                                  ((){
+                                    if(index != 1){
+                                      return lookupMimeType(feedsListener[i].imagesOrVideos[index])?.contains('video') == true
+                                      ? BetterPlayer.network('${feedsListener[i].imagesOrVideos[index]}',
+                                        betterPlayerConfiguration: BetterPlayerConfiguration(
+                                          placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                          controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                          aspectRatio: 16 / 9,
+                                          fit: BoxFit.contain,
+                                        ),
+                                      )
+                                      : CachedNetworkImage(
+                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                        placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                        imageUrl: feedsListener[i].imagesOrVideos[index],
+                                        fit: BoxFit.cover,
+                                      );
+                                    }else{
+                                      return ((){
+                                        if(feedsListener[i].imagesOrVideos.length - 3 > 0){
+                                          if(lookupMimeType(feedsListener[i].imagesOrVideos[index])?.contains('video') == true){
+                                            return Stack(
+                                              fit: StackFit.expand,
+                                              children: [
+                                                BetterPlayer.network('${feedsListener[i].imagesOrVideos[index]}',
+                                                  betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                    aspectRatio: 16 / 9,
+                                                    fit: BoxFit.contain,
+                                                  ),
+                                                ),
+
+                                                Container(color: const Color(0xff000000).withOpacity(0.5),),
+
+                                                Center(
+                                                  child: CircleAvatar(
+                                                    child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                    backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                    radius: 25,
+                                                  ),
+                                                ),
+                                              ],
+                                            );
+                                          }else{
+                                            return Stack(
+                                              fit: StackFit.expand,
+                                              children: [
+                                                CachedNetworkImage(
+                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                  imageUrl: feedsListener[i].imagesOrVideos[index],
+                                                  fit: BoxFit.cover,
+                                                ),
+
+                                                Container(color: const Color(0xff000000).withOpacity(0.5),),
+
+                                                Center(
+                                                  child: CircleAvatar(
+                                                    child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                    backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                    radius: 25,
+                                                  ),
+                                                ),
+                                              ],
+                                            );
+                                          }
+                                        }else{
+                                          if(lookupMimeType(feedsListener[i].imagesOrVideos[index])?.contains('video') == true){
+                                            return BetterPlayer.network('${feedsListener[i].imagesOrVideos[index]}',
+                                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                aspectRatio: 16 / 9,
+                                                fit: BoxFit.contain,
+                                              ),
+                                            );
+                                          }else{
+                                            return CachedNetworkImage(
+                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                              imageUrl: feedsListener[i].imagesOrVideos[index],
+                                              fit: BoxFit.cover,
+                                            );
+                                          }
+                                        }
+                                      }());
+                                    }
+                                  }()),
                                 );
                               }
-                            }else if(feedsListener[i].imagesOrVideos.length == 2){
-                              return StaggeredGridView.countBuilder(
-                                staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                                physics: const NeverScrollableScrollPhysics(),
-                                padding: EdgeInsets.zero,
-                                crossAxisSpacing: 4.0,
-                                mainAxisSpacing: 4.0,
-                                crossAxisCount: 4,
-                                shrinkWrap: true,
-                                itemBuilder: (BuildContext context, int index) => lookupMimeType(feedsListener[i].imagesOrVideos[index])?.contains('video') == true
-                                ? BetterPlayer.network('${feedsListener[i].imagesOrVideos[index]}',
-                                  betterPlayerConfiguration: BetterPlayerConfiguration(
-                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                    aspectRatio: 16 / 9,
-                                    fit: BoxFit.contain,
-                                  ),
-                                )
-                                : CachedNetworkImage(
-                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                  imageUrl: feedsListener[i].imagesOrVideos[index],
-                                  fit: BoxFit.cover,
-                                ),
-                              );
-                            }else{
-                              return StaggeredGridView.countBuilder(
-                                staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                                physics: const NeverScrollableScrollPhysics(),
-                                padding: EdgeInsets.zero,
-                                crossAxisSpacing: 4.0,
-                                mainAxisSpacing: 4.0,
-                                crossAxisCount: 4,
-                                shrinkWrap: true,
-                                itemCount: 3,
-                                itemBuilder: (BuildContext context, int index) => 
-                                ((){
-                                  if(index != 1){
-                                    return lookupMimeType(feedsListener[i].imagesOrVideos[index])?.contains('video') == true
-                                    ? BetterPlayer.network('${feedsListener[i].imagesOrVideos[index]}',
-                                      betterPlayerConfiguration: BetterPlayerConfiguration(
-                                        placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                        controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                        aspectRatio: 16 / 9,
-                                        fit: BoxFit.contain,
-                                      ),
-                                    )
-                                    : CachedNetworkImage(
-                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                      imageUrl: feedsListener[i].imagesOrVideos[index],
-                                      fit: BoxFit.cover,
-                                    );
-                                  }else{
-                                    return ((){
-                                      if(feedsListener[i].imagesOrVideos.length - 3 > 0){
-                                        if(lookupMimeType(feedsListener[i].imagesOrVideos[index])?.contains('video') == true){
-                                          return Stack(
-                                            fit: StackFit.expand,
-                                            children: [
-                                              BetterPlayer.network('${feedsListener[i].imagesOrVideos[index]}',
-                                                betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                                  aspectRatio: 16 / 9,
-                                                  fit: BoxFit.contain,
-                                                ),
-                                              ),
+                            }()),
+                          ),
+                        ],
+                      ) 
+                      : Container(height: 0),
+                    ],
+                  )
+                  : MiscRegularPost(
+                    key: ValueKey('$i'),
+                    userId: feedsListener[i].userId,
+                    postId: feedsListener[i].postId,
+                    memorialId: feedsListener[i].memorialId,
+                    memorialName: feedsListener[i].memorialName,
+                    timeCreated: timeago.format(DateTime.parse(feedsListener[i].timeCreated)),
+                    managed: feedsListener[i].managed,
+                    joined: feedsListener[i].joined,
+                    profileImage: feedsListener[i].profileImage,
+                    numberOfComments: feedsListener[i].numberOfComments,
+                    numberOfLikes: feedsListener[i].numberOfLikes,
+                    likeStatus: feedsListener[i].likeStatus,
+                    numberOfTagged: feedsListener[i].numberOfTagged,
+                    taggedFirstName: feedsListener[i].taggedFirstName,
+                    taggedLastName: feedsListener[i].taggedLastName,
+                    taggedId: feedsListener[i].taggedId,
+                    pageType: feedsListener[i].pageType,
+                    famOrFriends: feedsListener[i].famOrFriends,
+                    relationship: feedsListener[i].relationship,
+                    location: feedsListener[i].location,
+                    latitude: feedsListener[i].latitude,
+                    longitude: feedsListener[i].longitude,
+                    contents: [
+                      Container(alignment: Alignment.centerLeft, child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
 
-                                              Container(color: const Color(0xff000000).withOpacity(0.5),),
+                      feedsListener[i].imagesOrVideos.isNotEmpty
+                      ? Column(
+                        children: [
+                          const SizedBox(height: 20),
 
-                                              Center(
-                                                child: CircleAvatar(
-                                                  child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: const TextStyle(color: const Color(0xffffffff), fontWeight: FontWeight.bold, fontSize: 40,),),
-                                                  backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                  radius: 25,
-                                                ),
-                                              ),
-                                            ],
-                                          );
-                                        }else{
-                                          return Stack(
-                                            fit: StackFit.expand,
-                                            children: [
-                                              CachedNetworkImage(
-                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                imageUrl: feedsListener[i].imagesOrVideos[index],
-                                                fit: BoxFit.cover,
-                                              ),
-
-                                              Container(color: const Color(0xff000000).withOpacity(0.5),),
-
-                                              Center(
-                                                child: CircleAvatar(
-                                                  child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
-                                                  backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                  radius: 25,
-                                                ),
-                                              ),
-                                            ],
-                                          );
-                                        }
-                                      }else{
-                                        if(lookupMimeType(feedsListener[i].imagesOrVideos[index])?.contains('video') == true){
-                                          return BetterPlayer.network('${feedsListener[i].imagesOrVideos[index]}',
-                                            betterPlayerConfiguration: BetterPlayerConfiguration(
-                                              placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                              controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                              aspectRatio: 16 / 9,
-                                              fit: BoxFit.contain,
-                                            ),
-                                          );
-                                        }else{
-                                          return CachedNetworkImage(
-                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                            placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                            imageUrl: feedsListener[i].imagesOrVideos[index],
-                                            fit: BoxFit.cover,
-                                          );
-                                        }
-                                      }
-                                    }());
-                                  }
-                                }()),
-                              );
-                            }
-                          }()),
-                        ),
-                      ],
-                    ) 
-                    : Container(height: 0),
-                  ],
-                )
-                : MiscRegularPost(
-                  key: ValueKey('$i'),
-                  userId: feedsListener[i].userId,
-                  postId: feedsListener[i].postId,
-                  memorialId: feedsListener[i].memorialId,
-                  memorialName: feedsListener[i].memorialName,
-                  timeCreated: timeago.format(DateTime.parse(feedsListener[i].timeCreated)),
-                  managed: feedsListener[i].managed,
-                  joined: feedsListener[i].joined,
-                  profileImage: feedsListener[i].profileImage,
-                  numberOfComments: feedsListener[i].numberOfComments,
-                  numberOfLikes: feedsListener[i].numberOfLikes,
-                  likeStatus: feedsListener[i].likeStatus,
-                  numberOfTagged: feedsListener[i].numberOfTagged,
-                  taggedFirstName: feedsListener[i].taggedFirstName,
-                  taggedLastName: feedsListener[i].taggedLastName,
-                  taggedId: feedsListener[i].taggedId,
-                  pageType: feedsListener[i].pageType,
-                  famOrFriends: feedsListener[i].famOrFriends,
-                  relationship: feedsListener[i].relationship,
-                  location: feedsListener[i].location,
-                  latitude: feedsListener[i].latitude,
-                  longitude: feedsListener[i].longitude,
-                  contents: [
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(feedsListener[i].postBody,
-                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 5,
-                      ),
-                    ),
-
-                    feedsListener[i].imagesOrVideos.isNotEmpty
-                    ? Column(
-                      children: [
-                        const SizedBox(height: 20),
-
-                        Container(
-                          child: ((){
-                            if(feedsListener[i].imagesOrVideos.length == 1){
-                              if(lookupMimeType(feedsListener[i].imagesOrVideos[0])?.contains('video') == true){
-                                return BetterPlayer.network('${feedsListener[i].imagesOrVideos[0]}',
-                                  betterPlayerConfiguration: BetterPlayerConfiguration(
-                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                    aspectRatio: 16 / 9,
-                                    fit: BoxFit.contain,
+                          Container(
+                            child: ((){
+                              if(feedsListener[i].imagesOrVideos.length == 1){
+                                if(lookupMimeType(feedsListener[i].imagesOrVideos[0])?.contains('video') == true){
+                                  return BetterPlayer.network('${feedsListener[i].imagesOrVideos[0]}',
+                                    betterPlayerConfiguration: BetterPlayerConfiguration(
+                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                      aspectRatio: 16 / 9,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  );
+                                }else{
+                                  return CachedNetworkImage(
+                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                    imageUrl: feedsListener[i].imagesOrVideos[0],
+                                    fit: BoxFit.cover,
+                                  );
+                                }
+                              }else if(feedsListener[i].imagesOrVideos.length == 2){
+                                return StaggeredGridView.countBuilder(
+                                  staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  padding: EdgeInsets.zero,
+                                  crossAxisSpacing: 4.0,
+                                  mainAxisSpacing: 4.0,
+                                  crossAxisCount: 4,
+                                  shrinkWrap: true,
+                                  itemCount: 2,
+                                  itemBuilder: (BuildContext context, int index) => lookupMimeType(feedsListener[i].imagesOrVideos[index])?.contains('video') == true
+                                  ? BetterPlayer.network('${feedsListener[i].imagesOrVideos[index]}',
+                                    betterPlayerConfiguration: BetterPlayerConfiguration(
+                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                      aspectRatio: 16 / 9,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  )
+                                  : CachedNetworkImage(
+                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                    imageUrl: feedsListener[i].imagesOrVideos[index],
+                                    fit: BoxFit.cover,
                                   ),
                                 );
                               }else{
-                                return CachedNetworkImage(
-                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                  imageUrl: feedsListener[i].imagesOrVideos[0],
-                                  fit: BoxFit.cover,
+                                return StaggeredGridView.countBuilder(
+                                  staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  padding: EdgeInsets.zero,
+                                  crossAxisSpacing: 4.0,
+                                  mainAxisSpacing: 4.0,
+                                  crossAxisCount: 4,
+                                  shrinkWrap: true,
+                                  itemCount: 3,
+                                  itemBuilder: (BuildContext context, int index) =>
+                                  ((){
+                                    if(index != 1){
+                                      return lookupMimeType(feedsListener[i].imagesOrVideos[index])?.contains('video') == true
+                                      ? BetterPlayer.network('${feedsListener[i].imagesOrVideos[index]}',
+                                        betterPlayerConfiguration: BetterPlayerConfiguration(
+                                          placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                          controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                          aspectRatio: 16 / 9,
+                                          fit: BoxFit.contain,
+                                        ),
+                                      )
+                                      : CachedNetworkImage(
+                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                        placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                        imageUrl: feedsListener[i].imagesOrVideos[index],
+                                        fit: BoxFit.cover,
+                                      );
+                                    }else{
+                                      return ((){
+                                        if(feedsListener[i].imagesOrVideos.length - 3 > 0){
+                                          if(lookupMimeType(feedsListener[i].imagesOrVideos[index])?.contains('video') == true){
+                                            return Stack(
+                                              fit: StackFit.expand,
+                                              children: [
+                                                BetterPlayer.network('${feedsListener[i].imagesOrVideos[index]}',
+                                                  betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                    aspectRatio: 16 / 9,
+                                                    fit: BoxFit.contain,
+                                                  ),
+                                                ),
+
+                                                Container(color: const Color(0xff000000).withOpacity(0.5),),
+
+                                                Center(
+                                                  child: CircleAvatar(
+                                                    child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                    backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                    radius: 25,
+                                                  ),
+                                                ),
+                                              ],
+                                            );
+                                          }else{
+                                            return Stack(
+                                              fit: StackFit.expand,
+                                              children: [
+                                                CachedNetworkImage(
+                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                  imageUrl: feedsListener[i].imagesOrVideos[index],
+                                                  fit: BoxFit.cover,
+                                                ),
+
+                                                Container(color: const Color(0xff000000).withOpacity(0.5),),
+
+                                                Center(
+                                                  child: CircleAvatar(
+                                                    child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                    backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                    radius: 25,
+                                                  ),
+                                                ),
+                                              ],
+                                            );
+                                          }
+                                        }else{
+                                          if(lookupMimeType(feedsListener[i].imagesOrVideos[index])?.contains('video') == true){
+                                            return BetterPlayer.network('${feedsListener[i].imagesOrVideos[index]}',
+                                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                aspectRatio: 16 / 9,
+                                                fit: BoxFit.contain,
+                                              ),
+                                            );
+                                          }else{
+                                            return CachedNetworkImage(
+                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                              imageUrl: feedsListener[i].imagesOrVideos[index],
+                                              fit: BoxFit.cover,
+                                            );
+                                          }
+                                        }
+                                      }());
+                                    }
+                                  }()),
                                 );
                               }
-                            }else if(feedsListener[i].imagesOrVideos.length == 2){
-                              return StaggeredGridView.countBuilder(
-                                staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                                physics: const NeverScrollableScrollPhysics(),
-                                padding: EdgeInsets.zero,
-                                crossAxisSpacing: 4.0,
-                                mainAxisSpacing: 4.0,
-                                crossAxisCount: 4,
-                                shrinkWrap: true,
-                                itemCount: 2,
-                                itemBuilder: (BuildContext context, int index) => lookupMimeType(feedsListener[i].imagesOrVideos[index])?.contains('video') == true
-                                ? BetterPlayer.network('${feedsListener[i].imagesOrVideos[index]}',
-                                  betterPlayerConfiguration: BetterPlayerConfiguration(
-                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                    aspectRatio: 16 / 9,
-                                    fit: BoxFit.contain,
-                                  ),
-                                )
-                                : CachedNetworkImage(
-                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                  imageUrl: feedsListener[i].imagesOrVideos[index],
-                                  fit: BoxFit.cover,
-                                ),
-                              );
-                            }else{
-                              return StaggeredGridView.countBuilder(
-                                staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                                physics: const NeverScrollableScrollPhysics(),
-                                padding: EdgeInsets.zero,
-                                crossAxisSpacing: 4.0,
-                                mainAxisSpacing: 4.0,
-                                crossAxisCount: 4,
-                                shrinkWrap: true,
-                                itemCount: 3,
-                                itemBuilder: (BuildContext context, int index) =>
-                                ((){
-                                  if(index != 1){
-                                    return lookupMimeType(feedsListener[i].imagesOrVideos[index])?.contains('video') == true
-                                    ? BetterPlayer.network('${feedsListener[i].imagesOrVideos[index]}',
-                                      betterPlayerConfiguration: BetterPlayerConfiguration(
-                                        placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                        controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                        aspectRatio: 16 / 9,
-                                        fit: BoxFit.contain,
-                                      ),
-                                    )
-                                    : CachedNetworkImage(
-                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                      imageUrl: feedsListener[i].imagesOrVideos[index],
-                                      fit: BoxFit.cover,
-                                    );
-                                  }else{
-                                    return ((){
-                                      if(feedsListener[i].imagesOrVideos.length - 3 > 0){
-                                        if(lookupMimeType(feedsListener[i].imagesOrVideos[index])?.contains('video') == true){
-                                          return Stack(
-                                            fit: StackFit.expand,
-                                            children: [
-                                              BetterPlayer.network('${feedsListener[i].imagesOrVideos[index]}',
-                                                betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                                  aspectRatio: 16 / 9,
-                                                  fit: BoxFit.contain,
-                                                ),
-                                              ),
-
-                                              Container(color: const Color(0xff000000).withOpacity(0.5),),
-
-                                              Center(
-                                                child: CircleAvatar(
-                                                  child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: const TextStyle(color: const Color(0xffffffff), fontWeight: FontWeight.bold, fontSize: 40,),),
-                                                  backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                  radius: 25,
-                                                ),
-                                              ),
-                                            ],
-                                          );
-                                        }else{
-                                          return Stack(
-                                            fit: StackFit.expand,
-                                            children: [
-                                              CachedNetworkImage(
-                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                imageUrl: feedsListener[i].imagesOrVideos[index],
-                                                fit: BoxFit.cover,
-                                              ),
-
-                                              Container(color: const Color(0xff000000).withOpacity(0.5),),
-
-                                              Center(
-                                                child: CircleAvatar(
-                                                  child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: const TextStyle(color: const Color(0xffffffff), fontWeight: FontWeight.bold, fontSize: 40,),),
-                                                  backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                  radius: 25,
-                                                ),
-                                              ),
-                                            ],
-                                          );
-                                        }
-                                      }else{
-                                        if(lookupMimeType(feedsListener[i].imagesOrVideos[index])?.contains('video') == true){
-                                          return BetterPlayer.network('${feedsListener[i].imagesOrVideos[index]}',
-                                            betterPlayerConfiguration: BetterPlayerConfiguration(
-                                              placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                              controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                              aspectRatio: 16 / 9,
-                                              fit: BoxFit.contain,
-                                            ),
-                                          );
-                                        }else{
-                                          return CachedNetworkImage(
-                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                            placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                            imageUrl: feedsListener[i].imagesOrVideos[index],
-                                            fit: BoxFit.cover,
-                                          );
-                                        }
-                                      }
-                                    }());
-                                  }
-                                }()),
-                              );
-                            }
-                          }()),
-                        ),
-                      ],
-                    )
-                    : Container(height: 0),
-                  ],
-                );
-              },
+                            }()),
+                          ),
+                        ],
+                      )
+                      : Container(height: 0),
+                    ],
+                  );
+                },
+              ),
             ),
           )
           : SingleChildScrollView(
@@ -581,9 +576,9 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                     textAlign: TextAlign.center,
                     text: TextSpan(
                       children: <TextSpan>[
-                          TextSpan(text: 'Welcome to\n', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+                          TextSpan(text: 'Welcome to\n', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
 
-                          TextSpan(text: 'Faces by Places', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),
+                          TextSpan(text: 'Faces by Places', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),
                         ),
                       ],
                     ),
@@ -593,22 +588,22 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                 const SizedBox(height: 25,),
 
                 Container(
-                  padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 2, right: SizeConfig.blockSizeHorizontal! * 2),
+                  padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Image.asset('assets/icons/Welcome.png', width: SizeConfig.screenWidth, fit: BoxFit.cover,),
                 ),
 
-                SizedBox(height: SizeConfig.blockSizeVertical! * 4.04),
+                const SizedBox(height: 50,),
 
-                Center(child: Text('Feed is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),),
+                Center(child: Text('Feed is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),),
 
                 const SizedBox(height: 20,),
 
                 Padding(
-                  padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 6, right: SizeConfig.blockSizeHorizontal! * 6),
+                  padding: EdgeInsets.symmetric(horizontal: 40),
                   child: Center(
                     child: Text('Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations.',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                      style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                     ),
                   ),
                 ),
@@ -619,10 +614,10 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                 ? Container(height: 0,)
                 : MiscBLMButtonTemplate(
                   buttonText: 'Create',
-                  buttonTextStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),
+                  buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
                   buttonColor: const Color(0xff000000),
                   width: SizeConfig.screenWidth! / 2,
-                  height: 45,
+                  height: 50,
                   onPressed: (){
                     Navigator.pushNamed(context, '/home/blm/create-memorial');
                   },

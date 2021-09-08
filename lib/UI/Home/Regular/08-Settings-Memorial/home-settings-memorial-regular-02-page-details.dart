@@ -59,16 +59,10 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: const Color(0xff04ECFF),
-            centerTitle: true,
-            title: Row(
-              children: [
-                Text('Page Details', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
-
-                Spacer(),
-              ],
-            ),
+            centerTitle: false,
+            title: Text('Page Details', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+              icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
               onPressed: (){
                 Navigator.pop(context);
               },
@@ -80,7 +74,8 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
               if(memorialSettings.hasData){
                 return Stack(
                   children: [
-                    Container(padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
@@ -88,7 +83,7 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                             key: _key1,
                             labelText: 'Page Name',
                             displayText: memorialSettings.data!.almMemorial.showPageDetailsName,
-                            labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                            labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
                           ),
 
                           const SizedBox(height: 20,),
@@ -102,8 +97,8 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
 
                           TextFormField(
                             controller: controller1,
-                            decoration: InputDecoration(alignLabelWithHint: true, labelText: 'DOB', labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),), focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),),
-                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                            decoration: InputDecoration(alignLabelWithHint: true, labelText: 'DOB', labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),), focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),),
+                            style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                             cursorColor: const Color(0xff000000),
                             keyboardType: TextInputType.text,
                             readOnly: true,
@@ -128,8 +123,8 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
 
                           TextFormField(
                             controller: controller2,
-                            decoration: InputDecoration(alignLabelWithHint: true, labelText: 'RIP', labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),), focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),),
-                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                            decoration: InputDecoration(alignLabelWithHint: true, labelText: 'RIP', labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),), focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),),
+                            style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                             cursorColor: const Color(0xff000000),
                             keyboardType: TextInputType.text,
                             readOnly: true,
@@ -156,7 +151,7 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                             key: _key5,
                             labelText: 'Country',
                             displayText: memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry,
-                            labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                            labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
                           ),
 
                           const SizedBox(height: 20,),
@@ -165,17 +160,17 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                             key: _key6,
                             labelText: 'Cemetery',
                             displayText: memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCemetery,
-                            labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                            labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
                           ),
 
                           const SizedBox(height: 80,),
 
                           MiscRegularButtonTemplate(
-                            buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                            buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                             buttonColor: const Color(0xff04ECFF),
                             buttonText: 'Update',
                             width: 150,
-                            height: 45,
+                            height: 50,
                             onPressed: () async{
                               if(memorialSettings.data!.almMemorial.showPageDetailsName != _key1.currentState!.controller.text || memorialSettings.data!.almMemorial.showPageDetailsRelationship != _key2.currentState!.currentSelection || memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsDob != controller1.text || memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsRip != controller2.text || memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry != _key5.currentState!.controller.text || memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCemetery != _key6.currentState!.controller.text){
                                 bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Confirm', content:'Do you want to save the changes?', confirmColor_1: const Color(0xff04ECFF), confirmColor_2: const Color(0xffFF0000),),);
@@ -189,8 +184,8 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        description: Text('Successfully updated the account details.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                        description: Text('Successfully updated the account details.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         onlyOkButton: true,
@@ -205,8 +200,8 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                        description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         buttonOkColor: const Color(0xffff0000),
@@ -221,6 +216,8 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                               }
                             },
                           ),
+
+                          const SizedBox(height: 10,),
                         ],
                       ),
                     ),

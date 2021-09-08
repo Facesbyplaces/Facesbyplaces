@@ -18,21 +18,21 @@ class MiscRegularErrorMessageTemplate extends StatelessWidget{
 
             const SizedBox(height: 100,),
 
-            Text('Error', textAlign: TextAlign.center,style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+            Text('Error', textAlign: TextAlign.center,style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
             
             const SizedBox(height: 30,),
 
-            Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+            Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 28, fontFamily: 'NexaRegular'),),
 
             const SizedBox(height: 30,),
 
             MaterialButton(
-              child: Text('Go back', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+              child: Text('Go back', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
               minWidth: SizeConfig.screenWidth! / 2,
               color: const Color(0xff888888),
               padding: EdgeInsets.zero,
-              height: 45,
+              height: 50,
               onPressed: () async{
                 Navigator.pop(context);
               },

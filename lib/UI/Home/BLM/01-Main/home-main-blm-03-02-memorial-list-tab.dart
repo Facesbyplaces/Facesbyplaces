@@ -94,7 +94,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
             Expanded(
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: Text('My Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                child: Text('My Family', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
               ),
             ),
 
@@ -102,7 +102,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
               child: GestureDetector(
                 child: Align(
                   alignment: Alignment.centerRight,
-                  child: Text('Create', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                  child: Text('Create', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
                 ),
                 onTap: (){
                   Navigator.pushNamed(context, '/home/blm/create-memorial');
@@ -119,9 +119,9 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
     finalMemorials.add(
       Container(
         height: 80,
-        padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         color: const Color(0xffeeeeee),
-        child: Align(alignment: Alignment.centerLeft, child: Text('My Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),),
+        child: Align(alignment: Alignment.centerLeft, child: Text('My Friends', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),),
       ),
     );
   }
@@ -268,15 +268,17 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       builder: (_, int countListener, __) => Container(
         width: SizeConfig.screenWidth,
         child: countListener != 0
-        ? RefreshIndicator(
-          onRefresh: onRefresh,
-          child: ListView.separated(
-            controller: scrollController,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-            physics: const ClampingScrollPhysics(),
-            itemCount: finalMemorials.length,
-            itemBuilder: (c, i) => finalMemorials[i],
+        ? SafeArea(
+          child: RefreshIndicator(
+            onRefresh: onRefresh,
+            child: ListView.separated(
+              controller: scrollController,
+              separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+              physics: const ClampingScrollPhysics(),
+              itemCount: finalMemorials.length,
+              itemBuilder: (c, i) => finalMemorials[i],
+            ),
           ),
         )
         : SingleChildScrollView(
@@ -292,7 +294,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
 
                 const SizedBox(height: 45,),
 
-                Text('Memorial is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+                Text('Memorial is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
 
                 SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
               ],

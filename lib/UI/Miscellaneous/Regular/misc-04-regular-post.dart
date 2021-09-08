@@ -130,11 +130,11 @@ class MiscRegularPostState extends State<MiscRegularPost>{
                         child: RichText(
                           text: TextSpan(
                             children: [
-                              const TextSpan(style: const TextStyle(color: const Color(0xff888888)), text: 'with '),
+                              const TextSpan(style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: const Color(0xff888888)), text: 'with '),
 
                               TextSpan(
                                 children: List.generate(widget.numberOfTagged, (index) => TextSpan(
-                                  style: const TextStyle(fontWeight: FontWeight.bold, color: const Color(0xff000000)),
+                                  style: const TextStyle(fontSize: 18, fontFamily: 'NexaBold', color: const Color(0xff000000),),
                                     children: <TextSpan>[
                                       TextSpan(text: widget.taggedFirstName[index],),
 
@@ -164,7 +164,7 @@ class MiscRegularPostState extends State<MiscRegularPost>{
                       children: [
                         const Icon(Icons.place, color: const Color(0xff888888)),
 
-                        Expanded(child: Text('${widget.location}', style: TextStyle(fontWeight: FontWeight.bold),),),
+                        Expanded(child: Text('${widget.location}', style: TextStyle(fontSize: 18, fontFamily: 'NexaBold', color: const Color(0xff000000),),),),
                       ],
                     ),
                   ],

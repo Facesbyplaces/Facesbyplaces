@@ -115,15 +115,17 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
       builder: (_, int countListener, __) => Container(
         width: SizeConfig.screenWidth,
         child: countListener != 0
-          ? RefreshIndicator(
-            onRefresh: onRefresh,
-            child: ListView.separated(
-              controller: scrollController,
-              separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-              itemBuilder: (c, i) => notifications[i],
-              physics: const ClampingScrollPhysics(),
-              itemCount: countListener,
-            )
+          ? SafeArea(
+            child: RefreshIndicator(
+              onRefresh: onRefresh,
+              child: ListView.separated(
+                controller: scrollController,
+                separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+                itemBuilder: (c, i) => notifications[i],
+                physics: const ClampingScrollPhysics(),
+                itemCount: countListener,
+              )
+            ),
           )
           : SingleChildScrollView(
           physics: const ClampingScrollPhysics(),

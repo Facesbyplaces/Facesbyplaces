@@ -58,7 +58,8 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
                                 child: IconButton(
                                   icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
                                   onPressed: (){
-                                    Navigator.pop(context);
+                                    Navigator.pop(context,);
+                                    // Navigator.pop(context, ['San Francisco', 37.78583400000001, -122.406417]);
                                   },
                                 ),
                               ),
