@@ -31,207 +31,144 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
           }
         },
         child: Scaffold(
-          backgroundColor: Color(0xff04ECFF),
-          body: SafeArea(
-            bottom: false,
-            child: Container(
-              height: SizeConfig.screenHeight,
-              width: SizeConfig.screenWidth,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),
-              ),
-              child: SingleChildScrollView(
-                physics: const ClampingScrollPhysics(),
-                child: Column(
-                  children: [
-                    Container(
-                      height: SizeConfig.blockSizeVertical! * 8.80,
-                      width: SizeConfig.screenWidth,
-                      color: Color(0xff04ECFF),
-                      child: Row(
-                        children: [
-                          Align(alignment: Alignment.centerLeft, child: IconButton(icon:  Icon(Icons.arrow_back, color: const Color(0xffffffff),size: SizeConfig.blockSizeVertical! * 3.52,), onPressed: (){Navigator.pop(context);},),),
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(70.0),
+            child: AppBar(
+              leading: Container(),
+              backgroundColor: const Color(0xff04ECFF),
+              flexibleSpace: Column(
+                children: [
+                  const Spacer(),
 
-                          Spacer(),
-
-                          Container(
-                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(25),),
-                            width: SizeConfig.blockSizeHorizontal! * 79.06,
-                            child: Row(
-                              children: [
-                                IconButton(
-                                  onPressed: () async{
-                                    Location.Location location = new Location.Location();
-                                    bool serviceEnabled = await location.serviceEnabled();
-
-                                    print('The serviceEnabled is $serviceEnabled');
-
-                                    if (!serviceEnabled) {
-                                      serviceEnabled = await location.requestService();
-                                      if (!serviceEnabled) {
-                                        return;
-                                      }
-                                    }
-
-                                    Location.PermissionStatus permissionGranted = await location.hasPermission();
-
-                                    print('The permissionGranted is $permissionGranted');
-
-                                    if (permissionGranted != Location.PermissionStatus.granted) {
-                                      bool confirmation = await showDialog(
-                                        context: context,
-                                        builder: (_) => AssetGiffyDialog(
-                                          description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                          title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          entryAnimation: EntryAnimation.DEFAULT,
-                                          onlyOkButton: false,
-                                          onOkButtonPressed: (){
-                                            Navigator.pop(context, true);
-                                          },
-                                          onCancelButtonPressed: (){
-                                            Navigator.pop(context, false);
-                                          },
-                                        ),
-                                      );
-
-                                      if(confirmation == true){
-                                        permissionGranted = await location.requestPermission();
-
-                                        context.loaderOverlay.show();
-                                        Location.LocationData locationData = await location.getLocation();
-                                        List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
-                                        context.loaderOverlay.hide();
-
-                                        print('The latitude is ${locationData.latitude}');
-                                        print('The latitude is ${locationData.longitude}');
-
-                                        Navigator.pop(context);
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
-                                      }
-                                    }else{
-                                      context.loaderOverlay.show();
-                                      Location.LocationData locationData = await location.getLocation();
-                                      List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
-                                      context.loaderOverlay.hide();
-
-                                      print('The latitude is ${locationData.latitude}');
-                                      print('The latitude is ${locationData.longitude}');
-
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
-                                    }
-                                  },
-                                  icon:  Icon(Icons.search, color: const Color(0xff888888),size: SizeConfig.blockSizeVertical! * 3.65,),
-                                ),
-                                Expanded(
-                                  child: TextFormField(
-                                    keyboardType: TextInputType.text,
-                                    controller: controller,
-                                    onFieldSubmitted: (String keyword) async{
-                                      Location.Location location = new Location.Location();
-                                      bool serviceEnabled = await location.serviceEnabled();
-
-                                      print('The serviceEnabled is $serviceEnabled');
-
-                                      if (!serviceEnabled) {
-                                        serviceEnabled = await location.requestService();
-                                        if (!serviceEnabled) {
-                                          return;
-                                        }
-                                      }
-
-                                      Location.PermissionStatus permissionGranted = await location.hasPermission();
-
-                                      print('The permissionGranted is $permissionGranted');
-
-                                      if (permissionGranted != Location.PermissionStatus.granted) {
-                                        bool confirmation = await showDialog(
-                                          context: context,
-                                          builder: (_) => AssetGiffyDialog(
-                                            description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                            title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                            entryAnimation: EntryAnimation.DEFAULT,
-                                            onlyOkButton: false,
-                                            onOkButtonPressed: (){
-                                              Navigator.pop(context, true);
-                                            },
-                                            onCancelButtonPressed: (){
-                                              Navigator.pop(context, false);
-                                            },
-                                          ),
-                                        );
-
-                                        if(confirmation == true){
-                                          permissionGranted = await location.requestPermission();
-
-                                          context.loaderOverlay.show();
-                                          Location.LocationData locationData = await location.getLocation();
-                                          List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
-                                          context.loaderOverlay.hide();
-
-                                          print('The latitude is ${locationData.latitude}');
-                                          print('The latitude is ${locationData.longitude}');
-
-                                          Navigator.pop(context);
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
-                                        }
-                                      }else{
-                                        context.loaderOverlay.show();
-                                        Location.LocationData locationData = await location.getLocation();
-                                        List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
-                                        context.loaderOverlay.hide();
-
-                                        print('The latitude is ${locationData.latitude}');
-                                        print('The latitude is ${locationData.longitude}');
-
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
-                                      }
-                                    },
-                                    style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
-                                    decoration: InputDecoration(
-                                      hintText: 'Search a Memorial',
-                                      hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
-                                      contentPadding: const EdgeInsets.all(15.0),
-                                      focusColor: const Color(0xffffffff),
-                                      fillColor: const Color(0xffffffff),
-                                      filled: true,
-                                      border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                      enabledBorder:  const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                      focusedBorder:  const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-
-                          const SizedBox(width: 20,),
-                        ],
+                  Row(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: IconButton(
+                          icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+                          onPressed: (){
+                            Navigator.pop(context);
+                          },
+                        ),
                       ),
-                    ),
-                    SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
 
-                    Container(
-                      height: SizeConfig.blockSizeVertical! * 23.23,
-                      width: SizeConfig.blockSizeVertical! * 41.25,
-                      decoration: new BoxDecoration(color: Color(0xffEFFEFF), shape: BoxShape.circle,),
-                      child: Icon(Icons.search, color: const Color(0xff4EC9D4), size: SizeConfig.blockSizeVertical! * 15.26),
-                    ),
+                      Expanded(
+                        child: TextFormField(
+                          controller: controller,
+                          decoration: InputDecoration(
+                            enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
+                            focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
+                            border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
+                            hintStyle: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                            contentPadding: const EdgeInsets.all(15.0),
+                            fillColor: const Color(0xffffffff),
+                            focusColor: const Color(0xffffffff),
+                            hintText: 'Search a Post',
+                            filled: true,
+                          ),
+                          style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                          keyboardType: TextInputType.text,
+                          onFieldSubmitted: (String keyword) async{
+                            Location.Location location = new Location.Location();
+                            bool serviceEnabled = await location.serviceEnabled();
 
-                    SizedBox(height: SizeConfig.blockSizeVertical! * 3.16),
+                            print('The value of serviceEnabled $serviceEnabled');
 
-                    Padding(
-                      padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 22.75, right: SizeConfig.blockSizeHorizontal! * 22.75),
-                      child: Text('Enter a memorial page name to start searching', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff6B6B6B)),),
-                    ),
+                            if(!serviceEnabled){
+                              serviceEnabled = await location.requestService();
+                              if(!serviceEnabled){
+                                return;
+                              }
+                            }
 
-                    SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
-                  ],
-                ),
+                            Location.PermissionStatus permissionGranted = await location.hasPermission();
+
+                            print('The permissionGranted is $permissionGranted');
+
+                            if(permissionGranted != Location.PermissionStatus.granted){
+                              print('Here 1');
+                              bool confirmation = await showDialog(
+                                context: context,
+                                builder: (_) => AssetGiffyDialog(
+                                  description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                  title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  onlyOkButton: false,
+                                  onOkButtonPressed: (){
+                                    Navigator.pop(context, true);
+                                  },
+                                  onCancelButtonPressed: (){
+                                    Navigator.pop(context, false);
+                                  },
+                                ),
+                              );
+
+                              if(confirmation == true){
+                                permissionGranted = await location.requestPermission();
+
+                                context.loaderOverlay.show();
+                                Location.LocationData locationData = await location.getLocation();
+                                List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
+                                context.loaderOverlay.hide();
+
+                                print('The latitude is ${locationData.latitude}');
+                                print('The latitude is ${locationData.longitude}');
+
+                                Navigator.pop(context);
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
+                              }
+                            }else{
+                              print('Here 2');
+                              context.loaderOverlay.show();
+                              print('lkjasdflkjasdf');
+                              Location.LocationData locationData = await location.getLocation();
+                              print('The latitude is ${locationData.latitude}');
+                              print('The latitude is ${locationData.longitude}');
+                              List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
+                              context.loaderOverlay.hide();
+
+                              print('The latitude is ${locationData.latitude}');
+                              print('The latitude is ${locationData.longitude}');
+
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,),),);
+                            }
+                          },
+                        ),
+                      ),
+
+                      const SizedBox(width: 20,),
+                    ],
+                  ),
+
+                  SizedBox(height: 5,),
+                ],
               ),
             ),
+          ),
+          body: Container(
+            height: SizeConfig.screenHeight,
+            width: SizeConfig.screenWidth,
+            decoration: BoxDecoration(color: Colors.white, image: DecorationImage(fit: BoxFit.fill, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),),
+            child: SingleChildScrollView(
+              physics: const ClampingScrollPhysics(),
+              child: Column(
+                children: [
+                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
+
+                  Icon(Icons.search, color: const Color(0xff4EC9D4), size: 240),
+
+                  const SizedBox(height: 20),
+
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Text('Enter a memorial page name to start searching', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff6B6B6B)),),
+                  ),
+
+                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
+                ],
+              ),
+            )
           ),
         ),
       ),

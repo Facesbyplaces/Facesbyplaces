@@ -19,8 +19,14 @@ class RegularDirections{
     if((map['routes'] as List).isNotEmpty){
       final data = Map<String, dynamic>.from(map['routes'][0]);
 
+      print('The data is $data');
+
+
       final northeast = data['bounds']['northeast'];
       final southwest = data['bounds']['southwest'];
+
+      print('The northeast is $northeast');
+      print('The southwest is $southwest');
 
       final bounds = LatLngBounds(
         northeast: LatLng(northeast['lat'], northeast['lng']),
@@ -29,11 +35,16 @@ class RegularDirections{
 
       String distance = '';
       String duration = '';
-      if((data['legs'] as List).isEmpty){
+      if((data['legs'] as List).isNotEmpty){
         final leg = data['legs'][0];
+        print('The leg is $leg');
+        
         distance = leg['distance']['text'];
         duration = leg['duration']['text'];
       }
+
+      print('The distance is $distance');
+      print('The duration is $duration');
 
       return RegularDirections(
         bounds: bounds,

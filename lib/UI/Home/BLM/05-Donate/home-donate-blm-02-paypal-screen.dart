@@ -34,16 +34,10 @@ class HomeBLMPaypalState extends State<HomeBLMPaypal>{
           backgroundColor: const Color(0xffECF0F1),
           appBar: AppBar(
             backgroundColor: const Color(0xff04ECFF),
-            centerTitle: true,
-            title: Row(
-              children: [
-                Text('Paypal', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
-
-                Spacer(),
-              ],
-            ),
+            centerTitle: false,
+            title: Text('Paypal', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+              icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
               onPressed: (){
                 Navigator.pop(context);
               },
@@ -61,8 +55,8 @@ class HomeBLMPaypalState extends State<HomeBLMPaypal>{
                   await showDialog(
                     context: context,
                     builder: (_) => AssetGiffyDialog(
-                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center,),
+                      title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                       entryAnimation: EntryAnimation.DEFAULT,
                       buttonOkColor: const Color(0xffff0000),

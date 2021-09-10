@@ -138,11 +138,11 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                                 indicatorColor: Colors.transparent,
                                 isScrollable: false,
                                 tabs: [
-                                  Center(child: Text('Text', style: TextStyle(fontSize: 14, fontFamily: 'NexaRegular',),),),
+                                  const Center(child: const Text('Text', style: const TextStyle(fontSize: 14, fontFamily: 'NexaRegular',),),),
 
-                                  Center(child: Text('Video', style: TextStyle(fontSize: 14, fontFamily: 'NexaRegular',),),),
+                                  const Center(child: const Text('Video', style: const TextStyle(fontSize: 14, fontFamily: 'NexaRegular',),),),
 
-                                  Center(child: Text('Slide', style: TextStyle(fontSize: 14, fontFamily: 'NexaRegular',),),),
+                                  const Center(child: const Text('Slide', style: const TextStyle(fontSize: 14, fontFamily: 'NexaRegular',),),),
                                 ],
                                 onTap: (int number){
                                   toggle.value = number;
@@ -378,7 +378,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                                   children: [
                                     Center(
                                       child: CircleAvatar(
-                                        child: Text('${index + 1}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                        child: Text('${index + 1}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                         backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                         radius: 25,
                                       ),

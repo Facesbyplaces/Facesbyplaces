@@ -4,7 +4,6 @@ import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-03-search-nearby.
 import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-02-search-suggested.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-03-blm-manage-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-post.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-post.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -422,305 +421,295 @@ class HomeBLMPostState extends State<HomeBLMPost>{
               valueListenable: onSearch,
               builder: (_, bool onSearchListener, __) => Scaffold(
                 backgroundColor: Color(0xff04ECFF),
-                body: SafeArea(
-                  bottom: false,
-                  child: Container(
-                    height: SizeConfig.screenHeight,
-                    width: SizeConfig.screenWidth,
-                    decoration: BoxDecoration(color: Colors.white, image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),),
-                    child: Stack(
+appBar: PreferredSize(
+                  preferredSize: Size.fromHeight(70.0),
+                  child: AppBar(
+                    leading: Container(),
+                    backgroundColor: const Color(0xff04ECFF),
+                    flexibleSpace: Column(
                       children: [
-                        SingleChildScrollView(physics: const NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: const MiscBLMBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),),
+                        const Spacer(),
 
-                        Column(
+                        Row(
                           children: [
-                            Container(
-                              height: SizeConfig.blockSizeVertical! * 8.80,
-                              width: SizeConfig.screenWidth,
-                              color: Color(0xff04ECFF),
-                              child: Row(
-                                children: [
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: IconButton(
-                                      icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.65,),
-                                      onPressed: (){
-                                        Navigator.pop(context);
-                                      },
-                                    ),
-                                  ),
-
-                                  Spacer(),
-
-                                  Container(
-                                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(25),),
-                                    width: SizeConfig.blockSizeHorizontal! * 79.06,
-                                    child: Row(
-                                      children: [
-                                        IconButton(
-                                          icon: const Icon(Icons.search, color: const Color(0xff888888),),
-                                          onPressed: () async{
-                                            if(controller.text == ''){
-                                              onSearch.value = false;
-                                              searchFeeds = [];
-                                              searchSuggested = [];
-                                              searchNearby = [];
-                                              searchBlm = [];
-                                            }else{
-                                              onSearch.value = true;
-
-                                              if(toggleListener == 0){
-                                                for(int i = 0; i < feeds.length; i++){
-                                                  if(feeds[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch.value == true){
-                                                    print('The ${feeds[i].memorialName} contains ${controller.text}');
-                                                    searchFeeds.add(feeds[i]);
-                                                  }
-                                                }
-                                              }else if(toggleListener == 1){
-                                                for(int i = 0; i < suggested.length; i++){
-                                                  if(suggested[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch.value == true){
-                                                    print('The ${suggested[i].memorialName} contains ${controller.text}');
-                                                    searchSuggested.add(suggested[i]);
-                                                  }
-                                                }
-                                              }else if(toggleListener == 2){
-                                                for(int i = 0; i < nearby.length; i++){
-                                                  if(nearby[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch.value == true){
-                                                    print('The ${nearby[i].memorialName} contains ${controller.text}');
-                                                    searchNearby.add(nearby[i]);
-                                                  }
-                                                }
-                                              }else if(toggleListener == 3){
-                                                for(int i = 0; i < blm.length; i++){
-                                                  if(blm[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch.value == true){
-                                                    print('The ${blm[i].memorialName} contains ${controller.text}');
-                                                    searchBlm.add(blm[i]);
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          },
-                                        ),
-                                        Expanded(
-                                          child: TextFormField(
-                                            controller: controller,
-                                            keyboardType: TextInputType.text,
-                                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
-                                            decoration: InputDecoration(
-                                              contentPadding: const EdgeInsets.all(15.0),
-                                              filled: true,
-                                              fillColor: const Color(0xffffffff),
-                                              focusColor: const Color(0xffffffff),
-                                              hintText: 'Search Memorial',
-                                              hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
-                                              border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
-                                              enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                              focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                            ),
-                                            onChanged: (search){
-                                              if(search == ''){
-                                                onSearch.value = false;
-                                                searchFeeds = [];
-                                                searchSuggested = [];
-                                                searchNearby = [];
-                                                searchBlm = [];
-                                              }
-                                            },
-                                            onFieldSubmitted: (search){
-                                              searchKeyword = search;
-                                              if(search == ''){
-                                                onSearch.value = false;
-                                                searchFeeds = [];
-                                                searchSuggested = [];
-                                                searchNearby = [];
-                                                searchBlm = [];
-                                              }else{
-                                                onSearch.value = true;
-
-                                                if(toggleListener == 0){
-                                                  for(int i = 0; i < feeds.length; i++){
-                                                    if(feeds[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch.value == true){
-                                                      print('The ${feeds[i].memorialName} contains $search');
-                                                      searchFeeds.add(feeds[i]);
-                                                    }
-                                                  }
-                                                }else if(toggleListener == 1){
-                                                  for(int i = 0; i < suggested.length; i++){
-                                                    if(suggested[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch.value == true){
-                                                      print('The ${suggested[i].memorialName} contains $search');
-                                                      searchSuggested.add(suggested[i]);
-                                                    }
-                                                  }
-                                                }else if(toggleListener == 2){
-                                                  for(int i = 0; i < nearby.length; i++){
-                                                    if(nearby[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch.value == true){
-                                                      print('The ${nearby[i].memorialName} contains $search');
-                                                      searchNearby.add(nearby[i]);
-                                                    }
-                                                  }
-                                                }else if(toggleListener == 3){
-                                                  for(int i = 0; i < blm.length; i++){
-                                                    if(blm[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch.value == true){
-                                                      print('The ${blm[i].memorialName} contains $search');
-                                                      searchBlm.add(blm[i]);
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            },
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-
-                                  Spacer(),
-                                ],
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: IconButton(
+                                icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                },
                               ),
                             ),
-                            IgnorePointer(
-                              ignoring: isGuestLoggedInListener,
-                              child: Container(
-                                color: const Color(0xffffffff),
-                                alignment: Alignment.center,
-                                height: 55,
-                                child: DefaultTabController(
-                                  length: 4,
-                                  child: TabBar(
-                                    unselectedLabelColor: const Color(0xff000000),
-                                    indicatorColor: const Color(0xff04ECFF),
-                                    labelColor: const Color(0xff04ECFF),
-                                    isScrollable: true,
-                                    tabs: [
-                                      Center(child: Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
 
-                                      Center(child: Text('Suggested', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
+                            Expanded(
+                              child: TextFormField(
+                                keyboardType: TextInputType.text,
+                                controller: controller,
+                                style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                decoration: InputDecoration(
+                                  enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                  focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                  border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                  hintStyle: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                  contentPadding: const EdgeInsets.all(15.0),
+                                  focusColor: const Color(0xffffffff),
+                                  fillColor: const Color(0xffffffff),
+                                  hintText: 'Search Memorial',
+                                  filled: true,
+                                  prefixIcon: IconButton(
+                                    icon: const Icon(Icons.search, color: const Color(0xff888888), size: 35,),
+                                    onPressed: () async{
+                                      if(controller.text == ''){
+                                        onSearch.value = false;
+                                        searchFeeds = [];
+                                        searchSuggested = [];
+                                        searchNearby = [];
+                                        searchBlm = [];
+                                      }else{
+                                        onSearch.value = true;
 
-                                      Center(child: Text('Nearby', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
-
-                                      Center(child: Text('BLM', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
-                                    ],
-                                    onTap: (int number){
-                                      toggle.value = number;
-                                      searchFeeds = [];
-                                      searchSuggested = [];
-                                      searchNearby = [];
-                                      searchBlm = [];
-
-                                      if(onSearchListener == true){
-                                        if(toggle.value == 0){
+                                        if(toggleListener == 0){
                                           for(int i = 0; i < feeds.length; i++){
-                                            if(feeds[i].memorialName.toUpperCase().contains(searchKeyword.toUpperCase()) && onSearch.value == true){
-                                              print('The ${feeds[i].memorialName} contains $searchKeyword');
+                                            if(feeds[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch.value == true){
+                                              print('The ${feeds[i].memorialName} contains ${controller.text}');
                                               searchFeeds.add(feeds[i]);
                                             }
                                           }
-                                        }else if(toggle.value == 1){
-                                          for(int i = 0; i < suggested.length; i++){
-                                            if(suggested[i].memorialName.toUpperCase().contains(searchKeyword.toUpperCase()) && onSearch.value == true){
-                                              print('The ${suggested[i].memorialName} contains $searchKeyword');
+                                        }else if(toggleListener == 1){
+                                          for(int i = 0; i < suggested.length; i++) {
+                                            if(suggested[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch.value == true){
+                                              print('The ${suggested[i].memorialName} contains ${controller.text}');
                                               searchSuggested.add(suggested[i]);
                                             }
                                           }
-                                        }else if(toggle.value == 2){
+                                        }else if(toggleListener == 2){
                                           for(int i = 0; i < nearby.length; i++){
-                                            if(nearby[i].memorialName.toUpperCase().contains(searchKeyword.toUpperCase()) && onSearch.value == true){
-                                              print('The ${nearby[i].memorialName} contains $searchKeyword');
+                                            if(nearby[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch.value == true){
+                                              print('The ${nearby[i].memorialName} contains ${controller.text}');
                                               searchNearby.add(nearby[i]);
                                             }
                                           }
-                                        }else if(toggle.value == 3){
+                                        }else if(toggleListener == 3){
                                           for(int i = 0; i < blm.length; i++){
-                                            if(blm[i].memorialName.toUpperCase().contains(searchKeyword.toUpperCase()) && onSearch.value == true){
-                                              print('The ${blm[i].memorialName} contains $searchKeyword');
+                                            if(blm[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch.value == true) {
+                                              print('The ${blm[i].memorialName} contains ${controller.text}');
                                               searchBlm.add(blm[i]);
                                             }
                                           }
                                         }
-
-                                        onSearch.value = true;
                                       }
                                     },
                                   ),
                                 ),
-                              ),
-                            ),
-
-                            Container(
-                              child: ((){
-                                switch(toggleListener){
-                                  case 0: return Container(height: 20,);
-                                  case 1: return Container(height: 20,);
-                                  case 2: return 
-                                  Container(
-                                    height: 40,
-                                    child: Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Row(
-                                        children: [
-                                          const SizedBox(width: 20,),
-
-                                          const Icon(Icons.location_pin, color: const Color(0xff979797),),
-
-                                          const SizedBox(width: 20,),
-
-                                          ((){
-                                            if(widget.currentLocation != ''){
-                                              return Text(widget.currentLocation, style: const TextStyle(color: const Color(0xff000000), fontSize: 12),);
-                                            }else{
-                                              return const Text('', style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
-                                            }
-                                          }()),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                  case 3: return
-                                  Container(
-                                    height: 40,
-                                    child: Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Row(
-                                        children: [
-                                          const SizedBox(width: 20,),
-
-                                          const Icon(Icons.location_pin, color: const Color(0xff979797),),
-
-                                          const SizedBox(width: 20,),
-
-                                          ((){
-                                            if(widget.currentLocation != ''){
-                                              return Text(widget.currentLocation, style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
-                                            }else{
-                                              return const Text('', style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
-                                            }
-                                          }()),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                }
-                              }()),
-                            ),
-
-                            Expanded(
-                              child: Container(
-                                child: isGuestLoggedInListener 
-                                ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: MiscBLMLoginToContinue(),)
-                                : ((){
-                                  switch(toggleListener){
-                                    case 0: return searchPostExtended();
-                                    case 1: return searchSuggestedExtended();
-                                    case 2: return searchNearbyExtended();
-                                    case 3: return searchBLMExtended();
+                                onChanged: (search){
+                                  if(search == ''){
+                                    onSearch.value = false;
+                                    searchFeeds = [];
+                                    searchSuggested = [];
+                                    searchNearby = [];
+                                    searchBlm = [];
                                   }
-                                }()),
+                                },
+                                onFieldSubmitted: (search){
+                                  searchKeyword = search;
+                                  if(search == ''){
+                                    onSearch.value = false;
+                                    searchFeeds = [];
+                                    searchSuggested = [];
+                                    searchNearby = [];
+                                    searchBlm = [];
+                                  }else{
+                                    onSearch.value = true;
+
+                                    if(toggleListener == 0){
+                                      for(int i = 0; i < feeds.length; i++){
+                                        if(feeds[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch.value == true){
+                                          print('The ${feeds[i].memorialName} contains $search');
+                                          searchFeeds.add(feeds[i]);
+                                        }
+                                      }
+                                    }else if(toggleListener == 1){
+                                      for(int i = 0; i < suggested.length; i++){
+                                        if(suggested[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch.value == true){
+                                          print('The ${suggested[i].memorialName} contains $search');
+                                          searchSuggested.add(suggested[i]);
+                                        }
+                                      }
+                                    }else if(toggleListener == 2){
+                                      for(int i = 0; i < nearby.length; i++){
+                                        if(nearby[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch.value == true){
+                                          print('The ${nearby[i].memorialName} contains $search');
+                                          searchNearby.add(nearby[i]);
+                                        }
+                                      }
+                                    }else if(toggleListener == 3){
+                                      for(int i = 0; i < blm.length; i++){
+                                        if(blm[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch.value == true){
+                                          print('The ${blm[i].memorialName} contains $search');
+                                          searchBlm.add(blm[i]);
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
                               ),
                             ),
+
+                            const SizedBox(width: 20,),
                           ],
                         ),
+
+                        SizedBox(height: 5,),
                       ],
                     ),
+                  ),
+                ),
+                body: Container(
+                  height: SizeConfig.screenHeight,
+                  width: SizeConfig.screenWidth,
+                  decoration: BoxDecoration(color: Colors.white, image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),),
+                  child: Column(
+                    children: [
+                      IgnorePointer(
+                        ignoring: isGuestLoggedInListener,
+                        child: Container(
+                          color: const Color(0xffffffff),
+                          alignment: Alignment.center,
+                          height: 55,
+                          child: DefaultTabController(
+                            length: 4,
+                            child: TabBar(
+                              unselectedLabelColor: const Color(0xff000000),
+                              indicatorColor: const Color(0xff04ECFF),
+                              labelColor: const Color(0xff04ECFF),
+                              isScrollable: true,
+                              tabs: [
+                                const Center(child: const Text('Post', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular'),),),
+
+                                const Center(child: const Text('Suggested', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular'),),),
+
+                                const Center(child: const Text('Nearby', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular'),),),
+
+                                const Center(child: const Text('BLM', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular'),),),
+                              ],
+                              onTap: (int number){
+                                toggle.value = number;
+                                searchFeeds = [];
+                                searchSuggested = [];
+                                searchNearby = [];
+                                searchBlm = [];
+
+                                if(onSearchListener == true){
+                                  if(toggle.value == 0){
+                                    for(int i = 0; i < feeds.length; i++){
+                                      if(feeds[i].memorialName.toUpperCase().contains(searchKeyword.toUpperCase()) && onSearch.value == true){
+                                        print('The ${feeds[i].memorialName} contains $searchKeyword');
+                                        searchFeeds.add(feeds[i]);
+                                      }
+                                    }
+                                  }else if(toggle.value == 1){
+                                    for(int i = 0; i < suggested.length; i++){
+                                      if(suggested[i].memorialName.toUpperCase().contains(searchKeyword.toUpperCase()) && onSearch.value == true){
+                                        print('The ${suggested[i].memorialName} contains $searchKeyword');
+                                        searchSuggested.add(suggested[i]);
+                                      }
+                                    }
+                                  }else if(toggle.value == 2){
+                                    for(int i = 0; i < nearby.length; i++){
+                                      if(nearby[i].memorialName.toUpperCase().contains(searchKeyword.toUpperCase()) && onSearch.value == true){
+                                        print('The ${nearby[i].memorialName} contains $searchKeyword');
+                                        searchNearby.add(nearby[i]);
+                                      }
+                                    }
+                                  }else if(toggle.value == 3){
+                                    for(int i = 0; i < blm.length; i++){
+                                      if(blm[i].memorialName.toUpperCase().contains(searchKeyword.toUpperCase()) && onSearch.value == true){
+                                        print('The ${blm[i].memorialName} contains $searchKeyword');
+                                        searchBlm.add(blm[i]);
+                                      }
+                                    }
+                                  }
+
+                                  onSearch.value = true;
+                                }
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        child: ((){
+                          switch(toggleListener){
+                            case 0: return Container(height: 20,);
+                            case 1: return Container(height: 20,);
+                            case 2: return 
+                            Container(
+                              height: 40,
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Row(
+                                  children: [
+                                    const SizedBox(width: 20,),
+
+                                    const Icon(Icons.location_pin, color: const Color(0xff979797),),
+
+                                    const SizedBox(width: 20,),
+
+                                    ((){
+                                      if(widget.currentLocation != ''){
+                                        return Text(widget.currentLocation, style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular'),);
+                                      }else{
+                                        return const Text('', style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
+                                      }
+                                    }()),
+                                  ],
+                                ),
+                              ),
+                            );
+                            case 3: return
+                            Container(
+                              height: 40,
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Row(
+                                  children: [
+                                    const SizedBox(width: 20,),
+
+                                    const Icon(Icons.location_pin, color: const Color(0xff979797),),
+
+                                    const SizedBox(width: 20,),
+
+                                    ((){
+                                      if(widget.currentLocation != ''){
+                                        return Text(widget.currentLocation, style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular'),);
+                                      }else{
+                                        return const Text('', style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
+                                      }
+                                    }()),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }
+                        }()),
+                      ),
+
+                      Expanded(
+                        child: Container(
+                          child: isGuestLoggedInListener 
+                          ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: MiscBLMLoginToContinue(),)
+                          : ((){
+                            switch(toggleListener){
+                              case 0: return searchPostExtended();
+                              case 1: return searchSuggestedExtended();
+                              case 2: return searchNearbyExtended();
+                              case 3: return searchBLMExtended();
+                            }
+                          }()),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -772,12 +761,12 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                 latitude: feeds[i].latitude,
                 longitude: feeds[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+                  Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
 
                   feeds[i].imagesOrVideos.isNotEmpty
                   ? Column(
                     children: [
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
 
                       Container(
                         child: ((){
@@ -874,7 +863,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                               ),
                                             ),
                                           ],
@@ -896,7 +885,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                               ),
                                             ),
                                           ],
@@ -957,7 +946,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                 latitude: feeds[i].latitude,
                 longitude: feeds[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+                  Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
 
                   feeds[i].imagesOrVideos.isNotEmpty
                   ? Column(
@@ -1059,7 +1048,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                               ),
                                             ),
                                           ],
@@ -1081,7 +1070,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                               ),
                                             ),
                                           ],
@@ -1152,7 +1141,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                 latitude: searchFeeds[i].latitude,
                 longitude: searchFeeds[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+                  Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
 
                   searchFeeds[i].imagesOrVideos.isNotEmpty
                   ? Column(
@@ -1254,7 +1243,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                               ),
                                             ),
                                           ],
@@ -1337,7 +1326,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                 latitude: searchFeeds[i].latitude,
                 longitude: searchFeeds[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+                  Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
 
                   searchFeeds[i].imagesOrVideos.isNotEmpty
                   ? Column(
@@ -1439,7 +1428,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor:const  Color(0xffffffff).withOpacity(.5),
-                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                               ),
                                             ),
                                           ],
@@ -1461,7 +1450,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                               ),
                                             ),
                                           ],
@@ -1514,7 +1503,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
                 const SizedBox(height: 45,),
 
-                Text('Post is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+                Text('Post is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
 
                 SizedBox(height: (SizeConfig.screenHeight! - 55 - kToolbarHeight) / 4,),
               ],
@@ -1586,7 +1575,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
                 const SizedBox(height: 45,),
 
-                Text('Suggested is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+                Text('Suggested is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
                 
                 SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
               ],
@@ -1658,7 +1647,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
               const SizedBox(height: 45,),
 
-              Text('Nearby is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+              Text('Nearby is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
 
               SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
             ],
@@ -1679,7 +1668,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           onRefresh: onRefresh4,
           child: onSearchListener != true
           ? ListView.separated(
-            controller: scrollController3,
+            controller: scrollController4,
             separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
             physics: const ClampingScrollPhysics(),
@@ -1698,7 +1687,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
             ),
           )
           : ListView.separated(
-            controller: scrollController3,
+            controller: scrollController4,
             separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
             physics: const ClampingScrollPhysics(),
@@ -1730,7 +1719,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
                 const SizedBox(height: 45,),
 
-                Text('BLM is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+                Text('BLM is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
 
                 SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
               ],

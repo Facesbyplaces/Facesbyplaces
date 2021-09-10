@@ -1,4 +1,3 @@
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +43,7 @@ class MiscBLMInputFieldTemplateState extends State<MiscBLMInputFieldTemplate>{
       readOnly: widget.readOnly,
       obscureText: widget.obscureText,
       cursorColor: const Color(0xff000000),
-      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+      style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       decoration: InputDecoration(focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),), labelStyle: widget.labelTextStyle, labelText: widget.labelText, alignLabelWithHint: true,),
     );
   }
@@ -81,7 +80,7 @@ class MiscBLMInputFieldMultiTextTemplateState extends State<MiscBLMInputFieldMul
       keyboardType: widget.type,
       readOnly: widget.readOnly,
       cursorColor: const Color(0xff000000),
-      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+      style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       decoration: InputDecoration(
         filled: true,
         alignLabelWithHint: true,
@@ -118,7 +117,7 @@ class MiscBLMInputFieldDropDownState extends State<MiscBLMInputFieldDropDown>{
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: 'Relationship',
-        labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+        labelStyle: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
         focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
       ),
       child: DropdownButtonHideUnderline(
@@ -133,7 +132,7 @@ class MiscBLMInputFieldDropDownState extends State<MiscBLMInputFieldDropDown>{
           items: relationship.map((String value){
             return DropdownMenuItem<String>(
               value: value,
-              child: Text(value, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+              child: Text(value, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
             );
           }).toList(),
         ),
@@ -171,12 +170,12 @@ class MiscBLMInputFieldSecurityQuestionsState extends State<MiscBLMInputFieldSec
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: 'Security Question',
-        labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7)),
+        labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7)),
         focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
-          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.2, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+          style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
           value: currentSelection,
           isDense: true,
           onChanged: (String? newValue){
@@ -187,7 +186,7 @@ class MiscBLMInputFieldSecurityQuestionsState extends State<MiscBLMInputFieldSec
           items: securityQuestions.map((String value){
             return DropdownMenuItem<String>(
               value: value,
-              child: Text(value),
+              child: Text(value, overflow: TextOverflow.clip, style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
             );
           }).toList(),
         ),
@@ -235,7 +234,7 @@ class MiscBLMInputFieldDateTimeTemplateState extends State<MiscBLMInputFieldDate
       },
       decoration: InputDecoration(
         focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
-        labelStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: const Color(0xffBDC3C7),),
+        labelStyle: const TextStyle(fontSize: 24, fontWeight: FontWeight.w400, color: const Color(0xffBDC3C7),),
         labelText: widget.labelText,
         alignLabelWithHint: true,
       ),
@@ -281,7 +280,7 @@ class MiscBLMPhoneNumberTemplateState extends State<MiscBLMPhoneNumberTemplate>{
     return InternationalPhoneNumberInput(
       textFieldController: controller,
       selectorConfig: const SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET, showFlags: false,),
-      textStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, color: const Color(0xff2F353D), fontFamily: 'NexaRegular',),
+      textStyle: TextStyle(fontSize: 24, color: const Color(0xff2F353D), fontFamily: 'NexaRegular',),
       inputDecoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: widget.labelText,

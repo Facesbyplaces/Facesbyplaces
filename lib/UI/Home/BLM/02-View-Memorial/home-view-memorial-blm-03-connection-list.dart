@@ -104,8 +104,8 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
@@ -149,8 +149,8 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
@@ -194,8 +194,8 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
@@ -262,7 +262,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                         Align(
                           alignment: Alignment.centerLeft,
                           child: IconButton(
-                            icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+                            icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
                             onPressed: (){
                               Navigator.pop(context);
                             },
@@ -271,7 +271,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
 
                         Expanded(
                           child: TextFormField(
-                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                            style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.all(15.0),
                               focusColor: const Color(0xffffffff),
@@ -287,7 +287,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                               enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                               focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                               border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                              hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
+                              hintStyle: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
                               prefixIcon: const Icon(Icons.search, color: const Color(0xff888888)),
                             ),
                             onChanged: (search){
@@ -396,17 +396,17 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                         }
                       },
                       tabs: [
-                        Text('Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular',),),
+                        const Text('Family', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
 
-                        Text('Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular',),),
+                        const Text('Friends', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
 
-                        Text('Followers', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular',),),
+                        const Text('Followers', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                       ],
                     ),
                   ),
                 ),
 
-                SizedBox(height: SizeConfig.blockSizeVertical! * 2.0),
+                const SizedBox(height: 20),
 
                 Expanded(
                   child: ((){
@@ -496,24 +496,24 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                       ),
                     ),
 
-                    SizedBox(height: SizeConfig.blockSizeVertical! * 1.0),
+                    const SizedBox(height: 10),
 
                     onSearchListener
                     ? Text('${searches[index].firstName} ${searches[index].lastName}',
-                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                      style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
                     )
                     : Text('${listsFamily[index].firstName} ${listsFamily[index].lastName}', 
-                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                      style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                       textAlign: TextAlign.center, 
                       overflow: TextOverflow.clip, 
                       maxLines: 1,
                     ),
 
                     Text('${listsFamily[index].relationship}',
-                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
+                      style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
@@ -599,17 +599,17 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                       ),
                     ),
 
-                    SizedBox(height: SizeConfig.blockSizeVertical! * 1.0),
+                    const SizedBox(height: 10),
 
                     onSearchListener
                     ? Text('${searches[index].firstName} ${searches[index].lastName}',
-                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                      style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
                     )
                     : Text('${listsFriends[index].firstName} ${listsFriends[index].lastName}',
-                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                      style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
@@ -695,17 +695,17 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                       ),
                     ),
 
-                    SizedBox(height: SizeConfig.blockSizeVertical! * 1.0),
+                    const SizedBox(height: 10),
 
                     onSearchListener
                     ? Text('${searches[index].firstName} ${searches[index].lastName}',
-                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                      style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
                     )
                     : Text('${listsFollowers[index].firstName} ${listsFollowers[index].lastName}',
-                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                      style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,

@@ -407,7 +407,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                             return Container(
                                                               alignment: Alignment.center,
                                                               padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                                                              child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDescription, textAlign: TextAlign.center,style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                                                              child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDescription, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                                                             );
                                                           }else{
                                                             return Container(height: 0,);
@@ -433,14 +433,14 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                           Expanded(
                                                             flex: 2,
                                                             child: Padding(
-                                                              padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                                                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
                                                               child: MaterialButton(
                                                                 child: Text(joinListener ? 'Unjoin' : 'Join', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                                 color: joinListener ? const Color(0xff888888) : const Color(0xff04ECFF),
                                                                 minWidth: SizeConfig.screenWidth! / 2,
                                                                 shape: const StadiumBorder(),
                                                                 padding: EdgeInsets.zero,
-                                                                height: 45,
+                                                                height: 50,
                                                                 onPressed: () async{
                                                                   join.value = !join.value;
 
@@ -694,7 +694,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                             Container(
                                                               width: SizeConfig.screenWidth,
                                                               height: 100,
-                                                              padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                                                              padding: const EdgeInsets.symmetric(horizontal: 20),
                                                               child: ListView.separated(
                                                                 physics: const ClampingScrollPhysics(),
                                                                 scrollDirection: Axis.horizontal,
@@ -1079,7 +1079,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                               child: CircleAvatar(
                                                                                 radius: 25,
                                                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                                               ),
                                                                             ),
                                                                           ],
@@ -1101,7 +1101,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                               child: CircleAvatar(
                                                                                 radius: 25,
                                                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                                               ),
                                                                             ),
                                                                           ],

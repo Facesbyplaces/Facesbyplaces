@@ -29,7 +29,7 @@ class BLMDirections{
 
       String distance = '';
       String duration = '';
-      if((data['legs'] as List).isEmpty){
+      if((data['legs'] as List).isNotEmpty){
         final leg = data['legs'][0];
         distance = leg['distance']['text'];
         duration = leg['duration']['text'];

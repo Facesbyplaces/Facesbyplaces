@@ -79,8 +79,8 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 36, fontFamily: 'NexaRegular'),),
+            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
@@ -147,70 +147,60 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                         Align(
                           alignment: Alignment.centerLeft,
                           child: IconButton(
-                            icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+                            icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
                             onPressed: (){
                               Navigator.pop(context);
                             },
                           ),
                         ),
 
-                        Spacer(),
-                        
-                        Container(
-                          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(25),),
-                          width: SizeConfig.blockSizeHorizontal! * 79.06,
-                          child: Row(
-                            children: [
-                              IconButton(
-                                onPressed: (){
+                        Expanded(
+                          child: TextFormField(
+                            controller: controller,
+                            keyboardType: TextInputType.text,
+                            style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.all(15.0),
+                              filled: true,
+                              fillColor: const Color(0xffffffff),
+                              focusColor: const Color(0xffffffff),
+                              hintText: 'Search User',
+                              hintStyle: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                              border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                              enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                              focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                              prefixIcon: IconButton(
+                                icon: const Icon(Icons.search, color: const Color(0xff888888), size: 35,),
+                                onPressed: () {
                                   keywords = controller.text;
 
                                   if(controller.text != ''){
                                     onLoading();
                                   }
                                 },
-                                icon: const Icon(Icons.search, color: const Color(0xff888888)),
                               ),
-                              Expanded(
-                                child: TextFormField(
-                                  controller: controller,
-                                  keyboardType: TextInputType.text,
-                                  style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.all(15.0),
-                                    filled: true,
-                                    fillColor: const Color(0xffffffff),
-                                    focusColor: const Color(0xffffffff),
-                                    hintText: 'Search User',
-                                    hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
-                                    border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                    enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                    focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                  ),
-                                  onChanged: (newPlaces){
-                                    keywords = newPlaces;
+                            ),
+                            onChanged: (newPlaces){
+                              keywords = newPlaces;
 
-                                    if(newPlaces != ''){
-                                      itemRemaining = 1;
-                                      page = 1;
-                                      keywords = '';
-                                    }else{
-                                      itemRemaining = 1;
-                                      count.value = 0;
-                                      users = [];
-                                      page = 1;
-                                    }
-                                  },
-                                  onFieldSubmitted: (newPlaces){
-                                    keywords = newPlaces;
+                              if(newPlaces != ''){
+                                itemRemaining = 1;
+                                page = 1;
+                                keywords = '';
+                              }else{
+                                itemRemaining = 1;
+                                count.value = 0;
+                                users = [];
+                                page = 1;
+                              }
+                            },
+                            onFieldSubmitted: (newPlaces){
+                              keywords = newPlaces;
 
-                                    if(newPlaces != ''){
-                                      onLoading();
-                                    }
-                                  },
-                                ),
-                              )
-                            ],
+                              if(newPlaces != ''){
+                                onLoading();
+                              }
+                            },
                           ),
                         ),
 
@@ -239,7 +229,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
 
                     const SizedBox(height: 20,),
 
-                    Text('Search to add users', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                    Text('Search to add users', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
 
                     SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
                   ],
@@ -280,8 +270,8 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                  description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                   entryAnimation: EntryAnimation.DEFAULT,
                                   buttonOkColor: const Color(0xffff0000),
@@ -304,8 +294,8 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                             await showDialog(
                               context: context,
                               builder: (_) => AssetGiffyDialog(
-                                description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                 entryAnimation: EntryAnimation.DEFAULT,
                                 buttonOkColor: const Color(0xffff0000),

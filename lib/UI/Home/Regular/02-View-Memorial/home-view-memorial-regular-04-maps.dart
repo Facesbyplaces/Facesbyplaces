@@ -84,13 +84,18 @@ class HomeRegularMapsState extends State<HomeRegularMaps>{
         actions: [
           IconButton(
             onPressed: (){
-
+              googleMapController!.animateCamera(
+                info != null
+                ? CameraUpdate.newLatLngBounds(info!.bounds, 100.0)
+                : CameraUpdate.newCameraPosition(initialCameraPosition!),
+              );
             },
             icon: Icon(Icons.send_outlined),
           ),
         ],
       ),
       body: Stack(
+        alignment: Alignment.center,
         children: [
           GoogleMap(
             mapType: MapType.normal,
@@ -106,6 +111,16 @@ class HomeRegularMapsState extends State<HomeRegularMaps>{
             onMapCreated: (GoogleMapController controller){
               customInfoWindowController.googleMapController = controller;
             },
+            polylines: {
+              info != null
+              ? Polyline(
+                polylineId: const PolylineId('overview_polyline'),
+                color: Colors.red,
+                width: 5,
+                points: info!.polylinePoints.map((e) => LatLng(e.latitude, e.longitude)).toList()
+              )
+              : Polyline(polylineId: const PolylineId('blank'),),
+            },
           ),
 
           CustomInfoWindow(
@@ -114,6 +129,30 @@ class HomeRegularMapsState extends State<HomeRegularMaps>{
             width: 300,
             offset: 50,
           ),
+
+          info != null
+          ? Positioned(
+            top: 20.0,
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                vertical: 6.0,
+                horizontal: 12.0,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.yellowAccent,
+                borderRadius: BorderRadius.circular(20.0),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black26,
+                    offset: Offset(0, 2),
+                    blurRadius: 6.0,
+                  ),
+                ],
+              ),
+              child: Text('${info!.totalDistance}, ${info!.totalDuration}', style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600)),
+            ),
+          )
+          : Container(),
         ],
       ),
     );

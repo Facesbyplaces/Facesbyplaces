@@ -81,16 +81,10 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
           builder: (_, int backgroundImageToggleListener, __) => Scaffold(
             appBar: AppBar(
               backgroundColor: const Color(0xff04ECFF),
-              title: Row(
-                children: [
-                  Text('Page Image', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
-
-                  Spacer(),
-                ],
-              ),
-              centerTitle: true,
+              title: Text('Page Image', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+              centerTitle: false,
               leading: IconButton(
-                icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+                icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
                 onPressed: () async{
                   if(profileImage.value.path != '' || (backgroundImage.value.path != '' && backgroundImageToggle.value != 0)){
                     bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to discard the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
@@ -118,7 +112,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                           children: [
                             const SizedBox(height: 20,),
 
-                            Text('Upload or Select an Image', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.65, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                            Text('Upload or Select an Image', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
 
                             const SizedBox(height: 20,),
 
@@ -179,11 +173,11 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
 
                             const SizedBox(height: 20,),
 
-                            Text('Upload the best photo of the person in the memorial page.', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+                            Text('Upload the best photo of the person in the memorial page.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
 
                             const SizedBox(height: 40,),
 
-                            Text('Choose Background', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.65, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                            Text('Choose Background', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
 
                             const SizedBox(height: 20,),
 
@@ -256,16 +250,16 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
 
                             const SizedBox(height: 20,),
 
-                            Text('Upload your own or select from the pre-mades.', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+                            Text('Upload your own or select from the pre-mades.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
 
                             const SizedBox(height: 80,),
 
                             MiscBLMButtonTemplate(
                               buttonText: 'Update',
-                              buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                              buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                               buttonColor: Color(0xff04ECFF),
                               width: 150,
-                              height: 45,
+                              height: 50,
                               onPressed: () async{
                                 if(profileImage.value.path != '' || backgroundImage.value.path != ''){
                                   context.loaderOverlay.show();
@@ -276,8 +270,8 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        description: Text('Successfully updated the memorial image.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87,fontFamily: 'NexaRegular'),),
-                                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                        description: Text('Successfully updated the memorial image.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         onlyOkButton: true,
@@ -292,8 +286,8 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                        description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         buttonOkColor: const Color(0xffff0000),

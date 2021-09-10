@@ -357,7 +357,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                       ],
                     ),
 
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                   ],
                 ),
               ),
@@ -414,17 +414,17 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                         }
                       },
                       tabs: [
-                        Text('Family', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                        const Text('Family', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
 
-                        Text('Friends', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                        const Text('Friends', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
 
-                        Text('Followers', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                        const Text('Followers', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                       ],
                     ),
                   ),
                 ),
 
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 Expanded(
                   child: ((){
@@ -514,7 +514,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                       ),
                     ),
 
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
                     onSearchListener
                     ? Text('${searches[index].firstName} ${searches[index].lastName}', 
@@ -617,7 +617,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                       ),
                     ),
 
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
                     onSearchListener
                     ? Text('${searches[index].firstName} ${searches[index].lastName}',
@@ -713,7 +713,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                       ),
                     ),
 
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
                     onSearchListener
                     ? Text('${searches[index].firstName} ${searches[index].lastName}',

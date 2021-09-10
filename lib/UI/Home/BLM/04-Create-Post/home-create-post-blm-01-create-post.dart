@@ -134,16 +134,10 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                   builder: (_, String newLocationListener, __) => Scaffold(
                     appBar: AppBar(
                       backgroundColor: const Color(0xff04ECFF),
-                      centerTitle: true,
-                      title: Row(
-                        children: [
-                          Text('Create Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
-
-                          const Spacer(),
-                        ],
-                      ),
+                      centerTitle: false,
+                      title: Text('Create Post', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
                       leading: IconButton(
-                        icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+                        icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
                         onPressed: (){
                           Navigator.pop(context);
                         },
@@ -152,7 +146,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                         GestureDetector(
                           child: Padding(
                             padding: const EdgeInsets.only(right: 20.0),
-                            child: Center(child: Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),),
+                            child: Center(child: Text('Post', style: TextStyle(fontSize: 28, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),),
                           ),
                           onTap: () async{
                             List<BLMTaggedPeople> userIds = [];
@@ -185,8 +179,8 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                   await showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
-                                      description: Text('Permission to access location has been denied from this app. In order to turn it on, go to settings and allow location access permission for this app.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                      description: Text('Permission to access location has been denied from this app. In order to turn it on, go to settings and allow location access permission for this app.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                       entryAnimation: EntryAnimation.DEFAULT,
                                       buttonOkColor: const Color(0xffff0000),
@@ -235,8 +229,8 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                  description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                   entryAnimation: EntryAnimation.DEFAULT,
                                   buttonOkColor: const Color(0xffff0000),
@@ -310,27 +304,20 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                             ),
                             FocusScope(
                               child: Focus(
-                                onFocusChange: (focus){
-                                  if(focus){
-                                    maxLines = 10;
-                                  }else{
-                                    maxLines = 5;
-                                  }
-                                },
                                 child: Container(
-                                  height: SizeConfig.blockSizeVertical! * 50,
+                                  height: 500,
                                   padding: const EdgeInsets.all(10),
                                   child: TextFormField(
                                     controller: controller,
                                     cursorColor: const Color(0xff000000),
                                     maxLines: maxLines,
                                     keyboardType: TextInputType.text,
-                                    style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xfF000000),),
+                                    style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xfF000000),),
                                     decoration: InputDecoration(
                                       fillColor: const Color(0xffffffff),
                                       alignLabelWithHint: true,
                                       labelText: 'Speak out...',
-                                      labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
+                                      labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
                                       border: OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
                                       focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent,),),
                                       enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent,),),
@@ -338,18 +325,25 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                   ),
                                 ),
                               ),
+                                onFocusChange: (focus){
+                                  if(focus){
+                                    maxLines = 10;
+                                  }else{
+                                    maxLines = 5;
+                                  }
+                                },
                             ),
 
                             const SizedBox(height: 10,),
 
                             newLocationListener != ''
                             ? Container(
-                              padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
+                              padding: const EdgeInsets.symmetric(horizontal: 20.0),
                               alignment: Alignment.centerLeft,
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Icon(Icons.place, color: Color(0xff888888)),
+                                  const Icon(Icons.place, color: const Color(0xff888888)),
 
                                   Expanded(
                                     child: Align(
@@ -373,11 +367,11 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
 
                             userCountListener != 0
                             ? Container(
-                              padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
+                              padding: const EdgeInsets.symmetric(horizontal: 20.0),
                               alignment: Alignment.centerLeft,
                               child: Row(
                                 children: [
-                                  Icon(Icons.people, color: Color(0xff888888)),
+                                  const Icon(Icons.people, color: const Color(0xff888888)),
 
                                   Expanded(
                                     child: Wrap(
@@ -409,7 +403,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                   return Container(
                                     height: 200,
                                     width: SizeConfig.screenWidth,
-                                    padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
                                     child: Container(
                                       height: 100,
                                       child: GridView.count(
@@ -435,7 +429,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                   child: CircleAvatar(
                                                     radius: 25,
                                                     backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                    child: Text('${index + 1}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                    child: Text('${index + 1}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                   ),
                                                 ),
                                                 
@@ -465,7 +459,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                     child: CircleAvatar(
                                                       radius: 25,
                                                       backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                                      child: Text('${index + 1}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                      child: Text('${index + 1}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                     ),
                                                   ),
 
@@ -560,11 +554,11 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                   Expanded(
                                     child: GestureDetector(
                                       child: Container(
-                                        padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
+                                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
                                         color: Colors.transparent,
                                         child: Row(
                                           children: [
-                                            Expanded(child: Text('Add a location', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                                            Expanded(child: Text('Add a location', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
 
                                             const Icon(Icons.place, color: const Color(0xff4EC9D4),),
                                           ],
@@ -586,6 +580,17 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                   
                                   Expanded(
                                     child: GestureDetector(
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                                        color: Colors.transparent,
+                                        child: Row(
+                                          children: [
+                                            Expanded(child: Text('Tag a person you are with', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+
+                                            const Icon(Icons.person, color: const Color(0xff4EC9D4),),
+                                          ],
+                                        ),
+                                      ),
                                       onTap: () async{
                                         BLMTaggedUsers? result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreatePostSearchUser(taggedUsers: users,)));
 
@@ -594,17 +599,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                           users.add(result);
                                         }
                                       },
-                                      child: Container(
-                                        padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
-                                        color: Colors.transparent,
-                                        child: Row(
-                                          children: [
-                                            Expanded(child: Text('Tag a person you are with', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
-
-                                            const Icon(Icons.person, color: const Color(0xff4EC9D4),),
-                                          ],
-                                        ),
-                                      ),
                                     ),
                                   ),
 
@@ -613,11 +607,11 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                   Expanded(
                                     child: GestureDetector(
                                       child: Container(
-                                        padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
+                                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
                                         color: Colors.transparent,
                                         child: Row(
                                           children: [
-                                            Expanded(child: Text('Upload a Video / Image', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                                            Expanded(child: Text('Upload a Video / Image', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
                                             
                                             const Icon(Icons.image, color: const Color(0xff4EC9D4),),
                                           ],

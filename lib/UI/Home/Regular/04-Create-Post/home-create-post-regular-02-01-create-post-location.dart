@@ -1,4 +1,5 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:google_place/google_place.dart';
 import 'package:flutter/material.dart';
 
@@ -87,43 +88,23 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
                                       descriptionPlaces.value = [];
                                       locationPlaces.value = [];
                                     }else{
-                                      // empty.value = false;
+                                      empty.value = false;
 
-                                      // context.loaderOverlay.show();
-
-                                      // var googlePlace = GooglePlace("AIzaSyCTPIQSGBS0cdzWRv9VGqrRuVwd2KuuhNg");
-                                      // GooglePlace searchResult = await googlePlace.autocomplete.get("1600 Amphitheatre");
-                                      // // List<Place> searchResult = await Nominatim.searchByName(
-                                      // //   query: '$newPlaces',
-                                      // //   limit: 5,
-                                      // //   addressDetails: true,
-                                      // //   extraTags: true,
-                                      // //   nameDetails: true,
-                                      // // );
-                                      // context.loaderOverlay.hide();
-
-                                      // places.value = [];
-                                      // descriptionPlaces.value = [];
-                                      // locationPlaces.value = [];
-
-                                      // for(int i = 0; i < searchResult.length; i++){
-                                      //   places.value.add(searchResult[i].nameDetails!['name'] ?? '');
-                                      //   descriptionPlaces.value.add(searchResult[i].displayName);
-                                      //   locationPlaces.value.add([searchResult[i].lat, searchResult[i].lon]);
-                                      // }
+                                      context.loaderOverlay.show();
                                       GooglePlace googlePlace = GooglePlace("AIzaSyCTPIQSGBS0cdzWRv9VGqrRuVwd2KuuhNg");
-
-                                      print('The api key is ${googlePlace.apiKEY}');
-                                      print('The newPlaces is $newPlaces');
-
                                       var result = await googlePlace.autocomplete.get(newPlaces);
-                                      if(result != null && result.predictions != null){
+                                      context.loaderOverlay.hide();
 
-                                        setState(() {
-                                          predictions = result.predictions!;
-                                          print('The result is ${result.status}');
-                                          print('The result is ${result.predictions}');
-                                        });
+                                      places.value = [];
+                                      descriptionPlaces.value = [];
+                                      locationPlaces.value = [];
+
+                                      if(result != null){
+                                        for(int i = 0; i < result.predictions!.length; i++){
+                                          places.value.add('${result.predictions![i].terms![0].value}, ${result.predictions![i].terms![1].value}');
+                                          descriptionPlaces.value.add('${result.predictions![i].description}');
+                                          locationPlaces.value.add([37.79170209999999, -122.4041937]);
+                                        }
                                       }
                                     }
                                   },

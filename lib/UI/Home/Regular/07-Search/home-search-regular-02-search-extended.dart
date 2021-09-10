@@ -584,13 +584,13 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               unselectedLabelColor: const Color(0xff000000),
                               indicatorColor: const Color(0xff04ECFF),
                               tabs: [
-                                Center(child: Text('Post', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular'),),),
+                                const Center(child: const Text('Post', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular'),),),
 
-                                Center(child: Text('Suggested', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular'),),),
+                                const Center(child: const Text('Suggested', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular'),),),
 
-                                Center(child: Text('Nearby', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular'),),),
+                                const Center(child: const Text('Nearby', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular'),),),
 
-                                Center(child: Text('BLM', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular'),),),
+                                const Center(child: const Text('BLM', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular'),),),
                               ],
                               onTap: (int number){
                                 toggle.value = number;
@@ -679,7 +679,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                                     ((){
                                       if(widget.currentLocation != ''){
-                                        return Text(widget.currentLocation, style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
+                                        return Text(widget.currentLocation, style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular'),);
                                       }else{
                                         return const Text('', style: const TextStyle(color: const Color(0xff000000),fontSize: 12,),);
                                       }
@@ -859,7 +859,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                                             Center(
                                               child: CircleAvatar(
-                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                 radius: 25,
                                               ),
@@ -881,7 +881,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                                             Center(
                                               child: CircleAvatar(
-                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                 radius: 25,
                                               ),
@@ -1046,7 +1046,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                             
                                             Center(
                                               child: CircleAvatar(
-                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5), 
                                                 radius: 25,
                                               ),
@@ -1068,7 +1068,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                             
                                             Center(
                                               child: CircleAvatar(
-                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                 radius: 25,
                                               ),
@@ -1141,10 +1141,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 latitude: feeds[i].latitude,
                 longitude: feeds[i].longitude,
                 contents: [
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
-                  ),
+                  Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
                   
                   searchFeeds[i].imagesOrVideos.isNotEmpty
                   ? Column(
@@ -1245,7 +1242,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                                               Center(
                                                 child: CircleAvatar(
-                                                  child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                  child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                   radius: 25,
                                                 ),
@@ -1269,7 +1266,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                                 child: CircleAvatar(
                                                   radius: 25,
                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                  child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                  child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                 ),
                                               ),
                                             ],
@@ -1330,10 +1327,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 latitude: feeds[i].latitude,
                 longitude: feeds[i].longitude,
                 contents: [
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
-                  ),
+                  Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
                   
                   searchFeeds[i].imagesOrVideos.isNotEmpty
                   ? Column(
@@ -1434,7 +1428,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                                             Center(
                                               child: CircleAvatar(
-                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                 radius: 25,
                                               ),
@@ -1456,7 +1450,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                                             Center(
                                               child: CircleAvatar(
-                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                 radius: 25,
                                               ),
@@ -1676,7 +1670,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           onRefresh: onRefresh4,
           child: onSearchListener != true
           ? ListView.separated(
-            controller: scrollController3,
+            controller: scrollController4,
             separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
             physics: const ClampingScrollPhysics(),
@@ -1695,7 +1689,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
             ),
           )
           : ListView.separated(
-            controller: scrollController3,
+            controller: scrollController4,
             separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
             physics: const ClampingScrollPhysics(),

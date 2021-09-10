@@ -78,7 +78,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
               backgroundColor: const Color(0xff04ECFF),
               centerTitle: true,
               leading: IconButton(
-                icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),),
+                icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35),
                 onPressed: (){
                   Navigator.pop(context);
                 },

@@ -1016,7 +1016,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                                               Center(
                                                                 child: CircleAvatar(
-                                                                  child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                                  child: Text('${posts[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                                   radius: 25,
                                                                 ),
@@ -1038,7 +1038,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                                               Center(
                                                                 child: CircleAvatar(
-                                                                  child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                                  child: Text('${posts[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                                   radius: 25,
                                                                 ),

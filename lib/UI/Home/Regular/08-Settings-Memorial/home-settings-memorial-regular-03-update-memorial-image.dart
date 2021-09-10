@@ -113,7 +113,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                           children: [
                             const SizedBox(height: 20,),
 
-                            Text('Upload or Select an Image', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular',color: const Color(0xff000000),),),
+                            Text('Upload or Select an Image', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                             
                             SizedBox(height: 20,),
 

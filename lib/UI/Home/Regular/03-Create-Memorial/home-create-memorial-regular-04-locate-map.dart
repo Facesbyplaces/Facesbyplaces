@@ -28,7 +28,7 @@ class HomeRegularCreateMemorialLocateMapState extends State<HomeRegularCreateMem
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: Text('Test', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
+        title: Text('Maps', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
         backgroundColor: const Color(0xff04ECFF),
         actions: [
           IconButton(

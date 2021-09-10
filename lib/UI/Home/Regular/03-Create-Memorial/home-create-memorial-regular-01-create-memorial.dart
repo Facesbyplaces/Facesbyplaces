@@ -100,6 +100,7 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                         cursorColor: const Color(0xff000000),
                         keyboardType: TextInputType.text,
                         readOnly: true,
+                        style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                         decoration: InputDecoration(
                           labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                           focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
@@ -137,6 +138,7 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                         cursorColor: const Color(0xff000000),
                         keyboardType: TextInputType.text,
                         readOnly: true,
+                        style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                         decoration: InputDecoration(
                           labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                           focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),

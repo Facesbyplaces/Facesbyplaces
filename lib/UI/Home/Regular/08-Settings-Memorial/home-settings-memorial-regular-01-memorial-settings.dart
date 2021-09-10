@@ -28,10 +28,10 @@ class HomeRegularMemorialSettings extends StatefulWidget{
 }
 
 class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings>{
-  ValueNotifier<int> toggle = ValueNotifier<int>(0);
   ValueNotifier<bool> isSwitched1 = ValueNotifier<bool>(false);
   ValueNotifier<bool> isSwitched2 = ValueNotifier<bool>(false);
   ValueNotifier<bool> isSwitched3 = ValueNotifier<bool>(false);
+  ValueNotifier<int> toggle = ValueNotifier<int>(0);
   Future<bool>? switchStatus;
 
   void initState(){
@@ -214,6 +214,8 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
             }
           },
         ),
+
+        Container(height: 5, color: const Color(0xffeeeeee),),
 
         const SizedBox(height: 10,),
         

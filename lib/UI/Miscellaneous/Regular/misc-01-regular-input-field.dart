@@ -1,6 +1,5 @@
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import '../../../Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
 class MiscRegularInputFieldTemplate extends StatefulWidget{
@@ -116,7 +115,6 @@ class MiscRegularInputFieldDropDownState extends State<MiscRegularInputFieldDrop
 
   @override
   Widget build(BuildContext context){
-    SizeConfig.init(context);
     return InputDecorator(
       decoration: InputDecoration(
         alignLabelWithHint: true,

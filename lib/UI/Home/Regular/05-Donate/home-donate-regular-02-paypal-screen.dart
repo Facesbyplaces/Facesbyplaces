@@ -55,8 +55,8 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
                   await showDialog(
                     context: context,
                     builder: (_) =>  AssetGiffyDialog(
-                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center,),
+                      title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                       entryAnimation: EntryAnimation.DEFAULT,
                       buttonOkColor: const Color(0xffff0000),

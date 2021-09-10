@@ -58,7 +58,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                       children: [
                         Expanded(child: Align(alignment: Alignment.centerLeft, child: IconButton(icon: const Icon(Icons.arrow_back, color: const Color(0xff000000),), onPressed: (){Navigator.pop(context);},),),),
 
-                        const Text('Send a Gift', style: const TextStyle(fontSize: 24),),
+                        const Text('Send a Gift', style: const TextStyle(fontSize: 24, color: const Color(0xffffffff), fontFamily: 'NexaBold',),),
 
                         Expanded(child: Container(),),
                       ],
@@ -68,7 +68,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
 
                     Expanded(
                       child: GridView.count(
-                        padding: const EdgeInsets.only(left: 10.0, right: 10.0,),
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         physics: const ClampingScrollPhysics(),
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 10,
@@ -92,12 +92,12 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                     Container(
                                       child: ((){
                                         switch(index){
-                                          case 0: return const Text('\$1.00', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
-                                          case 1: return const Text('\$5.00', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
-                                          case 2: return const Text('\$15.00', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
-                                          case 3: return const Text('\$25.00', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
-                                          case 4: return const Text('\$50.00', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
-                                          case 5: return const Text('\$100.00', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
+                                          case 0: return const Text('\$1.00', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),);
+                                          case 1: return const Text('\$5.00', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),);
+                                          case 2: return const Text('\$15.00', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),);
+                                          case 3: return const Text('\$25.00', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),);
+                                          case 4: return const Text('\$50.00', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),);
+                                          case 5: return const Text('\$100.00', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),);
                                         }
                                       }()),
                                     ),
@@ -114,11 +114,11 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                     ),
                     
                     MiscBLMButtonTemplate(
-                      buttonTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff),),
+                      buttonTextStyle: TextStyle(fontSize: 24, color: const Color(0xffffffff), fontFamily: 'NexaBold',),
                       width: SizeConfig.screenWidth! / 2,
                       buttonColor: Color(0xff4EC9D4),
                       buttonText: 'Send Gift',
-                      height: 45,
+                      height: 50,
                       onPressed: () async{
                         String amount = '0.99';
 
@@ -229,7 +229,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                         ),
 
                                                         Padding(
-                                                          padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                                                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
                                                           child: CardField(
                                                             onCardChanged: (card){
                                                               newCard = card;
@@ -240,11 +240,11 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                         SizedBox(height: 20,),
 
                                                         MiscBLMButtonTemplate(
-                                                          buttonTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff),),
+                                                          buttonTextStyle: TextStyle(fontSize: 24, color: const Color(0xffffffff), fontFamily: 'NexaBold',),
                                                           width: SizeConfig.screenWidth! / 2, 
                                                           buttonColor: Color(0xff4EC9D4),
                                                           buttonText: 'Send Gift',
-                                                          height: 45,
+                                                          height: 50,
                                                           onPressed: () async{
                                                             if(newCard != null){
                                                               context.loaderOverlay.show();
@@ -256,8 +256,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                                 showDialog(
                                                                   context: context,
                                                                   builder: (_) => AssetGiffyDialog(
-                                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                                     entryAnimation: EntryAnimation.DEFAULT,
                                                                     buttonOkColor: const Color(0xffff0000),
@@ -279,8 +279,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                                 showDialog(
                                                                   context: context,
                                                                   builder: (_) => AssetGiffyDialog(
-                                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                                     entryAnimation: EntryAnimation.DEFAULT,
                                                                     buttonOkColor: const Color(0xffff0000),
@@ -302,8 +302,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                                 showDialog(
                                                                   context: context,
                                                                   builder: (_) => AssetGiffyDialog(
-                                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                                     entryAnimation: EntryAnimation.DEFAULT,
                                                                     buttonOkColor: const Color(0xffff0000),
@@ -325,8 +325,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                                 await showDialog(
                                                                   context: context,
                                                                   builder: (_) => AssetGiffyDialog(
-                                                                    description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center,),
-                                                                    title: const Text('Thank you', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                                                    title: const Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                                    description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                                     entryAnimation: EntryAnimation.DEFAULT,
                                                                     onlyOkButton: true,
@@ -339,8 +339,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                                 await showDialog(
                                                                   context: context,
                                                                   builder: (_) => AssetGiffyDialog(
-                                                                    title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                                                    description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center,),
+                                                                    title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                                    description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                                     entryAnimation: EntryAnimation.DEFAULT,
                                                                     buttonOkColor: const Color(0xffff0000),
@@ -355,8 +355,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                               await showDialog(
                                                                 context: context,
                                                                 builder: (_) => AssetGiffyDialog(
-                                                                  title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                                                  description: const Text('Please input your card information first before proceeding.', textAlign: TextAlign.center,),
+                                                                  title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                                  description: const Text('Please input your card information first before proceeding.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                                   entryAnimation: EntryAnimation.DEFAULT,
                                                                   buttonOkColor: const Color(0xffff0000),
@@ -399,8 +399,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                     showDialog(
                                                       context: context,
                                                       builder: (_) => AssetGiffyDialog(
-                                                        description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                        description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                         entryAnimation: EntryAnimation.DEFAULT,
                                                         buttonOkColor: const Color(0xffff0000),
@@ -422,8 +422,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                   await showDialog(
                                                     context: context,
                                                     builder: (_) => AssetGiffyDialog(
-                                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                                      description: const Text('Apple pay is not setup on this phone\'s settings. Please try again.', textAlign: TextAlign.center,),
+                                                      title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                      description: const Text('Apple pay is not setup on this phone\'s settings. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                       entryAnimation: EntryAnimation.DEFAULT,
                                                       buttonOkColor: const Color(0xffff0000),
@@ -458,8 +458,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                     showDialog(
                                                       context: context,
                                                       builder: (_) => AssetGiffyDialog(
-                                                        description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                        description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                         entryAnimation: EntryAnimation.DEFAULT,
                                                         buttonOkColor: const Color(0xffff0000),
@@ -491,8 +491,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                       await showDialog(
                                                         context: context,
                                                         builder: (_) => AssetGiffyDialog(
-                                                          description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center,),
-                                                          title: const Text('Thank you', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                                          title: const Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                          description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                           entryAnimation: EntryAnimation.DEFAULT,
                                                           onlyOkButton: true,
@@ -505,8 +505,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                       await showDialog(
                                                         context: context,
                                                         builder: (_) => AssetGiffyDialog(
-                                                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                                          description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center,),
+                                                          title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                          description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                           entryAnimation: EntryAnimation.DEFAULT,
                                                           buttonOkColor: const Color(0xffff0000),
@@ -522,8 +522,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                   await showDialog(
                                                     context: context,
                                                     builder: (_) => AssetGiffyDialog(
-                                                      description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center,),
-                                                      title: const Text('Thank you', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                                      title: const Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                      description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                       entryAnimation: EntryAnimation.DEFAULT,
                                                       onlyOkButton: true,
@@ -536,9 +536,9 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                   await showDialog(
                                                     context: context,
                                                     builder: (_) => AssetGiffyDialog(
-                                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                                      title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                      description: Text('Error: $e', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                      description: Text('Error: $e', textAlign: TextAlign.center,),
                                                       entryAnimation: EntryAnimation.DEFAULT,
                                                       buttonOkColor: const Color(0xffff0000),
                                                       onlyOkButton: true,
@@ -555,8 +555,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                 await showDialog(
                                                   context: context,
                                                   builder: (_) => AssetGiffyDialog(
-                                                    title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                                    description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center,),
+                                                    title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                    description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                     entryAnimation: EntryAnimation.DEFAULT,
                                                     buttonOkColor: const Color(0xffff0000),

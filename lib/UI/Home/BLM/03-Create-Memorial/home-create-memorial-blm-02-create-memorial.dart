@@ -28,7 +28,7 @@ class HomeBLMCreateMemorial2 extends StatefulWidget{
 
 class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
   GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  TextEditingController controllerStory = TextEditingController();
+  TextEditingController controllerStory = TextEditingController(text: '');
   ValueNotifier<List<File> > slideImages = ValueNotifier<List<File>>([]);
   ValueNotifier<File> videoFile = ValueNotifier<File>(File(''));
   ValueNotifier<int> slideCount = ValueNotifier<int>(0);
@@ -82,11 +82,11 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
           valueListenable: toggle,
           builder: (_, int toggleListener, __) => Scaffold(
             appBar: AppBar(
-              title: Text('Cry out for the Victims', maxLines: 2, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+              title: Text('Cry out for the Victims', maxLines: 2, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
               backgroundColor: const Color(0xff04ECFF),
               centerTitle: true,
               leading: IconButton(
-                icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+                icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35),
                 onPressed: (){
                   Navigator.pop(context);
                 },
@@ -104,14 +104,14 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                       MiscBLMInputFieldTemplate(
                         key: _key1, 
                         labelText: 'Name of your Memorial Page',
-                        labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                        labelTextStyle: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                       ),
 
                       const SizedBox(height: 40,),
 
                       Row(
                         children: [
-                          Text('Share your Story', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                          Text('Share your Story', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
 
                           Expanded(
                             child: DefaultTabController(
@@ -123,11 +123,11 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                                 indicatorColor: Colors.transparent,
                                 isScrollable: false,
                                 tabs: [
-                                  Center(child: Text('Text', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular',),),),
+                                  const Center(child: const Text('Text', style: const TextStyle(fontSize: 14, fontFamily: 'NexaRegular',),),),
 
-                                  Center(child: Text('Video', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular',),),),
+                                  const Center(child: const Text('Video', style: const TextStyle(fontSize: 14, fontFamily: 'NexaRegular',),),),
 
-                                  Center(child: Text('Slide', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular',),),),
+                                  const Center(child: const Text('Slide', style: const TextStyle(fontSize: 14, fontFamily: 'NexaRegular',),),),
                                 ],
                                 onTap: (int number) {
                                   toggle.value = number;
@@ -152,21 +152,21 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                       
                       const SizedBox(height: 20),
                       
-                      Text('Describe the events that happened to your love one.', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+                      Text('Describe the events that happened to your love one.', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
                       
-                      SizedBox(height: SizeConfig.blockSizeVertical! * 16.02),
+                      const SizedBox(height: 80,),
                       
                       MiscBLMButtonTemplate(
-                        buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),
+                        buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),
                         width: 150,
-                        height: 45,
+                        height: 50,
                         onPressed: () async{
                           if(_key1.currentState!.controller.text == ''){
                             await showDialog(
                               context: context,
                               builder: (_) => AssetGiffyDialog(
-                                description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                 entryAnimation: EntryAnimation.DEFAULT,
                                 buttonOkColor: const Color(0xffff0000),
@@ -205,7 +205,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
   shareStory1(){
     return TextFormField(
       controller: controllerStory,
-      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+      style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       keyboardType: TextInputType.text,
       cursorColor: const Color(0xff000000),
       readOnly: false,
@@ -357,7 +357,13 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
 
                                 Stack(
                                   children: [
-                                    Center(child: CircleAvatar(radius: 25, backgroundColor: const Color(0xffffffff).withOpacity(.5), child: Text('${index + 1}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),),),
+                                    Center(
+                                      child: CircleAvatar(
+                                        radius: 25, 
+                                        backgroundColor: const Color(0xffffffff).withOpacity(.5), 
+                                        child: Text('${index + 1}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ],
@@ -420,7 +426,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
             
             Align(
               alignment: Alignment.centerLeft,
-              child: Text('Double tap to remove images.', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+              child: Text('Double tap to remove images.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
             ),
           ],
         ),

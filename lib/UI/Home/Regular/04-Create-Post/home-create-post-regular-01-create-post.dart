@@ -342,12 +342,12 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
 
                             newLocationListener != ''
                             ? Container(
-                              padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
+                              padding: const EdgeInsets.symmetric(horizontal: 20.0),
                               alignment: Alignment.centerLeft,
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Icon(Icons.place, color: Color(0xff888888)),
+                                  const Icon(Icons.place, color: const Color(0xff888888)),
 
                                   Expanded(
                                     child: Align(
@@ -371,12 +371,12 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
 
                             userCountListener != 0
                             ? Container(
-                              padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
+                              padding: const EdgeInsets.symmetric(horizontal: 20.0),
                               alignment: Alignment.centerLeft,
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Icon(Icons.people, color: Color(0xff888888)),
+                                  const Icon(Icons.people, color: const Color(0xff888888)),
 
                                   Expanded(
                                     child: Wrap(
@@ -408,7 +408,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                   return Container(
                                     height: 200,
                                     width: SizeConfig.screenWidth,
-                                    padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
                                     child: Container(
                                       height: 100,
                                       child: GridView.count(
@@ -434,7 +434,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                                   child: CircleAvatar(
                                                     radius: 25,
                                                     backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                    child: Text('${index + 1}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                    child: Text('${index + 1}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                   ),
                                                 ),
 
@@ -467,7 +467,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                                     child: CircleAvatar(
                                                       radius: 25,
                                                       backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                                      child: Text('${index + 1}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                      child: Text('${index + 1}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                     ),
                                                   ),
                                                   
@@ -565,7 +565,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                   Expanded(
                                     child: GestureDetector(
                                       child: Container(
-                                        padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
+                                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
                                         color: Colors.transparent,
                                         child: Row(
                                           children: [
@@ -592,7 +592,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                   Expanded(
                                     child: GestureDetector(
                                       child: Container(
-                                        padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
+                                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
                                         color: Colors.transparent,
                                         child: Row(
                                           children: [
@@ -618,7 +618,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                   Expanded(
                                     child: GestureDetector(
                                       child: Container(
-                                        padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
+                                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
                                         color: Colors.transparent,
                                         child: Row(
                                           children: [
