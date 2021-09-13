@@ -175,7 +175,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                 latitude: posts[i].latitude,
                 longitude: posts[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+                  Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
 
                   posts[i].imagesOrVideos.isNotEmpty
                   ? Column(
@@ -276,7 +276,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                               ),
                                             ),
                                           ],
@@ -297,7 +297,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                               ),
                                             ),
                                           ],
@@ -350,7 +350,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
 
                 const SizedBox(height: 45,),
 
-                Text('Post is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+                const Text('Post is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
 
                 SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
               ],
@@ -416,10 +416,7 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
         height: 80,
         padding: const EdgeInsets.only(left: 20.0, right: 20.0),
         color: const Color(0xffeeeeee),
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Text('Owned', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
-        ),
+        child: const Align(alignment: Alignment.centerLeft, child: const Text('Owned', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
       ),
     );
   }
@@ -430,10 +427,7 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
         height: 80,
         padding: const EdgeInsets.only(left: 20.0, right: 20.0),
         color: const Color(0xffeeeeee),
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Text('Followed', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
-        ),
+        child: const Align(alignment: Alignment.centerLeft, child: const Text('Followed', style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
       ),
     );
   }
@@ -547,7 +541,7 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
 
                 const SizedBox(height: 45,),
 
-                Text('Memorial is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+                const Text('Memorial is empty', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
 
                 SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
               ],

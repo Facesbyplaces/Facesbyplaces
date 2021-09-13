@@ -282,7 +282,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
 
                                             const SizedBox(width: 20,),
 
-                                            Text(value.name, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                                            Text(value.name, style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
                                           ],
                                         ),
                                       );

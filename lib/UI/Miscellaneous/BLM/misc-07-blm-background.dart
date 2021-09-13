@@ -10,9 +10,9 @@ class MiscBLMBackgroundTemplate extends StatelessWidget{
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
+          colorFilter: filter,
           fit: BoxFit.cover,
           image: image,
-          colorFilter: filter,
         ),
       ),
     );

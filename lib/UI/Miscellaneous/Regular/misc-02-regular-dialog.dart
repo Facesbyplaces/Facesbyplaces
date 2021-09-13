@@ -78,7 +78,7 @@ class MiscRegularRelationshipFromDialog extends StatelessWidget{
               },
             ),
 
-            SizedBox(height: 40,),
+            const SizedBox(height: 40,),
 
             GestureDetector(
               child: Text('Sister', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),

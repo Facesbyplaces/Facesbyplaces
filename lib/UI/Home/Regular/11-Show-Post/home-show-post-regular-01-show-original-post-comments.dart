@@ -1321,11 +1321,11 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                           child: RichText(
                             text: TextSpan(
                               children: <TextSpan>[
-                                TextSpan(text: 'Replying to ', style: TextStyle(color: Color(0xff888888,), fontSize: 24, fontFamily: 'NexaRegular',),),
+                                const TextSpan(text: 'Replying to ', style: const TextStyle(color: const Color(0xff888888,), fontSize: 24, fontFamily: 'NexaRegular',),),
 
-                                TextSpan(text: '$replyFrom\n', style: TextStyle(color: Color(0xff000000), fontSize: 24, fontFamily: 'NexaRegular', fontWeight: FontWeight.bold)),
+                                TextSpan(text: '$replyFrom\n', style: const TextStyle(color: const Color(0xff000000), fontSize: 24, fontFamily: 'NexaRegular', fontWeight: FontWeight.bold)),
 
-                                TextSpan(text: '$toReply', style: TextStyle(color: Color(0xff000000), fontSize: 24, fontFamily: 'NexaRegular',),),
+                                TextSpan(text: '$toReply', style: const TextStyle(color: const Color(0xff000000), fontSize: 24, fontFamily: 'NexaRegular',),),
                               ],
                             ),
                           ),

@@ -114,9 +114,9 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
         Container(height: 5, color: const Color(0xffeeeeee),),
 
         const ListTile(
-          tileColor: const Color(0xffaaaaaa),
           title: const Text('Family', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
           subtitle: const Text('Add or remove family of this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+          tileColor: const Color(0xffaaaaaa),
         ),
 
         Container(height: 5, color: const Color(0xffeeeeee),),
@@ -214,20 +214,6 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
         ),
 
         Container(height: 5, color: const Color(0xffeeeeee),),
-
-        const ListTile(
-          title: const Text('Paypal', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
-          subtitle: const Text('Manage cards that receives the memorial gifts.', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
-          tileColor: const Color(0xffaaaaaa),
-        ),
-
-        Container(height: 5, color: const Color(0xffeeeeee),),
-
-        const ListTile(
-          title: const Text('Delete Page', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
-          subtitle: const Text('Completely remove the page. This is irreversible', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
-          tileColor: const Color(0xffaaaaaa),
-        ),
 
         const SizedBox(height: 10,),
 

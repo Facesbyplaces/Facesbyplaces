@@ -244,11 +244,11 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                       ],
                                     ),
 
-                                    SizedBox(height: SizeConfig.blockSizeVertical! * 5.12),
+                                    const SizedBox(height: 50),
 
-                                    Divider(color: Colors.white, thickness: 1,),
+                                    const Divider(color: const Color(0xffffffff), thickness: 1,),
 
-                                    SizedBox(height: SizeConfig.blockSizeVertical! * 5.12),
+                                    const SizedBox(height: 50),
 
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,

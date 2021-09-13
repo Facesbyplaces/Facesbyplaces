@@ -203,17 +203,17 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                         width: SizeConfig.screenWidth,
                         child: Column(
                           children: [
-                            Text('${profile.data!.showUserInformationFirstName + ' ' + profile.data!.showUserInformationLastName}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                            Text('${profile.data!.showUserInformationFirstName + ' ' + profile.data!.showUserInformationLastName}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
 
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
 
-                            Text('${profile.data!.showUserInformationEmailAddress}', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                            Text('${profile.data!.showUserInformationEmailAddress}', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
 
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
 
-                            Text('About', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xff04ECFF),),),
+                            Text('About', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xff04ECFF),),),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical! * 2,),
+                            const SizedBox(height: 20),
 
                             Padding(
                               padding: const EdgeInsets.only(left: 20.0, right: 20.0),
@@ -228,7 +228,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
 
                                             const SizedBox(width: 20,),
 
-                                            Text('Birthdate', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                                            const Text('Birthdate', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                                           ],
                                         ),
                                       ),
@@ -248,12 +248,12 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
 
                                             const SizedBox(width: 20,),
 
-                                            Text('Birthplace', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                                            const Text('Birthplace', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                                           ],
                                         ),
                                       ),
 
-                                      Expanded(child: Text('${profile.data!.showUserInformationBirthplace}', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),)),
+                                      Expanded(child: Text('${profile.data!.showUserInformationBirthplace}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),)),
                                     ],
                                   ),
 
@@ -268,7 +268,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
 
                                             const SizedBox(width: 20),
 
-                                            Text('Home Address', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                                            const Text('Home Address', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                                           ],
                                         ),
                                       ),
@@ -277,7 +277,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                     ],
                                   ),
 
-                                  SizedBox(height: 10,),
+                                  const SizedBox(height: 10,),
 
                                   Row(
                                     children: [
@@ -288,7 +288,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
 
                                             const SizedBox(width: 20),
 
-                                            Text('Email Address', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                                            const Text('Email Address', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                                           ],
                                         ),
                                       ),
@@ -308,12 +308,12 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
 
                                             const SizedBox(width: 20,),
 
-                                            Text('Contact Number', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                                            const Text('Contact Number', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                                           ],
                                         ),
                                       ),
 
-                                      Expanded(child: Text('${profile.data!.showUserInformationContactNumber}', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),),
+                                      Expanded(child: Text('${profile.data!.showUserInformationContactNumber}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),),
                                     ],
                                   ),
                                 ],

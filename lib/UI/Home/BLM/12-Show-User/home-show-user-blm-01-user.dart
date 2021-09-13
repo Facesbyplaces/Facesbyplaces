@@ -74,34 +74,20 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                             unselectedLabelColor: const Color(0xffCDEAEC),
                             indicatorColor: const Color(0xff04ECFF),
                             labelColor: const Color(0xff04ECFF),
-                            onTap: (int number){
-                              currentIndex.value = number;
-                            },
                             tabs: [
                               Container(
                                 width: SizeConfig.screenWidth! / 2.5,
-                                child: Center(
-                                  child: Text('Post',
-                                    style: TextStyle(
-                                      fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                      fontFamily: 'NexaBold',
-                                    ),
-                                  ),
-                                ),
+                                child: Center(child: Text('Post', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold',),),),
                               ),
 
                               Container(
                                 width: SizeConfig.screenWidth! / 2.5,
-                                child: Center(
-                                  child: Text('Memorials',
-                                    style: TextStyle(
-                                      fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                      fontFamily: 'NexaBold',
-                                    ),
-                                  ),
-                                ),
+                                child: Center(child: Text('Memorials', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold',),),),
                               ),
                             ],
+                            onTap: (int number){
+                              currentIndex.value = number;
+                            },
                           ),
                         ),
                       ),
@@ -119,7 +105,6 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                 ),
                 body: Stack(
                   children: [
-
                     Container(height: SizeConfig.screenHeight, color: const Color(0xffffffff),),
 
                     Container(
@@ -207,7 +192,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                       child: Padding(
                         padding: const EdgeInsets.only(left: 10.0),
                         child: IconButton(
-                          icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52),
+                          icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35),
                           onPressed: (){
                             Navigator.pop(context);
                           },
@@ -221,35 +206,17 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                         width: SizeConfig.screenWidth,
                         child: Column(
                           children: [
-                            Text('${profile.data!.showUserInformationFirstName + ' ' + profile.data!.showUserInformationLastName}',
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 3.52,
-                                fontFamily: 'NexaBold',
-                                color: const Color(0xff000000),
-                              ),
-                            ),
+                            Text('${profile.data!.showUserInformationFirstName + ' ' + profile.data!.showUserInformationLastName}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical! * 2.03),
+                            const SizedBox(height: 20),
 
-                            Text('${profile.data!.showUserInformationEmailAddress}',
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                fontFamily: 'NexaRegular',
-                                color: const Color(0xffBDC3C7),
-                              ),
-                            ),
+                            Text('${profile.data!.showUserInformationEmailAddress}', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical! * 1,),
+                            const SizedBox(height: 10),
 
-                            Text('About',
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                fontFamily: 'NexaRegular',
-                                color: const Color(0xff04ECFF),
-                              ),
-                            ),
+                            Text('About', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xff04ECFF),),),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical! * 2,),
+                            const SizedBox(height: 20,),
 
                             Padding(
                               padding: const EdgeInsets.only(left: 20.0, right: 20.0),
@@ -264,25 +231,12 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
 
                                             const SizedBox(width: 20,),
 
-                                            Text('Birthdate',
-                                              style: TextStyle(
-                                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                                fontFamily: 'NexaRegular',
-                                                color: const Color(0xffBDC3C7),
-                                              ),
-                                            ),
+                                            const Text('Birthdate', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                                           ],
                                         ),
                                       ),
-                                      Expanded(
-                                        child: Text('${profile.data!.showUserInformationBirthdate}',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                            fontFamily: 'NexaRegular',
-                                            color: const Color(0xff2F353D),
-                                          ),
-                                        ),
-                                      ),
+
+                                      Expanded(child: Text('${profile.data!.showUserInformationBirthdate}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),),
                                     ],
                                   ),
 
@@ -297,25 +251,12 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
 
                                             const SizedBox(width: 20,),
 
-                                            Text('Birthplace',
-                                              style: TextStyle(
-                                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                                fontFamily: 'NexaRegular',
-                                                color: const Color(0xffBDC3C7),
-                                              ),
-                                            ),
+                                            const Text('Birthplace', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                                           ],
                                         ),
                                       ),
-                                      Expanded(
-                                        child: Text('${profile.data!.showUserInformationBirthplace}',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                            fontFamily: 'NexaRegular',
-                                            color: const Color(0xff2F353D),
-                                          ),
-                                        )
-                                      ),
+
+                                      Expanded(child: Text('${profile.data!.showUserInformationBirthplace}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),)),
                                     ],
                                   ),
 
@@ -330,26 +271,12 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
 
                                             const SizedBox(width: 20),
 
-                                            Text('Home Address',
-                                              style: TextStyle(
-                                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                                fontFamily: 'NexaRegular',
-                                                color: const Color(0xffBDC3C7),
-                                              ),
-                                            ),
+                                            const Text('Home Address', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                                           ],
                                         ),
                                       ),
-                                      Expanded(
-                                        child: 
-                                        Text('${profile.data!.showUserInformationHomeAddress}',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                            fontFamily: 'NexaRegular',
-                                            color: const Color(0xff2F353D),
-                                          ),
-                                        )
-                                      ),
+
+                                      Expanded(child: Text('${profile.data!.showUserInformationHomeAddress}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),),
                                     ],
                                   ),
 
@@ -364,25 +291,12 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
 
                                             const SizedBox(width: 20),
 
-                                            Text('Email Address',
-                                              style: TextStyle(
-                                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                                fontFamily: 'NexaRegular',
-                                                color: const Color(0xffBDC3C7),
-                                              ),
-                                            ),
+                                            const Text('Email Address', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                                           ],
                                         ),
                                       ),
-                                      Expanded(
-                                        child: Text('${profile.data!.showUserInformationEmailAddress}',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.blockSizeVertical! * 2,
-                                            fontFamily: 'NexaRegular',
-                                            color: const Color(0xff2F353D),
-                                          ),
-                                        )
-                                      ),
+
+                                      Expanded(child: Text('${profile.data!.showUserInformationEmailAddress}', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),),
                                     ],
                                   ),
 
@@ -397,25 +311,12 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
 
                                             const SizedBox(width: 20,),
 
-                                            Text('Contact Number',
-                                              style: TextStyle(
-                                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                                fontFamily: 'NexaRegular',
-                                                color: const Color(0xffBDC3C7),
-                                              ),
-                                            ),
+                                            const Text('Contact Number', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                                           ],
                                         ),
                                       ),
-                                      Expanded(
-                                        child: Text('${profile.data!.showUserInformationContactNumber}',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                            fontFamily: 'NexaRegular',
-                                            color: const Color(0xff2F353D),
-                                          ),
-                                        )
-                                      ),
+
+                                      Expanded(child: Text('${profile.data!.showUserInformationContactNumber}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),),
                                     ],
                                   ),
                                 ],
@@ -428,7 +329,6 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                   ],
                 ),
               );
-
             }else if(profile.hasError){
               return MiscBLMErrorMessageTemplate();
             }else{

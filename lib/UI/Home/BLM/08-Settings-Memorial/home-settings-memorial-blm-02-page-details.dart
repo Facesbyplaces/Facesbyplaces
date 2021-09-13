@@ -95,7 +95,7 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                             MiscBLMInputFieldTemplate(
                               key: _key2,
                               labelText: 'Description',
-                              labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                              labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
                               displayText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDescription,
                             ),
 

@@ -56,7 +56,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
 
                     Row(
                       children: [
-                        Expanded(child: Align(alignment: Alignment.centerLeft, child: IconButton(icon: const Icon(Icons.arrow_back, color: const Color(0xff000000),), onPressed: (){Navigator.pop(context);},),),),
+                        Expanded(child: Align(alignment: Alignment.centerLeft, child: IconButton(icon: const Icon(Icons.arrow_back, color: const Color(0xff000000), size: 35,), onPressed: (){Navigator.pop(context);},),),),
 
                         const Text('Send a Gift', style: const TextStyle(fontSize: 24, color: const Color(0xffffffff), fontFamily: 'NexaBold',),),
 

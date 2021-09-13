@@ -18,7 +18,7 @@ class MiscRegularErrorMessageTemplate extends StatelessWidget{
 
             const SizedBox(height: 100,),
 
-            Text('Error', textAlign: TextAlign.center,style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+            const Text('Error', textAlign: TextAlign.center,style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
             
             const SizedBox(height: 30,),
 

@@ -208,10 +208,10 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
 
                                         MiscRegularButtonTemplate(
                                           buttonText: 'Share',
-                                          buttonTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),
+                                          buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
                                           width: SizeConfig.screenWidth! / 2,
                                           buttonColor: const Color(0xff04ECFF),
-                                          height: 45,
+                                          height: 50,
                                           onPressed: () async{
                                             await shareQRCode(qrData);
                                           },
@@ -452,10 +452,10 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
 
                                         MiscRegularButtonTemplate(
                                           buttonText: 'Share',
-                                          buttonTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),
+                                          buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
                                           buttonColor: const Color(0xff04ECFF),
                                           width: SizeConfig.screenWidth! / 2,
-                                          height: 45,
+                                          height: 50,
                                           onPressed: () async{
                                             await shareQRCode(qrData);
                                           },

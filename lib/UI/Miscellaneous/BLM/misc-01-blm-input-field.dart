@@ -218,6 +218,12 @@ class MiscBLMInputFieldDateTimeTemplateState extends State<MiscBLMInputFieldDate
       cursorColor: const Color(0xff000000),
       keyboardType: TextInputType.text,
       readOnly: true,
+      decoration: InputDecoration(
+        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
+        labelStyle: const TextStyle(fontSize: 24, fontWeight: FontWeight.w400, color: const Color(0xffBDC3C7),),
+        labelText: widget.labelText,
+        alignLabelWithHint: true,
+      ),
       onTap: (){
         DatePicker.showDatePicker(
           context, 
@@ -232,12 +238,6 @@ class MiscBLMInputFieldDateTimeTemplateState extends State<MiscBLMInputFieldDate
           locale: LocaleType.en,
         );
       },
-      decoration: InputDecoration(
-        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
-        labelStyle: const TextStyle(fontSize: 24, fontWeight: FontWeight.w400, color: const Color(0xffBDC3C7),),
-        labelText: widget.labelText,
-        alignLabelWithHint: true,
-      ),
     );
   }
 }

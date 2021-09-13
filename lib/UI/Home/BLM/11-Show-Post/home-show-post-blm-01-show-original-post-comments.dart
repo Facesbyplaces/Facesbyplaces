@@ -272,10 +272,10 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                 builder: (_, List<BLMOriginalReply> repliesListener, __) => Scaffold(
                   appBar: AppBar(
                     backgroundColor: const Color(0xff04ECFF),
-                    title: Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+                    title: Text('Post', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
                     centerTitle: true,
                     leading: IconButton(
-                      icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52),
+                      icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35),
                       onPressed: (){
                         Navigator.pop(context, numberOfComments);
                       },
@@ -372,7 +372,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                 child: Text(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageName,
                                                                   overflow: TextOverflow.ellipsis,
                                                                   style: TextStyle(
-                                                                    fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                                                                    fontSize: 22,
                                                                     fontFamily: 'NexaBold',
                                                                     color: const Color(0xff000000),
                                                                   ),
@@ -385,7 +385,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                 child: Text(timeago.format(DateTime.parse(originalPost.data!.blmPost.showOriginalPostCreatedAt),),
                                                                   maxLines: 1, 
                                                                   style: TextStyle(
-                                                                    fontSize: SizeConfig.blockSizeVertical! * 1.76,
+                                                                    fontSize: 18,
                                                                     fontFamily: 'NexaBold',
                                                                     color: const Color(0xffBDC3C7),
                                                                   ),
@@ -403,35 +403,17 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                             Container(
                                               padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                                               alignment: Alignment.centerLeft,
-                                              child: Text(originalPost.data!.blmPost.showOriginalPostBody, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                                              child: Text(originalPost.data!.blmPost.showOriginalPostBody, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                                             ),
                                             originalPost.data!.blmPost.showOriginalPostImagesOrVideos.isNotEmpty
                                             ? Column(
                                               children: [
                                                 const SizedBox(height: 20),
+
                                                 Container(
                                                   child: ((){
                                                     if(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length == 1){
                                                       return GestureDetector(
-                                                        child: ((){
-                                                          if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
-                                                            return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0]}',
-                                                              betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                                                controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                                                aspectRatio: 16 / 9,
-                                                                fit: BoxFit.contain,
-                                                              ),
-                                                            );
-                                                          }else{
-                                                            return CachedNetworkImage(
-                                                              fit: BoxFit.cover,
-                                                              imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
-                                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                            );
-                                                          }
-                                                        }()),
                                                         onTap: (){
                                                           showGeneralDialog(
                                                             context: context,
@@ -493,6 +475,25 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                             },
                                                           );
                                                         },
+                                                        child: ((){
+                                                          if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
+                                                            return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0]}',
+                                                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                                controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                aspectRatio: 16 / 9,
+                                                                fit: BoxFit.contain,
+                                                              ),
+                                                            );
+                                                          }else{
+                                                            return CachedNetworkImage(
+                                                              fit: BoxFit.cover,
+                                                              imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
+                                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                            );
+                                                          }
+                                                        }()),
                                                       );
                                                     }else if(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length == 2){
                                                       return StaggeredGridView.countBuilder(
@@ -669,7 +670,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                           child: CircleAvatar(
                                                                             radius: 25,
                                                                             backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                                            child: Text('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3}', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                                            child: Text('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                                           ),
                                                                         ),
                                                                       ],
@@ -691,7 +692,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                           child: CircleAvatar(
                                                                             radius: 25,
                                                                             backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                                            child: Text('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3}', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                                            child: Text('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                                           ),
                                                                         ),
                                                                       ],
@@ -827,10 +828,12 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                   child: RichText(
                                                     text: TextSpan(
                                                       children: [
-                                                        const TextSpan(style: const TextStyle(color: const Color(0xff888888),), text: 'with '),
+                                                        const TextSpan(style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: const Color(0xff888888)), text: 'with '),
 
                                                         TextSpan(
-                                                          children: List.generate(originalPost.data!.blmPost.showOriginalPostPostTagged.length, (index) => TextSpan(style: const TextStyle(fontWeight: FontWeight.bold, color: const Color(0xff000000)),
+                                                          children: List.generate(
+                                                            originalPost.data!.blmPost.showOriginalPostPostTagged.length, (index) => TextSpan(
+                                                              style: const TextStyle(fontSize: 18, fontFamily: 'NexaBold', color: const Color(0xff000000),),
                                                               children: <TextSpan>[
                                                                 TextSpan(text: originalPost.data!.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedFirstName + ' ' + originalPost.data!.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedLastName,
                                                                 recognizer: TapGestureRecognizer()
@@ -891,7 +894,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
 
                                                       const SizedBox(width: 10,),
                                                       
-                                                      Text('$numberOfLikes', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                                                      Text('$numberOfLikes', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                                                     ],
                                                   ),
 
@@ -903,7 +906,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                       
                                                       const SizedBox(width: 10,),
 
-                                                      Text('$numberOfComments', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                                                      Text('$numberOfComments', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                                                     ],
                                                   ),
                                                 ],
@@ -932,21 +935,10 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                     children: [
                                                       Expanded(
                                                         child: currentUserId == commentsListener[i].userId && currentAccountType == commentsListener[i].userAccountType
-                                                        ? Text('You',
-                                                          style: TextStyle(
-                                                            fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                                            fontFamily: 'NexaBold',
-                                                            color: const Color(0xff000000),
-                                                          ),
-                                                        )
-                                                        : Text('${commentsListener[i].firstName}' + ' ' + '${commentsListener[i].lastName}',
-                                                            style: TextStyle(
-                                                              fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                                              fontFamily: 'NexaBold',
-                                                              color: const Color(0xff000000),
-                                                            ),
-                                                          ),
-                                                        ),
+                                                        ? Text('You', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff000000),),)
+                                                        : Text('${commentsListener[i].firstName}' + ' ' + '${commentsListener[i].lastName}', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                                                      ),
+
                                                       Expanded(
                                                         child: Align(
                                                           alignment: Alignment.centerRight,
@@ -967,13 +959,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                             icon: commentsLikes[i] == true
                                                             ? const FaIcon(FontAwesomeIcons.peace, color: const Color(0xffff0000),)
                                                             : const FaIcon(FontAwesomeIcons.peace, color: const Color(0xff888888),),
-                                                            label: Text('${commentsNumberOfLikes[i]}',
-                                                              style: TextStyle(
-                                                                fontSize: SizeConfig.blockSizeVertical! * 1.76,
-                                                                fontFamily: 'NexaRegular',
-                                                                color: const Color(0xffBDC3C7),
-                                                              ),
-                                                            ),
+                                                            label: Text('${commentsNumberOfLikes[i]}', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                                                           ),
                                                         ),
                                                       ),
@@ -986,7 +972,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                           Expanded(
                                                             child: Container(
                                                               padding: const EdgeInsets.all(10.0),
-                                                              child: Text(commentsListener[i].commentBody, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),),
+                                                              child: Text(commentsListener[i].commentBody, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),),
                                                               decoration: const BoxDecoration(color: const Color(0xff4EC9D4), borderRadius: const BorderRadius.all(Radius.circular(10.0)),),
                                                             ),
                                                           ),
@@ -997,18 +983,12 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
 
                                                       Row(
                                                         children: [
-                                                          Text(timeago.format(DateTime.parse(commentsListener[i].createdAt)),
-                                                            style: TextStyle(
-                                                              fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                                              fontFamily: 'NexaRegular',
-                                                              color: const Color(0xff000000),
-                                                            ),
-                                                          ),
+                                                          Text(timeago.format(DateTime.parse(commentsListener[i].createdAt)), style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
 
                                                           const SizedBox(width: 20,),
 
                                                           GestureDetector(
-                                                            child: Text('Reply', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                                                            child: Text('Reply', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                                                             onTap: () async{
                                                               if(controller.text != ''){
                                                                 controller.clear();
@@ -1032,8 +1012,110 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                           (index) => ListTile(
                                                             contentPadding: EdgeInsets.zero, 
                                                             visualDensity: const VisualDensity(vertical: 4.0),
+                                                            leading: commentsListener[i].listOfReplies[index].image != ''
+                                                            ? CircleAvatar(
+                                                              backgroundColor: const Color(0xff888888),
+                                                              foregroundImage: NetworkImage(commentsListener[i].listOfReplies[index].image),
+                                                            )
+                                                            : const CircleAvatar(
+                                                              backgroundColor: const Color(0xff888888),
+                                                              foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                                            ),
+                                                            title: Row(
+                                                              children: [
+                                                                Expanded(
+                                                                  child: currentUserId == commentsListener[i].listOfReplies[index].userId && currentAccountType == commentsListener[i].listOfReplies[index].userAccountType
+                                                                  ? Text('You',
+                                                                    style: TextStyle(
+                                                                      fontSize: 20,
+                                                                      fontFamily: 'NexaBold',
+                                                                      color: const Color(0xff000000),
+                                                                    ),
+                                                                  )
+                                                                  : Text(commentsListener[i].listOfReplies[index].firstName + ' ' + commentsListener[i].listOfReplies[index].lastName,
+                                                                    style: TextStyle(
+                                                                      fontSize: 20,
+                                                                      fontFamily: 'NexaBold',
+                                                                      color: const Color(0xff000000),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Expanded(
+                                                                  child: Align(
+                                                                    alignment: Alignment.centerRight,
+                                                                    child: TextButton.icon(
+                                                                      onPressed: () async{
+                                                                        if(repliesLikes[i][index] == true){
+                                                                          repliesLikes[i][index] = false;
+                                                                          repliesNumberOfLikes[i][index]--;
+
+                                                                          await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: commentsListener[i].listOfReplies[index].replyId, likeStatus: false);
+                                                                        }else{
+                                                                          repliesLikes[i][index] = true;
+                                                                          repliesNumberOfLikes[i][index]++;
+
+                                                                          await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: commentsListener[i].listOfReplies[index].replyId, likeStatus: true);
+                                                                        }
+                                                                      },
+                                                                      icon: repliesLikes[i][index] == true
+                                                                      ? const FaIcon(FontAwesomeIcons.peace, color: const Color(0xffff0000),)
+                                                                      : const FaIcon(FontAwesomeIcons.peace, color: const Color(0xff888888),),
+                                                                      label: Text('${repliesNumberOfLikes[i][index]}', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            subtitle: Column(
+                                                              children: [
+                                                                Row(
+                                                                  children: [
+                                                                    Expanded(
+                                                                      child: Container(
+                                                                        padding: const EdgeInsets.all(10.0),
+                                                                        child: Text(commentsListener[i].listOfReplies[index].replyBody, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),),
+                                                                        decoration: const BoxDecoration(color: const Color(0xff4EC9D4), borderRadius: const BorderRadius.all(Radius.circular(10.0)),),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+
+                                                                const SizedBox(height: 5,),
+
+                                                                Row(
+                                                                  children: [
+                                                                    Text(timeago.format(DateTime.parse(commentsListener[i].listOfReplies[index].createdAt)),
+                                                                      style: TextStyle(
+                                                                        fontSize: 18,
+                                                                        fontFamily: 'NexaRegular',
+                                                                        color: const Color(0xff000000),
+                                                                      ),
+                                                                    ),
+
+                                                                    const SizedBox(width: 40,),
+
+                                                                    GestureDetector(
+                                                                     child: Text('Reply', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                                                                      onTap: () async{
+                                                                        print('show reply here 2');
+
+                                                                        if(controller.text != ''){
+                                                                          controller.clear();
+                                                                        }
+
+                                                                        controller.text = commentsListener[i].firstName + ' ' + commentsListener[i].lastName + ' ';
+                                                                        isComment = false;
+                                                                        currentCommentId = commentsListener[i].commentId;
+
+                                                                        await showModalBottomSheet(context: context, builder: (context) => showKeyboard(isReply: true, toReply: commentsListener[i].listOfReplies[index].replyBody, replyFrom: '${commentsListener[i].listOfReplies[index].firstName}' + ' ' + '${commentsListener[i].listOfReplies[index].lastName}'),);
+                                                                      },
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
                                                             onTap: (){
-                                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: commentsListener[i].listOfReplies[index].userId, accountType: currentAccountType,),),);
+                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: commentsListener[i].listOfReplies[index].userId, accountType: currentAccountType,),),);
                                                             },
                                                             onLongPress: () async{
                                                               if(currentUserId == commentsListener[i].listOfReplies[index].userId && currentAccountType == commentsListener[i].listOfReplies[index].userAccountType){
@@ -1106,114 +1188,6 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                 );
                                                               }
                                                             },
-                                                            leading: commentsListener[i].listOfReplies[index].image != ''
-                                                            ? CircleAvatar(
-                                                              backgroundColor: const Color(0xff888888),
-                                                              foregroundImage: NetworkImage(commentsListener[i].listOfReplies[index].image),
-                                                            )
-                                                            : const CircleAvatar(
-                                                              backgroundColor: const Color(0xff888888),
-                                                              foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
-                                                            ),
-                                                            title: Row(
-                                                              children: [
-                                                                Expanded(
-                                                                  child: currentUserId == commentsListener[i].listOfReplies[index].userId && currentAccountType == commentsListener[i].listOfReplies[index].userAccountType
-                                                                  ? Text('You',
-                                                                    style: TextStyle(
-                                                                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                                                      fontFamily: 'NexaBold',
-                                                                      color: const Color(0xff000000),
-                                                                    ),
-                                                                  )
-                                                                  : Text(commentsListener[i].listOfReplies[index].firstName + ' ' + commentsListener[i].listOfReplies[index].lastName,
-                                                                    style: TextStyle(
-                                                                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                                                      fontFamily: 'NexaBold',
-                                                                      color: const Color(0xff000000),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                  child: Align(
-                                                                    alignment: Alignment.centerRight,
-                                                                    child: TextButton.icon(
-                                                                      onPressed: () async{
-                                                                        if(repliesLikes[i][index] == true){
-                                                                          repliesLikes[i][index] = false;
-                                                                          repliesNumberOfLikes[i][index]--;
-
-                                                                          await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: commentsListener[i].listOfReplies[index].replyId, likeStatus: false);
-                                                                        }else{
-                                                                          repliesLikes[i][index] = true;
-                                                                          repliesNumberOfLikes[i][index]++;
-
-                                                                          await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: commentsListener[i].listOfReplies[index].replyId, likeStatus: true);
-                                                                        }
-                                                                      },
-                                                                      icon: repliesLikes[i][index] == true
-                                                                      ? const FaIcon(FontAwesomeIcons.peace, color: const Color(0xffff0000),)
-                                                                      : const FaIcon(FontAwesomeIcons.peace, color: const Color(0xff888888),),
-                                                                      label: Text('${repliesNumberOfLikes[i][index]}',
-                                                                        style: TextStyle(
-                                                                          fontSize: SizeConfig.blockSizeVertical! * 1.76,
-                                                                          fontFamily: 'NexaRegular',
-                                                                          color: const Color(0xffBDC3C7),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            subtitle: Column(
-                                                              children: [
-                                                                Row(
-                                                                  children: [
-                                                                    Expanded(
-                                                                      child: Container(
-                                                                        padding: const EdgeInsets.all(10.0),
-                                                                        child: Text(commentsListener[i].listOfReplies[index].replyBody, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),),
-                                                                        decoration: const BoxDecoration(color: const Color(0xff4EC9D4), borderRadius: const BorderRadius.all(Radius.circular(10.0)),),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-
-                                                                const SizedBox(height: 5,),
-
-                                                                Row(
-                                                                  children: [
-                                                                    Text(timeago.format(DateTime.parse(commentsListener[i].listOfReplies[index].createdAt)),
-                                                                      style: TextStyle(
-                                                                        fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                                                        fontFamily: 'NexaRegular',
-                                                                        color: const Color(0xff000000),
-                                                                      ),
-                                                                    ),
-
-                                                                    const SizedBox(width: 40,),
-
-                                                                    GestureDetector(
-                                                                     child: Text('Reply', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
-                                                                      onTap: () async{
-                                                                        print('show reply here 2');
-
-                                                                        if(controller.text != ''){
-                                                                          controller.clear();
-                                                                        }
-
-                                                                        controller.text = commentsListener[i].firstName + ' ' + commentsListener[i].lastName + ' ';
-                                                                        isComment = false;
-                                                                        currentCommentId = commentsListener[i].commentId;
-
-                                                                        await showModalBottomSheet(context: context, builder: (context) => showKeyboard(isReply: true, toReply: commentsListener[i].listOfReplies[index].replyBody, replyFrom: '${commentsListener[i].listOfReplies[index].firstName}' + ' ' + '${commentsListener[i].listOfReplies[index].lastName}'),);
-                                                                      },
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ],
-                                                            ),
                                                           ),
                                                         ),
                                                       )
@@ -1314,10 +1288,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                       ),
 
                       isGuestLoggedInListener
-                      ? BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                        child: MiscBLMLoginToContinue(),
-                      )
+                      ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: MiscBLMLoginToContinue(),)
                       : Container(height: 0),
                     ],
                   ),
@@ -1352,11 +1323,11 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                           child: RichText(
                             text: TextSpan(
                               children: <TextSpan>[
-                                TextSpan(text: 'Replying to ', style: TextStyle(color: Color(0xff888888,), fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular',)),
+                                const TextSpan(text: 'Replying to ', style: const TextStyle(color: const Color(0xff888888,), fontSize: 24, fontFamily: 'NexaRegular',)),
 
-                                TextSpan(text: '$replyFrom\n', style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', fontWeight: FontWeight.bold)),
+                                TextSpan(text: '$replyFrom\n', style: const TextStyle(color: const Color(0xff000000), fontSize: 24, fontFamily: 'NexaRegular', fontWeight: FontWeight.bold)),
 
-                                TextSpan(text: '$toReply', style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular',)),
+                                TextSpan(text: '$toReply', style: const TextStyle(color: const Color(0xff000000), fontSize: 24, fontFamily: 'NexaRegular',)),
                               ],
                             ),
                           ),
@@ -1393,7 +1364,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                       padding: const EdgeInsets.all(10.0),
                       child: TextFormField(
                         controller: controller,
-                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                        style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                         cursorColor: const Color(0xff000000),
                         keyboardType: TextInputType.text,
                         maxLines: 2,
@@ -1402,7 +1373,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                           labelText: 'Say something...',
                           fillColor: const Color(0xffBDC3C7),
                           floatingLabelBehavior: FloatingLabelBehavior.never,
-                          labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                          labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                           border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffBDC3C7),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
                           focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffBDC3C7),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
                         ),
@@ -1410,14 +1381,14 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                     ),
                   ),
                   GestureDetector(
-                    child: Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+                    child: Text('Post', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
                     onTap: () async{
                       if(controller.text == ''){
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(
-                            description: Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                            description: Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             entryAnimation: EntryAnimation.DEFAULT,
                             buttonOkColor: const Color(0xffff0000),
@@ -1500,13 +1471,13 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                   cursorColor: const Color(0xff000000),
                   maxLines: 2,
                   keyboardType: TextInputType.text,
-                  style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                  style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                   decoration: InputDecoration(
                     filled: true,
                     labelText: 'Say something...',
                     fillColor: const Color(0xffBDC3C7),
                     floatingLabelBehavior: FloatingLabelBehavior.never,
-                    labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                    labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                     border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffBDC3C7),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
                     focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffBDC3C7),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
                   ),
@@ -1514,14 +1485,14 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
               ),
             ),
             GestureDetector(
-              child: Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+              child: Text('Post', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
               onTap: () async{
                 if(controller.text == ''){
                   await showDialog(
                     context: context,
                     builder: (_) => AssetGiffyDialog(
-                      description: Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                      description: Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                       entryAnimation: EntryAnimation.DEFAULT,
                       buttonOkColor: const Color(0xffff0000),
@@ -1614,13 +1585,13 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                   cursorColor: const Color(0xff000000),
                   maxLines: 2,
                   keyboardType: TextInputType.text,
-                  style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                  style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                   decoration: InputDecoration(
                     filled: true,
                     labelText: 'Say something...',
                     fillColor: const Color(0xffBDC3C7),
                     floatingLabelBehavior: FloatingLabelBehavior.never,
-                    labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                    labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                     border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffBDC3C7),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
                     focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffBDC3C7),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
                   ),
@@ -1628,14 +1599,14 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
               ),
             ),
             GestureDetector(
-              child: Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+              child: Text('Post', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
               onTap: () async{
                 if(controller.text == ''){
                   await showDialog(
                     context: context,
                     builder: (_) => AssetGiffyDialog(
-                      description: Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                      description: Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                       entryAnimation: EntryAnimation.DEFAULT,
                       buttonOkColor: const Color(0xffff0000),

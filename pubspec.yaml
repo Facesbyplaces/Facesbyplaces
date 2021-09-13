@@ -80,7 +80,6 @@ dev_dependencies:
   flutter_datetime_picker: ^1.5.1
   extended_image: ^4.1.0
   google_maps_flutter: ^2.0.6
-  flutter_google_places: ^0.3.0
   easy_rich_text: ^0.5.7
   flutter_stripe: ^1.2.0
   flutter_launcher_icons: ^0.9.1

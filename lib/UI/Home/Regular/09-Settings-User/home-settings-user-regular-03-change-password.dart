@@ -41,7 +41,7 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
             centerTitle: false,
             title: Text(widget.isAddPassword == true ? 'Add Password' : 'Change Password', textAlign: TextAlign.left, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff)),),
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
+              icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
               onPressed: (){
                 Navigator.pop(context);
               },

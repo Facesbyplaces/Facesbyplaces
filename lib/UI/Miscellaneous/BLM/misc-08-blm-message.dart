@@ -18,21 +18,21 @@ class MiscBLMErrorMessageTemplate extends StatelessWidget{
 
             const SizedBox(height: 100,),
 
-            const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600, color: const Color(0xffff0000)),),
+            const Text('Error', textAlign: TextAlign.center,style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
             
             const SizedBox(height: 30,),
 
-            const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16),),
+            const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 28, fontFamily: 'NexaRegular'),),
 
             const SizedBox(height: 30,),
 
             MaterialButton(
-              child: const Text('Go back', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+              child: Text('Go back', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5),),
               minWidth: SizeConfig.screenWidth! / 2,
               color: const Color(0xff888888),
               padding: EdgeInsets.zero,
-              height: 45,
+              height: 50,
               onPressed: () async{
                 Navigator.pop(context);
               },

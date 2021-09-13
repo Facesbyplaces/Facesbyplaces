@@ -126,7 +126,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
 
                       ListTile(
                         title: Text('Other info', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-                        subtitle: Text('Optional informations you can share',style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                        subtitle: Text('Optional informations you can share', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                         onTap: () async{
                           context.loaderOverlay.show();
                           APIRegularShowOtherDetailsStatus result = await apiRegularShowOtherDetailsStatus(userId: widget.userId);
@@ -204,87 +204,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                       child: Stack(
                         children: [
                           CustomPaint(size: Size.infinite, painter: MiscRegularCurvePainter(),),
-
-                          // Positioned(
-                          //   bottom: 50,
-                          //   left: (SizeConfig.screenWidth! / 2) - 120,
-                          //   child: GestureDetector(
-                          //     onTap: () async{
-                          //       bool getImage = await getProfileImage();
-
-                          //       if(getImage){
-                          //         context.loaderOverlay.show();
-                          //         bool result = await apiRegularUpdateUserProfilePicture(image: profileImage.value);
-                          //         context.loaderOverlay.hide();
-
-                          //         if(result){
-                          //           await showDialog(
-                          //             context: context,
-                          //             builder: (_) => AssetGiffyDialog(
-                          //               description: Text('Successfully updated the profile picture.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                          //               title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                          //               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          //               entryAnimation: EntryAnimation.DEFAULT,
-                          //               onlyOkButton: true,
-                          //               onOkButtonPressed: (){
-                          //                 Navigator.pop(context, true);
-                          //               },
-                          //             ),
-                          //           );
-                          //         }else{
-                          //           await showDialog(
-                          //             context: context,
-                          //             builder: (_) => AssetGiffyDialog(
-                          //               description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                          //               title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                          //               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          //               entryAnimation: EntryAnimation.DEFAULT,
-                          //               buttonOkColor: const Color(0xffff0000),
-                          //               onlyOkButton: true,
-                          //               onOkButtonPressed: (){
-                          //                 Navigator.pop(context, true);
-                          //               },
-                          //             ),
-                          //           );
-                          //         }
-                          //       }
-                          //     },
-                          //     child: Stack(
-                          //       alignment: Alignment.center,
-                          //       children: [
-                          //         Container(
-                          //           child: ((){
-                          //             if(profileImageListener.path != ''){
-                          //               return CircleAvatar(
-                          //                 radius: 120,
-                          //                 backgroundColor: const Color(0xff888888),
-                          //                 foregroundImage: AssetImage(profileImageListener.path),
-                          //               );
-                          //             }else if(profile.data!.showProfileInformationImage != ''){
-                          //               return CircleAvatar(
-                          //                 radius: 120,
-                          //                 backgroundColor: const Color(0xff888888),
-                          //                 foregroundImage: NetworkImage(profile.data!.showProfileInformationImage),
-                          //               );
-                          //             }else{
-                          //               return CircleAvatar(
-                          //                 radius: 120,
-                          //                 backgroundColor: const Color(0xff888888),
-                          //                 foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
-                          //               );
-                          //             }
-                          //           }()),
-                          //         ),
-
-                          //         const Positioned(
-                          //           child: const CircleAvatar(radius: 30, backgroundColor: const Color(0xff888888), child: const Icon(Icons.camera, size: 50, color: const Color(0xffffffff),),),
-                          //           right: 20,
-                          //           top: 0,
-                          //         )
-                          //       ],
-                          //     ),
-                          //   ),
-                          // ),
 
                           GestureDetector( // BACKGROUND IMAGE FOR ZOOMING IN
                             child: Container(
@@ -369,11 +288,11 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                         width: SizeConfig.screenWidth,
                         child: Column(
                           children: [
-                            Center(child: Text(profile.data!.showProfileInformationFirstName + ' ' + profile.data!.showProfileInformationLastName, style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xff000000),),),),
+                            Center(child: Text(profile.data!.showProfileInformationFirstName + ' ' + profile.data!.showProfileInformationLastName, style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xff000000),),),),
 
                             SizedBox(height: 20),
 
-                            Center(child: Text(profile.data!.showProfileInformationEmail, style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),),
+                            Center(child: Text(profile.data!.showProfileInformationEmail, style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),),
 
                             const SizedBox(height: 40,),
                           ],

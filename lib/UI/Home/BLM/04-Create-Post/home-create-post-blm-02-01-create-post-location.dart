@@ -17,6 +17,7 @@ class HomeBLMCreatePostSearchLocationState extends State<HomeBLMCreatePostSearch
   ValueNotifier<bool> empty = ValueNotifier<bool>(true);
   TextEditingController controller = TextEditingController();
   List<AutocompletePrediction> predictions = [];
+  List<String> placeId = [];
 
   @override
   Widget build(BuildContext context){
@@ -58,7 +59,6 @@ class HomeBLMCreatePostSearchLocationState extends State<HomeBLMCreatePostSearch
                                   icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
                                   onPressed: (){
                                     Navigator.pop(context,);
-                                    // Navigator.pop(context, ['San Francisco', 37.78583400000001, -122.406417]);
                                   },
                                 ),
                               ),
@@ -86,8 +86,6 @@ class HomeBLMCreatePostSearchLocationState extends State<HomeBLMCreatePostSearch
                                       descriptionPlaces.value = [];
                                       locationPlaces.value = [];
                                     }else{
-                                      empty.value = false;
-
                                       context.loaderOverlay.show();
                                       GooglePlace googlePlace = GooglePlace("AIzaSyCTPIQSGBS0cdzWRv9VGqrRuVwd2KuuhNg");
                                       var result = await googlePlace.autocomplete.get(newPlaces);
@@ -96,13 +94,27 @@ class HomeBLMCreatePostSearchLocationState extends State<HomeBLMCreatePostSearch
                                       places.value = [];
                                       descriptionPlaces.value = [];
                                       locationPlaces.value = [];
+                                      placeId = [];
 
                                       if(result != null){
+                                        // print('The result is ${result.status}');
+                                        // for(int i = 0; i < result.predictions!.length; i++){
+                                        //   places.value.add('${result.predictions![i].terms![0].value}, ${result.predictions![i].terms![1].value}');
+
+                                        //   var newResult = await googlePlace.details.get('${result.predictions![i].placeId}', fields: "name,rating,formatted_phone_number");
+                                        //   print('The newResult is ${newResult!.result!.geometry!.location!.lat}');
+                                        //   print('The newResult is ${newResult.result!.geometry!.location!.lng}');
+                                          
+                                        //   descriptionPlaces.value.add('${result.predictions![i].description}');
+                                        //   locationPlaces.value.add([37.79170209999999, -122.4041937]);
+                                        // }
                                         for(int i = 0; i < result.predictions!.length; i++){
                                           places.value.add('${result.predictions![i].terms![0].value}, ${result.predictions![i].terms![1].value}');
+                                          placeId.add('${result.predictions![i].placeId}');
                                           descriptionPlaces.value.add('${result.predictions![i].description}');
-                                          locationPlaces.value.add([37.79170209999999, -122.4041937]);
                                         }
+
+                                        empty.value = false;
                                       }
                                     }
                                   },
@@ -160,8 +172,13 @@ class HomeBLMCreatePostSearchLocationState extends State<HomeBLMCreatePostSearch
                               Text('Click to add on your post', style: TextStyle(fontSize: 12, fontFamily: 'NexaRegular', color: const Color(0xff888888),),),
                             ],
                           ),
-                          onTap: (){
-                            Navigator.pop(context, [placesListener[index], locationPlacesListener[index][0], locationPlacesListener[index][1]]);
+                          onTap: () async{
+                            context.loaderOverlay.show();
+                            GooglePlace googlePlace = GooglePlace("AIzaSyCTPIQSGBS0cdzWRv9VGqrRuVwd2KuuhNg");
+                            var newResult = await googlePlace.details.get('${placeId[index]}');
+                            context.loaderOverlay.hide();
+
+                            Navigator.pop(context, [placesListener[index], newResult!.result!.geometry!.location!.lat, newResult.result!.geometry!.location!.lng]);
                           },
                         );
                       },
