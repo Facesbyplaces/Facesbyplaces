@@ -97,7 +97,6 @@ void main() async{
               }
             }
           }()),
-          // home: HomeRegularPost(keyword: 'Memorial', newToggle: 0, latitude: 37.78583400000001, longitude: -122.406417, currentLocation: 'Location'),
           builder: (context, widget) => ResponsiveWrapper.builder(
             BouncingScrollWrapper.builder(context, widget!),
             maxWidth: 1200,

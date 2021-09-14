@@ -9,16 +9,16 @@ class RegularJoin extends StatelessWidget{
   Widget build(BuildContext context){
     SizeConfig.init(context);
     return Scaffold(
-      body: SafeArea(
-        child: LayoutBuilder(
-          builder: (context, constraint){
-            return SingleChildScrollView(
-              physics: ClampingScrollPhysics(),
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraint.maxHeight),
-                child: IntrinsicHeight(
-                  child: Container(
-                    decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/All Lives Matter.png'),),),
+      body: LayoutBuilder(
+        builder: (context, constraint){
+          return SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraint.maxHeight),
+              child: IntrinsicHeight(
+                child: Container(
+                  decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/All Lives Matter.png'),),),
+                  child: SafeArea(
                     child: Column(
                       children: [
                         Align(
@@ -60,9 +60,9 @@ class RegularJoin extends StatelessWidget{
                   ),
                 ),
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }

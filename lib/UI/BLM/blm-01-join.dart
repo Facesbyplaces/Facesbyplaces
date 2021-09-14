@@ -9,16 +9,16 @@ class BLMJoin extends StatelessWidget{
   Widget build(BuildContext context){
     SizeConfig.init(context);
     return Scaffold(
-      body: SafeArea(
-        child: LayoutBuilder(
-          builder: (context, constraint){
-            return SingleChildScrollView(
-              physics: ClampingScrollPhysics(),
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraint.maxHeight),
-                child: IntrinsicHeight(
-                  child: Container(
-                    decoration: const BoxDecoration(color: const Color(0xffffffff), image: const DecorationImage(fit: BoxFit.fill, image: const AssetImage('assets/icons/background2.png', ), colorFilter: const ColorFilter.srgbToLinearGamma(),),),
+      body: LayoutBuilder(
+        builder: (context, constraint){
+          return SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraint.maxHeight),
+              child: IntrinsicHeight(
+                child: Container(
+                  decoration: const BoxDecoration(color: const Color(0xffffffff), image: const DecorationImage(fit: BoxFit.fill, image: const AssetImage('assets/icons/background2.png', ), colorFilter: const ColorFilter.srgbToLinearGamma(),),),
+                  child: SafeArea(
                     child: Column(
                       children: [
                         Align(
@@ -84,9 +84,9 @@ class BLMJoin extends StatelessWidget{
                   ),
                 ),
               ),
-            );
-          }
-        ),
+            ),
+          );
+        }
       ),
     );
   }

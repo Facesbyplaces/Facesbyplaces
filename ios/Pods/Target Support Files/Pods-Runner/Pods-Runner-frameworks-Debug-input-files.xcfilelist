@@ -46,7 +46,6 @@ ${BUILT_PRODUCTS_DIR}/libphonenumber/libphonenumber.framework
 ${BUILT_PRODUCTS_DIR}/libphonenumber_plugin/libphonenumber_plugin.framework
 ${BUILT_PRODUCTS_DIR}/location/location.framework
 ${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework
-${BUILT_PRODUCTS_DIR}/package_info_plus/package_info_plus.framework
 ${BUILT_PRODUCTS_DIR}/path_provider/path_provider.framework
 ${BUILT_PRODUCTS_DIR}/pay_ios/pay_ios.framework
 ${BUILT_PRODUCTS_DIR}/share/share.framework

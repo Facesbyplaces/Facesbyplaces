@@ -114,7 +114,7 @@ class HomeRegularMapsState extends State<HomeBLMMaps>{
               info != null
               ? Polyline(
                 polylineId: const PolylineId('overview_polyline'),
-                color: Colors.red,
+                color: const Color(0xff04ECFF),
                 width: 5,
                 points: info!.polylinePoints.map((e) => LatLng(e.latitude, e.longitude)).toList()
               )
@@ -164,7 +164,7 @@ class HomeRegularMapsState extends State<HomeBLMMaps>{
       setState(() {
         markers.add(Marker(
           markerId: const MarkerId('destination'),
-          infoWindow: const InfoWindow(title: 'Chosen location'),
+          infoWindow: const InfoWindow(title: 'Your chosen location'),
           icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
           position: position,
         ));
@@ -173,6 +173,41 @@ class HomeRegularMapsState extends State<HomeBLMMaps>{
       final directions = await RegularDirectionsRepository().getDirections(
         origin: LatLng(widget.latitude, widget.longitude), 
         destination: position
+      );
+
+      customInfoWindowController.addInfoWindow!(
+        ClipPath(
+          clipper: MessageClipper(borderRadius: 10),
+          child: Container(
+            color: const Color(0xffffffff),
+            child: Column(
+              children: [
+                Text('Here Lies', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+
+                ListTile(
+                  leading: widget.memorialImage != ''
+                  ? CircleAvatar(
+                    radius: 20,
+                    backgroundColor: const Color(0xff888888),
+                    foregroundImage: NetworkImage(widget.memorialImage),
+                    backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                  )
+                  : const CircleAvatar(
+                    radius: 20,
+                    backgroundColor: const Color(0xff888888),
+                    foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                  ),
+                  title: Text('${widget.memorialName}', maxLines: 2,),
+                  subtitle: Text('${widget.latitude.toStringAsFixed(6)}, ${widget.longitude.toStringAsFixed(6)}'),
+                ),
+
+                SizedBox(height: 20,),
+              ],
+            ),
+          ),
+        ),
+
+        LatLng(widget.latitude, widget.longitude),
       );
 
       setState(() {

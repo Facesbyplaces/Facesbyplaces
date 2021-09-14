@@ -32,147 +32,115 @@ class BLMRegister extends StatelessWidget{
           }
         },
         child: Scaffold(
-          body: SafeArea(
-            child: LayoutBuilder(
-              builder: (context, constraint){
-                return SingleChildScrollView(
-                  physics: ClampingScrollPhysics(),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(minHeight: constraint.maxHeight),
-                    child: IntrinsicHeight(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: const Color(0xffffffff),
-                          image: DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/background2.png'), colorFilter: const ColorFilter.srgbToLinearGamma(),),
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: SizeConfig.screenHeight! / 6,
-                              decoration: const BoxDecoration(image: const DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/background-blm.png'),),),
-                              child: Align(
-                                alignment: Alignment.topLeft,
-                                child: IconButton(
-                                  icon: const Icon(Icons.arrow_back, color: const Color(0xffFFFFFF), size: 35),
-                                  onPressed: (){
-                                    Navigator.pop(context);
-                                  },
+          body: Stack(
+            children: [
+              SingleChildScrollView(
+                child: Container(
+                  height: SizeConfig.screenHeight,
+                  decoration: BoxDecoration(
+                    color: const Color(0xffffffff),
+                    image: DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/background2.png'), colorFilter: const ColorFilter.srgbToLinearGamma(),),
+                  ),
+                ),
+              ),
+
+              LayoutBuilder(
+                builder: (context, constraint){
+                  return SingleChildScrollView(
+                    physics: ClampingScrollPhysics(),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(minHeight: constraint.maxHeight),
+                      child: IntrinsicHeight(
+                        child: SafeArea(
+                          child: Column(
+                            children: [
+                              Container(
+                                height: SizeConfig.screenHeight! / 6,
+                                decoration: const BoxDecoration(image: const DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/background-blm.png'),),),
+                                child: Align(
+                                  alignment: Alignment.topLeft,
+                                  child: IconButton(
+                                    icon: const Icon(Icons.arrow_back, color: const Color(0xffFFFFFF), size: 35),
+                                    onPressed: (){
+                                      Navigator.pop(context);
+                                    },
+                                  ),
                                 ),
                               ),
-                            ),
 
-                            SizedBox(height: 10,),
+                              SizedBox(height: 10,),
 
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 40),
-                              child: Column(
-                                children: [
-                                  MiscBLMInputFieldTemplate(
-                                    key: _key1,
-                                    labelText: 'Your Name',
-                                    type: TextInputType.name,
-                                    labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                                  ),
+                              Container(
+                                padding: EdgeInsets.symmetric(horizontal: 40),
+                                child: Column(
+                                  children: [
+                                    MiscBLMInputFieldTemplate(
+                                      key: _key1,
+                                      labelText: 'Your Name',
+                                      type: TextInputType.name,
+                                      labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                    ),
 
-                                  MiscBLMInputFieldTemplate(
-                                    key: _key2,
-                                    labelText: 'Last Name',
-                                    type: TextInputType.name,
-                                    labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                                  ),
+                                    MiscBLMInputFieldTemplate(
+                                      key: _key2,
+                                      labelText: 'Last Name',
+                                      type: TextInputType.name,
+                                      labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                    ),
 
-                                  MiscBLMPhoneNumberTemplate(
-                                    key: _key3,
-                                    labelText: 'Mobile #',
-                                    type: TextInputType.phone,
-                                    labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                                  ),
+                                    MiscBLMPhoneNumberTemplate(
+                                      key: _key3,
+                                      labelText: 'Mobile #',
+                                      type: TextInputType.phone,
+                                      labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                    ),
 
-                                  MiscBLMInputFieldTemplate(
-                                    key: _key4,
-                                    labelText: 'Email Address',
-                                    type: TextInputType.emailAddress,
-                                    labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                                  ),
+                                    MiscBLMInputFieldTemplate(
+                                      key: _key4,
+                                      labelText: 'Email Address',
+                                      type: TextInputType.emailAddress,
+                                      labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                    ),
 
-                                  MiscBLMInputFieldTemplate(
-                                    key: _key5,
-                                    labelText: 'Username',
-                                    type: TextInputType.text,
-                                    labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                                  ),
+                                    MiscBLMInputFieldTemplate(
+                                      key: _key5,
+                                      labelText: 'Username',
+                                      type: TextInputType.text,
+                                      labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                    ),
 
-                                  MiscBLMInputFieldTemplate(
-                                    key: _key6,
-                                    labelText: 'Password',
-                                    type: TextInputType.text,
-                                    labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                                    obscureText: true,
-                                  ),
-                                ],
+                                    MiscBLMInputFieldTemplate(
+                                      key: _key6,
+                                      labelText: 'Password',
+                                      type: TextInputType.text,
+                                      labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                      obscureText: true,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
 
-                            Expanded(child: Container()),
-                            
-                            SizedBox(height: 50,),
+                              Expanded(child: Container()),
+                              
+                              SizedBox(height: 50,),
 
-                            MiscBLMButtonTemplate(
-                              buttonText: 'Next',
-                              buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
-                              width: SizeConfig.screenWidth! / 2,
-                              height: 50,
-                              buttonColor: const Color(0xff000000),
-                              onPressed: () async{
-                                bool validEmail = false;
-                                validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key4.currentState!.controller.text);
+                              MiscBLMButtonTemplate(
+                                buttonText: 'Next',
+                                buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                                width: SizeConfig.screenWidth! / 2,
+                                height: 50,
+                                buttonColor: const Color(0xff000000),
+                                onPressed: () async{
+                                  bool validEmail = false;
+                                  validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key4.currentState!.controller.text);
 
-                                if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == '' || _key3.currentState!.controller.text == '' || _key4.currentState!.controller.text == '' || _key5.currentState!.controller.text == '' || _key6.currentState!.controller.text == ''){
-                                  await showDialog(
-                                    context: context,
-                                    builder: (_) => AssetGiffyDialog(
-                                      description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      entryAnimation: EntryAnimation.DEFAULT,
-                                      buttonOkColor: const Color(0xffff0000),
-                                      onlyOkButton: true,
-                                      onOkButtonPressed: (){
-                                        Navigator.pop(context, true);
-                                      },
-                                    ),
-                                  );
-                                }else if (!validEmail){
-                                  await showDialog(
-                                    context: context,
-                                    builder: (_) => AssetGiffyDialog(
-                                      description: Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                      title:  Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      entryAnimation: EntryAnimation.DEFAULT,
-                                      buttonOkColor: const Color(0xffff0000),
-                                      onlyOkButton: true,
-                                      onOkButtonPressed: (){
-                                        Navigator.pop(context, true);
-                                      },
-                                    ),
-                                  );
-                                }else{
-                                  APIBLMAccountRegistration account = APIBLMAccountRegistration(firstName: _key1.currentState!.controller.text, lastName: _key2.currentState!.controller.text, phoneNumber: _key3.currentState!.controller.text, email: _key4.currentState!.controller.text, username: _key5.currentState!.controller.text, password: _key6.currentState!.controller.text,);
-
-                                  context.loaderOverlay.show();
-                                  String result = await apiBLMRegistration(account: account);
-                                  context.loaderOverlay.hide();
-
-                                  if(result == 'Success'){
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => BLMVerifyEmail()));
-                                  }else{
+                                  if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == '' || _key3.currentState!.controller.text == '' || _key4.currentState!.controller.text == '' || _key5.currentState!.controller.text == '' || _key6.currentState!.controller.text == ''){
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
+                                        description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                         title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        description: Text('$result', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         buttonOkColor: const Color(0xffff0000),
                                         onlyOkButton: true,
@@ -181,42 +149,82 @@ class BLMRegister extends StatelessWidget{
                                         },
                                       ),
                                     );
+                                  }else if (!validEmail){
+                                    await showDialog(
+                                      context: context,
+                                      builder: (_) => AssetGiffyDialog(
+                                        description: Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                        title:  Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        entryAnimation: EntryAnimation.DEFAULT,
+                                        buttonOkColor: const Color(0xffff0000),
+                                        onlyOkButton: true,
+                                        onOkButtonPressed: (){
+                                          Navigator.pop(context, true);
+                                        },
+                                      ),
+                                    );
+                                  }else{
+                                    APIBLMAccountRegistration account = APIBLMAccountRegistration(firstName: _key1.currentState!.controller.text, lastName: _key2.currentState!.controller.text, phoneNumber: _key3.currentState!.controller.text, email: _key4.currentState!.controller.text, username: _key5.currentState!.controller.text, password: _key6.currentState!.controller.text,);
+
+                                    context.loaderOverlay.show();
+                                    String result = await apiBLMRegistration(account: account);
+                                    context.loaderOverlay.hide();
+
+                                    if(result == 'Success'){
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => BLMVerifyEmail()));
+                                    }else{
+                                      await showDialog(
+                                        context: context,
+                                        builder: (_) => AssetGiffyDialog(
+                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                          description: Text('$result', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                          entryAnimation: EntryAnimation.DEFAULT,
+                                          buttonOkColor: const Color(0xffff0000),
+                                          onlyOkButton: true,
+                                          onOkButtonPressed: (){
+                                            Navigator.pop(context, true);
+                                          },
+                                        ),
+                                      );
+                                    }
                                   }
-                                }
-                              },
-                            ),
-
-                            const SizedBox(height: 50,),
-
-                            RichText(
-                              text: TextSpan(
-                                children: <TextSpan>[
-                                  const TextSpan(
-                                    text: 'Already have an account? ',
-                                    style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                                  ),
-
-                                  TextSpan(
-                                    text: 'Login',
-                                    style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff04ECFF),),
-                                    recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      Navigator.pushNamed(context, '/blm/login');
-                                    },
-                                  ),
-                                ],
+                                },
                               ),
-                            ),
 
-                            const SizedBox(height: 50,),
-                          ],
+                              const SizedBox(height: 50,),
+
+                              RichText(
+                                text: TextSpan(
+                                  children: <TextSpan>[
+                                    const TextSpan(
+                                      text: 'Already have an account? ',
+                                      style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                    ),
+
+                                    TextSpan(
+                                      text: 'Login',
+                                      style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff04ECFF),),
+                                      recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        Navigator.pushNamed(context, '/blm/login');
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              const SizedBox(height: 50,),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  )
-                );
-              }
-            ),
+                    )
+                  );
+                }
+              ),
+            ],
           ),
         ),
       ),

@@ -7,14 +7,14 @@ class UILogin01 extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      body: SafeArea(
-        child: LayoutBuilder(
-          builder: (context, constraint){
-            return SingleChildScrollView(
-              physics: ClampingScrollPhysics(),
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraint.maxHeight),
-                child: IntrinsicHeight(
+      body: LayoutBuilder(
+        builder: (context, constraint){
+          return SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraint.maxHeight),
+              child: IntrinsicHeight(
+                child: SafeArea(
                   child: Column(
                     children: [
                       const SizedBox(height: 50,),
@@ -123,9 +123,9 @@ class UILogin01 extends StatelessWidget{
                   ),
                 ),
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }

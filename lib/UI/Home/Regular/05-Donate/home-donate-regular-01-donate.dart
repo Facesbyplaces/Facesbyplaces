@@ -627,129 +627,129 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
     );
   }
 
-  Future<void> onGooglePayResult(paymentResult) async {
+  // Future<void> onGooglePayResult(paymentResult) async {
 
-    //  debugPrint(paymentResult.toString());
-    // print('The payment result is ${paymentResult.toString()}');
-    //   final response = await fetchPaymentIntentClientSecret();
-    //   final clientSecret = response['clientSecret'];
-    //   final token = paymentResult['paymentMethodData']['tokenizationData']['token'];
-    //   final tokenJson = Map.castFrom(json.decode(token));
+  //   //  debugPrint(paymentResult.toString());
+  //   // print('The payment result is ${paymentResult.toString()}');
+  //   //   final response = await fetchPaymentIntentClientSecret();
+  //   //   final clientSecret = response['clientSecret'];
+  //   //   final token = paymentResult['paymentMethodData']['tokenizationData']['token'];
+  //   //   final tokenJson = Map.castFrom(json.decode(token));
 
-    //   final params = PaymentMethodParams.cardFromToken(
-    //     token: tokenJson['id'],
-    //   );
-    //   // Confirm Google pay payment method
-    //   await Stripe.instance.confirmPaymentMethod(
-    //     clientSecret,
-    //     params,
-    //   );
+  //   //   final params = PaymentMethodParams.cardFromToken(
+  //   //     token: tokenJson['id'],
+  //   //   );
+  //   //   // Confirm Google pay payment method
+  //   //   await Stripe.instance.confirmPaymentMethod(
+  //   //     clientSecret,
+  //   //     params,
+  //   //   );
 
-    // debugPrint('test here hehehe');
-    debugPrint(paymentResult.toString());
+  //   // debugPrint('test here hehehe');
+  //   debugPrint(paymentResult.toString());
 
 
-        try{
-          print('heheheh');
+  //       try{
+  //         print('heheheh');
 
-          bool onError = false;
+  //         bool onError = false;
 
-          List<String> newValue = await apiRegularDonate(pageType: widget.pageType, pageId: widget.pageId, amount: 1.00, paymentMethod: '').onError((error, stackTrace){
-            showDialog(
-              context: context,
-              builder: (_) => AssetGiffyDialog(
-                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                entryAnimation: EntryAnimation.DEFAULT,
-                buttonOkColor: const Color(0xffff0000),
-                onlyOkButton: true,
-                onOkButtonPressed: (){
-                  Navigator.pop(context, true);
-                  Navigator.pop(context, true);
-                },
-              ),
-            );
-            onError = true;
-            throw Exception('The error is: $error');
-          });
+  //         List<String> newValue = await apiRegularDonate(pageType: widget.pageType, pageId: widget.pageId, amount: 1.00, paymentMethod: '').onError((error, stackTrace){
+  //           showDialog(
+  //             context: context,
+  //             builder: (_) => AssetGiffyDialog(
+  //               title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+  //               description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+  //               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+  //               entryAnimation: EntryAnimation.DEFAULT,
+  //               buttonOkColor: const Color(0xffff0000),
+  //               onlyOkButton: true,
+  //               onOkButtonPressed: (){
+  //                 Navigator.pop(context, true);
+  //                 Navigator.pop(context, true);
+  //               },
+  //             ),
+  //           );
+  //           onError = true;
+  //           throw Exception('The error is: $error');
+  //         });
 
-          print('The newValue[0] is ${newValue[0]}');
-          print('The newValue[1] is ${newValue[1]}');
+  //         print('The newValue[0] is ${newValue[0]}');
+  //         print('The newValue[1] is ${newValue[1]}');
 
-          if(onError != true){
-            final params = PaymentMethodParams.cardFromToken(token: newValue[1],);
+  //         if(onError != true){
+  //           final params = PaymentMethodParams.cardFromToken(token: newValue[1],);
 
-            print('The params is $params');
+  //           print('The params is $params');
 
-            PaymentIntent confirmGooglePayment = await Stripe.instance.confirmPayment(newValue[0], params,);
+  //           PaymentIntent confirmGooglePayment = await Stripe.instance.confirmPayment(newValue[0], params,);
 
-            print('The google payment is $confirmGooglePayment');
-            print('The google payment status is ${confirmGooglePayment.status}');
+  //           print('The google payment is $confirmGooglePayment');
+  //           print('The google payment status is ${confirmGooglePayment.status}');
 
-            if(confirmGooglePayment.status == PaymentIntentsStatus.Succeeded){
-              await showDialog(
-                context: context,
-                builder: (_) => AssetGiffyDialog(
-                  title: const Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                  description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                  entryAnimation: EntryAnimation.DEFAULT,
-                  onlyOkButton: true,
-                  onOkButtonPressed: (){
-                    Navigator.pop(context);
-                  },
-                ),
-              );
-            }else{
-              await showDialog(
-                context: context,
-                builder: (_) => AssetGiffyDialog(
-                  title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                  description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                  entryAnimation: EntryAnimation.DEFAULT,
-                  buttonOkColor: const Color(0xffff0000),
-                  onlyOkButton: true,
-                  onOkButtonPressed: (){
-                    Navigator.pop(context, true);
-                  },
-                ),
-              );
-            }
-          }
+  //           if(confirmGooglePayment.status == PaymentIntentsStatus.Succeeded){
+  //             await showDialog(
+  //               context: context,
+  //               builder: (_) => AssetGiffyDialog(
+  //                 title: const Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+  //                 description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+  //                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+  //                 entryAnimation: EntryAnimation.DEFAULT,
+  //                 onlyOkButton: true,
+  //                 onOkButtonPressed: (){
+  //                   Navigator.pop(context);
+  //                 },
+  //               ),
+  //             );
+  //           }else{
+  //             await showDialog(
+  //               context: context,
+  //               builder: (_) => AssetGiffyDialog(
+  //                 title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+  //                 description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+  //                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+  //                 entryAnimation: EntryAnimation.DEFAULT,
+  //                 buttonOkColor: const Color(0xffff0000),
+  //                 onlyOkButton: true,
+  //                 onOkButtonPressed: (){
+  //                   Navigator.pop(context, true);
+  //                 },
+  //               ),
+  //             );
+  //           }
+  //         }
 
-          await showDialog(
-            context: context,
-            builder: (_) => AssetGiffyDialog(
-              title: const Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-              description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-              entryAnimation: EntryAnimation.DEFAULT,
-              onlyOkButton: true,
-              onOkButtonPressed: (){
-                Navigator.pop(context);
-              },
-            ),
-          );
-        }catch(e){
-          await showDialog(
-            context: context,
-            builder: (_) => AssetGiffyDialog(
-              title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-              description: Text('Error: $e', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-              entryAnimation: EntryAnimation.DEFAULT,
-              buttonOkColor: const Color(0xffff0000),
-              onlyOkButton: true,
-              onOkButtonPressed: (){
-                Navigator.pop(context, true);
-              },
-            ),
-          );
-        }
+  //         await showDialog(
+  //           context: context,
+  //           builder: (_) => AssetGiffyDialog(
+  //             title: const Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+  //             description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+  //             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+  //             entryAnimation: EntryAnimation.DEFAULT,
+  //             onlyOkButton: true,
+  //             onOkButtonPressed: (){
+  //               Navigator.pop(context);
+  //             },
+  //           ),
+  //         );
+  //       }catch(e){
+  //         await showDialog(
+  //           context: context,
+  //           builder: (_) => AssetGiffyDialog(
+  //             title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+  //             description: Text('Error: $e', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+  //             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+  //             entryAnimation: EntryAnimation.DEFAULT,
+  //             buttonOkColor: const Color(0xffff0000),
+  //             onlyOkButton: true,
+  //             onOkButtonPressed: (){
+  //               Navigator.pop(context, true);
+  //             },
+  //           ),
+  //         );
+  //       }
 
-  }
+  // }
 
   Future<void> debugChangedStripePublishableKey() async {
     if (kDebugMode) {
