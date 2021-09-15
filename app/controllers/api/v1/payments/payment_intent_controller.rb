@@ -24,7 +24,7 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
     if intent.status == 'requires_confirmation'
       save_transaction(intent)
     elsif intent.status == 'requires_payment_method'
-      render json: { client_secret: intent.client_secret, token: token }, status: 200
+      render json: { client_secret: intent.client_secret }, status: 200
     end
   end
 
