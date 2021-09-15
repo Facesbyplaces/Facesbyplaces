@@ -256,7 +256,7 @@ class UINewlyInstalled02State extends State<UINewlyInstalled02>{
                           children: <TextSpan>[
                             const TextSpan(
                               text: 'Born ',
-                              style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xfFFFFFFF),),
+                              style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xfFFFFFFF),),
                             ),
 
                             const TextSpan(
@@ -283,7 +283,7 @@ class UINewlyInstalled02State extends State<UINewlyInstalled02>{
                           children: <TextSpan>[
                             const TextSpan(
                               text: 'Died ',
-                              style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xfFFFFFFF),),
+                              style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xfFFFFFFF),),
                             ),
 
                             const TextSpan(
@@ -401,7 +401,7 @@ class UINewlyInstalled03State extends State<UINewlyInstalled03>{
                         const SizedBox(width: 5,),
 
                         RichText(
-                          text: TextSpan(
+                          text: const TextSpan(
                             children: <TextSpan>[
                               const TextSpan(
                                 text: 'Born ',
@@ -432,7 +432,7 @@ class UINewlyInstalled03State extends State<UINewlyInstalled03>{
                             children: <TextSpan>[
                               const TextSpan(
                                 text: 'Died ',
-                                style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xfFFFFFFF),),
+                                style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xfFFFFFFF),),
                               ),
 
                               const TextSpan(
@@ -447,7 +447,7 @@ class UINewlyInstalled03State extends State<UINewlyInstalled03>{
 
                     const SizedBox(height: 10,),
 
-                    Text('"I\'ve been the luckiest man in the world because I\'ve had friends, and to have the right friends is everything: people you can depend on, people who tell you the truth if you ask something."',
+                    const Text('"I\'ve been the luckiest man in the world because I\'ve had friends, and to have the right friends is everything: people you can depend on, people who tell you the truth if you ask something."',
                       textAlign: TextAlign.center,
                       style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xfFFFFFFF),),
                     ),
@@ -474,7 +474,7 @@ class UINewlyInstalled03State extends State<UINewlyInstalled03>{
                       ),
                     ),
                     MaterialButton(
-                      child: Text('Next', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xfFFFFFFF),),),
+                      child: const Text('Next', style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xfFFFFFFF),),),
                       color: const Color(0xff04ECFF),
                       shape: const StadiumBorder(),
                       padding: EdgeInsets.zero,

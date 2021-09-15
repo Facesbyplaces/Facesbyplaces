@@ -12,6 +12,7 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:pay/pay.dart' as pay;
+import 'dart:convert';
 import 'dart:io';
 
 class HomeRegularUserDonate extends StatefulWidget{
@@ -335,11 +336,12 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                                 context.loaderOverlay.hide();
 
                                                                 if(confirmPaymentResult == true){
+                                                                  
                                                                   await showDialog(
                                                                     context: context,
                                                                     builder: (_) => AssetGiffyDialog(
                                                                       title: const Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                                      description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                                                      description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular',),),
                                                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                                       entryAnimation: EntryAnimation.DEFAULT,
                                                                       onlyOkButton: true,
@@ -475,11 +477,14 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                 margin: const EdgeInsets.only(top: 15),
                                                 loadingIndicator: const Center(child: CircularProgressIndicator(),),
                                                 // onPaymentResult: onGooglePayResult,
-                                                onPaymentResult: (payment) async{
+                                                onPaymentResult: (paymentResult) async{
                                                   try{
-                                                    print('heheheh');
-
-                                                    debugPrint('test here heheheheh');
+                                                    
+                                                    debugPrint('the payment result is $paymentResult');
+                                                    // debugPrint('${payment['paymentMethodData']['tokenizationData']['token']}');
+                                                    final token = paymentResult['paymentMethodData']['tokenizationData']['token'];
+                                                    final tokenJson = Map.castFrom(json.decode(token));
+                                                    print('The token is $tokenJson');
 
                                                     bool onError = false;
 
@@ -507,7 +512,8 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                     print('The newValue[1] is ${newValue[1]}');
 
                                                     if(onError != true){
-                                                      final params = PaymentMethodParams.cardFromToken(token: newValue[1],);
+                                                      // final params = PaymentMethodParams.cardFromToken(token: newValue[1],);
+                                                      final params = PaymentMethodParams.cardFromToken(token: tokenJson['id'],);
 
                                                       print('The params is $params');
 
@@ -521,7 +527,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                           context: context,
                                                           builder: (_) => AssetGiffyDialog(
                                                             title: const Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                            description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                                            description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular',),),
                                                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                             entryAnimation: EntryAnimation.DEFAULT,
                                                             onlyOkButton: true,
@@ -547,20 +553,6 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                         );
                                                       }
                                                     }
-
-                                                    // await showDialog(
-                                                    //   context: context,
-                                                    //   builder: (_) => AssetGiffyDialog(
-                                                    //     title: const Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                    //     description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                                    //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                    //     entryAnimation: EntryAnimation.DEFAULT,
-                                                    //     onlyOkButton: true,
-                                                    //     onOkButtonPressed: (){
-                                                    //       Navigator.pop(context);
-                                                    //     },
-                                                    //   ),
-                                                    // );
                                                   }catch(e){
                                                     await showDialog(
                                                       context: context,
@@ -626,130 +618,6 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
       ),
     );
   }
-
-  // Future<void> onGooglePayResult(paymentResult) async {
-
-  //   //  debugPrint(paymentResult.toString());
-  //   // print('The payment result is ${paymentResult.toString()}');
-  //   //   final response = await fetchPaymentIntentClientSecret();
-  //   //   final clientSecret = response['clientSecret'];
-  //   //   final token = paymentResult['paymentMethodData']['tokenizationData']['token'];
-  //   //   final tokenJson = Map.castFrom(json.decode(token));
-
-  //   //   final params = PaymentMethodParams.cardFromToken(
-  //   //     token: tokenJson['id'],
-  //   //   );
-  //   //   // Confirm Google pay payment method
-  //   //   await Stripe.instance.confirmPaymentMethod(
-  //   //     clientSecret,
-  //   //     params,
-  //   //   );
-
-  //   // debugPrint('test here hehehe');
-  //   debugPrint(paymentResult.toString());
-
-
-  //       try{
-  //         print('heheheh');
-
-  //         bool onError = false;
-
-  //         List<String> newValue = await apiRegularDonate(pageType: widget.pageType, pageId: widget.pageId, amount: 1.00, paymentMethod: '').onError((error, stackTrace){
-  //           showDialog(
-  //             context: context,
-  //             builder: (_) => AssetGiffyDialog(
-  //               title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-  //               description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-  //               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-  //               entryAnimation: EntryAnimation.DEFAULT,
-  //               buttonOkColor: const Color(0xffff0000),
-  //               onlyOkButton: true,
-  //               onOkButtonPressed: (){
-  //                 Navigator.pop(context, true);
-  //                 Navigator.pop(context, true);
-  //               },
-  //             ),
-  //           );
-  //           onError = true;
-  //           throw Exception('The error is: $error');
-  //         });
-
-  //         print('The newValue[0] is ${newValue[0]}');
-  //         print('The newValue[1] is ${newValue[1]}');
-
-  //         if(onError != true){
-  //           final params = PaymentMethodParams.cardFromToken(token: newValue[1],);
-
-  //           print('The params is $params');
-
-  //           PaymentIntent confirmGooglePayment = await Stripe.instance.confirmPayment(newValue[0], params,);
-
-  //           print('The google payment is $confirmGooglePayment');
-  //           print('The google payment status is ${confirmGooglePayment.status}');
-
-  //           if(confirmGooglePayment.status == PaymentIntentsStatus.Succeeded){
-  //             await showDialog(
-  //               context: context,
-  //               builder: (_) => AssetGiffyDialog(
-  //                 title: const Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-  //                 description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-  //                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-  //                 entryAnimation: EntryAnimation.DEFAULT,
-  //                 onlyOkButton: true,
-  //                 onOkButtonPressed: (){
-  //                   Navigator.pop(context);
-  //                 },
-  //               ),
-  //             );
-  //           }else{
-  //             await showDialog(
-  //               context: context,
-  //               builder: (_) => AssetGiffyDialog(
-  //                 title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-  //                 description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-  //                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-  //                 entryAnimation: EntryAnimation.DEFAULT,
-  //                 buttonOkColor: const Color(0xffff0000),
-  //                 onlyOkButton: true,
-  //                 onOkButtonPressed: (){
-  //                   Navigator.pop(context, true);
-  //                 },
-  //               ),
-  //             );
-  //           }
-  //         }
-
-  //         await showDialog(
-  //           context: context,
-  //           builder: (_) => AssetGiffyDialog(
-  //             title: const Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-  //             description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-  //             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-  //             entryAnimation: EntryAnimation.DEFAULT,
-  //             onlyOkButton: true,
-  //             onOkButtonPressed: (){
-  //               Navigator.pop(context);
-  //             },
-  //           ),
-  //         );
-  //       }catch(e){
-  //         await showDialog(
-  //           context: context,
-  //           builder: (_) => AssetGiffyDialog(
-  //             title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-  //             description: Text('Error: $e', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-  //             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-  //             entryAnimation: EntryAnimation.DEFAULT,
-  //             buttonOkColor: const Color(0xffff0000),
-  //             onlyOkButton: true,
-  //             onOkButtonPressed: (){
-  //               Navigator.pop(context, true);
-  //             },
-  //           ),
-  //         );
-  //       }
-
-  // }
 
   Future<void> debugChangedStripePublishableKey() async {
     if (kDebugMode) {

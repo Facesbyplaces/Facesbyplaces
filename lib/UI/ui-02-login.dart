@@ -27,7 +27,7 @@ class UILogin01 extends StatelessWidget{
 
                       const SizedBox(height: 50,),
                       
-                      Text('Honor, Respect, Never Forget', textAlign: TextAlign.center, style: const TextStyle(fontFamily: 'NexaBold', fontSize: 22, color: const Color(0xff000000),),),
+                      const Text('Honor, Respect, Never Forget', textAlign: TextAlign.center, style: const TextStyle(fontFamily: 'NexaBold', fontSize: 22, color: const Color(0xff000000),),),
 
                       const SizedBox(height: 50,),
                       
@@ -104,7 +104,7 @@ class UILogin01 extends StatelessWidget{
                       RichText(
                         text: TextSpan(
                           children: <TextSpan>[
-                            const TextSpan(text: 'Already have an Account? ', style: TextStyle(fontSize: 22, color: const Color(0xff000000), fontFamily: 'NexaRegular'),),
+                            const TextSpan(text: 'Already have an Account? ', style: const TextStyle(fontSize: 22, color: const Color(0xff000000), fontFamily: 'NexaRegular'),),
 
                             TextSpan(
                               style: const TextStyle(fontSize: 22, color: const Color(0xff04ECFF), fontFamily: 'NexaRegular',),

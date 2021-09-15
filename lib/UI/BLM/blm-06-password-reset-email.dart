@@ -29,7 +29,7 @@ class BLMPasswordResetEmail extends StatelessWidget{
             child: LayoutBuilder(
               builder: (context, constraint){
                 return SingleChildScrollView(
-                  physics: ClampingScrollPhysics(),
+                  physics: const ClampingScrollPhysics(),
                   child: ConstrainedBox(
                     constraints: BoxConstraints(minHeight: constraint.maxHeight),
                     child: IntrinsicHeight(
@@ -38,7 +38,7 @@ class BLMPasswordResetEmail extends StatelessWidget{
                           Align(
                             alignment: Alignment.centerLeft,
                             child: IconButton(
-                              icon: Icon(Icons.arrow_back, color: const Color(0xff000000), size: 35,),
+                              icon: const Icon(Icons.arrow_back, color: const Color(0xff000000), size: 35,),
                               onPressed: (){
                                 Navigator.pop(context);
                               },
@@ -47,11 +47,11 @@ class BLMPasswordResetEmail extends StatelessWidget{
 
                           const SizedBox(height: 80,),
 
-                          Center(child: const Text('Verify Email', style: const TextStyle(fontSize:42, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
+                          const Center(child: const Text('Verify Email', style: const TextStyle(fontSize:42, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
 
                           const SizedBox(height: 40),
 
-                          Padding(
+                          const Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 40), 
                             child: const Text('Please enter email address used on signing up.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                           ),
@@ -62,13 +62,13 @@ class BLMPasswordResetEmail extends StatelessWidget{
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: TextFormField(
                               controller: controller,
-                              style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                              style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                               keyboardType: TextInputType.emailAddress,
                               cursorColor: const Color(0xff000000),
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 alignLabelWithHint: true,
                                 labelText: 'Email Address',
-                                labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                                labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                                 focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff), width: 0,),),
                                 border: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
                               ),
@@ -92,8 +92,8 @@ class BLMPasswordResetEmail extends StatelessWidget{
                                 await showDialog(
                                   context: context,
                                   builder: (_) => AssetGiffyDialog(
-                                    description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                    title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                    description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                     entryAnimation: EntryAnimation.DEFAULT,
                                     buttonOkColor: const Color(0xffff0000),
@@ -107,8 +107,8 @@ class BLMPasswordResetEmail extends StatelessWidget{
                                 await showDialog(
                                   context: context,
                                   builder: (_) => AssetGiffyDialog(
-                                    description: Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                    description: const Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                    title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                     entryAnimation: EntryAnimation.DEFAULT,
                                     buttonOkColor: const Color(0xffff0000),
@@ -150,8 +150,8 @@ class BLMPasswordResetEmail extends StatelessWidget{
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        description: Text('An email has been sent to ${controller.text} containing instructions for resetting your password.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                        title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                        description: Text('An email has been sent to ${controller.text} containing instructions for resetting your password.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular'),),
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         onlyOkButton: true,
@@ -164,8 +164,8 @@ class BLMPasswordResetEmail extends StatelessWidget{
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                        description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         buttonOkColor: const Color(0xffff0000),
@@ -180,8 +180,8 @@ class BLMPasswordResetEmail extends StatelessWidget{
                                   await showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
-                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                       entryAnimation: EntryAnimation.DEFAULT,
                                       buttonOkColor: const Color(0xffff0000),

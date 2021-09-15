@@ -47,7 +47,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
           child: LayoutBuilder(
             builder: (context, constraint){
               return SingleChildScrollView(
-                physics: ClampingScrollPhysics(),
+                physics: const ClampingScrollPhysics(),
                 child: ConstrainedBox(
                   constraints: BoxConstraints(minHeight: constraint.maxHeight),
                   child: IntrinsicHeight(
@@ -55,7 +55,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                       children: [
                         const SizedBox(height: 40,),
 
-                        const Center(child: const Text('Upload Photo', style: TextStyle(fontSize: 42, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
+                        const Center(child: const Text('Upload Photo', style: const TextStyle(fontSize: 42, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
 
                         const SizedBox(height: 40,),
 
@@ -81,9 +81,9 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                                   ),
                                 ),
                                 
-                                Text('A valid photo of yourself would be a better choice because it would be worth a thousand words.',
+                                const Text('A valid photo of yourself would be a better choice because it would be worth a thousand words.',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                  style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                                 ),
                               ],
                             ),
@@ -109,7 +109,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
 
                         MiscBLMButtonTemplate(
                           buttonText: imageListener.path != '' ? 'Sign Up' : 'Speak Now',
-                          buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                          buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
                           buttonColor: imageListener.path != '' ? const Color(0xff04ECFF) : const Color(0xff000000),
                           width: SizeConfig.screenWidth! / 2,
                           height: 50,
@@ -125,8 +125,8 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                                 await showDialog(
                                   context: context,
                                   builder: (_) => AssetGiffyDialog(
-                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                    title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                    description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                     entryAnimation: EntryAnimation.DEFAULT,
                                     buttonOkColor: const Color(0xffff0000),
@@ -141,8 +141,8 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  description: Text('Please upload a photo.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                  title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                  description: const Text('Please upload a photo.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                   entryAnimation: EntryAnimation.DEFAULT,
                                   buttonOkColor: const Color(0xffff0000),

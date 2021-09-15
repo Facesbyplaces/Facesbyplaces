@@ -41,12 +41,12 @@ class BLMLogin extends StatelessWidget{
           body: Stack(
             children: [
               SingleChildScrollView(
-                physics: ClampingScrollPhysics(),
+                physics: const ClampingScrollPhysics(),
                 child: Container(
                   height: SizeConfig.screenHeight,
                   decoration: BoxDecoration(
                     color: const Color(0xffffffff),
-                    image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: const ColorFilter.srgbToLinearGamma(),),
+                    image: DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/background2.png'), colorFilter: const ColorFilter.srgbToLinearGamma(),),
                   ),
                 ),
               ),
@@ -54,7 +54,7 @@ class BLMLogin extends StatelessWidget{
               LayoutBuilder(
                 builder: (context, constraint){
                   return SingleChildScrollView(
-                    physics: ClampingScrollPhysics(),
+                    physics: const ClampingScrollPhysics(),
                     child: ConstrainedBox(
                       constraints: BoxConstraints(minHeight: constraint.maxHeight),
                       child: IntrinsicHeight(
@@ -71,7 +71,7 @@ class BLMLogin extends StatelessWidget{
                                 ),
                               ),
 
-                              SizedBox(height: 30,),
+                              const SizedBox(height: 30,),
 
                               Container(
                                 child: const Text('Log In', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
@@ -79,7 +79,7 @@ class BLMLogin extends StatelessWidget{
                                 alignment: Alignment.centerLeft,
                               ),
 
-                              SizedBox(height: 30,),
+                              const SizedBox(height: 30,),
 
                               Row(
                                 children: [
@@ -89,7 +89,7 @@ class BLMLogin extends StatelessWidget{
                                     height: 70,
                                     width: 70,
                                     child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(primary: Color(0xff3A559F), shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(10),),),),
+                                      style: ElevatedButton.styleFrom(primary: const Color(0xff3A559F), shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(10),),),),
                                       child: Center(child: Image.asset('assets/icons/Facebook2.png',),),
                                       onPressed: () async{
                                         final fb = FacebookLogin();
@@ -114,8 +114,8 @@ class BLMLogin extends StatelessWidget{
                                             await showDialog(
                                               context: context,
                                               builder: (_) => AssetGiffyDialog(
-                                                description: Text('Invalid email or password. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                                title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                description: const Text('Invalid email or password. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                 entryAnimation: EntryAnimation.DEFAULT,
                                                 buttonOkColor: const Color(0xffff0000),
@@ -201,8 +201,8 @@ class BLMLogin extends StatelessWidget{
                                           await showDialog(
                                             context: context,
                                             builder: (_) => AssetGiffyDialog(
-                                              description: Text('Invalid email or password. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                                              title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                              description: const Text('Invalid email or password. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                               entryAnimation: EntryAnimation.DEFAULT,
                                               buttonOkColor: const Color(0xffff0000),
@@ -223,7 +223,7 @@ class BLMLogin extends StatelessWidget{
 
                               const SizedBox(height: 50),
 
-                              const Center(child: const Text('or log in with email', style: TextStyle(fontSize: 24, color: const Color(0xff000000), fontFamily: 'NexaRegular',),)),
+                              const Center(child: const Text('or log in with email', style: const TextStyle(fontSize: 24, color: const Color(0xff000000), fontFamily: 'NexaRegular',),)),
 
                               const SizedBox(height: 50),
 
@@ -259,7 +259,7 @@ class BLMLogin extends StatelessWidget{
 
                                     GestureDetector(
                                       child: Align(
-                                        child: const Text('Forgot Password?', style: TextStyle(color: const Color(0xff2F353D), fontSize: 20, fontFamily: 'NexaRegular', decoration: TextDecoration.underline),),
+                                        child: const Text('Forgot Password?', style: const TextStyle(color: const Color(0xff2F353D), fontSize: 20, fontFamily: 'NexaRegular', decoration: TextDecoration.underline),),
                                         alignment: Alignment.centerRight,
                                       ),
                                       onTap: (){
@@ -288,8 +288,8 @@ class BLMLogin extends StatelessWidget{
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                        description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         buttonOkColor: const Color(0xffff0000),
@@ -303,8 +303,8 @@ class BLMLogin extends StatelessWidget{
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        description: Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                        description: const Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         buttonOkColor: const Color(0xffff0000),
@@ -330,8 +330,8 @@ class BLMLogin extends StatelessWidget{
                                       await showDialog(
                                         context: context,
                                         builder: (_) => AssetGiffyDialog(
-                                          description: Text('Error: $result', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                          description: Text('Error: $result', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                           entryAnimation: EntryAnimation.DEFAULT,
                                           buttonOkColor: const Color(0xffff0000),
@@ -346,7 +346,7 @@ class BLMLogin extends StatelessWidget{
                                 },
                               ),
 
-                              SizedBox(height: 30,),
+                              const SizedBox(height: 30,),
 
                               RichText(
                                 text: TextSpan(
@@ -371,7 +371,7 @@ class BLMLogin extends StatelessWidget{
                               const SizedBox(height: 20,),
 
                               GestureDetector(
-                                child: const Text('Sign in as Guest', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xff4EC9D4), decoration: TextDecoration.underline,)),
+                                child: const Text('Sign in as Guest', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xff4EC9D4), decoration: TextDecoration.underline,)),
                                 onTap: () async{
                                   final sharedPrefs = await SharedPreferences.getInstance();
                                   sharedPrefs.setBool('user-guest-session', true);

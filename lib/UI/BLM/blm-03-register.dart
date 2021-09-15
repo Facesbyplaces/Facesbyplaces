@@ -35,11 +35,12 @@ class BLMRegister extends StatelessWidget{
           body: Stack(
             children: [
               SingleChildScrollView(
+                physics: const ClampingScrollPhysics(),
                 child: Container(
                   height: SizeConfig.screenHeight,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: const Color(0xffffffff),
-                    image: DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/background2.png'), colorFilter: const ColorFilter.srgbToLinearGamma(),),
+                    image: const DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/background2.png'), colorFilter: const ColorFilter.srgbToLinearGamma(),),
                   ),
                 ),
               ),
@@ -47,7 +48,7 @@ class BLMRegister extends StatelessWidget{
               LayoutBuilder(
                 builder: (context, constraint){
                   return SingleChildScrollView(
-                    physics: ClampingScrollPhysics(),
+                    physics: const ClampingScrollPhysics(),
                     child: ConstrainedBox(
                       constraints: BoxConstraints(minHeight: constraint.maxHeight),
                       child: IntrinsicHeight(
@@ -68,10 +69,10 @@ class BLMRegister extends StatelessWidget{
                                 ),
                               ),
 
-                              SizedBox(height: 10,),
+                              const SizedBox(height: 10,),
 
                               Container(
-                                padding: EdgeInsets.symmetric(horizontal: 40),
+                                padding: const EdgeInsets.symmetric(horizontal: 40),
                                 child: Column(
                                   children: [
                                     MiscBLMInputFieldTemplate(
@@ -122,7 +123,7 @@ class BLMRegister extends StatelessWidget{
 
                               Expanded(child: Container()),
                               
-                              SizedBox(height: 50,),
+                              const SizedBox(height: 50,),
 
                               MiscBLMButtonTemplate(
                                 buttonText: 'Next',
@@ -138,8 +139,8 @@ class BLMRegister extends StatelessWidget{
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                        description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         buttonOkColor: const Color(0xffff0000),
@@ -153,8 +154,8 @@ class BLMRegister extends StatelessWidget{
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        description: Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                        title:  Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                        description: const Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         buttonOkColor: const Color(0xffff0000),
@@ -177,9 +178,9 @@ class BLMRegister extends StatelessWidget{
                                       await showDialog(
                                         context: context,
                                         builder: (_) => AssetGiffyDialog(
-                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                                           description: Text('$result', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                           entryAnimation: EntryAnimation.DEFAULT,
                                           buttonOkColor: const Color(0xffff0000),
                                           onlyOkButton: true,

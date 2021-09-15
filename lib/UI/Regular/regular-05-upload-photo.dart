@@ -46,7 +46,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
             child: LayoutBuilder(
               builder: (context, constraint){
                 return SingleChildScrollView(
-                  physics: ClampingScrollPhysics(),
+                  physics: const ClampingScrollPhysics(),
                   child: ConstrainedBox(
                     constraints: BoxConstraints(minHeight: constraint.maxHeight),
                     child: IntrinsicHeight(
@@ -54,7 +54,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                         children: [
                           const SizedBox(height: 40),
 
-                          Center(child: Text('Upload Photo', style: TextStyle(fontSize: 42, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
+                          const Center(child: const Text('Upload Photo', style: const TextStyle(fontSize: 42, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
 
                           const SizedBox(height: 40),
 
@@ -78,7 +78,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                             child: Container(
                                             decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: FileImage(imageListener),),),),
                                           )
-                                          : Align(
+                                          : const Align(
                                             alignment: Alignment.center,
                                             child: const Icon(Icons.add, color: const Color(0xffE3E3E3), size: 250,),
                                           ),
@@ -87,15 +87,15 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                     ),
                                   ),
 
-                                  Text('A valid photo of yourself would be a better choice because it would be worth a thousand words.',
-                                    style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                  const Text('A valid photo of yourself would be a better choice because it would be worth a thousand words.',
+                                    style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                                     textAlign: TextAlign.center,
                                   ),
                                 ],
                               ),
                             ),
                             onTap: () async{
-                              var choice = await showDialog(context: (context), builder: (build) => MiscRegularUploadFromDialog());
+                              var choice = await showDialog(context: (context), builder: (build) => const MiscRegularUploadFromDialog());
 
                               if(choice == null){
                                 choice = 0;
@@ -131,8 +131,8 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                   await showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
-                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                       entryAnimation: EntryAnimation.DEFAULT,
                                       buttonOkColor: const Color(0xffff0000),
@@ -147,8 +147,8 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                 await showDialog(
                                   context: context,
                                   builder: (_) => AssetGiffyDialog(
-                                    description: Text('Please upload a photo.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                    title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                    description: const Text('Please upload a photo.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                     entryAnimation: EntryAnimation.DEFAULT,
                                     buttonOkColor: const Color(0xffff0000),

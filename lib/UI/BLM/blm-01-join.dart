@@ -12,7 +12,7 @@ class BLMJoin extends StatelessWidget{
       body: LayoutBuilder(
         builder: (context, constraint){
           return SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
+            physics: const ClampingScrollPhysics(),
             child: ConstrainedBox(
               constraints: BoxConstraints(minHeight: constraint.maxHeight),
               child: IntrinsicHeight(
@@ -37,7 +37,7 @@ class BLMJoin extends StatelessWidget{
                             children: [
                               const Spacer(),
 
-                              Text('BLACK', style: const TextStyle(fontSize: 32, color: const Color(0xff000000), fontFamily: 'NexaBold',),),
+                              const Text('BLACK', style: const TextStyle(fontSize: 32, color: const Color(0xff000000), fontFamily: 'NexaBold',),),
 
                               const SizedBox(width: 20,),
 
@@ -63,7 +63,7 @@ class BLMJoin extends StatelessWidget{
 
                         const SizedBox(height: 20,),
 
-                        const Text('Remembering the Victims', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                        const Text('Remembering the Victims', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
 
                         const SizedBox(height: 20,),
 

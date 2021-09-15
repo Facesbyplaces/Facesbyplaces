@@ -10,6 +10,7 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:pay/pay.dart' as pay;
+import 'dart:convert';
 import 'dart:io';
 
 class HomeBLMUserDonate extends StatefulWidget{
@@ -326,7 +327,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                                   context: context,
                                                                   builder: (_) => AssetGiffyDialog(
                                                                     title: const Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                                    description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                                                    description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular',),),
                                                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                                     entryAnimation: EntryAnimation.DEFAULT,
                                                                     onlyOkButton: true,
@@ -450,8 +451,14 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                               paymentItems: _paymentItems,
                                               margin: const EdgeInsets.only(top: 15),
                                               type: pay.GooglePayButtonType.donate,
-                                              onPaymentResult: (payment) async{
+                                              onPaymentResult: (paymentResult) async{
                                                 try{
+                                                    debugPrint('the payment result is $paymentResult');
+                                                    // debugPrint('${payment['paymentMethodData']['tokenizationData']['token']}');
+                                                    final token = paymentResult['paymentMethodData']['tokenizationData']['token'];
+                                                    final tokenJson = Map.castFrom(json.decode(token));
+                                                    print('The token is $tokenJson');
+
                                                   bool onError = false;
 
                                                   List<String> newValue = await apiBLMDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: '').onError((error, stackTrace){
@@ -478,7 +485,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                   print('The newValue[1] is ${newValue[1]}');
 
                                                   if(onError != true){
-                                                    final params = PaymentMethodParams.cardFromToken(token: newValue[1],);
+                                                    // final params = PaymentMethodParams.cardFromToken(token: newValue[1],);
+                                                    final params = PaymentMethodParams.cardFromToken(token: tokenJson['id'],);
 
                                                     print('The params is $params');
                                                     
@@ -492,7 +500,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                         context: context,
                                                         builder: (_) => AssetGiffyDialog(
                                                           title: const Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                          description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                                          description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular',),),
                                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                           entryAnimation: EntryAnimation.DEFAULT,
                                                           onlyOkButton: true,
@@ -518,20 +526,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                       );
                                                     }
                                                   }
-
-                                                  await showDialog(
-                                                    context: context,
-                                                    builder: (_) => AssetGiffyDialog(
-                                                      title: const Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                      description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                      entryAnimation: EntryAnimation.DEFAULT,
-                                                      onlyOkButton: true,
-                                                      onOkButtonPressed: (){
-                                                        Navigator.pop(context);
-                                                      },
-                                                    ),
-                                                  );
                                                 }catch(e){
                                                   await showDialog(
                                                     context: context,

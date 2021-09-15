@@ -46,12 +46,12 @@ class RegularLoginState extends State<RegularLogin>{
             body: Stack(
               children: [
                 SingleChildScrollView(
-                  physics: ClampingScrollPhysics(),
+                  physics: const ClampingScrollPhysics(),
                   child: Container(
                     height: SizeConfig.screenHeight,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: const Color(0xffffffff),
-                      image: DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),
+                      image: const DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/background2.png'), colorFilter: const ColorFilter.srgbToLinearGamma(),),
                     ),
                   ),
                 ),
@@ -59,7 +59,7 @@ class RegularLoginState extends State<RegularLogin>{
                 LayoutBuilder(
                   builder: (context, constraint){
                     return SingleChildScrollView(
-                      physics: ClampingScrollPhysics(),
+                      physics: const ClampingScrollPhysics(),
                       child: ConstrainedBox(
                         constraints: BoxConstraints(minHeight: constraint.maxHeight),
                         child: IntrinsicHeight(
@@ -69,14 +69,14 @@ class RegularLoginState extends State<RegularLogin>{
                                 Align(
                                   alignment: Alignment.centerLeft,
                                   child: IconButton(
-                                    icon: Icon(Icons.arrow_back, color: const Color(0xff000000), size: 35),
+                                    icon: const Icon(Icons.arrow_back, color: const Color(0xff000000), size: 35),
                                     onPressed: (){
                                       Navigator.pop(context);
                                     },
                                   ),
                                 ),
 
-                                SizedBox(height: 30,),
+                                const SizedBox(height: 30,),
 
                                 Container(
                                   child: const Text('Log In', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
@@ -121,8 +121,8 @@ class RegularLoginState extends State<RegularLogin>{
                                               await showDialog(
                                                 context: context,
                                                 builder: (_) => AssetGiffyDialog(
-                                                  description: Text('Invalid email or password. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                  title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                  description: const Text('Invalid email or password. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                   entryAnimation: EntryAnimation.DEFAULT,
                                                   buttonOkColor: const Color(0xffff0000),
@@ -166,7 +166,7 @@ class RegularLoginState extends State<RegularLogin>{
                                       height: 70,
                                       width: 70,
                                       child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(primary: Color(0xffFFFFFF), shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(10),),),),
+                                        style: ElevatedButton.styleFrom(primary: const Color(0xffFFFFFF), shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(10),),),),
                                         child: Center(child: Image.asset('assets/icons/google.png',),),
                                         onPressed: () async{
                                           User? user = await RegularGoogleAuthentication.signInWithGoogle(context: context);
@@ -220,8 +220,8 @@ class RegularLoginState extends State<RegularLogin>{
                                             await showDialog(
                                               context: context,
                                               builder: (_) => AssetGiffyDialog(
-                                                description: Text('Invalid email or password. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                description: const Text('Invalid email or password. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                 entryAnimation: EntryAnimation.DEFAULT,
                                                 buttonOkColor: const Color(0xffff0000),
@@ -306,8 +306,8 @@ class RegularLoginState extends State<RegularLogin>{
                                       await showDialog(
                                         context: context,
                                         builder: (_) => AssetGiffyDialog(
-                                          description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                          description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                           entryAnimation: EntryAnimation.DEFAULT,
                                           buttonOkColor: const Color(0xffff0000),
@@ -321,8 +321,8 @@ class RegularLoginState extends State<RegularLogin>{
                                       await showDialog(
                                         context: context,
                                         builder: (_) => AssetGiffyDialog(
-                                          description: Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                          description: const Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                           entryAnimation: EntryAnimation.DEFAULT,
                                           buttonOkColor: const Color(0xffff0000),
@@ -351,8 +351,8 @@ class RegularLoginState extends State<RegularLogin>{
                                         await showDialog(
                                           context: context,
                                           builder: (_) => AssetGiffyDialog(
-                                            description: Text('Error: $result', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                            description: Text('Error: $result', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                             entryAnimation: EntryAnimation.DEFAULT,
                                             buttonOkColor: const Color(0xffff0000),
@@ -403,9 +403,9 @@ class RegularLoginState extends State<RegularLogin>{
                                 SizedBox(height: 20,),
 
                                 Container(
-                                  padding: const EdgeInsets.only(left: 40, right: 40),
+                                  padding: const EdgeInsets.symmetric(horizontal: 40),
                                   child: RichText(
-                                    text: TextSpan(
+                                    text: const TextSpan(
                                       children: <TextSpan>[
                                         const TextSpan(text: 'Connect  /  ', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
 

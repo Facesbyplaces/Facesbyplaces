@@ -31,14 +31,14 @@ class RegularVerifyEmail extends StatelessWidget{
             body: Stack(
               children: [
                 SingleChildScrollView(
-                  physics: ClampingScrollPhysics(),
+                  physics: const ClampingScrollPhysics(),
                   child: Container(
                     height: SizeConfig.screenHeight,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
+                    decoration: const BoxDecoration(
+                      image: const DecorationImage(
                         colorFilter: const ColorFilter.srgbToLinearGamma(),
                         fit: BoxFit.cover,
-                        image: AssetImage('assets/icons/background2.png'),
+                        image: const AssetImage('assets/icons/background2.png'),
                       ),
                     ),
                   ),
@@ -47,7 +47,7 @@ class RegularVerifyEmail extends StatelessWidget{
                 LayoutBuilder(
                   builder: (context, constraint){
                     return SingleChildScrollView(
-                      physics: ClampingScrollPhysics(),
+                      physics: const ClampingScrollPhysics(),
                       child: ConstrainedBox(
                         constraints: BoxConstraints(minHeight: constraint.maxHeight),
                         child: IntrinsicHeight(
@@ -68,15 +68,15 @@ class RegularVerifyEmail extends StatelessWidget{
 
                                 const SizedBox(height: 40),
 
-                                Center(child: Text('Verify Email', style: TextStyle(fontSize: 42, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
+                                const Center(child: const Text('Verify Email', style: const TextStyle(fontSize: 42, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
 
                                 const SizedBox(height: 40),
 
-                                Padding(
+                                const Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 40),
-                                  child: Text('We have sent a verification code to your email address. Please enter the verification code to continue.',
+                                  child: const Text('We have sent a verification code to your email address. Please enter the verification code to continue.',
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                    style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                                   ),
                                 ),
 
@@ -100,14 +100,14 @@ class RegularVerifyEmail extends StatelessWidget{
                                 RichText(
                                   text: TextSpan(
                                     children: <TextSpan>[
-                                      TextSpan(
+                                      const TextSpan(
                                         text: 'Didn\'t receive a code? ',
-                                        style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                        style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                                       ),
                                       
                                       TextSpan(
                                         text: 'Resend',
-                                        style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000), decoration: TextDecoration.underline),
+                                        style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000), decoration: TextDecoration.underline),
                                         recognizer: TapGestureRecognizer()
                                         ..onTap = () async{
                                           context.loaderOverlay.show();
@@ -118,8 +118,8 @@ class RegularVerifyEmail extends StatelessWidget{
                                             await showDialog(
                                               context: context,
                                               builder: (_) => AssetGiffyDialog(
-                                                description: Text('Another code has been sent to your email address. Please check your inbox.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                                title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                description: const Text('Another code has been sent to your email address. Please check your inbox.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                 entryAnimation: EntryAnimation.DEFAULT,
                                                 onlyOkButton: true,
@@ -132,8 +132,8 @@ class RegularVerifyEmail extends StatelessWidget{
                                             await showDialog(
                                               context: context,
                                               builder: (_) => AssetGiffyDialog(
-                                                description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                 entryAnimation: EntryAnimation.DEFAULT,
                                                 buttonOkColor: const Color(0xffff0000),
@@ -154,7 +154,7 @@ class RegularVerifyEmail extends StatelessWidget{
 
                                 MiscRegularButtonTemplate(
                                   buttonText: controller.text.length != 3 ? 'Next' : 'Sign Up',
-                                  buttonTextStyle: TextStyle(fontSize: 24, color: const Color(0xffffffff), fontFamily: 'NexaBold'),
+                                  buttonTextStyle: const TextStyle(fontSize: 24, color: const Color(0xffffffff), fontFamily: 'NexaBold'),
                                   buttonColor: const Color(0xff04ECFF),
                                   width: SizeConfig.screenWidth! / 2,
                                   height: 50,
@@ -163,8 +163,8 @@ class RegularVerifyEmail extends StatelessWidget{
                                       await showDialog(
                                         context: context,
                                         builder: (_) => AssetGiffyDialog(
-                                          description: Text('Please enter the verification code.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                          description: const Text('Please enter the verification code.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                           entryAnimation: EntryAnimation.DEFAULT,
                                           buttonOkColor: const Color(0xffff0000),
@@ -185,8 +185,8 @@ class RegularVerifyEmail extends StatelessWidget{
                                         await showDialog(
                                           context: context,
                                           builder: (_) => AssetGiffyDialog(
-                                            description: Text('Error: $result', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                            description: Text('Error: $result', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                             entryAnimation: EntryAnimation.DEFAULT,
                                             buttonOkColor: const Color(0xffff0000),

@@ -12,7 +12,7 @@ class RegularJoin extends StatelessWidget{
       body: LayoutBuilder(
         builder: (context, constraint){
           return SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
+            physics: const ClampingScrollPhysics(),
             child: ConstrainedBox(
               constraints: BoxConstraints(minHeight: constraint.maxHeight),
               child: IntrinsicHeight(
@@ -24,7 +24,7 @@ class RegularJoin extends StatelessWidget{
                         Align(
                           alignment: Alignment.centerLeft,
                           child: IconButton(
-                            icon: Icon(Icons.arrow_back, color: const Color(0xffFFFFFF), size: 35,),
+                            icon: const Icon(Icons.arrow_back, color: const Color(0xffFFFFFF), size: 35,),
                             onPressed: (){
                               Navigator.pop(context);
                             },
@@ -39,7 +39,7 @@ class RegularJoin extends StatelessWidget{
 
                         Expanded(child: Container()),
 
-                        Center(child: const Text('All Lives Matter', style: const TextStyle(fontSize: 42, color: const Color(0xffffffff), fontFamily: 'NexaBold',),),),
+                        const Center(child: const Text('All Lives Matter', style: const TextStyle(fontSize: 42, color: const Color(0xffffffff), fontFamily: 'NexaBold',),),),
 
                         const SizedBox(height: 50,),
 
