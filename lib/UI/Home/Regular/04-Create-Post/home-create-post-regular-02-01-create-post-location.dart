@@ -66,12 +66,12 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
                               Expanded(
                                 child: TextFormField(
                                   controller: controller,
-                                  style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                                  decoration: InputDecoration(
+                                  style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                  decoration: const InputDecoration(
                                     focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                                     enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                                     border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                    hintStyle: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
+                                    hintStyle: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
                                     prefixIcon: const Icon(Icons.search, color: const Color(0xff888888)),
                                     contentPadding: const EdgeInsets.all(15.0),
                                     focusColor: const Color(0xffffffff),
@@ -113,7 +113,7 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
                             ],
                           ),
 
-                          SizedBox(height: 5,),
+                          const SizedBox(height: 5,),
                         ],
                       ),
                     ),
@@ -131,9 +131,9 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
 
                           const SizedBox(height: 20),
 
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
-                            child: Text('Search a location to add on your post', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                          const Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: const Text('Search a location to add on your post', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                           ),
 
                           SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
@@ -148,16 +148,16 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
                       },
                       itemBuilder: (context, index){
                         return ListTile(
-                          title: Text(placesListener[index], style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular', fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+                          title: Text(placesListener[index], style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
                           subtitle: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(descriptionPlacesListener[index], style: TextStyle(fontSize: 14, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                              Text(descriptionPlacesListener[index], style: const TextStyle(fontSize: 14, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
 
-                              SizedBox(height: 5,),
+                              const SizedBox(height: 5,),
 
-                              Text('Click to add on your post', style: TextStyle(fontSize: 12, fontFamily: 'NexaRegular', color: const Color(0xff888888),),),
+                              const Text('Click to add on your post', style: const TextStyle(fontSize: 12, fontFamily: 'NexaRegular', color: const Color(0xff888888),),),
                             ],
                           ),
                           onTap: () async{

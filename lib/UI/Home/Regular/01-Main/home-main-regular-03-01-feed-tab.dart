@@ -101,8 +101,8 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+            description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
@@ -212,7 +212,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                     latitude: feedsListener[i].latitude,
                     longitude: feedsListener[i].longitude,
                     contents: [
-                      Container(alignment: Alignment.centerLeft, child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                      Container(alignment: Alignment.centerLeft, child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
                           
                       feedsListener[i].imagesOrVideos.isNotEmpty
                       ? Column(
@@ -314,7 +314,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                                   child: CircleAvatar(
                                                     radius: 25,
                                                     backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                    child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                    child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                   ),
                                                 ),
                                               ],
@@ -336,7 +336,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                                   child: CircleAvatar(
                                                     radius: 25,
                                                     backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                    child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                    child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                   ),
                                                 ),
                                               ],
@@ -397,15 +397,13 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                     latitude: feedsListener[i].latitude,
                     longitude: feedsListener[i].longitude,
                     contents: [
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
-                      ),
+                      Container(alignment: Alignment.centerLeft, child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
                       
                       feedsListener[i].imagesOrVideos.isNotEmpty
                       ? Column(
                         children: [
                           const SizedBox(height: 20),
+
                           Container(
                             child: ((){
                               if(feedsListener[i].imagesOrVideos.length == 1){
@@ -502,7 +500,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                                   child: CircleAvatar(
                                                     radius: 25,
                                                     backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                    child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                    child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                   ),
                                                 ),
                                               ],
@@ -524,7 +522,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                                   child: CircleAvatar(
                                                     radius: 25,
                                                     backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                    child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                    child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                   ),
                                                 ),
                                               ],
@@ -575,16 +573,16 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                   alignment: Alignment.center,
                   child: RichText(
                     textAlign: TextAlign.center,
-                    text: TextSpan(
-                      children:  <TextSpan>[
-                        TextSpan(
+                    text: const TextSpan(
+                      children: const <TextSpan>[
+                        const TextSpan(
                           text: 'Welcome to\n',
-                          style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),
+                          style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),
                         ),
 
-                        TextSpan(
+                        const TextSpan(
                           text: 'Faces by Places',
-                          style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),
+                          style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),
                         ),
                       ],
                     ),
@@ -594,19 +592,19 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                 const SizedBox(height: 20),
 
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Image.asset('assets/icons/Welcome.png', width: SizeConfig.screenWidth, fit: BoxFit.cover,),
                 ),
 
                 const SizedBox(height: 50,),
 
-                Text('Feed is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+                const Text('Feed is empty', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
 
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 40),
-                  child: Text('Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations.',
+                const Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: const Text('Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations.',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                    style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                   ),
                 ),
 
@@ -615,7 +613,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                 isGuestLoggedInListener
                 ? Container(height: 0,)
                 : MiscRegularButtonTemplate(
-                  buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                  buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
                   buttonColor: const Color(0xff04ECFF),
                   width: SizeConfig.screenWidth! / 2,
                   buttonText: 'Create',

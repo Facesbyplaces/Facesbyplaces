@@ -190,7 +190,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                   latitude: posts[i].latitude,
                   longitude: posts[i].longitude,
                   contents: [
-                    Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                    Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
 
                     posts[i].imagesOrVideos.isNotEmpty
                     ? Column(
@@ -291,7 +291,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
 
                                               Center(
                                                 child: CircleAvatar(
-                                                  child: Text('${posts[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                  child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                   radius: 25,
                                                 ),
@@ -313,7 +313,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
 
                                               Center(
                                                 child: CircleAvatar(
-                                                  child: Text('${posts[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                  child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                   radius: 25,
                                                 ),

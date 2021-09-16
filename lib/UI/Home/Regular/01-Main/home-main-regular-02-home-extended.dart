@@ -103,8 +103,8 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
       await showDialog(
         context: context, 
         builder: (_) => AssetGiffyDialog(
-          description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-          title: Text('Error',  textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+          description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
           entryAnimation: EntryAnimation.DEFAULT,
           buttonOkColor: const Color(0xffff0000),
@@ -151,8 +151,8 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                 valueListenable: isGuestLoggedIn,
                 builder: (_, bool isGuestLoggedInListener, __) => Scaffold(
                   appBar: AppBar(
-                    title: Text('FacesByPlaces.com', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
-                    backgroundColor: Color(0xff4EC9D4),
+                    title: const Text('FacesByPlaces.com', style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
+                    backgroundColor: const Color(0xff4EC9D4),
                     centerTitle: true,
                     leading: FutureBuilder<APIRegularShowProfileInformation>(
                       future: drawerSettings,
@@ -162,7 +162,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                             builder: (context){
                               return IconButton(
                                 icon: Container(
-                                  decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: Colors.white, width: 2,),),
+                                  decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: const Color(0xffffffff), width: 2,),),
                                   child: profileImage.data!.showProfileInformationImage != ''
                                   ? CircleAvatar(
                                     backgroundColor: const Color(0xff888888),
@@ -213,10 +213,10 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                       Container(
                         child: ((){
                           switch (toggleBottomListener){
-                            case 0: return HomeRegularFeedTab();
-                            case 1: return HomeRegularManageTab();
-                            case 2: return HomeRegularPostTab();
-                            case 3: return HomeRegularNotificationsTab();
+                            case 0: return const HomeRegularFeedTab();
+                            case 1: return const HomeRegularManageTab();
+                            case 2: return const HomeRegularPostTab();
+                            case 3: return const HomeRegularNotificationsTab();
                           }
                         }()),
                       ),
@@ -263,7 +263,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
                                   const SizedBox(height: 5),
 
-                                  Text('Feed', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight'),),
+                                  const Text('Feed', style: const TextStyle(fontSize: 18, fontFamily: 'NexaLight'),),
                                 ],
                               ),
                             ),
@@ -275,7 +275,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
                                   const SizedBox(height: 5),
 
-                                  Text('Memorials', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight'),),
+                                  const Text('Memorials', style: const TextStyle(fontSize: 18, fontFamily: 'NexaLight'),),
                                 ],
                               ),
                             ),
@@ -287,7 +287,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
                                   const SizedBox(height: 5),
 
-                                  Text('Post', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight',),),
+                                  const Text('Post', style: const TextStyle(fontSize: 18, fontFamily: 'NexaLight',),),
                                 ],
                               ),
                             ),
@@ -302,7 +302,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
                                       const SizedBox(height: 5),
 
-                                      Text('Notification', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight',),),
+                                      const Text('Notification', style: const TextStyle(fontSize: 18, fontFamily: 'NexaLight',),),
                                     ],
                                   ),
                                   Positioned(
@@ -353,7 +353,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                             alignment: Alignment.topCenter,
                             color: const Color(0xff4EC9D4),
                             child: SingleChildScrollView(
-                              physics: ClampingScrollPhysics(),
+                              physics: const ClampingScrollPhysics(),
                               child: Column(
                                 children: [
                                   const SizedBox(height: 50),
@@ -362,7 +362,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                     child: manageDrawer.data!.showProfileInformationImage != ''
                                     ? Container(
                                       child: CircleAvatar(radius: 100, backgroundColor: const Color(0xff888888), foregroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),),
-                                      decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: Colors.white, width: 3,),),
+                                      decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: const Color(0xffffffff), width: 3,),),
                                     )
                                     : const CircleAvatar(
                                       radius: 100,
@@ -420,13 +420,13 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   Text(
                                     manageDrawer.data!.showProfileInformationFirstName + ' ' + manageDrawer.data!.showProfileInformationLastName,
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize: 28, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                                    style: const TextStyle(fontSize: 28, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
                                   ),
 
                                   const SizedBox(height: 45),
 
                                   GestureDetector(
-                                    child: Text('Home', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                                    child: const Text('Home', style: const TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                                     onTap: (){
                                       Navigator.pop(context);
                                     },
@@ -435,7 +435,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   const SizedBox(height: 25),
 
                                   GestureDetector(
-                                    child: Text('Create Memorial Page', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                                    child: const Text('Create Memorial Page', style: const TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                                     onTap: (){
                                       Navigator.pop(context);
                                       Navigator.pushNamed(context, '/home/regular/create-memorial');
@@ -445,7 +445,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   const SizedBox(height: 20),
 
                                   GestureDetector(
-                                    child: Text('Notification Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                                    child: const Text('Notification Settings', style: const TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                                     onTap: () async{
                                       context.loaderOverlay.show();
                                       APIRegularShowNotificationStatus result = await apiRegularShowNotificationStatus(userId: manageDrawer.data!.showProfileInformationUserId);
@@ -459,7 +459,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   const SizedBox(height: 20),
 
                                   GestureDetector(
-                                    child: Text('Profile Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                                    child: const Text('Profile Settings', style: const TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                                     onTap: () async{
                                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: manageDrawer.data!.showProfileInformationUserId)));
                                     },
@@ -468,9 +468,9 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   const SizedBox(height: 20),
 
                                   GestureDetector(
-                                    child: Text('Log Out', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                                    child: const Text('Log Out', style: const TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                                     onTap: () async{
-                                      bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Log Out', content: 'Are you sure you want to logout from this account?', confirmColor_1: const Color(0xff000000), confirmColor_2: const Color(0xff888888),));
+                                      bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Log Out', content: 'Are you sure you want to logout from this account?', confirmColor_1: const Color(0xff000000), confirmColor_2: const Color(0xff888888),));
 
                                       if(confirmResult){
                                         context.loaderOverlay.show();
@@ -484,8 +484,8 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                           await showDialog(
                                             context: context,
                                             builder: (_) => AssetGiffyDialog(
-                                              description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                              title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                              description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                               entryAnimation: EntryAnimation.DEFAULT,
                                               buttonOkColor: const Color(0xffff0000),
@@ -524,7 +524,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                 Expanded(child: Container(),),
 
                                 GestureDetector(
-                                  child: Text('Something went wrong. Please try again.', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color:  Color(0xffFFFFFF),), textAlign: TextAlign.center,),
+                                  child: const Text('Something went wrong. Please try again.', style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),), textAlign: TextAlign.center,),
                                   onTap: (){
                                     Navigator.pop(context);
                                   },
@@ -540,7 +540,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
                                       const SizedBox(width: 20),
 
-                                      Text('Go back', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),),
+                                      const Text('Go back', style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),),
                                     ],
                                   ),
                                   onTap: (){
@@ -577,12 +577,12 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
                             const SizedBox(height: 20,),
 
-                            Text('Guest User', textAlign: TextAlign.center, style: TextStyle(fontSize: 28, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
+                            const Text('Guest User', textAlign: TextAlign.center, style: const TextStyle(fontSize: 28, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
 
                             const SizedBox(height: 45,),
 
                             GestureDetector(
-                              child: Text('Home', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                              child: const Text('Home', style: const TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                               onTap: (){
                                 Navigator.pop(context);
                               },
@@ -591,7 +591,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                             const SizedBox(height: 25,),
 
                             GestureDetector(
-                              child: Text('Sign up or Sign in', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                              child: const Text('Sign up or Sign in', style: const TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                               onTap: () async{
                                 final sharedPrefs = await SharedPreferences.getInstance();
 

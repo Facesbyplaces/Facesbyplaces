@@ -18,13 +18,13 @@ class HomeRegularMaps extends StatefulWidget{
 }
 
 class HomeRegularMapsState extends State<HomeRegularMaps>{
-  CameraPosition? initialCameraPosition;
-  GoogleMapController? googleMapController;
-  Marker? origin;
-  Marker? destination;
   CustomInfoWindowController customInfoWindowController = CustomInfoWindowController();
+  GoogleMapController? googleMapController;
+  CameraPosition? initialCameraPosition;
   Set<Marker> markers = {};
   RegularDirections? info;
+  Marker? origin;
+  Marker? destination;
 
   void initState(){
     super.initState();
@@ -37,12 +37,11 @@ class HomeRegularMapsState extends State<HomeRegularMaps>{
         customInfoWindowController.addInfoWindow!(
           ClipPath(
             clipper: MessageClipper(borderRadius: 10),
-            // clipper: MiscRegularMessageClipper(),
             child: Container(
               color: const Color(0xffffffff),
               child: Column(
                 children: [
-                  Text('Here Lies', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                  const Text('Here Lies', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
 
                   ListTile(
                     leading: widget.memorialImage != ''
@@ -61,7 +60,7 @@ class HomeRegularMapsState extends State<HomeRegularMaps>{
                     subtitle: Text('${widget.latitude.toStringAsFixed(6)}, ${widget.longitude.toStringAsFixed(6)}'),
                   ),
 
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20,),
                 ],
               ),
             ),
@@ -79,7 +78,7 @@ class HomeRegularMapsState extends State<HomeRegularMaps>{
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: Text('${widget.memorialName}', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
+        title: Text('${widget.memorialName}', style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
         backgroundColor: const Color(0xff04ECFF),
         actions: [
           IconButton(
@@ -90,7 +89,7 @@ class HomeRegularMapsState extends State<HomeRegularMaps>{
                 : CameraUpdate.newCameraPosition(initialCameraPosition!),
               );
             },
-            icon: Icon(Icons.send_outlined),
+            icon: const Icon(Icons.send_outlined),
           ),
         ],
       ),
@@ -144,7 +143,7 @@ class HomeRegularMapsState extends State<HomeRegularMaps>{
                 boxShadow: const [
                   BoxShadow(
                     color: Colors.black26,
-                    offset: Offset(0, 2),
+                    offset: const Offset(0, 2),
                     blurRadius: 6.0,
                   ),
                 ],
@@ -183,7 +182,7 @@ class HomeRegularMapsState extends State<HomeRegularMaps>{
             color: const Color(0xffffffff),
             child: Column(
               children: [
-                Text('Here Lies', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                const Text('Here Lies', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
 
                 ListTile(
                   leading: widget.memorialImage != ''
@@ -202,7 +201,7 @@ class HomeRegularMapsState extends State<HomeRegularMaps>{
                   subtitle: Text('${widget.latitude.toStringAsFixed(6)}, ${widget.longitude.toStringAsFixed(6)}'),
                 ),
 
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
               ],
             ),
           ),

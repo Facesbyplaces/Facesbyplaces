@@ -122,8 +122,8 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+            description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
@@ -167,8 +167,8 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+            description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
@@ -212,8 +212,8 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+            description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
@@ -280,7 +280,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                         Align(
                           alignment: Alignment.centerLeft,
                           child: IconButton(
-                            icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+                            icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
                             onPressed: (){
                               Navigator.pop(context);
                             },
@@ -289,7 +289,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
 
                         Expanded(
                           child: TextFormField(
-                            style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                            style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.all(15.0),
                               focusColor: const Color(0xffffffff),
@@ -305,7 +305,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                               enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                               focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                               border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
-                              hintStyle: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
+                              hintStyle: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
                               prefixIcon: const Icon(Icons.search, color: const Color(0xff888888)),
                             ),
                             onChanged: (search){
@@ -414,11 +414,11 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                         }
                       },
                       tabs: [
-                        const Text('Family', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                        const Text('Family', style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
 
-                        const Text('Friends', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                        const Text('Friends', style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
 
-                        const Text('Followers', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                        const Text('Followers', style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                       ],
                     ),
                   ),
@@ -518,20 +518,20 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
 
                     onSearchListener
                     ? Text('${searches[index].firstName} ${searches[index].lastName}', 
-                      style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
+                      style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
                     )
                     : Text('${listsFamily[index].firstName} ${listsFamily[index].lastName}',
-                      style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
+                      style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
                     ),
 
                     Text('${listsFamily[index].relationship}',
-                      style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                      style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
@@ -621,13 +621,13 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
 
                     onSearchListener
                     ? Text('${searches[index].firstName} ${searches[index].lastName}',
-                      style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
+                      style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
                     )
                     : Text('${listsFriends[index].firstName} ${listsFriends[index].lastName}',
-                      style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
+                      style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
@@ -717,13 +717,13 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
 
                     onSearchListener
                     ? Text('${searches[index].firstName} ${searches[index].lastName}',
-                      style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
+                      style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
                     )
                     : Text('${listsFollowers[index].firstName} ${listsFollowers[index].lastName}',
-                      style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
+                      style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,

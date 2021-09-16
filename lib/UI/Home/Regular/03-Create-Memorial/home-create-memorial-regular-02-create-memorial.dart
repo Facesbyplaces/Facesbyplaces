@@ -81,11 +81,11 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
           valueListenable: toggle,
           builder: (_, int toggleListener, __) => Scaffold(
             appBar: AppBar(
-              title: Text('Create a Memorial Page for Friends and family.', maxLines: 2, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff))),
+              title: const Text('Create a Memorial Page for Friends and family.', maxLines: 2, style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff))),
               backgroundColor: const Color(0xff04ECFF),
               centerTitle: true,
               leading: IconButton(
-                icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
+                icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
                 onPressed: (){
                   Navigator.pop(context);
                 },
@@ -97,6 +97,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                   physics: const NeverScrollableScrollPhysics(),
                   child: Container(height: SizeConfig.screenHeight, child: const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),
                 ),
+
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                   child: ListView(
@@ -105,34 +106,26 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                       MiscRegularInputFieldTemplate(
                         key: _key1,
                         labelText: 'Name of your Memorial Page',
-                        labelTextStyle: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                        labelTextStyle: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                       ),
 
                       const SizedBox(height: 30,),
 
-                      Center(
-                        child: Text('Name should be at least related to the person that perished. Or the family that will cherish the person in this memorial page.',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontFamily: 'NexaRegular',
-                            color: const Color(0xff000000),
-                          ),
-                        ),
-                      ),
+                      Center(child: Text('Name should be at least related to the person that perished. Or the family that will cherish the person in this memorial page.', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
 
                       const SizedBox(height: 30,),
 
                       Row(
                         children: [
-                          Text('Share your Memories', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                          const Text('Share your Memories', style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
 
-                          SizedBox(width: 5,),
+                          const SizedBox(width: 5,),
 
                           Expanded(
                             child: DefaultTabController(
                               length: 3,
                               child: TabBar(
-                                indicator: BoxDecoration(border: Border(left: BorderSide(width: 1, color: Color(0xff000000)), right: BorderSide(width: 1, color: Color(0xff000000))),),
+                                indicator: const BoxDecoration(border: const Border(left: const BorderSide(width: 1, color: const Color(0xff000000)), right: const BorderSide(width: 1, color: const Color(0xff000000))),),
                                 unselectedLabelColor: const Color(0xff000000),
                                 labelColor: const Color(0xff04ECFF),
                                 indicatorColor: Colors.transparent,
@@ -167,12 +160,12 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
 
                       const SizedBox(height: 20,),
 
-                      Center(child: Text('Share your Memories', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),),
+                      const Center(child: const Text('Share your Memories', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),),
 
                       const SizedBox(height: 80,),
 
                       MiscRegularButtonTemplate(
-                        buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),
+                        buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),
                         width: 150,
                         height: 50,
                         onPressed: () async{
@@ -180,8 +173,8 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                             await showDialog(
                               context: context,
                               builder: (_) => AssetGiffyDialog(
-                                description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                 entryAnimation: EntryAnimation.DEFAULT,
                                 buttonOkColor: const Color(0xffff0000),
@@ -220,7 +213,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
   shareStory1(){
     return TextFormField(
       controller: controllerStory,
-      style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+      style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       cursorColor: const Color(0xff000000),
       keyboardType: TextInputType.text,
       readOnly: false,
@@ -320,7 +313,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
           )
           : Container(
             decoration: BoxDecoration(color: const Color(0xffcccccc), border: Border.all(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
-            child: Icon(Icons.file_upload, color: const Color(0xff888888), size: 100,),
+            child: const Icon(Icons.file_upload, color: const Color(0xff888888), size: 100,),
             width: SizeConfig.screenWidth,
             height: 260,
           ),
@@ -378,7 +371,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                                   children: [
                                     Center(
                                       child: CircleAvatar(
-                                        child: Text('${index + 1}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                        child: Text('${index + 1}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                         backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                         radius: 25,
                                       ),
@@ -439,9 +432,9 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
 
             const SizedBox(height: 5,),
 
-            Align(
+            const Align(
               alignment: Alignment.centerLeft,
-              child: Text('Double tap to remove images.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+              child: const Text('Double tap to remove images.', style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
             ),
           ],
         ),

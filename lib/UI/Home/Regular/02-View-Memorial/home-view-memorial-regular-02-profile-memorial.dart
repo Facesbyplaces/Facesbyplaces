@@ -307,7 +307,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                     const SizedBox(height: 20,),
 
                                                     TextButton.icon(
-                                                      label: Text('${profile.data!.almMemorial.showMemorialFollowersCount}', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+                                                      label: Text('${profile.data!.almMemorial.showMemorialFollowersCount}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
                                                       icon: const CircleAvatar(radius: 15, backgroundColor: const Color(0xffE67E22), child: const Icon(Icons.card_giftcard, color: const Color(0xffffffff), size: 18,),),
                                                       onPressed: (){
                                                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: widget.memorialId, newToggle: 2)));
@@ -406,8 +406,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                           if(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDescription != ''){
                                                             return Container(
                                                               alignment: Alignment.center,
-                                                              padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                                                              child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDescription, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                                                              padding: const EdgeInsets.symmetric(horizontal: 20.0,),
+                                                              child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDescription, textAlign: TextAlign.center, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                                                             );
                                                           }else{
                                                             return Container(height: 0,);
@@ -435,7 +435,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                             child: Padding(
                                                               padding: const EdgeInsets.symmetric(horizontal: 10.0),
                                                               child: MaterialButton(
-                                                                child: Text(joinListener ? 'Unjoin' : 'Join', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                                child: Text(joinListener ? 'Unjoin' : 'Join', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                                 color: joinListener ? const Color(0xff888888) : const Color(0xff04ECFF),
                                                                 minWidth: SizeConfig.screenWidth! / 2,
                                                                 shape: const StadiumBorder(),
@@ -451,9 +451,9 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                   if(join.value == true){
                                                                     profile.data!.almMemorial.showMemorialFollowersCount++;
 
-                                                                  context.loaderOverlay.show();
-                                                                  result = await apiRegularModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId);
-                                                                  context.loaderOverlay.hide();
+                                                                    context.loaderOverlay.show();
+                                                                    result = await apiRegularModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId);
+                                                                    context.loaderOverlay.hide();
                                                                   }else{
                                                                     profile.data!.almMemorial.showMemorialFollowersCount--;
 
@@ -466,8 +466,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                     await showDialog(
                                                                       context: context,
                                                                       builder: (_) => AssetGiffyDialog(
-                                                                        description: Text(join.value != true ? 'Successfully unfollowed the page. You will no longer receive notifications from this page.' : 'Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                                                        title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                                        title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                                        description: Text(join.value != true ? 'Successfully unfollowed the page. You will no longer receive notifications from this page.' : 'Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                                         entryAnimation: EntryAnimation.DEFAULT,
                                                                         onlyOkButton: true,
@@ -480,8 +480,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                     await showDialog(
                                                                       context: context,
                                                                       builder: (_) => AssetGiffyDialog(
-                                                                        title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                                                        description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                                                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                                        description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                                         entryAnimation: EntryAnimation.DEFAULT,
                                                                         buttonOkColor: const Color(0xffff0000),
@@ -683,7 +683,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                         Container(
                                                           padding: const EdgeInsets.only(left: 20.0),
                                                           alignment: Alignment.centerLeft,
-                                                          child: const Text('Post', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                                                          child: const Text('Post', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
                                                         ),
 
                                                         const SizedBox(height: 20),
@@ -842,7 +842,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                 children: [
                                                   TextButton.icon(
                                                     icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35),
-                                                    label: const Text('Back', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
+                                                    label: const Text('Back', style: const TextStyle(fontSize: 32, color: const Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
                                                     onPressed: (){ // BACK BUTTON
                                                       Navigator.pop(context, join.value);
                                                     },
@@ -977,12 +977,12 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                 latitude: posts[i].latitude,
                                                 longitude: posts[i].longitude,
                                                 contents: [
-                                                  Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                                                  Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
 
                                                   posts[i].imagesOrVideos.isNotEmpty
                                                   ? Column(
                                                     children: [
-                                                      SizedBox(height: 20),
+                                                      const SizedBox(height: 20),
 
                                                       Container(
                                                         child: ((){
@@ -1079,7 +1079,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                               child: CircleAvatar(
                                                                                 radius: 25,
                                                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                                               ),
                                                                             ),
                                                                           ],
@@ -1101,7 +1101,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                               child: CircleAvatar(
                                                                                 radius: 25,
                                                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                                               ),
                                                                             ),
                                                                           ],
@@ -1164,7 +1164,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                             ),
                           );
                         }else if(profile.hasError){
-                          return MiscRegularErrorMessageTemplate();
+                          return const MiscRegularErrorMessageTemplate();
                         }else{
                           return Container(height: SizeConfig.screenHeight);
                         }

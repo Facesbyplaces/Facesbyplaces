@@ -137,9 +137,9 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                     appBar: AppBar(
                       backgroundColor: const Color(0xff04ECFF),
                       centerTitle: false,
-                      title: Text('Create Post', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+                      title: const Text('Create Post', style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
                       leading: IconButton(
-                        icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+                        icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
                         onPressed: (){
                           Navigator.pop(context);
                         },
@@ -148,7 +148,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                         GestureDetector(
                           child: Padding(
                             padding: const EdgeInsets.only(right: 20.0),
-                            child: Center(child: Text('Post', style: TextStyle(fontSize: 28, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),),
+                            child: Center(child: const Text('Post', style: const TextStyle(fontSize: 28, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),),
                           ),
                           onTap: () async{
                             List<RegularTaggedPeople> userIds = [];
@@ -181,8 +181,8 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                   await showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
-                                      description: Text('Permission to access location has been denied from this app. In order to turn it on, go to settings and allow location access permission for this app.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                      description: const Text('Permission to access location has been denied from this app. In order to turn it on, go to settings and allow location access permission for this app.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                       entryAnimation: EntryAnimation.DEFAULT,
                                       buttonOkColor: const Color(0xffff0000),
@@ -231,8 +231,8 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                  title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                  description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                   entryAnimation: EntryAnimation.DEFAULT,
                                   buttonOkColor: const Color(0xffff0000),
@@ -268,7 +268,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                         value: value.pageId,
                                         child: Row(
                                           children: [
-                                            SizedBox(width: 5,),
+                                            const SizedBox(width: 5,),
 
                                             value.image != ''
                                             ? CircleAvatar(
@@ -281,9 +281,9 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                               foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                                             ),
 
-                                            SizedBox(width: 5,),
+                                            const SizedBox(width: 5,),
 
-                                            Text(value.name, overflow: TextOverflow.clip, style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                                            Text(value.name, overflow: TextOverflow.clip, style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
                                           ],
                                         ),
                                       );
@@ -313,7 +313,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                   padding: const EdgeInsets.all(10),
                                   child: TextFormField(
                                     controller: controller,
-                                    style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xfF000000),),
+                                    style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xfF000000),),
                                     cursorColor: const Color(0xff000000),
                                     keyboardType: TextInputType.text,
                                     maxLines: maxLines,
@@ -434,7 +434,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                                   child: CircleAvatar(
                                                     radius: 25,
                                                     backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                    child: Text('${index + 1}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                    child: Text('${index + 1}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                   ),
                                                 ),
 
@@ -467,7 +467,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                                     child: CircleAvatar(
                                                       radius: 25,
                                                       backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                                      child: Text('${index + 1}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                      child: Text('${index + 1}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                     ),
                                                   ),
                                                   
@@ -556,7 +556,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                               }()),
                             ),
 
-                            Divider(color: const Color(0xff2F353D), thickness: 0.2,),
+                            const Divider(color: const Color(0xff2F353D), thickness: 0.2,),
 
                             Container(
                               height: 160,
@@ -569,7 +569,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                         color: Colors.transparent,
                                         child: Row(
                                           children: [
-                                            Expanded(child: Text('Add a location', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                                            Expanded(child: const Text('Add a location', style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
 
                                             const Icon(Icons.place, color: const Color(0xff4EC9D4),),
                                           ],
@@ -587,7 +587,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                     ),
                                   ),
 
-                                  Divider(color: const Color(0xff2F353D), thickness: 0.2,),
+                                  const Divider(color: const Color(0xff2F353D), thickness: 0.2,),
 
                                   Expanded(
                                     child: GestureDetector(
@@ -596,7 +596,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                         color: Colors.transparent,
                                         child: Row(
                                           children: [
-                                            Expanded(child: Text('Tag a person you are with', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color:const Color(0xff000000),),),),
+                                            Expanded(child: const Text('Tag a person you are with', style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color:const Color(0xff000000),),),),
 
                                             const Icon(Icons.person, color: const Color(0xff4EC9D4),),
                                           ],
@@ -613,7 +613,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                     ),
                                   ),
 
-                                  Divider(color: const Color(0xff2F353D), thickness: 0.2,),
+                                  const Divider(color: const Color(0xff2F353D), thickness: 0.2,),
 
                                   Expanded(
                                     child: GestureDetector(
@@ -622,7 +622,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                         color: Colors.transparent,
                                         child: Row(
                                           children: [
-                                            Expanded(child: Text('Upload a Video / Image', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                                            Expanded(child: const Text('Upload a Video / Image', style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
 
                                             const Icon(Icons.image, color: const Color(0xff4EC9D4),),
                                           ],

@@ -129,7 +129,7 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
                         Align(
                           alignment: Alignment.centerLeft,
                           child: IconButton(
-                            icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+                            icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
                             onPressed: (){
                               Navigator.pop(context);
                             },
@@ -138,12 +138,12 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
 
                         Expanded(
                           child: TextFormField(
-                            style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                            style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                             decoration: InputDecoration(
                               enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                               focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                               border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                              hintStyle: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
+                              hintStyle: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
                               contentPadding: const EdgeInsets.all(15.0),
                               focusColor: const Color(0xffffffff),
                               fillColor: const Color(0xffffffff),
@@ -176,7 +176,7 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
                       ],
                     ),
 
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                   ],
                 ),
               ),
@@ -203,8 +203,8 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
                       backgroundColor: const Color(0xff888888),
                       foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                     ),
-                    title: Text(users[i].firstName + ' ' + users[i].lastName, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
-                    subtitle: Text(users[i].email, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff888888),),),
+                    title: Text(users[i].firstName + ' ' + users[i].lastName, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                    subtitle: Text(users[i].email, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff888888),),),
                     onTap: (){
                       Navigator.pop(context, RegularTaggedUsers(name: users[i].firstName + ' ' + users[i].lastName, userId: users[i].userId, accountType: users[i].accountType),);
                     },
@@ -224,9 +224,9 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
 
                     const SizedBox(height: 20),
 
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: Text('Search a user to tag on your post.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                    const Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: const Text('Search a user to tag on your post.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                     ),
 
                     SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),

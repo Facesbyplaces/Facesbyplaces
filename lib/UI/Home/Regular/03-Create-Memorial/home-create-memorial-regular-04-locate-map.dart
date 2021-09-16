@@ -28,7 +28,7 @@ class HomeRegularCreateMemorialLocateMapState extends State<HomeRegularCreateMem
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: Text('Maps', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
+        title: const Text('Maps', style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
         backgroundColor: const Color(0xff04ECFF),
         actions: [
           IconButton(
@@ -38,7 +38,7 @@ class HomeRegularCreateMemorialLocateMapState extends State<HomeRegularCreateMem
                 pinned = false;
               });
             },
-            icon: Icon(Icons.delete),
+            icon: const Icon(Icons.delete),
           ),
 
           IconButton(
@@ -47,8 +47,8 @@ class HomeRegularCreateMemorialLocateMapState extends State<HomeRegularCreateMem
                 await showDialog(
                   context: context,
                   builder: (_) => AssetGiffyDialog(
-                    description: Text('Pin the location of the cemetery first before proceeding by long pressing the location of the memorial on the map.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                    title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                    description: const Text('Pin the location of the cemetery first before proceeding by long pressing the location of the memorial on the map.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                     entryAnimation: EntryAnimation.DEFAULT,
                     buttonOkColor: const Color(0xffff0000),
