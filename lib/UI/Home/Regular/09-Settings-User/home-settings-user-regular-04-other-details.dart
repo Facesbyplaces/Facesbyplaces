@@ -83,9 +83,9 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                     appBar: AppBar(
                       backgroundColor: const Color(0xff04ECFF),
                       centerTitle: false,
-                      title: Text('Other Details', textAlign: TextAlign.left, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff)),),
+                      title: const Text('Other Details', textAlign: TextAlign.left, style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff)),),
                       leading: IconButton(
-                        icon: Icon(Icons.arrow_back,size: 35,),
+                        icon: const Icon(Icons.arrow_back,size: 35,),
                         onPressed: (){
                           Navigator.pop(context);
                         },
@@ -132,7 +132,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                       Expanded(
                                         child: MiscRegularInputFieldTemplate(
                                           key: _key2,
-                                          labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
                                           displayText: details.data!.showOtherDetailsBirthplace,
                                           labelText: 'Birthplace',
                                         ),
@@ -159,7 +159,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                       Expanded(
                                         child: MiscRegularInputFieldTemplate(
                                           key: _key3,
-                                          labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
                                           displayText: details.data!.showOtherDetailsAddress,
                                           labelText: 'Home Address',
                                         ),
@@ -186,7 +186,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                       Expanded(
                                         child: MiscRegularInputFieldTemplate(
                                           key: _key4,
-                                          labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
                                           displayText: details.data!.showOtherDetailsEmail,
                                           type: TextInputType.emailAddress,
                                           labelText: 'Email',
@@ -214,7 +214,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                       Expanded(
                                         child: MiscRegularPhoneNumberTemplate(
                                           key: _key5,
-                                          labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',color: const Color(0xffBDC3C7),),
+                                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',color: const Color(0xffBDC3C7),),
                                           displayText: details.data!.showOtherDetailsPhoneNumber,
                                           labelText: 'Contact Number',
                                           type: TextInputType.phone,
@@ -238,7 +238,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                   const SizedBox(height: 80,),
 
                                   MiscRegularButtonTemplate(
-                                    buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                                    buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
                                     buttonColor: const Color(0xff04ECFF),
                                     width: SizeConfig.screenWidth! / 2,
                                     buttonText: 'Update',
@@ -256,8 +256,8 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                             await showDialog(
                                               context: context,
                                               builder: (_) => AssetGiffyDialog(
-                                                description: Text('Successfully updated the other details.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                                title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                description: const Text('Successfully updated the other details.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                 entryAnimation: EntryAnimation.DEFAULT,
                                                 onlyOkButton: true,
@@ -272,8 +272,8 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                             await showDialog(
                                               context: context,
                                               builder: (_) => AssetGiffyDialog(
-                                                description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                 entryAnimation: EntryAnimation.DEFAULT,
                                                 buttonOkColor: const Color(0xffff0000),

@@ -77,11 +77,11 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                       valueListenable: toggle7,
                       builder: (_, bool toggle7Listener, __) => Scaffold(
                         appBar: AppBar(
-                          title: Text('Notification Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
+                          title: const Text('Notification Settings', style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
                           backgroundColor: const Color(0xff04ECFF),
                           centerTitle: true,
                           leading: IconButton(
-                            icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
+                            icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
                             onPressed: (){
                               Navigator.pop(context);
                             },
@@ -100,7 +100,7 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                       children: [
                                         Row(
                                           children: [
-                                            Expanded(child: Text('New Memorial Page', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
+                                            Expanded(child: const Text('New Memorial Page', style: const TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
 
                                             Switch(
                                               value: toggle1Listener,
@@ -117,8 +117,8 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                                   await showDialog(
                                                     context: context,
                                                     builder: (_) => AssetGiffyDialog(
-                                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                       entryAnimation: EntryAnimation.DEFAULT,
                                                       buttonOkColor: const Color(0xffff0000),
@@ -136,7 +136,7 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
 
                                         Row(
                                           children: [
-                                            Expanded(child: Text('New Activities', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
+                                            Expanded(child: const Text('New Activities', style: const TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
 
                                             Switch(
                                               value: toggle2Listener,
@@ -153,8 +153,8 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                                   await showDialog(
                                                     context: context,
                                                     builder: (_) => AssetGiffyDialog(
-                                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                       entryAnimation: EntryAnimation.DEFAULT,
                                                       buttonOkColor: const Color(0xffff0000),
@@ -172,7 +172,7 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
 
                                         Row(
                                           children: [
-                                            Expanded(child: Text('Post Likes', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
+                                            Expanded(child: const Text('Post Likes', style: const TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
 
                                             Switch(
                                               value: toggle3Listener,
@@ -189,8 +189,8 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                                   await showDialog(
                                                     context: context,
                                                     builder: (_) => AssetGiffyDialog(
-                                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                       entryAnimation: EntryAnimation.DEFAULT,
                                                       buttonOkColor: const Color(0xffff0000),
@@ -208,7 +208,7 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
 
                                         Row(
                                           children: [
-                                            Expanded(child: Text('Post Comments', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
+                                            Expanded(child: const Text('Post Comments', style: const TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
 
                                             Switch(
                                               value: toggle4Listener,
@@ -225,8 +225,8 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                                   await showDialog(
                                                     context: context,
                                                     builder: (_) => AssetGiffyDialog(
-                                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                       entryAnimation: EntryAnimation.DEFAULT,
                                                       buttonOkColor: const Color(0xffff0000),
@@ -253,13 +253,13 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text('Page Invites', style: TextStyle(fontSize: 26, fontFamily: 'HelveticaBold', color: const Color(0xff000000),),),
+                                        const Text('Page Invites', style: const TextStyle(fontSize: 26, fontFamily: 'HelveticaBold', color: const Color(0xff000000),),),
 
                                         const SizedBox(height: 10,),
 
                                         Row(
                                           children: [
-                                            Expanded(child: Text('Add as Family', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
+                                            Expanded(child: const Text('Add as Family', style: const TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
 
                                             Switch(
                                               value: toggle5Listener,
@@ -276,8 +276,8 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                                   await showDialog(
                                                     context: context,
                                                     builder: (_) => AssetGiffyDialog(
-                                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                       entryAnimation: EntryAnimation.DEFAULT,
                                                       buttonOkColor: const Color(0xffff0000),
@@ -295,7 +295,7 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                         
                                         Row(
                                           children: [
-                                            Expanded(child: Text('Add as Friend', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),)),
+                                            Expanded(child: const Text('Add as Friend', style: const TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),)),
 
                                             Switch(
                                               value: toggle6Listener,
@@ -312,8 +312,8 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                                   await showDialog(
                                                     context: context,
                                                     builder: (_) => AssetGiffyDialog(
-                                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                       entryAnimation: EntryAnimation.DEFAULT,
                                                       buttonOkColor: const Color(0xffff0000),
@@ -330,7 +330,7 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                         ),
                                         Row(
                                           children: [
-                                            Expanded(child: Text('Add as Page Admin', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),)),
+                                            Expanded(child: const Text('Add as Page Admin', style: const TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),)),
 
                                             Switch(
                                               value: toggle7Listener,
@@ -347,8 +347,8 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                                   await showDialog(
                                                     context: context,
                                                     builder: (_) => AssetGiffyDialog(
-                                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                       entryAnimation: EntryAnimation.DEFAULT,
                                                       buttonOkColor: const Color(0xffff0000),

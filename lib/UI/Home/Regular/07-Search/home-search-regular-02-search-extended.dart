@@ -434,7 +434,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                             Align(
                               alignment: Alignment.centerLeft,
                               child: IconButton(
-                                icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+                                icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
                                 onPressed: (){
                                   Navigator.pop(context);
                                 },
@@ -445,12 +445,12 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               child: TextFormField(
                                 keyboardType: TextInputType.text,
                                 controller: controller,
-                                style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
                                 decoration: InputDecoration(
                                   enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                                   focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                                   border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                  hintStyle: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                  hintStyle: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
                                   contentPadding: const EdgeInsets.all(15.0),
                                   focusColor: const Color(0xffffffff),
                                   fillColor: const Color(0xffffffff),
@@ -559,7 +559,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                           ],
                         ),
 
-                        SizedBox(height: 5,),
+                        const SizedBox(height: 5,),
                       ],
                     ),
                   ),
@@ -567,7 +567,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 body: Container(
                   height: SizeConfig.screenHeight,
                   width: SizeConfig.screenWidth,
-                  decoration: BoxDecoration(color: Colors.white, image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),),
+                  decoration: const BoxDecoration(color: const Color(0xffffffff), image: const DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/background2.png'), colorFilter: const ColorFilter.srgbToLinearGamma(),),),
                   child: Column(
                     children: [
                       IgnorePointer(
@@ -656,7 +656,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                                     ((){
                                       if(widget.currentLocation != ''){
-                                        return Text(widget.currentLocation, style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular'),);
+                                        return Text(widget.currentLocation, style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular'),);
                                       }else{
                                         return const Text('', style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
                                       }
@@ -679,7 +679,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                                     ((){
                                       if(widget.currentLocation != ''){
-                                        return Text(widget.currentLocation, style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular'),);
+                                        return Text(widget.currentLocation, style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular'),);
                                       }else{
                                         return const Text('', style: const TextStyle(color: const Color(0xff000000),fontSize: 12,),);
                                       }
@@ -758,7 +758,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 latitude: feeds[i].latitude,
                 longitude: feeds[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                  Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
                   
                   feeds[i].imagesOrVideos.isNotEmpty
                   ? Column(
@@ -859,7 +859,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                                             Center(
                                               child: CircleAvatar(
-                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                 radius: 25,
                                               ),
@@ -881,7 +881,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                                             Center(
                                               child: CircleAvatar(
-                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                 radius: 25,
                                               ),
@@ -944,7 +944,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 latitude: feeds[i].latitude,
                 longitude: feeds[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                  Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
                   
                   feeds[i].imagesOrVideos.isNotEmpty
                   ? Column(
@@ -1046,7 +1046,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                             
                                             Center(
                                               child: CircleAvatar(
-                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5), 
                                                 radius: 25,
                                               ),
@@ -1068,7 +1068,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                             
                                             Center(
                                               child: CircleAvatar(
-                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                 radius: 25,
                                               ),
@@ -1141,7 +1141,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 latitude: feeds[i].latitude,
                 longitude: feeds[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                  Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
                   
                   searchFeeds[i].imagesOrVideos.isNotEmpty
                   ? Column(
@@ -1242,7 +1242,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                                               Center(
                                                 child: CircleAvatar(
-                                                  child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                  child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                   radius: 25,
                                                 ),
@@ -1266,7 +1266,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                                 child: CircleAvatar(
                                                   radius: 25,
                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                  child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                  child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                 ),
                                               ),
                                             ],
@@ -1327,7 +1327,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 latitude: feeds[i].latitude,
                 longitude: feeds[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                  Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
                   
                   searchFeeds[i].imagesOrVideos.isNotEmpty
                   ? Column(
@@ -1428,7 +1428,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                                             Center(
                                               child: CircleAvatar(
-                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                 radius: 25,
                                               ),
@@ -1450,7 +1450,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                                             Center(
                                               child: CircleAvatar(
-                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                 radius: 25,
                                               ),

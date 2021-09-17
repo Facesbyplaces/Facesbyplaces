@@ -73,11 +73,11 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
   }
 
   void addManagers1(){
-    managers.add(Padding(padding: const EdgeInsets.only(left: 20.0,), child: Text('Admin', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff9F9F9F),),),),);
+    managers.add(const Padding(padding: const EdgeInsets.only(left: 20.0,), child: const Text('Admin', style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff9F9F9F),),),),);
   }
 
   void addManagers2(){
-    managers.add(Padding(padding: const EdgeInsets.only(left: 20.0,), child: Text('Family', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff9F9F9F),),),),);
+    managers.add(const Padding(padding: const EdgeInsets.only(left: 20.0,), child: const Text('Family', style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff9F9F9F),),),),);
   }
 
   void onLoading1() async{
@@ -88,8 +88,8 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+            description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
@@ -136,7 +136,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
               ),
             ),
             trailing: MaterialButton(
-              child: Text('Remove', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xffffffff),),),
+              child: const Text('Remove', style: const TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xffffffff),),),
               shape: const StadiumBorder(side: const BorderSide(color: const Color(0xffE74C3C)),),
               minWidth: SizeConfig.screenWidth! / 3.5,
               splashColor: const Color(0xff04ECFF),
@@ -148,8 +148,8 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                 bool confirmation = await showDialog(
                   context: context,
                   builder: (_) => AssetGiffyDialog(
-                    description: Text('Are you sure you want to remove this user?', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                    title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                    description: const Text('Are you sure you want to remove this user?', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                     entryAnimation: EntryAnimation.DEFAULT,
                     onlyOkButton: false,
@@ -171,8 +171,8 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                        description: Text('Error: $result.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         entryAnimation: EntryAnimation.DEFAULT,
                         buttonOkColor: const Color(0xffff0000),
@@ -186,8 +186,8 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        description: Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                        title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                        description: const Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         entryAnimation: EntryAnimation.DEFAULT,
                         onlyOkButton: true,
@@ -247,22 +247,10 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
               backgroundColor: const Color(0xff888888),
               foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
             ),
-            title: Text('${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}',
-              style: TextStyle(
-                fontSize: 20,
-                fontFamily: 'NexaBold',
-                color: const Color(0xff000000),
-              ),
-            ),
-            subtitle: Text('${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail}',
-              style: TextStyle(
-                fontSize: 16,
-                fontFamily: 'NexaRegular',
-                color: const Color(0xffBDC3C7),
-              ),
-            ),
+            title: Text('${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+            subtitle: Text('${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail}', style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
             trailing: MaterialButton(
-              child: Text('Make Manager', style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular',),),
+              child: const Text('Make Manager', style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular',),),
               shape: const StadiumBorder(side: const BorderSide(color: const Color(0xff04ECFF)),),
               minWidth: SizeConfig.screenWidth! / 3.5,
               splashColor: const Color(0xff04ECFF),
@@ -274,8 +262,8 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                 bool confirmation = await showDialog(
                   context: context,
                   builder: (_) => AssetGiffyDialog(
-                    description: Text('Are you sure you want to make this user a manager?', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                    title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                    description: Text('Are you sure you want to make this user a manager?', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                     entryAnimation: EntryAnimation.DEFAULT,
                     onlyOkButton: false,
@@ -297,8 +285,8 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                        description: Text('Error: $result.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         entryAnimation: EntryAnimation.DEFAULT,
                         buttonOkColor: const Color(0xffff0000),
@@ -312,8 +300,8 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        description: Text('Successfully added as an admin.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                        title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                        description: const Text('Successfully added as an admin.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         entryAnimation: EntryAnimation.DEFAULT,
                         onlyOkButton: true,
@@ -353,9 +341,9 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
         appBar: AppBar(
           backgroundColor: const Color(0xff04ECFF),
           centerTitle: false,
-          title: Text('Page Managers', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+          title: const Text('Page Managers', style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back,size: 35,),
+            icon: const Icon(Icons.arrow_back,size: 35,),
             onPressed: (){
               Navigator.pop(context);
             },
@@ -387,7 +375,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
 
                 const SizedBox(height: 45,),
 
-                Text('Managers list is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+                const Text('Managers list is empty', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
 
                 SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
               ],

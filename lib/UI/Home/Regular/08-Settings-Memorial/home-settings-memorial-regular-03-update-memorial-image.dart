@@ -82,9 +82,9 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
             appBar: AppBar(
               backgroundColor: const Color(0xff04ECFF),
               centerTitle: false,
-              title: Text('Page Image', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+              title: const Text('Page Image', style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
               leading: IconButton(
-                icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+                icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
                 onPressed: () async{
                   if(profileImage.value.path != '' || (backgroundImage.value.path != '' && backgroundImageToggle.value != 0)){
                     bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to discard the changes?', confirmColor_1: const Color(0xff04ECFF), confirmColor_2: const Color(0xffFF0000),),);
@@ -113,7 +113,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                           children: [
                             const SizedBox(height: 20,),
 
-                            Text('Upload or Select an Image', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                            const Text('Upload or Select an Image', style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                             
                             SizedBox(height: 20,),
 
@@ -174,11 +174,11 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
 
                             const SizedBox(height: 20,),
 
-                            Text('Upload the best photo of the person in the memorial page.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+                            const Text('Upload the best photo of the person in the memorial page.', style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
 
                             const SizedBox(height: 40,),
 
-                            Text('Choose Background',style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                            const Text('Choose Background', style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
 
                             const SizedBox(height: 20,),
 
@@ -255,12 +255,12 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
 
                             const SizedBox(height: 20,),
 
-                            Text('Upload your own or select from the pre-mades.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+                            const Text('Upload your own or select from the pre-mades.', style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
 
                             const SizedBox(height: 80,),
 
                             MiscRegularButtonTemplate(
-                              buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF)),
+                              buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF)),
                               buttonColor: const Color(0xff000000),
                               buttonText: 'Speak Out',
                               width: 150,
@@ -275,8 +275,8 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        description: Text('Successfully updated the memorial image.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                        title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                        description: const Text('Successfully updated the memorial image.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         onlyOkButton: true,
@@ -291,8 +291,8 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                        description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         buttonOkColor: const Color(0xffff0000),

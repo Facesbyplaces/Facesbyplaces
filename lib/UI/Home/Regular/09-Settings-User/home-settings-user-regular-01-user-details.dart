@@ -78,8 +78,8 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                       Expanded(child: Container(),),
 
                       ListTile(
-                        title: Text('Update Details', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-                        subtitle: Text('Update your account details', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                        title: const Text('Update Details', style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                        subtitle: const Text('Update your account details', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                         onTap: (){
                           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserUpdateDetails(userId: widget.userId,)));
                         },
@@ -88,8 +88,8 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                       const Divider(height: 20, color: const Color(0xff888888),),
 
                       ListTile(
-                        title: Text('Password', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-                        subtitle: Text('Change your login password', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                        title: const Text('Password', style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                        subtitle: const Text('Change your login password', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                         onTap: () async{
                           final sharedPrefs = await SharedPreferences.getInstance();
                           bool socialAppSession = sharedPrefs.getBool('regular-social-app-session') ?? false;
@@ -99,8 +99,8 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                             showDialog(
                               context: context,
                               builder: (_) => AssetGiffyDialog(
-                                description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                 entryAnimation: EntryAnimation.DEFAULT,
                                 buttonOkColor: const Color(0xffff0000),
@@ -125,8 +125,8 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                       const Divider(height: 20, color: const Color(0xff888888),),
 
                       ListTile(
-                        title: Text('Other info', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-                        subtitle: Text('Optional informations you can share', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                        title: const Text('Other info', style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                        subtitle: const Text('Optional informations you can share', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                         onTap: () async{
                           context.loaderOverlay.show();
                           APIRegularShowOtherDetailsStatus result = await apiRegularShowOtherDetailsStatus(userId: widget.userId);
@@ -139,8 +139,8 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                       const Divider(height: 20, color: const Color(0xff888888),),
 
                       ListTile(
-                        title: Text('Privacy Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-                        subtitle: Text('Control what others see', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                        title: const Text('Privacy Settings', style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                        subtitle: const Text('Control what others see', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                         onTap: () => {},
                       ),
 
@@ -149,7 +149,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                       const SizedBox(height: 20,),
 
                       MiscRegularButtonTemplate(
-                        buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                        buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
                         buttonColor: const Color(0xff04ECFF),
                         width: SizeConfig.screenWidth! / 2,
                         buttonText: 'Logout',
@@ -169,8 +169,8 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                  title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                  description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                   entryAnimation: EntryAnimation.DEFAULT,
                                   buttonOkColor: const Color(0xffff0000),
@@ -187,7 +187,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
 
                       const SizedBox(height: 20,),
 
-                      Text('V.1.1.0', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff888888),),),
+                      const Text('V.1.1.0', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff888888),),),
 
                       Expanded(child: Container(),),
                     ],
@@ -213,7 +213,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                               ? Container(
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  border: Border.all(color: Colors.white, width: 3,),
+                                  border: Border.all(color: const Color(0xffffffff), width: 3,),
                                 ),
                                 child: CircleAvatar(
                                   radius: 100,
@@ -239,8 +239,8 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                   await showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
-                                      description: Text('Successfully updated the profile picture.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                      title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                      description: const Text('Successfully updated the profile picture.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                       entryAnimation: EntryAnimation.DEFAULT,
                                       onlyOkButton: true,
@@ -253,8 +253,8 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                   await showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
-                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                       entryAnimation: EntryAnimation.DEFAULT,
                                       buttonOkColor: const Color(0xffff0000),
@@ -275,7 +275,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                       child: Padding(
                         padding: const EdgeInsets.only(left: 20),
                         child: IconButton(
-                          icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35),
+                          icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35),
                           onPressed: (){
                             Navigator.of(context).popAndPushNamed('/home/regular');
                           },
