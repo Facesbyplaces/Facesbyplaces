@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-04-show-family-settings.dart';
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-13-remove-friends-or-family.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';

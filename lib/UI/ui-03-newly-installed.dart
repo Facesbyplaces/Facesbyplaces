@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc-start-misc.dart';

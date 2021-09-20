@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:facesbyplaces/UI/Home/Regular/06-Report/home-report-regular-01-report.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-03-bloc-regular-misc.dart';

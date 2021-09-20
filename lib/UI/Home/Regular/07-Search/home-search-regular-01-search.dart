@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-search-regular-02-search-extended.dart';
 import 'package:loader_overlay/loader_overlay.dart';

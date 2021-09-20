@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-05-maps.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-06-directions.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';

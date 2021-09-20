@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-03-verify-email.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-10-verification-code-resend.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
@@ -35,10 +36,10 @@ class RegularVerifyEmail extends StatelessWidget{
                   child: Container(
                     height: SizeConfig.screenHeight,
                     decoration: const BoxDecoration(
-                      image: const DecorationImage(
-                        colorFilter: const ColorFilter.srgbToLinearGamma(),
+                      image: DecorationImage(
+                        colorFilter: ColorFilter.srgbToLinearGamma(),
                         fit: BoxFit.cover,
-                        image: const AssetImage('assets/icons/background2.png'),
+                        image: AssetImage('assets/icons/background2.png'),
                       ),
                     ),
                   ),

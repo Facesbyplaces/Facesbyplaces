@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:firebase_core/firebase_core.dart';

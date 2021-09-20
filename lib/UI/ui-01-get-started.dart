@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart';
 import 'Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';

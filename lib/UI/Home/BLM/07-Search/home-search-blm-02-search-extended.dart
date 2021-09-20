@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-01-search-posts.dart';
 import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-04-search-blm.dart';
 import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-03-search-nearby.dart';

@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-05-search-users.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-create-post-regular-01-create-post.dart';

@@ -28,6 +28,8 @@ import 'UI/ui-02-login.dart';
 import 'UI/ui-03-newly-installed.dart';
 import 'dart:async';
 
+import 'UI/ui-06-newest-test.dart';
+
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   print("Handling a background message: $message");
@@ -112,13 +114,14 @@ void main() async{
             background: Container(color: const Color(0xFFF5F5F5))
           ),
           theme: ThemeData(
-            primaryColor: Color(0xFF000000),
-            accentColor: const Color(0xff4EC9D4),
+            primaryColor: const Color(0xFF000000),
+            // accentColor: const Color(0xff4EC9D4),
+            // colorScheme: ColorScheme(secondary: const Color(0xff4EC9D4),),
             cardColor: const Color(0xffffffff),
           ),
           routes: <String, WidgetBuilder>{ // NAMED ROUTES USED FOR NAVIGATING
-            '/start': (BuildContext context) => UIGetStarted(),
-            '/login': (BuildContext context) => UILogin01(), // START
+            '/start': (BuildContext context) => const UIGetStarted(),
+            '/login': (BuildContext context) => const UILogin01(), // START
 
             '/blm/join': (BuildContext context) => BLMJoin(),
             '/blm/login': (BuildContext context) => BLMLogin(),
@@ -145,3 +148,140 @@ void main() async{
     ),
   );
 }
+
+
+
+
+
+
+
+
+// // import 'UI/Home/Regular/01-Main/home-main-regular-01-home.dart';
+// // import 'UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-01-create-memorial.dart';
+// // import 'UI/Home/Regular/04-Create-Post/home-create-post-regular-02-01-create-post-location.dart';
+// // import 'UI/Home/Regular/07-Search/home-search-regular-01-search.dart';
+// // import 'UI/Home/BLM/01-Main/home-main-blm-01-home.dart';
+// // import 'UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-01-create-memorial.dart';
+// // import 'UI/Home/BLM/04-Create-Post/home-create-post-blm-02-01-create-post-location.dart';
+// // import 'UI/Home/BLM/07-Search/home-search-blm-01-search.dart';
+// // import 'package:responsive_framework/responsive_framework.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
+// // import 'package:firebase_messaging/firebase_messaging.dart';
+// // import 'package:flutter_spinkit/flutter_spinkit.dart';
+// // import 'package:flutter_stripe/flutter_stripe.dart';
+// // import 'package:loader_overlay/loader_overlay.dart';
+// // import 'package:firebase_core/firebase_core.dart';
+// import 'package:flutter/rendering.dart';
+// import 'package:flutter/material.dart';
+// // import 'UI/Regular/regular-01-join.dart';
+// // import 'UI/Regular/regular-02-login.dart';
+// // import 'UI/Regular/regular-03-register.dart';
+// // import 'UI/Regular/regular-05-upload-photo.dart';
+// // import 'UI/BLM/blm-01-join.dart';
+// // import 'UI/BLM/blm-02-login.dart';
+// // import 'UI/BLM/blm-03-register.dart';
+// // import 'UI/BLM/blm-05-upload-photo.dart';
+// import 'UI/ui-01-get-started.dart';
+// import 'UI/ui-02-login.dart';
+// // import 'UI/ui-03-newly-installed.dart';
+// import 'dart:async';
+
+// // Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+// //   await Firebase.initializeApp();
+// //   print("Handling a background message: $message");
+// //   print("Handling a background message: ${message.data}");
+// //   print("Handling a background message: ${message.messageId}");
+// //   print("Handling a background message: ${message.messageId}");
+// //   print("Handling a background message title: ${message.notification!.title}");
+// //   print("Handling a background message bodyy: ${message.notification!.body}");
+// // }
+
+// void main() async{
+
+//   // debugProfileBuildsEnabled = true;
+//   // debugRepaintRainbowEnabled = true;
+//   // debugRepaintTextRainbowEnabled = true;
+
+//   WidgetsFlutterBinding.ensureInitialized();
+//   // Stripe.publishableKey =  'pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik';
+//   // Stripe.merchantIdentifier = 'merchant.com.facesbyplaces.facesbyplaces';
+//   // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+//   // await Firebase.initializeApp();
+
+//   // NotificationSettings settings = await FirebaseMessaging.instance.requestPermission(
+//   //   alert: true,
+//   //   announcement: false,
+//   //   badge: true,
+//   //   carPlay: false,
+//   //   criticalAlert: false,
+//   //   provisional: false,
+//   //   sound: true,
+//   // );
+
+//   // await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+//   //   alert: true,
+//   //   badge: true,
+//   //   sound: true,
+//   // );
+
+//   // print('User granted permission for push notification: ${settings.authorizationStatus}');
+
+//   final sharedPrefs = await SharedPreferences.getInstance();
+//   final newlyInstalled = sharedPrefs.getBool('newly-installed') ?? true;
+//   final blmSession = sharedPrefs.getBool('blm-user-session') ?? false;
+//   final regularSession = sharedPrefs.getBool('regular-user-session') ?? false;
+
+//   runApp(
+//     RepaintBoundary(
+//       child: MaterialApp(
+//           // checkerboardRasterCacheImages: true,
+//           // showPerformanceOverlay: true,
+//           title: 'Faces by Places',
+//           // home: ((){
+//           //   if(newlyInstalled){
+//           //     return UINewlyInstalled();
+//           //   }else{
+//           //     if(blmSession){
+//           //       return const HomeBLMScreen();
+//           //     }else if(regularSession){
+//           //       return const HomeRegularScreen();
+//           //     }else{
+//           //       return const UIGetStarted();
+//           //     }
+//           //   }
+//           // }()),
+//           home: UIGetStarted(),
+//           theme: ThemeData(
+//             primaryColor: Color(0xFF000000),
+//             // accentColor: const Color(0xff4EC9D4),
+//             // colorScheme: ColorScheme(secondary: const Color(0xff4EC9D4),),
+//             cardColor: const Color(0xffffffff),
+//           ),
+//           routes: <String, WidgetBuilder>{ // NAMED ROUTES USED FOR NAVIGATING
+//             '/start': (BuildContext context) => UIGetStarted(),
+//             '/login': (BuildContext context) => UILogin01(), // START
+
+//             // '/blm/join': (BuildContext context) => BLMJoin(),
+//             // '/blm/login': (BuildContext context) => BLMLogin(),
+//             // '/blm/register': (BuildContext context) => BLMRegister(),
+//             // '/blm/upload-photo': (BuildContext context) => BLMUploadPhoto(), // BLM START
+
+//             // '/regular/join': (BuildContext context) => RegularJoin(),
+//             // '/regular/login': (BuildContext context) => RegularLogin(),
+//             // '/regular/register': (BuildContext context) => RegularRegister(),
+//             // '/regular/upload-photo': (BuildContext context) => RegularUploadPhoto(), // ALM START
+
+//             // '/home/blm': (BuildContext context) => HomeBLMScreen(),
+//             // '/home/blm/create-post-location': (BuildContext context) => HomeBLMCreatePostSearchLocation(),
+//             // '/home/blm/create-memorial': (BuildContext context) => HomeBLMCreateMemorial1(),
+//             // '/home/blm/search': (BuildContext context) => HomeBLMSearch(), // BLM HOME SCREEN
+
+//             // '/home/regular': (BuildContext context) => HomeRegularScreen(),
+//             // '/home/regular/create-post-location': (BuildContext context) => HomeRegularCreatePostSearchLocation(),
+//             // '/home/regular/create-memorial': (BuildContext context) => HomeRegularCreateMemorial1(),
+//             // '/home/regular/search': (BuildContext context) => HomeRegularSearch(), // ALM HOME SCREEN
+//           },
+//         ),
+//     ),
+//   );
+// }

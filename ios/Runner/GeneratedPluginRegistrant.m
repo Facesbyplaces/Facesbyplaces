@@ -2,6 +2,8 @@
 //  Generated file. Do not edit.
 //
 
+// clang-format off
+
 #import "GeneratedPluginRegistrant.h"
 
 #if __has_include(<better_player/BetterPlayerPlugin.h>)
@@ -58,12 +60,6 @@
 @import flutter_login_facebook;
 #endif
 
-#if __has_include(<flutter_osm_plugin/FlutterOsmPlugin.h>)
-#import <flutter_osm_plugin/FlutterOsmPlugin.h>
-#else
-@import flutter_osm_plugin;
-#endif
-
 #if __has_include(<geocoding/GeocodingPlugin.h>)
 #import <geocoding/GeocodingPlugin.h>
 #else
@@ -92,12 +88,6 @@
 #import <image_picker/FLTImagePickerPlugin.h>
 #else
 @import image_picker;
-#endif
-
-#if __has_include(<images_picker/ImagesPickerPlugin.h>)
-#import <images_picker/ImagesPickerPlugin.h>
-#else
-@import images_picker;
 #endif
 
 #if __has_include(<libphonenumber/LibphonenumberPlugin.h>)
@@ -184,13 +174,11 @@
   [InAppWebViewFlutterPlugin registerWithRegistrar:[registry registrarForPlugin:@"InAppWebViewFlutterPlugin"]];
   [FlutterKeyboardVisibilityPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterKeyboardVisibilityPlugin"]];
   [FlutterLoginFacebookPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterLoginFacebookPlugin"]];
-  [FlutterOsmPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterOsmPlugin"]];
   [GeocodingPlugin registerWithRegistrar:[registry registrarForPlugin:@"GeocodingPlugin"]];
   [GeolocatorPlugin registerWithRegistrar:[registry registrarForPlugin:@"GeolocatorPlugin"]];
   [FLTGoogleMapsPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTGoogleMapsPlugin"]];
   [FLTGoogleSignInPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTGoogleSignInPlugin"]];
   [FLTImagePickerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTImagePickerPlugin"]];
-  [ImagesPickerPlugin registerWithRegistrar:[registry registrarForPlugin:@"ImagesPickerPlugin"]];
   [LibphonenumberPlugin registerWithRegistrar:[registry registrarForPlugin:@"LibphonenumberPlugin"]];
   [FLTLibphonenumberPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTLibphonenumberPlugin"]];
   [LocationPlugin registerWithRegistrar:[registry registrarForPlugin:@"LocationPlugin"]];

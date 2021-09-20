@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-04-home-notifications-tab.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-10-blm-notification-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';

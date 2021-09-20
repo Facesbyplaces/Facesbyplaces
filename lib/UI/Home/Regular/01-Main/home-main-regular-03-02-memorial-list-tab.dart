@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-00-home-memorials-tab.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-03-regular-manage-memorial.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
