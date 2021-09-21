@@ -58,13 +58,9 @@ Future<int> apiBLMCreateMemorial({required APIBLMCreateMemorial blmMemorial}) as
     ),  
   );
 
-  print('The status code of blm create memorial is ${response.statusCode}');
-  print('The status data of blm create memorial is ${response.data}');
-
   if(response.statusCode == 200){
     var value = response.data;
     int userId = value['blm']['memorial']['id'];
-    print('The userId is $userId');
     
     return userId;
   }else{

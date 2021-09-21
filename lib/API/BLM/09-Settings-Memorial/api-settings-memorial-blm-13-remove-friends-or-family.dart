@@ -25,8 +25,6 @@ Future<String> apiBLMDeleteMemorialFriendsOrFamily({required int memorialId, req
     ),  
   );
 
-  print('The status code of blm remove friends is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return 'Success';
   }else{

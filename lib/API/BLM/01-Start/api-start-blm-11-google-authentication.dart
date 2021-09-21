@@ -70,8 +70,6 @@ class BLMGoogleAuthentication{
         throw Exception('$error');
       });
 
-      print('The result is $result');
-
       final AuthCredential credential = GoogleAuthProvider.credential(accessToken: googleSignInAuthentication.accessToken, idToken: googleSignInAuthentication.idToken,);
 
       try{
@@ -82,7 +80,7 @@ class BLMGoogleAuthentication{
           await showDialog(
             context: context,
             builder: (_) => AssetGiffyDialog(
-              title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+              title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
               description: const Text('The account already exists with a different credential.', textAlign: TextAlign.center,),
               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
               entryAnimation: EntryAnimation.DEFAULT,
@@ -98,7 +96,7 @@ class BLMGoogleAuthentication{
           await showDialog(
             context: context,
             builder: (_) => AssetGiffyDialog(
-              title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+              title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
               description: const Text('Error occurred while accessing credentials. Try again.', textAlign: TextAlign.center,),
               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
               entryAnimation: EntryAnimation.DEFAULT,
@@ -114,7 +112,7 @@ class BLMGoogleAuthentication{
         await showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
             description: const Text('Error occurred while accessing credentials. Try again.', textAlign: TextAlign.center,),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
@@ -139,7 +137,7 @@ class BLMGoogleAuthentication{
       await showDialog(
         context: context,
         builder: (_) => AssetGiffyDialog(
-          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+          title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
           description: const Text('Error signing out. Try again.', textAlign: TextAlign.center,),
           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
           entryAnimation: EntryAnimation.DEFAULT,

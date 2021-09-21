@@ -24,8 +24,6 @@ Future<bool> apiBLMUpdateNotificationAddAdmin({required bool hide}) async{
     ),  
   );
 
-  print('The status code of blm update notification add admin is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

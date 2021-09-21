@@ -33,8 +33,6 @@ Future<String> apiBLMAddFriends({required int memorialId, required int userId, r
     ),  
   );
 
-  print('The status code of blm add friends is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return 'Success';
   }else if(response.statusCode == 409){

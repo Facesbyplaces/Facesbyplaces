@@ -24,8 +24,6 @@ Future<bool> apiRegularReadUnreadNotifications() async{
     ),
   );
 
-  print('The status code of regular read unread notifications is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

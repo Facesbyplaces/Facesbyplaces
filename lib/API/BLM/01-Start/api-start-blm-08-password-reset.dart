@@ -16,8 +16,6 @@ Future<bool> apiBLMPasswordReset({required String email, required String redirec
     ),
   );
 
-  print('The status code of blm password reset is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

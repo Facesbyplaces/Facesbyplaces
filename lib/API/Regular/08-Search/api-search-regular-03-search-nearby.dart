@@ -25,8 +25,6 @@ Future<APIRegularSearchNearbyMain> apiRegularSearchNearby({required int page, re
     ),  
   );
 
-  print('The status code of regular search nearby is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIRegularSearchNearbyMain.fromJson(newData);
@@ -75,12 +73,12 @@ class APIRegularSearchNearbyExtended{
       searchNearbyId: parsedJson['id'],
       searchNearbyName: parsedJson['name'],
       searchNearbyDetails: APIRegularSearchNearbyExtendedPageDetails.fromJson(parsedJson['details']),
-      searchNearbyProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
-      searchNearbyRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      searchNearbyProfileImage: parsedJson['profileImage'] ?? '',
+      searchNearbyRelationship: parsedJson['relationship'] ?? '',
       searchNearbyManage: parsedJson['manage'],
       searchNearbyFamOrFriends: parsedJson['famOrFriends'],
       searchNearbyFollower: parsedJson['follower'],
-      searchNearbyPageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
+      searchNearbyPageType: parsedJson['page_type'] ?? '',
     );
   }
 }
@@ -91,7 +89,7 @@ class APIRegularSearchNearbyExtendedPageDetails{
 
   factory APIRegularSearchNearbyExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchNearbyExtendedPageDetails(
-      searchNearbyPageDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
+      searchNearbyPageDetailsDescription: parsedJson['description'] ?? '',
     );
   }
 }

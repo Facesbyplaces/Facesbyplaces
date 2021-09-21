@@ -24,8 +24,6 @@ Future<bool> apiRegularChangePassword({required String currentPassword, required
     ),  
   );
 
-  print('The status code of regular change password is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

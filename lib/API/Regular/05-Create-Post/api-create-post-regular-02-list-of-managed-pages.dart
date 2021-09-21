@@ -25,8 +25,6 @@ Future<APIRegularShowListOfManagedPages> apiRegularShowListOfManagedPages() asyn
     ),  
   );
 
-  print('The status code of regular list of managed pages is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIRegularShowListOfManagedPages.fromJson(newData);
@@ -58,8 +56,8 @@ class APIRegularShowListOfManagedPagesExtended{
   factory APIRegularShowListOfManagedPagesExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowListOfManagedPagesExtended(
       showListOfManagedPagesId: parsedJson['id'],
-      showListOfManagedPagesName: parsedJson['name'] != null ? parsedJson['name'] : '',
-      showListOfManagedPagesProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
+      showListOfManagedPagesName: parsedJson['name'] ?? '',
+      showListOfManagedPagesProfileImage: parsedJson['profileImage'] ?? '',
     );
   }
 }

@@ -25,8 +25,6 @@ Future<APIBLMHomeTabFeedMain> apiBLMHomeFeedTab({required int page}) async{
     ),  
   );
 
-  print('The status code of blm home feed tab is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMHomeTabFeedMain.fromJson(newData);

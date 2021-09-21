@@ -24,8 +24,6 @@ Future<bool> apiRegularHideBirthplace({required bool hide}) async{
     ),  
   );
 
-  print('The status code of regular hide birthplace is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

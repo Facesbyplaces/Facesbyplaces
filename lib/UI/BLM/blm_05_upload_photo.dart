@@ -11,7 +11,9 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 
 class BLMUploadPhoto extends StatefulWidget{
+  const BLMUploadPhoto({Key? key}) : super(key: key);
 
+  @override
   BLMUploadPhotoState createState() => BLMUploadPhotoState();
 }
 
@@ -56,7 +58,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                       children: [
                         const SizedBox(height: 40,),
 
-                        const Center(child: const Text('Upload Photo', style: const TextStyle(fontSize: 42, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
+                        const Center(child: Text('Upload Photo', style: TextStyle(fontSize: 42, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),),
 
                         const SizedBox(height: 40,),
 
@@ -76,7 +78,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
 
                                         imageListener.path != ''
                                         ? Align(alignment: Alignment.center, child: Container(decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: FileImage(imageListener),),),),)
-                                        : Align(alignment: Alignment.center, child: const Icon(Icons.add, color: const Color(0xffE3E3E3), size: 250,),),
+                                        : const Align(alignment: Alignment.center, child: Icon(Icons.add, color: Color(0xffE3E3E3), size: 250,),),
                                       ],
                                     ),
                                   ),
@@ -84,7 +86,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                                 
                                 const Text('A valid photo of yourself would be a better choice because it would be worth a thousand words.',
                                   textAlign: TextAlign.center,
-                                  style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                  style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                 ),
                               ],
                             ),
@@ -110,7 +112,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
 
                         MiscBLMButtonTemplate(
                           buttonText: imageListener.path != '' ? 'Sign Up' : 'Speak Now',
-                          buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                          buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                           buttonColor: imageListener.path != '' ? const Color(0xff04ECFF) : const Color(0xff000000),
                           width: SizeConfig.screenWidth! / 2,
                           height: 50,
@@ -126,8 +128,8 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                                 await showDialog(
                                   context: context,
                                   builder: (_) => AssetGiffyDialog(
-                                    title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                    description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                    title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                    description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                     entryAnimation: EntryAnimation.DEFAULT,
                                     buttonOkColor: const Color(0xffff0000),
@@ -142,8 +144,8 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                  description: const Text('Please upload a photo.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                  title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                  description: const Text('Please upload a photo.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                   entryAnimation: EntryAnimation.DEFAULT,
                                   buttonOkColor: const Color(0xffff0000),

@@ -24,8 +24,6 @@ Future<APIRegularHomeTabMemorialMain> apiRegularHomeMemorialsTab({required int p
     ),
   );
 
-  print('The status code of regular home memorials tab is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIRegularHomeTabMemorialMain.fromJson(newData);
@@ -132,14 +130,14 @@ class APIRegularHomeTabMemorialExtendedPage{
   factory APIRegularHomeTabMemorialExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabMemorialExtendedPage(
       blmHomeTabMemorialPageId: parsedJson['id'],
-      blmHomeTabMemorialPageName: parsedJson['name'] != null ? parsedJson['name'] : '',
+      blmHomeTabMemorialPageName: parsedJson['name'] ?? '',
       blmHomeTabMemorialPageDetails: APIRegularHomeTabMemorialExtendedPageDetails.fromJson(parsedJson['details']),
-      blmHomeTabMemorialPageProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
-      blmHomeTabMemorialPageRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      blmHomeTabMemorialPageProfileImage: parsedJson['profileImage'] ?? '',
+      blmHomeTabMemorialPageRelationship: parsedJson['relationship'] ?? '',
       blmHomeTabMemorialPageManage: parsedJson['manage'],
       blmHomeTabMemorialPageFamOrFriends: parsedJson['famOrFriends'],
       blmHomeTabMemorialPageFollower: parsedJson['follower'],
-      blmHomeTabMemorialPagePageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
+      blmHomeTabMemorialPagePageType: parsedJson['page_type'] ?? '',
     );
   }
 }
@@ -150,7 +148,7 @@ class APIRegularHomeTabMemorialExtendedPageDetails{
 
   factory APIRegularHomeTabMemorialExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabMemorialExtendedPageDetails(
-      blmHomeTabMemorialPageDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
+      blmHomeTabMemorialPageDetailsDescription: parsedJson['description'] ?? '',
     );
   }
 }

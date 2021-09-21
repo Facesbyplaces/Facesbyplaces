@@ -43,8 +43,9 @@ class RegularMiscDraggablePost{
 class MiscRegularDraggablePost extends StatefulWidget{
   final int userId;
   final int accountType;
-  const MiscRegularDraggablePost({required this.userId, required this.accountType});
+  const MiscRegularDraggablePost({Key? key, required this.userId, required this.accountType}) : super(key: key);
 
+  @override
   MiscRegularDraggablePostState createState() => MiscRegularDraggablePostState();
 }
 
@@ -55,6 +56,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
   int itemRemaining = 1;
   int page = 1;
 
+  @override
   void initState(){
     super.initState();
     onLoading();
@@ -65,9 +67,9 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: const Text('No more posts to show'),
-              duration: const Duration(seconds: 1),
-              backgroundColor: const Color(0xff4EC9D4),
+              content: Text('No more posts to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
             ),
           );
         }
@@ -130,8 +132,10 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
         );
       }
 
-      if(mounted)
-      page++;
+      if(mounted){
+        page++;
+      }
+      
       context.loaderOverlay.hide();
     }
   }
@@ -140,10 +144,9 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    print('User details screen post rebuild!');
     return ValueListenableBuilder(
       valueListenable: count,
-      builder: (_, int countListener, __) => Container(
+      builder: (_, int countListener, __) => SizedBox(
         width: SizeConfig.screenWidth,
         child: countListener != 0
         ? RefreshIndicator(
@@ -179,7 +182,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                 latitude: posts[i].latitude,
                 longitude: posts[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                  Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 
                   posts[i].imagesOrVideos.isNotEmpty
                   ? Column(
@@ -280,7 +283,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                                               ),
                                             ),
                                           ],
@@ -299,7 +302,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
 
                                             Center(
                                               child: CircleAvatar(
-                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                 radius: 25,
                                               ),
@@ -343,22 +346,20 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
         )
         : SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
-          child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
 
-                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-                const SizedBox(height: 45,),
+              const SizedBox(height: 45,),
 
-                const Text('Post is empty', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+              const Text('Post is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
 
-                SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
-              ],
-            ),
+              SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
+            ],
           ),
         ),
       ),
@@ -369,8 +370,9 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
 class MiscRegularDraggableMemorials extends StatefulWidget{
   final int userId;
   final int accountType;
-  const MiscRegularDraggableMemorials({required this.userId, required this.accountType});
+  const MiscRegularDraggableMemorials({Key? key, required this.userId, required this.accountType}) : super(key: key);
 
+  @override
   MiscRegularDraggableMemorialsState createState() => MiscRegularDraggableMemorialsState();
 }
 
@@ -384,6 +386,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
   int page1 = 1;
   int page2 = 1;
 
+  @override
   void initState(){
     super.initState();
     addMemorials1();
@@ -395,9 +398,9 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: const Text('No more memorials to show'),
-              duration: const Duration(seconds: 1),
-              backgroundColor: const Color(0xff4EC9D4),
+              content: Text('No more memorials to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
             ),
           );
         }
@@ -420,7 +423,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
         height: 80,
         padding: const EdgeInsets.only(left: 20.0, right: 20.0),
         color: const Color(0xffeeeeee),
-        child: const Align(alignment: Alignment.centerLeft, child: const Text('Owned', style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
+        child: const Align(alignment: Alignment.centerLeft, child: Text('Owned', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),),
       ),
     );
   }
@@ -431,7 +434,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
         height: 80,
         padding: const EdgeInsets.only(left: 20.0, right: 20.0),
         color: const Color(0xffeeeeee),
-        child: const Align(alignment: Alignment.centerLeft, child: const Text('Followed', style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
+        child: const Align(alignment: Alignment.centerLeft, child: Text('Followed', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),),
       ),
     );
   }
@@ -469,8 +472,10 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
         );
       }
 
-      if(mounted)
-      page1++;
+      if(mounted){
+        page1++;
+      }
+      
       context.loaderOverlay.hide();
 
       if(ownedItemsRemaining == 0){
@@ -506,8 +511,10 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
         );
       }
 
-      if(mounted)
-      page2++;
+      if(mounted){
+        page2++;
+      }
+      
       context.loaderOverlay.hide();
     }
   }
@@ -517,7 +524,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
     SizeConfig.init(context);
     return ValueListenableBuilder(
       valueListenable: count,
-      builder: (_, int countListener, __) => Container(
+      builder: (_, int countListener, __) => SizedBox(
         height: SizeConfig.screenHeight! / 1.5,
         width: SizeConfig.screenWidth,
         child: countListener != 0
@@ -534,22 +541,20 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
         )
         : SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
-          child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
 
-                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-                const SizedBox(height: 45,),
+              const SizedBox(height: 45,),
 
-                const Text('Memorial is empty', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+              const Text('Memorial is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
 
-                SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
-              ],
-            ),
+              SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
+            ],
           ),
         ),
       ),

@@ -24,8 +24,6 @@ Future<APIRegularShowPageDetailsMain> apiRegularShowPageDetails({required int me
     ),
   );
 
-  print('The status code of regular show page details is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIRegularShowPageDetailsMain.fromJson(newData);
@@ -53,9 +51,9 @@ class APIRegularShowPageDetailsExtended{
 
   factory APIRegularShowPageDetailsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowPageDetailsExtended(
-      showPageDetailsName: parsedJson['name'] != null ? parsedJson['name'] : '',
+      showPageDetailsName: parsedJson['name'] ?? '',
       showPageDetailsDetails: APIRegularShowPageDetailsExtendedDetails.fromJson(parsedJson['details']),
-      showPageDetailsRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      showPageDetailsRelationship: parsedJson['relationship'] ?? '',
     );
   }
 }
@@ -70,11 +68,11 @@ class APIRegularShowPageDetailsExtendedDetails{
 
   factory APIRegularShowPageDetailsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowPageDetailsExtendedDetails(
-      showPageDetailsDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
-      showPageDetailsDetailsCemetery: parsedJson['cemetery'] != null ? parsedJson['cemetery'] : '',
-      showPageDetailsDetailsDob: parsedJson['dob'] != null ? parsedJson['dob'] : '',
-      showPageDetailsDetailsRip: parsedJson['rip'] != null ? parsedJson['rip'] : '',
-      showPageDetailsDetailsCountry: parsedJson['country'] != null ? parsedJson['country'] : '',
+      showPageDetailsDetailsDescription: parsedJson['description'] ?? '',
+      showPageDetailsDetailsCemetery: parsedJson['cemetery'] ?? '',
+      showPageDetailsDetailsDob: parsedJson['dob'] ?? '',
+      showPageDetailsDetailsRip: parsedJson['rip'] ?? '',
+      showPageDetailsDetailsCountry: parsedJson['country'] ?? '',
     );
   }
 }

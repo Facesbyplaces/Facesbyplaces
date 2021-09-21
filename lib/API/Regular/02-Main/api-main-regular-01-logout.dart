@@ -27,8 +27,6 @@ Future<bool> apiRegularLogout() async{
     ),  
   );
 
-  print('The status code of regular logout is ${response.statusCode}');
-
   if(response.statusCode == 200){
     sharedPrefs.remove('blm-user-id');
     sharedPrefs.remove('blm-access-token');

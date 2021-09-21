@@ -42,8 +42,6 @@ Future<bool> apiBLMAddReply({required int commentId, required dynamic replyBody}
     ),  
   );
 
-  print('The status code of blm add reply is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

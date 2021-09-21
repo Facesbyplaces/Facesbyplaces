@@ -17,16 +17,11 @@ Future<String> apiRegularRegistration({required APIRegularAccountRegistration ac
     ),  
   );
 
-  print('The status code of regular registration is ${response.statusCode}');
-  print('The status data of regular registration is ${response.data}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     var user = newData['data'];
     int userId = user['id'];
     final sharedPrefs = await SharedPreferences.getInstance();
-
-    print('The value of data in regular registration is $user');
 
     sharedPrefs.setInt('regular-user-id', userId);
     sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll(']', '').replaceAll('[', ''));

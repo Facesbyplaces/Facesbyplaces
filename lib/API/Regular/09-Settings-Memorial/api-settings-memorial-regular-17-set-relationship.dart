@@ -24,8 +24,6 @@ Future<bool> apiRegularMemorialSetRelationship({required int memorialId, require
     ),
   );
 
-  print('The status code of regular set relationship is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

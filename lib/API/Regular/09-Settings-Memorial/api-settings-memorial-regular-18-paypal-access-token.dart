@@ -8,7 +8,7 @@ Future<String> apiRegularMemorialPaypalAccessToken({required String code}) async
 
   Map<String, String> data = {
     'grant_type': 'authorization_code',
-    'code': '$code',
+    'code': code,
   };
 
   var response = await dioRequest.post('https://api-m.sandbox.paypal.com/v1/oauth2/token',
@@ -22,8 +22,6 @@ Future<String> apiRegularMemorialPaypalAccessToken({required String code}) async
     ),
     data: data
   );
-
-  print('The status code of regular paypal access token is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

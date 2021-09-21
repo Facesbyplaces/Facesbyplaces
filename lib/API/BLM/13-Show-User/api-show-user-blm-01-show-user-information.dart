@@ -38,8 +38,6 @@ Future<APIBLMShowUserInformation> apiBLMShowUserInformation({required int userId
     ),  
   );
 
-  print('The status code of blm show user information is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMShowUserInformation.fromJson(newData);
@@ -74,14 +72,14 @@ class APIBLMShowUserInformation{
 
     return APIBLMShowUserInformation(
       showUserInformationId: parsedJson['id'],
-      showUserInformationFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      showUserInformationLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      showUserInformationFirstName: parsedJson['first_name'] ?? '',
+      showUserInformationLastName: parsedJson['last_name'] ?? '',
       showUserInformationBirthdate: newBirthdate,
-      showUserInformationBirthplace: parsedJson['birthplace'] != null ? parsedJson['birthplace'] : '',
-      showUserInformationHomeAddress: parsedJson['address'] != null ? parsedJson['address'] : '',
-      showUserInformationEmailAddress: parsedJson['email'] != null ? parsedJson['email'] : '',
-      showUserInformationContactNumber: parsedJson['phone_number'] != null ? parsedJson['phone_number'] : '',
-      showUserInformationImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      showUserInformationBirthplace: parsedJson['birthplace'] ?? '',
+      showUserInformationHomeAddress: parsedJson['address'] ?? '',
+      showUserInformationEmailAddress: parsedJson['email'] ?? '',
+      showUserInformationContactNumber: parsedJson['phone_number'] ?? '',
+      showUserInformationImage: parsedJson['image'] ?? '',
     );
   }
 }

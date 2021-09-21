@@ -25,8 +25,6 @@ Future<APIBLMHomeTabPostMain> apiBLMHomePostTab({required int page}) async{
     ),  
   );
 
-  print('The status code of blm home post tab is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMHomeTabPostMain.fromJson(newData);
@@ -80,13 +78,13 @@ class APIBLMHomeTabPostExtended{
     return APIBLMHomeTabPostExtended(
       homeTabPostId: parsedJson['id'],
       homeTabPostPage: APIBLMHomeTabPostExtendedPage.fromJson(parsedJson['page']),
-      homeTabPostBody: parsedJson['body'] != null ? parsedJson['body'] : '',
-      homeTabPostLocation: parsedJson['location'] != null ? parsedJson['location'] : '',
+      homeTabPostBody: parsedJson['body'] ?? '',
+      homeTabPostLocation: parsedJson['location'] ?? '',
       homeTabPostLatitude: parsedJson['latitude'],
       homeTabPostLongitude: parsedJson['longitude'],
-      homeTabPostImagesOrVideos: newList1 != null ? newList1 : [],
+      homeTabPostImagesOrVideos: newList1 ?? [],
       homeTabPostPostTagged: taggedList,
-      homeTabPostCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
+      homeTabPostCreatedAt: parsedJson['created_at'] ?? '',
       homeTabPostNumberOfLikes: parsedJson['numberOfLikes'],
       homeTabPostNumberOfComments: parsedJson['numberOfComments'],
       homeTabPostLikeStatus: parsedJson['likeStatus'],
@@ -109,14 +107,14 @@ class APIBLMHomeTabPostExtendedPage{
   factory APIBLMHomeTabPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeTabPostExtendedPage(
       homeTabPostPageId: parsedJson['id'],
-      homeTabPostPageName: parsedJson['name'] != null ? parsedJson['name'] : '',
-      homeTabPostPageProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
-      homeTabPostPageRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      homeTabPostPageName: parsedJson['name'] ?? '',
+      homeTabPostPageProfileImage: parsedJson['profileImage'] ?? '',
+      homeTabPostPageRelationship: parsedJson['relationship'] ?? '',
       homeTabPostPagePageCreator: APIBLMHomeTabPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
       homeTabPostPageManage: parsedJson['manage'],
       homeTabPostPageFamOrFriends: parsedJson['famOrFriends'],
       homeTabPostPageFollower: parsedJson['follower'],
-      homeTabPostPagePageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
+      homeTabPostPagePageType: parsedJson['page_type'] ?? '',
     );
   }
 }
@@ -142,9 +140,9 @@ class APIBLMHomeTabPostExtendedTagged{
   factory APIBLMHomeTabPostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeTabPostExtendedTagged(
       homeTabPostTabTaggedId: parsedJson['id'],
-      homeTabPostTabTaggedFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      homeTabPostTabTaggedLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      homeTabPostTabTaggedImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      homeTabPostTabTaggedFirstName: parsedJson['first_name'] ?? '',
+      homeTabPostTabTaggedLastName: parsedJson['last_name'] ?? '',
+      homeTabPostTabTaggedImage: parsedJson['image'] ?? '',
     );
   }
 }

@@ -17,8 +17,6 @@ Future<bool> apiRegularSignInWithApple({required String userIdentification, requ
     ),  
   );
 
-  print('The status code of regular login with apple is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     var user = newData['user'];

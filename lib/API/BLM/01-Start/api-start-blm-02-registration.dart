@@ -17,15 +17,10 @@ Future<String> apiBLMRegistration({required APIBLMAccountRegistration account}) 
     ),  
   );
 
-  print('The status code of blm registration is ${response.statusCode}');
-  print('The status data of blm registration is ${response.data}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     var user = newData['data'];
     int userId = user['id'];
-
-    print('The value of data in blm registration is $user');
 
     final sharedPrefs = await SharedPreferences.getInstance();
 

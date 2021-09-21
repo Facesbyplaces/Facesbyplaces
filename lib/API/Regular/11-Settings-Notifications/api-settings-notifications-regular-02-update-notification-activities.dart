@@ -24,8 +24,6 @@ Future<bool> apiRegularUpdateNotificationActivities({required bool hide}) async{
     ),  
   );
 
-  print('The status code of regular update notification activities is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

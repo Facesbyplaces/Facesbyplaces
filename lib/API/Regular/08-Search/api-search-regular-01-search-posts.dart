@@ -25,8 +25,6 @@ Future<APIRegularSearchPostMain> apiRegularSearchPosts({required String keywords
     ),  
   );
 
-  print('The status code of regular search posts is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIRegularSearchPostMain.fromJson(newData);
@@ -81,10 +79,10 @@ class APIRegularSearchPostExtended{
       searchPostId: parsedJson['id'],
       searchPostPage: APIRegularSearchPostExtendedPage.fromJson(parsedJson['page']),
       searchPostBody: parsedJson['body'],
-      searchPostLocation: parsedJson['location'] != null ? parsedJson['location'] : '',
+      searchPostLocation: parsedJson['location'] ?? '',
       searchPostLatitude: parsedJson['latitude'],
       searchPostLongitude: parsedJson['longitude'],
-      searchPostImagesOrVideos: newList1 != null ? newList1 : [],
+      searchPostImagesOrVideos: newList1 ?? [],
       searchPostPostTagged: taggedList,
       searchPostCreatedAt: parsedJson['created_at'],
       searchPostNumberOfLikes: parsedJson['numberOfLikes'],
@@ -109,14 +107,14 @@ class APIRegularSearchPostExtendedPage{
   factory APIRegularSearchPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchPostExtendedPage(
       searchPostPageId: parsedJson['id'],
-      searchPostPageName: parsedJson['name'] != null ? parsedJson['name'] : '',
-      searchPostPageProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
-      searchPostPageRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      searchPostPageName: parsedJson['name'] ?? '',
+      searchPostPageProfileImage: parsedJson['profileImage'] ?? '',
+      searchPostPageRelationship: parsedJson['relationship'] ?? '',
       searchPostPagePageCreator: APIRegularSearchPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
       searchPostPageManage: parsedJson['manage'],
       searchPostPageFamOrFriends: parsedJson['famOrFriends'],
       searchPostPageFollower: parsedJson['follower'],
-      searchPostPagePageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
+      searchPostPagePageType: parsedJson['page_type'] ?? '',
     );
   }
 }
@@ -142,9 +140,9 @@ class APIRegularSearchPostExtendedTagged{
   factory APIRegularSearchPostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchPostExtendedTagged(
       searchPostTaggedId: parsedJson['id'],
-      searchPostTaggedFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      searchPostTaggedLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      searchPostTaggedImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      searchPostTaggedFirstName: parsedJson['first_name'] ?? '',
+      searchPostTaggedLastName: parsedJson['last_name'] ?? '',
+      searchPostTaggedImage: parsedJson['image'] ?? '',
     );
   }
 }

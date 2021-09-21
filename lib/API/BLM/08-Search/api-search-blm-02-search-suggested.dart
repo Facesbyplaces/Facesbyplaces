@@ -25,8 +25,6 @@ Future<APIBLMSearchSuggestedMain> apiBLMSearchSuggested({required int page}) asy
     ),  
   );
 
-  print('The status code of blm search suggested is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMSearchSuggestedMain.fromJson(newData);
@@ -79,14 +77,14 @@ class APIBLMSearchSuggestedExtendedPage{
   factory APIBLMSearchSuggestedExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMSearchSuggestedExtendedPage(
       searchSuggestedPageId: parsedJson['id'],
-      searchSuggestedPageName: parsedJson['name'] != null ? parsedJson['name'] : '',
+      searchSuggestedPageName: parsedJson['name'] ?? '',
       searchSuggestedPageDetails: APIBLMSearchSuggestedPageDetails.fromJson(parsedJson['details']),
-      searchSuggestedPageProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
-      searchSuggestedPageRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      searchSuggestedPageProfileImage: parsedJson['profileImage'] ?? '',
+      searchSuggestedPageRelationship: parsedJson['relationship'] ?? '',
       searchSuggestedPageManage: parsedJson['manage'],
       searchSuggestedPageFamOrFriends: parsedJson['famOrFriends'],
       searchSuggestedPageFollower: parsedJson['follower'],
-      searchSuggestedPagePageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
+      searchSuggestedPagePageType: parsedJson['page_type'] ?? '',
     );
   }
 }
@@ -97,7 +95,7 @@ class APIBLMSearchSuggestedPageDetails{
 
   factory APIBLMSearchSuggestedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMSearchSuggestedPageDetails(
-      searchSuggestedPageDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
+      searchSuggestedPageDetailsDescription: parsedJson['description'] ?? '',
     );
   }
 }

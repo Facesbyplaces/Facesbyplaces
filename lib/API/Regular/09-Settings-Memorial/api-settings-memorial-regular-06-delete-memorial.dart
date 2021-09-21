@@ -24,8 +24,6 @@ Future<bool> apiRegularDeleteMemorial({required int memorialId}) async{
     ),
   );
 
-  print('The status code of regular delete memorial is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

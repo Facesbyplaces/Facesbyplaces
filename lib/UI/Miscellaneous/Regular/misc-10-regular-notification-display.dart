@@ -21,7 +21,7 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
   final String actor;
   final int actorId;
   final int actorAccountType;
-  const MiscRegularNotificationDisplayTemplate({this.imageIcon = '', required this.notification, required this.dateCreated, required this.postId, required this.notificationType, required this.readStatus, required this.actor, required this.actorId, required this.actorAccountType});
+  const MiscRegularNotificationDisplayTemplate({Key? key, this.imageIcon = '', required this.notification, required this.dateCreated, required this.postId, required this.notificationType, required this.readStatus, required this.actor, required this.actorId, required this.actorAccountType}) : super(key: key);
 
   @override
   Widget build(BuildContext context){
@@ -37,8 +37,8 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
           backgroundImage: const AssetImage('assets/icons/user-placeholder.png'),
         )
         : const CircleAvatar(
-          backgroundColor: const Color(0xff888888),
-          foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+          backgroundColor: Color(0xff888888),
+          foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
         ),
         onTap: (){
           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: actorId, accountType: actorAccountType)));
@@ -47,18 +47,18 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
       title: EasyRichText(notification,
         patternList: [
           EasyRichTextPattern(
-            targetString: '$actor',
+            targetString: actor,
             matchOption: 'first',
-            style: TextStyle(color: const Color(0xff000000), fontFamily: 'NexaBold',),
+            style: const TextStyle(color: Color(0xff000000), fontFamily: 'NexaBold',),
             recognizer: TapGestureRecognizer()
             ..onTap = (){
               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: actorId, accountType: actorAccountType)));
             }
           ),
         ],
-        defaultStyle: TextStyle(fontFamily: 'NexaRegular', fontSize: 18, color: const Color(0xff000000),),
+        defaultStyle: const TextStyle(fontFamily: 'NexaRegular', fontSize: 18, color: Color(0xff000000),),
       ),
-      subtitle: Text(dateCreated, style: TextStyle(fontSize: 16, fontFamily: 'RobotoLight', color: const Color(0xff000000),),),
+      subtitle: Text(dateCreated, style: const TextStyle(fontSize: 16, fontFamily: 'RobotoLight', color: Color(0xff000000),),),
       onTap: () async{
         if(notificationType == 'Memorial'){
           context.loaderOverlay.show();

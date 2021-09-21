@@ -25,8 +25,6 @@ Future<APIBLMShowPageDetailsMain> apiBLMShowPageDetails({required int memorialId
     ),  
   );
 
-  print('The status code of blm show page details is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMShowPageDetailsMain.fromJson(newData);
@@ -75,13 +73,13 @@ class APIBLMShowPageDetailsExtendedDetails{
 
   factory APIBLMShowPageDetailsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowPageDetailsExtendedDetails(
-      showPageDetailsDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
-      showPageDetailsDetailsLocation: parsedJson['location'] != null ? parsedJson['location'] : '',
-      showPageDetailsDetailsPrecinct: parsedJson['precinct'] != null ? parsedJson['precinct'] : '',
-      showPageDetailsDetailsDob: parsedJson['dob'] != null ? parsedJson['dob'] : '',
-      showPageDetailsDetailsRip: parsedJson['rip'] != null ? parsedJson['rip'] : '',
-      showPageDetailsDetailsState: parsedJson['state'] != null ? parsedJson['state'] : '',
-      showPageDetailsDetailsCountry: parsedJson['country'] != null ? parsedJson['country'] : '',
+      showPageDetailsDetailsDescription: parsedJson['description'] ?? '',
+      showPageDetailsDetailsLocation: parsedJson['location'] ?? '',
+      showPageDetailsDetailsPrecinct: parsedJson['precinct'] ?? '',
+      showPageDetailsDetailsDob: parsedJson['dob'] ?? '',
+      showPageDetailsDetailsRip: parsedJson['rip'] ?? '',
+      showPageDetailsDetailsState: parsedJson['state'] ?? '',
+      showPageDetailsDetailsCountry: parsedJson['country'] ?? '',
     );
   }
 }

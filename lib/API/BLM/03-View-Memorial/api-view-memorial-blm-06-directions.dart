@@ -16,7 +16,6 @@ class BLMDirections{
   });
 
   factory BLMDirections.fromMap(Map<String, dynamic> map){
-    print('The map is $map');
     if((map['routes'] as List).isNotEmpty){
       final data = Map<String, dynamic>.from(map['routes'][0]);
 

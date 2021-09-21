@@ -25,8 +25,6 @@ Future<String> apiRegularLeavePage({required int memorialId}) async{
     ),
   );
 
-  print('The status code of regular leave page is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return result;
   }else{

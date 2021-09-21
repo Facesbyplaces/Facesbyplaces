@@ -33,8 +33,6 @@ Future<String> apiBLMAddFamily({required int memorialId, required int userId, re
     ),  
   );
 
-  print('The status code of blm add family is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return 'Success';
   }else if(response.statusCode == 409){

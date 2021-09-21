@@ -35,12 +35,10 @@ Future<bool> apiRegularEditComment({required int commentId, required String comm
       }
     ),
     queryParameters: <String, dynamic>{
-      'comment_id': '$commentId',
-      'body': '$commentBody',
+      'comment_id': commentId,
+      'body': commentBody,
     }
   );
-
-  print('The status code of regular edit comment is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

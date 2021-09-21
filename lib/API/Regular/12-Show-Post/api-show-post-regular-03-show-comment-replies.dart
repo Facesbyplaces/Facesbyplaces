@@ -36,8 +36,6 @@ Future<APIRegularShowListOfReplies> apiRegularShowListOfReplies({required int po
     ),
   );
 
-  print('The status code of regular show comment replies is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIRegularShowListOfReplies.fromJson(newData);
@@ -75,8 +73,8 @@ class APIRegularShowListOfRepliesExtended{
       showListOfRepliesReplyId: parsedJson['id'],
       showListOfRepliesCommentId: parsedJson['comment_id'],
       showListOfRepliesUser: APIRegularShowListOfRepliesExtendedUser.fromJson(parsedJson['user']),
-      showListOfRepliesReplyBody: parsedJson['body'] != null ? parsedJson['body'] : '',
-      showListOfRepliesCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
+      showListOfRepliesReplyBody: parsedJson['body'] ?? '',
+      showListOfRepliesCreatedAt: parsedJson['created_at'] ?? '',
     );
   }
 }
@@ -92,9 +90,9 @@ class APIRegularShowListOfRepliesExtendedUser{
   factory APIRegularShowListOfRepliesExtendedUser.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowListOfRepliesExtendedUser(
       showListRepliesUserUserId: parsedJson['id'],
-      showListRepliesUserFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      showListRepliesUserLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      showListRepliesUserImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      showListRepliesUserFirstName: parsedJson['first_name'] ?? '',
+      showListRepliesUserLastName: parsedJson['last_name'] ?? '',
+      showListRepliesUserImage: parsedJson['image'] ?? '',
       showListOfCommentsUserAccountType: parsedJson['account_type'],
     );
   }

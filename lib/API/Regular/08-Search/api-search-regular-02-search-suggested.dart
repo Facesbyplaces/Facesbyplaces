@@ -25,8 +25,6 @@ Future<APIRegularSearchSuggestedMain> apiRegularSearchSuggested({required int pa
     ),  
   );
 
-  print('The status code of regular search suggested is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIRegularSearchSuggestedMain.fromJson(newData);
@@ -79,14 +77,14 @@ class APIRegularSearchSuggestedExtendedPage{
   factory APIRegularSearchSuggestedExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchSuggestedExtendedPage(
       searchSuggestedPageId: parsedJson['id'],
-      searchSuggestedPageName: parsedJson['name'] != null ? parsedJson['name'] : '',
+      searchSuggestedPageName: parsedJson['name'] ?? '',
       searchSuggestedPageDetails: APIRegularSearchSuggestedExtendedPageDetails.fromJson(parsedJson['details']),
-      searchSuggestedPageProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
-      searchSuggestedPageRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      searchSuggestedPageProfileImage: parsedJson['profileImage'] ?? '',
+      searchSuggestedPageRelationship: parsedJson['relationship'] ?? '',
       searchSuggestedPageManage: parsedJson['manage'],
       searchSuggestedPageFamOrFriends: parsedJson['famOrFriends'],
       searchSuggestedPageFollower: parsedJson['follower'],
-      searchSuggestedPagePageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
+      searchSuggestedPagePageType: parsedJson['page_type'] ?? '',
     );
   }
 }
@@ -97,7 +95,7 @@ class APIRegularSearchSuggestedExtendedPageDetails{
 
   factory APIRegularSearchSuggestedExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchSuggestedExtendedPageDetails(
-      searchSuggestedPageDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
+      searchSuggestedPageDetailsDescription: parsedJson['description'] ?? '',
     );
   }
 }

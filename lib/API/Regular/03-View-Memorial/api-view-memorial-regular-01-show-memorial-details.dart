@@ -23,8 +23,6 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial({required int memorial
 
   Dio dioRequest = Dio();
 
-  print('The memorial id is $memorialId');
-
   var response = await dioRequest.get('http://facesbyplaces.com/api/v1/pages/memorials/$memorialId',
     options: Options(
       followRedirects: false,
@@ -39,8 +37,6 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial({required int memorial
       }
     ),  
   );
-  
-  print('The status code of regular show memorial details is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
@@ -85,11 +81,11 @@ class APIRegularShowMemorialExtended{
 
     return APIRegularShowMemorialExtended(
       showMemorialId: parsedJson['id'],
-      showMemorialName: parsedJson['name'] != null ? parsedJson['name'] : '',
+      showMemorialName: parsedJson['name'] ?? '',
       showMemorialDetails: APIRegularShowMemorialExtendedDetails.fromJson(parsedJson['details']),
-      showMemorialBackgroundImage: parsedJson['backgroundImage'] != null ? parsedJson['backgroundImage'] : '',
-      showMemorialProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
-      showMemorialImagesOrVideos: newList1 != null ? newList1 : [],
+      showMemorialBackgroundImage: parsedJson['backgroundImage'] ?? '',
+      showMemorialProfileImage: parsedJson['profileImage'] ?? '',
+      showMemorialImagesOrVideos: newList1 ?? [],
       showMemorialFollower: parsedJson['follower'],
       showMemorialPostsCount: parsedJson['postsCount'],
       showMemorialFamilyCount: parsedJson['familyCount'],
@@ -119,15 +115,15 @@ class APIRegularShowMemorialExtendedDetails{
     DateTime rip = DateTime.parse(newRIP);
     
     return APIRegularShowMemorialExtendedDetails(
-      showMemorialDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
-      showMemorialDetailsBirthPlace: parsedJson['birthplace'] != null ? parsedJson['birthplace'] : '',
+      showMemorialDetailsDescription: parsedJson['description'] ?? '',
+      showMemorialDetailsBirthPlace: parsedJson['birthplace'] ?? '',
       showMemorialDetailsDob: dob.format(AmericanDateFormats.standardWithComma),
       showMemorialDetailsRip: rip.format(AmericanDateFormats.standardWithComma),
-      showMemorialDetailsCemetery: parsedJson['cemetery'] != null ? parsedJson['cemetery'] : '',
-      showMemorialDetailsCountry: parsedJson['country'] != null ? parsedJson['country'] : '',
-      showMemorialAcceptDonations: parsedJson['accept_donations'] != null ? parsedJson['accept_donations'] : false,
-      showMemorialLatitude: parsedJson['latitude'] != null ? parsedJson['latitude'] : 0.0,
-      showMemorialLongitude: parsedJson['longitude'] != null ? parsedJson['longitude'] : 0.0,
+      showMemorialDetailsCemetery: parsedJson['cemetery'] ?? '',
+      showMemorialDetailsCountry: parsedJson['country'] ?? '',
+      showMemorialAcceptDonations: parsedJson['accept_donations'] ?? false,
+      showMemorialLatitude: parsedJson['latitude'] ?? 0.0,
+      showMemorialLongitude: parsedJson['longitude'] ?? 0.0,
     );
   }
 }

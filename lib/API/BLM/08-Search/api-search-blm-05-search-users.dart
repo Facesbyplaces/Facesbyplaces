@@ -25,8 +25,6 @@ Future<APIBLMSearchUsersMain> apiBLMSearchUsers({required String keywords, requi
     ),  
   );
 
-  print('The status code of blm search users is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMSearchUsersMain.fromJson(newData);
@@ -63,11 +61,11 @@ class APIBLMSearchUsersExtended{
   factory APIBLMSearchUsersExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMSearchUsersExtended(
       searchUsersUserId: parsedJson['id'],
-      searchUsersFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      searchUsersLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      searchUsersEmail: parsedJson['email'] != null ? parsedJson['email'] : '',
+      searchUsersFirstName: parsedJson['first_name'] ?? '',
+      searchUsersLastName: parsedJson['last_name'] ?? '',
+      searchUsersEmail: parsedJson['email'] ?? '',
       searchUsersAccountType: parsedJson['account_type'],
-      searchUsersImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      searchUsersImage: parsedJson['image'] ?? '',
     );
   }
 }

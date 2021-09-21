@@ -35,13 +35,11 @@ Future<bool> apiRegularModifyFollowPage({required String pageType, required int 
       }
     ),
     queryParameters: <String, dynamic>{
-      'page_type': '$pageType',
+      'page_type': pageType,
       'page_id': '$pageId',
       'follow': true,
     }
   );
-
-  print('The status code of regular follow page is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

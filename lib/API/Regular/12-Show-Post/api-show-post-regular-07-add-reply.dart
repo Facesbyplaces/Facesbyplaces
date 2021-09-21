@@ -42,8 +42,6 @@ Future<bool> apiRegularAddReply({required int commentId, required dynamic replyB
     ),  
   );
 
-  print('The status code of regular add reply is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

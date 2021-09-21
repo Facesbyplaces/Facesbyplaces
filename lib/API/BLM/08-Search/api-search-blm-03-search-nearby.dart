@@ -25,8 +25,6 @@ Future<APIBLMSearchNearbyMain> apiBLMSearchNearby({required int page, required d
     ),  
   );
 
-  print('The status code of blm search nearby is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMSearchNearbyMain.fromJson(newData);
@@ -73,14 +71,14 @@ class APIBLMSearchNearbyExtended{
   factory APIBLMSearchNearbyExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMSearchNearbyExtended(
       searchNearbyId: parsedJson['id'],
-      searchNearbyName: parsedJson['name'] != null ? parsedJson['name'] : '',
+      searchNearbyName: parsedJson['name'] ?? '',
       searchNearbyDetails: APIBLMSearchNearbyExtendedPageDetails.fromJson(parsedJson['details']),
       searchNearbyProfileImage: parsedJson['profileImage'],
-      searchNearbyRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      searchNearbyRelationship: parsedJson['relationship'] ?? '',
       searchNearbyManage: parsedJson['manage'],
       searchNearbyFamOrFriends: parsedJson['famOrFriends'],
       searchNearbyFollower: parsedJson['follower'],
-      searchNearbyPageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
+      searchNearbyPageType: parsedJson['page_type'] ?? '',
     );
   }
 }
@@ -91,7 +89,7 @@ class APIBLMSearchNearbyExtendedPageDetails{
 
   factory APIBLMSearchNearbyExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMSearchNearbyExtendedPageDetails(
-      searchNearbyPageDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
+      searchNearbyPageDetailsDescription: parsedJson['description'] ?? '',
     );
   }
 }

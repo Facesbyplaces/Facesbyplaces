@@ -19,10 +19,10 @@ import 'UI/Regular/regular-01-join.dart';
 import 'UI/Regular/regular-02-login.dart';
 import 'UI/Regular/regular-03-register.dart';
 import 'UI/Regular/regular-05-upload-photo.dart';
-import 'UI/BLM/blm-01-join.dart';
-import 'UI/BLM/blm-02-login.dart';
-import 'UI/BLM/blm-03-register.dart';
-import 'UI/BLM/blm-05-upload-photo.dart';
+import 'UI/BLM/blm_01_join.dart';
+import 'UI/BLM/blm_02_login.dart';
+import 'UI/BLM/blm_03_register.dart';
+import 'UI/BLM/blm_05_upload_photo.dart';
 import 'UI/ui-01-get-started.dart';
 import 'UI/ui-02-login.dart';
 import 'UI/ui-03-newly-installed.dart';
@@ -123,25 +123,25 @@ void main() async{
             '/start': (BuildContext context) => const UIGetStarted(),
             '/login': (BuildContext context) => const UILogin01(), // START
 
-            '/blm/join': (BuildContext context) => BLMJoin(),
+            '/blm/join': (BuildContext context) => const BLMJoin(),
             '/blm/login': (BuildContext context) => BLMLogin(),
             '/blm/register': (BuildContext context) => BLMRegister(),
             '/blm/upload-photo': (BuildContext context) => BLMUploadPhoto(), // BLM START
 
-            '/regular/join': (BuildContext context) => RegularJoin(),
+            '/regular/join': (BuildContext context) => const RegularJoin(),
             '/regular/login': (BuildContext context) => RegularLogin(),
             '/regular/register': (BuildContext context) => RegularRegister(),
             '/regular/upload-photo': (BuildContext context) => RegularUploadPhoto(), // ALM START
 
-            '/home/blm': (BuildContext context) => HomeBLMScreen(),
-            '/home/blm/create-post-location': (BuildContext context) => HomeBLMCreatePostSearchLocation(),
-            '/home/blm/create-memorial': (BuildContext context) => HomeBLMCreateMemorial1(),
-            '/home/blm/search': (BuildContext context) => HomeBLMSearch(), // BLM HOME SCREEN
+            '/home/blm': (BuildContext context) => const HomeBLMScreen(),
+            '/home/blm/create-post-location': (BuildContext context) => const HomeBLMCreatePostSearchLocation(),
+            '/home/blm/create-memorial': (BuildContext context) => const HomeBLMCreateMemorial1(),
+            '/home/blm/search': (BuildContext context) => const HomeBLMSearch(), // BLM HOME SCREEN
 
-            '/home/regular': (BuildContext context) => HomeRegularScreen(),
-            '/home/regular/create-post-location': (BuildContext context) => HomeRegularCreatePostSearchLocation(),
-            '/home/regular/create-memorial': (BuildContext context) => HomeRegularCreateMemorial1(),
-            '/home/regular/search': (BuildContext context) => HomeRegularSearch(), // ALM HOME SCREEN
+            '/home/regular': (BuildContext context) => const HomeRegularScreen(),
+            '/home/regular/create-post-location': (BuildContext context) => const HomeRegularCreatePostSearchLocation(),
+            '/home/regular/create-memorial': (BuildContext context) => const HomeRegularCreateMemorial1(),
+            '/home/regular/search': (BuildContext context) => const HomeRegularSearch(), // ALM HOME SCREEN
           },
         ),
       ),

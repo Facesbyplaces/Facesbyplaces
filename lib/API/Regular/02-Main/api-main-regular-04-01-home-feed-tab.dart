@@ -24,8 +24,6 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab({required int page}) asy
     ),
   );
 
-  print('The status code of regular home feed tab is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIRegularHomeTabFeedMain.fromJson(newData);
@@ -79,13 +77,13 @@ class APIRegularHomeTabFeedExtended{
     return APIRegularHomeTabFeedExtended(
       homeTabFeedId: parsedJson['id'],
       homeTabFeedPage: APIRegularHomeTabFeedExtendedPage.fromJson(parsedJson['page']),
-      homeTabFeedBody: parsedJson['body'] != null ? parsedJson['body'] : '',
-      homeTabFeedLocation: parsedJson['location'] != null ? parsedJson['location'] : '',
+      homeTabFeedBody: parsedJson['body'] ?? '',
+      homeTabFeedLocation: parsedJson['location'] ?? '',
       homeTabFeedLatitude: parsedJson['latitude'],
       homeTabFeedLongitude: parsedJson['longitude'],
-      homeTabFeedImagesOrVideos: newList1 != null ? newList1 : [],
+      homeTabFeedImagesOrVideos: newList1 ?? [],
       homeTabFeedPostTagged: taggedList,
-      homeTabFeedCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
+      homeTabFeedCreatedAt: parsedJson['created_at'] ?? '',
       homeTabFeedNumberOfLikes: parsedJson['numberOfLikes'],
       homeTabFeedNumberOfComments: parsedJson['numberOfComments'],
       homeTabFeedLikeStatus: parsedJson['likeStatus'],
@@ -108,14 +106,14 @@ class APIRegularHomeTabFeedExtendedPage{
   factory APIRegularHomeTabFeedExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabFeedExtendedPage(
       homeTabFeedPageId: parsedJson['id'],
-      homeTabFeedPageName: parsedJson['name'] != null ? parsedJson['name'] : '',
-      homeTabFeedPageProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
-      homeTabFeedPageRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      homeTabFeedPageName: parsedJson['name'] ?? '',
+      homeTabFeedPageProfileImage: parsedJson['profileImage'] ?? '',
+      homeTabFeedPageRelationship: parsedJson['relationship'] ?? '',
       homeTabFeedPagePageCreator: APIRegularHomeTabFeedExtendedPageCreator.fromJson(parsedJson['page_creator']),
       homeTabFeedPageFollower: parsedJson['follower'],
       homeTabFeedPageManage: parsedJson['manage'],
       homeTabFeedPageFamOrFriends: parsedJson['famOrFriends'],
-      homeTabFeedPagePageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
+      homeTabFeedPagePageType: parsedJson['page_type'] ?? '',
     );
   }
 }
@@ -141,9 +139,9 @@ class APIRegularHomeTabFeedExtendedTagged{
   factory APIRegularHomeTabFeedExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabFeedExtendedTagged(
       homeTabFeedTaggedId: parsedJson['id'],
-      homeTabFeedTaggedFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      homeTabFeedTaggedLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      homeTabFeedTaggedImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      homeTabFeedTaggedFirstName: parsedJson['first_name'] ?? '',
+      homeTabFeedTaggedLastName: parsedJson['last_name'] ?? '',
+      homeTabFeedTaggedImage: parsedJson['image'] ?? '',
     );
   }
 }

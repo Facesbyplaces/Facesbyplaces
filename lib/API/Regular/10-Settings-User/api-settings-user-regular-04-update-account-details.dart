@@ -33,8 +33,6 @@ Future<bool> apiRegularUpdateAccountDetails({required String firstName, required
     ),
   );
 
-  print('The status code of regular update account details is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

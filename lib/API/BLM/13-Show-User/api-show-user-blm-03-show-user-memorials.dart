@@ -37,8 +37,6 @@ Future<APIBLMShowUserMemorialsMain> apiBLMShowUserMemorials({required int userId
     ),  
   );
 
-  print('The status code of blm show user memorials is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMShowUserMemorialsMain.fromJson(newData);
@@ -96,14 +94,14 @@ class APIBLMShowUserMemorialsExtendedPage{
   factory APIBLMShowUserMemorialsExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowUserMemorialsExtendedPage(
       showUserMemorialsPageId: parsedJson['id'],
-      showUserMemorialsPageName: parsedJson['name'] != null ? parsedJson['name'] : '',
+      showUserMemorialsPageName: parsedJson['name'] ?? '',
       showUserMemorialsPageDetails: APIBLMShowUserMemorialsExtendedPageDetails.fromJson(parsedJson['details']),
-      showUserMemorialsPageProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
-      showUserMemorialsPageRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      showUserMemorialsPageProfileImage: parsedJson['profileImage'] ?? '',
+      showUserMemorialsPageRelationship: parsedJson['relationship'] ?? '',
       showUserMemorialsPageManage: parsedJson['manage'],
       showUserMemorialsPageFamOrFriends: parsedJson['famOrFriends'],
       showUserMemorialsPageFollower: parsedJson['follower'],
-      showUserMemorialsPageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
+      showUserMemorialsPageType: parsedJson['page_type'] ?? '',
     );
   }
 }
@@ -114,7 +112,7 @@ class APIBLMShowUserMemorialsExtendedPageDetails{
   
   factory APIBLMShowUserMemorialsExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowUserMemorialsExtendedPageDetails(
-      showUserMemorialsPageDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
+      showUserMemorialsPageDetailsDescription: parsedJson['description'] ?? '',
     );
   }
 }

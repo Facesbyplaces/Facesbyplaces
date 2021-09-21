@@ -25,8 +25,6 @@ Future<bool> apiBLMUpdateSwitchStatusFamily({required int memorialId, required b
     ),  
   );
 
-  print('The status code of blm update switch status family is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

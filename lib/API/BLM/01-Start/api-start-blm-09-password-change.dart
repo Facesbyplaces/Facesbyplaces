@@ -17,8 +17,6 @@ Future<bool> apiBLMPasswordChange({required String password, required String pas
     ),
   );
 
-  print('The status code of blm password change is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     var user = newData['data'];

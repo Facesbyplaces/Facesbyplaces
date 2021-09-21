@@ -25,8 +25,6 @@ Future<bool> apiBLMReport({required int postId, required String reportType, requ
     ),
   );
 
-  print('The status code of blm report is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

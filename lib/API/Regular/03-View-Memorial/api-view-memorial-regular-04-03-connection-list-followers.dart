@@ -37,8 +37,6 @@ Future<APIRegularConnectionListFollowersMain> apiRegularConnectionListFollowers(
     ),  
   );
 
-  print('The status code of regular connection list followers is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIRegularConnectionListFollowersMain.fromJson(newData);
@@ -74,9 +72,9 @@ class APIRegularConnectionListFollowersExtendedDetails{
   factory APIRegularConnectionListFollowersExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularConnectionListFollowersExtendedDetails(
       connectionListFollowersDetailsId: parsedJson['id'],
-      connectionListFollowersDetailsFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      connectionListFollowersDetailsLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      connectionListFollowersDetailsImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      connectionListFollowersDetailsFirstName: parsedJson['first_name'] ?? '',
+      connectionListFollowersDetailsLastName: parsedJson['last_name'] ?? '',
+      connectionListFollowersDetailsImage: parsedJson['image'] ?? '',
       connectionListFollowersAccountType: parsedJson['account_type'],
     );
   }

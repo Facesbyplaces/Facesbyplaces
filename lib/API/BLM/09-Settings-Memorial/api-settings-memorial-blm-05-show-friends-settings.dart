@@ -25,8 +25,6 @@ Future<APIBLMShowFriendsSettingsMain> apiBLMShowFriendsSettings({required int me
     ),  
   );
 
-  print('The status code of blm show friends settings is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMShowFriendsSettingsMain.fromJson(newData);
@@ -59,7 +57,7 @@ class APIBLMShowFriendsSettingsExtended{
   factory APIBLMShowFriendsSettingsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowFriendsSettingsExtended(
       showFriendsSettingsUser: APIBLMShowFriendsSettingsExtendedDetails.fromJson(parsedJson['user']),
-      showFriendsSettingsRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      showFriendsSettingsRelationship: parsedJson['relationship'] ?? '',
     );
   }
 }
@@ -76,10 +74,10 @@ class APIBLMShowFriendsSettingsExtendedDetails{
   factory APIBLMShowFriendsSettingsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowFriendsSettingsExtendedDetails(
       showFriendsSettingsDetailsId: parsedJson['id'],
-      showFriendsSettingsDetailsFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      showFriendsSettingsDetailsLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      showFriendsSettingsDetailsImage: parsedJson['image'] != null ? parsedJson['image'] : '',
-      showFriendsSettingsDetailsEmail: parsedJson['email'] != null ? parsedJson['email'] : '',
+      showFriendsSettingsDetailsFirstName: parsedJson['first_name'] ?? '',
+      showFriendsSettingsDetailsLastName: parsedJson['last_name'] ?? '',
+      showFriendsSettingsDetailsImage: parsedJson['image'] ?? '',
+      showFriendsSettingsDetailsEmail: parsedJson['email'] ?? '',
       showFriendsSettingsDetailsAccountType: parsedJson['account_type'],
     );
   }

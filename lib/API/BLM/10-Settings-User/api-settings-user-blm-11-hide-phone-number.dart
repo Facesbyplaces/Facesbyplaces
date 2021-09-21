@@ -25,8 +25,6 @@ Future<bool> apiBLMHidePhoneNumber({required bool hide}) async{
     ),  
   );
 
-  print('The status code of blm hide phone number is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

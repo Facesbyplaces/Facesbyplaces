@@ -38,8 +38,6 @@ Future<APIBLMShowMemorialMain> apiBLMShowMemorial({required int memorialId}) asy
     ),  
   );
 
-  print('The status code of blm show memorial details is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMShowMemorialMain.fromJson(newData);
@@ -86,12 +84,12 @@ class APIBLMShowMemorialExtended{
 
     return APIBLMShowMemorialExtended(
       memorialId: parsedJson['id'],
-      memorialName: parsedJson['name'] != null ? parsedJson['name'] : '',
+      memorialName: parsedJson['name'] ?? '',
       memorialDetails: APIBLMShowMemorialExtendedDetails.fromJson(parsedJson['details']),
-      memorialBackgroundImage: parsedJson['backgroundImage'] != null ? parsedJson['backgroundImage'] : '',
-      memorialProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
-      memorialImagesOrVideos: newList1 != null ? newList1 : [],
-      memorialRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      memorialBackgroundImage: parsedJson['backgroundImage'] ?? '',
+      memorialProfileImage: parsedJson['profileImage'] ?? '',
+      memorialImagesOrVideos: newList1 ?? [],
+      memorialRelationship: parsedJson['relationship'] ?? '',
       memorialManage: parsedJson['manage'],
       memorialFamOrFriends: parsedJson['famOrFriends'],
       memorialFollower: parsedJson['follower'],
@@ -123,16 +121,16 @@ class APIBLMShowMemorialExtendedDetails{
     DateTime rip = DateTime.parse(newRIP);
 
     return APIBLMShowMemorialExtendedDetails(
-      memorialDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
-      memorialDetailsLocation: parsedJson['location'] != null ? parsedJson['location'] : '',
-      memorialDetailsPrecinct: parsedJson['precinct'] != null ? parsedJson['precinct'] : '',
+      memorialDetailsDescription: parsedJson['description'] ?? '',
+      memorialDetailsLocation: parsedJson['location'] ?? '',
+      memorialDetailsPrecinct: parsedJson['precinct'] ?? '',
       memorialDetailsDob: dob.format(AmericanDateFormats.standardWithComma),
       memorialDetailsRip: rip.format(AmericanDateFormats.standardWithComma),
-      memorialDetailsState: parsedJson['state'] != null ? parsedJson['state'] : '',
-      memorialDetailsCountry: parsedJson['country'] != null ? parsedJson['country'] : '',
-      memorialAcceptDonations: parsedJson['accept_donations'] != null ? parsedJson['accept_donations'] : false,
-      memorialLatitude: parsedJson['latitude'] != null ? parsedJson['latitude'] : 0.0,
-      memorialLongitude: parsedJson['longitude'] != null ? parsedJson['longitude'] : 0.0,
+      memorialDetailsState: parsedJson['state'] ?? '',
+      memorialDetailsCountry: parsedJson['country'] ?? '',
+      memorialAcceptDonations: parsedJson['accept_donations'] ?? false,
+      memorialLatitude: parsedJson['latitude'] ?? 0.0,
+      memorialLongitude: parsedJson['longitude'] ?? 0.0,
     );
   }
 }

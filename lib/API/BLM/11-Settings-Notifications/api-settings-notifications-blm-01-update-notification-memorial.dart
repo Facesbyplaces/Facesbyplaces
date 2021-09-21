@@ -24,8 +24,6 @@ Future<bool> apiBLMUpdateNotificationMemorial({required bool hide}) async{
     ),  
   );
 
-  print('The status code of blm update notification memorial is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

@@ -25,8 +25,6 @@ Future<APIBLMSearchMemorialMain> apiBLMSearchBLM({required String keywords, requ
     ),  
   );
 
-  print('The status code of blm search blm is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMSearchMemorialMain.fromJson(newData);
@@ -79,14 +77,14 @@ class APIBLMSearchMemorialExtended{
   factory APIBLMSearchMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMSearchMemorialExtended(
       searchMemorialId: parsedJson['id'],
-      searchMemorialName: parsedJson['name'] != null ? parsedJson['name'] : '',
+      searchMemorialName: parsedJson['name'] ?? '',
       searchMemorialDetails: APIBLMSearchMemorialExtendedPageDetails.fromJson(parsedJson['details']),
       searchMemorialProfileImage: parsedJson['profileImage'],
-      searchMemorialRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      searchMemorialRelationship: parsedJson['relationship'] ?? '',
       searchMemorialManage: parsedJson['manage'],
       searchMemorialFamOrFriends: parsedJson['famOrFriends'],
       searchMemorialFollower: parsedJson['follower'],
-      searchMemorialPageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
+      searchMemorialPageType: parsedJson['page_type'] ?? '',
     );
   }
 }
@@ -97,7 +95,7 @@ class APIBLMSearchMemorialExtendedPageDetails{
 
   factory APIBLMSearchMemorialExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMSearchMemorialExtendedPageDetails(
-      searchMemorialPageDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
+      searchMemorialPageDetailsDescription: parsedJson['description'] ?? '',
     );
   }
 }

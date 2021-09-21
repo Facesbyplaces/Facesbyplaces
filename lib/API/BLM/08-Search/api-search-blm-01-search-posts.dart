@@ -25,8 +25,6 @@ Future<APIBLMSearchPostMain> apiBLMSearchPosts({required String keywords, requir
     ),  
   );
 
-  print('The status code of blm search posts is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMSearchPostMain.fromJson(newData);
@@ -80,13 +78,13 @@ class APIBLMSearchPostExtended{
     return APIBLMSearchPostExtended(
       searchPostPostId: parsedJson['id'],
       searchPostPage: APIBLMSearchPostExtendedPage.fromJson(parsedJson['page']),
-      searchPostBody: parsedJson['body'] != null ? parsedJson['body'] : '',
-      searchPostLocation: parsedJson['location'] != null ? parsedJson['location'] : '',
+      searchPostBody: parsedJson['body'] ?? '',
+      searchPostLocation: parsedJson['location'] ?? '',
       searchPostLatitude: parsedJson['latitude'],
       searchPostLongitude: parsedJson['longitude'],
-      searchPostImagesOrVideos: newList1 != null ? newList1 : [],
+      searchPostImagesOrVideos: newList1 ?? [],
       searchPostPostTagged: taggedList,
-      searchPostCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
+      searchPostCreatedAt: parsedJson['created_at'] ?? '',
       searchPostNumberOfLikes: parsedJson['numberOfLikes'],
       searchPostNumberOfComments: parsedJson['numberOfComments'],
       searchPostLikeStatus: parsedJson['likeStatus'],
@@ -110,13 +108,13 @@ class APIBLMSearchPostExtendedPage{
     return APIBLMSearchPostExtendedPage(
       searchPostPagePageId: parsedJson['id'],
       searchPostPageName: parsedJson['name'],
-      searchPostPageProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
-      searchPostPageRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      searchPostPageProfileImage: parsedJson['profileImage'] ?? '',
+      searchPostPageRelationship: parsedJson['relationship'] ?? '',
       searchPostPagePageCreator: APIBLMSearchPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
       searchPostPageManage: parsedJson['manage'],
       searchPostPageFamOrFriends: parsedJson['famOrFriends'],
       searchPostPageFollower: parsedJson['follower'],
-      searchPostPagePageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
+      searchPostPagePageType: parsedJson['page_type'] ?? '',
     );
   }
 }
@@ -142,9 +140,9 @@ class APIBLMSearchPostExtendedTagged{
   factory APIBLMSearchPostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMSearchPostExtendedTagged(
       searchPostTaggedId: parsedJson['id'],
-      searchPostTaggedFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      searchPostTaggedLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      searchPostTaggedImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      searchPostTaggedFirstName: parsedJson['first_name'] ?? '',
+      searchPostTaggedLastName: parsedJson['last_name'] ?? '',
+      searchPostTaggedImage: parsedJson['image'] ?? '',
     );
   }
 }

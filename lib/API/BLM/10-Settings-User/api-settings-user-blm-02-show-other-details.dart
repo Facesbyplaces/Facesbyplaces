@@ -25,8 +25,6 @@ Future<APIBLMShowOtherDetails> apiBLMShowOtherDetails({required int userId}) asy
     ),  
   );
 
-  print('The status code of blm show other details is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMShowOtherDetails.fromJson(newData);
@@ -45,11 +43,11 @@ class APIBLMShowOtherDetails{
 
   factory APIBLMShowOtherDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowOtherDetails(
-      blmShowOtherDetailsBirthdate: parsedJson['birthdate'] != null ? parsedJson['birthdate'] : '',
-      blmShowOtherDetailsBirthplace: parsedJson['birthplace'] != null ? parsedJson['birthplace'] : '',
-      blmShowOtherDetailsEmail: parsedJson['email'] != null ? parsedJson['email'] : '',
-      blmShowOtherDetailsAddress: parsedJson['address'] != null ? parsedJson['address'] : '',
-      blmShowOtherDetailsPhoneNumber: parsedJson['phone_number'] != null ? parsedJson['phone_number'] : '',
+      blmShowOtherDetailsBirthdate: parsedJson['birthdate'] ?? '',
+      blmShowOtherDetailsBirthplace: parsedJson['birthplace'] ?? '',
+      blmShowOtherDetailsEmail: parsedJson['email'] ?? '',
+      blmShowOtherDetailsAddress: parsedJson['address'] ?? '',
+      blmShowOtherDetailsPhoneNumber: parsedJson['phone_number'] ?? '',
     );
   }
 }

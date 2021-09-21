@@ -24,8 +24,6 @@ Future<APIRegularShowPageImagesMain> apiRegularShowPageImages({required int memo
     ),
   );
 
-  print('The status code of regular show page images is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIRegularShowPageImagesMain.fromJson(newData);
@@ -53,9 +51,9 @@ class APIRegularShowPageImagesExtended{
 
   factory APIRegularShowPageImagesExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowPageImagesExtended(
-      showPageImagesBackgroundImage: parsedJson['backgroundImage'] != null ? parsedJson['backgroundImage'] : '',
-      showPageImagesProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
-      showPageImagesRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      showPageImagesBackgroundImage: parsedJson['backgroundImage'] ?? '',
+      showPageImagesProfileImage: parsedJson['profileImage'] ?? '',
+      showPageImagesRelationship: parsedJson['relationship'] ?? '',
     );
   }
 }

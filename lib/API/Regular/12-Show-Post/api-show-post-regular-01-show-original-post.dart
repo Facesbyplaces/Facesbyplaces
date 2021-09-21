@@ -36,8 +36,6 @@ Future<APIRegularShowOriginalPostMain> apiRegularShowOriginalPost({required int 
     ),
   );
 
-  print('The status code of regular show original post is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIRegularShowOriginalPostMain.fromJson(newData);
@@ -84,13 +82,13 @@ class APIRegularShowOriginalPostMainExtended{
 
     return APIRegularShowOriginalPostMainExtended(
       showOriginalPostPage: APIRegularShowOriginalPostMainExtendedPage.fromJson(parsedJson['page']),
-      showOriginalPostBody: parsedJson['body'] != null ? parsedJson['body'] : '',
-      showOriginalPostLocation: parsedJson['location'] != null ? parsedJson['location'] : '',
+      showOriginalPostBody: parsedJson['body'] ?? '',
+      showOriginalPostLocation: parsedJson['location'] ?? '',
       showOriginalPostLatitude: parsedJson['latitude'],
       showOriginalPostLongitude: parsedJson['longitude'],
-      showOriginalPostImagesOrVideos: newList1 != null ? newList1 : [],
+      showOriginalPostImagesOrVideos: newList1 ?? [],
       showOriginalPostPostTagged: taggedList,
-      showOriginalPostCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
+      showOriginalPostCreatedAt: parsedJson['created_at'] ?? '',
       showOriginalPostNumberOfLikes: parsedJson['numberOfLikes'],
       showOriginalPostNumberOfComments: parsedJson['numberOfComments'],
       showOriginalPostLikeStatus: parsedJson['likeStatus'],
@@ -113,14 +111,14 @@ class APIRegularShowOriginalPostMainExtendedPage{
   factory APIRegularShowOriginalPostMainExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowOriginalPostMainExtendedPage(
       showOriginalPostPageId: parsedJson['id'],
-      showOriginalPostPageName: parsedJson['name'] != null ? parsedJson['name'] : '',
-      showOriginalPostPageProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
-      showOriginalPostPageRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      showOriginalPostPageName: parsedJson['name'] ?? '',
+      showOriginalPostPageProfileImage: parsedJson['profileImage'] ?? '',
+      showOriginalPostPageRelationship: parsedJson['relationship'] ?? '',
       showOriginalPostPagePageCreator: APIRegularShowOriginalPostMainExtendedPageCreator.fromJson(parsedJson['page_creator']),
       showOriginalPostPageManage: parsedJson['manage'],
       showOriginalPostPageFamOrFriends: parsedJson['famOrFriends'],
       showOriginalPostPageFollower: parsedJson['follower'],
-      showOriginalPostPagePageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
+      showOriginalPostPagePageType: parsedJson['page_type'] ?? '',
     );
   }
 }
@@ -146,8 +144,8 @@ class APIRegularShowOriginalPostExtendedTagged{
   factory APIRegularShowOriginalPostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowOriginalPostExtendedTagged(
       showOriginalPostTaggedId: parsedJson['id'],
-      showOriginalPostTaggedFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      showOriginalPostTaggedLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      showOriginalPostTaggedFirstName: parsedJson['first_name'] ?? '',
+      showOriginalPostTaggedLastName: parsedJson['last_name'] ?? '',
       showOriginalPostAccountType: parsedJson['account_type'],
     );
   }

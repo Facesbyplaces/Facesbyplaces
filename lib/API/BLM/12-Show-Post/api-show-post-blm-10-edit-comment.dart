@@ -37,11 +37,9 @@ Future<bool> apiBLMEditComment({required int commentId, required String commentB
     ),
     queryParameters: <String, dynamic>{
       'comment_id': '$commentId',
-      'body': '$commentBody',
+      'body': commentBody,
     }
   );
-
-  print('The status code of blm edit comment is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

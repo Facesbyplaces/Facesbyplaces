@@ -24,8 +24,6 @@ Future<APIRegularShowFamilySettingsMain> apiRegularShowFamilySettings({required 
     ),
   );
 
-  print('The status code of regular show family settings is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIRegularShowFamilySettingsMain.fromJson(newData);
@@ -76,10 +74,10 @@ class APIRegularShowFamilySettingsExtendedDetails{
   factory APIRegularShowFamilySettingsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowFamilySettingsExtendedDetails(
       showFamilySettingsDetailsId: parsedJson['id'],
-      showFamilySettingsDetailsFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      showFamilySettingsDetailsLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      showFamilySettingsDetailsImage: parsedJson['image'] != null ? parsedJson['image'] : '',
-      showFamilySettingsDetailsEmail: parsedJson['email'] != null ? parsedJson['email'] : '',
+      showFamilySettingsDetailsFirstName: parsedJson['first_name'] ?? '',
+      showFamilySettingsDetailsLastName: parsedJson['last_name'] ?? '',
+      showFamilySettingsDetailsImage: parsedJson['image'] ?? '',
+      showFamilySettingsDetailsEmail: parsedJson['email'] ?? '',
       showFamilySettingsDetailsAccountType: parsedJson['account_type'],
     );
   }

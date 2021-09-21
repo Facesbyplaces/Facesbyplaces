@@ -24,8 +24,6 @@ Future<bool> apiRegularUpdateSwitchStatusFollowers({required int memorialId, req
     ),
   );
 
-  print('The status code of regular update switch status followers is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

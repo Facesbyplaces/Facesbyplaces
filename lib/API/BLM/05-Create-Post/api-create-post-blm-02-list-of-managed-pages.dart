@@ -25,8 +25,6 @@ Future<APIBLMShowListOfManagedPages> apiBLMShowListOfManagedPages() async{
     ),  
   );
 
-  print('The status code of blm list of managed pages is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMShowListOfManagedPages.fromJson(newData);
@@ -58,8 +56,8 @@ class APIBLMShowListOfManagedPagesExtended{
   factory APIBLMShowListOfManagedPagesExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowListOfManagedPagesExtended(
       blmManagedPagesId: parsedJson['id'],
-      blmManagedPagesName: parsedJson['name'] != null ? parsedJson['name'] : '',
-      blmManagedPagesProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
+      blmManagedPagesName: parsedJson['name'] ?? '',
+      blmManagedPagesProfileImage: parsedJson['profileImage'] ?? '',
     );
   }
 }

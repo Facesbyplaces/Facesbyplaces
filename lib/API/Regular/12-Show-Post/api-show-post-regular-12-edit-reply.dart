@@ -35,12 +35,10 @@ Future<bool> apiRegularEditReply({required int replyId, required String replyBod
       }
     ),
     queryParameters: <String, dynamic>{
-      'reply_id': '$replyId',
-      'body': '$replyBody',
+      'reply_id': replyId,
+      'body': replyBody,
     }
   );
-
-  print('The status code of regular edit reply is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

@@ -42,8 +42,6 @@ Future<bool> apiBLMLikeOrUnlikePost({required int postId, required bool like}) a
     ),  
   );
 
-  print('The status code of blm post like or unlike is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

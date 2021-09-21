@@ -7,7 +7,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'Regular/regular-07-password-reset.dart';
-import 'BLM/blm-07-password-reset.dart';
+import 'BLM/blm_07_password_reset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'ui-02-login.dart';
@@ -22,25 +22,11 @@ class PushNotificationService{
   PushNotificationService(this.fcm, this.context);
 
   Future initialise() async{
-    String token = (await fcm.getToken())!;
-    print("FirebaseMessaging token: $token");
+    (await fcm.getToken())!;
 
-    FirebaseMessaging.onMessage.listen((message) {
-      print('Got a message whilst in the foreground!');
-      print('Message data: $message');
-      print('Message data: ${message.data}');
-      print('Message data title: ${message.notification!.title}');
-      print('Message data body: ${message.notification!.body}');
-    });
+    FirebaseMessaging.onMessage.listen((message) {});
 
     FirebaseMessaging.onMessageOpenedApp.listen((event) async{
-      print('Pressed!');
-      print('The message on pressed is $event');
-      print('The message on pressed is ${event.data}');
-      print('The message on pressed is ${event.data['dataID']}');
-      print('The message on pressed is ${event.data['dataType']}');
-      print('The message on pressed is ${event.notification!.title}');
-      print('The message on pressed is ${event.notification!.body}');
 
       if(event.data['dataType'] == 'Post'){
         if(event.data['postType'] == 'Blm'){
@@ -60,8 +46,9 @@ class PushNotificationService{
 }
 
 class UIGetStarted extends StatefulWidget{
-  const UIGetStarted();
+  const UIGetStarted({Key? key}) : super(key: key);
 
+  @override
   UIGetStartedState createState() => UIGetStartedState();
 }
 
@@ -71,7 +58,6 @@ class UIGetStartedState extends State<UIGetStarted>{
   String token = '';
 
   void listenDeepLinkData(){
-    print('The start of deep linking');
     streamSubscription = FlutterBranchSdk.initSession().listen((data){
       if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && (data.containsKey("link-category") && data["link-category"] == 'Post')){
         initUnitSharePost(postId: data['link-post-id'], likeStatus: data['link-like-status'], numberOfLikes: data['link-number-of-likes'], pageType: data['link-type-of-account']);
@@ -82,7 +68,7 @@ class UIGetStartedState extends State<UIGetStarted>{
       }
     }, onError: (error) {
       PlatformException platformException = error as PlatformException;
-      print('InitSession error: ${platformException.code} - ${platformException.message}');
+      throw Exception('InitSession error: ${platformException.code} - ${platformException.message}');
     });
   }
 
@@ -101,7 +87,6 @@ class UIGetStartedState extends State<UIGetStarted>{
 
   initUnitSharePost({required int postId, required bool likeStatus, required int numberOfLikes, required String pageType}) async{
     bool login = await FlutterBranchSdk.isUserIdentified();
-    print('Shared post || User identified: $login || Post Type: $pageType');
 
     if(login){
       FlutterBranchSdk.logout();
@@ -115,7 +100,6 @@ class UIGetStartedState extends State<UIGetStarted>{
 
   initUnitShareMemorial({required int memorialId, required String pageType, required bool follower}) async{
     bool login = await FlutterBranchSdk.isUserIdentified();
-    print('Shared memorial || User identified: $login || Memorial Type: $pageType');
 
     if(login){
       FlutterBranchSdk.logout();
@@ -127,6 +111,7 @@ class UIGetStartedState extends State<UIGetStarted>{
     }
   }
 
+  @override
   void initState(){
     super.initState();
     listenDeepLinkData();
@@ -145,13 +130,13 @@ class UIGetStartedState extends State<UIGetStarted>{
       body: LayoutBuilder(
         builder: (context, constraint){
           return SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
+            physics: const ClampingScrollPhysics(),
             child: ConstrainedBox(
               constraints: BoxConstraints(minHeight: constraint.maxHeight),
               child: IntrinsicHeight(
                 child: Column(
                   children: [
-                    Container(
+                    SizedBox(
                       height: SizeConfig.screenHeight! / 2,
                       width: SizeConfig.screenWidth,
                       child: Stack(
@@ -171,20 +156,20 @@ class UIGetStartedState extends State<UIGetStarted>{
 
                     Expanded(
                       child: Container(
-                        decoration: const BoxDecoration(image: const DecorationImage(fit: BoxFit.fill, image: const AssetImage('assets/icons/background.png'),),),
+                        decoration: const BoxDecoration(image: DecorationImage(fit: BoxFit.fill, image: AssetImage('assets/icons/background.png'),),),
                         child: Column(
                           children: [
                             const SizedBox(height: 30),
 
-                            const Center(child: const Text('FacesByPlaces.com', style: const TextStyle(fontSize: 28, color: const Color(0xff04ECFF), fontFamily: 'NexaBold',),),),
+                            const Center(child: Text('FacesByPlaces.com', style: TextStyle(fontSize: 28, color: Color(0xff04ECFF), fontFamily: 'NexaBold',),),),
 
                             const SizedBox(height: 30),
 
                             Container(
                               padding: const EdgeInsets.only(left: 30, right: 30),
                               child: const Center(
-                                child: const Text('Create a Memorial Page for Loved Ones by Sharing Stories, photos of Special Events & Occasions. Keeping their Memories alive for Generations',
-                                  style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),
+                                child: Text('Create a Memorial Page for Loved Ones by Sharing Stories, photos of Special Events & Occasions. Keeping their Memories alive for Generations',
+                                  style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffffffff),),
                                   textAlign: TextAlign.center,
                                 ),
                               ),
@@ -197,7 +182,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             const SizedBox(height: 50),
 
                             MaterialButton(
-                              child: const Text('Get Started', style: TextStyle(fontSize: 24, color: const Color(0xffffffff), fontFamily: 'NexaBold',),),
+                              child: const Text('Get Started', style: TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold',),),
                               minWidth: SizeConfig.screenWidth! / 1.5,
                               color: const Color(0xff04ECFF),
                               shape: const StadiumBorder(),

@@ -7,7 +7,9 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class TestMap extends StatefulWidget{
+  const TestMap({Key? key}) : super(key: key);
 
+  @override
   TestMapState createState() => TestMapState();
 }
 
@@ -18,9 +20,10 @@ class TestMapState extends State<TestMap>{
   LatLng? memorial;
   bool pinned = false;
 
+  @override
   void initState(){
     super.initState();
-    initialCameraPosition = CameraPosition(target: LatLng(37.78583400000001, -122.406417), zoom: 14.4746,);
+    initialCameraPosition = const CameraPosition(target: LatLng(37.78583400000001, -122.406417), zoom: 14.4746,);
   }
 
   @override
@@ -43,7 +46,7 @@ class TestMapState extends State<TestMap>{
               //   memorial = {};
               // });
             },
-            icon: Icon(Icons.delete),
+            icon: const Icon(Icons.delete),
           ),
 
           IconButton(
@@ -63,11 +66,9 @@ class TestMapState extends State<TestMap>{
                     },
                   ),
                 );
-              }else{
-                print('heheheh');
               }
             },
-            icon: Icon(Icons.send_outlined),
+            icon: const Icon(Icons.send_outlined),
           ),
         ],
       ),
@@ -101,12 +102,7 @@ class TestMapState extends State<TestMap>{
   }
 
   void _addMarker(LatLng position) async{
-    print('long press');
-
-    print('The latitude is ${position.latitude}');
-    print('The longitude is ${position.longitude}');
-
-    if(markers.length == 0){
+    if(markers.isEmpty){
       setState(() {
         markers.add(Marker(
           markerId: const MarkerId('Memorial'),

@@ -25,8 +25,6 @@ Future<APIRegularHomeProfilePostMain> apiRegularProfilePost({required int memori
     ),  
   );
 
-  print('The status code of regular show profile post is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIRegularHomeProfilePostMain.fromJson(newData);
@@ -80,13 +78,13 @@ class APIRegularHomeProfilePostExtended{
     return APIRegularHomeProfilePostExtended(
       homeProfilePostId: parsedJson['id'],
       homeProfilePostPage: APIRegularHomeProfilePostExtendedPage.fromJson(parsedJson['page']),
-      homeProfilePostBody: parsedJson['body'] != null ? parsedJson['body'] : '',
-      homeProfilePostLocation: parsedJson['location'] != null ? parsedJson['location'] : '',
+      homeProfilePostBody: parsedJson['body'] ?? '',
+      homeProfilePostLocation: parsedJson['location'] ?? '',
       homeProfilePostLatitude: parsedJson['latitude'],
       homeProfilePostLongitude: parsedJson['longitude'],
-      homeProfilePostImagesOrVideos: newList1 != null ? newList1 : [],
+      homeProfilePostImagesOrVideos: newList1 ?? [],
       homeProfilePostTagged: taggedList,
-      homeProfilePostCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
+      homeProfilePostCreatedAt: parsedJson['created_at'] ?? '',
       homeProfilePostNumberOfLikes: parsedJson['numberOfLikes'],
       homeProfilePostNumberOfComments: parsedJson['numberOfComments'],
       homeProfilePostLikeStatus: parsedJson['likeStatus'],
@@ -109,14 +107,14 @@ class APIRegularHomeProfilePostExtendedPage{
   factory APIRegularHomeProfilePostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeProfilePostExtendedPage(
       homeProfilePostPageId: parsedJson['id'],
-      homeProfilePostPageName: parsedJson['name'] != null ? parsedJson['name'] : '',
-      homeProfilePostPageProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
-      homeProfilePostPageRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      homeProfilePostPageName: parsedJson['name'] ?? '',
+      homeProfilePostPageProfileImage: parsedJson['profileImage'] ?? '',
+      homeProfilePostPageRelationship: parsedJson['relationship'] ?? '',
       homeProfilePostPagePageCreator: APIRegularHomeProfilePostExtendedPageCreator.fromJson(parsedJson['page_creator']),
       homeProfilePostPageManage: parsedJson['manage'],
       homeProfilePostPageFamOrFriends: parsedJson['famOrFriends'],
       homeProfilePostPageFollower: parsedJson['follower'],
-      homeProfilePostPagePageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
+      homeProfilePostPagePageType: parsedJson['page_type'] ?? '',
     );
   }
 }
@@ -142,9 +140,9 @@ class APIRegularHomeProfilePostExtendedTagged{
   factory APIRegularHomeProfilePostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeProfilePostExtendedTagged(
       homeProfilePostTaggedId: parsedJson['id'],
-      homeProfilePostTaggedFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      homeProfilePostTaggedLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      homeProfilePostTaggedImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      homeProfilePostTaggedFirstName: parsedJson['first_name'] ?? '',
+      homeProfilePostTaggedLastName: parsedJson['last_name'] ?? '',
+      homeProfilePostTaggedImage: parsedJson['image'] ?? '',
     );
   }
 }

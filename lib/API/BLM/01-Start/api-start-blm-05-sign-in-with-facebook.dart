@@ -17,8 +17,6 @@ Future<bool> apiBLMSignInWithFacebook({required String firstName, required Strin
     ),  
   );
 
-  print('The status code of blm login with facebook is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     var user = newData['user'];

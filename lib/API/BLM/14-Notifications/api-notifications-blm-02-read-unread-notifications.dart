@@ -25,8 +25,6 @@ Future<bool> apiBLMReadUnreadNotifications() async{
     ),  
   );
 
-  print('The status code of blm read unread notifications is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

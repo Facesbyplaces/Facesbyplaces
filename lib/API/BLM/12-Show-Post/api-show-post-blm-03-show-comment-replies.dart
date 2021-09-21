@@ -37,8 +37,6 @@ Future<APIBLMShowListOfReplies> apiBLMShowListOfReplies({required int postId, re
     ),  
   );
 
-  print('The status code of blm show comments replies is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMShowListOfReplies.fromJson(newData);
@@ -76,8 +74,8 @@ class APIBLMShowListOfRepliesExtended{
       showListRepliesReplyId: parsedJson['id'],
       showListRepliesCommentId: parsedJson['comment_id'],
       showListRepliesUser: APIBLMShowListOfRepliesExtendedUser.fromJson(parsedJson['user']),
-      showListRepliesReplyBody: parsedJson['body'] != null ? parsedJson['body'] : '',
-      showListRepliesCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
+      showListRepliesReplyBody: parsedJson['body'] ?? '',
+      showListRepliesCreatedAt: parsedJson['created_at'] ?? '',
     );
   }
 }
@@ -93,9 +91,9 @@ class APIBLMShowListOfRepliesExtendedUser{
   factory APIBLMShowListOfRepliesExtendedUser.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowListOfRepliesExtendedUser(
       showListRepliesUserUserId: parsedJson['id'],
-      showListRepliesUserFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      showListRepliesUserLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      showListRepliesUserImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      showListRepliesUserFirstName: parsedJson['first_name'] ?? '',
+      showListRepliesUserLastName: parsedJson['last_name'] ?? '',
+      showListRepliesUserImage: parsedJson['image'] ?? '',
       showListRepliesUserAccountType: parsedJson['account_type'],
     );
   }

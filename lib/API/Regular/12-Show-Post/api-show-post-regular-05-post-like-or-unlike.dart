@@ -42,8 +42,6 @@ Future<bool> apiRegularLikeOrUnlikePost({required int postId, required bool like
     ),  
   );
 
-  print('The status code of regular post like or unlike is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

@@ -8,9 +8,10 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'blm-04-verify-email.dart';
+import 'blm_04_verify_email.dart';
 
 class BLMRegister extends StatelessWidget{
+  BLMRegister({Key? key}) : super(key: key);
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMPhoneNumberTemplateState> _key3 = GlobalKey<MiscBLMPhoneNumberTemplateState>();
@@ -40,8 +41,8 @@ class BLMRegister extends StatelessWidget{
                 child: Container(
                   height: SizeConfig.screenHeight,
                   decoration: const BoxDecoration(
-                    color: const Color(0xffffffff),
-                    image: const DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/background2.png'), colorFilter: const ColorFilter.srgbToLinearGamma(),),
+                    color: Color(0xffffffff),
+                    image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),
                   ),
                 ),
               ),
@@ -58,11 +59,11 @@ class BLMRegister extends StatelessWidget{
                             children: [
                               Container(
                                 height: SizeConfig.screenHeight! / 6,
-                                decoration: const BoxDecoration(image: const DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/background-blm.png'),),),
+                                decoration: const BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background-blm.png'),),),
                                 child: Align(
                                   alignment: Alignment.topLeft,
                                   child: IconButton(
-                                    icon: const Icon(Icons.arrow_back, color: const Color(0xffFFFFFF), size: 35),
+                                    icon: const Icon(Icons.arrow_back, color: Color(0xffFFFFFF), size: 35),
                                     onPressed: (){
                                       Navigator.pop(context);
                                     },
@@ -80,42 +81,42 @@ class BLMRegister extends StatelessWidget{
                                       key: _key1,
                                       labelText: 'Your Name',
                                       type: TextInputType.name,
-                                      labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                      labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                     ),
 
                                     MiscBLMInputFieldTemplate(
                                       key: _key2,
                                       labelText: 'Last Name',
                                       type: TextInputType.name,
-                                      labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                      labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                     ),
 
                                     MiscBLMPhoneNumberTemplate(
                                       key: _key3,
                                       labelText: 'Mobile #',
                                       type: TextInputType.phone,
-                                      labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                      labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                     ),
 
                                     MiscBLMInputFieldTemplate(
                                       key: _key4,
                                       labelText: 'Email Address',
                                       type: TextInputType.emailAddress,
-                                      labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                      labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                     ),
 
                                     MiscBLMInputFieldTemplate(
                                       key: _key5,
                                       labelText: 'Username',
                                       type: TextInputType.text,
-                                      labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                      labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                     ),
 
                                     MiscBLMInputFieldTemplate(
                                       key: _key6,
                                       labelText: 'Password',
                                       type: TextInputType.text,
-                                      labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                      labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                       obscureText: true,
                                     ),
                                   ],
@@ -128,7 +129,7 @@ class BLMRegister extends StatelessWidget{
 
                               MiscBLMButtonTemplate(
                                 buttonText: 'Next',
-                                buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                                buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                                 width: SizeConfig.screenWidth! / 2,
                                 height: 50,
                                 buttonColor: const Color(0xff000000),
@@ -140,8 +141,8 @@ class BLMRegister extends StatelessWidget{
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                        description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                        title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                        description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         buttonOkColor: const Color(0xffff0000),
@@ -155,8 +156,8 @@ class BLMRegister extends StatelessWidget{
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                        description: const Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                        title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                        description: const Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         buttonOkColor: const Color(0xffff0000),
@@ -179,8 +180,8 @@ class BLMRegister extends StatelessWidget{
                                       await showDialog(
                                         context: context,
                                         builder: (_) => AssetGiffyDialog(
-                                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                          description: Text('$result', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                          title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                          description: Text(result, textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                           entryAnimation: EntryAnimation.DEFAULT,
                                           buttonOkColor: const Color(0xffff0000),
@@ -202,12 +203,12 @@ class BLMRegister extends StatelessWidget{
                                   children: <TextSpan>[
                                     const TextSpan(
                                       text: 'Already have an account? ',
-                                      style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                      style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                     ),
 
                                     TextSpan(
                                       text: 'Login',
-                                      style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff04ECFF),),
+                                      style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff04ECFF),),
                                       recognizer: TapGestureRecognizer()
                                       ..onTap = () {
                                         Navigator.pushNamed(context, '/blm/login');

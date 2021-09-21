@@ -24,8 +24,6 @@ Future<APIBLMShowAdminsSettingMain> apiBLMShowAdminSettings({required int memori
     ),  
   );
 
-  print('The status code of blm show admin settings is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMShowAdminsSettingMain.fromJson(newData);
@@ -65,7 +63,7 @@ class APIBLMShowAdminsSettingExtended{
   factory APIBLMShowAdminsSettingExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowAdminsSettingExtended(
       showAdminsSettingsUser: APIBLMShowAdminsSettingExtendedUser.fromJson(parsedJson['user']),
-      showAdminsSettingsRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      showAdminsSettingsRelationship: parsedJson['relationship'] ?? '',
     );
   }
 }
@@ -81,10 +79,10 @@ class APIBLMShowAdminsSettingExtendedUser{
   factory APIBLMShowAdminsSettingExtendedUser.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowAdminsSettingExtendedUser(
       showAdminsSettingsUserId: parsedJson['id'],
-      showAdminsSettingsUserFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      showAdminsSettingsUserLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      showAdminsSettingsUserImage: parsedJson['image'] != null ? parsedJson['image'] : '',
-      showAdminsSettingsUserEmail: parsedJson['email'] != null ? parsedJson['email'] : '',
+      showAdminsSettingsUserFirstName: parsedJson['first_name'] ?? '',
+      showAdminsSettingsUserLastName: parsedJson['last_name'] ?? '',
+      showAdminsSettingsUserImage: parsedJson['image'] ?? '',
+      showAdminsSettingsUserEmail: parsedJson['email'] ?? '',
     );
   }
 }

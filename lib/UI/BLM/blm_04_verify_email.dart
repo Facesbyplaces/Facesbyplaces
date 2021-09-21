@@ -11,6 +11,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class BLMVerifyEmail extends StatelessWidget{
+  BLMVerifyEmail({Key? key}) : super(key: key);
   final TextEditingController controller = TextEditingController(text: '');
 
   @override
@@ -35,9 +36,9 @@ class BLMVerifyEmail extends StatelessWidget{
                 child: Container(
                   height: SizeConfig.screenHeight,
                   decoration: const BoxDecoration(
-                    image: const DecorationImage(
+                    image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: const AssetImage('assets/icons/background2.png'),
+                      image: AssetImage('assets/icons/background2.png'),
                     ),
                   ),
                 ),
@@ -56,7 +57,7 @@ class BLMVerifyEmail extends StatelessWidget{
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: IconButton(
-                                  icon: const Icon(Icons.arrow_back, color: const Color(0xff000000), size: 35,),
+                                  icon: const Icon(Icons.arrow_back, color: Color(0xff000000), size: 35,),
                                   onPressed: (){
                                     Navigator.pop(context);
                                   },
@@ -65,15 +66,15 @@ class BLMVerifyEmail extends StatelessWidget{
 
                               const SizedBox(height: 40,),
 
-                              const Center(child: const Text('Verify Email', style: const TextStyle(fontSize: 42, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
+                              const Center(child: Text('Verify Email', style: TextStyle(fontSize: 42, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),),
 
                               const SizedBox(height: 40,),
 
                               const Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 40),
-                                child: const Text('We have sent a verification code to your email address. Please enter the verification code to continue.',
+                                padding: EdgeInsets.symmetric(horizontal: 40),
+                                child: Text('We have sent a verification code to your email address. Please enter the verification code to continue.',
                                   textAlign: TextAlign.center,
-                                  style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                  style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                 ),
                               ),
 
@@ -85,10 +86,10 @@ class BLMVerifyEmail extends StatelessWidget{
                                   fieldsAlignment: MainAxisAlignment.spaceEvenly,
                                   controller: controller,
                                   fieldsCount: 3,
-                                  textStyle: const TextStyle(fontSize: 56, fontWeight: FontWeight.bold, color: const Color(0xff000000),),
-                                  followingFieldDecoration: const BoxDecoration(border: const Border(bottom: const BorderSide(color: const Color(0xff000000),),),),
-                                  selectedFieldDecoration: const BoxDecoration(border: const Border(bottom: const BorderSide(color: const Color(0xff000000),),),),
-                                  submittedFieldDecoration: const BoxDecoration(border: const Border(bottom: const BorderSide(color: const Color(0xff000000),),),),
+                                  textStyle: const TextStyle(fontSize: 56, fontWeight: FontWeight.bold, color: Color(0xff000000),),
+                                  followingFieldDecoration: const BoxDecoration(border: Border(bottom: BorderSide(color: Color(0xff000000),),),),
+                                  selectedFieldDecoration: const BoxDecoration(border: Border(bottom: BorderSide(color: Color(0xff000000),),),),
+                                  submittedFieldDecoration: const BoxDecoration(border: Border(bottom: BorderSide(color: Color(0xff000000),),),),
                                 ),
                               ),
 
@@ -97,11 +98,11 @@ class BLMVerifyEmail extends StatelessWidget{
                               RichText(
                                 text: TextSpan(
                                   children: <TextSpan>[
-                                    const TextSpan(text: 'Didn\'t receive a code? ', style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                                    const TextSpan(text: 'Didn\'t receive a code? ', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
 
                                     TextSpan(
                                       text: 'Resend',
-                                      style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000), decoration: TextDecoration.underline),
+                                      style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff000000), decoration: TextDecoration.underline),
                                       recognizer: TapGestureRecognizer()
                                       ..onTap = () async{
                                         context.loaderOverlay.show();
@@ -112,8 +113,8 @@ class BLMVerifyEmail extends StatelessWidget{
                                           await showDialog(
                                             context: context,
                                             builder: (_) => AssetGiffyDialog(
-                                              title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                              description: const Text('Another code has been sent to your email address. Please check your inbox.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                              title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                              description: const Text('Another code has been sent to your email address. Please check your inbox.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                               entryAnimation: EntryAnimation.DEFAULT,
                                               onlyOkButton: true,
@@ -126,8 +127,8 @@ class BLMVerifyEmail extends StatelessWidget{
                                           await showDialog(
                                             context: context,
                                             builder: (_) => AssetGiffyDialog(
-                                              title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                              description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                              title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                              description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                               entryAnimation: EntryAnimation.DEFAULT,
                                               buttonOkColor: const Color(0xffff0000),
@@ -148,7 +149,7 @@ class BLMVerifyEmail extends StatelessWidget{
 
                               MiscBLMButtonTemplate(
                                 buttonText: controller.text.length != 3 ? 'Next' : 'Sign Up',
-                                buttonTextStyle: const TextStyle(fontSize: 24, color: const Color(0xffffffff), fontFamily: 'NexaBold'),
+                                buttonTextStyle: const TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold'),
                                 buttonColor: const Color(0xff000000),
                                 width: SizeConfig.screenWidth! / 2,
                                 height: 50,
@@ -157,8 +158,8 @@ class BLMVerifyEmail extends StatelessWidget{
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                        description: const Text('Please enter the verification code.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                        title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                        description: const Text('Please enter the verification code.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         buttonOkColor: const Color(0xffff0000),
@@ -179,7 +180,7 @@ class BLMVerifyEmail extends StatelessWidget{
                                       await showDialog(
                                         context: context,
                                         builder: (_) => AssetGiffyDialog(
-                                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                          title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                                           description: Text('Error: $result', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                           entryAnimation: EntryAnimation.DEFAULT,

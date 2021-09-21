@@ -24,8 +24,6 @@ Future<APIRegularShowNotificationStatus> apiRegularShowNotificationStatus({requi
     ),
   );
 
-  print('The status code of regular show notification settings is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIRegularShowNotificationStatus.fromJson(newData);

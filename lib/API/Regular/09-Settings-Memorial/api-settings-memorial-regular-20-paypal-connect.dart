@@ -13,8 +13,6 @@ Future<bool> apiRegularMemorialPaypalConnect({required String userId, required S
     ),
   );
 
-  print('The status code of regular paypal connect is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

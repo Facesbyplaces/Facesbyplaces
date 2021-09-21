@@ -26,8 +26,6 @@ Future<String> apiBLMLeavePage({required int memorialId}) async{
     ),  
   );
 
-  print('The status code of blm leave page is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return result;
   }else{

@@ -25,8 +25,6 @@ Future<bool> apiBLMHideEmail({required bool hide}) async{
     ),  
   );
 
-  print('The status code of blm hide email is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

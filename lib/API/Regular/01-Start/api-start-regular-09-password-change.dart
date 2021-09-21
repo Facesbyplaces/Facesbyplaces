@@ -17,8 +17,6 @@ Future<bool> apiRegularPasswordChange({required String password, required String
     ),  
   );
 
-  print('The status code of regular password change is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     var user = newData['data'];

@@ -36,8 +36,6 @@ Future<bool> apiRegularLikeOrUnlikeCommentReply({required String commentableType
     ),
   );
 
-  print('The status code of regular comment reply like or unlike is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

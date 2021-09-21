@@ -24,8 +24,6 @@ Future<APIRegularShowAccountDetails> apiRegularShowAccountDetails({required int 
     ),
   );
 
-  print('The status code of regular show account details is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIRegularShowAccountDetails.fromJson(newData);
@@ -44,11 +42,11 @@ class APIRegularShowAccountDetails{
 
   factory APIRegularShowAccountDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowAccountDetails(
-      showAccountDetailsFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      showAccountDetailsLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      showAccountDetailsEmail: parsedJson['email'] != null ? parsedJson['email'] : '',
-      showAccountDetailsPhoneNumber: parsedJson['phone_number'] != null ? parsedJson['phone_number'] : '',
-      showAccountDetailsQuestion: parsedJson['question'] != null ? parsedJson['question'] : '',
+      showAccountDetailsFirstName: parsedJson['first_name'] ?? '',
+      showAccountDetailsLastName: parsedJson['last_name'] ?? '',
+      showAccountDetailsEmail: parsedJson['email'] ?? '',
+      showAccountDetailsPhoneNumber: parsedJson['phone_number'] ?? '',
+      showAccountDetailsQuestion: parsedJson['question'] ?? '',
     );
   }
 }

@@ -25,8 +25,6 @@ Future<APIRegularSearchUsersMain> apiRegularSearchUsers({required String keyword
     ),
   );
 
-  print('The status code of regular search users is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIRegularSearchUsersMain.fromJson(newData);
@@ -63,11 +61,11 @@ class APIBLMSearchUsersExtended{
   factory APIBLMSearchUsersExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMSearchUsersExtended(
       searchUsersId: parsedJson['id'],
-      searchUsersFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      searchUsersLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      searchUsersEmail: parsedJson['email'] != null ? parsedJson['email'] : '',
+      searchUsersFirstName: parsedJson['first_name'] ?? '',
+      searchUsersLastName: parsedJson['last_name'] ?? '',
+      searchUsersEmail: parsedJson['email'] ?? '',
       searchUsersAccountType: parsedJson['account_type'],
-      searchUsersImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      searchUsersImage: parsedJson['image'] ?? '',
     );
   }
 }

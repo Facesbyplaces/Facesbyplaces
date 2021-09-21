@@ -26,8 +26,6 @@ Future<APIBLMHomeTabMemorialMain> apiBLMHomeMemorialsTab({required int page}) as
     ),  
   );
 
-  print('The status code of blm home memorials tab is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMHomeTabMemorialMain.fromJson(newData);

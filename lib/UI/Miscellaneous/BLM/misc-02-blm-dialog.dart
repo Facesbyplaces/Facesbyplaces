@@ -5,24 +5,25 @@ import 'package:flutter/material.dart';
 class MiscBLMUploadFromDialog extends StatelessWidget{
   final String choice_1;
   final String choice_2;
-  const MiscBLMUploadFromDialog({this.choice_1 = 'Camera', this.choice_2 = 'Gallery'});
+  const MiscBLMUploadFromDialog({Key? key, this.choice_1 = 'Camera', this.choice_2 = 'Gallery'}) : super(key: key);
 
+  @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
     return Dialog(
-      shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
       child: Container(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Choose file to Upload:', style: const TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xff000000),),),
+            const Text('Choose file to Upload:', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xff000000),),),
 
             const SizedBox(height: 40,),
 
             GestureDetector(
-              child: Text(choice_1, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffC1C1C1),),),
+              child: Text(choice_1, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffC1C1C1),),),
               onTap: (){
                 Navigator.pop(context, 1);
               },
@@ -31,7 +32,7 @@ class MiscBLMUploadFromDialog extends StatelessWidget{
             const SizedBox(height: 40,),
 
             GestureDetector(
-              child: Text(choice_2, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffC1C1C1),),),
+              child: Text(choice_2, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffC1C1C1),),),
               onTap: (){
                 Navigator.pop(context, 2);
               },
@@ -44,11 +45,12 @@ class MiscBLMUploadFromDialog extends StatelessWidget{
 }
 
 class MiscBLMRelationshipFromDialog extends StatelessWidget{
-  const MiscBLMRelationshipFromDialog();
+  const MiscBLMRelationshipFromDialog({Key? key}) : super(key: key);
 
+  @override
   Widget build(BuildContext context){
     return Dialog(
-      shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         physics: const ClampingScrollPhysics(),
@@ -56,12 +58,12 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('Choose the relationship of this person:', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+            const Text('Choose the relationship of this person:', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff000000),),),
 
             const SizedBox(height: 40,),
 
             GestureDetector(
-              child: Text('Father', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000).withOpacity(0.5),),),
+              child: Text('Father', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),
               onTap: (){
                 Navigator.pop(context, 'Father');
               },
@@ -70,7 +72,7 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
             const SizedBox(height: 40,),
 
             GestureDetector(
-              child: Text('Mother', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000).withOpacity(0.5),),),
+              child: Text('Mother', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),
               onTap: (){
                 Navigator.pop(context, 'Mother');
               },
@@ -79,7 +81,7 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
             const SizedBox(height: 40,),
 
             GestureDetector(
-              child: Text('Sister', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000).withOpacity(0.5),),),
+              child: Text('Sister', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),
               onTap: (){
                 Navigator.pop(context, 'Sister');
               },
@@ -88,7 +90,7 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
             const SizedBox(height: 40,),
 
             GestureDetector(
-              child: Text('Brother', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000).withOpacity(0.5),),),
+              child: Text('Brother', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),
               onTap: (){
                 Navigator.pop(context, 'Brother');
               },
@@ -97,7 +99,7 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
             const SizedBox(height: 40,),
 
             GestureDetector(
-              child: Text('Aunt', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000).withOpacity(0.5),),),
+              child: Text('Aunt', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),
               onTap: (){
                 Navigator.pop(context, 'Aunt');
               },
@@ -106,22 +108,22 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
             const SizedBox(height: 40,),
 
             GestureDetector(
-              child: Text('Uncle', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000).withOpacity(0.5),),),
+              child: Text('Uncle', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),
               onTap: (){
                 Navigator.pop(context, 'Uncle');
               },
             ),
 
-            SizedBox(height: 40,),
+            const SizedBox(height: 40,),
 
             GestureDetector(
-              child: Text('Nephew', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000).withOpacity(0.5),),),
+              child: Text('Nephew', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),
               onTap: (){
                 Navigator.pop(context, 'Nephew');
               },
             ),
 
-            SizedBox(height: 40,),
+            const SizedBox(height: 40,),
 
             GestureDetector(
               child: Text('Grandfather', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),
@@ -133,7 +135,7 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
             const SizedBox(height: 40,),
 
             GestureDetector(
-              child: Text('Grandmother', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000).withOpacity(0.5),),),
+              child: Text('Grandmother', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),
               onTap: (){
                 Navigator.pop(context, 'Grandmother');
               },
@@ -155,28 +157,30 @@ class MiscBLMConfirmDialog extends StatelessWidget{
   final Color confirmColor_1;
   final Color confirmColor_2;
   const MiscBLMConfirmDialog({
+    Key? key,
     this.title = 'Confirm Delete',
     this.content = 'Are you sure you want to delete "Mark Jacksons Memorial"?',
     this.confirm_1 = 'Yes',
     this.confirm_2 = 'No',
     this.confirmColor_1 = const Color(0xffFF0000),
     this.confirmColor_2 = const Color(0xff04ECFF),
-  });
+  }) : super(key: key);
 
+  @override
   Widget build(BuildContext context){
     return Dialog(
-      shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
       child: Container(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(title, style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+            Text(title, style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff000000),),),
 
             const SizedBox(height: 20,),
 
-            Text(content, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+            Text(content, textAlign: TextAlign.center, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
 
             const SizedBox(height: 20,),
 

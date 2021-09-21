@@ -27,7 +27,7 @@ Future<String> apiRegularAddFamily({required int memorialId, required int userId
     MapEntry('page_type', MultipartFile.fromString('Memorial'),),
     MapEntry('page_id', MultipartFile.fromString('$memorialId')),
     MapEntry('user_id', MultipartFile.fromString('$userId'),),
-    MapEntry('relationship', MultipartFile.fromString('$relationship'),),
+    MapEntry('relationship', MultipartFile.fromString(relationship),),
     MapEntry('account_type', MultipartFile.fromString('$accountType'),),
   ]);
 
@@ -44,8 +44,6 @@ Future<String> apiRegularAddFamily({required int memorialId, required int userId
       }
     ),  
   );
-
-  print('The status code of regular add family is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return 'Success';

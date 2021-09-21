@@ -36,13 +36,11 @@ Future<bool> apiBLMModifyUnfollowPage({required String pageType, required int pa
       }
     ),
     queryParameters: <String, dynamic>{
-      'page_type': '$pageType',
-      'page_id': '$pageId',
+      'page_type': pageType,
+      'page_id': pageId,
       'follow': false,
     }
   );
-
-  print('The status code of blm follow page is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'regular-04-verify-email.dart';
 
 class RegularRegister extends StatelessWidget{
+  RegularRegister({Key? key}) : super(key: key);
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularPhoneNumberTemplateState> _key3 = GlobalKey<MiscRegularPhoneNumberTemplateState>();
@@ -40,8 +41,8 @@ class RegularRegister extends StatelessWidget{
                   child: Container(
                     height: SizeConfig.screenHeight,
                     decoration: const BoxDecoration(
-                      color: const Color(0xffffffff),
-                      image: const DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/background2.png'), colorFilter: const ColorFilter.srgbToLinearGamma(),),
+                      color: Color(0xffffffff),
+                      image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),
                     ),
                   ),
                 ),
@@ -58,11 +59,11 @@ class RegularRegister extends StatelessWidget{
                               children: [
                                 Container(
                                   height: SizeConfig.screenHeight! / 6,
-                                  decoration: const BoxDecoration(image: const DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/regular-background.png'),),),
+                                  decoration: const BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/regular-background.png'),),),
                                   child: Align(
                                     alignment: Alignment.topLeft,
                                     child: IconButton(
-                                      icon: const Icon(Icons.arrow_back, color: const Color(0xffFFFFFF), size: 35),
+                                      icon: const Icon(Icons.arrow_back, color: Color(0xffFFFFFF), size: 35),
                                       onPressed: (){
                                         Navigator.pop(context);
                                       },
@@ -70,7 +71,7 @@ class RegularRegister extends StatelessWidget{
                                   ),
                                 ),
 
-                                SizedBox(height: 10,),
+                                const SizedBox(height: 10,),
 
                                 Container(
                                   padding:const  EdgeInsets.symmetric(horizontal: 40),
@@ -80,21 +81,21 @@ class RegularRegister extends StatelessWidget{
                                         key: _key1,
                                         labelText: 'First Name',
                                         type: TextInputType.name,
-                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                       ),
 
                                       MiscRegularInputFieldTemplate(
                                         key: _key2,
                                         labelText: 'Last Name',
                                         type: TextInputType.name,
-                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                       ),
 
                                       MiscRegularPhoneNumberTemplate(
                                         key: _key3,
                                         labelText: 'Mobile #',
                                         type: TextInputType.phone,
-                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),
+                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),
                                         ),
                                       ),
 
@@ -102,21 +103,21 @@ class RegularRegister extends StatelessWidget{
                                         key: _key4,
                                         labelText: 'Email Address',
                                         type: TextInputType.emailAddress,
-                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                       ),
 
                                       MiscRegularInputFieldTemplate(
                                         key: _key5,
                                         labelText: 'Username',
                                         type: TextInputType.text,
-                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                       ),
 
                                       MiscRegularInputFieldTemplate(
                                         key: _key6,
                                         labelText: 'Password',
                                         type: TextInputType.text,
-                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                         obscureText: true,
                                       ),
                                     ],
@@ -129,7 +130,7 @@ class RegularRegister extends StatelessWidget{
 
                                 MiscRegularButtonTemplate(
                                   buttonText: 'Next',
-                                  buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                                  buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                                   width: SizeConfig.screenWidth! / 2,
                                   height: 50,
                                   buttonColor: const Color(0xff04ECFF),
@@ -141,8 +142,8 @@ class RegularRegister extends StatelessWidget{
                                       await showDialog(
                                         context: context,
                                         builder: (_) => AssetGiffyDialog(
-                                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                          description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                          title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                          description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                           entryAnimation: EntryAnimation.DEFAULT,
                                           buttonOkColor: const Color(0xffff0000),
@@ -156,8 +157,8 @@ class RegularRegister extends StatelessWidget{
                                       await showDialog(
                                         context: context,
                                         builder: (_) => AssetGiffyDialog(
-                                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                          description: const Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                          title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                          description: const Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                           entryAnimation: EntryAnimation.DEFAULT,
                                           buttonOkColor: const Color(0xffff0000),
@@ -180,8 +181,8 @@ class RegularRegister extends StatelessWidget{
                                         await showDialog(
                                           context: context,
                                           builder: (_) => AssetGiffyDialog(
-                                            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                            description: Text('$result', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                            description: Text(result, textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                             entryAnimation: EntryAnimation.DEFAULT,
                                             buttonOkColor: const Color(0xffff0000),
@@ -203,12 +204,12 @@ class RegularRegister extends StatelessWidget{
                                     children: <TextSpan>[
                                       const TextSpan(
                                         text: 'Already have an account? ', 
-                                        style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                        style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                       ),
 
                                       TextSpan(
                                         text: 'Login',
-                                        style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff04ECFF),),
+                                        style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff04ECFF),),
                                         recognizer: TapGestureRecognizer()
                                         ..onTap = (){
                                           Navigator.pushNamed(context, '/regular/login');

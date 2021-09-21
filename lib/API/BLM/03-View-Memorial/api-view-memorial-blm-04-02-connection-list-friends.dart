@@ -71,7 +71,7 @@ class APIBLMConnectionListFriendsExtended{
   factory APIBLMConnectionListFriendsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMConnectionListFriendsExtended(
       connectionListFriendsUser: APIBLMConnectionListFriendsExtendedDetails.fromJson(parsedJson['user']),
-      connectionListFriendsRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      connectionListFriendsRelationship: parsedJson['relationship'] ?? '',
     );
   }
 }
@@ -87,9 +87,9 @@ class APIBLMConnectionListFriendsExtendedDetails{
   factory APIBLMConnectionListFriendsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMConnectionListFriendsExtendedDetails(
       connectionListFriendsDetailsId: parsedJson['id'],
-      connectionListFriendsDetailsFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      connectionListFriendsDetailsLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      connectionListFriendsDetailsImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      connectionListFriendsDetailsFirstName: parsedJson['first_name'] ?? '',
+      connectionListFriendsDetailsLastName: parsedJson['last_name'] ?? '',
+      connectionListFriendsDetailsImage: parsedJson['image'] ?? '',
       connectionListFriendsAccountType: parsedJson['account_type'],
     );
   }

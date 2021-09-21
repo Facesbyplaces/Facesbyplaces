@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, unnecessary_const
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
@@ -37,8 +37,9 @@ class MiscRegularPost extends StatefulWidget{
   final String location;
   final double latitude;
   final double longitude;
-  const MiscRegularPost({required Key key, required this.contents, required this.userId, required this.postId, required this.memorialId, required this.profileImage, this.memorialName = '', this.timeCreated = '', required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship, required this.location, required this.latitude, required this.longitude}) : super(key: key);
+  const MiscRegularPost({Key? key, required this.contents, required this.userId, required this.postId, required this.memorialId, required this.profileImage, this.memorialName = '', this.timeCreated = '', required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship, required this.location, required this.latitude, required this.longitude}) : super(key: key);
 
+  @override
   MiscRegularPostState createState() => MiscRegularPostState();
 }
 
@@ -47,6 +48,7 @@ class MiscRegularPostState extends State<MiscRegularPost>{
   ValueNotifier<int> commentsCount = ValueNotifier<int>(0);
   int likesCount = 0;
 
+  @override
   void initState(){
     super.initState();
     likePost.value = widget.likeStatus;
@@ -64,9 +66,7 @@ class MiscRegularPostState extends State<MiscRegularPost>{
         builder: (_, int commentsCountListener, __) => GestureDetector(
           onTap: () async{
             final returnValue = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: widget.postId)));
-            print('The return value is $returnValue');
             commentsCount.value = int.parse(returnValue.toString());
-            print('New refreshed!');
           },
           child: Container(
             padding: const EdgeInsets.only(left: 10.0, right: 10.0,),
@@ -96,11 +96,11 @@ class MiscRegularPostState extends State<MiscRegularPost>{
                     backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                   )
                   : const CircleAvatar(
-                    backgroundColor: const Color(0xff888888),
-                    foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                    backgroundColor: Color(0xff888888),
+                    foregroundImage: AssetImage('assets/icons/app-icon.png'),
                   ),
-                  title: Text(widget.memorialName, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-                  subtitle: Text(widget.timeCreated, maxLines: 1, style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),),
+                  title: Text(widget.memorialName, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
+                  subtitle: Text(widget.timeCreated, maxLines: 1, style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),),
                   trailing: MiscRegularDropDownTemplate(postId: widget.postId, likePost: likePostListener, likesCount: likesCount, reportType: 'Post', pageType: widget.pageType, pageName: widget.memorialName),
                   onTap: (){
                     if(widget.pageType == 'Memorial'){
@@ -131,15 +131,15 @@ class MiscRegularPostState extends State<MiscRegularPost>{
                         child: RichText(
                           text: TextSpan(
                             children: [
-                              const TextSpan(style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: const Color(0xff888888)), text: 'with '),
+                              const TextSpan(style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: Color(0xff888888)), text: 'with '),
 
                               TextSpan(
                                 children: List.generate(widget.numberOfTagged, (index) => TextSpan(
-                                  style: const TextStyle(fontSize: 18, fontFamily: 'NexaBold', color: const Color(0xff000000),),
+                                  style: const TextStyle(fontSize: 18, fontFamily: 'NexaBold', color: Color(0xff000000),),
                                     children: <TextSpan>[
                                       TextSpan(text: widget.taggedFirstName[index],),
 
-                                      TextSpan(text: ' '),
+                                      const TextSpan(text: ' '),
 
                                       TextSpan(text: widget.taggedLastName[index],),
 
@@ -163,9 +163,9 @@ class MiscRegularPostState extends State<MiscRegularPost>{
 
                     Row(
                       children: [
-                        const Icon(Icons.place, color: const Color(0xff888888)),
+                        const Icon(Icons.place, color: Color(0xff888888)),
 
-                        Expanded(child: Text('${widget.location}', style: TextStyle(fontSize: 18, fontFamily: 'NexaBold', color: const Color(0xff000000),),),),
+                        Expanded(child: Text(widget.location, style: const TextStyle(fontSize: 18, fontFamily: 'NexaBold', color: Color(0xff000000),),),),
                       ],
                     ),
                   ],
@@ -176,9 +176,9 @@ class MiscRegularPostState extends State<MiscRegularPost>{
                   children: [
                     TextButton.icon(
                       icon: likePostListener == true
-                      ? const FaIcon(FontAwesomeIcons.solidHeart, color: const Color(0xffE74C3C),)
-                      : const FaIcon(FontAwesomeIcons.heart, color: const Color(0xff888888),),
-                      label: Text('$likesCount', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                      ? const FaIcon(FontAwesomeIcons.solidHeart, color: Color(0xffE74C3C),)
+                      : const FaIcon(FontAwesomeIcons.heart, color: Color(0xff888888),),
+                      label: Text('$likesCount', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
                       onPressed: () async{
                         likePost.value = !likePost.value;
 
@@ -195,8 +195,8 @@ class MiscRegularPostState extends State<MiscRegularPost>{
                     const SizedBox(width: 20),
 
                     TextButton.icon(
-                      icon: const FaIcon(FontAwesomeIcons.solidComment, color: const Color(0xff4EC9D4),),
-                      label: Text('$commentsCountListener', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                      icon: const FaIcon(FontAwesomeIcons.solidComment, color: Color(0xff4EC9D4),),
+                      label: Text('$commentsCountListener', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
                       onPressed: () async{
                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: widget.postId)));
                       },
@@ -207,7 +207,7 @@ class MiscRegularPostState extends State<MiscRegularPost>{
                     IconButton(
                       alignment: Alignment.centerRight,
                       splashColor: Colors.transparent,
-                      icon: const CircleAvatar(backgroundColor: const Color(0xff4EC9D4), child: const Icon(Icons.share_rounded, color: const Color(0xffffffff)),),
+                      icon: const CircleAvatar(backgroundColor: Color(0xff4EC9D4), child: Icon(Icons.share_rounded, color: const Color(0xffffffff)),),
                       onPressed: () async{
                         BranchUniversalObject buo = BranchUniversalObject(
                           canonicalIdentifier: 'FacesbyPlaces',
@@ -241,8 +241,8 @@ class MiscRegularPostState extends State<MiscRegularPost>{
                           await showDialog(
                             context: context,
                             builder: (_) => AssetGiffyDialog(
-                              description: Text('Successfully shared the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                              title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                              description: const Text('Successfully shared the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                              title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                               entryAnimation: EntryAnimation.DEFAULT,
                               onlyOkButton: true,

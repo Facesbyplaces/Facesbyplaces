@@ -37,8 +37,6 @@ Future<APIBLMShowOriginalPostMain> apiBLMShowOriginalPost({required int postId})
     ),  
   );
 
-  print('The status code of blm show original post is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMShowOriginalPostMain.fromJson(newData);
@@ -88,10 +86,10 @@ class APIBLMShowOriginalPostExtended{
       showOriginalPostId: parsedJson['id'],
       showOriginalPostPage: APIBLMShowOriginalPostExtendedPage.fromJson(parsedJson['page']),
       showOriginalPostBody: parsedJson['body'],
-      showOriginalPostLocation: parsedJson['location'] != null ? parsedJson['location'] : '',
+      showOriginalPostLocation: parsedJson['location'] ?? '',
       showOriginalPostLatitude: parsedJson['latitude'],
       showOriginalPostLongitude: parsedJson['longitude'],
-      showOriginalPostImagesOrVideos: newList != null ? newList : [],
+      showOriginalPostImagesOrVideos: newList ?? [],
       showOriginalPostPostTagged: taggedList,
       showOriginalPostCreatedAt: parsedJson['created_at'],
       showOriginalPostNumberOfLikes: parsedJson['numberOfLikes'],
@@ -149,8 +147,8 @@ class APIBLMShowOriginalPostExtendedTagged{
   factory APIBLMShowOriginalPostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowOriginalPostExtendedTagged(
       showOriginalPostTaggedId: parsedJson['id'],
-      showOriginalPostTaggedFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      showOriginalPostTaggedLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      showOriginalPostTaggedFirstName: parsedJson['first_name'] ?? '',
+      showOriginalPostTaggedLastName: parsedJson['last_name'] ?? '',
       showOriginalPostAccountType: parsedJson['account_type'],
     );
   }

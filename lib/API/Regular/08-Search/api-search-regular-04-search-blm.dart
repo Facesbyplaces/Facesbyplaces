@@ -25,8 +25,6 @@ Future<APIRegularSearchBLMMemorialMain> apiRegularSearchBLM({required String key
     ),  
   );
 
-  print('The status code of regular search blm is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIRegularSearchBLMMemorialMain.fromJson(newData);
@@ -81,12 +79,12 @@ class APIRegularSearchBLMMemorialExtendedPage{
       searchBLMMemorialPageId: parsedJson['id'],
       searchBLMMemorialPageName: parsedJson['name'],
       searchBLMMemorialPageDetails: APIRegularSearchBLMMemorialExtendedPageDetails.fromJson(parsedJson['details']),
-      searchBLMMemorialPageProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
-      searchBLMMemorialPageRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      searchBLMMemorialPageProfileImage: parsedJson['profileImage'] ?? '',
+      searchBLMMemorialPageRelationship: parsedJson['relationship'] ?? '',
       searchBLMMemorialPageManage: parsedJson['manage'],
       searchBLMMemorialPageFamOrFriends: parsedJson['famOrFriends'],
       searchBLMMemorialPageFollower: parsedJson['follower'],
-      searchBLMMemorialPagePageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
+      searchBLMMemorialPagePageType: parsedJson['page_type'] ?? '',
     );
   }
 }
@@ -97,7 +95,7 @@ class APIRegularSearchBLMMemorialExtendedPageDetails{
 
   factory APIRegularSearchBLMMemorialExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchBLMMemorialExtendedPageDetails(
-      searchBLMMemorialPageDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
+      searchBLMMemorialPageDetailsDescription: parsedJson['description'] ?? '',
     );
   }
 }

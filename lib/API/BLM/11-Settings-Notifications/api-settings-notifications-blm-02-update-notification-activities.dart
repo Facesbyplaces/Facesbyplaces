@@ -24,8 +24,6 @@ Future<bool> apiBLMUpdateNotificationActivities({required bool hide}) async{
     ),  
   );
 
-  print('The status code of blm update notification activities is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

@@ -29,8 +29,6 @@ Future<bool> apiRegularAddPassword({required String newPassword}) async{
     ),
   );
 
-  print('The status code of regular update user profile picture is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

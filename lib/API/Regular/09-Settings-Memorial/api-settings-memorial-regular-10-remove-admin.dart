@@ -43,8 +43,6 @@ Future<String> apiRegularDeleteMemorialAdmin({required String pageType, required
     ),  
   );
 
-  print('The status code of regular remove admin is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return 'Success';
   }else{

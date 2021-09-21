@@ -24,8 +24,6 @@ Future<bool> apiRegularUpdateNotificationAddFamily({required bool hide}) async{
     ),  
   );
 
-  print('The status code of regular update notification add family is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

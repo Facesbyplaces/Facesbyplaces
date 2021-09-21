@@ -43,9 +43,9 @@ class RegularGoogleAuthentication {
     if(googleSignInAccount != null){
       
       final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
-      FlutterClipboard.copy('${googleSignInAuthentication.idToken}').then(( value ) => print('Auth token copied!')); // verified on node
+      FlutterClipboard.copy('${googleSignInAuthentication.idToken}').then((value){}); // verified on node
 
-      bool result = await apiRegularSignInWithGoogle(
+      await apiRegularSignInWithGoogle(
         firstName: googleSignInAccount.displayName!, 
         lastName: '', 
         email: googleSignInAccount.email, 
@@ -57,7 +57,7 @@ class RegularGoogleAuthentication {
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
             description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center,),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
@@ -71,20 +71,17 @@ class RegularGoogleAuthentication {
         throw Exception('$error');
       });
 
-      print('The sign in with google result is $result');
-
       final AuthCredential credential = GoogleAuthProvider.credential(accessToken: googleSignInAuthentication.accessToken, idToken: googleSignInAuthentication.idToken,);
 
       try{
         final UserCredential userCredential = await auth.signInWithCredential(credential);
         user = userCredential.user;
       }on FirebaseAuthException catch (e){
-        print('The firebase error is $e');
         if(e.code == 'account-exists-with-different-credential'){
           await showDialog(
             context: context,
             builder: (_) => AssetGiffyDialog(
-              title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+              title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
               description: const Text('The account already exists with a different credential.', textAlign: TextAlign.center,),
               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
               entryAnimation: EntryAnimation.DEFAULT,
@@ -102,7 +99,7 @@ class RegularGoogleAuthentication {
             builder: (_) => 
               AssetGiffyDialog(
               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-              title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+              title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
               entryAnimation: EntryAnimation.DEFAULT,
               description: const Text('Error occurred while accessing credentials. Try again.',
                 textAlign: TextAlign.center,
@@ -119,7 +116,7 @@ class RegularGoogleAuthentication {
         await showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
             description: const Text('Error occurred while accessing credentials. Try again.', textAlign: TextAlign.center,),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
@@ -144,7 +141,7 @@ class RegularGoogleAuthentication {
       await showDialog(
         context: context,
         builder: (_) => AssetGiffyDialog(
-          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+          title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
           description: const Text('Error signing out. Try again.', textAlign: TextAlign.center,),
           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
           entryAnimation: EntryAnimation.DEFAULT,

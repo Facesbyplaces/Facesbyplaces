@@ -25,11 +25,9 @@ Future<bool> apiBLMMemorialSetRelationship({required int memorialId, required St
     ),
     queryParameters: <String, dynamic>{
       'id': '$memorialId',
-      'relationship': '$relationship',
+      'relationship': relationship,
     }
   );
-
-  print('The status code of blm set relationship is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

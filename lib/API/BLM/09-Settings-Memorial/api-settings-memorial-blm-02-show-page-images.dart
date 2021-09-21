@@ -25,8 +25,6 @@ Future<APIBLMShowPageImagesMain> apiBLMShowPageImages({required int memorialId})
     ),  
   );
 
-  print('The status code of blm show page images is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMShowPageImagesMain.fromJson(newData);

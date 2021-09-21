@@ -25,8 +25,6 @@ Future<bool> apiRegularReport({required int postId, required String reportType, 
     ),
   );
 
-  print('The status code of regular report is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

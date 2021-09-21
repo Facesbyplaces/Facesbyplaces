@@ -21,7 +21,9 @@ import 'package:flutter/services.dart';
 import '../ui-01-get-started.dart';
 
 class RegularLogin extends StatefulWidget{
+  const RegularLogin({Key? key}) : super(key: key);
 
+  @override
   RegularLoginState createState() => RegularLoginState();
 }
 
@@ -51,8 +53,8 @@ class RegularLoginState extends State<RegularLogin>{
                   child: Container(
                     height: SizeConfig.screenHeight,
                     decoration: const BoxDecoration(
-                      color: const Color(0xffffffff),
-                      image: const DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/background2.png'), colorFilter: const ColorFilter.srgbToLinearGamma(),),
+                      color: Color(0xffffffff),
+                      image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),
                     ),
                   ),
                 ),
@@ -70,7 +72,7 @@ class RegularLoginState extends State<RegularLogin>{
                                 Align(
                                   alignment: Alignment.centerLeft,
                                   child: IconButton(
-                                    icon: const Icon(Icons.arrow_back, color: const Color(0xff000000), size: 35),
+                                    icon: const Icon(Icons.arrow_back, color: Color(0xff000000), size: 35),
                                     onPressed: (){
                                       Navigator.pop(context);
                                     },
@@ -80,7 +82,7 @@ class RegularLoginState extends State<RegularLogin>{
                                 const SizedBox(height: 30,),
 
                                 Container(
-                                  child: const Text('Log In', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+                                  child: const Text('Log In', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
                                   padding: const EdgeInsets.only(left: 40),
                                   alignment: Alignment.centerLeft,
                                 ),
@@ -95,13 +97,11 @@ class RegularLoginState extends State<RegularLogin>{
                                       height: 70,
                                       width: 70,
                                       child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(primary: const Color(0xff3A559F), shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(10),),),),
+                                        style: ElevatedButton.styleFrom(primary: const Color(0xff3A559F), shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10),),),),
                                         child: Center(child: Image.asset('assets/icons/Facebook2.png',),),
                                         onPressed: () async{
                                           final fb = FacebookLogin();
                                           bool isLoggedIn = await fb.isLoggedIn;
-
-                                          print('isLoggedIn is $isLoggedIn');
 
                                           if(isLoggedIn == true){
                                             context.loaderOverlay.show();
@@ -113,7 +113,7 @@ class RegularLoginState extends State<RegularLogin>{
                                             context.loaderOverlay.hide();
 
                                             if(apiResult == true){
-                                              final OAuthCredential credential = FacebookAuthProvider.credential('${token.token}');
+                                              final OAuthCredential credential = FacebookAuthProvider.credential(token.token);
                                               await FirebaseAuth.instance.signInWithCredential(credential);
                                               final sharedPrefs = await SharedPreferences.getInstance();
                                               sharedPrefs.setBool('regular-social-app-session', true);
@@ -122,8 +122,8 @@ class RegularLoginState extends State<RegularLogin>{
                                               await showDialog(
                                                 context: context,
                                                 builder: (_) => AssetGiffyDialog(
-                                                  title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                                  description: const Text('Invalid email or password. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                                  title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                  description: const Text('Invalid email or password. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                   entryAnimation: EntryAnimation.DEFAULT,
                                                   buttonOkColor: const Color(0xffff0000),
@@ -149,7 +149,7 @@ class RegularLoginState extends State<RegularLogin>{
                                               if(apiResult == false){
                                                 await fb.logOut();
                                               }else{
-                                                final OAuthCredential credential = FacebookAuthProvider.credential('${token.token}');
+                                                final OAuthCredential credential = FacebookAuthProvider.credential(token.token);
                                                 await FirebaseAuth.instance.signInWithCredential(credential);
                                                 final sharedPrefs = await SharedPreferences.getInstance();
                                                 sharedPrefs.setBool('regular-social-app-session', true);
@@ -167,7 +167,7 @@ class RegularLoginState extends State<RegularLogin>{
                                       height: 70,
                                       width: 70,
                                       child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(primary: const Color(0xffFFFFFF), shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(10),),),),
+                                        style: ElevatedButton.styleFrom(primary: const Color(0xffFFFFFF), shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10),),),),
                                         child: Center(child: Image.asset('assets/icons/google.png',),),
                                         onPressed: () async{
                                           User? user = await RegularGoogleAuthentication.signInWithGoogle(context: context);
@@ -189,7 +189,7 @@ class RegularLoginState extends State<RegularLogin>{
                                       child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
                                           primary: const Color(0xff000000),
-                                          shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(10),),),
+                                          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10),),),
                                         ),
                                         child: Center(child: Image.asset('assets/icons/apple.png',),),
                                         onPressed: () async{
@@ -200,14 +200,8 @@ class RegularLoginState extends State<RegularLogin>{
                                             ],
                                             webAuthenticationOptions: WebAuthenticationOptions(clientId: 'com.puckproductions.facesbyplaces', redirectUri: Uri.parse('https://com.app.facesbyplaces.glitch.me/callbacks/sign_in_with_apple'),),
                                           );
-                                          final oAuthProvider = OAuthProvider('apple.com');
-                                          final newCredentials = oAuthProvider.credential(idToken: credential.identityToken, accessToken: credential.authorizationCode);
-
-                                          print('The newCredentials is $newCredentials');
-                                          print('The identification is ${credential.userIdentifier}');
-                                          print('The token is ${credential.identityToken}');
-                                          print('The state is ${credential.state}');
-                                          print('The authorization code is ${credential.authorizationCode}');
+                                          // final oAuthProvider = OAuthProvider('apple.com');
+                                          // final newCredentials = oAuthProvider.credential(idToken: credential.identityToken, accessToken: credential.authorizationCode);
 
                                           context.loaderOverlay.show();
                                           bool result = await apiRegularSignInWithApple(userIdentification: credential.userIdentifier!, identityToken: credential.identityToken!);
@@ -221,8 +215,8 @@ class RegularLoginState extends State<RegularLogin>{
                                             await showDialog(
                                               context: context,
                                               builder: (_) => AssetGiffyDialog(
-                                                title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                description: const Text('Invalid email or password. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                                title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                description: const Text('Invalid email or password. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                 entryAnimation: EntryAnimation.DEFAULT,
                                                 buttonOkColor: const Color(0xffff0000),
@@ -243,7 +237,7 @@ class RegularLoginState extends State<RegularLogin>{
 
                                 const SizedBox(height: 50),
 
-                                const Center(child: const Text('or log in with email', style: const TextStyle(fontSize: 24, color: const Color(0xff000000), fontFamily: 'NexaRegular',),),),
+                                const Center(child: Text('or log in with email', style: TextStyle(fontSize: 24, color: Color(0xff000000), fontFamily: 'NexaRegular',),),),
 
                                 const SizedBox(height: 50),
 
@@ -251,7 +245,7 @@ class RegularLoginState extends State<RegularLogin>{
                                   padding: const EdgeInsets.symmetric(horizontal: 40),
                                   child: MiscRegularInputFieldTemplate(
                                     key: _key1,
-                                    labelTextStyle: const TextStyle(fontSize: 24, color: const Color(0xff000000), fontFamily: 'NexaRegular',),
+                                    labelTextStyle: const TextStyle(fontSize: 24, color: Color(0xff000000), fontFamily: 'NexaRegular',),
                                     type: TextInputType.emailAddress,
                                     labelText: 'Email Address',
                                   ),
@@ -261,7 +255,7 @@ class RegularLoginState extends State<RegularLogin>{
                                   padding: const EdgeInsets.symmetric(horizontal: 40),
                                   child: MiscRegularInputFieldTemplate(
                                     key: _key2,
-                                    labelTextStyle: const TextStyle(fontSize: 24, color: const Color(0xff000000), fontFamily: 'NexaRegular'),
+                                    labelTextStyle: const TextStyle(fontSize: 24, color: Color(0xff000000), fontFamily: 'NexaRegular'),
                                     type: TextInputType.text,
                                     labelText: 'Password',
                                     obscureText: true,
@@ -277,8 +271,8 @@ class RegularLoginState extends State<RegularLogin>{
                                       const Spacer(),
 
                                       GestureDetector(
-                                        child: Align(
-                                          child: const Text('Forgot Password?', style: const TextStyle(color: const Color(0xff2F353D), fontSize: 20, fontFamily: 'NexaRegular', decoration: TextDecoration.underline),),
+                                        child: const Align(
+                                          child: Text('Forgot Password?', style: TextStyle(color: Color(0xff2F353D), fontSize: 20, fontFamily: 'NexaRegular', decoration: TextDecoration.underline),),
                                           alignment: Alignment.centerRight,
                                         ),
                                         onTap: (){
@@ -295,7 +289,7 @@ class RegularLoginState extends State<RegularLogin>{
 
                                 MiscRegularButtonTemplate(
                                   buttonText: 'Log In',
-                                  buttonTextStyle: const TextStyle(fontSize: 24, color: const Color(0xffffffff), fontFamily: 'NexaBold',),
+                                  buttonTextStyle: const TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold',),
                                   buttonColor: const Color(0xff4EC9D4),
                                   width: SizeConfig.screenWidth! / 2,
                                   height: 50,
@@ -307,8 +301,8 @@ class RegularLoginState extends State<RegularLogin>{
                                       await showDialog(
                                         context: context,
                                         builder: (_) => AssetGiffyDialog(
-                                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                          description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                          title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                          description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                           entryAnimation: EntryAnimation.DEFAULT,
                                           buttonOkColor: const Color(0xffff0000),
@@ -322,8 +316,8 @@ class RegularLoginState extends State<RegularLogin>{
                                       await showDialog(
                                         context: context,
                                         builder: (_) => AssetGiffyDialog(
-                                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                          description: const Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                          title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                          description: const Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                           entryAnimation: EntryAnimation.DEFAULT,
                                           buttonOkColor: const Color(0xffff0000),
@@ -340,11 +334,8 @@ class RegularLoginState extends State<RegularLogin>{
                                       final pushNotificationService = PushNotificationService(_firebaseMessaging, context);
                                       pushNotificationService.initialise();
                                       deviceToken = (await pushNotificationService.fcm.getToken())!;
-                                      print('The deviceToken is $deviceToken');
                                       String result = await apiRegularLogin(email: _key1.currentState!.controller.text, password: _key2.currentState!.controller.text, deviceToken: deviceToken);
                                       context.loaderOverlay.hide();
-
-                                      print('The result is $result');
 
                                       if(result == 'Success'){
                                         Navigator.pushReplacementNamed(context, '/home/regular');
@@ -352,7 +343,7 @@ class RegularLoginState extends State<RegularLogin>{
                                         await showDialog(
                                           context: context,
                                           builder: (_) => AssetGiffyDialog(
-                                            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                                             description: Text('Error: $result', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                             entryAnimation: EntryAnimation.DEFAULT,
@@ -368,19 +359,19 @@ class RegularLoginState extends State<RegularLogin>{
                                   },
                                 ),
 
-                                SizedBox(height: 30,),
+                                const SizedBox(height: 30,),
 
                                 RichText(
                                   text: TextSpan(
                                     children: <TextSpan>[
                                       const TextSpan(
                                         text: 'Don\'t have an Account? ',
-                                        style: const TextStyle(fontSize: 22, color: const Color(0xff2F353D), fontFamily: 'NexaRegular',),
+                                        style: TextStyle(fontSize: 22, color: Color(0xff2F353D), fontFamily: 'NexaRegular',),
                                       ),
 
                                       TextSpan(
                                         text: 'Sign Up', 
-                                        style: const TextStyle(fontSize: 22, color: const Color(0xff4EC9D4), fontFamily: 'NexaRegular',), 
+                                        style: const TextStyle(fontSize: 22, color: Color(0xff4EC9D4), fontFamily: 'NexaRegular',), 
                                         recognizer: TapGestureRecognizer()
                                         ..onTap = (){
                                           Navigator.pushNamed(context, '/regular/register');
@@ -393,7 +384,7 @@ class RegularLoginState extends State<RegularLogin>{
                                 const SizedBox(height: 20,),
 
                                 GestureDetector(
-                                  child: const Text('Sign in as Guest', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xff4EC9D4), decoration: TextDecoration.underline,),),
+                                  child: const Text('Sign in as Guest', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xff4EC9D4), decoration: TextDecoration.underline,),),
                                   onTap: () async{
                                     final sharedPrefs = await SharedPreferences.getInstance();
                                     sharedPrefs.setBool('user-guest-session', true);
@@ -401,18 +392,18 @@ class RegularLoginState extends State<RegularLogin>{
                                   },
                                 ),
 
-                                SizedBox(height: 20,),
+                                const SizedBox(height: 20,),
 
                                 Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 40),
                                   child: RichText(
                                     text: const TextSpan(
                                       children: <TextSpan>[
-                                        const TextSpan(text: 'Connect  /  ', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                                        TextSpan(text: 'Connect  /  ', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
 
-                                        const TextSpan(text: 'Remember  /  ', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                                        TextSpan(text: 'Remember  /  ', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
 
-                                        const TextSpan(text: 'Honor', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                                        TextSpan(text: 'Honor', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
                                       ],
                                     ),
                                   ),

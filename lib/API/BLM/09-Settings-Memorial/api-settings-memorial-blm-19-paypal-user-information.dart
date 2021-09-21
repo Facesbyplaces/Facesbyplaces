@@ -16,8 +16,6 @@ Future<APIBLMShowPaypalUserInformation> apiBLMMemorialPaypalUserInformation({req
     ),
   );
 
-  print('The status code of blm paypal user information is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMShowPaypalUserInformation.fromJson(newData);

@@ -20,10 +20,6 @@ Future<APIRegularShowProfileInformation> apiRegularShowProfileInformation() asyn
     getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   }
 
-  print('The access token is $getAccessToken');
-  print('The uid is $getUID');
-  print('The client is $getClient');
-
   Dio dioRequest = Dio();
 
   var response = await dioRequest.get('http://facesbyplaces.com/api/v1/users/image_show',
@@ -39,8 +35,6 @@ Future<APIRegularShowProfileInformation> apiRegularShowProfileInformation() asyn
       }
     ),
   );
-
-  print('The status code of regular show user information is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
@@ -65,10 +59,10 @@ class APIRegularShowProfileInformation{
 
     return APIRegularShowProfileInformation(
       showProfileInformationUserId: newValue['id'],
-      showProfileInformationFirstName: newValue['first_name'] != null ? newValue['first_name'] : '',
-      showProfileInformationLastName: newValue['last_name'] != null ? newValue['last_name'] : '',
-      showProfileInformationImage: newValue['image'] != null ? newValue['image'] : '',
-      showProfileInformationEmail: newValue['email'] != null ? newValue['email'] : '',
+      showProfileInformationFirstName: newValue['first_name'] ?? '',
+      showProfileInformationLastName: newValue['last_name'] ?? '',
+      showProfileInformationImage: newValue['image'] ?? '',
+      showProfileInformationEmail: newValue['email'] ?? '',
       showProfileInformationGuest: newValue['guest'],
       showProfileInformationAccountType: newValue['account_type'],
     );

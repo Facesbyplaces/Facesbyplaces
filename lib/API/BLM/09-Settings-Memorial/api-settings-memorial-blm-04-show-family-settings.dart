@@ -25,8 +25,6 @@ Future<APIBLMShowFamilySettingsMain> apiBLMShowFamilySettings({required int memo
     ),  
   );
 
-  print('The status code of blm show family settings is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMShowFamilySettingsMain.fromJson(newData);
@@ -59,7 +57,7 @@ class APIBLMShowFamilySettingsExtended{
   factory APIBLMShowFamilySettingsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowFamilySettingsExtended(
       showFamilySettingsUser: APIBLMShowFamilySettingsExtendedDetails.fromJson(parsedJson['user']),
-      showFamilySettingsRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      showFamilySettingsRelationship: parsedJson['relationship'] ?? '',
     );
   }
 }
@@ -76,10 +74,10 @@ class APIBLMShowFamilySettingsExtendedDetails{
   factory APIBLMShowFamilySettingsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowFamilySettingsExtendedDetails(
       showFamilySettingsDetailsId: parsedJson['id'],
-      showFamilySettingsDetailsFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      showFamilySettingsDetailsLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      showFamilySettingsDetailsImage: parsedJson['image'] != null ? parsedJson['image'] : '',
-      showFamilySettingsDetailsEmail: parsedJson['email'] != null ? parsedJson['email'] : '',
+      showFamilySettingsDetailsFirstName: parsedJson['first_name'] ?? '',
+      showFamilySettingsDetailsLastName: parsedJson['last_name'] ?? '',
+      showFamilySettingsDetailsImage: parsedJson['image'] ?? '',
+      showFamilySettingsDetailsEmail: parsedJson['email'] ?? '',
       showFamilySettingsDetailsAccountType: parsedJson['account_type'],
     );
   }

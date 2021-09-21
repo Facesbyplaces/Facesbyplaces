@@ -24,8 +24,6 @@ Future<APIRegularHomeTabNotificationMain> apiRegularHomeNotificationsTab({requir
     ),
   );
 
-  print('The status code of regular home notifications tab is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIRegularHomeTabNotificationMain.fromJson(newData);
@@ -64,13 +62,13 @@ class APIRegularHomeTabNotificationExtended{
   factory APIRegularHomeTabNotificationExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabNotificationExtended(
       homeTabNotificationId: parsedJson['id'],
-      homeTabNotificationCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
-      homeTabNotificationUpdatedAt: parsedJson['updated_at'] != null ? parsedJson['updated_at'] : '',
+      homeTabNotificationCreatedAt: parsedJson['created_at'] ?? '',
+      homeTabNotificationUpdatedAt: parsedJson['updated_at'] ?? '',
       homeTabNotificationActor: APIRegularHomeTabNotificationExtendedActor.fromJson(parsedJson['actor']),
       homeTabNotificationRead: parsedJson['read'],
-      homeTabNotificationAction: parsedJson['action'] != null ? parsedJson['action'] : '',
+      homeTabNotificationAction: parsedJson['action'] ?? '',
       homeTabNotificationPostId: parsedJson['postId'],
-      homeTabNotificationNotificationType: parsedJson['notif_type'] != null ? parsedJson['notif_type'] : '',
+      homeTabNotificationNotificationType: parsedJson['notif_type'] ?? '',
     );
   }
 }
@@ -85,9 +83,9 @@ class APIRegularHomeTabNotificationExtendedActor{
   factory APIRegularHomeTabNotificationExtendedActor.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabNotificationExtendedActor(
       homeTabNotificationActorId: parsedJson['id'],
-      homeTabNotificationActorImage: parsedJson['image'] != null ? parsedJson['image'] : '',
-      homeTabNotificationActorFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      homeTabNotificationActorAccountType: parsedJson['account_type'] != null ? parsedJson['account_type'] : '',
+      homeTabNotificationActorImage: parsedJson['image'] ?? '',
+      homeTabNotificationActorFirstName: parsedJson['first_name'] ?? '',
+      homeTabNotificationActorAccountType: parsedJson['account_type'] ?? '',
     );
   }
 }

@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, unnecessary_const
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-03-unfollow-page.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-01-leave-page.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
@@ -24,8 +24,9 @@ class MiscBLMManageMemorialTab extends StatefulWidget{
   final bool famOrFriends;
   final String pageType;
   final String relationship;
-  const MiscBLMManageMemorialTab({required this.index, this.memorialName = '', this.description = '', required this.image, required this.memorialId, required this.managed, required this.follower, required this.famOrFriends, required this.pageType, required this.relationship,});
+  const MiscBLMManageMemorialTab({Key? key, required this.index, this.memorialName = '', this.description = '', required this.image, required this.memorialId, required this.managed, required this.follower, required this.famOrFriends, required this.pageType, required this.relationship,}) : super(key: key);
 
+  @override
   MiscBLMManageMemorialTabState createState() => MiscBLMManageMemorialTabState();
 }
 
@@ -33,6 +34,7 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
   ValueNotifier<bool> followButton = ValueNotifier<bool>(false);
   bool manageButton = false;
 
+  @override
   void initState() {
     super.initState();
     followButton.value = widget.follower;
@@ -72,24 +74,24 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
             )
             : const CircleAvatar(
               radius: 30,
-              backgroundColor: const Color(0xff888888),
-              foregroundImage: const AssetImage('assets/icons/app-icon.png',),
+              backgroundColor: Color(0xff888888),
+              foregroundImage: AssetImage('assets/icons/app-icon.png',),
             ),
             title: Text(
               widget.memorialName,
               overflow: TextOverflow.ellipsis,
               maxLines: 2,
-              style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),
+              style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),
             ),
             subtitle: Text(
               widget.description,
-              style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff888888),),
+              style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff888888),),
             ),
             trailing: (() {
               if(widget.managed == true || widget.famOrFriends == true){
                 return MaterialButton(
-                  shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5)), side: const BorderSide(color: const Color(0xff04ECFF),),),
-                  child: Text('Leave', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5)), side: BorderSide(color: Color(0xff04ECFF),),),
+                  child: const Text('Leave', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                   splashColor: const Color(0xff4EC9D4),
                   textColor: const Color(0xffffffff),
                   color: const Color(0xff04ECFF),
@@ -100,8 +102,8 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                     bool confirmResult = await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        description: Text('Are you sure you want to leave this page?', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                        title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                        description: const Text('Are you sure you want to leave this page?', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                        title: const Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         entryAnimation: EntryAnimation.DEFAULT,
                         onlyOkButton: false,
@@ -128,8 +130,8 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(
-                            description: Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                            description: const Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                            title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             entryAnimation: EntryAnimation.DEFAULT,
                             onlyOkButton: true,
@@ -142,8 +144,8 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(
-                            description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                            description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             entryAnimation: EntryAnimation.DEFAULT,
                             buttonOkColor: const Color(0xffff0000),
@@ -159,8 +161,8 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                 );
               }else if(followButtonListener == true){
                 return MaterialButton(
-                  shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5)), side: const BorderSide(color: const Color(0xff04ECFF)),),
-                  child: Text('Leave', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5)), side: BorderSide(color: Color(0xff04ECFF)),),
+                  child: const Text('Leave', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                   splashColor: const Color(0xff4EC9D4),
                   textColor: const Color(0xffffffff),
                   color: const Color(0xff04ECFF),
@@ -171,8 +173,8 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                     bool confirmResult = await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        description: Text('Are you sure you want to leave this page?', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                        title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                        description: const Text('Are you sure you want to leave this page?', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                        title: const Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         entryAnimation: EntryAnimation.DEFAULT,
                         onlyOkButton: false,
@@ -196,8 +198,8 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(
-                            description: Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                            description: const Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                            title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             entryAnimation: EntryAnimation.DEFAULT,
                             onlyOkButton: true,
@@ -210,8 +212,8 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(
-                            description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                            description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             entryAnimation: EntryAnimation.DEFAULT,
                             buttonOkColor: const Color(0xffff0000),
@@ -227,8 +229,8 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                 );
               }else{
                 return MaterialButton(
-                  shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5)), side: const BorderSide(color: const Color(0xff4EC9D4)),),
-                  child: Text('Join', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold',),),
+                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5)), side: BorderSide(color: Color(0xff4EC9D4)),),
+                  child: const Text('Join', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold',),),
                   splashColor: const Color(0xff4EC9D4),
                   textColor: const Color(0xff4EC9D4),
                   color: const Color(0xffffffff),
@@ -246,8 +248,8 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                       await showDialog(
                         context: context,
                         builder: (_) => AssetGiffyDialog(
-                          description: Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                          description: const Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                          title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                           entryAnimation: EntryAnimation.DEFAULT,
                           onlyOkButton: true,
@@ -260,8 +262,8 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                       await showDialog(
                         context: context,
                         builder: (_) => AssetGiffyDialog(
-                          description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                          description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                          title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                           entryAnimation: EntryAnimation.DEFAULT,
                           buttonOkColor: const Color(0xffff0000),

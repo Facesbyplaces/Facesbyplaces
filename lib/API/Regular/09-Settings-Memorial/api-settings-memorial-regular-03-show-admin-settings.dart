@@ -24,8 +24,6 @@ Future<APIRegularShowAdminsSettingsMain> apiRegularShowAdminSettings({required i
     ),
   );
 
-  print('The status code of regular show admin settings is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIRegularShowAdminsSettingsMain.fromJson(newData);
@@ -81,10 +79,10 @@ class APIRegularShowAdminsSettingsExtendedUser{
   factory APIRegularShowAdminsSettingsExtendedUser.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowAdminsSettingsExtendedUser(
       showAdminsSettingsUserId: parsedJson['id'],
-      showAdminsSettingsUserFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      showAdminsSettingsUserLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      showAdminsSettingsUserImage: parsedJson['image'] != null ? parsedJson['image'] : '',
-      showAdminsSettingsUserEmail: parsedJson['email'] != null ? parsedJson['email'] : '',
+      showAdminsSettingsUserFirstName: parsedJson['first_name'] ?? '',
+      showAdminsSettingsUserLastName: parsedJson['last_name'] ?? '',
+      showAdminsSettingsUserImage: parsedJson['image'] ?? '',
+      showAdminsSettingsUserEmail: parsedJson['email'] ?? '',
     );
   }
 }

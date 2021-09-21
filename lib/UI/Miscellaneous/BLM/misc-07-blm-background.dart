@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class MiscBLMBackgroundTemplate extends StatelessWidget{
   final AssetImage image;
   final ColorFilter filter;
-  const MiscBLMBackgroundTemplate({this.image = const AssetImage('assets/icons/background.png'), this.filter = const ColorFilter.srgbToLinearGamma(),});
+  const MiscBLMBackgroundTemplate({Key? key, this.image = const AssetImage('assets/icons/background.png'), this.filter = const ColorFilter.srgbToLinearGamma(),}) : super(key: key);
 
   @override
   Widget build(BuildContext context){

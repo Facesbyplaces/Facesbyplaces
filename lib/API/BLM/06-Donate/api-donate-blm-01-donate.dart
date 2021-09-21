@@ -36,31 +36,22 @@ Future<List<String>> apiBLMDonate({required String pageType, required int pageId
       },
     ),
     queryParameters: <String, dynamic>{
-      'page_type': '$pageType',
-      'page_id': '$pageId',
-      'amount': '$amount',
-      'payment_method': '$paymentMethod',
+      'page_type': pageType,
+      'page_id': pageId,
+      'amount': amount,
+      'payment_method': paymentMethod,
     },
   );
-
-  print('The status code of blm donate is ${response.statusCode}');
-  print('The status data of blm donate is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     if(paymentMethod != ''){
       String clientSecret = newData['payment_intent'];
       String paymentMethod = newData['payment_method'];
-
-      print('The clientSecret is $clientSecret');
-      print('The payment_method is $paymentMethod');
-
       return [clientSecret, paymentMethod];
     }else{
       String clientSecret = newData['client_secret'];
       String token = newData['token'];
-
-      print('The clientSecret is $clientSecret');
       return [clientSecret, token];
     }
   }else{

@@ -44,8 +44,6 @@ Future<String> apiBLMDeleteMemorialAdmin({required String pageType, required int
     ),  
   );
 
-  print('The status code of blm remove admin is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return 'Success';
   }else{

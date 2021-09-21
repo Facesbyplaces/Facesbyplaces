@@ -2,9 +2,8 @@
 import 'package:flutter/material.dart';
 
 class MiscStartImageRegularTemplate extends StatelessWidget{
-
   final String image;
-  const MiscStartImageRegularTemplate({this.image = 'assets/icons/frontpage-image3.png',});
+  const MiscStartImageRegularTemplate({Key? key, this.image = 'assets/icons/frontpage-image3.png',}) : super(key: key);
 
   @override
   Widget build(BuildContext context){

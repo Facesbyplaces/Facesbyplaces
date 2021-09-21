@@ -31,8 +31,6 @@ Future<bool> apiRegularUploadPhoto({dynamic image}) async{
     ),
   );
 
-  print('The status code of regular upload photo is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

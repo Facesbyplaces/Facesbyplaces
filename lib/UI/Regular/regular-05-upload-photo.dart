@@ -11,7 +11,9 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 
 class RegularUploadPhoto extends StatefulWidget{
+  const RegularUploadPhoto({Key? key}) : super(key: key);
 
+  @override
   RegularUploadPhotoState createState() => RegularUploadPhotoState();
 }
 
@@ -55,7 +57,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                         children: [
                           const SizedBox(height: 40),
 
-                          const Center(child: const Text('Upload Photo', style: const TextStyle(fontSize: 42, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
+                          const Center(child: Text('Upload Photo', style: TextStyle(fontSize: 42, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),),
 
                           const SizedBox(height: 40),
 
@@ -81,7 +83,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                           )
                                           : const Align(
                                             alignment: Alignment.center,
-                                            child: const Icon(Icons.add, color: const Color(0xffE3E3E3), size: 250,),
+                                            child: Icon(Icons.add, color: Color(0xffE3E3E3), size: 250,),
                                           ),
                                         ],
                                       ),
@@ -89,7 +91,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                   ),
 
                                   const Text('A valid photo of yourself would be a better choice because it would be worth a thousand words.',
-                                    style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                    style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                     textAlign: TextAlign.center,
                                   ),
                                 ],
@@ -116,7 +118,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
 
                           MiscRegularButtonTemplate(
                             buttonText: imageListener.path != '' ? 'Sign Up' : 'Next',
-                            buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                            buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                             buttonColor: const Color(0xff04ECFF),
                             width: SizeConfig.screenWidth! / 2,
                             height: 50,
@@ -132,8 +134,8 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                   await showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
-                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                       entryAnimation: EntryAnimation.DEFAULT,
                                       buttonOkColor: const Color(0xffff0000),
@@ -148,8 +150,8 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                 await showDialog(
                                   context: context,
                                   builder: (_) => AssetGiffyDialog(
-                                    title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                    description: const Text('Please upload a photo.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                    title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                    description: const Text('Please upload a photo.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                     entryAnimation: EntryAnimation.DEFAULT,
                                     buttonOkColor: const Color(0xffff0000),
@@ -168,11 +170,11 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                           RichText(
                             text: const TextSpan(
                               children: <TextSpan>[
-                                const TextSpan(text: 'Connect / ', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w300, color: const Color(0xff888888),),),
+                                TextSpan(text: 'Connect / ', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w300, color: Color(0xff888888),),),
 
-                                const TextSpan(text: 'Remember / ', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w300, color: const Color(0xff888888),),),
+                                TextSpan(text: 'Remember / ', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w300, color: Color(0xff888888),),),
 
-                                const TextSpan(text: 'Honor', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w300, color: const Color(0xff888888),),),
+                                TextSpan(text: 'Honor', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w300, color: Color(0xff888888),),),
                               ],
                             ),
                           ),

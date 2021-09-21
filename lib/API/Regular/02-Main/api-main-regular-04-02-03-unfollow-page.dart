@@ -35,13 +35,11 @@ Future<bool> apiRegularModifyUnfollowPage({required String pageType, required in
       }
     ),
     queryParameters: <String, dynamic>{
-      'page_type': '$pageType',
-      'page_id': '$pageId',
+      'page_type': pageType,
+      'page_id': pageId,
       'follow': false,
     }
   );
-
-  print('The status code of regular unfollow page is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

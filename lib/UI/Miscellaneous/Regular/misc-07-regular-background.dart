@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class MiscRegularBackgroundTemplate extends StatelessWidget{
   final AssetImage image;
   final ColorFilter filter;
-  const MiscRegularBackgroundTemplate({this.image = const AssetImage('assets/icons/background.png'), this.filter = const ColorFilter.srgbToLinearGamma(),});
+  const MiscRegularBackgroundTemplate({Key? key, this.image = const AssetImage('assets/icons/background.png'), this.filter = const ColorFilter.srgbToLinearGamma(),}) : super(key: key);
 
   @override
   Widget build(BuildContext context){

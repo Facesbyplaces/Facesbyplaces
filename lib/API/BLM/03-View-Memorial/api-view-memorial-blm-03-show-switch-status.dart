@@ -25,8 +25,6 @@ Future<APIBLMShowSwitchStatus> apiBLMShowSwitchStatus({required int memorialId})
     ),  
   );
 
-  print('The status code of blm show switch status is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMShowSwitchStatus.fromJson(newData);

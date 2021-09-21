@@ -37,8 +37,6 @@ Future<bool> apiBLMLikeOrUnlikeCommentReply({required String commentableType, re
     ),
   );
 
-  print('The status code of blm comment reply is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

@@ -6,7 +6,7 @@ class MiscBLMImageDisplayFeedTemplate extends StatelessWidget{
   final double backSize;
   final double frontSize;
   final Color backgroundColor;
-  const MiscBLMImageDisplayFeedTemplate({this.image = 'assets/icons/app-icon.png', this.backSize = 20, this.frontSize = 15, this.backgroundColor = const Color(0xff000000),});
+  const MiscBLMImageDisplayFeedTemplate({Key? key, this.image = 'assets/icons/app-icon.png', this.backSize = 20, this.frontSize = 15, this.backgroundColor = const Color(0xff000000),}) : super(key: key);
 
   @override
   Widget build(BuildContext context){

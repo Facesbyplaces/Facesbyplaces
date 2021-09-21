@@ -36,8 +36,6 @@ Future<bool> apiRegularDeleteReply({required int replyId}) async{
     ),
   );
 
-  print('The status code of regular delete reply is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

@@ -24,8 +24,6 @@ Future<APIRegularShowOtherDetailsStatus> apiRegularShowOtherDetailsStatus({requi
     ),
   );
 
-  print('The status code of regular show other details status is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIRegularShowOtherDetailsStatus.fromJson(newData);

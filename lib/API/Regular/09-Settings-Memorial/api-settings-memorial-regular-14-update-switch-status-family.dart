@@ -24,8 +24,6 @@ Future<bool> apiRegularUpdateSwitchStatusFamily({required int memorialId, requir
     ),
   );
 
-  print('The status code of regular update switch status family is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

@@ -25,8 +25,6 @@ Future<bool> apiBLMUpdateOtherDetails({required String birthdate, required Strin
     ),  
   );
 
-  print('The status code of blm update other details is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

@@ -24,8 +24,6 @@ Future<bool> apiRegularHidePhoneNumber({required bool hide}) async{
     ),  
   );
 
-  print('The status code of regular hide phone number is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

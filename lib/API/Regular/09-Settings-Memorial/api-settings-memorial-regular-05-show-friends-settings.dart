@@ -24,8 +24,6 @@ Future<APIRegularShowFriendsSettingsMain> apiRegularShowFriendsSettings({require
     ),
   );
 
-  print('The status code of regular show friends settings is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIRegularShowFriendsSettingsMain.fromJson(newData);
@@ -75,10 +73,10 @@ class APIRegularShowFriendsSettingsExtendedDetails{
   factory APIRegularShowFriendsSettingsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowFriendsSettingsExtendedDetails(
       showFriendsSettingsDetailsId: parsedJson['id'],
-      showFriendsSettingsDetailsFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      showFriendsSettingsDetailsLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      showFriendsSettingsDetailsImage: parsedJson['image'] != null ? parsedJson['image'] : '',
-      showFriendsSettingsDetailsEmail: parsedJson['email'] != null ? parsedJson['email'] : '',
+      showFriendsSettingsDetailsFirstName: parsedJson['first_name'] ?? '',
+      showFriendsSettingsDetailsLastName: parsedJson['last_name'] ?? '',
+      showFriendsSettingsDetailsImage: parsedJson['image'] ?? '',
+      showFriendsSettingsDetailsEmail: parsedJson['email'] ?? '',
       showFriendsSettingsDetailsAccountType: parsedJson['account_type'],
     );
   }

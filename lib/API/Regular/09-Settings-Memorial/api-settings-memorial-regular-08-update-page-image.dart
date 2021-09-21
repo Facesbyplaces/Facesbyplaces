@@ -35,8 +35,6 @@ Future<bool> apiRegularUpdatePageImages({required int memorialId, required dynam
     ),
   );
 
-  print('The status code of regular update page image is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

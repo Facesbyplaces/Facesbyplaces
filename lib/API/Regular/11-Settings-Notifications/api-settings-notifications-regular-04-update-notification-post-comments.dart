@@ -24,8 +24,6 @@ Future<bool> apiRegularUpdateNotificationPostComments({required bool hide}) asyn
     ),  
   );
 
-  print('The status code of regular update notification post comments is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

@@ -25,8 +25,6 @@ Future<APIBLMHomeProfilePostMain> apiBLMProfilePost({required int memorialId, re
     ),  
   );
 
-  print('The status code of blm show profile post is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMHomeProfilePostMain.fromJson(newData);
@@ -80,13 +78,13 @@ class APIBLMHomeProfilePostExtended{
     return APIBLMHomeProfilePostExtended(
       profilePostId: parsedJson['id'],
       profilePostPage: APIBLMHomeProfilePostExtendedPage.fromJson(parsedJson['page']),
-      profilePostBody: parsedJson['body'] != null ? parsedJson['body'] : '',
-      homeProfilePostLocation: parsedJson['location'] != null ? parsedJson['location'] : '',
+      profilePostBody: parsedJson['body'] ?? '',
+      homeProfilePostLocation: parsedJson['location'] ?? '',
       homeProfilePostLatitude: parsedJson['latitude'],
       homeProfilePostLongitude: parsedJson['longitude'],
-      profilePostImagesOrVideos: newList1 != null ? newList1 : [],
+      profilePostImagesOrVideos: newList1 ?? [],
       profilePostPostTagged: taggedList,
-      profilePostCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
+      profilePostCreatedAt: parsedJson['created_at'] ?? '',
       profilePostNumberOfLikes: parsedJson['numberOfLikes'],
       profilePostNumberOfComments: parsedJson['numberOfComments'],
       profilePostLikeStatus: parsedJson['likeStatus'],
@@ -109,14 +107,14 @@ class APIBLMHomeProfilePostExtendedPage{
   factory APIBLMHomeProfilePostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeProfilePostExtendedPage(
       profilePageId: parsedJson['id'],
-      profilePageName: parsedJson['name'] != null ? parsedJson['name'] : '',
-      profilePageProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
-      profilePageRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      profilePageName: parsedJson['name'] ?? '',
+      profilePageProfileImage: parsedJson['profileImage'] ?? '',
+      profilePageRelationship: parsedJson['relationship'] ?? '',
       profilePagePageCreator: APIBLMHomeProfilePostExtendedPageCreator.fromJson(parsedJson['page_creator']),
       profilePageManage: parsedJson['manage'],
       profilePageFamOrFriends: parsedJson['famOrFriends'],
       profilePageFollower: parsedJson['follower'],
-      profilePagePageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
+      profilePagePageType: parsedJson['page_type'] ?? '',
     );
   }
 }
@@ -142,9 +140,9 @@ class APIBLMHomeProfilePostExtendedTagged{
   factory APIBLMHomeProfilePostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeProfilePostExtendedTagged(
       profilePageTaggedId: parsedJson['id'],
-      profilePageTaggedFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      profilePageTaggedLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      profilePageTaggedImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      profilePageTaggedFirstName: parsedJson['first_name'] ?? '',
+      profilePageTaggedLastName: parsedJson['last_name'] ?? '',
+      profilePageTaggedImage: parsedJson['image'] ?? '',
     );
   }
 }

@@ -33,8 +33,6 @@ Future<bool> apiRegularUpdateOtherDetails({required String birthdate, required S
     ),  
   );
 
-  print('The status code of regular update other details is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

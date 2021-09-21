@@ -33,8 +33,6 @@ Future<bool> apiBLMUpdateAccountDetails({required String firstName, required Str
     ),  
   );
 
-  print('The status code of blm update account details is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

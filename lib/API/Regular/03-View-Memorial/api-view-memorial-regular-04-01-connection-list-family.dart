@@ -37,8 +37,6 @@ Future<APIRegularConnectionListFamilyMain> apiRegularConnectionListFamily({requi
     ),  
   );
 
-  print('The status code of regular connection list family is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIRegularConnectionListFamilyMain.fromJson(newData);
@@ -71,7 +69,7 @@ class APIRegularConnectionListFamilyExtended{
   factory APIRegularConnectionListFamilyExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularConnectionListFamilyExtended(
       connectionListFamilyUser: APIRegularConnectionListFamilyExtendedDetails.fromJson(parsedJson['user']),
-      connectionListFamilyRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      connectionListFamilyRelationship: parsedJson['relationship'] ?? '',
     );
   }
 }
@@ -87,9 +85,9 @@ class APIRegularConnectionListFamilyExtendedDetails{
   factory APIRegularConnectionListFamilyExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularConnectionListFamilyExtendedDetails(
       connectionListFamilyDetailsId: parsedJson['id'],
-      connectionListFamilyDetailsFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      connectionListFamilyDetailsLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      connectionListFamilyDetailsImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      connectionListFamilyDetailsFirstName: parsedJson['first_name'] ?? '',
+      connectionListFamilyDetailsLastName: parsedJson['last_name'] ?? '',
+      connectionListFamilyDetailsImage: parsedJson['image'] ?? '',
       connectionListFamilyAccountType: parsedJson['account_type'],
     );
   }

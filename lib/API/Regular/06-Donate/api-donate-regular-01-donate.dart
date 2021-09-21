@@ -36,14 +36,12 @@ Future<List<String>> apiRegularDonate({required String pageType, required int pa
       }
     ),
     queryParameters: <String, dynamic>{
-      'page_type': '$pageType',
-      'page_id': '$pageId',
-      'amount': '$amount',
-      'payment_method': '$paymentMethod',
+      'page_type': pageType,
+      'page_id': pageId,
+      'amount': amount,
+      'payment_method': paymentMethod,
     },
   );
-
-  print('The status code of regular donate is ${response.statusCode}');
 
   if(response.statusCode == 200 || response.statusCode == 422){
     var newData = Map<String, dynamic>.from(response.data);

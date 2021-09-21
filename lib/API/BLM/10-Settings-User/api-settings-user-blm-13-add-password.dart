@@ -30,8 +30,6 @@ Future<bool> apiBLMAddPassword({required String newPassword}) async{
     ),
   );
 
-  print('The status code of blm update user profile picture is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return true;
   }else{

@@ -3,7 +3,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
 class MiscBLMErrorMessageTemplate extends StatelessWidget{
-  const MiscBLMErrorMessageTemplate();
+  const MiscBLMErrorMessageTemplate({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context){
@@ -28,7 +28,7 @@ class MiscBLMErrorMessageTemplate extends StatelessWidget{
             const SizedBox(height: 30,),
 
             MaterialButton(
-              child: Text('Go back', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+              child: const Text('Go back', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5),),
               minWidth: SizeConfig.screenWidth! / 2,
               color: const Color(0xff888888),
@@ -48,7 +48,7 @@ class MiscBLMErrorMessageTemplate extends StatelessWidget{
 }
 
 class MiscBLMLoginToContinue extends StatelessWidget{
-  const MiscBLMLoginToContinue();
+  const MiscBLMLoginToContinue({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context){
@@ -65,16 +65,16 @@ class MiscBLMLoginToContinue extends StatelessWidget{
 
             const SizedBox(height: 30,),
 
-            const Text('FacesbyPlaces', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+            const Text('FacesbyPlaces', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
             
             const SizedBox(height: 30,),
 
-            const Text('Sign in or sign up to get the most out of the FacesbyPlaces app; list of memorials nearby, posts and much more.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16),),
+            const Text('Sign in or sign up to get the most out of the FacesbyPlaces app; list of memorials nearby, posts and much more.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16),),
 
             const SizedBox(height: 100,),
 
             GestureDetector(
-              child: const Text('Sign in or sign up to continue', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff4EC9D4)),),
+              child: const Text('Sign in or sign up to continue', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff4EC9D4)),),
               onTap: (){
                 Navigator.of(context).pushNamedAndRemoveUntil('/login', ModalRoute.withName('/login'));
               },

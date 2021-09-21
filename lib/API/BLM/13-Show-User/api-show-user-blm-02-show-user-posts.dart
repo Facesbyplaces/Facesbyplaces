@@ -37,8 +37,6 @@ Future<APIBLMShowUsersPostsMain> apiBLMShowUserPosts({required int userId, requi
     ),  
   );
 
-  print('The status code of blm show user posts is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMShowUsersPostsMain.fromJson(newData);
@@ -92,13 +90,13 @@ class APIBLMShowUsersPostsExtended{
     return APIBLMShowUsersPostsExtended(
       showUsersPostsId: parsedJson['id'],
       showUsersPostsPage: APIBLMShowUsersPostsExtendedPage.fromJson(parsedJson['page']),
-      showUsersPostsBody: parsedJson['body'] != null ? parsedJson['body'] : '',
-      showUsersPostsLocation: parsedJson['location'] != null ? parsedJson['location'] : '',
+      showUsersPostsBody: parsedJson['body'] ?? '',
+      showUsersPostsLocation: parsedJson['location'] ?? '',
       showUsersPostsLatitude: parsedJson['latitude'],
       showUsersPostsLongitude: parsedJson['longitude'],
-      showUsersPostsImagesOrVideos: newList1 != null ? newList1 : [],
+      showUsersPostsImagesOrVideos: newList1 ?? [],
       showUsersPostsPostTagged: taggedList,
-      showUsersPostsCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
+      showUsersPostsCreatedAt: parsedJson['created_at'] ?? '',
       showUsersPostsNumberOfLikes: parsedJson['numberOfLikes'],
       showUsersPostsNumberOfComments: parsedJson['numberOfComments'],
       showUsersPostsLikeStatus: parsedJson['likeStatus'],
@@ -121,14 +119,14 @@ class APIBLMShowUsersPostsExtendedPage{
   factory APIBLMShowUsersPostsExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowUsersPostsExtendedPage(
       showUsersPostsPageId: parsedJson['id'],
-      showUsersPostsPageName: parsedJson['name'] != null ? parsedJson['name'] : '',
-      showUsersPostsPageProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
-      showUsersPostsPageRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
+      showUsersPostsPageName: parsedJson['name'] ?? '',
+      showUsersPostsPageProfileImage: parsedJson['profileImage'] ?? '',
+      showUsersPostsPageRelationship: parsedJson['relationship'] ?? '',
       showUsersPostsPagePageCreator: APIBLMShowUsersPostsExtendedPageCreator.fromJson(parsedJson['page_creator']),
       showUsersPostsPageFollower: parsedJson['follower'],
       showUsersPostsPageManage: parsedJson['manage'],
       showUsersPostsPageFamOrFriends: parsedJson['famOrFriends'],
-      showUsersPostsPagePageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
+      showUsersPostsPagePageType: parsedJson['page_type'] ?? '',
     );
   }
 }
@@ -154,9 +152,9 @@ class APIBLMShowUsersPostsExtendedTagged{
   factory APIBLMShowUsersPostsExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowUsersPostsExtendedTagged(
       showUsersPostsTaggedId: parsedJson['id'],
-      showUsersPostsTaggedFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      showUsersPostsTaggedLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      showUsersPostsTaggedImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      showUsersPostsTaggedFirstName: parsedJson['first_name'] ?? '',
+      showUsersPostsTaggedLastName: parsedJson['last_name'] ?? '',
+      showUsersPostsTaggedImage: parsedJson['image'] ?? '',
     );
   }
 }

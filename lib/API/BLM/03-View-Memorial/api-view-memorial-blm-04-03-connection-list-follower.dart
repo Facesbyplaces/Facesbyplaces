@@ -37,8 +37,6 @@ Future<APIBLMConnectionListFollowersMain> apiBLMConnectionListFollowers({require
     ),  
   );
 
-  print('The status code of blm connection list follower is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMConnectionListFollowersMain.fromJson(newData);
@@ -74,9 +72,9 @@ class APIBLMConnectionListFollowersExtendedDetails{
   factory APIBLMConnectionListFollowersExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMConnectionListFollowersExtendedDetails(
       connectionListFollowersId: parsedJson['id'],
-      connectionListFollowersFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      connectionListFollowersLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      connectionListFollowersImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      connectionListFollowersFirstName: parsedJson['first_name'] ?? '',
+      connectionListFollowersLastName: parsedJson['last_name'] ?? '',
+      connectionListFollowersImage: parsedJson['image'] ?? '',
       connectionListFollowersAccountType: parsedJson['account_type'],
     );
   }

@@ -11,8 +11,9 @@ import 'package:flutter/material.dart';
 
 class BLMPasswordReset extends StatefulWidget{
   final String resetToken;
-  const BLMPasswordReset({required this.resetToken});
+  const BLMPasswordReset({Key? key, required this.resetToken}) : super(key: key);
 
+  @override
   BLMPasswordResetState createState() => BLMPasswordResetState();
 }
 
@@ -56,7 +57,7 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: IconButton(
-                                  icon: const Icon(Icons.arrow_back, color: const Color(0xff000000), size: 35),
+                                  icon: const Icon(Icons.arrow_back, color: Color(0xff000000), size: 35),
                                   onPressed: (){
                                     Navigator.pop(context);
                                   },
@@ -67,11 +68,11 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
 
                           const SizedBox(height: 80),
 
-                          const Center(child: const Text('Change Password', style: const TextStyle(fontSize: 42, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
+                          const Center(child: Text('Change Password', style: TextStyle(fontSize: 42, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),),
 
                           const SizedBox(height: 40,),
 
-                          const Center(child: const Text('Please enter your new password', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                          const Center(child: Text('Please enter your new password', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 
                           const SizedBox(height: 80,),
 
@@ -80,7 +81,7 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                             child: MiscBLMInputFieldTemplate(
                               key: _key1,
                               labelText: 'New Password',
-                              labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                              labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                               type: TextInputType.emailAddress,
                               obscureText: true,
                             ),
@@ -93,7 +94,7 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                             child: MiscBLMInputFieldTemplate(
                               key: _key2,
                               labelText: 'Confirm Password',
-                              labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                              labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                               type: TextInputType.emailAddress,
                               obscureText: true,
                             ),
@@ -103,7 +104,7 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
 
                           MiscBLMButtonTemplate(
                             buttonText: 'Change',
-                            buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),
+                            buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),
                             buttonColor: const Color(0xff04ECFF),
                             width: SizeConfig.screenWidth! / 2,
                             height: 50,
@@ -112,8 +113,8 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                                 await showDialog(
                                   context: context,
                                   builder: (_) => AssetGiffyDialog(
-                                    title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                    description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                    title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                    description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                     entryAnimation: EntryAnimation.DEFAULT,
                                     buttonOkColor: const Color(0xffff0000),
@@ -127,8 +128,8 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                                 await showDialog(
                                   context: context,
                                   builder: (_) => AssetGiffyDialog(
-                                    title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                    description: const Text('Passwords don\'t match. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                    title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                    description: const Text('Passwords don\'t match. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                     entryAnimation: EntryAnimation.DEFAULT,
                                     buttonOkColor: const Color(0xffff0000),
@@ -147,8 +148,8 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                                   await showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
-                                      title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                      description: const Text('Successfully updated the password.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                      title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                      description: const Text('Successfully updated the password.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                       entryAnimation: EntryAnimation.DEFAULT,
                                       onlyOkButton: true,
@@ -162,8 +163,8 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                                   await showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
-                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                       entryAnimation: EntryAnimation.DEFAULT,
                                       buttonOkColor: const Color(0xffff0000),

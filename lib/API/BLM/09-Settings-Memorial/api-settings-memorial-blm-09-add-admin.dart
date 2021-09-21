@@ -44,8 +44,6 @@ Future<String> apiBLMAddMemorialAdmin({required String pageType, required int pa
     ),  
   );
 
-  print('The status code of blm add admin is ${response.statusCode}');
-
   if(response.statusCode == 200){
     return 'Success';
   }else{

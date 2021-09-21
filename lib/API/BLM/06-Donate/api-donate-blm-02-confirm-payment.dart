@@ -36,13 +36,10 @@ Future<bool> apiBLMConfirmPayment({required String clientSecret, required String
       }
     ),
     queryParameters: <String, dynamic>{
-      'client_secret': '$clientSecret',
-      'payment_method': '$paymentMethod',
+      'client_secret': clientSecret,
+      'payment_method': paymentMethod,
     },
   );
-
-  print('The status code of blm confirm payment is ${response.statusCode}');
-  print('The status data of blm confirm payment is ${response.data}');
 
   if(response.statusCode == 200){
     return true;
