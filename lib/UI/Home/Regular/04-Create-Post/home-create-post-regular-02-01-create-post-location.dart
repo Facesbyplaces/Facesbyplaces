@@ -5,7 +5,7 @@ import 'package:google_place/google_place.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularCreatePostSearchLocation extends StatefulWidget{
-  const HomeRegularCreatePostSearchLocation();
+  const HomeRegularCreatePostSearchLocation({Key? key}) : super(key: key);
   
   @override
   HomeRegularCreatePostSearchLocationState createState() => HomeRegularCreatePostSearchLocationState();
@@ -44,7 +44,7 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
                 valueListenable: empty,
                 builder: (_, bool emptyListener, __) => Scaffold(
                   appBar: PreferredSize(
-                    preferredSize: Size.fromHeight(70),
+                    preferredSize: const Size.fromHeight(70),
                       child: AppBar(
                       leading: Container(),
                       backgroundColor: const Color(0xff04ECFF),
@@ -57,7 +57,7 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: IconButton(
-                                  icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+                                  icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
                                   onPressed: (){
                                     Navigator.pop(context,);
                                   },
@@ -67,16 +67,16 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
                               Expanded(
                                 child: TextFormField(
                                   controller: controller,
-                                  style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                  style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                   decoration: const InputDecoration(
-                                    focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                    enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                    border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                    hintStyle: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
-                                    prefixIcon: const Icon(Icons.search, color: const Color(0xff888888)),
-                                    contentPadding: const EdgeInsets.all(15.0),
-                                    focusColor: const Color(0xffffffff),
-                                    fillColor: const Color(0xffffffff),
+                                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffffffff)), borderRadius: BorderRadius.all(Radius.circular(25)),),
+                                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffffffff)), borderRadius: BorderRadius.all(Radius.circular(25)),),
+                                    border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffffffff)), borderRadius: BorderRadius.all(Radius.circular(25)),),
+                                    hintStyle: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                    prefixIcon: Icon(Icons.search, color: Color(0xff888888)),
+                                    contentPadding: EdgeInsets.all(15.0),
+                                    focusColor: Color(0xffffffff),
+                                    fillColor: Color(0xffffffff),
                                     hintText: 'Search Location',
                                     filled: true,
                                   ),
@@ -119,7 +119,7 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
                       ),
                     ),
                   ),
-                  body: Container(
+                  body: SizedBox(
                     width: SizeConfig.screenWidth,
                     child: emptyListener
                     ? SingleChildScrollView(
@@ -128,13 +128,13 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
                         children: [
                           SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
 
-                          const Icon(Icons.place_rounded, size: 240, color: const Color(0xff888888),),
+                          const Icon(Icons.place_rounded, size: 240, color: Color(0xff888888),),
 
                           const SizedBox(height: 20),
 
                           const Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: const Text('Search a location to add on your post', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            child: Text('Search a location to add on your post', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
                           ),
 
                           SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
@@ -145,26 +145,26 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
                       physics: const ClampingScrollPhysics(),
                       itemCount: placesListener.length,
                       separatorBuilder: (context, index){
-                        return const Divider(thickness: 1, color: const Color(0xff888888),);
+                        return const Divider(thickness: 1, color: Color(0xff888888),);
                       },
                       itemBuilder: (context, index){
                         return ListTile(
-                          title: Text(placesListener[index], style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+                          title: Text(placesListener[index], style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', fontWeight: FontWeight.bold, color: Color(0xff000000),),),
                           subtitle: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(descriptionPlacesListener[index], style: const TextStyle(fontSize: 14, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                              Text(descriptionPlacesListener[index], style: const TextStyle(fontSize: 14, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
 
                               const SizedBox(height: 5,),
 
-                              const Text('Click to add on your post', style: const TextStyle(fontSize: 12, fontFamily: 'NexaRegular', color: const Color(0xff888888),),),
+                              const Text('Click to add on your post', style: TextStyle(fontSize: 12, fontFamily: 'NexaRegular', color: Color(0xff888888),),),
                             ],
                           ),
                           onTap: () async{
                             context.loaderOverlay.show();
                             GooglePlace googlePlace = GooglePlace("AIzaSyCTPIQSGBS0cdzWRv9VGqrRuVwd2KuuhNg");
-                            var newResult = await googlePlace.details.get('${placeId[index]}');
+                            var newResult = await googlePlace.details.get(placeId[index]);
                             context.loaderOverlay.hide();
 
                             Navigator.pop(context, [placesListener[index], newResult!.result!.geometry!.location!.lat, newResult.result!.geometry!.location!.lng]);

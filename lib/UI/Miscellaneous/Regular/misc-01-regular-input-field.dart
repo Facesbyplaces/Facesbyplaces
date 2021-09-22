@@ -290,7 +290,7 @@ class MiscRegularPhoneNumberTemplateState extends State<MiscRegularPhoneNumberTe
   @override
   Widget build(BuildContext context){
     return InternationalPhoneNumberInput(
-      inputDecoration: InputDecoration(alignLabelWithHint: true, labelText: widget.labelText, labelStyle: widget.labelTextStyle, focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),),
+      inputDecoration: InputDecoration(alignLabelWithHint: true, labelText: widget.labelText, labelStyle: widget.labelTextStyle, focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),),
       textStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
       selectorConfig: const SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET, showFlags: false,),
       textFieldController: controller,

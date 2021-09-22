@@ -28,15 +28,16 @@ class RegularCreateMemorialValues{
 }
 
 class HomeRegularCreateMemorial1 extends StatefulWidget{
-  const HomeRegularCreateMemorial1();
+  const HomeRegularCreateMemorial1({Key? key}) : super(key: key);
 
+  @override
   HomeRegularCreateMemorial1State createState() => HomeRegularCreateMemorial1State();
 }
 
 class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
-  GlobalKey<MiscRegularInputFieldDropDownState> _key1 = GlobalKey<MiscRegularInputFieldDropDownState>();
-  GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  GlobalKey<MiscRegularInputFieldTemplateState> _key6 = GlobalKey<MiscRegularInputFieldTemplateState>();
+  final GlobalKey<MiscRegularInputFieldDropDownState> _key1 = GlobalKey<MiscRegularInputFieldDropDownState>();
+  final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
+  final GlobalKey<MiscRegularInputFieldTemplateState> _key6 = GlobalKey<MiscRegularInputFieldTemplateState>();
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
   TextEditingController controller3 = TextEditingController();
@@ -63,11 +64,11 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
           valueListenable: location,
           builder: (_, LatLng? locationListener, __) => Scaffold(
             appBar: AppBar(
-              title: const Text('Create a Memorial Page for Friends and family.', maxLines: 2, style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+              title: const Text('Create a Memorial Page for Friends and family.', maxLines: 2, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
               centerTitle: true,
               backgroundColor: const Color(0xff04ECFF),
               leading: IconButton(
-                icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+                icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
                 onPressed: (){
                   Navigator.pop(context);
                 },
@@ -77,7 +78,7 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
               children: [
                 SingleChildScrollView(
                   physics: const NeverScrollableScrollPhysics(),
-                  child: Container(height: SizeConfig.screenHeight, child: const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),
+                  child: SizedBox(height: SizeConfig.screenHeight, child: const MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
                 ),
 
                 Container(
@@ -92,7 +93,7 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                       MiscRegularInputFieldTemplate(
                         key: _key2, 
                         labelText: 'Birthplace',
-                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                       ),
 
                       const SizedBox(height: 20,),
@@ -102,10 +103,10 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                         cursorColor: const Color(0xff000000),
                         keyboardType: TextInputType.text,
                         readOnly: true,
-                        style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                        style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                         decoration: InputDecoration(
-                          labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                          focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
+                          labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                          focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
                           alignLabelWithHint: true,
                           labelText: 'DOB',
                           suffixIcon: IconButton(
@@ -140,14 +141,14 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                         cursorColor: const Color(0xff000000),
                         keyboardType: TextInputType.text,
                         readOnly: true,
-                        style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                        style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                         decoration: InputDecoration(
-                          labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                          focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
+                          labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                          focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
                           alignLabelWithHint: true,
                           labelText: 'RIP',
                           suffixIcon: IconButton(
-                            icon: Icon(Icons.close), 
+                            icon: const Icon(Icons.close), 
                             onPressed: (){
                               controller2.text = '';
                               rip = DateTime.now();
@@ -178,21 +179,19 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                         keyboardType: TextInputType.text,
                         maxLines: 1,
                         cursorColor: const Color(0xff000000),
-                        style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                        style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                         decoration: InputDecoration(
                           alignLabelWithHint: true, 
                           labelText: 'Cemetery', 
-                          labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                          focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
+                          labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                          focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
                           suffixIcon: IconButton(
-                            icon: Icon(Icons.add_location), 
+                            icon: const Icon(Icons.add_location), 
                             onPressed: () async{
-                              var memorialLocation = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreateMemorialLocateMap()));
+                              var memorialLocation = await Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeRegularCreateMemorialLocateMap()));
 
                               if(memorialLocation != null){
                                 location.value = memorialLocation;
-                                print('The location latitude is ${location.value!.latitude}');
-                                print('The location longitude is ${location.value!.longitude}');
                               }
                             },
                           ),
@@ -205,13 +204,13 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                       MiscRegularInputFieldTemplate(
                         key: _key6, 
                         labelText: 'Country',
-                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                       ),
 
                       const SizedBox(height: 40,),
 
                       MiscRegularButtonTemplate(
-                        buttonTextStyle: const TextStyle(fontSize: 24, color: const Color(0xffffffff), fontFamily: 'NexaBold',),
+                        buttonTextStyle: const TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold',),
                         width: SizeConfig.screenWidth! / 2,
                         height: 50,
                         onPressed: () async{
@@ -219,8 +218,8 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                             await showDialog(
                               context: context,
                               builder: (_) => AssetGiffyDialog(
-                                title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                 entryAnimation: EntryAnimation.DEFAULT,
                                 buttonOkColor: const Color(0xffff0000),
@@ -234,8 +233,8 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                             await showDialog(
                               context: context,
                               builder: (_) => AssetGiffyDialog(
-                                title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                description: const Text('Pin the location of the cemetery first before proceeding.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                description: const Text('Pin the location of the cemetery first before proceeding.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                 entryAnimation: EntryAnimation.DEFAULT,
                                 buttonOkColor: const Color(0xffff0000),

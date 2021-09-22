@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
-import 'package:facesbyplaces/API/Regular/04-Create-Memorial/api-create-memorial-regular-01-create-memorial.dart';
+import 'package:facesbyplaces/API/Regular/04-Create-Memorial/api_create_memorial_regular_01_create_memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -24,8 +24,9 @@ class HomeRegularCreateMemorial3 extends StatefulWidget{
   final String description;
   final String memorialName;
   final List<dynamic> imagesOrVideos;
-  const HomeRegularCreateMemorial3({required this.relationship, required this.birthplace, required this.dob, required this.rip, required this.cemetery, required this.country, required this.latitude, required this.longitude, required this.description, required this.memorialName, required this.imagesOrVideos});
+  const HomeRegularCreateMemorial3({Key? key, required this.relationship, required this.birthplace, required this.dob, required this.rip, required this.cemetery, required this.country, required this.latitude, required this.longitude, required this.description, required this.memorialName, required this.imagesOrVideos}) : super(key: key);
 
+  @override
   HomeRegularCreateMemorial3State createState() => HomeRegularCreateMemorial3State();
 }
 
@@ -46,7 +47,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
         profileImage.value = File(pickedFile.path);
       }
     }catch (error){
-      print('Error: ${error.toString()}');
+      throw Exception('Error: $error');
     }
   }
 
@@ -60,7 +61,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
         backgroundImage.value = File(pickedFile.path);
       }
     }catch (error){
-      print('Error: ${error.toString()}');
+      throw Exception('Error: $error');
     }
   }
 
@@ -75,11 +76,11 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
           valueListenable: backgroundImageToggle,
           builder: (_, int backgroundImageToggleListener, __) => Scaffold(
             appBar: AppBar(
-              title: const Text('Create a Memorial Page for Friends and family.', maxLines: 2, style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+              title: const Text('Create a Memorial Page for Friends and family.', maxLines: 2, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
               backgroundColor: const Color(0xff04ECFF),
               centerTitle: true,
               leading: IconButton(
-                icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35),
+                icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35),
                 onPressed: (){
                   Navigator.pop(context);
                 },
@@ -87,7 +88,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
             ),
             body: Stack(
               children: [
-                const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),
+                const MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
 
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
@@ -96,11 +97,11 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                     children: [
                       const SizedBox(height: 20,),
                       
-                      const Text('Upload or Select an Image', style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xff000000))),
+                      const Text('Upload or Select an Image', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xff000000))),
 
                       const SizedBox(height: 20,),
 
-                      Container(
+                      SizedBox(
                         height: 200,
                         width: SizeConfig.screenWidth,
                         child: Stack(
@@ -111,7 +112,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                             : Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/alm-memorial-cover-1.jpeg'),),
+                                image: const DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/alm-memorial-cover-1.jpeg'),),
                               ),
                             ),
 
@@ -125,14 +126,14 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                                     child: profileImageListener.path != ''
                                     ? CircleAvatar(
                                       radius: 60,
-                                      backgroundColor: Color(0xff888888),
+                                      backgroundColor: const Color(0xff888888),
                                       foregroundImage: FileImage(profileImageListener),
                                       backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                     )
                                     : const CircleAvatar(
                                       radius: 60,
                                       backgroundColor: Color(0xff888888),
-                                      foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                      foregroundImage: AssetImage('assets/icons/app-icon.png'),
                                     ),
                                   ),
                                 ),
@@ -146,8 +147,8 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                               left: SizeConfig.screenWidth! / 2,
                               bottom: 40,
                               child: const CircleAvatar(
-                                child: const CircleAvatar(radius: 25, backgroundColor: Colors.transparent, child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),),
-                                backgroundColor: const Color(0xffffffff),
+                                child: CircleAvatar(radius: 25, backgroundColor: Colors.transparent, child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: 45,),),
+                                backgroundColor: Color(0xffffffff),
                                 radius: 25,
                               ),
                             ),
@@ -155,9 +156,9 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                             const Positioned(
                               right: 10,
                               top: 10,
-                              child: const CircleAvatar(
-                                child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),
-                                backgroundColor: const Color(0xffffffff),
+                              child: CircleAvatar(
+                                child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: 45,),
+                                backgroundColor: Color(0xffffffff),
                                 radius: 25,
                               ),
                             ),
@@ -167,15 +168,15 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
 
                       const SizedBox(height: 20,),
 
-                      const Text('Upload the best photo of the person in the memorial page.', style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+                      const Text('Upload the best photo of the person in the memorial page.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
 
                       const SizedBox(height: 40,),
 
-                      const Text('Choose Background', style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                      const Text('Choose Background', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
                       
                       const SizedBox(height: 20,),
                       
-                      Container(
+                      SizedBox(
                         height: 100,
                         child: ListView.separated(
                           physics: const ClampingScrollPhysics(),
@@ -190,7 +191,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                                 return GestureDetector(
                                   child: Container(
                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: const Color(0xffcccccc), border: Border.all(color: const Color(0xff000000),),),
-                                    child: const Icon(Icons.add_rounded, color: const Color(0xff000000), size: 60,),
+                                    child: const Icon(Icons.add_rounded, color: Color(0xff000000), size: 60,),
                                     height: 100,
                                     width: 100,
                                   ),
@@ -229,7 +230,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                                     final Uint8List list = bytes.buffer.asUint8List();
 
                                     final tempDir = await getTemporaryDirectory();
-                                    final file = await new File('${tempDir.path}/regular-background-image-$index.png').create();
+                                    final file = await File('${tempDir.path}/regular-background-image-$index.png').create();
                                     file.writeAsBytesSync(list);
 
                                     backgroundImageToggle.value = index;
@@ -244,12 +245,12 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
 
                       const SizedBox(height: 20,),
 
-                      const Text('Upload your own or select from the pre-mades.', style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+                      const Text('Upload your own or select from the pre-mades.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
 
                       const SizedBox(height: 80,),
 
                       MiscRegularButtonTemplate(
-                        buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                        buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),
                         buttonText: 'Create my Memorial Page',
                         width: 150,
                         height: 50,
@@ -259,7 +260,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                             final Uint8List list = bytes.buffer.asUint8List();
 
                             final tempDir = await getTemporaryDirectory();
-                            final file = await new File('${tempDir.path}/regular-background-image-$backgroundImageToggle.png').create();
+                            final file = await File('${tempDir.path}/regular-background-image-$backgroundImageToggle.png').create();
                             file.writeAsBytesSync(list);
 
                             backgroundImage.value = file;
@@ -270,7 +271,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                             final Uint8List list = bytes.buffer.asUint8List();
 
                             final tempDir = await getTemporaryDirectory();
-                            final file = await new File('${tempDir.path}/regular-profile-image.png').create();
+                            final file = await File('${tempDir.path}/regular-profile-image.png').create();
                             file.writeAsBytesSync(list);
 
                             profileImage.value = file;

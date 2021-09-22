@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
-import 'package:facesbyplaces/API/BLM/07-Report/api-report-blm-01-report.dart';
+import 'package:facesbyplaces/API/BLM/07-Report/api_report_blm_01_report.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 class HomeBLMReport extends StatelessWidget{
   final int postId;
   final String reportType;
-  HomeBLMReport({required this.postId, required this.reportType});
+  HomeBLMReport({Key? key, required this.postId, required this.reportType}) : super(key: key);
 
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldMultiTextTemplateState> _key2 = GlobalKey<MiscBLMInputFieldMultiTextTemplateState>();
@@ -33,10 +33,10 @@ class HomeBLMReport extends StatelessWidget{
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: const Color(0xff04ECFF),
-            title: Text('Report', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+            title: const Text('Report', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
             centerTitle: false,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+              icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
               onPressed: (){
                 Navigator.pop(context);
               },
@@ -49,9 +49,9 @@ class HomeBLMReport extends StatelessWidget{
               physics: const ClampingScrollPhysics(),
               child: Column(
                 children: [
-                  Align(
+                  const Align(
                     alignment: Alignment.centerLeft,
-                    child: Text('Inform us about what happened.', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xfF000000),),),
+                    child: Text('Inform us about what happened.', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xfF000000),),),
                   ),
 
                   const SizedBox(height: 25,),
@@ -60,7 +60,7 @@ class HomeBLMReport extends StatelessWidget{
                     key: _key1,
                     labelText: 'Subject',
                     type: TextInputType.text,
-                    labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xfFB1B1B1),),
+                    labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xfFB1B1B1),),
                   ),
 
                   const SizedBox(height: 25,),
@@ -68,14 +68,14 @@ class HomeBLMReport extends StatelessWidget{
                   MiscBLMInputFieldMultiTextTemplate(
                     key: _key2,
                     labelText: 'Body',
-                    labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xfFB1B1B1),),
+                    labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xfFB1B1B1),),
                   ),
 
                   const SizedBox(height: 50,),
 
                   MiscBLMButtonTemplate(
                     buttonText: 'Report',
-                    buttonTextStyle: TextStyle(fontSize: 24, color: const Color(0xffffffff), fontFamily: 'NexaBold'),
+                    buttonTextStyle: const TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold'),
                     buttonColor: const Color(0xff04ECFF),
                     width: SizeConfig.screenWidth! / 2,
                     height: 50,
@@ -84,8 +84,8 @@ class HomeBLMReport extends StatelessWidget{
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(
-                            title: Text('Error',textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                            description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                            title: const Text('Error',textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                            description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             entryAnimation: EntryAnimation.DEFAULT,
                             buttonOkColor: const Color(0xffff0000),
@@ -104,8 +104,8 @@ class HomeBLMReport extends StatelessWidget{
                           await showDialog(
                             context: context,
                             builder: (_) => AssetGiffyDialog(
-                              title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                              description: Text('Successfully submitted a report. Your report will be reviewed by the administrator.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                              title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                              description: const Text('Successfully submitted a report. Your report will be reviewed by the administrator.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                               entryAnimation: EntryAnimation.DEFAULT,
                               onlyOkButton: true,
@@ -119,8 +119,8 @@ class HomeBLMReport extends StatelessWidget{
                           await showDialog(
                             context: context,
                             builder: (_) => AssetGiffyDialog(
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                              description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                              title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                              description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                               entryAnimation: EntryAnimation.DEFAULT,
                               buttonOkColor: const Color(0xffff0000),

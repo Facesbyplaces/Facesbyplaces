@@ -1,5 +1,5 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-03-home-post-tab.dart';
+import 'package:facesbyplaces/API/BLM/02-Main/api_main_blm_04_03_home_post_tab.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-post.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -40,8 +40,9 @@ class BLMMainPagesPosts{
 }
 
 class HomeBLMPostTab extends StatefulWidget{
-  const HomeBLMPostTab();
+  const HomeBLMPostTab({Key? key}) : super(key: key);
 
+  @override
   HomeBLMPostTabState createState() => HomeBLMPostTabState();
 }
 
@@ -53,6 +54,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
   int itemRemaining = 1;
   int page = 1;
 
+  @override
   void initState(){
     super.initState();
     isGuest();
@@ -62,10 +64,10 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
           onLoading();
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: const Text('No more posts to show'),
-              duration: const Duration(seconds: 1),
-              backgroundColor: const Color(0xff4EC9D4),
+            const SnackBar(
+              content: Text('No more posts to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
             ),
           );
         }
@@ -142,8 +144,9 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
         );
       }
 
-      if(mounted)
-      page++;
+      if(mounted){
+        page++;
+      }
     }
   }
 
@@ -152,7 +155,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
     SizeConfig.init(context);
     return ValueListenableBuilder(
       valueListenable: count,
-      builder: (_, int countListener, __) => Container(
+      builder: (_, int countListener, __) => SizedBox(
         width: SizeConfig.screenWidth,
         child: countListener != 0
         ? SafeArea(
@@ -189,7 +192,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
                   latitude: posts[i].latitude,
                   longitude: posts[i].longitude,
                   contents: [
-                    Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                    Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 
                     posts[i].imagesOrVideos.isNotEmpty
                     ? Column(
@@ -290,7 +293,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
 
                                               Center(
                                                 child: CircleAvatar(
-                                                  child: Text('${posts[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                  child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                   radius: 25,
                                                 ),
@@ -312,7 +315,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
 
                                               Center(
                                                 child: CircleAvatar(
-                                                  child: Text('${posts[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                  child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                   radius: 25,
                                                 ),
@@ -357,22 +360,20 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
         )
         : SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
-          child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
 
-                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-                const SizedBox(height: 45,),
+              const SizedBox(height: 45,),
 
-                const Text('Post is empty', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+              const Text('Post is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
 
-                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
-              ],
-            ),
+              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+            ],
           ),
         ),
       ),

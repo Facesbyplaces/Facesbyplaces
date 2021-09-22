@@ -18,7 +18,7 @@ class BLMJoin extends StatelessWidget{
               constraints: BoxConstraints(minHeight: constraint.maxHeight),
               child: IntrinsicHeight(
                 child: Container(
-                  decoration: const BoxDecoration(color: Color(0xffffffff), image: DecorationImage(fit: BoxFit.fill, image: AssetImage('assets/icons/background2.png', ), colorFilter: const ColorFilter.srgbToLinearGamma(),),),
+                  decoration: const BoxDecoration(color: Color(0xffffffff), image: DecorationImage(fit: BoxFit.fill, image: AssetImage('assets/icons/background2.png', ), colorFilter: ColorFilter.srgbToLinearGamma(),),),
                   child: SafeArea(
                     child: Column(
                       children: [

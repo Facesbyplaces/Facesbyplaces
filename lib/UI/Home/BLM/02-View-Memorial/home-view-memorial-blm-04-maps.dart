@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-05-maps.dart';
-import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-06-directions.dart';
+import 'package:facesbyplaces/API/Regular/03-View-Memorial/api_view_memorial_regular_05_maps.dart';
+import 'package:facesbyplaces/API/Regular/03-View-Memorial/api_view_memorial_regular_06_directions.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -13,8 +13,9 @@ class HomeBLMMaps extends StatefulWidget{
   final bool isMemorial;
   final String memorialName;
   final String memorialImage;
-  const HomeBLMMaps({required this.latitude, required this.longitude, required this.isMemorial, required this.memorialName, required this.memorialImage});
+  const HomeBLMMaps({Key? key, required this.latitude, required this.longitude, required this.isMemorial, required this.memorialName, required this.memorialImage}) : super(key: key);
 
+  @override
   HomeRegularMapsState createState() => HomeRegularMapsState();
 }
 
@@ -27,6 +28,7 @@ class HomeRegularMapsState extends State<HomeBLMMaps>{
   Set<Marker> markers = {};
   RegularDirections? info;
 
+  @override
   void initState(){
     super.initState();
     initialCameraPosition = CameraPosition(target: LatLng(widget.latitude, widget.longitude), zoom: 14.4746,);
@@ -34,7 +36,6 @@ class HomeRegularMapsState extends State<HomeBLMMaps>{
       markerId: const MarkerId('origin'), 
       position: LatLng(widget.latitude, widget.longitude),
       onTap: (){
-        print('print hehehehe');
         customInfoWindowController.addInfoWindow!(
           ClipPath(
             clipper: MessageClipper(borderRadius: 10),
@@ -43,7 +44,7 @@ class HomeRegularMapsState extends State<HomeBLMMaps>{
               color: const Color(0xffffffff),
               child: Column(
                 children: [
-                  Text('Here Lies', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                  const Text('Here Lies', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
 
                   ListTile(
                     leading: widget.memorialImage != ''
@@ -55,14 +56,14 @@ class HomeRegularMapsState extends State<HomeBLMMaps>{
                     )
                     : const CircleAvatar(
                       radius: 20,
-                      backgroundColor: const Color(0xff888888),
-                      foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                      backgroundColor: Color(0xff888888),
+                      foregroundImage:AssetImage('assets/icons/app-icon.png'),
                     ),
-                    title: Text('${widget.memorialName}', maxLines: 2,),
+                    title: Text(widget.memorialName, maxLines: 2,),
                     subtitle: Text('${widget.latitude.toStringAsFixed(6)}, ${widget.longitude.toStringAsFixed(6)}'),
                   ),
 
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20,),
                 ],
               ),
             ),
@@ -80,7 +81,7 @@ class HomeRegularMapsState extends State<HomeBLMMaps>{
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: Text('${widget.memorialName}', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
+        title: Text(widget.memorialName, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
         backgroundColor: const Color(0xff04ECFF),
         actions: [
           IconButton(
@@ -91,7 +92,7 @@ class HomeRegularMapsState extends State<HomeBLMMaps>{
                 : CameraUpdate.newCameraPosition(initialCameraPosition!),
               );
             },
-            icon: Icon(Icons.send_outlined),
+            icon: const Icon(Icons.send_outlined),
           ),
         ],
       ),
@@ -119,7 +120,7 @@ class HomeRegularMapsState extends State<HomeBLMMaps>{
                 width: 5,
                 points: info!.polylinePoints.map((e) => LatLng(e.latitude, e.longitude)).toList()
               )
-              : Polyline(polylineId: const PolylineId('blank'),),
+              : const Polyline(polylineId: PolylineId('blank'),),
             },
           ),
 
@@ -159,8 +160,6 @@ class HomeRegularMapsState extends State<HomeBLMMaps>{
   }
 
   void _addMarker(LatLng position) async{
-    print('long press');
-
     if(markers.length == 1){
       setState(() {
         markers.add(Marker(
@@ -183,7 +182,7 @@ class HomeRegularMapsState extends State<HomeBLMMaps>{
             color: const Color(0xffffffff),
             child: Column(
               children: [
-                Text('Here Lies', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                const Text('Here Lies', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
 
                 ListTile(
                   leading: widget.memorialImage != ''
@@ -195,14 +194,14 @@ class HomeRegularMapsState extends State<HomeBLMMaps>{
                   )
                   : const CircleAvatar(
                     radius: 20,
-                    backgroundColor: const Color(0xff888888),
-                    foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                    backgroundColor: Color(0xff888888),
+                    foregroundImage: AssetImage('assets/icons/app-icon.png'),
                   ),
-                  title: Text('${widget.memorialName}', maxLines: 2,),
+                  title: Text(widget.memorialName, maxLines: 2,),
                   subtitle: Text('${widget.latitude.toStringAsFixed(6)}, ${widget.longitude.toStringAsFixed(6)}'),
                 ),
 
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
               ],
             ),
           ),

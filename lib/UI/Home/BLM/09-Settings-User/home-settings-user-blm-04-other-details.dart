@@ -1,11 +1,11 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-02-show-other-details.dart';
-import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-06-update-other-details.dart';
-import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-07-hide-birthdate.dart';
-import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-08-hide-birthplace.dart';
-import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-09-hide-address.dart';
-import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-10-hide-email.dart';
-import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-11-hide-phone-number.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_02_show_other_details.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_06_update_other_details.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_07_hide_birthdate.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_08_hide_birthplace.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_09_hide_address.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_10_hide_email.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_11_hide_phone_number.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
@@ -24,8 +24,9 @@ class HomeBLMUserOtherDetails extends StatefulWidget{
   final bool toggleAddress;
   final bool toggleEmail;
   final bool toggleNumber;
-  const HomeBLMUserOtherDetails({required this.userId, required this.toggleBirthdate, required this.toggleBirthplace, required this.toggleAddress, required this.toggleEmail, required this.toggleNumber});
+  const HomeBLMUserOtherDetails({Key? key, required this.userId, required this.toggleBirthdate, required this.toggleBirthplace, required this.toggleAddress, required this.toggleEmail, required this.toggleNumber}) : super(key: key);
 
+  @override
   HomeBLMUserOtherDetailsState createState() => HomeBLMUserOtherDetailsState();
 }
 
@@ -42,6 +43,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
   ValueNotifier<bool> toggle5 = ValueNotifier<bool>(false);
   Future<APIBLMShowOtherDetails>? otherDetails;
 
+  @override
   void initState(){
     super.initState();
     otherDetails = getOtherDetails(widget.userId);
@@ -83,10 +85,10 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                   builder: (_, bool toggle5Listener, __) => Scaffold(
                     appBar: AppBar(
                       backgroundColor: const Color(0xff04ECFF),
-                      title: Text('Other Details', textAlign: TextAlign.left, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff)),),
+                      title: const Text('Other Details', textAlign: TextAlign.left, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff)),),
                       centerTitle: false,
                       leading: IconButton(
-                        icon: Icon(Icons.arrow_back,size: 35,),
+                        icon: const Icon(Icons.arrow_back,size: 35,),
                         onPressed: (){
                           Navigator.pop(context);
                         },
@@ -134,7 +136,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                         key: _key2,
                                         labelText: 'Birthplace',
                                         displayText: details.data!.blmShowOtherDetailsBirthplace,
-                                        labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                                       ),
                                     ),
 
@@ -161,7 +163,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                         key: _key3,
                                         labelText: 'Home Address',
                                         displayText: details.data!.blmShowOtherDetailsAddress,
-                                        labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),
+                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),
                                         ),
                                       ),
                                     ),
@@ -190,7 +192,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                         labelText: 'Email',
                                         type: TextInputType.emailAddress,
                                         displayText: details.data!.blmShowOtherDetailsEmail,
-                                        labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                                       ),
                                     ),
 
@@ -218,7 +220,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                         labelText: 'Contact Number',
                                         type: TextInputType.phone,
                                         displayText: details.data!.blmShowOtherDetailsPhoneNumber,
-                                        labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                                       ),
                                     ),
 
@@ -240,13 +242,13 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                                 MiscBLMButtonTemplate(
                                   buttonText: 'Update',
-                                  buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                                  buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                                   buttonColor: const Color(0xff04ECFF),
                                   width: SizeConfig.screenWidth! / 2,
                                   height: 50,
                                   onPressed: () async{
                                     if(details.data!.blmShowOtherDetailsBirthdate != _key1.currentState!.controller.text || details.data!.blmShowOtherDetailsBirthplace != _key2.currentState!.controller.text || details.data!.blmShowOtherDetailsAddress != _key3.currentState!.controller.text || details.data!.blmShowOtherDetailsEmail != _key4.currentState!.controller.text || details.data!.blmShowOtherDetailsPhoneNumber != _key5.currentState!.controller.text){
-                                      bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: const Color(0xff04ECFF), confirmColor_2: const Color(0xffFF0000),),);
+                                      bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),),);
 
                                       if(confirmResult){
                                         context.loaderOverlay.show();
@@ -257,8 +259,8 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                           await showDialog(
                                             context: context,
                                             builder: (_) => AssetGiffyDialog(
-                                              description: Text('Successfully updated the other details.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                              title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                              description: const Text('Successfully updated the other details.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                              title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                               entryAnimation: EntryAnimation.DEFAULT,
                                               onlyOkButton: true,
@@ -272,8 +274,8 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                           await showDialog(
                                             context: context,
                                             builder: (_) => AssetGiffyDialog(
-                                              description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                              description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                              title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                               entryAnimation: EntryAnimation.DEFAULT,
                                               buttonOkColor: const Color(0xffff0000),
@@ -289,14 +291,14 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                   },
                                 ),
 
-                                SizedBox(height: 20,),
+                                const SizedBox(height: 20,),
                               ],
                             ),
                           );
                         }else if(details.hasError){
-                          return Container(height: SizeConfig.screenHeight, child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),),);
+                          return SizedBox(height: SizeConfig.screenHeight, child: const Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),),);
                         }else{
-                          return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
+                          return SizedBox(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
                         }
                       },
                     ),

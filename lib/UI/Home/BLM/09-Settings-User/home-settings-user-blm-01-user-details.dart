@@ -1,9 +1,9 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-01-logout.dart';
-import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-02-show-user-information.dart';
-import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-03-show-other-details-status.dart';
-import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-12-update-user-profile-picture.dart';
-import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-14-check-account.dart';
+import 'package:facesbyplaces/API/BLM/02-Main/api_main_blm_01_logout.dart';
+import 'package:facesbyplaces/API/BLM/02-Main/api_main_blm_02_show_user_information.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_03_show_other_details_status.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_12_update_user_profile_picture.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_14_check_account.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-custom-drawings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
@@ -25,8 +25,9 @@ import 'dart:io';
 
 class HomeBLMUserProfileDetails extends StatefulWidget{
   final int userId;
-  const HomeBLMUserProfileDetails({required this.userId});
+  const HomeBLMUserProfileDetails({Key? key, required this.userId}) : super(key: key);
 
+  @override
   HomeBLMUserProfileDetailsState createState() => HomeBLMUserProfileDetailsState();
 }
 
@@ -51,6 +52,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
     }
   }
 
+  @override
   void initState(){
     super.initState();
     showProfile = getProfileInformation();
@@ -71,7 +73,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                 panelMaxSize: SizeConfig.screenHeight! / 1.5,
                 backgroundColor: const Color(0xffECF0F1),
                 panel: Container(
-                  decoration: const BoxDecoration(color: const Color(0xffffffff), borderRadius: const BorderRadius.only(topLeft: const Radius.circular(50.0),),),
+                  decoration: const BoxDecoration(color: Color(0xffffffff), borderRadius: BorderRadius.only(topLeft: Radius.circular(50.0),),),
                   padding: const EdgeInsets.only(left: 50.0, right: 50.0),
                   height: SizeConfig.screenHeight! / 1.5,
                   child: Column(
@@ -79,18 +81,18 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                       Expanded(child: Container(),),
 
                       ListTile(
-                        title: Text('Update Details', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-                        subtitle: Text('Update your account details', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                        title: const Text('Update Details', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
+                        subtitle: const Text('Update your account details', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
                         onTap: (){
                           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserUpdateDetails(userId: widget.userId,)));
                         },
                       ),
 
-                      const Divider(height: 20, color: const Color(0xff888888),),
+                      const Divider(height: 20, color: Color(0xff888888),),
 
                       ListTile(
-                        title: Text('Password', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-                        subtitle: Text('Change your login password', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                        title: const Text('Password', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
+                        subtitle: const Text('Change your login password', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
                         onTap: () async{
                           final sharedPrefs = await SharedPreferences.getInstance();
                           bool socialAppSession = sharedPrefs.getBool('blm-social-app-session') ?? false;
@@ -100,8 +102,8 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                             showDialog(
                               context: context,
                               builder: (_) => AssetGiffyDialog(
-                                description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                 entryAnimation: EntryAnimation.DEFAULT,
                                 buttonOkColor: const Color(0xffff0000),
@@ -123,11 +125,11 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                         },
                       ),
 
-                      const Divider(height: 20, color: const Color(0xff888888),),
+                      const Divider(height: 20, color: Color(0xff888888),),
 
                       ListTile(
-                        title: Text('Other info', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-                        subtitle: Text('Optional informations you can share', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                        title: const Text('Other info', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
+                        subtitle: const Text('Optional informations you can share', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
                         onTap: () async{
                           context.loaderOverlay.show();
                           APIBLMShowOtherDetailsStatus result = await apiBLMShowOtherDetailsStatus(userId: widget.userId);
@@ -137,26 +139,26 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                         },
                       ),
 
-                      const Divider(height: 20, color: const Color(0xff888888),),
+                      const Divider(height: 20, color: Color(0xff888888),),
 
                       ListTile(
-                        title: Text('Privacy Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-                        subtitle: Text('Control what others see', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                        title: const Text('Privacy Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
+                        subtitle: const Text('Control what others see', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
                         onTap: () => {},
                       ),
 
-                      const Divider(height: 20, color: const Color(0xff888888),),
+                      const Divider(height: 20, color: Color(0xff888888),),
 
                       const SizedBox(height: 20,),
 
                       MiscBLMButtonTemplate(
                         buttonText: 'Logout',
-                        buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                        buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                         buttonColor: const Color(0xff04ECFF),
                         width: SizeConfig.screenWidth! / 2,
                         height: 45,
                         onPressed: () async{
-                          bool logoutResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Log out', content: 'Are you sure you want to logout from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),),);
+                          bool logoutResult = await showDialog(context: (context), builder: (build) => const MiscBLMConfirmDialog(title: 'Log out', content: 'Are you sure you want to logout from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),),);
 
                           if(logoutResult){
                             context.loaderOverlay.show();
@@ -170,8 +172,8 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                  description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                  title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                   entryAnimation: EntryAnimation.DEFAULT,
                                   buttonOkColor: const Color(0xffff0000),
@@ -188,7 +190,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
 
                       const SizedBox(height: 20,),
 
-                      Text('V.1.1.0', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff888888),),),
+                      const Text('V.1.1.0', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff888888),),),
 
                       Expanded(child: Container(),),
                     ],
@@ -198,7 +200,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                   children: [
                     Container(height: SizeConfig.screenHeight, color: const Color(0xffECF0F1),),
 
-                    Container(
+                    SizedBox(
                       height: SizeConfig.screenHeight! / 2.5,
                       child: Stack(
                         children: [
@@ -222,8 +224,8 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                               )
                               : const CircleAvatar(
                                 radius: 100, 
-                                backgroundColor: const Color(0xff888888), 
-                                foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                backgroundColor: Color(0xff888888), 
+                                foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
                               ),
                             ),
                             onTap: () async{
@@ -238,8 +240,8 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                                   await showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
-                                      description: Text('Successfully updated the profile picture.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                      description: const Text('Successfully updated the profile picture.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                      title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                       entryAnimation: EntryAnimation.DEFAULT,
                                       onlyOkButton: true,
@@ -252,8 +254,8 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                                   await showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
-                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                       entryAnimation: EntryAnimation.DEFAULT,
                                       buttonOkColor: const Color(0xffff0000),
@@ -274,7 +276,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                       child: Padding(
                         padding: const EdgeInsets.only(left: 20),
                         child: IconButton(
-                          icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+                          icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
                           onPressed: (){
                             Navigator.of(context).popAndPushNamed('/home/blm');
                           },
@@ -283,15 +285,15 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                     ),
                     Positioned(
                       top: SizeConfig.screenHeight! / 2.5,
-                      child: Container(
+                      child: SizedBox(
                         width: SizeConfig.screenWidth,
                         child: Column(
                           children: [
-                            Center(child: Text(profile.data!.showProfileInformationFirstName + ' ' + profile.data!.showProfileInformationLastName, style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xff000000),),),),
+                            Center(child: Text(profile.data!.showProfileInformationFirstName + ' ' + profile.data!.showProfileInformationLastName, style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xff000000),),),),
 
                             const SizedBox(height: 20),
 
-                            Center(child: Text(profile.data!.showProfileInformationEmail, style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),),
+                            Center(child: Text(profile.data!.showProfileInformationEmail, style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),),
 
                             const SizedBox(height: 40,),
                           ],
@@ -302,9 +304,9 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                 ),
               );
             }else if(profile.hasError){
-              return MiscBLMErrorMessageTemplate();
+              return const MiscBLMErrorMessageTemplate();
             }else{
-              return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
+              return SizedBox(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
             }
           },
         ),

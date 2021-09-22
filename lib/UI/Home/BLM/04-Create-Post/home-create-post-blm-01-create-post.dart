@@ -1,10 +1,11 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/BLM/05-Create-Post/api-create-post-blm-01-create-post.dart';
-import 'package:facesbyplaces/API/BLM/05-Create-Post/api-create-post-blm-02-list-of-managed-pages.dart';
+import 'package:facesbyplaces/API/BLM/05-Create-Post/api_create_post_blm_01_create_post.dart';
+import 'package:facesbyplaces/API/BLM/05-Create-Post/api_create_post_blm_02_list_of_managed_pages.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-create-post-blm-02-01-create-post-location.dart';
 import 'home-create-post-blm-02-02-create-post-user.dart';
+// ignore: library_prefixes
 import 'package:location/location.dart' as Location;
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
@@ -33,7 +34,7 @@ class BLMManagedPages{
 class HomeBLMCreatePost extends StatefulWidget{
   final String name;
   final int memorialId;
-  const HomeBLMCreatePost({required this.name, required this.memorialId});
+  const HomeBLMCreatePost({Key? key, required this.name, required this.memorialId}) : super(key: key);
 
   @override
   HomeBLMCreatePostState createState() => HomeBLMCreatePostState();
@@ -55,6 +56,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
   int currentIdSelected = 0;
   int maxLines = 5;
 
+  @override
   void initState(){
     super.initState();
     getManagedPages();
@@ -89,7 +91,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
         slideCount.value++;
       }
     }catch (error){
-      print('Error: ${error.toString()}');
+      throw Exception('Error: $error');
     }
   }
 
@@ -104,7 +106,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
         slideCount.value++;
       }
     }catch (error){
-      print('Error: ${error.toString()}');
+      throw Exception('Error: $error');
     }
   }
 
@@ -136,18 +138,18 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                     appBar: AppBar(
                       backgroundColor: const Color(0xff04ECFF),
                       centerTitle: false,
-                      title: Text('Create Post', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+                      title: const Text('Create Post', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
                       leading: IconButton(
-                        icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+                        icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
                         onPressed: (){
                           Navigator.pop(context);
                         },
                       ),
                       actions: [
                         GestureDetector(
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 20.0),
-                            child: Center(child: Text('Post', style: TextStyle(fontSize: 28, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),),
+                          child: const Padding(
+                            padding: EdgeInsets.only(right: 20.0),
+                            child: Center(child: Text('Post', style: TextStyle(fontSize: 28, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),),
                           ),
                           onTap: () async{
                             List<BLMTaggedPeople> userIds = [];
@@ -163,7 +165,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                             newFiles.addAll(slideImages.value);
 
                             if(newLocation.value == ''){
-                              Location.Location location = new Location.Location();
+                              Location.Location location = Location.Location();
 
                               bool serviceEnabled = await location.serviceEnabled();
                               if(!serviceEnabled){
@@ -180,8 +182,8 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                   await showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
-                                      description: Text('Permission to access location has been denied from this app. In order to turn it on, go to settings and allow location access permission for this app.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                      description: const Text('Permission to access location has been denied from this app. In order to turn it on, go to settings and allow location access permission for this app.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                       entryAnimation: EntryAnimation.DEFAULT,
                                       buttonOkColor: const Color(0xffff0000),
@@ -230,8 +232,8 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                  description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                  title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                   entryAnimation: EntryAnimation.DEFAULT,
                                   buttonOkColor: const Color(0xffff0000),
@@ -253,9 +255,9 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                           children: [
                             Container(
                               child: InputDecorator(
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   alignLabelWithHint: true,
-                                  labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
+                                  labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xff888888),),
                                   focusedBorder: UnderlineInputBorder(borderSide: BorderSide.none,),
                                   border: UnderlineInputBorder(borderSide: BorderSide.none,),
                                 ),
@@ -277,13 +279,13 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                               backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                             )
                                             : const CircleAvatar(
-                                              backgroundColor: const Color(0xff888888),
-                                              foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                              backgroundColor: Color(0xff888888),
+                                              foregroundImage: AssetImage('assets/icons/app-icon.png'),
                                             ),
 
                                             const SizedBox(width: 20,),
 
-                                            Text(value.name, style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                                            Text(value.name, style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff000000),),),
                                           ],
                                         ),
                                       );
@@ -313,15 +315,15 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                     cursorColor: const Color(0xff000000),
                                     maxLines: maxLines,
                                     keyboardType: TextInputType.text,
-                                    style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xfF000000),),
-                                    decoration: InputDecoration(
-                                      fillColor: const Color(0xffffffff),
+                                    style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xfF000000),),
+                                    decoration: const InputDecoration(
+                                      fillColor: Color(0xffffffff),
                                       alignLabelWithHint: true,
                                       labelText: 'Speak out...',
-                                      labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
-                                      border: OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
-                                      focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent,),),
-                                      enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent,),),
+                                      labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                      border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),), borderRadius: BorderRadius.all(Radius.circular(10)),),
+                                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent,),),
+                                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent,),),
                                     ),
                                   ),
                                 ),
@@ -344,7 +346,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  const Icon(Icons.place, color: const Color(0xff888888)),
+                                  const Icon(Icons.place, color: Color(0xff888888)),
 
                                   Expanded(
                                     child: Align(
@@ -372,7 +374,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                               alignment: Alignment.centerLeft,
                               child: Row(
                                 children: [
-                                  const Icon(Icons.people, color: const Color(0xff888888)),
+                                  const Icon(Icons.people, color: Color(0xff888888)),
 
                                   Expanded(
                                     child: Wrap(
@@ -405,7 +407,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                     height: 200,
                                     width: SizeConfig.screenWidth,
                                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                                    child: Container(
+                                    child: SizedBox(
                                       height: 100,
                                       child: GridView.count(
                                         physics: const ClampingScrollPhysics(),
@@ -417,7 +419,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                             child: lookupMimeType(slideImagesListener[index].path)?.contains('video') == true
                                             ? Stack(
                                               children: [
-                                                BetterPlayer.file('${slideImagesListener[index].path}',
+                                                BetterPlayer.file(slideImagesListener[index].path,
                                                   betterPlayerConfiguration: BetterPlayerConfiguration(
                                                     placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
                                                     controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
@@ -430,7 +432,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                   child: CircleAvatar(
                                                     radius: 25,
                                                     backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                    child: Text('${index + 1}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                    child: Text('${index + 1}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                                                   ),
                                                 ),
                                                 
@@ -439,7 +441,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                   top: 0,
                                                   right: 0,
                                                   child: GestureDetector(
-                                                    child: const CircleAvatar(backgroundColor: const Color(0xff000000), child: const Icon(Icons.close, color: const Color(0xffffffff),),),
+                                                    child: const CircleAvatar(backgroundColor: Color(0xff000000), child: Icon(Icons.close, color: Color(0xffffffff),),),
                                                     onTap: (){
                                                       slideImages.value.removeAt(index);
                                                       slideCount.value--;
@@ -449,7 +451,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                 : Container(height: 0),
                                               ],
                                             )
-                                            : Container(
+                                            : SizedBox(
                                               width: 80,
                                               child: Stack(
                                                 fit: StackFit.expand,
@@ -459,8 +461,8 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                   Center(
                                                     child: CircleAvatar(
                                                       radius: 25,
-                                                      backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                                      child: Text('${index + 1}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                      backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                      child: Text('${index + 1}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                                                     ),
                                                   ),
 
@@ -469,7 +471,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                     top: 0,
                                                     right: 0,
                                                     child: GestureDetector(
-                                                      child: const CircleAvatar(backgroundColor: const Color(0xff000000), child: const Icon(Icons.close, color: const Color(0xffffffff),),),
+                                                      child: const CircleAvatar(backgroundColor: Color(0xff000000), child: Icon(Icons.close, color: Color(0xffffffff),),),
                                                       onTap: (){
                                                         slideImages.value.removeAt(index);
                                                       },
@@ -487,7 +489,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                 context: context,
                                                 barrierDismissible: true,
                                                 barrierLabel: 'Dialog',
-                                                transitionDuration: Duration(milliseconds: 0),
+                                                transitionDuration: const Duration(milliseconds: 0),
                                                 pageBuilder: (_, __, ___){
                                                   return Scaffold(
                                                     backgroundColor: Colors.black12.withOpacity(0.7),
@@ -499,7 +501,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                               alignment: Alignment.centerRight,
                                                               padding: const EdgeInsets.only(right: 20.0),
                                                               child: GestureDetector(
-                                                                child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
+                                                                child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
                                                                 onTap: (){
                                                                   Navigator.pop(context);
                                                                 },
@@ -511,7 +513,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                             Expanded(
                                                               child: ((){
                                                                 if(lookupMimeType(slideImagesListener[index].path)?.contains('video') == true){
-                                                                  return BetterPlayer.file('${slideImagesListener[index].path}',
+                                                                  return BetterPlayer.file(slideImagesListener[index].path,
                                                                     betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                       placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                                                                       deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
@@ -546,9 +548,9 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                               }()),
                             ),
 
-                            Divider(color: const Color(0xff2F353D), thickness: 0.2,),
+                            const Divider(color: Color(0xff2F353D), thickness: 0.2,),
 
-                            Container(
+                            SizedBox(
                               height: 160,
                               child: Column(
                                 children: [
@@ -558,15 +560,15 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                                         color: Colors.transparent,
                                         child: Row(
-                                          children: [
-                                            Expanded(child: Text('Add a location', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                                          children: const [
+                                            Expanded(child: Text('Add a location', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 
-                                            const Icon(Icons.place, color: const Color(0xff4EC9D4),),
+                                            Icon(Icons.place, color: Color(0xff4EC9D4),),
                                           ],
                                         ),
                                       ),
                                       onTap: () async{
-                                        List<dynamic> result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreatePostSearchLocation()));
+                                        List<dynamic> result = await Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeBLMCreatePostSearchLocation()));
 
                                         if(result[0] != ''){
                                           newLocation.value = result[0];
@@ -577,7 +579,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                     ),
                                   ),
                                   
-                                  Divider(color: const Color(0xff2F353D), thickness: 0.2,),
+                                  const Divider(color: Color(0xff2F353D), thickness: 0.2,),
                                   
                                   Expanded(
                                     child: GestureDetector(
@@ -585,10 +587,10 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                                         color: Colors.transparent,
                                         child: Row(
-                                          children: [
-                                            Expanded(child: Text('Tag a person you are with', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                                          children: const [
+                                            Expanded(child: Text('Tag a person you are with', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 
-                                            const Icon(Icons.person, color: const Color(0xff4EC9D4),),
+                                            Icon(Icons.person, color: Color(0xff4EC9D4),),
                                           ],
                                         ),
                                       ),
@@ -603,7 +605,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                     ),
                                   ),
 
-                                  Divider(color: const Color(0xff2F353D), thickness: 0.2,),
+                                  const Divider(color: Color(0xff2F353D), thickness: 0.2,),
 
                                   Expanded(
                                     child: GestureDetector(
@@ -611,15 +613,15 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                                         color: Colors.transparent,
                                         child: Row(
-                                          children: [
-                                            Expanded(child: Text('Upload a Video / Image', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                                          children: const [
+                                            Expanded(child: Text('Upload a Video / Image', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                                             
-                                            const Icon(Icons.image, color: const Color(0xff4EC9D4),),
+                                            Icon(Icons.image, color: Color(0xff4EC9D4),),
                                           ],
                                         ),
                                       ),
                                       onTap: () async{
-                                        var choice = await showDialog(context: (context), builder: (build) => MiscBLMUploadFromDialog(choice_1: 'Image', choice_2: 'Video',),);
+                                        var choice = await showDialog(context: (context), builder: (build) => const MiscBLMUploadFromDialog(choice_1: 'Image', choice_2: 'Video',),);
 
                                         if(choice == null){
                                           choice = 0;

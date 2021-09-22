@@ -1,5 +1,5 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-08-password-reset.dart';
+import 'package:facesbyplaces/API/Regular/01-Start/api_start_regular_08_password_reset.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';

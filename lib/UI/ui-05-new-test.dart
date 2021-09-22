@@ -2,7 +2,9 @@
 import 'package:flutter/material.dart';
 
 class NewTest extends StatefulWidget{
+  const NewTest({Key? key}) : super(key: key);
 
+  @override
   NewTestState createState() => NewTestState();
 }
 
@@ -28,16 +30,14 @@ class NewTestState extends State<NewTest>{
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: Container(
-          child: Wrap(
-            spacing: 5.0,
-            children: List.generate(
-              items.length,
-              (index) => TextButton.icon(
-                onPressed: (){}, 
-                icon: Icon(Icons.person), 
-                label: Text(items[index]),
-              ),
+        child: Wrap(
+          spacing: 5.0,
+          children: List.generate(
+            items.length,
+            (index) => TextButton.icon(
+              onPressed: (){}, 
+              icon: const Icon(Icons.person), 
+              label: Text(items[index]),
             ),
           ),
         ),

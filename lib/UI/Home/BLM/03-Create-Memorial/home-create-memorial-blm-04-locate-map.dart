@@ -7,7 +7,9 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMCreateMemorialLocateMap extends StatefulWidget{
+  const HomeBLMCreateMemorialLocateMap({Key? key}) : super(key: key);
 
+  @override
   HomeBLMCreateMemorialLocateMapState createState() => HomeBLMCreateMemorialLocateMapState();
 }
 
@@ -18,9 +20,10 @@ class HomeBLMCreateMemorialLocateMapState extends State<HomeBLMCreateMemorialLoc
   bool pinned = false;
   LatLng? memorial;
 
+  @override
   void initState(){
     super.initState();
-    initialCameraPosition = CameraPosition(target: LatLng(37.78583400000001, -122.406417), zoom: 14.4746,);
+    initialCameraPosition = const CameraPosition(target: LatLng(37.78583400000001, -122.406417), zoom: 14.4746,);
   }
 
   @override
@@ -29,7 +32,7 @@ class HomeBLMCreateMemorialLocateMapState extends State<HomeBLMCreateMemorialLoc
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: Text('Maps', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
+        title: const Text('Maps', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xffffffff),),),
         backgroundColor: const Color(0xff04ECFF),
         actions: [
           IconButton(
@@ -39,7 +42,7 @@ class HomeBLMCreateMemorialLocateMapState extends State<HomeBLMCreateMemorialLoc
                 pinned = false;
               });
             },
-            icon: Icon(Icons.delete),
+            icon: const Icon(Icons.delete),
           ),
 
           IconButton(
@@ -48,8 +51,8 @@ class HomeBLMCreateMemorialLocateMapState extends State<HomeBLMCreateMemorialLoc
                 await showDialog(
                   context: context,
                   builder: (_) => AssetGiffyDialog(
-                    description: Text('Pin the location of the cemetery first before proceeding by long pressing the location of the memorial on the map.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                    description: const Text('Pin the location of the cemetery first before proceeding by long pressing the location of the memorial on the map.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                    title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                     entryAnimation: EntryAnimation.DEFAULT,
                     buttonOkColor: const Color(0xffff0000),
@@ -63,7 +66,7 @@ class HomeBLMCreateMemorialLocateMapState extends State<HomeBLMCreateMemorialLoc
                 Navigator.pop(context, memorial);
               }
             },
-            icon: Icon(Icons.send_outlined),
+            icon: const Icon(Icons.send_outlined),
           ),
         ],
       ),
@@ -97,12 +100,7 @@ class HomeBLMCreateMemorialLocateMapState extends State<HomeBLMCreateMemorialLoc
   }
 
   void _addMarker(LatLng position) async{
-    print('long press');
-
-    print('The latitude is ${position.latitude}');
-    print('The longitude is ${position.longitude}');
-
-    if(markers.length == 0){
+    if(markers.isEmpty){
       setState(() {
         markers.add(Marker(
           markerId: const MarkerId('Memorial'),

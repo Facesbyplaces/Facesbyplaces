@@ -1,5 +1,5 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/BLM/04-Create-Memorial/api-create-memorial-blm-01-create-memorial.dart';
+import 'package:facesbyplaces/API/BLM/04-Create-Memorial/api_create_memorial_blm_01_create_memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
@@ -25,8 +25,9 @@ class HomeBLMCreateMemorial3 extends StatefulWidget{
   final String description;
   final String memorialName;
   final List<dynamic> imagesOrVideos;
-  const HomeBLMCreateMemorial3({required this.relationship, required this.locationOfIncident, required this.precinct, required this.dob, required this.rip, required this.country, required this.latitude, required this.longitude,  required this.state, required this.description, required this.memorialName, required this.imagesOrVideos,});
+  const HomeBLMCreateMemorial3({Key? key, required this.relationship, required this.locationOfIncident, required this.precinct, required this.dob, required this.rip, required this.country, required this.latitude, required this.longitude,  required this.state, required this.description, required this.memorialName, required this.imagesOrVideos,}) : super(key: key);
 
+  @override
   HomeBLMCreateMemorial3State createState() => HomeBLMCreateMemorial3State();
 }
 
@@ -47,7 +48,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
         profileImage.value = File(pickedFile.path);
       }
     }catch (error){
-      print('Error: ${error.toString()}');
+      throw Exception('Error: $error');
     }
   }
 
@@ -61,7 +62,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
         backgroundImage.value = File(pickedFile.path);
       }
     }catch(error){
-      print('Error: ${error.toString()}');
+      throw Exception('Error: $error');
     }
   }
 
@@ -76,11 +77,11 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
           valueListenable: backgroundImageToggle,
           builder: (_, int backgroundImageToggleListener, __) => Scaffold(
             appBar: AppBar(
-              title: Text('Cry out for the Victims', maxLines: 2, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+              title: const Text('Cry out for the Victims', maxLines: 2, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
               backgroundColor: const Color(0xff04ECFF),
               centerTitle: true,
               leading: IconButton(
-                icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35),
+                icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35),
                 onPressed: (){
                   Navigator.pop(context);
                 },
@@ -88,7 +89,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
             ),
             body: Stack(
               children: [
-                const MiscBLMBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),
+                const MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
 
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
@@ -97,11 +98,11 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                     children: [
                       const SizedBox(height: 20,),
 
-                      Text('Upload or Select an Image', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                      const Text('Upload or Select an Image', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
 
                       const SizedBox(height: 20,),
 
-                      Container(
+                      SizedBox(
                         width: SizeConfig.screenWidth,
                         height: 200,
                         child: Stack(
@@ -114,7 +115,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                             )
                             : Container(
                               decoration: BoxDecoration(
-                                image: DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/blm-memorial-cover-1.jpeg'),),
+                                image: const DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/blm-memorial-cover-1.jpeg'),),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
@@ -129,14 +130,14 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                                     child: profileImageListener.path != ''
                                     ? CircleAvatar(
                                       radius: 60,
-                                      backgroundColor: Color(0xff888888),
+                                      backgroundColor: const Color(0xff888888),
                                       foregroundImage: FileImage(profileImageListener),
                                       backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                     )
                                     : const CircleAvatar(
                                       radius: 60,
                                       backgroundColor: Color(0xff888888),
-                                      foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                      foregroundImage: AssetImage('assets/icons/app-icon.png'),
                                     ),
                                   ),
                                 ),
@@ -150,14 +151,14 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                               left: SizeConfig.screenWidth! / 2,
                               bottom: 40,
                               child: const CircleAvatar(
-                                child: const CircleAvatar(radius: 25, backgroundColor: Colors.transparent, child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),),
-                                backgroundColor: const Color(0xffffffff),
+                                child: CircleAvatar(radius: 25, backgroundColor: Colors.transparent, child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: 45,),),
+                                backgroundColor: Color(0xffffffff),
                                 radius: 25,
                               ),
                             ),
 
                             const Positioned(
-                              child: const CircleAvatar(radius: 25, backgroundColor: const Color(0xffffffff), child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),),
+                              child: CircleAvatar(radius: 25, backgroundColor: Color(0xffffffff), child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: 45,),),
                               right: 10,
                               top: 10,
                             ),
@@ -167,15 +168,15 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
 
                       const SizedBox(height: 20,),
 
-                      Text('Upload the best photo of the person in the memorial page.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+                      const Text('Upload the best photo of the person in the memorial page.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
 
                       const SizedBox(height: 40,),
 
-                      Text('Choose Background', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                      const Text('Choose Background', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
 
                       const SizedBox(height: 20,),
 
-                      Container(
+                      SizedBox(
                         height: 100,
                         child: ListView.separated(
                           physics: const ClampingScrollPhysics(),
@@ -190,7 +191,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                                 return GestureDetector(
                                   child: Container(
                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: const Color(0xffcccccc), border: Border.all(color: const Color(0xff000000),),),
-                                    child: const Icon(Icons.add_rounded, color: const Color(0xff000000), size: 60,),
+                                    child: const Icon(Icons.add_rounded, color: Color(0xff000000), size: 60,),
                                     height: 100,
                                     width: 100,
                                   ),
@@ -206,7 +207,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                                     final Uint8List list = bytes.buffer.asUint8List();
 
                                     final tempDir = await getTemporaryDirectory();
-                                    final file = await new File('${tempDir.path}/blm-background-image-$index.png').create();
+                                    final file = await File('${tempDir.path}/blm-background-image-$index.png').create();
                                     file.writeAsBytesSync(list);
 
                                     backgroundImageToggle.value = index;
@@ -244,12 +245,12 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
 
                       const SizedBox(height: 20,),
 
-                      Text('Upload your own or select from the pre-mades.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+                      const Text('Upload your own or select from the pre-mades.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
 
                       const SizedBox(height: 80,),
 
                       MiscBLMButtonTemplate(
-                        buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                        buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),
                         buttonText: 'Create my Memorial Page',
                         width: 150,
                         height: 50,
@@ -259,7 +260,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                             final Uint8List list = bytes.buffer.asUint8List();
 
                             final tempDir = await getTemporaryDirectory();
-                            final file = await new File('${tempDir.path}/blm-background-image-$backgroundImageToggle.png').create();
+                            final file = await File('${tempDir.path}/blm-background-image-$backgroundImageToggle.png').create();
                             file.writeAsBytesSync(list);
 
                             backgroundImage.value = file;
@@ -270,7 +271,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                             final Uint8List list = bytes.buffer.asUint8List();
 
                             final tempDir = await getTemporaryDirectory();
-                            final file = await new File('${tempDir.path}/blm-profile-image.png').create();
+                            final file = await File('${tempDir.path}/blm-profile-image.png').create();
                             file.writeAsBytesSync(list);
 
                             profileImage.value = file;

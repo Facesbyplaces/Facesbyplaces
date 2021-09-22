@@ -1,5 +1,5 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-00-home-memorials-tab.dart';
+import 'package:facesbyplaces/API/BLM/02-Main/api_main_blm_04_02_00_home_memorials_tab.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-03-blm-manage-memorial.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,8 +17,9 @@ class BLMMainPagesMemorials{
 }
 
 class HomeBLMManageTab extends StatefulWidget{
-  const HomeBLMManageTab();
+  const HomeBLMManageTab({Key? key}) : super(key: key);
 
+  @override
   HomeBLMManageTabState createState() => HomeBLMManageTabState();
 }
 
@@ -35,6 +36,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
   int page1 = 1;
   int page2 = 1;
 
+  @override
   void initState(){
     super.initState();
     isGuest();
@@ -44,10 +46,10 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
           onLoading();
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: const Text('No more posts to show'),
-              duration: const Duration(seconds: 1),
-              backgroundColor: const Color(0xff4EC9D4),
+            const SnackBar(
+              content: Text('No more posts to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
             ),
           );
         }
@@ -92,18 +94,18 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
         color: const Color(0xffeeeeee),
         child: Row(
           children: [
-            Expanded(
+            const Expanded(
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: Text('My Family', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                child: Text('My Family', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
               ),
             ),
 
             Expanded(
               child: GestureDetector(
-                child: Align(
+                child: const Align(
                   alignment: Alignment.centerRight,
-                  child: Text('Create', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                  child: Text('Create', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
                 ),
                 onTap: (){
                   Navigator.pushNamed(context, '/home/blm/create-memorial');
@@ -122,7 +124,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
         height: 80,
         padding: const EdgeInsets.symmetric(horizontal: 20),
         color: const Color(0xffeeeeee),
-        child: Align(alignment: Alignment.centerLeft, child: Text('My Friends', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),),
+        child: const Align(alignment: Alignment.centerLeft, child: Text('My Friends', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),),
       ),
     );
   }
@@ -187,8 +189,9 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
         );
       }
 
-      if(mounted)
-      page1++;
+      if(mounted){
+        page1++;
+      }
 
       if(blmFamilyItemsRemaining == 0 && memorialFamilyItemsRemaining == 0){
         addMemorials2();
@@ -253,8 +256,9 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       }
     }
 
-    if(mounted)
-    page2++;
+    if(mounted){
+      page2++;
+    }
 
     if(blmFriendsItemsRemaining != 0 || memorialFriendsItemsRemaining != 0){
       onLoading();
@@ -266,7 +270,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
     SizeConfig.init(context);
     return ValueListenableBuilder(
       valueListenable: count,
-      builder: (_, int countListener, __) => Container(
+      builder: (_, int countListener, __) => SizedBox(
         width: SizeConfig.screenWidth,
         child: countListener != 0
         ? SafeArea(
@@ -284,22 +288,20 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
         )
         : SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
-          child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
 
-                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-                const SizedBox(height: 45,),
+              const SizedBox(height: 45,),
 
-                Text('Memorial is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+              const Text('Memorial is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
 
-                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
-              ],
-            ),
+              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+            ],
           ),
         ),
       ),

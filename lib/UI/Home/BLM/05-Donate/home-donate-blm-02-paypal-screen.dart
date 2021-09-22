@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-18-paypal-access-token.dart';
-import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-19-paypal-user-information.dart';
-import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-20-paypal-connect.dart';
+import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_18_paypal_access_token.dart';
+import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_19_paypal_user_information.dart';
+import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_20_paypal_connect.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 // ignore: import_of_legacy_library_into_null_safe
@@ -10,8 +10,9 @@ import 'package:flutter/material.dart';
 
 class HomeBLMPaypal extends StatefulWidget{
   final int pageId;
-  const HomeBLMPaypal({required this.pageId});
+  const HomeBLMPaypal({Key? key, required this.pageId}) : super(key: key);
 
+  @override
   HomeBLMPaypalState createState() => HomeBLMPaypalState();
 }
 
@@ -36,9 +37,9 @@ class HomeBLMPaypalState extends State<HomeBLMPaypal>{
           appBar: AppBar(
             backgroundColor: const Color(0xff04ECFF),
             centerTitle: false,
-            title: Text('Paypal', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+            title: const Text('Paypal', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+              icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
               onPressed: (){
                 Navigator.pop(context);
               },

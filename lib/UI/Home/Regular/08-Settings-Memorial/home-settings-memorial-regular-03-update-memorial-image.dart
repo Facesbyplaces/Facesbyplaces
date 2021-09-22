@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
-import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-02-show-page-images.dart';
-import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-08-update-page-image.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_02_show_page_images.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_08_update_page_image.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
@@ -20,8 +20,9 @@ import 'dart:io';
 
 class HomeRegularMemorialPageImage extends StatefulWidget{
   final int memorialId;
-  const HomeRegularMemorialPageImage({required this.memorialId});
+  const HomeRegularMemorialPageImage({Key? key, required this.memorialId}) : super(key: key);
 
+  @override
   HomeRegularMemorialPageImageState createState() => HomeRegularMemorialPageImageState();
 }
 
@@ -43,7 +44,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
         profileImage.value = File(pickedFile.path);
       }
     }catch (error){
-      print('Error: ${error.toString()}');
+      throw Exception('Error: $error');
     }
   }
 
@@ -57,7 +58,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
         backgroundImage.value = File(pickedFile.path);
       }
     }catch (error){
-      print('Error: ${error.toString()}');
+      throw Exception('Error: $error');
     }
   }
 
@@ -65,6 +66,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
     return await apiRegularShowPageImages(memorialId: memorialId);
   }
 
+  @override
   void initState(){
     super.initState();
     futureMemorialSettings = getMemorialSettings(widget.memorialId);
@@ -83,12 +85,12 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
             appBar: AppBar(
               backgroundColor: const Color(0xff04ECFF),
               centerTitle: false,
-              title: const Text('Page Image', style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+              title: const Text('Page Image', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
               leading: IconButton(
-                icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+                icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
                 onPressed: () async{
                   if(profileImage.value.path != '' || (backgroundImage.value.path != '' && backgroundImageToggle.value != 0)){
-                    bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to discard the changes?', confirmColor_1: const Color(0xff04ECFF), confirmColor_2: const Color(0xffFF0000),),);
+                    bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to discard the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),),);
 
                     if(confirmResult){
                       Navigator.pop(context);
@@ -105,7 +107,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                 if(memorialImageSettings.hasData){
                   return Stack(
                     children: [
-                      const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),
+                      const MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
 
                       Container(
                         padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
@@ -114,16 +116,16 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                           children: [
                             const SizedBox(height: 20,),
 
-                            const Text('Upload or Select an Image', style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                            const Text('Upload or Select an Image', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
                             
-                            SizedBox(height: 20,),
+                            const SizedBox(height: 20,),
 
                             Container(
                               height: 200,
                               decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
                               image: backgroundImageListener.path != ''
-                              ? DecorationImage(fit: BoxFit.cover, image: AssetImage('${backgroundImageListener.path}'),)
-                              : DecorationImage(fit: BoxFit.cover, image: CachedNetworkImageProvider('${memorialImageSettings.data!.almMemorial.showPageImagesBackgroundImage}'),),),
+                              ? DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImageListener.path),)
+                              : DecorationImage(fit: BoxFit.cover, image: CachedNetworkImageProvider(memorialImageSettings.data!.almMemorial.showPageImagesBackgroundImage),),),
                               child: Stack(
                                 children: [
                                   GestureDetector(
@@ -158,14 +160,14 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                     left: SizeConfig.screenWidth! / 2,
                                     bottom: 40,
                                     child: const CircleAvatar(
-                                      child: const CircleAvatar(radius: 25, backgroundColor: Colors.transparent, child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),),
-                                      backgroundColor: const Color(0xffffffff),
+                                      child: CircleAvatar(radius: 25, backgroundColor: Colors.transparent, child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: 45,),),
+                                      backgroundColor: Color(0xffffffff),
                                       radius: 25,
                                     ),
                                   ),
 
                                   const Positioned(
-                                    child: const CircleAvatar(radius: 25, backgroundColor: const Color(0xffffffff), child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),),
+                                    child: CircleAvatar(radius: 25, backgroundColor: Color(0xffffffff), child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: 45,),),
                                     right: 10,
                                     top: 10,
                                   ),
@@ -175,15 +177,15 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
 
                             const SizedBox(height: 20,),
 
-                            const Text('Upload the best photo of the person in the memorial page.', style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+                            const Text('Upload the best photo of the person in the memorial page.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
 
                             const SizedBox(height: 40,),
 
-                            const Text('Choose Background', style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                            const Text('Choose Background', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
 
                             const SizedBox(height: 20,),
 
-                            Container(
+                            SizedBox(
                               height: 100,
                               child: ListView.separated(
                                 physics: const ClampingScrollPhysics(),
@@ -199,7 +201,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                         child: Container(
                                           width: 100,
                                           height: 100,
-                                          child: const Icon(Icons.add_rounded, color: const Color(0xff000000), size: 60,),
+                                          child: const Icon(Icons.add_rounded, color: Color(0xff000000), size: 60,),
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(10),
                                             color: const Color(0xffcccccc),
@@ -241,7 +243,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                           final Uint8List list = bytes.buffer.asUint8List();
 
                                           final tempDir = await getTemporaryDirectory();
-                                          final file = await new File('${tempDir.path}/regular-background-image-$index.png').create();
+                                          final file = await File('${tempDir.path}/regular-background-image-$index.png').create();
                                           file.writeAsBytesSync(list);
 
                                           backgroundImageToggle.value = index;
@@ -256,12 +258,12 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
 
                             const SizedBox(height: 20,),
 
-                            const Text('Upload your own or select from the pre-mades.', style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+                            const Text('Upload your own or select from the pre-mades.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
 
                             const SizedBox(height: 80,),
 
                             MiscRegularButtonTemplate(
-                              buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF)),
+                              buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF)),
                               buttonColor: const Color(0xff000000),
                               buttonText: 'Speak Out',
                               width: 150,
@@ -276,8 +278,8 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                        description: const Text('Successfully updated the memorial image.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                        title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                        description: const Text('Successfully updated the memorial image.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         onlyOkButton: true,
@@ -292,8 +294,8 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                        description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                        title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                        description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         buttonOkColor: const Color(0xffff0000),
@@ -313,9 +315,9 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                     ],
                   );
                 }else if(memorialImageSettings.hasError){
-                  return Container(height: SizeConfig.screenHeight, child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),),);
+                  return SizedBox(height: SizeConfig.screenHeight, child: const Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),),);
                 }else{
-                  return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
+                  return SizedBox(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
                 }
               },
             ),

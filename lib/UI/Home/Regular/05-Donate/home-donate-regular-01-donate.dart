@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-01-donate.dart';
-import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-02-confirm-payment.dart';
+import 'package:facesbyplaces/API/Regular/06-Donate/api_donate_regular_01_donate.dart';
+import 'package:facesbyplaces/API/Regular/06-Donate/api_donate_regular_02_confirm_payment.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/foundation.dart';
@@ -20,8 +20,9 @@ class HomeRegularUserDonate extends StatefulWidget{
   final String pageType;
   final int pageId;
   final String pageName;
-  const HomeRegularUserDonate({required this.pageType, required this.pageId, required this.pageName});
+  const HomeRegularUserDonate({Key? key, required this.pageType, required this.pageId, required this.pageName}) : super(key: key);
 
+  @override
   HomeRegularUserDonateState createState() => HomeRegularUserDonateState();
 }
 
@@ -31,10 +32,6 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
   ValueNotifier<int> donateToggle = ValueNotifier<int>(0);
   CardFieldInputDetails? newCard;
   int paymentToggle = 0;
-
-  void initState(){
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context){
@@ -65,9 +62,9 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
 
                       Row(
                         children: [
-                          Expanded(child: Align(alignment: Alignment.centerLeft, child: IconButton(icon: const Icon(Icons.arrow_back, color: const Color(0xff000000), size: 35,), onPressed: (){Navigator.pop(context);},)),),
+                          Expanded(child: Align(alignment: Alignment.centerLeft, child: IconButton(icon: const Icon(Icons.arrow_back, color: Color(0xff000000), size: 35,), onPressed: (){Navigator.pop(context);},)),),
 
-                          const Text('Send a Gift', style: const TextStyle(fontSize: 24,),),
+                          const Text('Send a Gift', style: TextStyle(fontSize: 24,),),
 
                           Expanded(child: Container(),)
                         ],
@@ -101,12 +98,12 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                       Container(
                                         child: ((){
                                           switch(index){
-                                            case 0: return const Text('\$1.00', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),);
-                                            case 1: return const Text('\$5.00', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),);
-                                            case 2: return const Text('\$15.00', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),);
-                                            case 3: return const Text('\$25.00', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),);
-                                            case 4: return const Text('\$50.00', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),);
-                                            case 5: return const Text('\$100.00', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),);
+                                            case 0: return const Text('\$1.00', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff000000),),);
+                                            case 1: return const Text('\$5.00', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff000000),),);
+                                            case 2: return const Text('\$15.00', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff000000),),);
+                                            case 3: return const Text('\$25.00', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff000000),),);
+                                            case 4: return const Text('\$50.00', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff000000),),);
+                                            case 5: return const Text('\$100.00', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff000000),),);
                                           }
                                         }()),
                                       ),
@@ -125,7 +122,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                       const SizedBox(height: 10,),
 
                       MiscRegularButtonTemplate(
-                        buttonTextStyle: const TextStyle(fontSize: 24, color: const Color(0xffffffff), fontFamily: 'NexaBold',),
+                        buttonTextStyle: const TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold',),
                         width: SizeConfig.screenWidth! / 2, 
                         buttonColor: const Color(0xff4EC9D4),
                         buttonText: 'Send Gift',
@@ -153,7 +150,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                               return StatefulBuilder(
                                 builder: (BuildContext context, StateSetter modalSetState){
                                   return Padding(
-                                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,7 +159,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                           minWidth: 0,
                                           color: const Color(0xffffffff),
                                           child: const Icon(Icons.close, color: Colors.grey,),
-                                          shape: CircleBorder(),
+                                          shape: const CircleBorder(),
                                           onPressed: (){
                                             Navigator.pop(context);
                                           },
@@ -170,11 +167,11 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
 
                                         const SizedBox(height: 10,),
 
-                                        const Text('Select your donation method', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', fontWeight: FontWeight.bold)),
+                                        const Text('Select your donation method', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', fontWeight: FontWeight.bold)),
 
                                         const SizedBox(height: 10,),
 
-                                        Container(
+                                        SizedBox(
                                           height: 100,
                                           width: SizeConfig.screenWidth,
                                           child: ListView.separated(
@@ -183,7 +180,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                             separatorBuilder: (BuildContext context, int index) => const SizedBox(width: 15,),
                                             itemBuilder: (BuildContext context, int index){
                                               return Container(
-                                                padding: EdgeInsets.all(5),
+                                                padding: const EdgeInsets.all(5),
                                                 decoration: BoxDecoration(
                                                   color: paymentToggle == index ? Colors.green : const Color(0xffffffff),
                                                   borderRadius: BorderRadius.circular(10)
@@ -191,7 +188,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                 child: MaterialButton(
                                                   height: 80,
                                                   minWidth: 120,
-                                                  color: Color(0xffffffff),
+                                                  color: const Color(0xffffffff),
                                                   focusColor: Colors.blue,
                                                   onPressed: (){
                                                     modalSetState((){
@@ -200,7 +197,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                   },
                                                   child: ((){
                                                     if(index == 0){
-                                                      return Icon(Icons.credit_card_rounded, color: Colors.black);
+                                                      return const Icon(Icons.credit_card_rounded, color: Colors.black);
                                                     }else if(Platform.isIOS){
                                                       return donateWithApple;
                                                     }else{
@@ -224,11 +221,11 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                 minWidth: 0,
                                                 color: const Color(0xff000000),
                                                 shape: const CircleBorder(),
-                                                child: const Icon(Icons.arrow_forward_rounded, color: const Color(0xffffffff),),
+                                                child: const Icon(Icons.arrow_forward_rounded, color: Color(0xffffffff),),
                                                 onPressed: () async{
                                                   await showMaterialModalBottomSheet(
                                                     context: context,
-                                                    builder: (context) => Container(
+                                                    builder: (context) => SizedBox(
                                                       height: SizeConfig.screenHeight! / 1.5,
                                                       child: Column(
                                                         children: [
@@ -251,10 +248,10 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                             ),
                                                           ),
 
-                                                          SizedBox(height: 20,),
+                                                          const SizedBox(height: 20,),
 
                                                           MiscRegularButtonTemplate(
-                                                            buttonTextStyle: const TextStyle(fontSize: 24, color: const Color(0xffffffff), fontFamily: 'NexaBold',),
+                                                            buttonTextStyle: const TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold',),
                                                             width: SizeConfig.screenWidth! / 2, 
                                                             buttonColor: const Color(0xff4EC9D4),
                                                             buttonText: 'Send Gift',
@@ -270,8 +267,8 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                                   showDialog(
                                                                     context: context,
                                                                     builder: (_) => AssetGiffyDialog(
-                                                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                                                      title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                                       entryAnimation: EntryAnimation.DEFAULT,
                                                                       buttonOkColor: const Color(0xffff0000),
@@ -284,18 +281,14 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                                   );
                                                                   throw Exception('$error');
                                                                 });
-
-                                                                print('The payment method id is $paymentMethod');
-                                                                print('The payment method id is ${paymentMethod.id}');
-                                                                print('The amount is $amount');
                                                                 
                                                                 List<String> newValue = await apiRegularDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: paymentMethod.id).onError((error, stackTrace){
                                                                   context.loaderOverlay.hide();
                                                                   showDialog(
                                                                     context: context,
                                                                     builder: (_) => AssetGiffyDialog(
-                                                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                                                      title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                                       entryAnimation: EntryAnimation.DEFAULT,
                                                                       buttonOkColor: const Color(0xffff0000),
@@ -308,17 +301,14 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                                   );
                                                                   throw Exception('$error');
                                                                 });
-
-                                                                print('The newValue[0] id is ${newValue[0]}');
-                                                                print('The newValue[1] id is ${newValue[1]}');
 
                                                                 bool confirmPaymentResult = await apiRegularConfirmPayment(clientSecret: newValue[0], paymentMethod: newValue[1]).onError((error, stackTrace){
                                                                   context.loaderOverlay.hide();
                                                                   showDialog(
                                                                     context: context,
                                                                     builder: (_) => AssetGiffyDialog(
-                                                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                                                      title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                                       entryAnimation: EntryAnimation.DEFAULT,
                                                                       buttonOkColor: const Color(0xffff0000),
@@ -332,17 +322,14 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                                   throw Exception('$error');
                                                                 });
 
-                                                                print('The confirmPaymentResult id is $confirmPaymentResult');
-
                                                                 context.loaderOverlay.hide();
 
                                                                 if(confirmPaymentResult == true){
-                                                                  
                                                                   await showDialog(
                                                                     context: context,
                                                                     builder: (_) => AssetGiffyDialog(
-                                                                      title: const Text('Thank you', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                                      description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular',),),
+                                                                      title: const Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                                      description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular',),),
                                                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                                       entryAnimation: EntryAnimation.DEFAULT,
                                                                       onlyOkButton: true,
@@ -355,8 +342,8 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                                   await showDialog(
                                                                     context: context,
                                                                     builder: (_) => AssetGiffyDialog(
-                                                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                                                      title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                                       entryAnimation: EntryAnimation.DEFAULT,
                                                                       buttonOkColor: const Color(0xffff0000),
@@ -371,8 +358,8 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                                 await showDialog(
                                                                   context: context,
                                                                   builder: (_) => AssetGiffyDialog(
-                                                                    title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                                    description: const Text('Please input your card information first before proceeding.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                                                    title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                                    description: const Text('Please input your card information first before proceeding.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                                     entryAnimation: EntryAnimation.DEFAULT,
                                                                     buttonOkColor: const Color(0xffff0000),
@@ -416,8 +403,8 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                       showDialog(
                                                         context: context,
                                                         builder: (_) => AssetGiffyDialog(
-                                                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                          description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                                          title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                          description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                           entryAnimation: EntryAnimation.DEFAULT,
                                                           buttonOkColor: const Color(0xffff0000),
@@ -432,9 +419,6 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                       throw Exception('$error');
                                                     });
 
-                                                    print('The newValue[0] is ${newValue[0]}');
-                                                    print('The newValue[1] is ${newValue[1]}');
-
                                                     if(onError != true){
                                                       await Stripe.instance.confirmApplePayPayment(newValue[0]);
                                                     }
@@ -442,8 +426,8 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                     await showDialog(
                                                       context: context,
                                                       builder: (_) => AssetGiffyDialog(
-                                                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                        description: const Text('Apple pay is not setup on this phone\'s settings. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                                        title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                        description: const Text('Apple pay is not setup on this phone\'s settings. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                         entryAnimation: EntryAnimation.DEFAULT,
                                                         buttonOkColor: const Color(0xffff0000),
@@ -457,7 +441,6 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                 },
                                               );
                                             }else{
-                                              print('here');
                                               var _paymentItems = [
                                                 pay.PaymentItem(
                                                   label: 'Donation for ${widget.pageName}',
@@ -465,11 +448,6 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                   status: pay.PaymentItemStatus.final_price,
                                                 )
                                               ];
-
-                                              print('The _paymentItems is $_paymentItems');
-                                              print('The page name is ${widget.pageName}');
-                                              print('The amount is $amount');
-                                              print('The price is ${pay.PaymentItemStatus.final_price}');
 
                                               return pay.GooglePayButton(
                                                 paymentConfigurationAsset: 'google_pay_payment_profile.json',
@@ -479,11 +457,9 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                 loadingIndicator: const Center(child: CircularProgressIndicator(),),
                                                 onPaymentResult: (paymentResult) async{
                                                   try{
-                                                    
                                                     debugPrint('the payment result is $paymentResult');
                                                     final token = paymentResult['paymentMethodData']['tokenizationData']['token'];
                                                     final tokenJson = Map.castFrom(json.decode(token));
-                                                    print('The token is $tokenJson');
 
                                                     bool onError = false;
 
@@ -491,8 +467,8 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                       showDialog(
                                                         context: context,
                                                         builder: (_) => AssetGiffyDialog(
-                                                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                          description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                                          title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                          description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                           entryAnimation: EntryAnimation.DEFAULT,
                                                           buttonOkColor: const Color(0xffff0000),
@@ -507,25 +483,16 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                       throw Exception('The error is: $error');
                                                     });
 
-                                                    print('The newValue[0] is ${newValue[0]}');
-                                                    print('The newValue[1] is ${newValue[1]}');
-
                                                     if(onError != true){
                                                       final params = PaymentMethodParams.cardFromToken(token: tokenJson['id'],);
-
-                                                      print('The params is $params');
-
                                                       PaymentIntent confirmGooglePayment = await Stripe.instance.confirmPayment(newValue[0], params,);
-
-                                                      print('The google payment is $confirmGooglePayment');
-                                                      print('The google payment status is ${confirmGooglePayment.status}');
 
                                                       if(confirmGooglePayment.status == PaymentIntentsStatus.Succeeded){
                                                         await showDialog(
                                                           context: context,
                                                           builder: (_) => AssetGiffyDialog(
-                                                            title: const Text('Thank you', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                            description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular',),),
+                                                            title: const Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                            description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular',),),
                                                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                             entryAnimation: EntryAnimation.DEFAULT,
                                                             onlyOkButton: true,
@@ -538,8 +505,8 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                         await showDialog(
                                                           context: context,
                                                           builder: (_) => AssetGiffyDialog(
-                                                            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                            description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                                            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                            description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                             entryAnimation: EntryAnimation.DEFAULT,
                                                             buttonOkColor: const Color(0xffff0000),
@@ -555,7 +522,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                     await showDialog(
                                                       context: context,
                                                       builder: (_) => AssetGiffyDialog(
-                                                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                        title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                                                         description: Text('Error: $e', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                         entryAnimation: EntryAnimation.DEFAULT,
@@ -569,16 +536,14 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                   }
                                                 },
                                                 onPressed: () async{
-                                                  print('pressed key!');
                                                   await debugChangedStripePublishableKey();
                                                 },
                                                 onError: (e) async{
-                                                  print('The error on google payment: $e');
                                                   await showDialog(
                                                     context: context,
                                                     builder: (_) => AssetGiffyDialog(
-                                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                                      title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                       entryAnimation: EntryAnimation.DEFAULT,
                                                       buttonOkColor: const Color(0xffff0000),
@@ -618,15 +583,10 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
   }
 
   Future<void> debugChangedStripePublishableKey() async {
-    if (kDebugMode) {
-      final profile =
-          await rootBundle.loadString('assets/google_pay_payment_profile.json');
+    if(kDebugMode){
+      final profile = await rootBundle.loadString('assets/google_pay_payment_profile.json');
       final isValidKey = profile.contains('pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik');
-      print('The value of isValidKey is $isValidKey');
-      assert(
-        isValidKey,
-        'No stripe publishable key added to assets/google_pay_payment_profile.json',
-      );
+      assert(isValidKey, 'No stripe publishable key added to assets/google_pay_payment_profile.json',);
     }
   }
 }

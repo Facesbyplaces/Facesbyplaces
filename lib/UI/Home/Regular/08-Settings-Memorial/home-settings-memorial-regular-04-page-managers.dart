@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-03-show-admin-settings.dart';
-import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-09-add-admin.dart';
-import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-10-remove-admin.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_03_show_admin_settings.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_09_add_admin.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_10_remove_admin.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
@@ -20,8 +20,9 @@ class RegularShowAdminSettings{
 
 class HomeRegularPageManagers extends StatefulWidget{
   final int memorialId;
-  const HomeRegularPageManagers({required this.memorialId});
+  const HomeRegularPageManagers({Key? key, required this.memorialId}) : super(key: key);
 
+  @override
   HomeRegularPageManagersState createState() => HomeRegularPageManagersState();
 }
 
@@ -35,6 +36,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
   int page2 = 1;
   bool flag1 = false;
 
+  @override
   void initState(){
     super.initState();
     addManagers1();
@@ -44,7 +46,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
         if(adminItemsRemaining != 0 && familyItemsRemaining != 0){
           onLoading();
         }else{
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: const Text('No more users to show'), duration: const Duration(seconds: 1), backgroundColor: const Color(0xff4EC9D4),),);
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more users to show'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
         }
       }
     });
@@ -74,11 +76,11 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
   }
 
   void addManagers1(){
-    managers.add(const Padding(padding: const EdgeInsets.only(left: 20.0,), child: const Text('Admin', style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff9F9F9F),),),),);
+    managers.add(const Padding(padding: EdgeInsets.only(left: 20.0,), child: Text('Admin', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff9F9F9F),),),),);
   }
 
   void addManagers2(){
-    managers.add(const Padding(padding: const EdgeInsets.only(left: 20.0,), child: const Text('Family', style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff9F9F9F),),),),);
+    managers.add(const Padding(padding: EdgeInsets.only(left: 20.0,), child: Text('Family', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff9F9F9F),),),),);
   }
 
   void onLoading1() async{
@@ -89,7 +91,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
             description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
@@ -119,26 +121,26 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
             )
             : const CircleAvatar(
               maxRadius: 40,
-              backgroundColor: const Color(0xff888888),
-              foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+              backgroundColor: Color(0xff888888),
+              foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
             ),
             title: Text('${newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
                 fontFamily: 'NexaBold',
-                color: const Color(0xff000000),
+                color: Color(0xff000000),
               ),
             ),
-            subtitle: Text('${newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail}',
-              style: TextStyle(
+            subtitle: Text(newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail,
+              style: const TextStyle(
                 fontSize: 16,
                 fontFamily: 'NexaRegular',
-                color: const Color(0xffBDC3C7),
+                color: Color(0xffBDC3C7),
               ),
             ),
             trailing: MaterialButton(
-              child: const Text('Remove', style: const TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xffffffff),),),
-              shape: const StadiumBorder(side: const BorderSide(color: const Color(0xffE74C3C)),),
+              child: const Text('Remove', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: Color(0xffffffff),),),
+              shape: const StadiumBorder(side: BorderSide(color: Color(0xffE74C3C)),),
               minWidth: SizeConfig.screenWidth! / 3.5,
               splashColor: const Color(0xff04ECFF),
               textColor: const Color(0xffffffff),
@@ -149,8 +151,8 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                 bool confirmation = await showDialog(
                   context: context,
                   builder: (_) => AssetGiffyDialog(
-                    title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                    description: const Text('Are you sure you want to remove this user?', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                    title: const Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                    description: const Text('Are you sure you want to remove this user?', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                     entryAnimation: EntryAnimation.DEFAULT,
                     onlyOkButton: false,
@@ -172,7 +174,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                        title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                         description: Text('Error: $result.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         entryAnimation: EntryAnimation.DEFAULT,
@@ -187,8 +189,8 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                        description: const Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                        title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                        description: const Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         entryAnimation: EntryAnimation.DEFAULT,
                         onlyOkButton: true,
@@ -215,8 +217,9 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
       }
     }
 
-    if(mounted)
-    page1++;
+    if(mounted){
+      page1++;
+    }
 
     if(adminItemsRemaining == 0){
       addManagers2();
@@ -245,14 +248,14 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
             )
             : const CircleAvatar(
               maxRadius: 40,
-              backgroundColor: const Color(0xff888888),
-              foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+              backgroundColor: Color(0xff888888),
+              foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
             ),
-            title: Text('${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-            subtitle: Text('${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail}', style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+            title: Text('${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000),),),
+            subtitle: Text(newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail, style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
             trailing: MaterialButton(
               child: const Text('Make Manager', style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular',),),
-              shape: const StadiumBorder(side: const BorderSide(color: const Color(0xff04ECFF)),),
+              shape: const StadiumBorder(side: BorderSide(color: Color(0xff04ECFF)),),
               minWidth: SizeConfig.screenWidth! / 3.5,
               splashColor: const Color(0xff04ECFF),
               textColor: const Color(0xffffffff),
@@ -263,8 +266,8 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                 bool confirmation = await showDialog(
                   context: context,
                   builder: (_) => AssetGiffyDialog(
-                    title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                    description: Text('Are you sure you want to make this user a manager?', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                    title: const Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                    description: const Text('Are you sure you want to make this user a manager?', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                     entryAnimation: EntryAnimation.DEFAULT,
                     onlyOkButton: false,
@@ -286,7 +289,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                        title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                         description: Text('Error: $result.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         entryAnimation: EntryAnimation.DEFAULT,
@@ -301,8 +304,8 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                        description: const Text('Successfully added as an admin.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                        title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                        description: const Text('Successfully added as an admin.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         entryAnimation: EntryAnimation.DEFAULT,
                         onlyOkButton: true,
@@ -329,8 +332,9 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
       }
     }
 
-    if(mounted)
-    page2++;
+    if(mounted) {
+      page2++;
+    }
   }
 
   @override
@@ -342,7 +346,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
         appBar: AppBar(
           backgroundColor: const Color(0xff04ECFF),
           centerTitle: false,
-          title: const Text('Page Managers', style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+          title: const Text('Page Managers', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back,size: 35,),
             onPressed: (){
@@ -350,7 +354,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
             },
           ),
         ),
-        body: Container(
+        body: SizedBox(
           width: SizeConfig.screenWidth,
           child: countListener != 0
           ? RefreshIndicator(
@@ -376,7 +380,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
 
                 const SizedBox(height: 45,),
 
-                const Text('Managers list is empty', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+                const Text('Managers list is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
 
                 SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
               ],

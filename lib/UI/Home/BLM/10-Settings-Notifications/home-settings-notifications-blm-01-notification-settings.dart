@@ -1,11 +1,11 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-notifications-blm-01-update-notification-memorial.dart';
-import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-notifications-blm-02-update-notification-activities.dart';
-import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-notifications-blm-03-update-notification-post-likes.dart';
-import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-notifications-blm-04-update-notification-post-comments.dart';
-import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-notifications-blm-05-update-notification-add-family.dart';
-import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-notifications-blm-06-update-notification-add-friends.dart';
-import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-notifications-blm-07-update-notification-add-admin.dart';
+import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api_settings_notifications_blm_01_update_notification_memorial.dart';
+import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api_settings_notifications_blm_02_update_notification_activities.dart';
+import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api_settings_notifications_blm_03_update_notification_post_likes.dart';
+import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api_settings_notifications_blm_04_update_notification_post_comments.dart';
+import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api_settings_notifications_blm_05_update_notification_add_family.dart';
+import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api_settings_notifications_blm_06_update_notification_add_friends.dart';
+import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api_settings_notifications_blm_07_update_notification_add_admin.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -21,7 +21,7 @@ class HomeBLMNotificationSettings extends StatefulWidget{
   final bool addFamily;
   final bool addFriends;
   final bool addAdmin;
-  const HomeBLMNotificationSettings({required this.newMemorial, required this.newActivities, required this.postLikes, required this.postComments, required this.addFamily, required this.addFriends, required this.addAdmin});
+  const HomeBLMNotificationSettings({Key? key, required this.newMemorial, required this.newActivities, required this.postLikes, required this.postComments, required this.addFamily, required this.addFriends, required this.addAdmin}) : super(key: key);
 
   @override
   HomeBLMNotificationSettingsState createState() => HomeBLMNotificationSettingsState();
@@ -36,6 +36,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
   ValueNotifier<bool> toggle6 = ValueNotifier<bool>(false);
   ValueNotifier<bool> toggle7 = ValueNotifier<bool>(false);
 
+  @override
   void initState(){
     super.initState();
     toggle1.value = widget.newMemorial;
@@ -78,10 +79,10 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                       builder: (_, bool toggle7Listener, __) => Scaffold(
                         appBar: AppBar(
                           backgroundColor: const Color(0xff04ECFF),
-                          title: Text('Notification Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
+                          title: const Text('Notification Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xffffffff),),),
                           centerTitle: true,
                           leading: IconButton(
-                            icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+                            icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
                             onPressed: (){
                               Navigator.pop(context);
                             },
@@ -89,7 +90,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                         ),
                         body: Stack(
                           children: [
-                            const MiscBLMBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),
+                            const MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
                             SingleChildScrollView(
                               physics: const ClampingScrollPhysics(),
                               padding: const EdgeInsets.all(20.0),
@@ -99,7 +100,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                     children: [
                                       Row(
                                         children: [
-                                          Expanded(child: Text('New Memorial Page', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
+                                          const Expanded(child: Text('New Memorial Page', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: Color(0xff000000),),),),
 
                                           Switch(
                                             value: toggle1Listener,
@@ -116,8 +117,8 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                                 await showDialog(
                                                   context: context,
                                                   builder: (_) => AssetGiffyDialog(
-                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                    description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                                    title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                     entryAnimation: EntryAnimation.DEFAULT,
                                                     buttonOkColor: const Color(0xffff0000),
@@ -134,7 +135,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                       ),
                                       Row(
                                         children: [
-                                          Expanded(child: Text('New Activities', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
+                                          const Expanded(child: Text('New Activities', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: Color(0xff000000),),),),
 
                                           Switch(
                                             value: toggle2Listener,
@@ -151,8 +152,8 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                                 await showDialog(
                                                   context: context,
                                                   builder: (_) => AssetGiffyDialog(
-                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                    description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                                    title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                     entryAnimation: EntryAnimation.DEFAULT,
                                                     buttonOkColor: const Color(0xffff0000),
@@ -169,7 +170,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                       ),
                                       Row(
                                         children: [
-                                          Expanded(child: Text('Post Likes', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),)),
+                                          const Expanded(child: Text('Post Likes', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: Color(0xff000000),),)),
 
                                           Switch(
                                             value: toggle3Listener,
@@ -186,8 +187,8 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                                 await showDialog(
                                                   context: context,
                                                   builder: (_) => AssetGiffyDialog(
-                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                    description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                                    title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                     entryAnimation: EntryAnimation.DEFAULT,
                                                     buttonOkColor: const Color(0xffff0000),
@@ -204,7 +205,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                       ),
                                       Row(
                                         children: [
-                                          Expanded(child: Text('Post Comments', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
+                                          const Expanded(child: Text('Post Comments', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: Color(0xff000000),),),),
 
                                           Switch(
                                             value: toggle4Listener,
@@ -221,8 +222,8 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                                 await showDialog(
                                                   context: context,
                                                   builder: (_) => AssetGiffyDialog(
-                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                    description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                                    title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                     entryAnimation: EntryAnimation.DEFAULT,
                                                     buttonOkColor: const Color(0xffff0000),
@@ -242,20 +243,20 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
 
                                   const SizedBox(height: 50),
 
-                                  const Divider(color: const Color(0xffffffff), thickness: 1,),
+                                  const Divider(color: Color(0xffffffff), thickness: 1,),
 
                                   const SizedBox(height: 50),
 
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text('Page Invites', style: TextStyle(fontSize: 26, fontFamily: 'HelveticaBold', color: const Color(0xff000000),),),
+                                      const Text('Page Invites', style: TextStyle(fontSize: 26, fontFamily: 'HelveticaBold', color: Color(0xff000000),),),
 
                                       const SizedBox(height: 10,),
 
                                       Row(
                                         children: [
-                                          Expanded(child: Text('Add as Family', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
+                                          const Expanded(child: Text('Add as Family', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: Color(0xff000000),),),),
 
                                           Switch(
                                             value: toggle5Listener,
@@ -272,8 +273,8 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                                 await showDialog(
                                                   context: context,
                                                   builder: (_) => AssetGiffyDialog(
-                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                    description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                                    title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                     entryAnimation: EntryAnimation.DEFAULT,
                                                     buttonOkColor: const Color(0xffff0000),
@@ -290,7 +291,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                       ),
                                       Row(
                                         children: [
-                                          Expanded(child: Text('Add as Friend', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
+                                          const Expanded(child: Text('Add as Friend', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: Color(0xff000000),),),),
 
                                           Switch(
                                             value: toggle6Listener,
@@ -307,8 +308,8 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                                 await showDialog(
                                                   context: context,
                                                   builder: (_) => AssetGiffyDialog(
-                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                    description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                                    title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                     entryAnimation: EntryAnimation.DEFAULT,
                                                     buttonOkColor: const Color(0xffff0000),
@@ -325,7 +326,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                       ),
                                       Row(
                                         children: [
-                                          Expanded(child: Text('Add as Page Admin', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
+                                          const Expanded(child: Text('Add as Page Admin', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: Color(0xff000000),),),),
 
                                           Switch(
                                             value: toggle7Listener,
@@ -342,8 +343,8 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                                 await showDialog(
                                                   context: context,
                                                   builder: (_) => AssetGiffyDialog(
-                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                    description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                                    title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                     entryAnimation: EntryAnimation.DEFAULT,
                                                     buttonOkColor: const Color(0xffff0000),

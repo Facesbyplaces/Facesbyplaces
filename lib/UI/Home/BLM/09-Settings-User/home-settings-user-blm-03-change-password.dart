@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-05-change-password.dart';
-import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-13-add-password.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_05_change_password.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_13_add_password.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -13,8 +13,9 @@ import 'package:flutter/material.dart';
 class HomeBLMUserChangePassword extends StatefulWidget{
   final int userId;
   final bool isAddPassword;
-  const HomeBLMUserChangePassword({required this.userId, required this.isAddPassword});
+  const HomeBLMUserChangePassword({Key? key, required this.userId, required this.isAddPassword}) : super(key: key);
 
+  @override
   HomeBLMUserChangePasswordState createState() => HomeBLMUserChangePasswordState();
 }
 
@@ -39,10 +40,10 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: const Color(0xff04ECFF),
-            title: Text(widget.isAddPassword == true ? 'Add Password' : 'Change Password', textAlign: TextAlign.left, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff)),),
+            title: Text(widget.isAddPassword == true ? 'Add Password' : 'Change Password', textAlign: TextAlign.left, style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff)),),
             centerTitle: false,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+              icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
               onPressed: (){
                 Navigator.pop(context);
               },
@@ -57,7 +58,7 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
                   key: _key1,
                   obscureText: true,
                   labelText: widget.isAddPassword == true ? 'New Password' : 'Current Password',
-                  labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                  labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                 ),
 
                 const SizedBox(height: 20,),
@@ -66,14 +67,14 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
                   key: _key2,
                   obscureText: true,
                   labelText: widget.isAddPassword == true ? 'Confirm Password' : 'New Password',
-                  labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                  labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                 ),
 
                 const SizedBox(height: 80,),
 
                 MiscBLMButtonTemplate(
                   buttonText: widget.isAddPassword == true ? 'Add' : 'Update',
-                  buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                  buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                   buttonColor: const Color(0xff04ECFF),
                   width: SizeConfig.screenWidth! / 2,
                   height: 50,
@@ -82,8 +83,8 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
                       await showDialog(
                         context: context,
                         builder: (_) => AssetGiffyDialog(
-                          description: Text('Password can\'t be empty. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                          description: const Text('Password can\'t be empty. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                          title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                           entryAnimation: EntryAnimation.DEFAULT,
                           buttonOkColor: const Color(0xffff0000),
@@ -104,8 +105,8 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
                             await showDialog(
                               context: context,
                               builder: (_) => AssetGiffyDialog(
-                                description: Text('Successfully added a password.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                description: const Text('Successfully added a password.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                 entryAnimation: EntryAnimation.DEFAULT,
                                 onlyOkButton: true,
@@ -119,8 +120,8 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
                             await showDialog(
                               context: context,
                               builder: (_) => AssetGiffyDialog(
-                                description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                 entryAnimation: EntryAnimation.DEFAULT,
                                 buttonOkColor: const Color(0xffff0000),
@@ -135,8 +136,8 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
                           await showDialog(
                             context: context,
                             builder: (_) => AssetGiffyDialog(
-                              description: Text('Passwords don\'t match. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                              description: const Text('Passwords don\'t match. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                              title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                               entryAnimation: EntryAnimation.DEFAULT,
                               buttonOkColor: const Color(0xffff0000),
@@ -156,8 +157,8 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
                           await showDialog(
                             context: context,
                             builder: (_) => AssetGiffyDialog(
-                              description: Text('Successfully updated the password.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                              title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                              description: const Text('Successfully updated the password.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                              title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                               entryAnimation: EntryAnimation.DEFAULT,
                               onlyOkButton: true,
@@ -171,8 +172,8 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
                           await showDialog(
                             context: context,
                             builder: (_) => AssetGiffyDialog(
-                              description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                              description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                              title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                               entryAnimation: EntryAnimation.DEFAULT,
                               buttonOkColor: const Color(0xffff0000),

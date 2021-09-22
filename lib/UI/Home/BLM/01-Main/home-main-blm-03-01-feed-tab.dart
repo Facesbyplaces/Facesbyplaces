@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
-import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-01-home-feed-tab.dart';
+import 'package:facesbyplaces/API/BLM/02-Main/api_main_blm_04_01_home_feed_tab.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-post.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -44,8 +44,9 @@ class BLMMainPagesFeeds{
 }
 
 class HomeBLMFeedTab extends StatefulWidget{
-  const HomeBLMFeedTab();
+  const HomeBLMFeedTab({Key? key}) : super(key: key);
 
+  @override
   HomeBLMFeedTabState createState() => HomeBLMFeedTabState();
 }
 
@@ -57,6 +58,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
   int itemRemaining = 1;
   int page = 1;
 
+  @override
   void initState(){
     super.initState();
     isGuest();
@@ -67,9 +69,9 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: const Text('No more feeds to show'),
-              duration: const Duration(seconds: 1),
-              backgroundColor: const Color(0xff4EC9D4),
+              content: Text('No more feeds to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
             ),
           );
         }
@@ -102,7 +104,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
             description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
@@ -163,8 +165,9 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
         );
       }
 
-      if(mounted)
-      page++;
+      if(mounted){
+        page++;
+      }
     }
   }
 
@@ -214,7 +217,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                     latitude: feedsListener[i].latitude,
                     longitude: feedsListener[i].longitude,
                     contents: [
-                      Container(alignment: Alignment.centerLeft, child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                      Container(alignment: Alignment.centerLeft, child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 
                       feedsListener[i].imagesOrVideos.isNotEmpty
                       ? Column(
@@ -314,7 +317,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
 
                                                 Center(
                                                   child: CircleAvatar(
-                                                    child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                    child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color:  Color(0xffFFFFFF),),),
                                                     backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                     radius: 25,
                                                   ),
@@ -336,7 +339,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
 
                                                 Center(
                                                   child: CircleAvatar(
-                                                    child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                    child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                                                     backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                     radius: 25,
                                                   ),
@@ -399,7 +402,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                     latitude: feedsListener[i].latitude,
                     longitude: feedsListener[i].longitude,
                     contents: [
-                      Container(alignment: Alignment.centerLeft, child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                      Container(alignment: Alignment.centerLeft, child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 
                       feedsListener[i].imagesOrVideos.isNotEmpty
                       ? Column(
@@ -500,7 +503,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
 
                                                 Center(
                                                   child: CircleAvatar(
-                                                    child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                    child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                                                     backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                     radius: 25,
                                                   ),
@@ -522,7 +525,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
 
                                                 Center(
                                                   child: CircleAvatar(
-                                                    child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                    child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                                                     backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                     radius: 25,
                                                   ),
@@ -575,11 +578,11 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                   alignment: Alignment.center,
                   child: RichText(
                     textAlign: TextAlign.center,
-                    text: TextSpan(
+                    text: const TextSpan(
                       children: <TextSpan>[
-                          TextSpan(text: 'Welcome to\n', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+                          TextSpan(text: 'Welcome to\n', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color:  Color(0xff2F353D),),),
 
-                          TextSpan(text: 'Faces by Places', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),
+                          TextSpan(text: 'Faces by Places', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xff2F353D),),
                         ),
                       ],
                     ),
@@ -589,22 +592,22 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                 const SizedBox(height: 25,),
 
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Image.asset('assets/icons/Welcome.png', width: SizeConfig.screenWidth, fit: BoxFit.cover,),
                 ),
 
                 const SizedBox(height: 50,),
 
-                Center(child: Text('Feed is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),),
+                const Center(child: Text('Feed is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),),
 
                 const SizedBox(height: 20,),
 
-                Padding(
+                const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 40),
                   child: Center(
                     child: Text('Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations.',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                      style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                     ),
                   ),
                 ),
@@ -615,7 +618,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                 ? Container(height: 0,)
                 : MiscBLMButtonTemplate(
                   buttonText: 'Create',
-                  buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                  buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                   buttonColor: const Color(0xff000000),
                   width: SizeConfig.screenWidth! / 2,
                   height: 50,

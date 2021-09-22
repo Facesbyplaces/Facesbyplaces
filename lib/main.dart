@@ -2,7 +2,7 @@ import 'UI/Home/Regular/01-Main/home-main-regular-01-home.dart';
 import 'UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-01-create-memorial.dart';
 import 'UI/Home/Regular/04-Create-Post/home-create-post-regular-02-01-create-post-location.dart';
 import 'UI/Home/Regular/07-Search/home-search-regular-01-search.dart';
-import 'UI/Home/BLM/01-Main/home-main-blm-01-home.dart';
+import 'UI/Home/BLM/01-Main/home_main_blm_01_home.dart';
 import 'UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-01-create-memorial.dart';
 import 'UI/Home/BLM/04-Create-Post/home-create-post-blm-02-01-create-post-location.dart';
 import 'UI/Home/BLM/07-Search/home-search-blm-01-search.dart';
@@ -28,16 +28,8 @@ import 'UI/ui-02-login.dart';
 import 'UI/ui-03-newly-installed.dart';
 import 'dart:async';
 
-import 'UI/ui-06-newest-test.dart';
-
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  print("Handling a background message: $message");
-  print("Handling a background message: ${message.data}");
-  print("Handling a background message: ${message.messageId}");
-  print("Handling a background message: ${message.messageId}");
-  print("Handling a background message title: ${message.notification!.title}");
-  print("Handling a background message bodyy: ${message.notification!.body}");
 }
 
 void main() async{
@@ -52,7 +44,7 @@ void main() async{
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await Firebase.initializeApp();
 
-  NotificationSettings settings = await FirebaseMessaging.instance.requestPermission(
+  await FirebaseMessaging.instance.requestPermission(
     alert: true,
     announcement: false,
     badge: true,
@@ -68,8 +60,6 @@ void main() async{
     sound: true,
   );
 
-  print('User granted permission for push notification: ${settings.authorizationStatus}');
-
   final sharedPrefs = await SharedPreferences.getInstance();
   final newlyInstalled = sharedPrefs.getBool('newly-installed') ?? true;
   final blmSession = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -79,7 +69,7 @@ void main() async{
     RepaintBoundary(
       child: GlobalLoaderOverlay(
         useDefaultLoading: false,
-        overlayWidget: const Center(child: const SpinKitThreeBounce(color: const Color(0xff000000)),),
+        overlayWidget: const Center(child: SpinKitThreeBounce(color: Color(0xff000000)),),
         overlayOpacity: 0.5,
         overlayColor: Colors.grey,
         child: MaterialApp(
@@ -88,7 +78,7 @@ void main() async{
           title: 'Faces by Places',
           home: ((){
             if(newlyInstalled){
-              return UINewlyInstalled();
+              return const UINewlyInstalled();
             }else{
               if(blmSession){
                 return const HomeBLMScreen();
@@ -126,12 +116,12 @@ void main() async{
             '/blm/join': (BuildContext context) => const BLMJoin(),
             '/blm/login': (BuildContext context) => BLMLogin(),
             '/blm/register': (BuildContext context) => BLMRegister(),
-            '/blm/upload-photo': (BuildContext context) => BLMUploadPhoto(), // BLM START
+            '/blm/upload-photo': (BuildContext context) => const BLMUploadPhoto(), // BLM START
 
             '/regular/join': (BuildContext context) => const RegularJoin(),
-            '/regular/login': (BuildContext context) => RegularLogin(),
+            '/regular/login': (BuildContext context) => const RegularLogin(),
             '/regular/register': (BuildContext context) => RegularRegister(),
-            '/regular/upload-photo': (BuildContext context) => RegularUploadPhoto(), // ALM START
+            '/regular/upload-photo': (BuildContext context) => const RegularUploadPhoto(), // ALM START
 
             '/home/blm': (BuildContext context) => const HomeBLMScreen(),
             '/home/blm/create-post-location': (BuildContext context) => const HomeBLMCreatePostSearchLocation(),

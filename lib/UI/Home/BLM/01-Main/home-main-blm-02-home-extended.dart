@@ -7,11 +7,11 @@ import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memoria
 import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
-import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-01-logout.dart';
-import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-02-show-user-information.dart';
-import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-03-show-notifications-settings.dart';
-import 'package:facesbyplaces/API/BLM/14-Notifications/api-notifications-blm-01-show-unread-notifications.dart';
-import 'package:facesbyplaces/API/BLM/14-Notifications/api-notifications-blm-02-read-unread-notifications.dart';
+import 'package:facesbyplaces/API/BLM/02-Main/api_main_blm_01_logout.dart';
+import 'package:facesbyplaces/API/BLM/02-Main/api_main_blm_02_show_user_information.dart';
+import 'package:facesbyplaces/API/BLM/02-Main/api_main_blm_03_show_notifications_settings.dart';
+import 'package:facesbyplaces/API/BLM/14-Notifications/api_notifications_blm_01_show_unread_notifications.dart';
+import 'package:facesbyplaces/API/BLM/14-Notifications/api_notifications_blm_02_read_unread_notifications.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -33,8 +33,9 @@ import 'dart:async';
 
 class HomeBLMScreenExtended extends StatefulWidget{
   final int newToggleBottom;
-  const HomeBLMScreenExtended({required this.newToggleBottom});
+  const HomeBLMScreenExtended({Key? key, required this.newToggleBottom}) : super(key: key);
 
+  @override
   HomeBLMScreenExtendedState createState() => HomeBLMScreenExtendedState();
 }
 
@@ -43,7 +44,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
   ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(true);
   ValueNotifier<int> unreadNotifications = ValueNotifier<int>(0);
   ValueNotifier<int> toggleBottom = ValueNotifier<int>(0);
-  FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   Future<APIBLMShowProfileInformation>? drawerSettings;
   String _scanBarcode = 'Error';
 
@@ -70,13 +71,13 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
     String barcodeScanRes;
     try{
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode("#ff6666", "Cancel", true, ScanMode.QR);
-      print(barcodeScanRes);
     }on PlatformException{
       barcodeScanRes = 'Failed to get platform version.';
     }
 
-    if(!mounted)
-    return;
+    if(!mounted){
+      return;
+    }
 
     setState((){
       _scanBarcode = barcodeScanRes;
@@ -102,8 +103,8 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
       await showDialog(
         context: context, 
         builder: (_) => AssetGiffyDialog(
-          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-          description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+          title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+          description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
           entryAnimation: EntryAnimation.DEFAULT,
           buttonOkColor: const Color(0xffff0000),
@@ -116,6 +117,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
     }
   }
 
+  @override
   void initState(){
     super.initState();
     isGuest();
@@ -128,7 +130,6 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    print('Home blm extended rebuild!');
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -166,8 +167,8 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                     backgroundColor: const Color(0xff888888),
                                   )
                                   : const CircleAvatar(
-                                    foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
-                                    backgroundColor: const Color(0xff888888),
+                                    foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
+                                    backgroundColor: Color(0xff888888),
                                   ),
                                 ),
                                 onPressed: () async{
@@ -178,7 +179,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                           );
                         }else if(profileImage.hasError || isGuestLoggedInListener){
                           return IconButton(
-                            icon: const CircleAvatar(backgroundColor: const Color(0xff888888), foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),),
+                            icon: const CircleAvatar(backgroundColor: Color(0xff888888), foregroundImage: AssetImage('assets/icons/user-placeholder.png'),),
                             onPressed: () async{
                               Scaffold.of(context).openDrawer();
                             },
@@ -188,7 +189,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                         }
                       },
                     ),
-                    title: const Text('FacesByPlaces.com', style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
+                    title: const Text('FacesByPlaces.com', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xffffffff),),),
                     centerTitle: true,
                     actions: [
                       IconButton(
@@ -203,7 +204,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                     children: [
                       SingleChildScrollView(
                         physics: const NeverScrollableScrollPhysics(),
-                        child: Container(height: SizeConfig.screenHeight, child: const MiscBLMBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),
+                        child: SizedBox(height: SizeConfig.screenHeight, child: const MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
                       ),
 
                       Container(
@@ -220,7 +221,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                   ),
                   floatingActionButton: FloatingActionButton(
                     backgroundColor: const Color(0xffffffff),
-                    child: const Icon(Icons.qr_code, color: const Color(0xff4EC9D4),),
+                    child: const Icon(Icons.qr_code, color: Color(0xff4EC9D4),),
                     onPressed: () async{
                       scanQR();
                     },
@@ -245,54 +246,54 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                         renderBorder: false,
                         borderWidth: 0,
                         children: [
-                          Container(
+                          SizedBox(
                             width: SizeConfig.screenWidth! / 4,
                             child: Column(
-                              children: [
-                                const Icon(MdiIcons.fire,),
+                              children: const [
+                                Icon(MdiIcons.fire,),
 
-                                const SizedBox(height: 5),
+                                SizedBox(height: 5),
 
-                                const Text('Feed', style: const TextStyle(fontSize: 18, fontFamily: 'NexaLight'),),
+                                Text('Feed', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight'),),
                               ],
                             ),
                           ),
-                          Container(
+                          SizedBox(
                             width: SizeConfig.screenWidth! / 4,
                             child: Column(
-                              children: [
-                                const Icon(MdiIcons.graveStone),
+                              children: const [
+                                Icon(MdiIcons.graveStone),
 
-                                const SizedBox(height: 5),
+                                SizedBox(height: 5),
 
-                                const Text('Memorials', style: const TextStyle(fontSize: 18, fontFamily: 'NexaLight'),),
+                                Text('Memorials', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight'),),
                               ],
                             ),
                           ),
-                          Container(
+                          SizedBox(
                             width: SizeConfig.screenWidth! / 4,
                             child: Column(
-                              children: [
-                                const Icon(MdiIcons.post),
+                              children: const [
+                                Icon(MdiIcons.post),
                                 
-                                const SizedBox(height: 5),
+                                SizedBox(height: 5),
 
-                                const Text('Post', style: const TextStyle(fontSize: 18, fontFamily: 'NexaLight',),),
+                                Text('Post', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight',),),
                               ],
                             ),
                           ),
-                          Container(
+                          SizedBox(
                             width: SizeConfig.screenWidth! / 4,
                             child: Stack(
                               alignment: Alignment.center,
                               children: [
                                 Column(
-                                  children: <Widget>[
-                                    const Icon(MdiIcons.heart),
+                                  children: const <Widget>[
+                                    Icon(MdiIcons.heart),
                                     
-                                    const SizedBox(height: 5),
+                                    SizedBox(height: 5),
                                     
-                                    const Text('Notification', style: const TextStyle(fontSize: 18, fontFamily: 'NexaLight',),),
+                                    Text('Notification', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight',),),
                                   ],
                                 ),
                                 Positioned(
@@ -302,8 +303,8 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                     radius: 12,
                                     backgroundColor: const Color(0xffff0000),
                                     child: isGuestLoggedInListener == true
-                                    ? const Text('0', style: const TextStyle(color: const Color(0xffffffff), fontSize: 12),)
-                                    : Text(unreadNotificationListener > 99 ? '99+' : '$unreadNotificationListener', style: const TextStyle(color: const Color(0xffffffff), fontSize: 12),),
+                                    ? const Text('0', style: TextStyle(color: Color(0xffffffff), fontSize: 12),)
+                                    : Text(unreadNotificationListener > 99 ? '99+' : '$unreadNotificationListener', style: const TextStyle(color: Color(0xffffffff), fontSize: 12),),
                                   ),
                                 )
                               ],
@@ -357,8 +358,8 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                       ),
                                     )
                                     : const CircleAvatar(
-                                      foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
-                                      backgroundColor: const Color(0xff888888),
+                                      foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
+                                      backgroundColor: Color(0xff888888),
                                       radius: 100,
                                     ),
                                     onTap: (){
@@ -379,7 +380,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                                       padding: const EdgeInsets.only(right: 20.0),
                                                       child: GestureDetector(
                                                         child: CircleAvatar(
-                                                          child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
+                                                          child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),
                                                           backgroundColor: const Color(0xff000000).withOpacity(0.8),
                                                           radius: 20,
                                                         ),
@@ -416,13 +417,13 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                   Text(
                                     manageDrawer.data!.showProfileInformationFirstName + ' ' + manageDrawer.data!.showProfileInformationLastName,
                                     textAlign: TextAlign.center,
-                                    style: const TextStyle(fontSize: 28, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                                    style: const TextStyle(fontSize: 28, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                                   ),
 
                                   const SizedBox(height: 45),
 
                                   GestureDetector(
-                                    child: const Text('Home', style: const TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                                    child: const Text('Home', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
                                     onTap: (){
                                       Navigator.pop(context);
                                     },
@@ -431,7 +432,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                   const SizedBox(height: 25),
 
                                   GestureDetector(
-                                    child: const Text('Create Memorial Page', style: const TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                                    child: const Text('Create Memorial Page', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
                                     onTap: (){
                                       Navigator.pop(context);
                                       Navigator.pushNamed(context, '/home/blm/create-memorial');
@@ -441,7 +442,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                   const SizedBox(height: 20),
 
                                   GestureDetector(
-                                    child: const Text('Notification Settings', style: const TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                                    child: const Text('Notification Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
                                     onTap: () async{
                                       context.loaderOverlay.show();
                                       APIBLMShowNotificationStatus result = await apiBLMShowNotificationStatus(userId: manageDrawer.data!.showProfileInformationUserId);
@@ -455,7 +456,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                   const SizedBox(height: 20),
 
                                   GestureDetector(
-                                    child: const Text('Profile Settings', style: const TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                                    child: const Text('Profile Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
                                     onTap: () async{
                                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: manageDrawer.data!.showProfileInformationUserId)));
                                     },
@@ -464,9 +465,9 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                   const SizedBox(height: 20),
 
                                   GestureDetector(
-                                    child: const Text('Log Out', style: const TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                                    child: const Text('Log Out', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
                                     onTap: () async{
-                                      bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscBLMConfirmDialog(title: 'Log Out', content: 'Are you sure you want to logout from this account?', confirmColor_1: const Color(0xff000000), confirmColor_2: const Color(0xff888888),));
+                                      bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscBLMConfirmDialog(title: 'Log Out', content: 'Are you sure you want to logout from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),));
 
                                       if(confirmResult){
                                         context.loaderOverlay.show();
@@ -480,8 +481,8 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                           await showDialog(
                                             context: context,
                                             builder: (_) => AssetGiffyDialog(
-                                              title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                              description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                              title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                              description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                               entryAnimation: EntryAnimation.DEFAULT,
                                               buttonOkColor: const Color(0xffff0000),
@@ -509,12 +510,12 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                               children: [
                                 const SizedBox(height: 20,),
 
-                                const CircleAvatar(radius: 100, backgroundColor: const Color(0xff888888), foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),),
+                                const CircleAvatar(radius: 100, backgroundColor: Color(0xff888888), foregroundImage: AssetImage('assets/icons/user-placeholder.png'),),
 
                                 Expanded(child: Container(),),
 
                                 GestureDetector(
-                                  child: const Text('Something went wrong. Please try again.', style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),), textAlign: TextAlign.center,),
+                                  child: const Text('Something went wrong. Please try again.', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),), textAlign: TextAlign.center,),
                                   onTap: (){
                                     Navigator.pop(context);
                                   },
@@ -525,12 +526,12 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                 GestureDetector(
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Icon(Icons.directions_walk_rounded, color: const Color(0xffffffff), size: 16,),
+                                    children: const [
+                                      Icon(Icons.directions_walk_rounded, color: Color(0xffffffff), size: 16,),
                                       
-                                      const SizedBox(width: 20),
+                                      SizedBox(width: 20),
 
-                                      const Text('Go back', style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),),
+                                      Text('Go back', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),),
                                     ],
                                   ),
                                   onTap: (){
@@ -545,7 +546,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                           ),
                         );
                       }else{
-                        return Container(child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
+                        return Center(child: Container(child: const SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),);
                       }
                     }
                   )
@@ -559,16 +560,16 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                           children: [
                             const SizedBox(height: 20),
 
-                            const CircleAvatar(radius: 100, backgroundColor: const Color(0xff888888),foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),),
+                            const CircleAvatar(radius: 100, backgroundColor: Color(0xff888888),foregroundImage: AssetImage('assets/icons/user-placeholder.png'),),
 
                             const SizedBox(height: 20),
 
-                            const Text('Guest User', textAlign: TextAlign.center, style: const TextStyle(fontSize: 28, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
+                            const Text('Guest User', textAlign: TextAlign.center, style: TextStyle(fontSize: 28, fontFamily: 'NexaBold', color: Color(0xffffffff),),),
 
                             const SizedBox(height: 45),
 
                             GestureDetector(
-                              child: const Text('Home', style: const TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                              child: const Text('Home', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
                               onTap: (){
                                 Navigator.pop(context);
                               },
@@ -577,7 +578,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                             const SizedBox(height: 25),
 
                             GestureDetector(
-                              child: const Text('Sign up or Sign in', style: const TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                              child: const Text('Sign up or Sign in', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
                               onTap: () async{
                                 final sharedPrefs = await SharedPreferences.getInstance();
 

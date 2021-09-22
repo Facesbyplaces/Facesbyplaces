@@ -1,5 +1,5 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-05-search-users.dart';
+import 'package:facesbyplaces/API/BLM/08-Search/api_search_blm_05_search_users.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'home-create-post-blm-01-create-post.dart';
@@ -17,7 +17,7 @@ class BLMSearchUsers{
 
 class HomeBLMCreatePostSearchUser extends StatefulWidget{
   final List<BLMTaggedUsers> taggedUsers;
-  const HomeBLMCreatePostSearchUser({required this.taggedUsers});
+  const HomeBLMCreatePostSearchUser({Key? key, required this.taggedUsers}) : super(key: key);
 
   @override
   HomeBLMCreatePostSearchUserState createState() => HomeBLMCreatePostSearchUserState();
@@ -31,6 +31,7 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
   int itemRemaining = 1;
   int page = 1;
 
+  @override
   void initState(){
     super.initState();
     scrollController.addListener((){
@@ -40,9 +41,9 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: const Text('No more users to show'),
-              duration: const Duration(seconds: 1),
-              backgroundColor: const Color(0xff4EC9D4),
+              content: Text('No more users to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
             ),
           );
         }
@@ -77,7 +78,7 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
         ));
       }
 
-      if(widget.taggedUsers.length > 0){
+      if(widget.taggedUsers.isNotEmpty){
         List<BLMSearchUsers> filteredList = users.where((element){
           bool value = true;
 
@@ -94,8 +95,9 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
       }
     }
 
-    if(mounted) 
-    page++;
+    if(mounted){
+      page++;
+    }
   }
 
   @override
@@ -116,7 +118,7 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
           valueListenable: count,
           builder: (_, int countListener, __) => Scaffold(
             appBar: PreferredSize(
-              preferredSize: Size.fromHeight(70.0),
+              preferredSize: const Size.fromHeight(70.0),
               child: AppBar(
                 leading: Container(),
                 backgroundColor: const Color(0xff04ECFF),
@@ -129,7 +131,7 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
                         Align(
                           alignment: Alignment.centerLeft,
                           child: IconButton(
-                            icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+                            icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
                             onPressed: (){
                               Navigator.pop(context);
                             },
@@ -138,21 +140,20 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
 
                         Expanded(
                           child: TextFormField(
-                            style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                            style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.all(15.0),
                               focusColor: const Color(0xffffffff),
                               fillColor: const Color(0xffffffff),
                               hintText: 'Search User',
                               filled: true,
-                              hintStyle: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
-                              border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                              enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                              focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                              hintStyle: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                              border: const OutlineInputBorder(borderSide: BorderSide(color: Color(0xffffffff)), borderRadius: BorderRadius.all(Radius.circular(25)),),
+                              enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Color(0xffffffff)), borderRadius: BorderRadius.all(Radius.circular(25)),),
+                              focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: Color(0xffffffff)), borderRadius: BorderRadius.all(Radius.circular(25)),),
                               prefixIcon: IconButton(
-                                icon: const Icon(Icons.search, color: const Color(0xff888888),),
+                                icon: const Icon(Icons.search, color: Color(0xff888888),),
                                 onPressed: () {
-                                  print('Search!');
                                   onLoading();
                                 },
                               ),
@@ -176,7 +177,7 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
                       ],
                     ),
                     
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                   ],
                 ),
               ),
@@ -200,11 +201,11 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
                     )
                     : const CircleAvatar(
                       maxRadius: 40,
-                      backgroundColor: const Color(0xff888888),
-                      foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                      backgroundColor: Color(0xff888888),
+                      foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
                     ),
-                    title: Text(users[i].firstName + ' ' + users[i].lastName, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
-                    subtitle: Text(users[i].email, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                    title: Text(users[i].firstName + ' ' + users[i].lastName, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                    subtitle: Text(users[i].email, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
                     onTap: (){
                       Navigator.pop(context, BLMTaggedUsers(name: users[i].firstName + ' ' + users[i].lastName, userId: users[i].userId, accountType: users[i].accountType));
                     },
@@ -212,7 +213,7 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
                 },
               ),
             )
-            : Container(
+            : SizedBox(
               width: SizeConfig.screenWidth,
               child: SingleChildScrollView(
                 physics: const ClampingScrollPhysics(),
@@ -224,9 +225,9 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
 
                     const SizedBox(height: 20,),
 
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: Text('Search a location to add on your post', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                      child: Text('Search a location to add on your post', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
                     ),
 
                     SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),

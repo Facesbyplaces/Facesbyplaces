@@ -1,8 +1,8 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-06-delete-memorial.dart';
-import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-14-update-switch-status-family.dart';
-import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-15-update-switch-status-friends.dart';
-import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-16-update-switch-status-followers.dart';
+import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_06_delete_memorial.dart';
+import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_14_update_switch_status_family.dart';
+import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_15_update_switch_status_friends.dart';
+import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_16_update_switch_status_followers.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/05-Donate/home-donate-blm-02-paypal-screen.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
@@ -23,8 +23,9 @@ class HomeBLMMemorialSettings extends StatefulWidget{
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
-  const HomeBLMMemorialSettings({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
+  const HomeBLMMemorialSettings({Key? key, required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers}) : super(key: key);
 
+  @override
   HomeBLMMemorialSettingsState createState() => HomeBLMMemorialSettingsState();
 }
 
@@ -35,6 +36,7 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
   ValueNotifier<int> toggle = ValueNotifier<int>(0);
   Future? switchStatus;
 
+  @override
   void initState(){
     super.initState();
     isSwitched1.value = widget.switchFamily;
@@ -50,10 +52,10 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
       builder: (_, int toggleListener, __) => Scaffold(
         appBar: AppBar(
           backgroundColor: const Color(0xff04ECFF),
-          title: Text('Memorial Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+          title: const Text('Memorial Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
           centerTitle: false,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back,size: 35,),
+            icon: const Icon(Icons.arrow_back,size: 35,),
             onPressed: (){
               Navigator.pop(context);
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: widget.memorialId, relationship: '', managed: true, newlyCreated: false,)));
@@ -64,13 +66,13 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
           child: LayoutBuilder(
             builder: (context, constraint){
               return SingleChildScrollView(
-                physics: ClampingScrollPhysics(),
+                physics: const ClampingScrollPhysics(),
                 child: ConstrainedBox(
                   constraints: BoxConstraints(minHeight: constraint.maxHeight),
                   child: IntrinsicHeight(
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           height: 70,
                           child: DefaultTabController(
                             length: 2,
@@ -79,10 +81,10 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
                               unselectedLabelColor: const Color(0xff000000),
                               indicatorColor: const Color(0xff04ECFF),
                               indicatorSize: TabBarIndicatorSize.label,
-                              tabs: [
-                                Text('Page', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+                              tabs: const [
+                                Text('Page', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
 
-                                Text('Privacy', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+                                Text('Privacy', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
                               ],
                               onTap: (int index){
                                 toggle.value = index;
@@ -117,8 +119,8 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
       children: [
         ListTile(
           tileColor: const Color(0xffffffff),
-          title: Text('Page Details', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
-          subtitle: Text('Update page details', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+          title: const Text('Page Details', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+          subtitle: const Text('Update page details', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
           onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageDetails(memorialId: memorialId,)));
           },
@@ -128,8 +130,8 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
 
         ListTile(
           tileColor: const Color(0xffffffff),
-          title: Text('Page Image', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
-          subtitle: Text('Update Page image and background image', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+          title: const Text('Page Image', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+          subtitle: const Text('Update Page image and background image', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
           onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialPageImage(memorialId: memorialId,)));
           },
@@ -139,8 +141,8 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
 
         ListTile(
           tileColor: const Color(0xffffffff),
-          title: Text('Admins', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
-          subtitle: Text('Add or remove admins of this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+          title: const Text('Admins', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+          subtitle: const Text('Add or remove admins of this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
           onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageManagers(memorialId: memorialId,)));
           },
@@ -150,10 +152,10 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
 
         ListTile(
           tileColor: const Color(0xffffffff),
-          title: Text('Family', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
-          subtitle: Text('Add or remove family of this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+          title: const Text('Family', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+          subtitle: const Text('Add or remove family of this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers), settings: RouteSettings(name: 'memorial-settings'),),);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers), settings: const RouteSettings(name: 'memorial-settings'),),);
           },
         ),
 
@@ -161,8 +163,8 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
 
         ListTile(
           tileColor: const Color(0xffffffff),
-          title: Text('Friends', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
-          subtitle: Text('Add or remove friends of this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+          title: const Text('Friends', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+          subtitle: const Text('Add or remove friends of this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
           onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageFriends(memorialId: memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers,),),);
           },
@@ -172,8 +174,8 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
 
         ListTile(
           tileColor: const Color(0xffffffff),
-          title: Text('Paypal', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
-          subtitle: Text('Manage cards that receives the memorial gifts', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+          title: const Text('Paypal', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+          subtitle: const Text('Manage cards that receives the memorial gifts', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
           onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPaypal(pageId: memorialId)));
           },
@@ -182,9 +184,9 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
         Container(height: 5, color: const Color(0xffeeeeee),),
 
         ListTile(
-          tileColor: Color(0xffffffff),
-          title: Text('Delete Page', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
-          subtitle: Text('Completely remove the page. This is irreversible', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+          tileColor: const Color(0xffffffff),
+          title: const Text('Delete Page', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+          subtitle: const Text('Completely remove the page. This is irreversible', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
           onTap: () async{
             bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(content: 'Are you sure you want to delete "${widget.memorialName}"?',),);
 
@@ -199,8 +201,8 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
                 await showDialog(
                   context: context,
                   builder: (_) => AssetGiffyDialog(
-                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                    title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                    description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                     entryAnimation: EntryAnimation.DEFAULT,
                     buttonOkColor: const Color(0xffff0000),
@@ -237,10 +239,10 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
           valueListenable: isSwitched3,
           builder: (_, bool isSwitched3Listener, __) => Column(
             children: [
-              ListTile(
-                tileColor: const Color(0xffffffff),
-                title: Text('Customize shown info', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
-                subtitle: Text('Customize what others see on your page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+              const ListTile(
+                tileColor: Color(0xffffffff),
+                title: Text('Customize shown info', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+                subtitle: Text('Customize what others see on your page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
               ),
 
               Container(height: 5, color: const Color(0xffeeeeee),),
@@ -250,11 +252,11 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
                 color: const Color(0xffffffff),
                 child: Row(
                   children: [
-                    Expanded(
+                    const Expanded(
                       child: ListTile(
-                        tileColor: const Color(0xffffffff),
-                        title: Text('Hide Family', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
-                        subtitle: Text('Show or hide family details', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                        tileColor: Color(0xffffffff),
+                        title: Text('Hide Family', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+                        subtitle: Text('Show or hide family details', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
                       ),
                     ),
                     Switch(
@@ -277,11 +279,11 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
                 color: const Color(0xffffffff),
                 child: Row(
                   children: [
-                    Expanded(
+                    const Expanded(
                       child: ListTile(
-                        tileColor: const Color(0xffffffff),
-                        title: Text('Hide Friends', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
-                        subtitle: Text('Show or hide friends details', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                        tileColor: Color(0xffffffff),
+                        title: Text('Hide Friends', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+                        subtitle: Text('Show or hide friends details', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
                       ),
                     ),
                     Switch(
@@ -304,11 +306,11 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
                 color: const Color(0xffffffff),
                 child: Row(
                   children: [
-                    Expanded(
+                    const Expanded(
                       child: ListTile(
-                        tileColor: const Color(0xffffffff),
-                        title: Text('Hide Followers', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
-                        subtitle: Text('Show or hide your followers', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                        tileColor: Color(0xffffffff),
+                        title: Text('Hide Followers', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+                        subtitle: Text('Show or hide your followers', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
                       ),
                     ),
                     Switch(

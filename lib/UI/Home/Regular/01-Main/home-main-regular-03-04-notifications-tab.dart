@@ -1,5 +1,5 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-04-home-notifications-tab.dart';
+import 'package:facesbyplaces/API/Regular/02-Main/api_main_regular_04_04_home_notifications_tab.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-notification-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,8 +10,9 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularNotificationsTab extends StatefulWidget{
-  const HomeRegularNotificationsTab();
+  const HomeRegularNotificationsTab({Key? key}) : super(key: key);
 
+  @override
   HomeRegularNotificationsTabState createState() => HomeRegularNotificationsTabState();
 }
 
@@ -23,7 +24,8 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
   int itemRemaining = 1;
   int page = 1;
 
-  void initState() {
+  @override
+  void initState(){
     super.initState();
     isGuest();
     scrollController.addListener((){
@@ -33,9 +35,9 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: const Text('No more notifications to show'),
-              duration: const Duration(seconds: 1),
-              backgroundColor: const Color(0xff4EC9D4),
+              content: Text('No more notifications to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
             ),
           );
         }
@@ -68,8 +70,8 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
         await showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-            description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+            description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
@@ -102,18 +104,18 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
         );
       }
 
-      if(mounted)
-      page++;
+      if(mounted){
+        page++;
+      }
     }
   }
 
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    print('Notification tab rebuild!');
     return ValueListenableBuilder(
       valueListenable: count,
-      builder: (_, int countListener, __) => Container(
+      builder: (_, int countListener, __) => SizedBox(
         width: SizeConfig.screenWidth,
         child: countListener != 0
           ? SafeArea(
@@ -130,22 +132,20 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
           )
           : SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
-          child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
 
-                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-                const SizedBox(height: 45,),
+              const SizedBox(height: 45,),
 
-                const Text('Notification is empty', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+              const Text('Notification is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
 
-                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
-              ],
-            ),
+              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+            ],
           ),
         ),
       ),

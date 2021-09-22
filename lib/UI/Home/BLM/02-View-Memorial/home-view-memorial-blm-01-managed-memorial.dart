@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-01-show-memorial-details.dart';
-import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-02-show-profile-post.dart';
-import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-03-show-switch-status.dart';
+import 'package:facesbyplaces/API/BLM/03-View-Memorial/api_view_memorial_blm_01_show_memorial_details.dart';
+import 'package:facesbyplaces/API/BLM/03-View-Memorial/api_view_memorial_blm_02_show_profile_post.dart';
+import 'package:facesbyplaces/API/BLM/03-View-Memorial/api_view_memorial_blm_03_show_switch_status.dart';
 import 'package:facesbyplaces/UI/Home/BLM/01-Main/home-main-blm-02-home-extended.dart';
 import 'package:facesbyplaces/UI/Home/BLM/04-Create-Post/home-create-post-blm-01-create-post.dart';
 import 'package:facesbyplaces/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-01-memorial-settings.dart';
@@ -55,8 +55,9 @@ class HomeBLMProfile extends StatefulWidget{
   final String relationship;
   final bool managed;
   final bool newlyCreated;
-  const HomeBLMProfile({required this.memorialId, required this.relationship, required this.managed, required this.newlyCreated});
+  const HomeBLMProfile({Key? key, required this.memorialId, required this.relationship, required this.managed, required this.newlyCreated}) : super(key: key);
 
+  @override
   HomeBLMProfileState createState() => HomeBLMProfileState();
 }
 
@@ -76,6 +77,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
   bool empty = true;
   int page = 1;
 
+  @override
   void initState(){
     super.initState();
     onLoading();
@@ -140,8 +142,9 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
         );
       }
 
-      if(mounted)
-      page++;
+      if(mounted){
+        page++;
+      }
       context.loaderOverlay.hide();
     }
   }
@@ -179,7 +182,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    print('BLM screen rebuild!');
     return ValueListenableBuilder(
       valueListenable: showFloatingButton,
       builder: (_, bool showFloatingButtonListener, __) => ValueListenableBuilder(
@@ -201,7 +203,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                           children: [
                             Stack(
                               children: [
-                                Container(
+                                SizedBox(
                                   height: SizeConfig.screenHeight! / 3,
                                   width: SizeConfig.screenWidth,
                                   child: CachedNetworkImage(
@@ -233,7 +235,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                         alignment: Alignment.centerRight,
                                                         child: GestureDetector(
                                                           child: CircleAvatar(
-                                                            child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
+                                                            child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),
                                                             backgroundColor: const Color(0xff000000).withOpacity(0.8),
                                                             radius: 20,
                                                           ),
@@ -267,14 +269,14 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                                     Container(
                                       width: SizeConfig.screenWidth,
-                                      decoration: const BoxDecoration(borderRadius: const BorderRadius.only(topLeft: const Radius.circular(20), topRight: const Radius.circular(20)), color: const Color(0xffffffff),),
+                                      decoration: const BoxDecoration(borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)), color: Color(0xffffffff),),
                                       child: Column(
                                         children: [
                                           const SizedBox(height: 150,),
 
                                           Center(
                                             child: Text(profile.data!.blmMemorial.memorialName,
-                                            style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),
+                                            style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),
                                               textAlign: TextAlign.center,
                                               overflow: TextOverflow.clip,
                                               maxLines: 5,
@@ -284,8 +286,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                           const SizedBox(height: 20),
 
                                           TextButton.icon(
-                                            label: Text('${profile.data!.blmMemorial.memorialFollowersCount}', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
-                                            icon: const CircleAvatar(radius: 15, backgroundColor: const Color(0xff000000), child: const CircleAvatar(radius: 10, backgroundColor: Colors.transparent, foregroundImage: const AssetImage('assets/icons/fist.png'),),),
+                                            label: Text('${profile.data!.blmMemorial.memorialFollowersCount}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+                                            icon: const CircleAvatar(radius: 15, backgroundColor: Color(0xff000000), child: CircleAvatar(radius: 10, backgroundColor: Colors.transparent, foregroundImage: AssetImage('assets/icons/fist.png'),),),
                                             onPressed: (){
                                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: widget.memorialId, newToggle: 2)));
                                             },
@@ -331,7 +333,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                                   padding: const EdgeInsets.only(right: 20.0),
                                                                   alignment: Alignment.centerRight,
                                                                   child: GestureDetector(
-                                                                    child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
+                                                                    child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
                                                                     onTap: (){
                                                                       Navigator.pop(context);
                                                                     },
@@ -378,7 +380,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                               ((){
                                                 if(profile.data!.blmMemorial.memorialDetails.memorialDetailsDescription != ''){
                                                   return Container(
-                                                    child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsDescription, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                                                    child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsDescription, textAlign: TextAlign.center, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
                                                     padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                                                     alignment: Alignment.center,
                                                   );
@@ -391,65 +393,62 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                                           const SizedBox(height: 20,),
 
-                                          Container(
-                                            child: Row(
-                                              children: [
-                                                Expanded(child: Container(),),
+                                          Row(
+                                            children: [
+                                              Expanded(child: Container(),),
 
-                                                Expanded(
-                                                  flex: 2,
-                                                  child: Padding(
-                                                    padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                                                    child: MaterialButton(
-                                                      child: Text('Manage', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
-                                                      minWidth: SizeConfig.screenWidth! / 2,
-                                                      color: const Color(0xff2F353D),
-                                                      shape: const StadiumBorder(),
-                                                      padding: EdgeInsets.zero,
-                                                      height: 45,
-                                                      onPressed: () async{
-                                                        if(widget.managed == true){
-                                                          context.loaderOverlay.show();
-                                                          APIBLMShowSwitchStatus result = await apiBLMShowSwitchStatus(memorialId: widget.memorialId);
-                                                          context.loaderOverlay.hide();
+                                              Expanded(
+                                                flex: 2,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                                                  child: MaterialButton(
+                                                    child: const Text('Manage', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
+                                                    minWidth: SizeConfig.screenWidth! / 2,
+                                                    color: const Color(0xff2F353D),
+                                                    shape: const StadiumBorder(),
+                                                    padding: EdgeInsets.zero,
+                                                    height: 45,
+                                                    onPressed: () async{
+                                                      if(widget.managed == true){
+                                                        context.loaderOverlay.show();
+                                                        APIBLMShowSwitchStatus result = await apiBLMShowSwitchStatus(memorialId: widget.memorialId);
+                                                        context.loaderOverlay.hide();
 
-                                                          if(result.switchStatusSuccess){
-                                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialSettings(memorialId: widget.memorialId, memorialName: profile.data!.blmMemorial.memorialName, switchFamily: result.switchStatusFamily, switchFriends: result.switchStatusFriends, switchFollowers: result.switchStatusFollowers,)));
-                                                          }
-                                                        }else{
-                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialSettingsWithHidden(memorialId: widget.memorialId, relationship: widget.relationship,)));
+                                                        if(result.switchStatusSuccess){
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialSettings(memorialId: widget.memorialId, memorialName: profile.data!.blmMemorial.memorialName, switchFamily: result.switchStatusFamily, switchFriends: result.switchStatusFriends, switchFollowers: result.switchStatusFollowers,)));
                                                         }
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
-
-                                                Expanded(
-                                                  child: GestureDetector(
-                                                    child: const CircleAvatar(radius: 25, backgroundColor: const Color(0xff3498DB), child: const Icon(Icons.share, color: const Color(0xffffffff), size: 25,),),
-                                                    onTap: () async{
-                                                      initBranchShare();
-                                                      FlutterBranchSdk.setIdentity('blm-share-link');
-
-                                                      BranchResponse response = await FlutterBranchSdk.showShareSheet(
-                                                        buo: buo!,
-                                                        linkProperties: lp!,
-                                                        messageText: 'FacesbyPlaces App',
-                                                        androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
-                                                        androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
-                                                      );
-
-                                                      if(response.success){
-                                                        print('Link generated: ${response.result}');
                                                       }else{
-                                                        FlutterBranchSdk.logout();
-                                                        print('Error : ${response.errorCode} - ${response.errorMessage}');
+                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialSettingsWithHidden(memorialId: widget.memorialId, relationship: widget.relationship,)));
                                                       }
                                                     },
                                                   ),
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+
+                                              Expanded(
+                                                child: GestureDetector(
+                                                  child: const CircleAvatar(radius: 25, backgroundColor: Color(0xff3498DB), child: Icon(Icons.share, color: Color(0xffffffff), size: 25,),),
+                                                  onTap: () async{
+                                                    initBranchShare();
+                                                    FlutterBranchSdk.setIdentity('blm-share-link');
+
+                                                    BranchResponse response = await FlutterBranchSdk.showShareSheet(
+                                                      buo: buo!,
+                                                      linkProperties: lp!,
+                                                      messageText: 'FacesbyPlaces App',
+                                                      androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                                                      androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                                                    );
+
+                                                    if(response.success){
+                                                    }else{
+                                                      FlutterBranchSdk.logout();
+                                                      throw Exception('Error : ${response.errorCode} - ${response.errorMessage}');
+                                                    }
+                                                  },
+                                                ),
+                                              ),
+                                            ],
                                           ),
 
                                           const SizedBox(height: 20),
@@ -460,11 +459,11 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                               children: [
                                                 Row(
                                                   children: [
-                                                    const Icon(Icons.place, color: const Color(0xff000000), size: 25,),
+                                                    const Icon(Icons.place, color: Color(0xff000000), size: 25,),
 
                                                     const SizedBox(width: 20,),
 
-                                                    Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsCountry, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                                                    Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsCountry, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
                                                   ],
                                                 ),
 
@@ -472,11 +471,11 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                                                 Row(
                                                   children: [
-                                                    const Icon(Icons.star, color: const Color(0xff000000), size: 25,),
+                                                    const Icon(Icons.star, color: Color(0xff000000), size: 25,),
 
                                                     const SizedBox(width: 20,),
 
-                                                    Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsDob, style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                                                    Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsDob, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
                                                   ],
                                                 ),
 
@@ -488,7 +487,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                                                     const SizedBox(width: 20,),
 
-                                                    Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsRip, style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                                                    Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsRip, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
                                                   ],
                                                 ),
                                               ],
@@ -497,7 +496,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                                           const SizedBox(height: 20),
 
-                                          Container(
+                                          SizedBox(
                                             height: 50.0,
                                             child: Row(
                                               children: [
@@ -505,9 +504,9 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                   child: GestureDetector(
                                                     child: Column(
                                                       children: [
-                                                        Text('${profile.data!.blmMemorial.memorialPostsCount}', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                                                        Text('${profile.data!.blmMemorial.memorialPostsCount}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000),),),
 
-                                                        Text('Post', style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: const Color(0xff677375),),),
+                                                        const Text('Post', style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: Color(0xff677375),),),
                                                       ],
                                                     ),
                                                     onTap: (){
@@ -522,9 +521,9 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                   child: GestureDetector(
                                                     child: Column(
                                                       children: [
-                                                        Text('${profile.data!.blmMemorial.memorialFamilyCount}', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                                                        Text('${profile.data!.blmMemorial.memorialFamilyCount}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000),),),
 
-                                                        Text('Family', style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: const Color(0xff677375),),),
+                                                        const Text('Family', style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: Color(0xff677375),),),
                                                       ],
                                                     ),
                                                     onTap: (){
@@ -539,9 +538,9 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                   child: GestureDetector(
                                                     child: Column(
                                                       children: [
-                                                        Text('${profile.data!.blmMemorial.memorialFriendsCount}', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                                                        Text('${profile.data!.blmMemorial.memorialFriendsCount}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000),),),
 
-                                                        Text('Friends', style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: const Color(0xff677375),),),
+                                                        const Text('Friends', style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: Color(0xff677375),),),
                                                       ],
                                                     ),
                                                     onTap: (){
@@ -556,9 +555,9 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                   child: GestureDetector(
                                                     child: Column(
                                                       children: [
-                                                        Text('${profile.data!.blmMemorial.memorialFollowersCount}', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                                                        Text('${profile.data!.blmMemorial.memorialFollowersCount}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000),),),
 
-                                                        Text('Joined', style: TextStyle(fontSize: 16, fontFamily:'NexaRegular', color: const Color(0xff677375),),),
+                                                        const Text('Joined', style: TextStyle(fontSize: 16, fontFamily:'NexaRegular', color: Color(0xff677375),),),
                                                       ],
                                                     ),
                                                     onTap: (){
@@ -576,10 +575,10 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                                           Column(
                                             children: [
-                                              SizedBox(height: 20,),
+                                              const SizedBox(height: 20,),
 
                                               Container(
-                                                child: const Text('Post', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                                                child: const Text('Post', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff000000),),),
                                                 padding: const EdgeInsets.only(left: 20.0),
                                                 alignment: Alignment.centerLeft,
                                               ),
@@ -607,7 +606,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                               context: context,
                                                               barrierLabel: 'Dialog',
                                                               barrierDismissible: true,
-                                                              transitionDuration: Duration(milliseconds: 0),
+                                                              transitionDuration: const Duration(milliseconds: 0),
                                                               pageBuilder: (_, __, ___) {
                                                                 return Scaffold(
                                                                   backgroundColor: Colors.black12.withOpacity(0.7),
@@ -619,7 +618,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                                             padding: const EdgeInsets.only(right: 20.0),
                                                                             alignment: Alignment.centerRight,
                                                                             child: GestureDetector(
-                                                                              child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
+                                                                              child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
                                                                               onTap: (){
                                                                                 Navigator.pop(context);
                                                                               },
@@ -666,12 +665,12 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                                             children: [
                                                                               IconButton(
                                                                                 onPressed: () => buttonCarouselController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                                icon: const Icon(Icons.arrow_back_rounded, color: const Color(0xffffffff),),
+                                                                                icon: const Icon(Icons.arrow_back_rounded, color: Color(0xffffffff),),
                                                                               ),
 
                                                                               IconButton(
                                                                                 onPressed: () => buttonCarouselController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                                icon: const Icon(Icons.arrow_forward_rounded, color: const Color(0xffffffff),),
+                                                                                icon: const Icon(Icons.arrow_forward_rounded, color: Color(0xffffffff),),
                                                                               ),
                                                                             ],
                                                                           ),
@@ -687,7 +686,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                           },
                                                           child: ((){
                                                             if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[index])?.contains('video') == true){
-                                                              return Container(
+                                                              return SizedBox(
                                                                 width: 100,
                                                                 height: 100,
                                                                 child: BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[index]}',
@@ -700,7 +699,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                                 ),
                                                               );
                                                             }else{
-                                                              return Container(
+                                                              return SizedBox(
                                                                 height: 100,
                                                                 width: 100,
                                                                 child: CachedNetworkImage(
@@ -732,7 +731,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                 ),
 
                                 SafeArea(
-                                  child: Container(
+                                  child: SizedBox(
                                     height: Size.fromHeight(AppBar().preferredSize.height).height + (Size.fromHeight(AppBar().preferredSize.height).height / 2),
                                     child: Row(
                                       children: [
@@ -749,8 +748,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                 }
                                               },
                                               child: Row(
-                                                children: [
-                                                  Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+                                                children: const [
+                                                  Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
 
                                                   Text('Back', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
                                                 ],
@@ -764,7 +763,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                             alignment: Alignment.centerRight,
                                             child: widget.managed == true
                                             ? MaterialButton(
-                                              child: Text('Create Post', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
+                                              child: const Text('Create Post', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
                                               onPressed: () async{
                                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreatePost(name: profile.data!.blmMemorial.memorialName, memorialId: profile.data!.blmMemorial.memorialId)));
                                               },
@@ -779,7 +778,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                                 Positioned(
                                   top: SizeConfig.screenHeight! / 5,
-                                  child: Container(
+                                  child: SizedBox(
                                     width: SizeConfig.screenWidth,
                                     height: 160,
                                     child: Row(
@@ -791,7 +790,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                               context: context,
                                               barrierLabel: 'Dialog',
                                               barrierDismissible: true,
-                                              transitionDuration: Duration(milliseconds: 0),
+                                              transitionDuration: const Duration(milliseconds: 0),
                                               pageBuilder: (_, __, ___) {
                                                 return Scaffold(
                                                   backgroundColor: Colors.black12.withOpacity(0.7),
@@ -803,7 +802,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                             alignment: Alignment.centerRight,
                                                             padding: const EdgeInsets.only(right: 20.0),
                                                             child: GestureDetector(
-                                                              child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
+                                                              child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
                                                               onTap: (){
                                                                 Navigator.pop(context);
                                                               },
@@ -834,7 +833,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                             backgroundColor: const Color(0xff04ECFF),
                                             radius: 100,
                                             child: Padding(
-                                              padding: EdgeInsets.all(5),
+                                              padding: const EdgeInsets.all(5),
                                               child: profile.data!.blmMemorial.memorialProfileImage != ''
                                               ? CircleAvatar(
                                                 radius: 100,
@@ -844,8 +843,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                               )
                                               : const CircleAvatar(
                                                 radius: 100,
-                                                backgroundColor: const Color(0xff888888),
-                                                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                                backgroundColor: Color(0xff888888),
+                                                foregroundImage: AssetImage('assets/icons/app-icon.png'),
                                               ),
                                             ),
                                           ),
@@ -859,7 +858,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                           ],
                         );
                       }else if(profile.hasError){
-                        return MiscBLMErrorMessageTemplate();
+                        return const MiscBLMErrorMessageTemplate();
                       }else{
                         return Container(height: SizeConfig.screenHeight);
                       }
@@ -877,7 +876,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                         Column(
                           children: List.generate(
                             posts.length, (i) => Padding(
-                              padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
                               child: MiscBLMPost(
                                 key: ValueKey('$i'),
                                 userId: posts[i].userId,
@@ -902,11 +901,10 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                 latitude: posts[i].latitude,
                                 longitude: posts[i].longitude,
                                 contents: [
-                                  // Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),),
                                   Container(
                                     alignment: Alignment.centerLeft,
                                     child: Text(posts[i].postBody,
-                                      style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                      style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 5,
                                     ),
@@ -1010,7 +1008,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                                                             Center(
                                                               child: CircleAvatar(
-                                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                                 radius: 25,
                                                               ),
@@ -1032,7 +1030,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                                                             Center(
                                                               child: CircleAvatar(
-                                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                                 radius: 25,
                                                               ),
@@ -1087,7 +1085,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                       const SizedBox(height: 45,),
 
-                      const Center(child: const Text('Post is empty', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),),
+                      const Center(child: Text('Post is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),),
 
                       const SizedBox(height: 40,),
                     ],
@@ -1101,7 +1099,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
             visible: showFloatingButtonListener,
             child: FloatingActionButton(
               backgroundColor: const Color(0xff4EC9D4,),
-              child: const Icon(Icons.arrow_upward_rounded, color: const Color(0xffffffff),),
+              child: const Icon(Icons.arrow_upward_rounded, color: Color(0xffffffff),),
               onPressed: (){
                 Scrollable.ensureVisible(profileKey.currentContext!);
               },

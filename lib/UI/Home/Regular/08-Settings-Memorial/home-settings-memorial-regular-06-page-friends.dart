@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-05-show-friends-settings.dart';
-import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-13-remove-friends-or-family.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_05_show_friends_settings.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_13_remove_friends_or_family.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-settings-memorial-regular-07-search-user-settings.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -14,8 +14,9 @@ class HomeRegularPageFriends extends StatefulWidget{
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
-  const HomeRegularPageFriends({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
+  const HomeRegularPageFriends({Key? key, required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers}) : super(key: key);
 
+  @override
   HomeRegularPageFriendsState createState() => HomeRegularPageFriendsState();
 }
 
@@ -26,7 +27,8 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
   List<Widget> friends = [];
   int page = 1;
 
-  void initState() {
+  @override
+  void initState(){
     super.initState();
     onLoading();
     scrollController.addListener((){
@@ -34,7 +36,7 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
         if(friendsItemsRemaining != 0){
           onLoading();
         }else{
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: const Text('No more users to show'), duration: const Duration(seconds: 1), backgroundColor: const Color(0xff4EC9D4),),);
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more users to show'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
         }
       }
     });
@@ -56,7 +58,7 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
             description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
@@ -81,19 +83,19 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
             leading: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage != ''
             ? CircleAvatar(
               maxRadius: 40,
-              backgroundColor: Color(0xff888888),
-              foregroundImage: NetworkImage('${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage}',),
+              backgroundColor: const Color(0xff888888),
+              foregroundImage: NetworkImage(newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage,),
             )
             : const CircleAvatar(
               maxRadius: 40,
-              backgroundColor: const Color(0xff888888),
-              foregroundImage: const AssetImage('assets/icons/user-placeholder.png',),
+              backgroundColor: Color(0xff888888),
+              foregroundImage: AssetImage('assets/icons/user-placeholder.png',),
             ),
-            title: Text('${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsFirstName} ${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsLastName}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-            subtitle: Text('${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsEmail}', style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+            title: Text('${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsFirstName} ${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsLastName}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000),),),
+            subtitle: Text(newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsEmail, style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
             trailing: MaterialButton(
-              child: const Text('Remove', style: const TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xffffffff),),),
-              shape: const StadiumBorder(side: const BorderSide(color: const Color(0xffE74C3C)),),
+              child: const Text('Remove', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: Color(0xffffffff),),),
+              shape: const StadiumBorder(side: BorderSide(color: Color(0xffE74C3C)),),
               minWidth: SizeConfig.screenWidth! / 3.5,
               splashColor: const Color(0xff04ECFF),
               textColor: const Color(0xffffffff),
@@ -104,8 +106,8 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
                 bool confirmation = await showDialog(
                   context: context,
                   builder: (_) => AssetGiffyDialog(
-                    title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                    description: const Text('Are you sure you want to remove this user?', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                    title: const Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                    description: const Text('Are you sure you want to remove this user?', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                     entryAnimation: EntryAnimation.DEFAULT,
                     onlyOkButton: false,
@@ -127,7 +129,7 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                        title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                         description: Text('Error: $result.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         entryAnimation: EntryAnimation.DEFAULT,
@@ -142,8 +144,8 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                        description: const Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                        title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                        description: const Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         entryAnimation: EntryAnimation.DEFAULT,
                         onlyOkButton: true,
@@ -167,8 +169,9 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
       }
     }
 
-    if(mounted)
-    page++;
+    if(mounted){
+      page++;
+    }
   }
 
   @override
@@ -179,24 +182,24 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
       builder: (_, int countListener, __) => Scaffold(
         appBar: AppBar(
           backgroundColor: const Color(0xff04ECFF),
-          title: const Text('Friends', style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+          title: const Text('Friends', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
           centerTitle: false,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+            icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
             onPressed: (){
               Navigator.pop(context);
             },
           ),
           actions: [
             GestureDetector(
-              child: const Center(child: const Text('Add Friends', style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),),
+              child: const Center(child: Text('Add Friends', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),),
               onTap: (){
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularSearchUser(isFamily: false, memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)));
               },
             ),
           ],
         ),
-        body: Container(
+        body: SizedBox(
           width: SizeConfig.screenWidth,
           child: countListener != 0
           ? RefreshIndicator(
@@ -222,7 +225,7 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
 
                 const SizedBox(height: 45,),
 
-                const Text('Friends list is empty', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+                const Text('Friends list is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
 
                 SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
               ],

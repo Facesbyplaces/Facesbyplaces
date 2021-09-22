@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
-import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-01-show-page-details.dart';
-import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-07-update-page-details.dart';
+import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_01_show_page_details.dart';
+import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_07_update_page_details.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
@@ -15,8 +15,9 @@ import 'package:flutter/material.dart';
 
 class HomeBLMPageDetails extends StatefulWidget{
   final int memorialId;
-  const HomeBLMPageDetails({required this.memorialId});
+  const HomeBLMPageDetails({Key? key, required this.memorialId}) : super(key: key);
 
+  @override
   HomeBLMPageDetailsState createState() => HomeBLMPageDetailsState();
 }
 
@@ -34,7 +35,8 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
   DateTime dob = DateTime(1000);
   DateTime rip = DateTime.now();
 
-  void initState() {
+  @override
+  void initState(){
     super.initState();
     futureMemorialSettings = getMemorialSettings(widget.memorialId);
   }
@@ -63,10 +65,10 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: const Color(0xff04ECFF),
-            title: Text('Page Details', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+            title: const Text('Page Details', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
             centerTitle: false,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+              icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
               onPressed: (){
                 Navigator.pop(context);
               },
@@ -80,14 +82,14 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                   return Stack(
                     children: [
                       Container(
-                        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                         child: ListView(
                           physics: const ClampingScrollPhysics(),
                           children: [
                             MiscBLMInputFieldTemplate(
                               key: _key1,
                               labelText: 'Page Name',
-                              labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                              labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                               displayText: memorialSettings.data!.blmMemorial.showPageDetailsName,
                             ),
 
@@ -96,7 +98,7 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                             MiscBLMInputFieldTemplate(
                               key: _key2,
                               labelText: 'Description',
-                              labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                              labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                               displayText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDescription,
                             ),
 
@@ -122,12 +124,12 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                               cursorColor: const Color(0xff000000),
                               keyboardType: TextInputType.text,
                               readOnly: true,
-                              style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
-                              decoration: InputDecoration(
+                              style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
+                              decoration: const InputDecoration(
                                 labelText: 'DOB',
                                 alignLabelWithHint: true,
-                                focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
-                                labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                                focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
+                                labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                               ),
                               onTap: (){
                                 DatePicker.showDatePicker(
@@ -154,12 +156,12 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                               cursorColor: const Color(0xff000000),
                               keyboardType: TextInputType.text,
                               readOnly: true,
-                              style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
-                              decoration: InputDecoration(
+                              style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
+                              decoration: const InputDecoration(
                                 labelText: 'RIP',
                                 alignLabelWithHint: true,
-                                focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
-                                labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                                focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
+                                labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                               ),
                               onTap: (){
                                 DatePicker.showDatePicker(
@@ -184,7 +186,7 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                               key: _key7,
                               labelText: 'State',
                               displayText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsState,
-                              labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                              labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                             ),
 
                             const SizedBox(height: 20,),
@@ -193,7 +195,7 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                               key: _key8,
                               labelText: 'Country',
                               displayText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry,
-                              labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                              labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                             ),
 
                             const SizedBox(height: 20,),
@@ -202,20 +204,20 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                               key: _key9,
                               labelText: 'Precinct',
                               displayText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsPrecinct,
-                              labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                              labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                             ),
 
                             const SizedBox(height: 80,),
 
                             MiscBLMButtonTemplate(
                               buttonText: 'Update',
-                              buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                              buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),
                               buttonColor: const Color(0xff04ECFF),
                               width: 150,
                               height: 50,
                               onPressed: () async{
                                 if(memorialSettings.data!.blmMemorial.showPageDetailsName != _key1.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDescription != _key2.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsRelationship != _key3.currentState!.currentSelection || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsLocation != _key4.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob != controller1.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsRip != controller2.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsState != _key7.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry != _key8.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsPrecinct != _key9.currentState!.controller.text){
-                                  bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),),);
+                                  bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),),);
 
                                   if(confirmResult){
                                     context.loaderOverlay.show();
@@ -226,8 +228,8 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                                       await showDialog(
                                         context: context,
                                         builder: (_) =>  AssetGiffyDialog(
-                                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                          description: Text('Successfully updated the account details.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                          title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                          description: const Text('Successfully updated the account details.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                           entryAnimation: EntryAnimation.DEFAULT,
                                           onlyOkButton: true,
@@ -243,8 +245,8 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                                       await showDialog(
                                         context: context,
                                         builder: (_) => AssetGiffyDialog(
-                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                          description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                          title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                          description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                           entryAnimation: EntryAnimation.DEFAULT,
                                           buttonOkColor: const Color(0xffff0000),
@@ -267,14 +269,14 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                     ],
                   );
                 }else if(memorialSettings.hasError){
-                  return Container(
+                  return SizedBox(
                     height: SizeConfig.screenHeight,
-                    child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),),
+                    child: const Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),),
                   );
                 }else{
-                  return Container(
+                  return SizedBox(
                     height: SizeConfig.screenHeight,
-                    child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),
+                    child: Center(child: Container(child: const SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),
                   );
                 }
               },

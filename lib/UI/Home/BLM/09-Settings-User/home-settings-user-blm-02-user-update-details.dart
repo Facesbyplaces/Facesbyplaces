@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-01-show-account-details.dart';
-import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-04-update-account-details.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_01_show_account_details.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_04_update_account_details.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
@@ -14,8 +14,9 @@ import 'package:flutter/material.dart';
 
 class HomeBLMUserUpdateDetails extends StatefulWidget{
   final int userId;
-  const HomeBLMUserUpdateDetails({required this.userId});
+  const HomeBLMUserUpdateDetails({Key? key, required this.userId}) : super(key: key);
 
+  @override
   HomeBLMUserUpdateDetailsState createState() => HomeBLMUserUpdateDetailsState();
 }
 
@@ -25,9 +26,9 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
   final GlobalKey<MiscBLMInputFieldTemplateState> _key3 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMPhoneNumberTemplateState> _key4 = GlobalKey<MiscBLMPhoneNumberTemplateState>();
   final GlobalKey<MiscBLMInputFieldSecurityQuestionsState> _key5 = GlobalKey<MiscBLMInputFieldSecurityQuestionsState>();
-
   Future<APIBLMShowAccountDetails>? accountDetails;
 
+  @override
   void initState(){
     super.initState();
     accountDetails = getAccountDetails(widget.userId);
@@ -54,12 +55,12 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: const Color(0xff04ECFF),
-            title: Text('Account Details', textAlign: TextAlign.left, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff)),),
+            title: const Text('Account Details', textAlign: TextAlign.left, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff)),),
             centerTitle: false,
             leading: Builder(
               builder: (BuildContext context){
                 return IconButton(
-                  icon: Icon(Icons.arrow_back, size: 35,),
+                  icon: const Icon(Icons.arrow_back, size: 35,),
                   onPressed: (){
                     Navigator.pop(context);
                   },
@@ -81,7 +82,7 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
                           key: _key1,
                           labelText: 'First Name',
                           displayText: details.data!.showAccountDetailsFirstName,
-                          labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                         ),
 
                         const SizedBox(height: 20,),
@@ -90,7 +91,7 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
                           key: _key2,
                           labelText: 'Last Name',
                           displayText: details.data!.showAccountDetailsLastName,
-                          labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                         ),
 
                         const SizedBox(height: 20,),
@@ -100,7 +101,7 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
                           labelText: 'Email Address',
                           displayText: details.data!.showAccountDetailsEmail,
                           type: TextInputType.emailAddress,
-                          labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                         ),
 
                         const SizedBox(height: 20,),
@@ -110,7 +111,7 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
                           labelText: 'Mobile Number',
                           displayText: details.data!.showAccountDetailsPhoneNumber,
                           type: TextInputType.phone,
-                          labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                         ),
 
                         const SizedBox(height: 20,),
@@ -124,13 +125,13 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
 
                         MiscBLMButtonTemplate(
                           buttonText: 'Update',
-                          buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                          buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                           buttonColor: const Color(0xff04ECFF),
                           width: SizeConfig.screenWidth! / 2,
                           height: 50,
                           onPressed: () async{
                             if(details.data!.showAccountDetailsFirstName != _key1.currentState!.controller.text || details.data!.showAccountDetailsLastName != _key2.currentState!.controller.text || details.data!.showAccountDetailsEmail != _key3.currentState!.controller.text || details.data!.showAccountDetailsPhoneNumber != _key4.currentState!.controller.text || details.data!.showAccountDetailsQuestion != _key5.currentState!.currentSelection){
-                              bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: const Color(0xff04ECFF), confirmColor_2: const Color(0xffFF0000),),);
+                              bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),),);
 
                               if(confirmResult) {
                                 context.loaderOverlay.show();
@@ -141,8 +142,8 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
                                   await showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
-                                      description: Text('Successfully updated the account details.', textAlign: TextAlign.center, style: TextStyle(fontSize: 244, fontFamily: 'NexaRegular',),),
-                                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                      description: const Text('Successfully updated the account details.', textAlign: TextAlign.center, style: TextStyle(fontSize: 244, fontFamily: 'NexaRegular',),),
+                                      title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                       entryAnimation: EntryAnimation.DEFAULT,
                                       onlyOkButton: true,
@@ -156,8 +157,8 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
                                   await showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
-                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                       entryAnimation: EntryAnimation.DEFAULT,
                                       buttonOkColor: const Color(0xffff0000),
@@ -178,9 +179,9 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
                     ),
                   );
                 }else if(details.hasError){
-                  return Container(height: SizeConfig.screenHeight, child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),),);
+                  return SizedBox(height: SizeConfig.screenHeight, child: const Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),),);
                 }else{
-                  return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
+                  return SizedBox(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
                 }
               },
             ),

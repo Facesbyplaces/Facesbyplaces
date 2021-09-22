@@ -1,5 +1,5 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/Regular/07-Report/api-report-regular-01-report.dart';
+import 'package:facesbyplaces/API/Regular/07-Report/api_report_regular_01_report.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 class HomeRegularReport extends StatelessWidget{
   final int postId;
   final String reportType;
-  HomeRegularReport({required this.postId, required this.reportType});
+  HomeRegularReport({Key? key, required this.postId, required this.reportType}) : super(key: key);
 
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldMultiTextTemplateState> _key2 = GlobalKey<MiscRegularInputFieldMultiTextTemplateState>();
@@ -34,9 +34,9 @@ class HomeRegularReport extends StatelessWidget{
           appBar: AppBar(
             backgroundColor: const Color(0xff04ECFF),
             centerTitle: false,
-            title: const Text('Report', style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+            title: const Text('Report', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+              icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
               onPressed: (){
                 Navigator.pop(context);
               },
@@ -49,7 +49,7 @@ class HomeRegularReport extends StatelessWidget{
               children: [
                 const Align(
                   alignment: Alignment.centerLeft,
-                  child: const Text('Inform us about what happened.', style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xfF000000),),),
+                  child: Text('Inform us about what happened.', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xfF000000),),),
                 ),
 
                 const SizedBox(height: 25,),
@@ -58,7 +58,7 @@ class HomeRegularReport extends StatelessWidget{
                   key: _key1,
                   labelText: 'Subject',
                   type: TextInputType.text,
-                  labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xfFB1B1B1),),
+                  labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xfFB1B1B1),),
                 ),
 
                 const SizedBox(height: 25,),
@@ -66,13 +66,13 @@ class HomeRegularReport extends StatelessWidget{
                 MiscRegularInputFieldMultiTextTemplate(
                   key: _key2,
                   labelText: 'Body',
-                  labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xfFB1B1B1),),
+                  labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xfFB1B1B1),),
                 ),
 
                 const SizedBox(height: 50,),
 
                 MiscRegularButtonTemplate(
-                  buttonTextStyle: const TextStyle(fontSize: 24, color: const Color(0xffffffff), fontFamily: 'NexaBold',),
+                  buttonTextStyle: const TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold',),
                   buttonColor: const Color(0xff04ECFF),
                   width: SizeConfig.screenWidth! / 2,
                   buttonText: 'Report',
@@ -82,8 +82,8 @@ class HomeRegularReport extends StatelessWidget{
                       await showDialog(
                         context: context,
                         builder: (_) => AssetGiffyDialog(
-                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                          description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                          title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                          description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                           entryAnimation: EntryAnimation.DEFAULT,
                           buttonOkColor: const Color(0xffff0000),
@@ -102,8 +102,8 @@ class HomeRegularReport extends StatelessWidget{
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(
-                            title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                            description: const Text('Successfully submitted a report. Your report will be reviewed by the administrator.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                            title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                            description: const Text('Successfully submitted a report. Your report will be reviewed by the administrator.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             entryAnimation: EntryAnimation.DEFAULT,
                             onlyOkButton: true,
@@ -117,8 +117,8 @@ class HomeRegularReport extends StatelessWidget{
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(
-                            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular')),
-                            description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular')),
+                            description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             entryAnimation: EntryAnimation.DEFAULT,
                             buttonOkColor: const Color(0xffff0000),

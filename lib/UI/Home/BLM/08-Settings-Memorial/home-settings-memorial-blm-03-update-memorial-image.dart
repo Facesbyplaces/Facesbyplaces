@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
-import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-08-update-page-image.dart';
-import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-02-show-page-images.dart';
+import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_08_update_page_image.dart';
+import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_02_show_page_images.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
@@ -20,8 +20,9 @@ import 'dart:io';
 
 class HomeBLMMemorialPageImage extends StatefulWidget{
   final int memorialId;
-  const HomeBLMMemorialPageImage({required this.memorialId});
+  const HomeBLMMemorialPageImage({Key? key, required this.memorialId}) : super(key: key);
 
+  @override
   HomeBLMMemorialPageImageState createState() => HomeBLMMemorialPageImageState();
 }
 
@@ -43,7 +44,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
         profileImage.value = File(pickedFile.path);
       }
     }catch (error){
-      print('Error: ${error.toString()}');
+      throw Exception('Error: $error');
     }
   }
 
@@ -57,7 +58,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
         backgroundImage.value = File(pickedFile.path);
       }
     }catch (error){
-      print('Error: ${error.toString()}');
+      throw Exception('Error: $error');
     }
   }
 
@@ -65,6 +66,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
     return await apiBLMShowPageImages(memorialId: memorialId);
   }
 
+  @override
   void initState(){
     super.initState();
     futureMemorialSettings = getMemorialSettings(widget.memorialId);
@@ -82,13 +84,13 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
           builder: (_, int backgroundImageToggleListener, __) => Scaffold(
             appBar: AppBar(
               backgroundColor: const Color(0xff04ECFF),
-              title: Text('Page Image', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+              title: const Text('Page Image', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
               centerTitle: false,
               leading: IconButton(
-                icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+                icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
                 onPressed: () async{
                   if(profileImage.value.path != '' || (backgroundImage.value.path != '' && backgroundImageToggle.value != 0)){
-                    bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to discard the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
+                    bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to discard the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
                     if(confirmResult){
                       Navigator.pop(context);
                     }
@@ -104,16 +106,16 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                 if(memorialImageSettings.hasData){
                   return Stack(
                     children: [
-                      const MiscBLMBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),
+                      const MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
 
                       Container(
-                        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                         child: ListView(
                           physics: const ClampingScrollPhysics(),
                           children: [
                             const SizedBox(height: 20,),
 
-                            Text('Upload or Select an Image', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                            const Text('Upload or Select an Image', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
 
                             const SizedBox(height: 20,),
 
@@ -122,7 +124,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 image: backgroundImageListener.path != ''
-                                ? DecorationImage(fit: BoxFit.cover, image: AssetImage('${backgroundImageListener.path}'),)
+                                ? DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImageListener.path),)
                                 : DecorationImage(fit: BoxFit.cover, image: CachedNetworkImageProvider('${memorialImageSettings.data!.blmMemorial.showPageImagesBackgroundImage}')),
                               ),
                               child: Stack(
@@ -159,14 +161,14 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                     left: SizeConfig.screenWidth! / 2,
                                     child: const CircleAvatar(
                                       radius: 25,
-                                      backgroundColor: const Color(0xffffffff),
-                                      child: const CircleAvatar(radius: 25, backgroundColor: Colors.transparent, child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),),
+                                      backgroundColor: Color(0xffffffff),
+                                      child: CircleAvatar(radius: 25, backgroundColor: Colors.transparent, child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: 45,),),
                                     ),
                                   ),
                                   const Positioned(
                                     top: 10,
                                     right: 10,
-                                    child: const CircleAvatar(radius: 25, backgroundColor: const Color(0xffffffff), child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),),
+                                    child: CircleAvatar(radius: 25, backgroundColor: Color(0xffffffff), child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: 45,),),
                                   ),
                                 ],
                               ),
@@ -174,15 +176,15 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
 
                             const SizedBox(height: 20,),
 
-                            Text('Upload the best photo of the person in the memorial page.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+                            const Text('Upload the best photo of the person in the memorial page.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
 
                             const SizedBox(height: 40,),
 
-                            Text('Choose Background', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                            const Text('Choose Background', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
 
                             const SizedBox(height: 20,),
 
-                            Container(
+                            SizedBox(
                               height: 100,
                               child: ListView.separated(
                                 physics: const ClampingScrollPhysics(),
@@ -198,7 +200,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                         child: Container(
                                           width: 100,
                                           height: 100,
-                                          child: const Icon(Icons.add_rounded, color: const Color(0xff000000), size: 60,),
+                                          child: const Icon(Icons.add_rounded, color: Color(0xff000000), size: 60,),
                                           decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: const Color(0xffcccccc), border: Border.all(color: const Color(0xff000000),),),
                                         ),
                                         onTap: () async{
@@ -236,7 +238,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                           final Uint8List list = bytes.buffer.asUint8List();
 
                                           final tempDir = await getTemporaryDirectory();
-                                          final file = await new File('${tempDir.path}/blm-background-image-$index.png').create();
+                                          final file = await File('${tempDir.path}/blm-background-image-$index.png').create();
                                           file.writeAsBytesSync(list);
 
                                           backgroundImageToggle.value = index;
@@ -251,14 +253,14 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
 
                             const SizedBox(height: 20,),
 
-                            Text('Upload your own or select from the pre-mades.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+                            const Text('Upload your own or select from the pre-mades.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
 
                             const SizedBox(height: 80,),
 
                             MiscBLMButtonTemplate(
                               buttonText: 'Update',
-                              buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
-                              buttonColor: Color(0xff04ECFF),
+                              buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),
+                              buttonColor: const Color(0xff04ECFF),
                               width: 150,
                               height: 50,
                               onPressed: () async{
@@ -271,8 +273,8 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                        description: Text('Successfully updated the memorial image.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                        title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                        description: const Text('Successfully updated the memorial image.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         onlyOkButton: true,
@@ -287,8 +289,8 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                        description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                        title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                        description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         buttonOkColor: const Color(0xffff0000),
@@ -308,14 +310,14 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                     ],
                   );
                 }else if(memorialImageSettings.hasError){
-                  return Container(
+                  return SizedBox(
                     height: SizeConfig.screenHeight,
-                    child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),),
+                    child: const Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),),
                   );
                 }else{
-                  return Container(
+                  return SizedBox(
                     height: SizeConfig.screenHeight,
-                    child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),
+                    child: Center(child: Container(child: const SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),
                   );
                 }
               },

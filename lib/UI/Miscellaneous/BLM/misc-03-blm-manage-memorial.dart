@@ -1,12 +1,12 @@
 // ignore_for_file: file_names, unnecessary_const
-import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-03-unfollow-page.dart';
-import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-01-leave-page.dart';
+import 'package:facesbyplaces/API/BLM/02-Main/api_main_blm_04_02_03_unfollow_page.dart';
+import 'package:facesbyplaces/API/Regular/02-Main/api_main_regular_04_02_01_leave_page.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
-import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-01-leave-page.dart';
-import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-02-follow-page.dart';
+import 'package:facesbyplaces/API/BLM/02-Main/api_main_blm_04_02_01_leave_page.dart';
+import 'package:facesbyplaces/API/BLM/02-Main/api_main_blm_04_02_02_follow_page.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe

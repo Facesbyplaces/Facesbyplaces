@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-03-verify-email.dart';
-import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-10-verification-code-resend.dart';
+import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_03_verify_email.dart';
+import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_10_verification_code_resend.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';

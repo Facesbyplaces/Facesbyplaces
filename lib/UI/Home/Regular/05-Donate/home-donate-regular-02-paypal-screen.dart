@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-18-paypal-access-token.dart';
-import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-19-paypal-user-information.dart';
-import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-20-paypal-connect.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_18_paypal_access_token.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_19_paypal_user_information.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_20_paypal_connect.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 // ignore: import_of_legacy_library_into_null_safe
@@ -10,8 +10,9 @@ import 'package:flutter/material.dart';
 
 class HomeRegularPaypal extends StatefulWidget{
   final int pageId;
-  const HomeRegularPaypal({required this.pageId});
+  const HomeRegularPaypal({Key? key, required this.pageId}) : super(key: key);
 
+  @override
   HomeRegularPaypalState createState() => HomeRegularPaypalState();
 }
 
@@ -36,9 +37,9 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
           appBar: AppBar(
             backgroundColor: const Color(0xff04ECFF),
             centerTitle: false,
-            title: const Text('Paypal', style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+            title: const Text('Paypal', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+              icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
               onPressed: (){
                 Navigator.pop(context);
               },
@@ -56,8 +57,8 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
                   await showDialog(
                     context: context,
                     builder: (_) =>  AssetGiffyDialog(
-                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                      title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                       entryAnimation: EntryAnimation.DEFAULT,
                       buttonOkColor: const Color(0xffff0000),

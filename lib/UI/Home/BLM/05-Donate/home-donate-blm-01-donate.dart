@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/BLM/06-Donate/api-donate-blm-01-donate.dart';
-import 'package:facesbyplaces/API/BLM/06-Donate/api-donate-blm-02-confirm-payment.dart';
+import 'package:facesbyplaces/API/BLM/06-Donate/api_donate_blm_01_donate.dart';
+import 'package:facesbyplaces/API/BLM/06-Donate/api_donate_blm_02_confirm_payment.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -18,8 +18,9 @@ class HomeBLMUserDonate extends StatefulWidget{
   final String pageType;
   final int pageId;
   final String pageName;
-  const HomeBLMUserDonate({required this.pageType, required this.pageId, required this.pageName});
+  const HomeBLMUserDonate({Key? key, required this.pageType, required this.pageId, required this.pageName}) : super(key: key);
 
+  @override
   HomeBLMUserDonateState createState() => HomeBLMUserDonateState();
 }
 
@@ -58,9 +59,9 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
 
                     Row(
                       children: [
-                        Expanded(child: Align(alignment: Alignment.centerLeft, child: IconButton(icon: const Icon(Icons.arrow_back, color: const Color(0xff000000), size: 35,), onPressed: (){Navigator.pop(context);},),),),
+                        Expanded(child: Align(alignment: Alignment.centerLeft, child: IconButton(icon: const Icon(Icons.arrow_back, color: Color(0xff000000), size: 35,), onPressed: (){Navigator.pop(context);},),),),
 
-                        const Text('Send a Gift', style: const TextStyle(fontSize: 24, color: const Color(0xffffffff), fontFamily: 'NexaBold',),),
+                        const Text('Send a Gift', style: TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold',),),
 
                         Expanded(child: Container(),),
                       ],
@@ -94,12 +95,12 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                     Container(
                                       child: ((){
                                         switch(index){
-                                          case 0: return const Text('\$1.00', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),);
-                                          case 1: return const Text('\$5.00', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),);
-                                          case 2: return const Text('\$15.00', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),);
-                                          case 3: return const Text('\$25.00', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),);
-                                          case 4: return const Text('\$50.00', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),);
-                                          case 5: return const Text('\$100.00', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),);
+                                          case 0: return const Text('\$1.00', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff000000),),);
+                                          case 1: return const Text('\$5.00', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff000000),),);
+                                          case 2: return const Text('\$15.00', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff000000),),);
+                                          case 3: return const Text('\$25.00', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff000000),),);
+                                          case 4: return const Text('\$50.00', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff000000),),);
+                                          case 5: return const Text('\$100.00', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff000000),),);
                                         }
                                       }()),
                                     ),
@@ -116,9 +117,9 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                     ),
                     
                     MiscBLMButtonTemplate(
-                      buttonTextStyle: TextStyle(fontSize: 24, color: const Color(0xffffffff), fontFamily: 'NexaBold',),
+                      buttonTextStyle: const TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold',),
                       width: SizeConfig.screenWidth! / 2,
-                      buttonColor: Color(0xff4EC9D4),
+                      buttonColor: const Color(0xff4EC9D4),
                       buttonText: 'Send Gift',
                       height: 50,
                       onPressed: () async{
@@ -144,28 +145,28 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                             return StatefulBuilder(
                               builder: (BuildContext context, StateSetter modalSetState){
                                 return Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: <Widget>[
                                       MaterialButton(
                                         minWidth: 0,
-                                        child: Icon(Icons.close, color: Colors.grey,),
-                                        shape: CircleBorder(),
+                                        child: const Icon(Icons.close, color: Colors.grey,),
+                                        shape: const CircleBorder(),
                                         color: Colors.white,
                                         onPressed: (){
                                           Navigator.pop(context);
                                         },
                                       ),
 
-                                      SizedBox(height: 10,),
+                                      const SizedBox(height: 10,),
 
-                                      Text('Select your donation method', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', fontWeight: FontWeight.bold)),
+                                      const Text('Select your donation method', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', fontWeight: FontWeight.bold)),
 
-                                      SizedBox(height: 10,),
+                                      const SizedBox(height: 10,),
 
-                                      Container(
+                                      SizedBox(
                                         height: 100,
                                         width: SizeConfig.screenWidth,
                                         child: ListView.separated(
@@ -173,11 +174,11 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                           itemBuilder: (BuildContext context, int index){
                                             return Container(
                                               decoration: BoxDecoration(color: paymentToggle == index ? Colors.green : Colors.white, borderRadius: BorderRadius.circular(10)),
-                                              padding: EdgeInsets.all(5),
+                                              padding: const EdgeInsets.all(5),
                                               child: MaterialButton(
                                                 height: 80,
                                                 minWidth: 120,
-                                                color: Color(0xffffffff),
+                                                color: const Color(0xffffffff),
                                                 focusColor: Colors.blue,
                                                 onPressed: (){
                                                   modalSetState(() {
@@ -186,7 +187,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                 },
                                                 child: ((){
                                                   if(index == 0){
-                                                    return Icon(Icons.credit_card_rounded, color: Colors.black);
+                                                    return const Icon(Icons.credit_card_rounded, color: Colors.black);
                                                   }else if(Platform.isIOS){
                                                     return donateWithApple;
                                                   }else{
@@ -197,33 +198,33 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                               ),
                                             );
                                           },
-                                          separatorBuilder: (BuildContext context, int index) => SizedBox(width: 15,), 
+                                          separatorBuilder: (BuildContext context, int index) => const SizedBox(width: 15,), 
                                           itemCount: 2,
                                         ),
                                       ),
 
-                                      SizedBox(height: 10,),
+                                      const SizedBox(height: 10,),
 
                                       Container(
                                         alignment: Alignment.center,
                                         child: ((){
                                           if(paymentToggle == 0){
                                             return MaterialButton(
-                                              child: Icon(Icons.arrow_forward_rounded, color: Colors.white,),
-                                              shape: CircleBorder(),
+                                              child: const Icon(Icons.arrow_forward_rounded, color: Colors.white,),
+                                              shape: const CircleBorder(),
                                               color: Colors.black,
                                               minWidth: 0,
                                               onPressed: () async{
                                                 await showMaterialModalBottomSheet(
                                                   context: context,
-                                                  builder: (context) => Container(
+                                                  builder: (context) => SizedBox(
                                                     height: SizeConfig.screenHeight! / 1.5,
                                                     child: Column(
                                                       children: [
                                                         Align(
                                                           alignment: Alignment.centerLeft,
                                                           child: IconButton(
-                                                            icon: Icon(Icons.arrow_back),
+                                                            icon: const Icon(Icons.arrow_back),
                                                             onPressed: (){
                                                               Navigator.pop(context);
                                                             },
@@ -239,12 +240,12 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                           ),
                                                         ),
 
-                                                        SizedBox(height: 20,),
+                                                        const SizedBox(height: 20,),
 
                                                         MiscBLMButtonTemplate(
-                                                          buttonTextStyle: TextStyle(fontSize: 24, color: const Color(0xffffffff), fontFamily: 'NexaBold',),
+                                                          buttonTextStyle: const TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold',),
                                                           width: SizeConfig.screenWidth! / 2, 
-                                                          buttonColor: Color(0xff4EC9D4),
+                                                          buttonColor: const Color(0xff4EC9D4),
                                                           buttonText: 'Send Gift',
                                                           height: 50,
                                                           onPressed: () async{
@@ -258,8 +259,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                                 showDialog(
                                                                   context: context,
                                                                   builder: (_) => AssetGiffyDialog(
-                                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                                                    title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                                    description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                                     entryAnimation: EntryAnimation.DEFAULT,
                                                                     buttonOkColor: const Color(0xffff0000),
@@ -272,17 +273,14 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                                 );
                                                                 throw Exception('$error');
                                                               });
-
-                                                              print('The payment method id is $paymentMethod');
-                                                              print('The payment method id is ${paymentMethod.id}');
                                                               
                                                               List<String> newValue = await apiBLMDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: paymentMethod.id).onError((error, stackTrace){
                                                                 context.loaderOverlay.hide();
                                                                 showDialog(
                                                                   context: context,
                                                                   builder: (_) => AssetGiffyDialog(
-                                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                                                    title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                                    description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                                     entryAnimation: EntryAnimation.DEFAULT,
                                                                     buttonOkColor: const Color(0xffff0000),
@@ -295,17 +293,14 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                                 );
                                                                 throw Exception('$error');
                                                               });
-
-                                                              print('The newValue[0] id is ${newValue[0]}');
-                                                              print('The newValue[1] id is ${newValue[1]}');
 
                                                               bool confirmPaymentResult = await apiBLMConfirmPayment(clientSecret: newValue[0], paymentMethod: newValue[1]).onError((error, stackTrace){
                                                                 context.loaderOverlay.hide();
                                                                 showDialog(
                                                                   context: context,
                                                                   builder: (_) => AssetGiffyDialog(
-                                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                                                    title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                                    description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                                     entryAnimation: EntryAnimation.DEFAULT,
                                                                     buttonOkColor: const Color(0xffff0000),
@@ -318,8 +313,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                                 );
                                                                 throw Exception('$error');
                                                               });
-
-                                                              print('The confirmPaymentResult id is $confirmPaymentResult');
 
                                                               context.loaderOverlay.hide();
 
@@ -401,8 +394,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                     showDialog(
                                                       context: context,
                                                       builder: (_) => AssetGiffyDialog(
-                                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                        description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                                        title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                        description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                         entryAnimation: EntryAnimation.DEFAULT,
                                                         buttonOkColor: const Color(0xffff0000),
@@ -455,10 +448,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                               onPaymentResult: (paymentResult) async{
                                                 try{
                                                     debugPrint('the payment result is $paymentResult');
-                                                    // debugPrint('${payment['paymentMethodData']['tokenizationData']['token']}');
                                                     final token = paymentResult['paymentMethodData']['tokenizationData']['token'];
                                                     final tokenJson = Map.castFrom(json.decode(token));
-                                                    print('The token is $tokenJson');
 
                                                   bool onError = false;
 
@@ -466,8 +457,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                     showDialog(
                                                       context: context,
                                                       builder: (_) => AssetGiffyDialog(
-                                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                        description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                                        title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                                        description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                         entryAnimation: EntryAnimation.DEFAULT,
                                                         buttonOkColor: const Color(0xffff0000),
@@ -482,19 +473,10 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                     throw Exception('$error');
                                                   });
 
-                                                  print('The newValue[0] is ${newValue[0]}');
-                                                  print('The newValue[1] is ${newValue[1]}');
-
                                                   if(onError != true){
-                                                    // final params = PaymentMethodParams.cardFromToken(token: newValue[1],);
                                                     final params = PaymentMethodParams.cardFromToken(token: tokenJson['id'],);
-
-                                                    print('The params is $params');
                                                     
                                                     PaymentIntent confirmGooglePayment = await Stripe.instance.confirmPayment(newValue[0], params,);
-
-                                                    print('The google payment is $confirmGooglePayment');
-                                                    print('The google payment status is ${confirmGooglePayment.status}');
 
                                                     if(confirmGooglePayment.status == PaymentIntentsStatus.Succeeded){
                                                       await showDialog(
@@ -532,7 +514,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                     context: context,
                                                     builder: (_) => AssetGiffyDialog(
                                                       title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                      description: Text('Error: $e', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                                      description: Text('Error: $e', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                       entryAnimation: EntryAnimation.DEFAULT,
                                                       buttonOkColor: const Color(0xffff0000),
@@ -567,7 +549,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                         }()),
                                       ),
 
-                                      SizedBox(height: 10,),
+                                      const SizedBox(height: 10,),
                                     ],
                                   ),
                                 );

@@ -1,5 +1,5 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-05-search-users.dart';
+import 'package:facesbyplaces/API/Regular/08-Search/api_search_regular_05_search_users.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-create-post-regular-01-create-post.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -17,7 +17,7 @@ class RegularSearchUsers{
 
 class HomeRegularCreatePostSearchUser extends StatefulWidget{
   final List<RegularTaggedUsers> taggedUsers;
-  const HomeRegularCreatePostSearchUser({required this.taggedUsers});
+  const HomeRegularCreatePostSearchUser({Key? key, required this.taggedUsers}) : super(key: key);
 
   @override
   HomeRegularCreatePostSearchUserState createState() => HomeRegularCreatePostSearchUserState();
@@ -31,6 +31,7 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
   int itemRemaining = 1;
   int page = 1;
 
+  @override
   void initState(){
     super.initState();
     scrollController.addListener((){
@@ -40,9 +41,9 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: const Text('No more users to show'),
-              duration: const Duration(seconds: 1),
-              backgroundColor: const Color(0xff4EC9D4),
+              content: Text('No more users to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
             ),
           );
         }
@@ -78,7 +79,7 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
         );
       }
 
-      if(widget.taggedUsers.length > 0){
+      if(widget.taggedUsers.isNotEmpty){
         List<RegularSearchUsers> filteredList = users.where((element){
           bool value = true;
 
@@ -95,8 +96,9 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
       }
     }
 
-    if(mounted)
-    page++;
+    if(mounted){
+      page++;
+    }
   }
 
   @override
@@ -117,7 +119,7 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
           valueListenable: count,
           builder: (_, int countListener, __) => Scaffold(
             appBar: PreferredSize(
-              preferredSize: Size.fromHeight(70.0),
+              preferredSize: const Size.fromHeight(70.0),
               child: AppBar(
                 leading: Container(),
                 backgroundColor: const Color(0xff04ECFF),
@@ -130,7 +132,7 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
                         Align(
                           alignment: Alignment.centerLeft,
                           child: IconButton(
-                            icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+                            icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
                             onPressed: (){
                               Navigator.pop(context);
                             },
@@ -139,21 +141,20 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
 
                         Expanded(
                           child: TextFormField(
-                            style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                            style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                             decoration: InputDecoration(
-                              enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                              focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                              border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                              hintStyle: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
+                              enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Color(0xffffffff)), borderRadius: BorderRadius.all(Radius.circular(25)),),
+                              focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: Color(0xffffffff)), borderRadius: BorderRadius.all(Radius.circular(25)),),
+                              border: const OutlineInputBorder(borderSide: BorderSide(color: Color(0xffffffff)), borderRadius: BorderRadius.all(Radius.circular(25)),),
+                              hintStyle: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
                               contentPadding: const EdgeInsets.all(15.0),
                               focusColor: const Color(0xffffffff),
                               fillColor: const Color(0xffffffff),
                               hintText: 'Search User',
                               filled: true,
                               prefixIcon: IconButton(
-                                icon: const Icon(Icons.search, color: const Color(0xff888888)),
+                                icon: const Icon(Icons.search, color: Color(0xff888888)),
                                 onPressed: (){
-                                  print('Search!');
                                   onLoading();
                                 },
                               ),
@@ -201,11 +202,11 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
                     )
                     : const CircleAvatar(
                       maxRadius: 40,
-                      backgroundColor: const Color(0xff888888),
-                      foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                      backgroundColor: Color(0xff888888),
+                      foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
                     ),
-                    title: Text(users[i].firstName + ' ' + users[i].lastName, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
-                    subtitle: Text(users[i].email, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff888888),),),
+                    title: Text(users[i].firstName + ' ' + users[i].lastName, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                    subtitle: Text(users[i].email, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff888888),),),
                     onTap: (){
                       Navigator.pop(context, RegularTaggedUsers(name: users[i].firstName + ' ' + users[i].lastName, userId: users[i].userId, accountType: users[i].accountType),);
                     },
@@ -213,7 +214,7 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
                 },
               ),
             )
-            : Container(
+            : SizedBox(
               width: SizeConfig.screenWidth,
               child: SingleChildScrollView(
                 physics: const ClampingScrollPhysics(),
@@ -226,8 +227,8 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
                     const SizedBox(height: 20),
 
                     const Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: const Text('Search a user to tag on your post.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Text('Search a user to tag on your post.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
                     ),
 
                     SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),

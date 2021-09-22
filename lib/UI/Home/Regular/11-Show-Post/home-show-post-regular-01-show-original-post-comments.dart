@@ -1,5 +1,5 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-02-show-user-information.dart';
+import 'package:facesbyplaces/API/Regular/02-Main/api_main_regular_02_show_user_information.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-01-show-original-post.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-02-show-post-comments.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-03-show-comment-replies.dart';
@@ -73,7 +73,7 @@ class RegularOriginalReply{
 
 class HomeRegularShowOriginalPostComments extends StatefulWidget{
   final int postId;
-  const HomeRegularShowOriginalPostComments({required this.postId});
+  const HomeRegularShowOriginalPostComments({Key? key, required this.postId}) : super(key: key);
 
   @override
   HomeRegularShowOriginalPostCommentsState createState() => HomeRegularShowOriginalPostCommentsState();
@@ -110,14 +110,11 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
   int page1 = 1;
   int page2 = 1;
 
+  @override
   void initState(){
     super.initState();
     isGuest();
     likesCount = numberOfLikes;
-  }
-
-  void dispose(){
-    super.dispose();
   }
 
   void isGuest() async{
@@ -141,9 +138,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
           }else{
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: const Text('No more comments to show'),
-                duration: const Duration(seconds: 1),
-                backgroundColor: const Color(0xff4EC9D4),
+                content: Text('No more comments to show'),
+                duration: Duration(seconds: 1),
+                backgroundColor: Color(0xff4EC9D4),
               ),
             );
           }
@@ -241,21 +238,20 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
         replies.value = [];
       }
 
-      if(mounted)
-      page1++;
+      if(mounted){
+        page1++;
+      }
       context.loaderOverlay.hide();
     }
   }
 
   Future<APIRegularShowOriginalPostMain> getOriginalPost(postId) async{
-    print('The post id is $postId');
     return await apiRegularShowOriginalPost(postId: postId);
   }
 
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    print('Show original post comments screen rebuild!');
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -278,10 +274,10 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                 builder: (_, List<RegularOriginalReply> repliesListener, __) => Scaffold(
                   appBar: AppBar(
                     backgroundColor: const Color(0xff04ECFF),
-                    title: const Text('Post', style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+                    title: const Text('Post', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
                     centerTitle: false,
                     leading: IconButton(
-                      icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35),
+                      icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35),
                       onPressed: (){
                         Navigator.pop(context, numberOfComments);
                       },
@@ -326,8 +322,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                         foregroundImage: NetworkImage(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageProfileImage),
                                                       )
                                                       : const CircleAvatar(
-                                                        backgroundColor: const Color(0xff888888),
-                                                        foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                                        backgroundColor: Color(0xff888888),
+                                                        foregroundImage: AssetImage('assets/icons/app-icon.png'),
                                                       ),
                                                       onTap: () async{
                                                         if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
@@ -356,7 +352,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                   alignment: Alignment.bottomLeft,
                                                                   child: Text(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageName,
                                                                     overflow: TextOverflow.ellipsis,
-                                                                    style: const TextStyle(fontSize: 22, fontFamily: 'NexaBold', color: const Color(0xff000000),),
+                                                                    style: const TextStyle(fontSize: 22, fontFamily: 'NexaBold', color: Color(0xff000000),),
                                                                   ),
                                                                 ),
                                                               ),
@@ -365,7 +361,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                   alignment: Alignment.topLeft,
                                                                   child: Text(timeago.format(DateTime.parse(originalPost.data!.almPost.showOriginalPostCreatedAt),),
                                                                     maxLines: 1,
-                                                                    style: const TextStyle(fontSize: 18, fontFamily: 'NexaBold', color: const Color(0xffBDC3C7),),
+                                                                    style: const TextStyle(fontSize: 18, fontFamily: 'NexaBold', color: Color(0xffBDC3C7),),
                                                                   ),
                                                                 ),
                                                               ),
@@ -393,9 +389,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                 ),
                                               ),
                                               Container(
-                                                padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                                                padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                                                 alignment: Alignment.centerLeft,
-                                                child: Text(originalPost.data!.almPost.showOriginalPostBody, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                                                child: Text(originalPost.data!.almPost.showOriginalPostBody, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
                                               ),
                                               originalPost.data!.almPost.showOriginalPostImagesOrVideos.isNotEmpty
                                               ? Column(
@@ -423,7 +419,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                             alignment: Alignment.centerRight,
                                                                             padding: const EdgeInsets.only(right: 20.0),
                                                                             child: GestureDetector(
-                                                                              child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
+                                                                              child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
                                                                               onTap: (){
                                                                                 Navigator.pop(context);
                                                                               },
@@ -535,7 +531,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                               alignment: Alignment.centerRight,
                                                                               padding: const EdgeInsets.only(right: 20.0),
                                                                               child: GestureDetector(
-                                                                                child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
+                                                                                child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
                                                                                 onTap: (){
                                                                                   Navigator.pop(context);
                                                                                 },
@@ -587,11 +583,11 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                               children: [
                                                                                 IconButton(
                                                                                   onPressed: () => buttonCarouselController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                                  icon: const Icon(Icons.arrow_back_rounded, color: const Color(0xffffffff),),
+                                                                                  icon: const Icon(Icons.arrow_back_rounded, color: Color(0xffffffff),),
                                                                                 ),
                                                                                 IconButton(
                                                                                   onPressed: () => buttonCarouselController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                                  icon: const Icon(Icons.arrow_forward_rounded, color: const Color(0xffffffff),),
+                                                                                  icon: const Icon(Icons.arrow_forward_rounded, color: Color(0xffffffff),),
                                                                                 ),
                                                                               ],
                                                                             ),
@@ -657,7 +653,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                             child: CircleAvatar(
                                                                               radius: 25,
                                                                               backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                                              child: Text('${originalPost.data!.almPost.showOriginalPostImagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                                              child: Text('${originalPost.data!.almPost.showOriginalPostImagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                                                                             ),
                                                                           ),
                                                                         ],
@@ -679,7 +675,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                             child: CircleAvatar(
                                                                               radius: 25,
                                                                               backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                                              child: Text('${originalPost.data!.almPost.showOriginalPostImagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                                              child: Text('${originalPost.data!.almPost.showOriginalPostImagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                                                                             ),
                                                                           ),
                                                                         ],
@@ -724,7 +720,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                               alignment: Alignment.centerRight,
                                                                               padding: const EdgeInsets.only(right: 20.0),
                                                                               child: GestureDetector(
-                                                                                child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
+                                                                                child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
                                                                                 onTap: (){
                                                                                   Navigator.pop(context);
                                                                                 },
@@ -777,11 +773,11 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                               children: [
                                                                                 IconButton(
                                                                                   onPressed: () => buttonCarouselController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                                  icon: const Icon(Icons.arrow_back_rounded, color: const Color(0xffffffff),),
+                                                                                  icon: const Icon(Icons.arrow_back_rounded, color: Color(0xffffffff),),
                                                                                 ),
                                                                                 IconButton(
                                                                                   onPressed: () => buttonCarouselController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                                  icon: const Icon(Icons.arrow_forward_rounded, color: const Color(0xffffffff),),
+                                                                                  icon: const Icon(Icons.arrow_forward_rounded, color: Color(0xffffffff),),
                                                                                 ),
                                                                               ],
                                                                             ),
@@ -806,7 +802,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                               )
                                               : Container(color: const Color(0xffff0000), height: 0,),
 
-                                              originalPost.data!.almPost.showOriginalPostPostTagged.length != 0
+                                              originalPost.data!.almPost.showOriginalPostPostTagged.isNotEmpty
                                               ? Column(
                                                 children: [
                                                   const SizedBox(height: 10),
@@ -817,18 +813,16 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                     child: RichText(
                                                       text: TextSpan(
                                                         children: [
-                                                          const TextSpan(style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: const Color(0xff888888)), text: 'with '),
+                                                          const TextSpan(style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: Color(0xff888888)), text: 'with '),
 
                                                           TextSpan(
                                                             children: List.generate(
                                                               originalPost.data!.almPost.showOriginalPostPostTagged.length, (index) => TextSpan(
-                                                                style: const TextStyle(fontSize: 18, fontFamily: 'NexaBold', color: const Color(0xff000000),),
+                                                                style: const TextStyle(fontSize: 18, fontFamily: 'NexaBold', color: Color(0xff000000),),
                                                                 children: <TextSpan>[
                                                                   TextSpan(text: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedFirstName + ' ' + originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedLastName,
                                                                   recognizer: TapGestureRecognizer()
                                                                     ..onTap = (){
-                                                                      print('The user id is ${originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId}');
-                                                                      print('The account type is ${originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId}');
                                                                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId, accountType: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostAccountType)));
                                                                     },
                                                                   ),
@@ -855,11 +849,11 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                     child: Row(
                                                       crossAxisAlignment: CrossAxisAlignment.center,
                                                       children: [
-                                                        const Icon(Icons.place, color: const Color(0xff888888)),
+                                                        const Icon(Icons.place, color: Color(0xff888888)),
 
                                                         Expanded(
                                                           child: GestureDetector(
-                                                            child: Text('${originalPost.data!.almPost.showOriginalPostLocation}', style: const TextStyle(fontSize: 18, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                                                            child: Text(originalPost.data!.almPost.showOriginalPostLocation, style: const TextStyle(fontSize: 18, fontFamily: 'NexaBold', color: Color(0xff000000),),),
                                                             onTap: (){
                                                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMaps(latitude: originalPost.data!.almPost.showOriginalPostLatitude, longitude: originalPost.data!.almPost.showOriginalPostLongitude, isMemorial: false, memorialName: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageName, memorialImage: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageProfileImage,)));
                                                             },
@@ -881,23 +875,23 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                     Row(
                                                       children: [
                                                         likePost == true
-                                                        ? const FaIcon(FontAwesomeIcons.heart, color: const Color(0xffE74C3C),)
-                                                        : const FaIcon(FontAwesomeIcons.heart, color: const Color(0xff000000),),
+                                                        ? const FaIcon(FontAwesomeIcons.heart, color: Color(0xffE74C3C),)
+                                                        : const FaIcon(FontAwesomeIcons.heart, color: Color(0xff000000),),
 
                                                         const SizedBox(width: 10,),
 
-                                                        Text('$numberOfLikes', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                                                        Text('$numberOfLikes', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
                                                       ],
                                                     ),
                                                     const SizedBox(width: 40,),
 
                                                     Row(
                                                       children: [
-                                                        const FaIcon(FontAwesomeIcons.comment, color: const Color(0xff000000),),
+                                                        const FaIcon(FontAwesomeIcons.comment, color: Color(0xff000000),),
 
                                                         const SizedBox(width: 10,),
 
-                                                        Text('$numberOfComments', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                                                        Text('$numberOfComments', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
                                                       ],
                                                     ),
                                                   ],
@@ -918,15 +912,15 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                     foregroundImage: NetworkImage(commentsListener[i].image),
                                                   )
                                                   : const CircleAvatar(
-                                                    backgroundColor: const Color(0xff888888),
-                                                    foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                                    backgroundColor: Color(0xff888888),
+                                                    foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
                                                   ),
                                                   title: Row(
                                                     children: [
                                                       Expanded(
                                                         child: currentUserId == commentsListener[i].userId && currentAccountType == commentsListener[i].userAccountType
-                                                        ? const Text('You', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff000000),),)
-                                                        : Text('${commentsListener[i].firstName}' + ' ' + '${commentsListener[i].lastName}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                                                        ? const Text('You', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000),),)
+                                                        : Text('${commentsListener[i].firstName} ${commentsListener[i].lastName}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000),),),
                                                       ),
 
                                                       Expanded(
@@ -947,9 +941,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                               }
                                                             },
                                                             icon: commentsLikes[i] == true
-                                                            ? const FaIcon(FontAwesomeIcons.solidHeart, color: const Color(0xffE74C3C),)
-                                                            : const FaIcon(FontAwesomeIcons.heart, color: const Color(0xff888888),),
-                                                            label: Text('${commentsNumberOfLikes[i]}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                                                            ? const FaIcon(FontAwesomeIcons.solidHeart, color: Color(0xffE74C3C),)
+                                                            : const FaIcon(FontAwesomeIcons.heart, color: Color(0xff888888),),
+                                                            label: Text('${commentsNumberOfLikes[i]}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
                                                           ),
                                                         ),
                                                       ),
@@ -962,8 +956,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                           Expanded(
                                                             child: Container(
                                                               padding: const EdgeInsets.all(10.0),
-                                                              child: Text(commentsListener[i].commentBody, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),),
-                                                              decoration: const BoxDecoration(color: const Color(0xff4EC9D4), borderRadius: const BorderRadius.all(Radius.circular(10.0)),),
+                                                              child: Text(commentsListener[i].commentBody, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),),
+                                                              decoration: const BoxDecoration(color: Color(0xff4EC9D4), borderRadius: BorderRadius.all(Radius.circular(10.0)),),
                                                             ),
                                                           ),
                                                         ],
@@ -973,12 +967,12 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
 
                                                       Row(
                                                         children: [
-                                                          Text(timeago.format(DateTime.parse(commentsListener[i].createdAt)), style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                                                          Text(timeago.format(DateTime.parse(commentsListener[i].createdAt)), style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
 
                                                           const SizedBox(width: 20,),
 
                                                           GestureDetector(
-                                                            child: const Text('Reply', style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                                                            child: const Text('Reply', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
                                                             onTap: () async{
                                                               if(controller.text != ''){
                                                                 controller.clear();
@@ -986,12 +980,11 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
 
                                                               isComment = false;
                                                               currentCommentId = commentsListener[i].commentId;
-                                                              print('show reply here 1');
 
                                                               await showModalBottomSheet(context: context, builder: (context) => showKeyboard(
                                                                 isReply: true, 
                                                                 toReply: commentsListener[i].commentBody, 
-                                                                replyFrom: '${commentsListener[i].firstName}' + ' ' + '${commentsListener[i].lastName}')
+                                                                replyFrom: '${commentsListener[i].firstName}' '${commentsListener[i].lastName}')
                                                               );
                                                             },
                                                           ),
@@ -1000,7 +993,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                       
                                                       const SizedBox(height: 20,),
 
-                                                      commentsListener[i].listOfReplies.length != 0
+                                                      commentsListener[i].listOfReplies.isNotEmpty
                                                       ? Column(
                                                         children: List.generate(commentsListener[i].listOfReplies.length, (index) => ListTile(
                                                           contentPadding: EdgeInsets.zero,
@@ -1011,15 +1004,15 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                             foregroundImage: NetworkImage(commentsListener[i].listOfReplies[index].image),
                                                           )
                                                           : const CircleAvatar(
-                                                            backgroundColor: const Color(0xff888888),
-                                                            foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                                            backgroundColor: Color(0xff888888),
+                                                            foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
                                                           ),
                                                           title: Row(
                                                             children: [
                                                               Expanded(
                                                                 child: currentUserId == commentsListener[i].listOfReplies[index].userId && currentAccountType == commentsListener[i].listOfReplies[index].userAccountType
-                                                                ? const Text('You', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff000000),),)
-                                                                : Text(commentsListener[i].listOfReplies[index].firstName + ' ' + commentsListener[i].listOfReplies[index].lastName, style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff000000)),),
+                                                                ? const Text('You', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000),),)
+                                                                : Text(commentsListener[i].listOfReplies[index].firstName + ' ' + commentsListener[i].listOfReplies[index].lastName, style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000)),),
                                                               ),
                                                               Expanded(
                                                                 child: Align(
@@ -1039,9 +1032,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                       }
                                                                     },
                                                                     icon: repliesLikes[i][index] == true
-                                                                    ? const FaIcon(FontAwesomeIcons.solidHeart, color: const Color(0xffE74C3C),)
-                                                                    : const FaIcon(FontAwesomeIcons.heart, color: const Color(0xff888888),),
-                                                                    label: Text('${repliesNumberOfLikes[i][index]}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                                                                    ? const FaIcon(FontAwesomeIcons.solidHeart, color: Color(0xffE74C3C),)
+                                                                    : const FaIcon(FontAwesomeIcons.heart, color: Color(0xff888888),),
+                                                                    label: Text('${repliesNumberOfLikes[i][index]}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
                                                                   ),
                                                                 ),
                                                               ),
@@ -1054,8 +1047,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                   Expanded(
                                                                     child: Container(
                                                                       padding: const EdgeInsets.all(10.0),
-                                                                      child: Text(commentsListener[i].listOfReplies[index].replyBody, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),),
-                                                                      decoration: const BoxDecoration(color: const Color(0xff4EC9D4), borderRadius: const BorderRadius.all(Radius.circular(10.0)),),
+                                                                      child: Text(commentsListener[i].listOfReplies[index].replyBody, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),),
+                                                                      decoration: const BoxDecoration(color: Color(0xff4EC9D4), borderRadius: BorderRadius.all(Radius.circular(10.0)),),
                                                                     ),
                                                                   ),
                                                                 ],
@@ -1065,15 +1058,13 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
 
                                                               Row(
                                                                 children: [
-                                                                  Text(timeago.format(DateTime.parse(commentsListener[i].listOfReplies[index].createdAt),), style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                                                                  Text(timeago.format(DateTime.parse(commentsListener[i].listOfReplies[index].createdAt),), style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
 
                                                                   const SizedBox(width: 40,),
 
                                                                   GestureDetector(
-                                                                    child: const Text('Reply', style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                                                                    child: const Text('Reply', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
                                                                     onTap: () async{
-                                                                      print('show reply here 2');
-
                                                                       if(controller.text != ''){
                                                                         controller.clear();
                                                                       }
@@ -1082,7 +1073,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                       isComment = false;
                                                                       currentCommentId = commentsListener[i].commentId;
 
-                                                                      await showModalBottomSheet(context: context, builder: (context) => showKeyboard(isReply: true, toReply: commentsListener[i].listOfReplies[index].replyBody, replyFrom: '${commentsListener[i].listOfReplies[index].firstName}' + ' ' + '${commentsListener[i].listOfReplies[index].lastName}'));
+                                                                      await showModalBottomSheet(context: context, builder: (context) => showKeyboard(isReply: true, toReply: commentsListener[i].listOfReplies[index].replyBody, replyFrom: '${commentsListener[i].listOfReplies[index].firstName} ${commentsListener[i].listOfReplies[index].lastName}'));
                                                                     },
                                                                   ),
                                                                 ],
@@ -1287,7 +1278,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0,),
         child: isReply == true
-        ? Container(
+        ? SizedBox(
           height: 200,
           child: Column(
             children: [
@@ -1303,11 +1294,11 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                           child: RichText(
                             text: TextSpan(
                               children: <TextSpan>[
-                                const TextSpan(text: 'Replying to ', style: const TextStyle(color: const Color(0xff888888,), fontSize: 24, fontFamily: 'NexaRegular',),),
+                                const TextSpan(text: 'Replying to ', style: TextStyle(color: Color(0xff888888,), fontSize: 24, fontFamily: 'NexaRegular',),),
 
-                                TextSpan(text: '$replyFrom\n', style: const TextStyle(color: const Color(0xff000000), fontSize: 24, fontFamily: 'NexaRegular', fontWeight: FontWeight.bold)),
+                                TextSpan(text: '$replyFrom\n', style: const TextStyle(color: Color(0xff000000), fontSize: 24, fontFamily: 'NexaRegular', fontWeight: FontWeight.bold)),
 
-                                TextSpan(text: '$toReply', style: const TextStyle(color: const Color(0xff000000), fontSize: 24, fontFamily: 'NexaRegular',),),
+                                TextSpan(text: toReply, style: const TextStyle(color: Color(0xff000000), fontSize: 24, fontFamily: 'NexaRegular',),),
                               ],
                             ),
                           ),
@@ -1336,39 +1327,39 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                     foregroundImage: NetworkImage(currentUserImage),
                   )
                   : const CircleAvatar(
-                    backgroundColor: const Color(0xff888888),
-                    foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                    backgroundColor: Color(0xff888888),
+                    foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
                   ),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: TextFormField(
                         controller: controller,
-                        style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                        style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),
                         keyboardType: TextInputType.text,
                         cursorColor: const Color(0xffFFFFFF),
                         maxLines: 2,
                         decoration: const InputDecoration(
                           filled: true,
                           labelText: 'Say something...',
-                          fillColor: const Color(0xffBDC3C7),
+                          fillColor: Color(0xffBDC3C7),
                           floatingLabelBehavior: FloatingLabelBehavior.never,
-                          labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
-                          border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffBDC3C7),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
-                          focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffBDC3C7),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
+                          labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),
+                          border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffBDC3C7),), borderRadius: BorderRadius.all(Radius.circular(10)),),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffBDC3C7),), borderRadius: BorderRadius.all(Radius.circular(10)),),
                         ),
                       ),
                     ),
                   ),
                   GestureDetector(
-                    child: const Text('Post', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+                    child: const Text('Post', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
                     onTap: () async{
                       if(controller.text == ''){
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(
-                            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                            description: const Text('Please input a comment.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                            description: const Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             entryAnimation: EntryAnimation.DEFAULT,
                             buttonOkColor: Colors.red,
@@ -1440,8 +1431,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
               foregroundImage: NetworkImage(currentUserImage),
             )
             : const CircleAvatar(
-              backgroundColor: const Color(0xff888888),
-              foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+              backgroundColor: Color(0xff888888),
+              foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
             ),
             Expanded(
               child: Padding(
@@ -1451,28 +1442,28 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                   cursorColor: const Color(0xffFFFFFF),
                   maxLines: 2,
                   keyboardType: TextInputType.text,
-                  style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                  style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),
                   decoration: const InputDecoration(
                     filled: true,
-                    fillColor: const Color(0xffBDC3C7),
+                    fillColor: Color(0xffBDC3C7),
                     labelText: 'Say something...',
                     floatingLabelBehavior: FloatingLabelBehavior.never,
-                    labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
-                    border: const OutlineInputBorder(borderSide: BorderSide(color: const Color(0xffBDC3C7),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
-                    focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: const Color(0xffBDC3C7),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
+                    labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),
+                    border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffBDC3C7),), borderRadius: BorderRadius.all(Radius.circular(10)),),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffBDC3C7),), borderRadius: BorderRadius.all(Radius.circular(10)),),
                   ),
                 ),
               ),
             ),
             GestureDetector(
-              child: const Text('Post', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+              child: const Text('Post', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
               onTap: () async{
                 if(controller.text == ''){
                   await showDialog(
                     context: context,
                     builder: (_) => AssetGiffyDialog(
-                      description: const Text('Please input a comment.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                      description: const Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                      title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                       entryAnimation: EntryAnimation.DEFAULT,
                       onlyOkButton: true,
@@ -1551,39 +1542,39 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
               foregroundImage: NetworkImage(currentUserImage),
             )
             : const CircleAvatar(
-              backgroundColor: const Color(0xff888888),
-              foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+              backgroundColor: Color(0xff888888),
+              foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 child: TextFormField(
                   controller: controller,
                   cursorColor: const Color(0xffFFFFFF),
                   maxLines: 2,
                   keyboardType: TextInputType.text,
-                  style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                  style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),
                   decoration: const InputDecoration(
                     filled: true,
-                    fillColor: const Color(0xffBDC3C7),
+                    fillColor: Color(0xffBDC3C7),
                     labelText: 'Say something...',
                     floatingLabelBehavior: FloatingLabelBehavior.never,
-                    labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
-                    border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffBDC3C7),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
-                    focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffBDC3C7),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
+                    labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),
+                    border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffBDC3C7),), borderRadius: BorderRadius.all(Radius.circular(10)),),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffBDC3C7),), borderRadius: BorderRadius.all(Radius.circular(10)),),
                   ),
                 ),
               ),
             ),
             GestureDetector(
-              child: const Text('Post', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+              child: const Text('Post', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
               onTap: () async{
                 if(controller.text == ''){
                   await showDialog(
                     context: context,
                     builder: (_) => AssetGiffyDialog(
-                      description: const Text('Please input a comment.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                      description: const Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                      title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                       entryAnimation: EntryAnimation.DEFAULT,
                       buttonOkColor: Colors.red,

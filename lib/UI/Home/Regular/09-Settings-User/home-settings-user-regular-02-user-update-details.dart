@@ -14,8 +14,9 @@ import 'package:flutter/material.dart';
 
 class HomeRegularUserUpdateDetails extends StatefulWidget{
   final int userId;
-  const HomeRegularUserUpdateDetails({required this.userId});
+  const HomeRegularUserUpdateDetails({Key? key, required this.userId}) : super(key: key);
 
+  @override
   HomeRegularUserUpdateDetailsState createState() => HomeRegularUserUpdateDetailsState();
 }
 
@@ -27,6 +28,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
   final GlobalKey<MiscRegularInputFieldSecurityQuestionsState> _key5 = GlobalKey<MiscRegularInputFieldSecurityQuestionsState>();
   Future<APIRegularShowAccountDetails>? accountDetails;
 
+  @override
   void initState(){
     super.initState();
     accountDetails = getAccountDetails(widget.userId);
@@ -53,7 +55,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: const Color(0xff04ECFF),
-            title: const Text('Account Details', textAlign: TextAlign.left, style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff)),),
+            title: const Text('Account Details', textAlign: TextAlign.left, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff)),),
             centerTitle: false,
             leading: Builder(
               builder: (BuildContext context){
@@ -80,7 +82,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                           key: _key1,
                           labelText: 'First Name',
                           displayText: details.data!.showAccountDetailsFirstName,
-                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                         ),
 
                         const SizedBox(height: 20,),
@@ -89,7 +91,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                           key: _key2,
                           labelText: 'Last Name',
                           displayText: details.data!.showAccountDetailsLastName,
-                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                         ),
 
                         const SizedBox(height: 20,),
@@ -99,7 +101,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                           labelText: 'Email Address',
                           displayText: details.data!.showAccountDetailsEmail,
                           type: TextInputType.emailAddress,
-                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                         ),
 
                         const SizedBox(height: 20,),
@@ -108,7 +110,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                           key: _key4,
                           labelText: 'Phone Number',
                           displayText: details.data!.showAccountDetailsPhoneNumber,
-                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                         ),
 
                         const SizedBox(height: 20,),
@@ -121,14 +123,14 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                         const SizedBox(height: 80,),
 
                         MiscRegularButtonTemplate(
-                          buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                          buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                           buttonColor: const Color(0xff04ECFF),
                           width: SizeConfig.screenWidth! / 2,
                           buttonText: 'Update',
                           height: 50,
                           onPressed: () async{
                             if(details.data!.showAccountDetailsFirstName != _key1.currentState!.controller.text || details.data!.showAccountDetailsLastName != _key2.currentState!.controller.text || details.data!.showAccountDetailsEmail != _key3.currentState!.controller.text || details.data!.showAccountDetailsPhoneNumber != _key4.currentState!.controller.text || details.data!.showAccountDetailsQuestion != _key5.currentState!.currentSelection){
-                              bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: const Color(0xff04ECFF), confirmColor_2: const Color(0xffFF0000), ),);
+                              bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000), ),);
 
                               if(confirmResult){
                                 context.loaderOverlay.show();
@@ -139,8 +141,8 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                                   await showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
-                                      title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                      description: const Text('Successfully updated the profile picture.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                      title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                      description: const Text('Successfully updated the profile picture.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                       entryAnimation: EntryAnimation.DEFAULT,
                                       onlyOkButton: true,
@@ -154,8 +156,8 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                                   await showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
-                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                       entryAnimation: EntryAnimation.DEFAULT,
                                       buttonOkColor: const Color(0xffff0000),
@@ -176,9 +178,9 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                     ),
                   );
                 }else if (details.hasError){
-                  return Container(height: SizeConfig.screenHeight, child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),),);
+                  return SizedBox(height: SizeConfig.screenHeight, child: const Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),),);
                 }else{
-                  return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
+                  return SizedBox(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
                 }
               },
             ),

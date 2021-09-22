@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-05-search-users.dart';
-import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-11-add-family.dart';
-import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-12-add-friends.dart';
+import 'package:facesbyplaces/API/BLM/08-Search/api_search_blm_05_search_users.dart';
+import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_11_add_family.dart';
+import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_12_add_friends.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-settings-memorial-blm-05-page-family.dart';
@@ -28,7 +28,7 @@ class HomeBLMSearchUser extends StatefulWidget{
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
-  const HomeBLMSearchUser({required this.isFamily, required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
+  const HomeBLMSearchUser({Key? key, required this.isFamily, required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers}) : super(key: key);
 
   @override
   HomeBLMSearchUserState createState() => HomeBLMSearchUserState();
@@ -44,6 +44,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
   bool empty = true;
   int page = 1;
 
+  @override
   void initState(){
     super.initState();
     onLoading();
@@ -54,9 +55,9 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: const Text('No more users to show'),
-              duration: const Duration(seconds: 1),
-              backgroundColor: const Color(0xff4EC9D4),
+              content: Text('No more users to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
             ),
           );
         }
@@ -80,8 +81,8 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 36, fontFamily: 'NexaRegular'),),
-            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 36, fontFamily: 'NexaRegular'),),
+            description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
@@ -113,8 +114,9 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
       }
     }
 
-    if(mounted)
-    page++;
+    if(mounted){
+      page++;
+    }
   }
 
   @override
@@ -135,20 +137,20 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
           valueListenable: count,
           builder: (_, int countListener, __) => Scaffold(
             appBar: PreferredSize(
-              preferredSize: Size.fromHeight(70.0),
+              preferredSize: const Size.fromHeight(70.0),
               child: AppBar(
                 leading: Container(),
                 backgroundColor: const Color(0xff04ECFF),
                 flexibleSpace: Column(
                   children: [
-                    Spacer(),
+                    const Spacer(),
 
                     Row(
                       children: [
                         Align(
                           alignment: Alignment.centerLeft,
                           child: IconButton(
-                            icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+                            icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
                             onPressed: (){
                               Navigator.pop(context);
                             },
@@ -159,19 +161,19 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                           child: TextFormField(
                             controller: controller,
                             keyboardType: TextInputType.text,
-                            style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                            style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.all(15.0),
                               filled: true,
                               fillColor: const Color(0xffffffff),
                               focusColor: const Color(0xffffffff),
                               hintText: 'Search User',
-                              hintStyle: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
-                              border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                              enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                              focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                              hintStyle: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                              border: const OutlineInputBorder(borderSide: BorderSide(color: Color(0xffffffff)), borderRadius: BorderRadius.all(Radius.circular(25)),),
+                              enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Color(0xffffffff)), borderRadius: BorderRadius.all(Radius.circular(25)),),
+                              focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: Color(0xffffffff)), borderRadius: BorderRadius.all(Radius.circular(25)),),
                               prefixIcon: IconButton(
-                                icon: const Icon(Icons.search, color: const Color(0xff888888), size: 35,),
+                                icon: const Icon(Icons.search, color: Color(0xff888888), size: 35,),
                                 onPressed: () {
                                   keywords = controller.text;
 
@@ -209,12 +211,12 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                       ],
                     ),
 
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                   ],
                 ),
               ),
             ),
-            body: Container(
+            body: SizedBox(
               height: SizeConfig.screenHeight! - kToolbarHeight,
               width: SizeConfig.screenWidth,
               child: countListener == 0
@@ -230,13 +232,13 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
 
                     const SizedBox(height: 20,),
 
-                    Text('Search to add users', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                    const Text('Search to add users', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
 
                     SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
                   ],
                 ),
               )
-              : Container(
+              : SizedBox(
                 width: SizeConfig.screenWidth,
                 child: RefreshIndicator(
                   onRefresh: onRefresh,
@@ -250,17 +252,17 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                       leading: users[index].image != ''
                       ? CircleAvatar(
                         backgroundColor: const Color(0xff888888),
-                        foregroundImage: NetworkImage('${users[index].image}'),
+                        foregroundImage: NetworkImage(users[index].image),
                       )
                       : const CircleAvatar(
-                        backgroundColor: const Color(0xff888888),
-                        foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                        backgroundColor: Color(0xff888888),
+                        foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
                       ),
                       title: Text('${users[index].firstName} ${users[index].lastName}'),
-                      subtitle: Text('${users[index].email}',),
+                      subtitle: Text(users[index].email),
                       onTap: () async{
                         if(widget.isFamily){
-                          String choice = await showDialog(context: (context), builder: (build) => MiscBLMRelationshipFromDialog()) ?? '';
+                          String choice = await showDialog(context: (context), builder: (build) => const MiscBLMRelationshipFromDialog()) ?? '';
 
                           if(choice != ''){
                             context.loaderOverlay.show();
@@ -271,8 +273,8 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                  description: Text('Error: $result.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                  title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                   entryAnimation: EntryAnimation.DEFAULT,
                                   buttonOkColor: const Color(0xffff0000),
@@ -295,8 +297,8 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                             await showDialog(
                               context: context,
                               builder: (_) => AssetGiffyDialog(
-                                description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                description: Text('Error: $result.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                 entryAnimation: EntryAnimation.DEFAULT,
                                 buttonOkColor: const Color(0xffff0000),

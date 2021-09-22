@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-04-01-connection-list-family.dart';
-import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-04-02-connection-list-friends.dart';
-import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-04-03-connection-list-followers.dart';
+import 'package:facesbyplaces/API/Regular/03-View-Memorial/api_view_memorial_regular_04_01_connection_list_family.dart';
+import 'package:facesbyplaces/API/Regular/03-View-Memorial/api_view_memorial_regular_04_02_connection_list_friends.dart';
+import 'package:facesbyplaces/API/Regular/03-View-Memorial/api_view_memorial_regular_04_03_connection_list_followers.dart';
 import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
 import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-user.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -23,8 +23,9 @@ class RegularConnectionListItem{
 class HomeRegularConnectionList extends StatefulWidget{
   final int memorialId;
   final int newToggle;
-  const HomeRegularConnectionList({required this.memorialId, required this.newToggle});
+  const HomeRegularConnectionList({Key? key, required this.memorialId, required this.newToggle}) : super(key: key);
 
+  @override
   HomeRegularConnectionListState createState() => HomeRegularConnectionListState();
 }
 
@@ -50,7 +51,8 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
   int page2 = 1;
   int page3 = 1;
 
-  void initState() {
+  @override
+  void initState(){
     super.initState();
     toggle.value = widget.newToggle;
     onLoading1();
@@ -63,9 +65,9 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: const Text('No more connection list family to show'),
-              duration: const Duration(seconds: 1),
-              backgroundColor: const Color(0xff4EC9D4),
+              content: Text('No more connection list family to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
             ),
           );
         }
@@ -78,9 +80,9 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: const Text('No more connection list friends to show'),
-              duration: const Duration(seconds: 1),
-              backgroundColor: const Color(0xff4EC9D4),
+              content: Text('No more connection list friends to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
             ),
           );
         }
@@ -93,9 +95,9 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: const Text('No more connection list followers to show'),
-              duration: const Duration(seconds: 1),
-              backgroundColor: const Color(0xff4EC9D4),
+              content: Text('No more connection list followers to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
             ),
           );
         }
@@ -123,7 +125,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
             description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
@@ -155,8 +157,9 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
         );
       }
 
-      if (mounted)
-      page1++;
+      if(mounted){
+        page1++;
+      }
     }
   }
 
@@ -168,7 +171,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
             description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
@@ -200,8 +203,9 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
         );
       }
 
-      if (mounted)
-      page2++;
+      if(mounted){
+        page2++;
+      }
     }
   }
 
@@ -213,7 +217,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
             description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
@@ -245,8 +249,9 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
         );
       }
 
-      if (mounted)
-      page3++;
+      if (mounted) {
+        page3++;
+      }
     }
   }
 
@@ -268,7 +273,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
           valueListenable: toggle,
           builder: (_, int toggleListener, __) => Scaffold(
             appBar: PreferredSize(
-              preferredSize: Size.fromHeight(70.0),
+              preferredSize: const Size.fromHeight(70.0),
               child: AppBar(
                 leading: Container(),
                 backgroundColor: const Color(0xff04ECFF),
@@ -281,7 +286,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                         Align(
                           alignment: Alignment.centerLeft,
                           child: IconButton(
-                            icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+                            icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
                             onPressed: (){
                               Navigator.pop(context);
                             },
@@ -290,7 +295,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
 
                         Expanded(
                           child: TextFormField(
-                            style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                            style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.all(15.0),
                               focusColor: const Color(0xffffffff),
@@ -303,11 +308,11 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                                   case 2: return 'Search Followers';
                                 }
                               }()),
-                              enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                              focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                              border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
-                              hintStyle: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
-                              prefixIcon: const Icon(Icons.search, color: const Color(0xff888888)),
+                              enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Color(0xffffffff)), borderRadius: BorderRadius.all(Radius.circular(25)),),
+                              focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: Color(0xffffffff)), borderRadius: BorderRadius.all(Radius.circular(25)),),
+                              border: const OutlineInputBorder(borderSide: BorderSide(color: Color(0xffffffff)), borderRadius: BorderRadius.all(Radius.circular(25),),),
+                              hintStyle: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                              prefixIcon: const Icon(Icons.search, color: Color(0xff888888)),
                             ),
                             onChanged: (search){
                               searchKeyword = search;
@@ -324,7 +329,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                                 if(toggle.value == 0){
                                   searches = listsFamily;
                                   count4.value = searches.length;
-                                  if(searches.length != 0){
+                                  if(searches.isNotEmpty){
                                     for(int i = 0; i < listsFamily.length; i++){
                                       searches = searches.where((element) => element.firstName.toUpperCase().contains(searchKeyword.toUpperCase()) || element.lastName.toUpperCase().contains(searchKeyword.toUpperCase())).toList();
                                       count4.value = searches.length;
@@ -333,7 +338,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                                 }else if(toggle.value == 1){
                                   searches = listsFriends;
                                   count4.value = searches.length;
-                                  if(searches.length != 0){
+                                  if(searches.isNotEmpty){
                                     for(int i = 0; i < listsFriends.length; i++){
                                       searches = searches.where((element) => element.firstName.toUpperCase().contains(searchKeyword.toUpperCase()) || element.lastName.toUpperCase().contains(searchKeyword.toUpperCase())).toList();
                                       count4.value = searches.length;
@@ -342,7 +347,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                                 }else if(toggle.value == 2){
                                   searches = listsFollowers;
                                   count4.value = searches.length;
-                                  if(searches.length != 0){
+                                  if(searches.isNotEmpty){
                                     for(int i = 0; i < listsFollowers.length; i++){
                                       searches = searches.where((element) => element.firstName.toUpperCase().contains(searchKeyword.toUpperCase()) || element.lastName.toUpperCase().contains(searchKeyword.toUpperCase())).toList();
                                       count4.value = searches.length;
@@ -386,7 +391,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                           if(toggle.value == 0){
                             searches = listsFamily;
                             count4.value = searches.length;
-                            if(searches.length != 0){
+                            if(searches.isNotEmpty){
                               for(int i = 0; i < listsFamily.length; i++){
                                 searches = searches.where((element) => element.firstName.toUpperCase().contains(searchKeyword.toUpperCase()) || element.lastName.toUpperCase().contains(searchKeyword.toUpperCase())).toList();
                                 count4.value = searches.length;
@@ -395,7 +400,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                           }else if(toggle.value == 1){
                             searches = listsFriends;
                             count4.value = searches.length;
-                            if(searches.length != 0){
+                            if(searches.isNotEmpty){
                               for(int i = 0; i < listsFriends.length; i++){
                                 searches = searches.where((element) => element.firstName.toUpperCase().contains(searchKeyword.toUpperCase()) || element.lastName.toUpperCase().contains(searchKeyword.toUpperCase())).toList();
                                 count4.value = searches.length;
@@ -405,7 +410,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                             count4.value = 1;
                             searches = listsFollowers;
                             count4.value = searches.length;
-                            if(searches.length != 0){
+                            if(searches.isNotEmpty){
                               for(int i = 0; i < listsFollowers.length; i++){
                                 searches = searches.where((element) => element.firstName.toUpperCase().contains(searchKeyword.toUpperCase()) || element.lastName.toUpperCase().contains(searchKeyword.toUpperCase())).toList();
                                 count4.value = searches.length;
@@ -414,12 +419,12 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                           }
                         }
                       },
-                      tabs: [
-                        const Text('Family', style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                      tabs: const[
+                        Text('Family', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
 
-                        const Text('Friends', style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                        Text('Friends', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
 
-                        const Text('Followers', style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                        Text('Followers', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                       ],
                     ),
                   ),
@@ -477,8 +482,8 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                             }else{
                               return const CircleAvatar(
                                 radius: 40,
-                                backgroundColor: const Color(0xff888888),
-                                foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                backgroundColor: Color(0xff888888),
+                                foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
                               );
                             }
                           }else{
@@ -491,8 +496,8 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                             }else{
                               return const CircleAvatar(
                                 radius: 40,
-                                backgroundColor: const Color(0xff888888),
-                                foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                backgroundColor: Color(0xff888888),
+                                foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
                               );
                             }
                           }
@@ -519,20 +524,20 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
 
                     onSearchListener
                     ? Text('${searches[index].firstName} ${searches[index].lastName}', 
-                      style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                      style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
                     )
                     : Text('${listsFamily[index].firstName} ${listsFamily[index].lastName}',
-                      style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                      style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
                     ),
 
-                    Text('${listsFamily[index].relationship}',
-                      style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
+                    Text(listsFamily[index].relationship,
+                      style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
@@ -580,8 +585,8 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                             }else{
                               return const CircleAvatar(
                                 radius: 40,
-                                backgroundColor: const Color(0xff888888),
-                                foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                backgroundColor: Color(0xff888888),
+                                foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
                               );
                             }
                           }else{
@@ -594,8 +599,8 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                             }else{
                               return const CircleAvatar(
                                 radius: 40,
-                                backgroundColor: const Color(0xff888888),
-                                foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                backgroundColor: Color(0xff888888),
+                                foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
                               );
                             }
                           }
@@ -622,13 +627,13 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
 
                     onSearchListener
                     ? Text('${searches[index].firstName} ${searches[index].lastName}',
-                      style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                      style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
                     )
                     : Text('${listsFriends[index].firstName} ${listsFriends[index].lastName}',
-                      style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                      style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
@@ -691,8 +696,8 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                             }else{
                               return const CircleAvatar(
                                 radius: 40,
-                                backgroundColor: const Color(0xff888888),
-                                foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                backgroundColor: Color(0xff888888),
+                                foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
                               );
                             }
                           }else{
@@ -705,8 +710,8 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                             }else{
                               return const CircleAvatar(
                                 radius: 40,
-                                backgroundColor: const Color(0xff888888),
-                                foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                backgroundColor: Color(0xff888888),
+                                foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
                               );
                             }
                           }
@@ -718,13 +723,13 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
 
                     onSearchListener
                     ? Text('${searches[index].firstName} ${searches[index].lastName}',
-                      style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                      style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
                     )
                     : Text('${listsFollowers[index].firstName} ${listsFollowers[index].lastName}',
-                      style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                      style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,

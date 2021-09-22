@@ -1,5 +1,5 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-00-home-memorials-tab.dart';
+import 'package:facesbyplaces/API/Regular/02-Main/api_main_regular_04_02_00_home_memorials_tab.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-03-regular-manage-memorial.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,8 +17,9 @@ class RegularMainPagesMemorials{
 }
 
 class HomeRegularManageTab extends StatefulWidget{
-  const HomeRegularManageTab();
+  const HomeRegularManageTab({Key? key}) : super(key: key);
 
+  @override
   HomeRegularManageTabState createState() => HomeRegularManageTabState();
 }
 
@@ -35,6 +36,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
   int page1 = 1;
   int page2 = 1;
 
+  @override
   void initState(){
     super.initState();
     isGuest();
@@ -44,10 +46,10 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
           onLoading();
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: const Text('No more posts to show'),
-              duration: const Duration(seconds: 1),
-              backgroundColor: const Color(0xff4EC9D4),
+            const SnackBar(
+              content: Text('No more posts to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
             ),
           );
         }
@@ -92,17 +94,17 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
         color: const Color(0xffeeeeee),
         child: Row(
           children: [
-            Expanded(
-              child: const Align(
+            const Expanded(
+              child: Align(
                 alignment: Alignment.centerLeft,
-                child: const Text('My Family', style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                child: Text('My Family', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
               ),
             ),
             Expanded(
               child: GestureDetector(
                 child: const Align(
                   alignment: Alignment.centerRight,
-                  child: const Text('Create', style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                  child: Text('Create', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
                 ),
                 onTap: (){
                   Navigator.pushNamed(context, '/home/regular/create-memorial');
@@ -121,7 +123,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
         height: 80,
         padding: const EdgeInsets.symmetric(horizontal: 20),
         color: const Color(0xffeeeeee),
-        child: const Align(alignment: Alignment.centerLeft, child: const Text('My Friends', style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),),
+        child: const Align(alignment: Alignment.centerLeft, child: Text('My Friends', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),),
       ),
     );
   }
@@ -187,8 +189,9 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       }
     }
 
-    if(mounted)
-    page1++;
+    if(mounted){
+      page1++;
+    }
 
     if(blmFamilyItemsRemaining == 0 && memorialFamilyItemsRemaining == 0){
       addMemorials2();
@@ -200,7 +203,6 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
   }
 
   void onLoading2() async{
-    print('onLoading2 called!');
     if(memorialFriendsItemsRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiRegularHomeMemorialsTab(page: page2);
@@ -253,8 +255,9 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       }
     }
 
-    if(mounted)
-    page2++;
+    if(mounted){
+      page2++;
+    }
 
     if(blmFriendsItemsRemaining != 0 || memorialFriendsItemsRemaining != 0){
       onLoading();
@@ -264,10 +267,9 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    print('Memorial list tab rebuild!');
     return ValueListenableBuilder(
       valueListenable: count,
-      builder: (_, int countListener, __) => Container(
+      builder: (_, int countListener, __) => SizedBox(
         width: SizeConfig.screenWidth,
         child: countListener != 0
         ? SafeArea(
@@ -285,22 +287,20 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
         )
         : SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
 
-                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-                const SizedBox(height: 45,),
+              const SizedBox(height: 45,),
 
-                const Text('Memorial is empty', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+              const Text('Memorial is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
 
-                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
-              ],
-            ),
+              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+            ],
           ),
         ),
       ),

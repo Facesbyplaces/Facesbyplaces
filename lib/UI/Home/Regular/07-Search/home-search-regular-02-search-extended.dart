@@ -1,8 +1,8 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-02-search-suggested.dart';
-import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-03-search-nearby.dart';
-import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-01-search-posts.dart';
-import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-04-search-blm.dart';
+import 'package:facesbyplaces/API/Regular/08-Search/api_search_regular_02_search_suggested.dart';
+import 'package:facesbyplaces/API/Regular/08-Search/api_search_regular_03_search_nearby.dart';
+import 'package:facesbyplaces/API/Regular/08-Search/api_search_regular_01_search_posts.dart';
+import 'package:facesbyplaces/API/Regular/08-Search/api_search_regular_04_search_blm.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-03-regular-manage-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-message.dart';
@@ -91,8 +91,9 @@ class HomeRegularPost extends StatefulWidget{
   final double latitude;
   final double longitude;
   final String currentLocation;
-  const HomeRegularPost({required this.keyword, required this.newToggle, required this.latitude, required this.longitude, required this.currentLocation});
+  const HomeRegularPost({Key? key, required this.keyword, required this.newToggle, required this.latitude, required this.longitude, required this.currentLocation}) : super(key: key);
 
+  @override
   HomeRegularPostState createState() => HomeRegularPostState();
 }
 
@@ -196,8 +197,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         );
       }
 
-      if (mounted) 
-      page1++;
+      if(mounted){
+        page1++;
+      }
     }
   }
 
@@ -226,8 +228,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         );
       }
 
-      if (mounted) 
-      page2++;
+      if(mounted){
+        page2++;
+      }
     }
   }
 
@@ -256,8 +259,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         );
       }
 
-      if(mounted) 
-      page3++;
+      if(mounted){
+        page3++;
+      }
     }
 
     page3 = 1;
@@ -286,8 +290,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         );
       }
 
-      if(mounted)
-      page3++;
+      if(mounted){
+        page3++;
+      }
     }
   }
 
@@ -316,8 +321,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         );
       }
 
-      if(mounted)
-      page4++;
+      if(mounted){
+        page4++;
+      }
     }
   }
 
@@ -333,6 +339,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
     }
   }
 
+  @override
   void initState(){
     super.initState();
     isGuest();
@@ -344,9 +351,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: const Text('No more posts to show'),
-              duration: const Duration(seconds: 1),
-              backgroundColor: const Color(0xff4EC9D4),
+              content: Text('No more posts to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
             ),
           );
         }
@@ -359,9 +366,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: const Text('No more suggested memorials to show'),
-              duration: const Duration(seconds: 1),
-              backgroundColor: const Color(0xff4EC9D4),
+              content: Text('No more suggested memorials to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
             ),
           );
         }
@@ -374,9 +381,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: const Text('No more nearby memorials to show'),
-              duration: const Duration(seconds: 1),
-              backgroundColor: const Color(0xff4EC9D4),
+              content: Text('No more nearby memorials to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
             ),
           );
         }
@@ -389,9 +396,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: const Text('No more BLM memorials to show'),
-              duration: const Duration(seconds: 1),
-              backgroundColor: const Color(0xff4EC9D4),
+              content: Text('No more BLM memorials to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
             ),
           );
         }
@@ -402,7 +409,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    print('Search screen rebuild!');
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -422,7 +428,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
               valueListenable: onSearch,
               builder: (_, bool onSearchListener, __) => Scaffold(
                 appBar: PreferredSize(
-                  preferredSize: Size.fromHeight(70.0),
+                  preferredSize: const Size.fromHeight(70.0),
                   child: AppBar(
                     leading: Container(),
                     backgroundColor: const Color(0xff04ECFF),
@@ -435,7 +441,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                             Align(
                               alignment: Alignment.centerLeft,
                               child: IconButton(
-                                icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+                                icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
                                 onPressed: (){
                                   Navigator.pop(context);
                                 },
@@ -446,19 +452,19 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               child: TextFormField(
                                 keyboardType: TextInputType.text,
                                 controller: controller,
-                                style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
+                                style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
                                 decoration: InputDecoration(
-                                  enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                  focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                  border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                  hintStyle: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
+                                  enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Color(0xffffffff)), borderRadius: BorderRadius.all(Radius.circular(25)),),
+                                  focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: Color(0xffffffff)), borderRadius: BorderRadius.all(Radius.circular(25)),),
+                                  border: const OutlineInputBorder(borderSide: BorderSide(color: Color(0xffffffff)), borderRadius: BorderRadius.all(Radius.circular(25)),),
+                                  hintStyle: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
                                   contentPadding: const EdgeInsets.all(15.0),
                                   focusColor: const Color(0xffffffff),
                                   fillColor: const Color(0xffffffff),
                                   hintText: 'Search Memorial',
                                   filled: true,
                                   prefixIcon: IconButton(
-                                    icon: const Icon(Icons.search, color: const Color(0xff888888), size: 35,),
+                                    icon: const Icon(Icons.search, color: Color(0xff888888), size: 35,),
                                     onPressed: () async{
                                       if(controller.text == ''){
                                         onSearch.value = false;
@@ -472,28 +478,24 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                         if(toggleListener == 0){
                                           for(int i = 0; i < feeds.length; i++){
                                             if(feeds[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch.value == true){
-                                              print('The ${feeds[i].memorialName} contains ${controller.text}');
                                               searchFeeds.add(feeds[i]);
                                             }
                                           }
                                         }else if(toggleListener == 1){
                                           for(int i = 0; i < suggested.length; i++) {
                                             if(suggested[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch.value == true){
-                                              print('The ${suggested[i].memorialName} contains ${controller.text}');
                                               searchSuggested.add(suggested[i]);
                                             }
                                           }
                                         }else if(toggleListener == 2){
                                           for(int i = 0; i < nearby.length; i++){
                                             if(nearby[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch.value == true){
-                                              print('The ${nearby[i].memorialName} contains ${controller.text}');
                                               searchNearby.add(nearby[i]);
                                             }
                                           }
                                         }else if(toggleListener == 3){
                                           for(int i = 0; i < blm.length; i++){
                                             if(blm[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch.value == true) {
-                                              print('The ${blm[i].memorialName} contains ${controller.text}');
                                               searchBlm.add(blm[i]);
                                             }
                                           }
@@ -525,28 +527,24 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                     if(toggleListener == 0){
                                       for(int i = 0; i < feeds.length; i++){
                                         if(feeds[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch.value == true){
-                                          print('The ${feeds[i].memorialName} contains $search');
                                           searchFeeds.add(feeds[i]);
                                         }
                                       }
                                     }else if(toggleListener == 1){
                                       for(int i = 0; i < suggested.length; i++){
                                         if(suggested[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch.value == true){
-                                          print('The ${suggested[i].memorialName} contains $search');
                                           searchSuggested.add(suggested[i]);
                                         }
                                       }
                                     }else if(toggleListener == 2){
                                       for(int i = 0; i < nearby.length; i++){
                                         if(nearby[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch.value == true){
-                                          print('The ${nearby[i].memorialName} contains $search');
                                           searchNearby.add(nearby[i]);
                                         }
                                       }
                                     }else if(toggleListener == 3){
                                       for(int i = 0; i < blm.length; i++){
                                         if(blm[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch.value == true){
-                                          print('The ${blm[i].memorialName} contains $search');
                                           searchBlm.add(blm[i]);
                                         }
                                       }
@@ -568,7 +566,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 body: Container(
                   height: SizeConfig.screenHeight,
                   width: SizeConfig.screenWidth,
-                  decoration: const BoxDecoration(color: const Color(0xffffffff), image: const DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/background2.png'), colorFilter: const ColorFilter.srgbToLinearGamma(),),),
+                  decoration: const BoxDecoration(color: Color(0xffffffff), image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),),
                   child: Column(
                     children: [
                       IgnorePointer(
@@ -584,14 +582,14 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               labelColor: const Color(0xff04ECFF),
                               unselectedLabelColor: const Color(0xff000000),
                               indicatorColor: const Color(0xff04ECFF),
-                              tabs: [
-                                const Center(child: const Text('Post', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular'),),),
+                              tabs: const [
+                                Center(child: Text('Post', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular'),),),
 
-                                const Center(child: const Text('Suggested', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular'),),),
+                                Center(child: Text('Suggested', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular'),),),
 
-                                const Center(child: const Text('Nearby', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular'),),),
+                                Center(child: Text('Nearby', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular'),),),
 
-                                const Center(child: const Text('BLM', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular'),),),
+                                Center(child: Text('BLM', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular'),),),
                               ],
                               onTap: (int number){
                                 toggle.value = number;
@@ -604,28 +602,24 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                   if(toggle.value == 0){
                                     for(int i = 0; i < feeds.length; i++){
                                       if(feeds[i].memorialName.toUpperCase().contains(searchKeyword.toUpperCase()) && onSearch.value == true){
-                                        print('The ${feeds[i].memorialName} contains $searchKeyword');
                                         searchFeeds.add(feeds[i]);
                                       }
                                     }
                                   }else if(toggle.value == 1){
                                     for(int i = 0; i < suggested.length; i++){
                                       if(suggested[i].memorialName.toUpperCase().contains(searchKeyword.toUpperCase()) && onSearch.value == true){
-                                        print('The ${suggested[i].memorialName} contains $searchKeyword');
                                         searchSuggested.add(suggested[i]);
                                       }
                                     }
                                   }else if(toggle.value == 2){
                                     for(int i = 0; i < nearby.length; i++){
                                       if(nearby[i].memorialName.toUpperCase().contains(searchKeyword.toUpperCase()) && onSearch.value == true){
-                                        print('The ${nearby[i].memorialName} contains $searchKeyword');
                                         searchNearby.add(nearby[i]);
                                       }
                                     }
                                   }else if(toggle.value == 3){
                                     for(int i = 0; i < blm.length; i++){
                                       if(blm[i].memorialName.toUpperCase().contains(searchKeyword.toUpperCase()) && onSearch.value == true){
-                                        print('The ${blm[i].memorialName} contains $searchKeyword');
                                         searchBlm.add(blm[i]);
                                       }
                                     }
@@ -641,9 +635,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                       Container(
                         child: ((){
                           switch (toggleListener){
-                            case 0: return Container(height: 20,);
-                            case 1: return Container(height: 20,);
-                            case 2: return Container(
+                            case 0: return const SizedBox(height: 20,);
+                            case 1: return const SizedBox(height: 20,);
+                            case 2: return SizedBox(
                               height: 40,
                               child: Align(
                                 alignment: Alignment.centerLeft,
@@ -651,7 +645,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                   children: [
                                     const SizedBox(width: 20,),
 
-                                    const Icon(Icons.location_pin, color: const Color(0xff979797),),
+                                    const Icon(Icons.location_pin, color: Color(0xff979797),),
 
                                     const SizedBox(width: 20,),
 
@@ -659,14 +653,14 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                       if(widget.currentLocation != ''){
                                         return Text(widget.currentLocation, style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular'),);
                                       }else{
-                                        return const Text('', style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
+                                        return const Text('', style: TextStyle(color: Color(0xff000000), fontSize: 12,),);
                                       }
                                     }()),
                                   ],
                                 ),
                               ),
                             );
-                            case 3: return Container(
+                            case 3: return SizedBox(
                               height: 40,
                               child: Align(
                                 alignment: Alignment.centerLeft,
@@ -674,7 +668,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                   children: [
                                     const SizedBox(width: 20,),
 
-                                    const Icon(Icons.location_pin, color: const Color(0xff979797),),
+                                    const Icon(Icons.location_pin, color: Color(0xff979797),),
 
                                     const SizedBox(width: 20,),
 
@@ -682,7 +676,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                       if(widget.currentLocation != ''){
                                         return Text(widget.currentLocation, style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular'),);
                                       }else{
-                                        return const Text('', style: const TextStyle(color: const Color(0xff000000),fontSize: 12,),);
+                                        return const Text('', style: TextStyle(color: Color(0xff000000),fontSize: 12,),);
                                       }
                                     }()),
                                   ],
@@ -759,7 +753,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 latitude: feeds[i].latitude,
                 longitude: feeds[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                  Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                   
                   feeds[i].imagesOrVideos.isNotEmpty
                   ? Column(
@@ -860,7 +854,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                                             Center(
                                               child: CircleAvatar(
-                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                 radius: 25,
                                               ),
@@ -882,7 +876,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                                             Center(
                                               child: CircleAvatar(
-                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                 radius: 25,
                                               ),
@@ -945,7 +939,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 latitude: feeds[i].latitude,
                 longitude: feeds[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                  Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                   
                   feeds[i].imagesOrVideos.isNotEmpty
                   ? Column(
@@ -1047,7 +1041,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                             
                                             Center(
                                               child: CircleAvatar(
-                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5), 
                                                 radius: 25,
                                               ),
@@ -1069,7 +1063,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                             
                                             Center(
                                               child: CircleAvatar(
-                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                 radius: 25,
                                               ),
@@ -1142,7 +1136,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 latitude: feeds[i].latitude,
                 longitude: feeds[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                  Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                   
                   searchFeeds[i].imagesOrVideos.isNotEmpty
                   ? Column(
@@ -1243,7 +1237,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                                               Center(
                                                 child: CircleAvatar(
-                                                  child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                  child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                   radius: 25,
                                                 ),
@@ -1267,7 +1261,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                                 child: CircleAvatar(
                                                   radius: 25,
                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                  child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                  child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                                                 ),
                                               ),
                                             ],
@@ -1328,7 +1322,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 latitude: feeds[i].latitude,
                 longitude: feeds[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                  Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                   
                   searchFeeds[i].imagesOrVideos.isNotEmpty
                   ? Column(
@@ -1429,7 +1423,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                                             Center(
                                               child: CircleAvatar(
-                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                 radius: 25,
                                               ),
@@ -1451,7 +1445,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                                             Center(
                                               child: CircleAvatar(
-                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                 radius: 25,
                                               ),
@@ -1495,22 +1489,20 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         )
         : SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: (SizeConfig.screenHeight! - 55 - kToolbarHeight) / 4,),
-                
-                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: (SizeConfig.screenHeight! - 55 - kToolbarHeight) / 4,),
+              
+              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-                const SizedBox(height: 45,),
+              const SizedBox(height: 45,),
 
-                const Text('Post is empty', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+              const Text('Post is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
 
-                SizedBox(height: (SizeConfig.screenHeight! - 55 - kToolbarHeight) / 4,),
-              ],
-            ),
+              SizedBox(height: (SizeConfig.screenHeight! - 55 - kToolbarHeight) / 4,),
+            ],
           ),
         ),
       ),
@@ -1567,22 +1559,20 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         )
         : SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
 
-                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-                const SizedBox(height: 45,),
+              const SizedBox(height: 45,),
 
-                const Text('Suggested is empty', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+              const Text('Suggested is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
 
-                SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
-              ],
-            ),
+              SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
+            ],
           ),
         ),
       ),
@@ -1639,22 +1629,20 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         )
         : SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
 
-                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-                const SizedBox(height: 45,),
+              const SizedBox(height: 45,),
 
-                const Text('Nearby is empty', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+              const Text('Nearby is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
 
-                SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
-              ],
-            ),
+              SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
+            ],
           ),
         ),
       ),
@@ -1711,22 +1699,20 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         )
         : SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
 
-                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-                const SizedBox(height: 45,),
+              const SizedBox(height: 45,),
 
-                const Text('BLM is empty', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+              const Text('BLM is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
 
-                SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
-              ],
-            ),
+              SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
+            ],
           ),
         ),
       ),

@@ -5,7 +5,7 @@ import 'package:google_place/google_place.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMCreatePostSearchLocation extends StatefulWidget{
-  const HomeBLMCreatePostSearchLocation();
+  const HomeBLMCreatePostSearchLocation({Key? key}) : super(key: key);
 
   @override
   HomeBLMCreatePostSearchLocationState createState() => HomeBLMCreatePostSearchLocationState();
@@ -44,7 +44,7 @@ class HomeBLMCreatePostSearchLocationState extends State<HomeBLMCreatePostSearch
                 valueListenable: empty,
                 builder: (_, bool emptyListener, __) => Scaffold(
                   appBar: PreferredSize(
-                    preferredSize: Size.fromHeight(70),
+                    preferredSize: const Size.fromHeight(70),
                       child: AppBar(
                       leading: Container(),
                       backgroundColor: const Color(0xff04ECFF),
@@ -57,7 +57,7 @@ class HomeBLMCreatePostSearchLocationState extends State<HomeBLMCreatePostSearch
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: IconButton(
-                                  icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+                                  icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
                                   onPressed: (){
                                     Navigator.pop(context,);
                                   },
@@ -67,16 +67,16 @@ class HomeBLMCreatePostSearchLocationState extends State<HomeBLMCreatePostSearch
                               Expanded(
                                 child: TextFormField(
                                   controller: controller,
-                                  style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                                  decoration: InputDecoration(
-                                    focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                    enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                    border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                    hintStyle: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
-                                    prefixIcon: const Icon(Icons.search, color: const Color(0xff888888)),
-                                    contentPadding: const EdgeInsets.all(15.0),
-                                    focusColor: const Color(0xffffffff),
-                                    fillColor: const Color(0xffffffff),
+                                  style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                                  decoration: const InputDecoration(
+                                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffffffff)), borderRadius: BorderRadius.all(Radius.circular(25)),),
+                                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffffffff)), borderRadius: BorderRadius.all(Radius.circular(25)),),
+                                    border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffffffff)), borderRadius: BorderRadius.all(Radius.circular(25)),),
+                                    hintStyle: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                    prefixIcon: Icon(Icons.search, color: Color(0xff888888)),
+                                    contentPadding: EdgeInsets.all(15.0),
+                                    focusColor: Color(0xffffffff),
+                                    fillColor: Color(0xffffffff),
                                     hintText: 'Search Location',
                                     filled: true,
                                   ),
@@ -98,17 +98,6 @@ class HomeBLMCreatePostSearchLocationState extends State<HomeBLMCreatePostSearch
                                       placeId = [];
 
                                       if(result != null){
-                                        // print('The result is ${result.status}');
-                                        // for(int i = 0; i < result.predictions!.length; i++){
-                                        //   places.value.add('${result.predictions![i].terms![0].value}, ${result.predictions![i].terms![1].value}');
-
-                                        //   var newResult = await googlePlace.details.get('${result.predictions![i].placeId}', fields: "name,rating,formatted_phone_number");
-                                        //   print('The newResult is ${newResult!.result!.geometry!.location!.lat}');
-                                        //   print('The newResult is ${newResult.result!.geometry!.location!.lng}');
-                                          
-                                        //   descriptionPlaces.value.add('${result.predictions![i].description}');
-                                        //   locationPlaces.value.add([37.79170209999999, -122.4041937]);
-                                        // }
                                         for(int i = 0; i < result.predictions!.length; i++){
                                           places.value.add('${result.predictions![i].terms![0].value}, ${result.predictions![i].terms![1].value}');
                                           placeId.add('${result.predictions![i].placeId}');
@@ -126,12 +115,12 @@ class HomeBLMCreatePostSearchLocationState extends State<HomeBLMCreatePostSearch
                             ],
                           ),
 
-                          SizedBox(height: 5,),
+                          const SizedBox(height: 5,),
                         ],
                       ),
                     ),
                   ),
-                  body: Container(
+                  body: SizedBox(
                     width: SizeConfig.screenWidth,
                     child: emptyListener
                     ? SingleChildScrollView(
@@ -140,13 +129,13 @@ class HomeBLMCreatePostSearchLocationState extends State<HomeBLMCreatePostSearch
                         children: [
                           SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
 
-                          const Icon(Icons.place_rounded, size: 240, color: const Color(0xff888888),),
+                          const Icon(Icons.place_rounded, size: 240, color: Color(0xff888888),),
 
                           const SizedBox(height: 20),
 
-                          Padding(
+                          const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 20),
-                            child: Text('Search a location to add on your post', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                            child: Text('Search a location to add on your post', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
                           ),
 
                           SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
@@ -157,26 +146,26 @@ class HomeBLMCreatePostSearchLocationState extends State<HomeBLMCreatePostSearch
                       physics: const ClampingScrollPhysics(),
                       itemCount: placesListener.length,
                       separatorBuilder: (context, index){
-                        return const Divider(thickness: 1, color: const Color(0xff888888),);
+                        return const Divider(thickness: 1, color: Color(0xff888888),);
                       },
                       itemBuilder: (context, index){
                         return ListTile(
-                          title: Text(placesListener[index], style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular', fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+                          title: Text(placesListener[index], style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', fontWeight: FontWeight.bold, color: Color(0xff000000),),),
                           subtitle: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(descriptionPlacesListener[index], style: TextStyle(fontSize: 14, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                              Text(descriptionPlacesListener[index], style: const TextStyle(fontSize: 14, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
 
-                              SizedBox(height: 5,),
+                              const SizedBox(height: 5,),
 
-                              Text('Click to add on your post', style: TextStyle(fontSize: 12, fontFamily: 'NexaRegular', color: const Color(0xff888888),),),
+                              const Text('Click to add on your post', style: TextStyle(fontSize: 12, fontFamily: 'NexaRegular', color: Color(0xff888888),),),
                             ],
                           ),
                           onTap: () async{
                             context.loaderOverlay.show();
                             GooglePlace googlePlace = GooglePlace("AIzaSyCTPIQSGBS0cdzWRv9VGqrRuVwd2KuuhNg");
-                            var newResult = await googlePlace.details.get('${placeId[index]}');
+                            var newResult = await googlePlace.details.get(placeId[index]);
                             context.loaderOverlay.hide();
 
                             Navigator.pop(context, [placesListener[index], newResult!.result!.geometry!.location!.lat, newResult.result!.geometry!.location!.lng]);

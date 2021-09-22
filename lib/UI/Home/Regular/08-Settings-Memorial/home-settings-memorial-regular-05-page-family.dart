@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-04-show-family-settings.dart';
-import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-13-remove-friends-or-family.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_04_show_family_settings.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_13_remove_friends_or_family.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-settings-memorial-regular-07-search-user-settings.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -14,8 +14,9 @@ class HomeRegularPageFamily extends StatefulWidget{
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
-  const HomeRegularPageFamily({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers,});
+  const HomeRegularPageFamily({Key? key, required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers,}) : super(key: key);
 
+  @override
   HomeRegularPageFamilyState createState() => HomeRegularPageFamilyState();
 }
 
@@ -26,6 +27,7 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
   List<Widget> family = [];
   int page = 1;
 
+  @override
   void initState(){
     super.initState();
     onLoading();
@@ -34,7 +36,7 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
         if(familyItemsRemaining != 0){
           onLoading();
         }else{
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: const Text('No more users to show'), duration: const Duration(seconds: 1), backgroundColor: const Color(0xff4EC9D4),),);
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more users to show'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
         }
       }
     });
@@ -56,7 +58,7 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 36, fontFamily: 'NexaRegular'),),
+            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 36, fontFamily: 'NexaRegular'),),
             description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
@@ -82,30 +84,30 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
             ? CircleAvatar(
               maxRadius: 40,
               backgroundColor: const Color(0xff888888),
-              foregroundImage: NetworkImage('${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage}',),
+              foregroundImage: NetworkImage(newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage,),
             )
             : const CircleAvatar(
               maxRadius: 40,
-              backgroundColor: const Color(0xff888888),
-              foregroundImage: const AssetImage('assets/icons/user-placeholder.png',),
+              backgroundColor: Color(0xff888888),
+              foregroundImage: AssetImage('assets/icons/user-placeholder.png',),
             ),
-            title: Text('${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsFirstName} ${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsLastName}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-            subtitle: Text('${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsEmail}', style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+            title: Text('${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsFirstName} ${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsLastName}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000),),),
+            subtitle: Text(newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsEmail, style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
             trailing: MaterialButton(
-              child: const Text('Remove', style: const TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: const Color(0xffffffff),),),
-              shape: const StadiumBorder(side: const BorderSide(color: const Color(0xffE74C3C),),),
+              child: const Text('Remove', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: Color(0xffffffff),),),
+              shape: const StadiumBorder(side: BorderSide(color: Color(0xffE74C3C),),),
               minWidth: SizeConfig.screenWidth! / 3.5,
               splashColor: const Color(0xff04ECFF),
               textColor: const Color(0xffffffff),
               padding: EdgeInsets.zero,
-              color: Color(0xffE74C3C),
+              color: const Color(0xffE74C3C),
               height: 40,
               onPressed: () async{
                 bool confirmation = await showDialog(
                   context: context,
                   builder: (_) => AssetGiffyDialog(
-                    title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                    description: const Text('Are you sure you want to remove this user?', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                    title: const Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                    description: const Text('Are you sure you want to remove this user?', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                     entryAnimation: EntryAnimation.DEFAULT,
                     onlyOkButton: false,
@@ -127,7 +129,7 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                        title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                         description: Text('Error: $result.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         entryAnimation: EntryAnimation.DEFAULT,
@@ -142,8 +144,8 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                        description: const Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',)),
+                        title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                        description: const Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',)),
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         entryAnimation: EntryAnimation.DEFAULT,
                         onlyOkButton: true,
@@ -167,8 +169,9 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
       }
     }
 
-    if(mounted)
-    page++;
+    if(mounted){
+      page++;
+    }
   }
 
   @override
@@ -180,23 +183,23 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
         appBar: AppBar(
           backgroundColor: const Color(0xff04ECFF),
           centerTitle: false,
-          title: const Text('Family', style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+          title: const Text('Family', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+            icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
             onPressed: (){
               Navigator.pop(context);
             },
           ),
           actions: [
             GestureDetector(
-              child: const Center(child: const Text('Add Family', style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),),
+              child: const Center(child: Text('Add Family', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),),
               onTap: (){
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularSearchUser(isFamily: true, memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)));
               },
             ),
           ],
         ),
-        body: Container(
+        body: SizedBox(
           width: SizeConfig.screenWidth,
           child: countListener != 0
           ? RefreshIndicator(
@@ -222,7 +225,7 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
 
                 const SizedBox(height: 45,),
 
-                const Text('Family list is empty', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+                const Text('Family list is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
 
                 SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
               ],

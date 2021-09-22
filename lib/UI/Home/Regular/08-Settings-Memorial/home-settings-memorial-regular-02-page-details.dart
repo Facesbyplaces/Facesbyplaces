@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
-import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-01-show-page-details.dart';
-import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-07-update-page-details.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_01_show_page_details.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_07_update_page_details.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
@@ -15,8 +15,9 @@ import 'package:flutter/material.dart';
 
 class HomeRegularPageDetails extends StatefulWidget{
   final int memorialId;
-  const HomeRegularPageDetails({required this.memorialId});
+  const HomeRegularPageDetails({Key? key, required this.memorialId}) : super(key: key);
 
+  @override
   HomeRegularPageDetailsState createState() => HomeRegularPageDetailsState();
 }
 
@@ -31,6 +32,7 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
   DateTime dob = DateTime(1000);
   DateTime rip = DateTime.now();
 
+  @override
   void initState(){
     super.initState();
     futureMemorialSettings = getMemorialSettings(widget.memorialId);
@@ -61,9 +63,9 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
           appBar: AppBar(
             backgroundColor: const Color(0xff04ECFF),
             centerTitle: false,
-            title: const Text('Page Details', style: const TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+            title: const Text('Page Details', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
+              icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
               onPressed: (){
                 Navigator.pop(context);
               },
@@ -84,7 +86,7 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                             key: _key1,
                             labelText: 'Page Name',
                             displayText: memorialSettings.data!.almMemorial.showPageDetailsName,
-                            labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                            labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                           ),
 
                           const SizedBox(height: 20,),
@@ -98,8 +100,8 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
 
                           TextFormField(
                             controller: controller1,
-                            decoration: const InputDecoration(alignLabelWithHint: true, labelText: 'DOB', labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),), focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),),
-                            style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                            decoration: const InputDecoration(alignLabelWithHint: true, labelText: 'DOB', labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),), focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),),
+                            style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                             cursorColor: const Color(0xff000000),
                             keyboardType: TextInputType.text,
                             readOnly: true,
@@ -124,8 +126,8 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
 
                           TextFormField(
                             controller: controller2,
-                            decoration: const InputDecoration(alignLabelWithHint: true, labelText: 'RIP', labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),), focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),),
-                            style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                            decoration: const InputDecoration(alignLabelWithHint: true, labelText: 'RIP', labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),), focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),),
+                            style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                             cursorColor: const Color(0xff000000),
                             keyboardType: TextInputType.text,
                             readOnly: true,
@@ -152,7 +154,7 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                             key: _key5,
                             labelText: 'Country',
                             displayText: memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry,
-                            labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                            labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                           ),
 
                           const SizedBox(height: 20,),
@@ -161,20 +163,20 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                             key: _key6,
                             labelText: 'Cemetery',
                             displayText: memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCemetery,
-                            labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                            labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                           ),
 
                           const SizedBox(height: 80,),
 
                           MiscRegularButtonTemplate(
-                            buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                            buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),
                             buttonColor: const Color(0xff04ECFF),
                             buttonText: 'Update',
                             width: 150,
                             height: 50,
                             onPressed: () async{
                               if(memorialSettings.data!.almMemorial.showPageDetailsName != _key1.currentState!.controller.text || memorialSettings.data!.almMemorial.showPageDetailsRelationship != _key2.currentState!.currentSelection || memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsDob != controller1.text || memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsRip != controller2.text || memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry != _key5.currentState!.controller.text || memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCemetery != _key6.currentState!.controller.text){
-                                bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Confirm', content:'Do you want to save the changes?', confirmColor_1: const Color(0xff04ECFF), confirmColor_2: const Color(0xffFF0000),),);
+                                bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Confirm', content:'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),),);
 
                                 if(confirmResult){
                                   context.loaderOverlay.show();
@@ -185,8 +187,8 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                        description: const Text('Successfully updated the account details.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                        title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                        description: const Text('Successfully updated the account details.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         onlyOkButton: true,
@@ -201,8 +203,8 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                        description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                        title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                        description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         buttonOkColor: const Color(0xffff0000),
@@ -225,9 +227,9 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                   ],
                 );
               }else if(memorialSettings.hasError){
-                return Container(height: SizeConfig.screenHeight, child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),));
+                return SizedBox(height: SizeConfig.screenHeight, child: const Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),));
               }else{
-                return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
+                return SizedBox(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
               }
             },
           ),

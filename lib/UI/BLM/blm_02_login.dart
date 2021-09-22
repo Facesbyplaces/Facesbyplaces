@@ -1,8 +1,8 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-01-login.dart';
-import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-05-sign-in-with-facebook.dart';
-import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-07-sign-in-with-apple.dart';
-import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-11-google-authentication.dart';
+import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_01_login.dart';
+import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_05_sign_in_with_facebook.dart';
+import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_07_sign_in_with_apple.dart';
+import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_11_google_authentication.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
