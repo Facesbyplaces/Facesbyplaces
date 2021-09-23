@@ -1,5 +1,5 @@
 import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_08_password_reset.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_06_blm_button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:loader_overlay/loader_overlay.dart';

@@ -88,6 +88,8 @@ dev_dependencies:
   flutter_custom_clippers: ^2.0.0
   flutter_polyline_points: ^1.0.0
   pinput: ^1.2.0
+  misc:
+    path: packages/misc
 
 
 # For information on the generic Dart part of this file, see the

@@ -1,8 +1,8 @@
 // ignore_for_file: file_names
-import 'Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
-import 'Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart';
-import 'Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
-import 'Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.dart';
+import 'Home/Regular/02-View-Memorial/home_view_memorial_regular_02_profile_memorial.dart';
+import 'Home/Regular/11-Show-Post/home_show_post_regular_01_show_original_post_comments.dart';
+import 'Home/BLM/02-View-Memorial/home_view_memorial_blm_02_profile_memorial.dart';
+import 'Home/BLM/11-Show-Post/home_show_post_blm_01_show_original_post_comments.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
