@@ -8,6 +8,15 @@ class Memorials::Destroy
     end
 
     def execute
+        deleteAdmins
+        deleteNotifs
+        
+        @memorial.destroy()
+    end
+    
+    private
+
+    def deleteAdmins
         if @type === "Blm"
             @admins.each do |admin_id|
                 User.find(admin_id).roles.where(resource_type: 'Blm', resource_id: @id).first.destroy
@@ -17,8 +26,9 @@ class Memorials::Destroy
                 AlmUser.find(admin_id).roles.where(resource_type: 'Memorial', resource_id: @id).first.destroy 
             end
         end
-        
-        @memorial.destroy()
     end
-    
+
+    def deleteNotifs
+        Notification.all.where(postId: @memorial.id, notif_type: @type).destroy
+    end
 end
