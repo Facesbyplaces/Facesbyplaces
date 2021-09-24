@@ -1,6 +1,5 @@
 import 'package:facesbyplaces/API/BLM/05-Create-Post/api_create_post_blm_01_create_post.dart';
 import 'package:facesbyplaces/API/BLM/05-Create-Post/api_create_post_blm_02_list_of_managed_pages.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_02_blm_dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home_create_post_blm_02_01_create_post_location.dart';
 import 'home_create_post_blm_02_02_create_post_user.dart';
@@ -14,6 +13,7 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
+import 'package:misc/misc.dart';
 import 'dart:io';
 
 class BLMTaggedUsers{
@@ -620,7 +620,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                         ),
                                       ),
                                       onTap: () async{
-                                        var choice = await showDialog(context: (context), builder: (build) => const MiscBLMUploadFromDialog(choice_1: 'Image', choice_2: 'Video',),);
+                                        var choice = await showDialog(context: (context), builder: (build) => const MiscUploadFromDialog(choice_1: 'Image', choice_2: 'Video',),);
 
                                         if(choice == null){
                                           choice = 0;

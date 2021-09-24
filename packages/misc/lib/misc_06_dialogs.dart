@@ -1,14 +1,12 @@
-import '../../../Configurations/size_configuration.dart';
-import 'package:flutter/material.dart';
+part of misc;
 
-class MiscRegularUploadFromDialog extends StatelessWidget{
+class MiscUploadFromDialog extends StatelessWidget{
   final String choice_1;
   final String choice_2;
-  const MiscRegularUploadFromDialog({Key? key, this.choice_1 = 'Camera', this.choice_2 = 'Gallery'}) : super(key: key);
+  const MiscUploadFromDialog({Key? key, this.choice_1 = 'Camera', this.choice_2 = 'Gallery'}) : super(key: key);
 
   @override
   Widget build(BuildContext context){
-    SizeConfig.init(context);
     return Dialog(
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
       child: Container(
@@ -43,8 +41,8 @@ class MiscRegularUploadFromDialog extends StatelessWidget{
   }
 }
 
-class MiscRegularRelationshipFromDialog extends StatelessWidget{
-  const MiscRegularRelationshipFromDialog({Key? key}) : super(key: key);
+class MiscRelationshipFromDialog extends StatelessWidget{
+  const MiscRelationshipFromDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context){
@@ -151,14 +149,14 @@ class MiscRegularRelationshipFromDialog extends StatelessWidget{
   }
 }
 
-class MiscRegularConfirmDialog extends StatelessWidget{
+class MiscConfirmDialog extends StatelessWidget{
   final String title;
   final String content;
   final String confirm_1;
   final String confirm_2;
   final Color confirmColor_1;
   final Color confirmColor_2;
-  const MiscRegularConfirmDialog({
+  const MiscConfirmDialog({
     Key? key,
     this.title = 'Confirm Delete',
     this.content = 'Are you sure you want to delete "Mark Jacksons Memorial"?',

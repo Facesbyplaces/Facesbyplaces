@@ -1,13 +1,12 @@
 import 'package:facesbyplaces/API/BLM/13-Show-User/api_show_user_blm_01_show_user_information.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_05_blm_custom_drawings.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_08_blm_message.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_12_blm_user_details.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_06_blm_user_details.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:we_slide/we_slide.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 import 'dart:ui';
 
 class HomeBLMUserProfile extends StatefulWidget{
@@ -111,7 +110,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                       height: SizeConfig.screenHeight! / 2.5,
                       child: Stack(
                         children: [
-                          CustomPaint(size: Size.infinite, painter: MiscBLMCurvePainter(),),
+                          CustomPaint(size: Size.infinite, painter: MiscCurvePainter(),),
 
                           GestureDetector( // BACKGROUND IMAGE FOR ZOOMING IN
                             child: Container(
@@ -330,7 +329,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                 ),
               );
             }else if(profile.hasError){
-              return const MiscBLMErrorMessageTemplate();
+              return const MiscErrorMessageTemplate();
             }else{
               return SizedBox(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
             }

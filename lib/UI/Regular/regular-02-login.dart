@@ -4,7 +4,6 @@ import 'package:facesbyplaces/API/Regular/01-Start/api_start_regular_05_sign_in_
 import 'package:facesbyplaces/API/Regular/01-Start/api_start_regular_07_sign_in_with_apple.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api_start_regular_11_google_authentication.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_01_regular_input_field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_06_regular_button.dart';
 import 'package:facesbyplaces/UI/Regular/regular-06-password-reset-email.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
@@ -19,6 +18,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../ui-01-get-started.dart';
+import 'package:misc/misc.dart';
 
 class RegularLogin extends StatefulWidget{
   const RegularLogin({Key? key}) : super(key: key);
@@ -287,7 +287,7 @@ class RegularLoginState extends State<RegularLogin>{
 
                                 const SizedBox(height: 30,),
 
-                                MiscRegularButtonTemplate(
+                                MiscButtonTemplate(
                                   buttonText: 'Log In',
                                   buttonTextStyle: const TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold',),
                                   buttonColor: const Color(0xff4EC9D4),

@@ -11,7 +11,7 @@ import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'misc_11_blm_dropdown.dart';
+import 'misc_05_blm_dropdown.dart';
 
 class MiscBLMPost extends StatefulWidget{
   final List<Widget> contents;

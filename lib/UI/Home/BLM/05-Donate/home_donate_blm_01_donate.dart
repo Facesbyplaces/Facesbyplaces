@@ -1,6 +1,5 @@
 import 'package:facesbyplaces/API/BLM/06-Donate/api_donate_blm_01_donate.dart';
 import 'package:facesbyplaces/API/BLM/06-Donate/api_donate_blm_02_confirm_payment.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_06_blm_button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -10,6 +9,7 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:pay/pay.dart' as pay;
+import 'package:misc/misc.dart';
 import 'dart:convert';
 import 'dart:io';
 
@@ -115,7 +115,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                       ),
                     ),
                     
-                    MiscBLMButtonTemplate(
+                    MiscButtonTemplate(
                       buttonTextStyle: const TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold',),
                       width: SizeConfig.screenWidth! / 2,
                       buttonColor: const Color(0xff4EC9D4),
@@ -241,7 +241,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
 
                                                         const SizedBox(height: 20,),
 
-                                                        MiscBLMButtonTemplate(
+                                                        MiscButtonTemplate(
                                                           buttonTextStyle: const TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold',),
                                                           width: SizeConfig.screenWidth! / 2, 
                                                           buttonColor: const Color(0xff4EC9D4),

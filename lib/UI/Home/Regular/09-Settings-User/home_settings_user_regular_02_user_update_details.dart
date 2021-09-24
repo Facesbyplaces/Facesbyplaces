@@ -1,8 +1,6 @@
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_regular_04_update_account_details.dart';
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_regular_01_show_account_details.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_01_regular_input_field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_06_regular_button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_02_regular_dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home_settings_user_regular_01_user_details.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -10,6 +8,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 
 class HomeRegularUserUpdateDetails extends StatefulWidget{
   final int userId;
@@ -121,7 +120,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
 
                         const SizedBox(height: 80,),
 
-                        MiscRegularButtonTemplate(
+                        MiscButtonTemplate(
                           buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                           buttonColor: const Color(0xff04ECFF),
                           width: SizeConfig.screenWidth! / 2,
@@ -129,7 +128,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                           height: 50,
                           onPressed: () async{
                             if(details.data!.showAccountDetailsFirstName != _key1.currentState!.controller.text || details.data!.showAccountDetailsLastName != _key2.currentState!.controller.text || details.data!.showAccountDetailsEmail != _key3.currentState!.controller.text || details.data!.showAccountDetailsPhoneNumber != _key4.currentState!.controller.text || details.data!.showAccountDetailsQuestion != _key5.currentState!.currentSelection){
-                              bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000), ),);
+                              bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000), ),);
 
                               if(confirmResult){
                                 context.loaderOverlay.show();

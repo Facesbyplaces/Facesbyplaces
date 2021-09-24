@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_06_blm_button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 
 class BLMJoin extends StatelessWidget{
   const BLMJoin({Key? key}) : super(key: key);
@@ -69,7 +69,7 @@ class BLMJoin extends StatelessWidget{
 
                         const SizedBox(height: 20,),
 
-                        MiscBLMButtonTemplate(
+                        MiscButtonTemplate(
                           buttonText: 'Join',
                           buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                           width: SizeConfig.screenWidth! / 1.8,

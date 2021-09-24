@@ -4,7 +4,6 @@ import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_05_sign_in_with_fac
 import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_07_sign_in_with_apple.dart';
 import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_11_google_authentication.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_01_blm_input_field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_06_blm_button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import '../ui-01-get-started.dart';
+import 'package:misc/misc.dart';
 
 class BLMLogin extends StatelessWidget{
   BLMLogin({Key? key}) : super(key: key);
@@ -276,7 +276,7 @@ class BLMLogin extends StatelessWidget{
 
                               const SizedBox(height: 30,),
 
-                              MiscBLMButtonTemplate(
+                              MiscButtonTemplate(
                                 buttonText: 'Log In',
                                 buttonTextStyle: const TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold'),
                                 buttonColor: const Color(0xff4EC9D4),

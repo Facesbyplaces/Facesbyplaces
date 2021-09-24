@@ -4,7 +4,6 @@ import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_16_update_switch_status_followers.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home_view_memorial_blm_01_managed_memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/05-Donate/home_donate_blm_02_paypal_screen.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_02_blm_dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home_settings_memorial_blm_02_page_details.dart';
 import 'home_settings_memorial_blm_03_update_memorial_image.dart';
@@ -15,6 +14,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 
 class HomeBLMMemorialSettings extends StatefulWidget{
   final int memorialId;
@@ -187,7 +187,7 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
           title: const Text('Delete Page', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
           subtitle: const Text('Completely remove the page. This is irreversible', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
           onTap: () async{
-            bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(content: 'Are you sure you want to delete "${widget.memorialName}"?',),);
+            bool confirmResult = await showDialog(context: (context), builder: (build) => MiscConfirmDialog(content: 'Are you sure you want to delete "${widget.memorialName}"?',),);
 
             if(confirmResult){
               context.loaderOverlay.show();

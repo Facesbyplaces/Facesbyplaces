@@ -1,7 +1,6 @@
 // ignore_for_file: file_names
 import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_02_registration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_01_blm_input_field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_06_blm_button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
@@ -9,6 +8,7 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'blm_04_verify_email.dart';
+import 'package:misc/misc.dart';
 
 class BLMRegister extends StatelessWidget{
   BLMRegister({Key? key}) : super(key: key);
@@ -127,7 +127,7 @@ class BLMRegister extends StatelessWidget{
                               
                               const SizedBox(height: 50,),
 
-                              MiscBLMButtonTemplate(
+                              MiscButtonTemplate(
                                 buttonText: 'Next',
                                 buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                                 width: SizeConfig.screenWidth! / 2,

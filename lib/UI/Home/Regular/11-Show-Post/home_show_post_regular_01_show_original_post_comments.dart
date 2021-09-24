@@ -17,8 +17,7 @@ import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home_view_memoria
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home_view_memorial_regular_04_maps.dart';
 import 'package:facesbyplaces/UI/Home/Regular/06-Report/home_report_regular_01_report.dart';
 import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home_show_user_regular_01_user.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_08_regular_message.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_11_regular_dropdown.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_05_regular_dropdown.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -37,6 +36,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:mime/mime.dart';
+import 'package:misc/misc.dart';
 import 'dart:ui';
 
 class RegularOriginalComment{
@@ -1250,7 +1250,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                               ),
                               );
                             }else if(originalPost.hasError) {
-                              return const MiscRegularErrorMessageTemplate();
+                              return const MiscErrorMessageTemplate();
                             }else{
                               return Container(height: 0,);
                             }
@@ -1258,7 +1258,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                         ),
                       ),
                       isGuestLoggedInListener
-                      ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: const MiscRegularLoginToContinue(),)
+                      ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: const MiscLoginToContinue(),)
                       : Container(height: 0),
                     ],
                   ),

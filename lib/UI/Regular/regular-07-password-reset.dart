@@ -1,13 +1,13 @@
 // ignore_for_file: file_names
 import 'package:facesbyplaces/API/Regular/01-Start/api_start_regular_09_password_change.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_01_regular_input_field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_06_regular_button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 
 class RegularPasswordReset extends StatefulWidget{
   final String resetToken;
@@ -103,7 +103,7 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
 
                             const SizedBox(height: 80,),
 
-                            MiscRegularButtonTemplate(
+                            MiscButtonTemplate(
                               buttonText: 'Change',
                               buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),
                               buttonColor: const Color(0xff04ECFF),

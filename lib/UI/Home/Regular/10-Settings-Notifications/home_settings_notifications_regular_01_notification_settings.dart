@@ -5,7 +5,7 @@ import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api_settings
 import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api_settings_notifications_regular_05_update_notification_add_family.dart';
 import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api_settings_notifications_regular_06_update_notification_add_friends.dart';
 import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api_settings_notifications_regular_07_update_notification_add_admin.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_07_regular_background.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_04_regular_background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe

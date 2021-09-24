@@ -6,8 +6,6 @@ import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_09_
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_10_hide_email.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_11_hide_phone_number.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_01_blm_input_field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_02_blm_dialog.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_06_blm_button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'home_settings_use_blm_01_user_details.dart';
@@ -15,6 +13,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 
 class HomeBLMUserOtherDetails extends StatefulWidget{
   final int userId;
@@ -239,7 +238,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                                 const SizedBox(height: 80,),
 
-                                MiscBLMButtonTemplate(
+                                MiscButtonTemplate(
                                   buttonText: 'Update',
                                   buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                                   buttonColor: const Color(0xff04ECFF),
@@ -247,7 +246,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                   height: 50,
                                   onPressed: () async{
                                     if(details.data!.blmShowOtherDetailsBirthdate != _key1.currentState!.controller.text || details.data!.blmShowOtherDetailsBirthplace != _key2.currentState!.controller.text || details.data!.blmShowOtherDetailsAddress != _key3.currentState!.controller.text || details.data!.blmShowOtherDetailsEmail != _key4.currentState!.controller.text || details.data!.blmShowOtherDetailsPhoneNumber != _key5.currentState!.controller.text){
-                                      bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),),);
+                                      bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),),);
 
                                       if(confirmResult){
                                         context.loaderOverlay.show();

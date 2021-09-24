@@ -9,8 +9,7 @@ import 'package:facesbyplaces/API/Regular/02-Main/api_main_regular_02_show_user_
 import 'package:facesbyplaces/API/Regular/02-Main/api_main_regular_03_show_notification_settings.dart';
 import 'package:facesbyplaces/API/Regular/14-Notifications/api_notifications_regular_01_show_unread_notifications.dart';
 import 'package:facesbyplaces/API/Regular/14-Notifications/api_notifications_regular_02_read_unread_notifications.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_02_regular_dialog.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_07_regular_background.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_04_regular_background.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -28,6 +27,7 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import '../../../ui-01-get-started.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 import 'dart:async';
 
 class HomeRegularScreenExtended extends StatefulWidget{
@@ -468,7 +468,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   GestureDetector(
                                     child: const Text('Log Out', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
                                     onTap: () async{
-                                      bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Log Out', content: 'Are you sure you want to logout from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),));
+                                      bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscConfirmDialog(title: 'Log Out', content: 'Are you sure you want to logout from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),));
 
                                       if(confirmResult){
                                         context.loaderOverlay.show();

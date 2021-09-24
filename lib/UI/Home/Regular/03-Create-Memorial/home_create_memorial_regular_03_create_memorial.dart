@@ -1,13 +1,13 @@
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home_view_memorial_regular_01_managed_memorial.dart';
 import 'package:facesbyplaces/API/Regular/04-Create-Memorial/api_create_memorial_regular_01_create_memorial.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_06_regular_button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_07_regular_background.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_04_regular_background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:misc/misc.dart';
 import 'dart:typed_data';
 import 'dart:io';
 
@@ -248,7 +248,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
 
                       const SizedBox(height: 80,),
 
-                      MiscRegularButtonTemplate(
+                      MiscButtonTemplate(
                         buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),
                         buttonText: 'Create my Memorial Page',
                         width: 150,

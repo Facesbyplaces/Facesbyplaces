@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_06_regular_button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 
 class RegularJoin extends StatelessWidget{
   const RegularJoin({Key? key}) : super(key: key);
@@ -44,7 +44,7 @@ class RegularJoin extends StatelessWidget{
 
                         const SizedBox(height: 50,),
 
-                        MiscRegularButtonTemplate(
+                        MiscButtonTemplate(
                           buttonText: 'Next',
                           buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                           width: SizeConfig.screenWidth! / 1.8,

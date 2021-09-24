@@ -2,8 +2,6 @@ import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home_view_memoria
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_01_show_page_details.dart';
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_07_update_page_details.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_01_regular_input_field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_06_regular_button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_02_regular_dialog.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -11,6 +9,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 
 class HomeRegularPageDetails extends StatefulWidget{
   final int memorialId;
@@ -167,7 +166,7 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
 
                           const SizedBox(height: 80,),
 
-                          MiscRegularButtonTemplate(
+                          MiscButtonTemplate(
                             buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),
                             buttonColor: const Color(0xff04ECFF),
                             buttonText: 'Update',
@@ -175,7 +174,7 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                             height: 50,
                             onPressed: () async{
                               if(memorialSettings.data!.almMemorial.showPageDetailsName != _key1.currentState!.controller.text || memorialSettings.data!.almMemorial.showPageDetailsRelationship != _key2.currentState!.currentSelection || memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsDob != controller1.text || memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsRip != controller2.text || memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry != _key5.currentState!.controller.text || memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCemetery != _key6.currentState!.controller.text){
-                                bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Confirm', content:'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),),);
+                                bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscConfirmDialog(title: 'Confirm', content:'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),),);
 
                                 if(confirmResult){
                                   context.loaderOverlay.show();

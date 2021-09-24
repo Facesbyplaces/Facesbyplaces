@@ -12,7 +12,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:share/share.dart';
-import 'misc_06_blm_button.dart';
+import 'package:misc/misc.dart';
 import 'dart:typed_data';
 import 'dart:io';
 import 'dart:ui';
@@ -203,7 +203,7 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
 
                                         const Spacer(),
 
-                                        MiscBLMButtonTemplate(
+                                        MiscButtonTemplate(
                                           buttonText: 'Share',
                                           buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                                           buttonColor: const Color(0xff04ECFF),
@@ -446,7 +446,7 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
 
                                         const Spacer(),
 
-                                        MiscBLMButtonTemplate(
+                                        MiscButtonTemplate(
                                           buttonText: 'Share',
                                           buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                                           buttonColor: const Color(0xff04ECFF),

@@ -1,6 +1,5 @@
 import 'package:facesbyplaces/API/Regular/06-Donate/api_donate_regular_01_donate.dart';
 import 'package:facesbyplaces/API/Regular/06-Donate/api_donate_regular_02_confirm_payment.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_06_regular_button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -12,6 +11,7 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:pay/pay.dart' as pay;
+import 'package:misc/misc.dart';
 import 'dart:convert';
 import 'dart:io';
 
@@ -120,7 +120,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
 
                       const SizedBox(height: 10,),
 
-                      MiscRegularButtonTemplate(
+                      MiscButtonTemplate(
                         buttonTextStyle: const TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold',),
                         width: SizeConfig.screenWidth! / 2, 
                         buttonColor: const Color(0xff4EC9D4),
@@ -249,7 +249,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
 
                                                           const SizedBox(height: 20,),
 
-                                                          MiscRegularButtonTemplate(
+                                                          MiscButtonTemplate(
                                                             buttonTextStyle: const TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold',),
                                                             width: SizeConfig.screenWidth! / 2, 
                                                             buttonColor: const Color(0xff4EC9D4),

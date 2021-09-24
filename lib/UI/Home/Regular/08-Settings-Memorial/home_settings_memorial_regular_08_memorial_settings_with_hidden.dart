@@ -1,11 +1,11 @@
 import 'package:facesbyplaces/API/Regular/02-Main/api_main_regular_04_02_01_leave_page.dart';
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_17_set_relationship.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_02_regular_dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 
 class HomeRegularMemorialSettingsWithHidden extends StatefulWidget{
   final int memorialId;
@@ -136,7 +136,7 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
           subtitle: const Text('Set your relationship for this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
           tileColor: const Color(0xffffffff),
           onTap: () async{
-            String choice = await showDialog(context: (context), builder: (build) => const MiscRegularRelationshipFromDialog());
+            String choice = await showDialog(context: (context), builder: (build) => const MiscRelationshipFromDialog());
 
             if(choice.isNotEmpty){
               bool result = await apiRegularMemorialSetRelationship(memorialId: memorialId, relationship: choice);
@@ -179,7 +179,7 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
           subtitle: const Text('Leave this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
           tileColor: const Color(0xffffffff),
           onTap: () async{
-            bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Leave page', content: 'Are you sure you want to leave this page?',),);
+            bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscConfirmDialog(title: 'Leave page', content: 'Are you sure you want to leave this page?',),);
 
             if(confirmResult){
               context.loaderOverlay.show();

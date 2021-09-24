@@ -10,3 +10,8 @@ import 'package:flutter/gestures.dart';
 
 part 'misc_01_post.dart';
 part 'misc_02_notification.dart';
+part 'misc_03_message.dart';
+part 'misc_04_memorial_manager.dart';
+part 'misc_05_custom_drawings.dart';
+part 'misc_06_dialogs.dart';
+part 'misc_07_buttons.dart';

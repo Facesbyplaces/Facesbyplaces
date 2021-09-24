@@ -1,6 +1,5 @@
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_01_regular_input_field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_07_regular_background.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_06_regular_button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_04_regular_background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home_create_memorial_regular_03_create_memorial.dart';
 import 'package:better_player/better_player.dart';
@@ -9,6 +8,7 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 import 'dart:io';
 
 class HomeRegularCreateMemorial2 extends StatefulWidget{
@@ -165,7 +165,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
 
                       const SizedBox(height: 80,),
 
-                      MiscRegularButtonTemplate(
+                      MiscButtonTemplate(
                         buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),
                         width: 150,
                         height: 50,

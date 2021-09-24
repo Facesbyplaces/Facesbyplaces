@@ -5,7 +5,7 @@ import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api_settings_not
 import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api_settings_notifications_blm_05_update_notification_add_family.dart';
 import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api_settings_notifications_blm_06_update_notification_add_friends.dart';
 import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api_settings_notifications_blm_07_update_notification_add_admin.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_07_blm_background.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_04_blm_background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe

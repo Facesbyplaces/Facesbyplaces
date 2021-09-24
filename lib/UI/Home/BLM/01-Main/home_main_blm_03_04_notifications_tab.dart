@@ -1,10 +1,16 @@
 import 'package:facesbyplaces/API/BLM/02-Main/api_main_blm_04_04_home_notifications_tab.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_10_blm_notification_display.dart';
+import 'package:facesbyplaces/API/BLM/03-View-Memorial/api_view_memorial_blm_01_show_memorial_details.dart';
+import 'package:facesbyplaces/API/Regular/03-View-Memorial/api_view_memorial_regular_01_show_memorial_details.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home_view_memorial_blm_02_profile_memorial.dart';
+import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home_view_memorial_regular_02_profile_memorial.dart';
+import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home_show_post_regular_01_show_original_post_comments.dart';
+import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home_show_user_regular_01_user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 
 class HomeBLMNotificationsTab extends StatefulWidget{
   const HomeBLMNotificationsTab({Key? key}) : super(key: key);
@@ -14,7 +20,7 @@ class HomeBLMNotificationsTab extends StatefulWidget{
 }
 
 class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
-  List<MiscBLMNotificationDisplayTemplate> notifications = [];
+  List<MiscNotificationDisplayTemplate> notifications = [];
   ScrollController scrollController = ScrollController();
   ValueNotifier<int> count = ValueNotifier<int>(0);
   bool isGuestLoggedIn = true;
@@ -70,16 +76,35 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
 
       for(int i = 0; i < newValue.blmNotification.length; i++){
         notifications.add(
-          MiscBLMNotificationDisplayTemplate(
+          MiscNotificationDisplayTemplate(
             imageIcon: newValue.blmNotification[i].homeTabNotificationActor.homeTabNotificationActorImage,
-            postId: newValue.blmNotification[i].homeTabNotificationPostId,
             notification: newValue.blmNotification[i].homeTabNotificationAction,
             dateCreated: timeago.format(DateTime.parse(newValue.blmNotification[i].homeTabNotificationCreatedAt,)),
-            notificationType: newValue.blmNotification[i].homeTabNotificationNotificationType,
             readStatus: newValue.blmNotification[i].homeTabNotificationRead,
             actor: newValue.blmNotification[i].homeTabNotificationActor.homeTabNotificationActorFirstName,
-            actorId: newValue.blmNotification[i].homeTabNotificationActor.homeTabNotificationActorId,
-            actorAccountType: newValue.blmNotification[i].homeTabNotificationActor.homeTabNotificationActorAccountType,
+            imageOnPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: newValue.blmNotification[i].homeTabNotificationActor.homeTabNotificationActorId, accountType: newValue.blmNotification[i].homeTabNotificationActor.homeTabNotificationActorAccountType,)));
+            },
+            titleOnPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: newValue.blmNotification[i].homeTabNotificationActor.homeTabNotificationActorId, accountType: newValue.blmNotification[i].homeTabNotificationActor.homeTabNotificationActorAccountType,)));
+            },
+            notificationOnPressed: () async{
+              if(newValue.blmNotification[i].homeTabNotificationNotificationType == 'Memorial'){
+                context.loaderOverlay.show();
+                var memorialProfile = await apiRegularShowMemorial(memorialId: newValue.blmNotification[i].homeTabNotificationPostId);
+                context.loaderOverlay.hide();
+
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: newValue.blmNotification[i].homeTabNotificationPostId, pageType: newValue.blmNotification[i].homeTabNotificationNotificationType, newJoin: memorialProfile.almMemorial.showMemorialFollower,)));
+              }else if(newValue.blmNotification[i].homeTabNotificationNotificationType == 'Blm'){
+                context.loaderOverlay.show();
+                var blmProfile = await apiBLMShowMemorial(memorialId: newValue.blmNotification[i].homeTabNotificationPostId);
+                context.loaderOverlay.hide();
+
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: newValue.blmNotification[i].homeTabNotificationPostId, pageType: newValue.blmNotification[i].homeTabNotificationNotificationType, newJoin: blmProfile.blmMemorial.memorialFollower,)));
+              }else if(newValue.blmNotification[i].homeTabNotificationNotificationType == 'Post'){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: newValue.blmNotification[i].homeTabNotificationPostId)));
+              }
+            },
           ),
         );
       }

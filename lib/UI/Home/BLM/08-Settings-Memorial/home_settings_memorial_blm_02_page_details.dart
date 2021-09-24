@@ -2,8 +2,6 @@ import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home_view_memorial_bl
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_01_show_page_details.dart';
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_07_update_page_details.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_01_blm_input_field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_02_blm_dialog.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_06_blm_button.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -11,6 +9,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 
 class HomeBLMPageDetails extends StatefulWidget{
   final int memorialId;
@@ -208,7 +207,7 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
 
                             const SizedBox(height: 80,),
 
-                            MiscBLMButtonTemplate(
+                            MiscButtonTemplate(
                               buttonText: 'Update',
                               buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),
                               buttonColor: const Color(0xff04ECFF),
@@ -216,7 +215,7 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                               height: 50,
                               onPressed: () async{
                                 if(memorialSettings.data!.blmMemorial.showPageDetailsName != _key1.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDescription != _key2.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsRelationship != _key3.currentState!.currentSelection || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsLocation != _key4.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob != controller1.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsRip != controller2.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsState != _key7.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry != _key8.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsPrecinct != _key9.currentState!.controller.text){
-                                  bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),),);
+                                  bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),),);
 
                                   if(confirmResult){
                                     context.loaderOverlay.show();

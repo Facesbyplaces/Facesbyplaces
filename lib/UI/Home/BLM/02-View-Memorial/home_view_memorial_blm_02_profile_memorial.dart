@@ -3,10 +3,9 @@ import 'package:facesbyplaces/API/BLM/02-Main/api_main_blm_04_02_03_unfollow_pag
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api_view_memorial_blm_01_show_memorial_details.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api_view_memorial_blm_02_show_profile_post.dart';
 import 'package:facesbyplaces/UI/Home/BLM/05-Donate/home_donate_blm_01_donate.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_11_blm_dropdown.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_05_blm_dropdown.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_04_blm_post.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_08_blm_message.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_03_blm_post.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,6 +21,7 @@ import 'home_view_memorial_blm_04_maps.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
+import 'package:misc/misc.dart';
 import 'dart:ui';
 
 class BLMProfilePosts{
@@ -900,7 +900,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                     ],
                                   );
                                 }else if(profile.hasError){
-                                  return const MiscBLMErrorMessageTemplate();
+                                  return const MiscErrorMessageTemplate();
                                 }else{
                                   return Container(height: SizeConfig.screenHeight);
                                 }
@@ -1132,7 +1132,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                   ),
 
                   isGuestLoggedInListener
-                  ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: const MiscBLMLoginToContinue(),)
+                  ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: const MiscLoginToContinue(),)
                   : Container(height: 0),
                 ],
               ),

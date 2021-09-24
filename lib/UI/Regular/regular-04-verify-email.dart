@@ -1,7 +1,6 @@
 // ignore_for_file: file_names
 import 'package:facesbyplaces/API/Regular/01-Start/api_start_regular_03_verify_email.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api_start_regular_10_verification_code_resend.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_06_regular_button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
@@ -9,6 +8,7 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 
 class RegularVerifyEmail extends StatelessWidget{
   RegularVerifyEmail({Key? key}) : super(key: key);
@@ -154,7 +154,7 @@ class RegularVerifyEmail extends StatelessWidget{
 
                                 const SizedBox(height: 120),
 
-                                MiscRegularButtonTemplate(
+                                MiscButtonTemplate(
                                   buttonText: controller.text.length != 3 ? 'Next' : 'Sign Up',
                                   buttonTextStyle: const TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold'),
                                   buttonColor: const Color(0xff04ECFF),

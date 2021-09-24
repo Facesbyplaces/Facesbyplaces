@@ -1,6 +1,5 @@
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_01_regular_input_field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_06_regular_button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_07_regular_background.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_04_regular_background.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -9,6 +8,7 @@ import 'home_create_memorial_regular_04_locate_map.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 import 'dart:io';
 
 class RegularCreateMemorialValues{
@@ -208,7 +208,7 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
 
                       const SizedBox(height: 40,),
 
-                      MiscRegularButtonTemplate(
+                      MiscButtonTemplate(
                         buttonTextStyle: const TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold',),
                         width: SizeConfig.screenWidth! / 2,
                         height: 50,

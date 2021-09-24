@@ -1,13 +1,12 @@
 import 'package:facesbyplaces/API/Regular/13-Show-User/api_show_user_regular_01_show_user_information.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_05_regular_custom_drawings.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_08_regular_message.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_12_regular_user_details.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_06_regular_user_details.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:we_slide/we_slide.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 import 'dart:ui';
 
 class HomeRegularUserProfile extends StatefulWidget{
@@ -111,7 +110,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                       height: SizeConfig.screenHeight! / 2.5,
                       child: Stack(
                         children: [
-                          CustomPaint(size: Size.infinite, painter: MiscRegularCurvePainter(),),
+                          CustomPaint(size: Size.infinite, painter: MiscCurvePainter(),),
 
                           GestureDetector( // BACKGROUND IMAGE FOR ZOOMING IN
                             child: Container(
@@ -326,7 +325,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                 ),
               );
             }else if(profile.hasError){
-              return const MiscRegularErrorMessageTemplate();
+              return const MiscErrorMessageTemplate();
             }else{
               return SizedBox(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
             }

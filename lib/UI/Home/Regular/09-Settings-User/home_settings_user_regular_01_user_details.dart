@@ -3,10 +3,6 @@ import 'package:facesbyplaces/API/Regular/02-Main/api_main_regular_02_show_user_
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_regular_03_show_other_details_status.dart';
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_regular_12_update_user_profile_picture.dart';
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_regular_14_check_account.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_02_regular_dialog.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_05_regular_custom_drawings.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_06_regular_button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_08_regular_message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/ui-01-get-started.dart';
 import 'home_settings_user_regular_02_user_update_details.dart';
@@ -20,6 +16,7 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:we_slide/we_slide.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 import 'dart:io';
 
 class HomeRegularUserProfileDetails extends StatefulWidget{
@@ -150,14 +147,14 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
 
                       const SizedBox(height: 20,),
 
-                      MiscRegularButtonTemplate(
+                      MiscButtonTemplate(
                         buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                         buttonColor: const Color(0xff04ECFF),
                         width: SizeConfig.screenWidth! / 2,
                         buttonText: 'Logout',
                         height: 50,
                         onPressed: () async{
-                          bool logoutResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Log out', content: 'Are you sure you want to logout from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),),);
+                          bool logoutResult = await showDialog(context: (context), builder: (build) => const MiscConfirmDialog(title: 'Log out', content: 'Are you sure you want to logout from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),),);
 
                           if(logoutResult){
                             context.loaderOverlay.show();
@@ -205,7 +202,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                       height: SizeConfig.screenHeight! / 2.5,
                       child: Stack(
                         children: [
-                          CustomPaint(size: Size.infinite, painter: MiscRegularCurvePainter(),),
+                          CustomPaint(size: Size.infinite, painter: MiscCurvePainter(),),
 
                           GestureDetector( // BACKGROUND IMAGE FOR ZOOMING IN
                             child: Container(
@@ -306,7 +303,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                 ),
               );
             }else if(profile.hasError){
-              return const MiscRegularErrorMessageTemplate();
+              return const MiscErrorMessageTemplate();
             }else{
               return SizedBox(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
             }

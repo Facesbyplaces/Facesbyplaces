@@ -1,6 +1,5 @@
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_01_blm_input_field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_07_blm_background.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_06_blm_button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_04_blm_background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home_create_memorial_blm_03_create_memorial.dart';
 import 'package:better_player/better_player.dart';
@@ -9,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 import 'dart:io';
 
 class HomeBLMCreateMemorial2 extends StatefulWidget{
@@ -157,7 +157,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                       
                       const SizedBox(height: 80,),
                       
-                      MiscBLMButtonTemplate(
+                      MiscButtonTemplate(
                         buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),
                         width: 150,
                         height: 50,

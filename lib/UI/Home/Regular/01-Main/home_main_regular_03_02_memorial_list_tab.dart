@@ -1,5 +1,5 @@
 import 'package:facesbyplaces/API/Regular/02-Main/api_main_regular_04_02_00_home_memorials_tab.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_03_regular_manage_memorial.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_02_regular_manage_memorial.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -158,6 +158,33 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
             pageType: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPagePageType,
             relationship: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageRelationship,
           ),
+          // MiscManageMemorialTab(
+          //   index: i,
+          //   memorialName: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageName,
+          //   description: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageDetails.blmHomeTabMemorialPageDetailsDescription,
+          //   image: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageProfileImage,
+          //   memorialId: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageId,
+          //   managed: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageManage,
+          //   follower: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageFollower,
+          //   famOrFriends: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageFamOrFriends,
+          //   pageType: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPagePageType,
+          //   relationship: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageRelationship,
+          //   memorialOnPressed: () async{
+          //     if(newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPagePageType == 'Memorial'){
+          //       if(newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageManage == true || newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageFamOrFriends == true){
+          //         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageId, relationship: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageRelationship, managed: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageManage, newlyCreated: false,)));
+          //       }else{
+          //         followButton.value = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: widget.memorialId, pageType: widget.pageType, newJoin: followButtonListener,)));
+          //       }
+          //     }else{
+          //       if(widget.managed == true || widget.famOrFriends == true){
+          //         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed: widget.managed, newlyCreated: false,)));
+          //       }else{
+          //         followButton.value = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: widget.memorialId, pageType: widget.pageType, newJoin: followButtonListener,)));
+          //       }
+          //     }
+          //   }
+          // ),
         );
       }
     }

@@ -1,9 +1,7 @@
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home_view_memorial_blm_01_managed_memorial.dart';
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_08_update_page_image.dart';
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_02_show_page_images.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_02_blm_dialog.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_06_blm_button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_07_blm_background.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_04_blm_background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -14,6 +12,7 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:misc/misc.dart';
 import 'dart:typed_data';
 import 'dart:io';
 
@@ -89,7 +88,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                 icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
                 onPressed: () async{
                   if(profileImage.value.path != '' || (backgroundImage.value.path != '' && backgroundImageToggle.value != 0)){
-                    bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to discard the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
+                    bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscConfirmDialog(title: 'Confirm', content: 'Do you want to discard the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
                     if(confirmResult){
                       Navigator.pop(context);
                     }
@@ -256,7 +255,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
 
                             const SizedBox(height: 80,),
 
-                            MiscBLMButtonTemplate(
+                            MiscButtonTemplate(
                               buttonText: 'Update',
                               buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),
                               buttonColor: const Color(0xff04ECFF),

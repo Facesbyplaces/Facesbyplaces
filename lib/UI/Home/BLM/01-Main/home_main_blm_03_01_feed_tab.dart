@@ -1,7 +1,6 @@
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_04_blm_post.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_06_blm_button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_03_blm_post.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api_main_blm_04_01_home_feed_tab.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_04_regular_post.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_03_regular_post.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -13,6 +12,7 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
+import 'package:misc/misc.dart';
 
 class BLMMainPagesFeeds{
   final int userId;
@@ -615,7 +615,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
 
                 isGuestLoggedInListener
                 ? Container(height: 0,)
-                : MiscBLMButtonTemplate(
+                : MiscButtonTemplate(
                   buttonText: 'Create',
                   buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                   buttonColor: const Color(0xff000000),

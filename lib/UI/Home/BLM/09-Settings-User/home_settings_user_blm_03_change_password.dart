@@ -1,13 +1,13 @@
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_05_change_password.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_13_add_password.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_01_blm_input_field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_06_blm_button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home_settings_use_blm_01_user_details.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 
 class HomeBLMUserChangePassword extends StatefulWidget{
   final int userId;
@@ -71,7 +71,7 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
 
                 const SizedBox(height: 80,),
 
-                MiscBLMButtonTemplate(
+                MiscButtonTemplate(
                   buttonText: widget.isAddPassword == true ? 'Add' : 'Update',
                   buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                   buttonColor: const Color(0xff04ECFF),

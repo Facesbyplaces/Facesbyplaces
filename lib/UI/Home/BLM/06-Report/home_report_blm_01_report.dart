@@ -1,11 +1,11 @@
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_01_blm_input_field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_06_blm_button.dart';
 import 'package:facesbyplaces/API/BLM/07-Report/api_report_blm_01_report.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 
 class HomeBLMReport extends StatelessWidget{
   final int postId;
@@ -72,7 +72,7 @@ class HomeBLMReport extends StatelessWidget{
 
                   const SizedBox(height: 50,),
 
-                  MiscBLMButtonTemplate(
+                  MiscButtonTemplate(
                     buttonText: 'Report',
                     buttonTextStyle: const TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold'),
                     buttonColor: const Color(0xff04ECFF),

@@ -3,9 +3,8 @@ import 'package:facesbyplaces/API/Regular/02-Main/api_main_regular_04_02_03_unfo
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api_view_memorial_regular_02_show_profile_post.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api_view_memorial_regular_01_show_memorial_details.dart';
 import 'package:facesbyplaces/UI/Home/Regular/05-Donate/home_donate_regular_01_donate.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_04_regular_post.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_08_regular_message.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_11_regular_dropdown.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_03_regular_post.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_05_regular_dropdown.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -22,6 +21,7 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
+import 'package:misc/misc.dart';
 import 'dart:ui';
 
 class RegularProfilePosts{
@@ -1160,7 +1160,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                             ),
                           );
                         }else if(profile.hasError){
-                          return const MiscRegularErrorMessageTemplate();
+                          // return const MiscRegularErrorMessageTemplate();
+                          return const MiscErrorMessageTemplate();
                         }else{
                           return Container(height: SizeConfig.screenHeight);
                         }
@@ -1169,7 +1170,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                   ),
 
                   isGuestLoggedInListener
-                  ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: const MiscRegularLoginToContinue(),)
+                  ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: const MiscLoginToContinue(),)
                   : Container(height: 0),
                 ],
               ),

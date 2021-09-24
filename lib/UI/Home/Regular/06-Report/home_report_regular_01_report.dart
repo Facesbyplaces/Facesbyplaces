@@ -1,11 +1,11 @@
 import 'package:facesbyplaces/API/Regular/07-Report/api_report_regular_01_report.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_01_regular_input_field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_06_regular_button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 
 class HomeRegularReport extends StatelessWidget{
   final int postId;
@@ -70,7 +70,7 @@ class HomeRegularReport extends StatelessWidget{
 
                 const SizedBox(height: 50,),
 
-                MiscRegularButtonTemplate(
+                MiscButtonTemplate(
                   buttonTextStyle: const TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold',),
                   buttonColor: const Color(0xff04ECFF),
                   width: SizeConfig.screenWidth! / 2,

@@ -1,7 +1,6 @@
 import 'package:facesbyplaces/API/BLM/08-Search/api_search_blm_05_search_users.dart';
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_11_add_family.dart';
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_12_add_friends.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_02_blm_dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home_settings_memorial_blm_05_page_family.dart';
 import 'home_settings_memorial_blm_06_page_friends.dart';
@@ -9,6 +8,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 
 class BLMSearchUsers{
   final int userId;
@@ -261,7 +261,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                       subtitle: Text(users[index].email),
                       onTap: () async{
                         if(widget.isFamily){
-                          String choice = await showDialog(context: (context), builder: (build) => const MiscBLMRelationshipFromDialog()) ?? '';
+                          String choice = await showDialog(context: (context), builder: (build) => const MiscRelationshipFromDialog()) ?? '';
 
                           if(choice != ''){
                             context.loaderOverlay.show();

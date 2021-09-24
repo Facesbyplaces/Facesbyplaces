@@ -3,10 +3,6 @@ import 'package:facesbyplaces/API/BLM/02-Main/api_main_blm_02_show_user_informat
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_03_show_other_details_status.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_12_update_user_profile_picture.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_14_check_account.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_02_blm_dialog.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_05_blm_custom_drawings.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_06_blm_button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_08_blm_message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'home_settings_user_blm_02_user_update_details.dart';
@@ -20,6 +16,7 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import '../../../ui-01-get-started.dart';
 import 'package:we_slide/we_slide.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 import 'dart:io';
 
 class HomeBLMUserProfileDetails extends StatefulWidget{
@@ -150,14 +147,14 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
 
                       const SizedBox(height: 20,),
 
-                      MiscBLMButtonTemplate(
+                      MiscButtonTemplate(
                         buttonText: 'Logout',
                         buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                         buttonColor: const Color(0xff04ECFF),
                         width: SizeConfig.screenWidth! / 2,
                         height: 45,
                         onPressed: () async{
-                          bool logoutResult = await showDialog(context: (context), builder: (build) => const MiscBLMConfirmDialog(title: 'Log out', content: 'Are you sure you want to logout from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),),);
+                          bool logoutResult = await showDialog(context: (context), builder: (build) => const MiscConfirmDialog(title: 'Log out', content: 'Are you sure you want to logout from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),),);
 
                           if(logoutResult){
                             context.loaderOverlay.show();
@@ -203,7 +200,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                       height: SizeConfig.screenHeight! / 2.5,
                       child: Stack(
                         children: [
-                          CustomPaint(size: Size.infinite, painter: MiscBLMCurvePainter(),),
+                          CustomPaint(size: Size.infinite, painter: MiscCurvePainter(),),
 
                           GestureDetector( // BACKGROUND IMAGE FOR ZOOMING IN
                             child: Container(
@@ -303,7 +300,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                 ),
               );
             }else if(profile.hasError){
-              return const MiscBLMErrorMessageTemplate();
+              return const MiscErrorMessageTemplate();
             }else{
               return SizedBox(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
             }

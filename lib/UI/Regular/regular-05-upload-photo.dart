@@ -1,13 +1,12 @@
 // ignore_for_file: file_names
 import 'package:facesbyplaces/API/Regular/01-Start/api_start_regular_04_upload_photo.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_06_regular_button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_02_regular_dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 import 'dart:io';
 
 class RegularUploadPhoto extends StatefulWidget{
@@ -98,7 +97,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                               ),
                             ),
                             onTap: () async{
-                              var choice = await showDialog(context: (context), builder: (build) => const MiscRegularUploadFromDialog());
+                              var choice = await showDialog(context: (context), builder: (build) => const MiscUploadFromDialog());
 
                               if(choice == null){
                                 choice = 0;
@@ -116,7 +115,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
 
                           const SizedBox(height: 50),
 
-                          MiscRegularButtonTemplate(
+                          MiscButtonTemplate(
                             buttonText: imageListener.path != '' ? 'Sign Up' : 'Next',
                             buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                             buttonColor: const Color(0xff04ECFF),

@@ -1,13 +1,12 @@
 // ignore_for_file: file_names
 import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_04_upload_photo.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_02_blm_dialog.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_06_blm_button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 import 'dart:io';
 
 class BLMUploadPhoto extends StatefulWidget{
@@ -92,7 +91,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                             ),
                           ),
                           onTap: () async{
-                            var choice = await showDialog(context: (context), builder: (build) => const MiscBLMUploadFromDialog());
+                            var choice = await showDialog(context: (context), builder: (build) => const MiscUploadFromDialog());
 
                             if(choice == null){
                               choice = 0;
@@ -110,7 +109,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
 
                         const SizedBox(height: 50),
 
-                        MiscBLMButtonTemplate(
+                        MiscButtonTemplate(
                           buttonText: imageListener.path != '' ? 'Sign Up' : 'Speak Now',
                           buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                           buttonColor: imageListener.path != '' ? const Color(0xff04ECFF) : const Color(0xff000000),

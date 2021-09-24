@@ -2,10 +2,9 @@ import 'package:facesbyplaces/API/BLM/08-Search/api_search_blm_01_search_posts.d
 import 'package:facesbyplaces/API/BLM/08-Search/api_search_blm_04_search_blm.dart';
 import 'package:facesbyplaces/API/BLM/08-Search/api_search_blm_03_search_nearby.dart';
 import 'package:facesbyplaces/API/BLM/08-Search/api_search_blm_02_search_suggested.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_03_blm_manage_memorial.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_04_blm_post.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_08_blm_message.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_04_regular_post.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_02_blm_manage_memorial.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_03_blm_post.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_03_regular_post.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -15,6 +14,7 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
+import 'package:misc/misc.dart';
 import 'dart:ui';
 
 class BLMSearchMainPosts{
@@ -692,7 +692,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                       Expanded(
                         child: Container(
                           child: isGuestLoggedInListener 
-                          ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: const MiscBLMLoginToContinue(),)
+                          ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: const MiscLoginToContinue(),)
                           : ((){
                             switch(toggleListener){
                               case 0: return searchPostExtended();

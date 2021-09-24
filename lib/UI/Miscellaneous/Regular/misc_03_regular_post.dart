@@ -11,7 +11,7 @@ import '../../../Configurations/size_configuration.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'misc_11_regular_dropdown.dart';
+import 'misc_05_regular_dropdown.dart';
 
 class MiscRegularPost extends StatefulWidget{
   final List<Widget> contents;

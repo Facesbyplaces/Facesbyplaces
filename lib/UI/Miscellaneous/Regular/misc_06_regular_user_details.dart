@@ -6,9 +6,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'misc_03_regular_manage_memorial.dart';
+import 'misc_02_regular_manage_memorial.dart';
 import 'package:flutter/material.dart';
-import 'misc_04_regular_post.dart';
+import 'misc_03_regular_post.dart';
 import 'package:mime/mime.dart';
 
 class RegularMiscDraggablePost{

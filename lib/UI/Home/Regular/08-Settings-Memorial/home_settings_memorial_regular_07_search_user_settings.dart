@@ -1,7 +1,6 @@
 import 'package:facesbyplaces/API/Regular/08-Search/api_search_regular_05_search_users.dart';
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_11_add_family.dart';
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_12_add_friends.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_02_regular_dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home_settings_memorial_regular_05_page_family.dart';
 import 'home_settings_memorial_regular_06_page_friends.dart';
@@ -9,6 +8,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 
 class RegularSearchUsers{
   final int userId;
@@ -254,7 +254,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                       subtitle: Text(users[index].email, style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
                       onTap: () async{
                         if(widget.isFamily){
-                          String choice = await showDialog(context: (context), builder: (build) => const MiscRegularRelationshipFromDialog()) ?? '';
+                          String choice = await showDialog(context: (context), builder: (build) => const MiscRelationshipFromDialog()) ?? '';
 
                           if(choice != ''){
                             context.loaderOverlay.show();

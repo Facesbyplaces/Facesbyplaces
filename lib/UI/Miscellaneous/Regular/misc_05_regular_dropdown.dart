@@ -11,8 +11,8 @@ import 'package:clipboard/clipboard.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'misc_06_regular_button.dart';
 import 'package:share/share.dart';
+import 'package:misc/misc.dart';
 import 'dart:typed_data';
 import 'dart:ui';
 import 'dart:io';
@@ -204,7 +204,7 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
 
                                         const Spacer(),
 
-                                        MiscRegularButtonTemplate(
+                                        MiscButtonTemplate(
                                           buttonText: 'Share',
                                           buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                                           width: SizeConfig.screenWidth! / 2,
@@ -449,7 +449,7 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
 
                                         const Spacer(),
 
-                                        MiscRegularButtonTemplate(
+                                        MiscButtonTemplate(
                                           buttonText: 'Share',
                                           buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                                           buttonColor: const Color(0xff04ECFF),

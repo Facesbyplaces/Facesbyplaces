@@ -1,6 +1,5 @@
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_01_blm_input_field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_07_blm_background.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_06_blm_button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_04_blm_background.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -9,6 +8,7 @@ import 'home_create_memorial_blm_04_locate_map.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 import 'dart:io';
 
 class BLMCreateMemorialValues{
@@ -213,7 +213,7 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
 
                       const SizedBox(height: 40,),
 
-                      MiscBLMButtonTemplate(
+                      MiscButtonTemplate(
                         buttonTextStyle: const TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold',),
                         width: SizeConfig.screenWidth! / 2,
                         height: 50,

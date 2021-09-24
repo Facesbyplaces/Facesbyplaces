@@ -1,13 +1,13 @@
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_regular_05_change_password.dart';
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_regular_13_add_password.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_01_regular_input_field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_06_regular_button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home_settings_user_regular_01_user_details.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 
 class HomeRegularUserChangePassword extends StatefulWidget{
   final int userId;
@@ -72,7 +72,7 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
 
                   const SizedBox(height: 80,),
 
-                  MiscRegularButtonTemplate(
+                  MiscButtonTemplate(
                     buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                     buttonText: widget.isAddPassword == true ? 'Add' : 'Update',
                     buttonColor: const Color(0xff04ECFF),
