@@ -1,4 +1,3 @@
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_01_blm_input_field.dart';
 import 'package:facesbyplaces/API/BLM/07-Report/api_report_blm_01_report.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -12,8 +11,8 @@ class HomeBLMReport extends StatelessWidget{
   final String reportType;
   HomeBLMReport({Key? key, required this.postId, required this.reportType}) : super(key: key);
 
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldMultiTextTemplateState> _key2 = GlobalKey<MiscBLMInputFieldMultiTextTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldMultiTextTemplateState> _key2 = GlobalKey<MiscInputFieldMultiTextTemplateState>();
 
   @override
   Widget build(BuildContext context){
@@ -55,7 +54,7 @@ class HomeBLMReport extends StatelessWidget{
 
                   const SizedBox(height: 25,),
 
-                  MiscBLMInputFieldTemplate(
+                  MiscInputFieldTemplate(
                     key: _key1,
                     labelText: 'Subject',
                     type: TextInputType.text,
@@ -64,7 +63,7 @@ class HomeBLMReport extends StatelessWidget{
 
                   const SizedBox(height: 25,),
 
-                  MiscBLMInputFieldMultiTextTemplate(
+                  MiscInputFieldMultiTextTemplate(
                     key: _key2,
                     labelText: 'Body',
                     labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xfFB1B1B1),),

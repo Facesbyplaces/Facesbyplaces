@@ -1,4 +1,3 @@
-// ignore_for_file: file_names
 import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_04_upload_photo.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';

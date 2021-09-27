@@ -1,4 +1,3 @@
-// ignore_for_file: file_names
 import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_03_verify_email.dart';
 import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_10_verification_code_resend.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';

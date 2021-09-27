@@ -1,9 +1,7 @@
-// ignore_for_file: file_names
 import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_01_login.dart';
 import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_05_sign_in_with_facebook.dart';
 import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_07_sign_in_with_apple.dart';
 import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_11_google_authentication.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_01_blm_input_field.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,13 +15,13 @@ import 'blm_06_password_reset_email.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
-import '../ui-01-get-started.dart';
+import '../ui_01_get_started.dart';
 import 'package:misc/misc.dart';
 
 class BLMLogin extends StatelessWidget{
   BLMLogin({Key? key}) : super(key: key);
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
 
   @override
   Widget build(BuildContext context){
@@ -231,7 +229,7 @@ class BLMLogin extends StatelessWidget{
 
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 40),
-                                child: MiscBLMInputFieldTemplate(
+                                child: MiscInputFieldTemplate(
                                   key: _key1,
                                   labelText: 'Email Address',
                                   type: TextInputType.emailAddress,
@@ -242,7 +240,7 @@ class BLMLogin extends StatelessWidget{
 
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 40),
-                                child: MiscBLMInputFieldTemplate(
+                                child: MiscInputFieldTemplate(
                                   key: _key2,
                                   labelText: 'Password',
                                   obscureText: true,

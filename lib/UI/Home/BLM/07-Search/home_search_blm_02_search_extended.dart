@@ -2,9 +2,9 @@ import 'package:facesbyplaces/API/BLM/08-Search/api_search_blm_01_search_posts.d
 import 'package:facesbyplaces/API/BLM/08-Search/api_search_blm_04_search_blm.dart';
 import 'package:facesbyplaces/API/BLM/08-Search/api_search_blm_03_search_nearby.dart';
 import 'package:facesbyplaces/API/BLM/08-Search/api_search_blm_02_search_suggested.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_02_blm_manage_memorial.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_03_blm_post.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_03_regular_post.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_01_blm_manage_memorial.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_02_blm_post.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_02_regular_post.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';

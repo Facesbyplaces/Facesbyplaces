@@ -5,12 +5,12 @@ import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api_settings
 import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api_settings_notifications_regular_05_update_notification_add_family.dart';
 import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api_settings_notifications_regular_06_update_notification_add_friends.dart';
 import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api_settings_notifications_regular_07_update_notification_add_admin.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_04_regular_background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:misc/misc.dart';
 
 class HomeRegularNotificationSettings extends StatefulWidget{
   final bool newMemorial;
@@ -89,7 +89,7 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                         ),
                         body: Stack(
                           children: [
-                            const MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
+                            const MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
                             SingleChildScrollView(
                               physics: const ClampingScrollPhysics(),
                                 padding: const EdgeInsets.all(20.0),

@@ -1,5 +1,5 @@
 import 'package:facesbyplaces/API/Regular/02-Main/api_main_regular_04_02_00_home_memorials_tab.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_02_regular_manage_memorial.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_01_regular_manage_memorial.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:loader_overlay/loader_overlay.dart';

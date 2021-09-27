@@ -5,7 +5,7 @@ import 'package:facesbyplaces/UI/Home/BLM/01-Main/home_main_blm_02_home_extended
 import 'package:facesbyplaces/UI/Home/BLM/04-Create-Post/home_create_post_blm_01_create_post.dart';
 import 'package:facesbyplaces/UI/Home/BLM/08-Settings-Memorial/home_settings_memorial_blm_01_memorial_settings.dart';
 import 'package:facesbyplaces/UI/Home/BLM/08-Settings-Memorial/home_settings_memorial_blm_08_memorial_settings_with_hidden.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_03_blm_post.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_02_blm_post.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';

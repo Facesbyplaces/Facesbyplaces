@@ -1,7 +1,6 @@
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home_view_memorial_regular_01_managed_memorial.dart';
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_01_show_page_details.dart';
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_07_update_page_details.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_01_regular_input_field.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -20,10 +19,10 @@ class HomeRegularPageDetails extends StatefulWidget{
 }
 
 class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  final GlobalKey<MiscRegularInputFieldDropDownState> _key2 = GlobalKey<MiscRegularInputFieldDropDownState>();
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key5 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key6 = GlobalKey<MiscRegularInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldDropDownState> _key2 = GlobalKey<MiscInputFieldDropDownState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key5 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key6 = GlobalKey<MiscInputFieldTemplateState>();
   Future<APIRegularShowPageDetailsMain>? futureMemorialSettings;
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
@@ -80,7 +79,7 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
-                          MiscRegularInputFieldTemplate(
+                          MiscInputFieldTemplate(
                             key: _key1,
                             labelText: 'Page Name',
                             displayText: memorialSettings.data!.almMemorial.showPageDetailsName,
@@ -89,7 +88,7 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
 
                           const SizedBox(height: 20,),
 
-                          MiscRegularInputFieldDropDown(
+                          MiscInputFieldDropDown(
                             key: _key2,
                             displayText: memorialSettings.data!.almMemorial.showPageDetailsRelationship,
                           ),
@@ -148,7 +147,7 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
 
                           const SizedBox(height: 20,),
 
-                          MiscRegularInputFieldTemplate(
+                          MiscInputFieldTemplate(
                             key: _key5,
                             labelText: 'Country',
                             displayText: memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry,
@@ -157,7 +156,7 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
 
                           const SizedBox(height: 20,),
 
-                          MiscRegularInputFieldTemplate(
+                          MiscInputFieldTemplate(
                             key: _key6,
                             labelText: 'Cemetery',
                             displayText: memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCemetery,

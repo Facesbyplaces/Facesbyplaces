@@ -1,6 +1,4 @@
-// ignore_for_file: file_names
 import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_02_registration.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_01_blm_input_field.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
@@ -12,12 +10,12 @@ import 'package:misc/misc.dart';
 
 class BLMRegister extends StatelessWidget{
   BLMRegister({Key? key}) : super(key: key);
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMPhoneNumberTemplateState> _key3 = GlobalKey<MiscBLMPhoneNumberTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key4 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key5 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key6 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscPhoneNumberTemplateState> _key3 = GlobalKey<MiscPhoneNumberTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key4 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key5 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key6 = GlobalKey<MiscInputFieldTemplateState>();
 
   @override
   Widget build(BuildContext context){
@@ -77,42 +75,42 @@ class BLMRegister extends StatelessWidget{
                                 padding: const EdgeInsets.symmetric(horizontal: 40),
                                 child: Column(
                                   children: [
-                                    MiscBLMInputFieldTemplate(
+                                    MiscInputFieldTemplate(
                                       key: _key1,
                                       labelText: 'Your Name',
                                       type: TextInputType.name,
                                       labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                     ),
 
-                                    MiscBLMInputFieldTemplate(
+                                    MiscInputFieldTemplate(
                                       key: _key2,
                                       labelText: 'Last Name',
                                       type: TextInputType.name,
                                       labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                     ),
 
-                                    MiscBLMPhoneNumberTemplate(
+                                    MiscPhoneNumberTemplate(
                                       key: _key3,
                                       labelText: 'Mobile #',
                                       type: TextInputType.phone,
                                       labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                     ),
 
-                                    MiscBLMInputFieldTemplate(
+                                    MiscInputFieldTemplate(
                                       key: _key4,
                                       labelText: 'Email Address',
                                       type: TextInputType.emailAddress,
                                       labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                     ),
 
-                                    MiscBLMInputFieldTemplate(
+                                    MiscInputFieldTemplate(
                                       key: _key5,
                                       labelText: 'Username',
                                       type: TextInputType.text,
                                       labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                     ),
 
-                                    MiscBLMInputFieldTemplate(
+                                    MiscInputFieldTemplate(
                                       key: _key6,
                                       labelText: 'Password',
                                       type: TextInputType.text,

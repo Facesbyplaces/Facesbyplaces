@@ -4,7 +4,7 @@ import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_reg
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_regular_12_update_user_profile_picture.dart';
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_regular_14_check_account.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/UI/ui-01-get-started.dart';
+import 'package:facesbyplaces/UI/ui_01_get_started.dart';
 import 'home_settings_user_regular_02_user_update_details.dart';
 import 'home_settings_user_regular_03_change_password.dart';
 import 'home_settings_user_regular_04_other_details.dart';

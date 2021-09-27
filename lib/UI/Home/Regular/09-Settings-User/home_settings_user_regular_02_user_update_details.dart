@@ -1,6 +1,5 @@
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_regular_04_update_account_details.dart';
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_regular_01_show_account_details.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_01_regular_input_field.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home_settings_user_regular_01_user_details.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -19,11 +18,11 @@ class HomeRegularUserUpdateDetails extends StatefulWidget{
 }
 
 class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetails>{
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key3 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  final GlobalKey<MiscRegularPhoneNumberTemplateState> _key4 = GlobalKey<MiscRegularPhoneNumberTemplateState>();
-  final GlobalKey<MiscRegularInputFieldSecurityQuestionsState> _key5 = GlobalKey<MiscRegularInputFieldSecurityQuestionsState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key3 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscPhoneNumberTemplateState> _key4 = GlobalKey<MiscPhoneNumberTemplateState>();
+  final GlobalKey<MiscInputFieldSecurityQuestionsState> _key5 = GlobalKey<MiscInputFieldSecurityQuestionsState>();
   Future<APIRegularShowAccountDetails>? accountDetails;
 
   @override
@@ -76,7 +75,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                     physics: const ClampingScrollPhysics(),
                     child: Column(
                       children: [
-                        MiscRegularInputFieldTemplate(
+                        MiscInputFieldTemplate(
                           key: _key1,
                           labelText: 'First Name',
                           displayText: details.data!.showAccountDetailsFirstName,
@@ -85,7 +84,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
 
                         const SizedBox(height: 20,),
 
-                        MiscRegularInputFieldTemplate(
+                        MiscInputFieldTemplate(
                           key: _key2,
                           labelText: 'Last Name',
                           displayText: details.data!.showAccountDetailsLastName,
@@ -94,7 +93,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
 
                         const SizedBox(height: 20,),
 
-                        MiscRegularInputFieldTemplate(
+                        MiscInputFieldTemplate(
                           key: _key3,
                           labelText: 'Email Address',
                           displayText: details.data!.showAccountDetailsEmail,
@@ -104,7 +103,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
 
                         const SizedBox(height: 20,),
 
-                        MiscRegularPhoneNumberTemplate(
+                        MiscPhoneNumberTemplate(
                           key: _key4,
                           labelText: 'Phone Number',
                           displayText: details.data!.showAccountDetailsPhoneNumber,
@@ -113,7 +112,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
 
                         const SizedBox(height: 20,),
 
-                        MiscRegularInputFieldSecurityQuestions(
+                        MiscInputFieldSecurityQuestions(
                           key: _key5,
                           displayText: details.data!.showAccountDetailsQuestion != '' ? details.data!.showAccountDetailsQuestion : 'What\'s the name of your first dog?',
                         ),
@@ -140,7 +139,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
                                       title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                      description: const Text('Successfully updated the profile picture.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                      description: const Text('Successfully updated the account details.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                       entryAnimation: EntryAnimation.DEFAULT,
                                       onlyOkButton: true,

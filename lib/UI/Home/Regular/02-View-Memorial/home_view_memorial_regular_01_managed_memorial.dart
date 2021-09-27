@@ -5,7 +5,7 @@ import 'package:facesbyplaces/UI/Home/Regular/01-Main/home_main_regular_02_home_
 import 'package:facesbyplaces/UI/Home/Regular/04-Create-Post/home_create_post_regular_01_create_post.dart';
 import 'package:facesbyplaces/UI/Home/Regular/08-Settings-Memorial/home_settings_memorial_regular_01_memorial_settings.dart';
 import 'package:facesbyplaces/UI/Home/Regular/08-Settings-Memorial/home_settings_memorial_regular_08_memorial_settings_with_hidden.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_03_regular_post.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_02_regular_post.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';

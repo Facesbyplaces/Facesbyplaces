@@ -9,7 +9,6 @@ import 'package:facesbyplaces/API/Regular/02-Main/api_main_regular_02_show_user_
 import 'package:facesbyplaces/API/Regular/02-Main/api_main_regular_03_show_notification_settings.dart';
 import 'package:facesbyplaces/API/Regular/14-Notifications/api_notifications_regular_01_show_unread_notifications.dart';
 import 'package:facesbyplaces/API/Regular/14-Notifications/api_notifications_regular_02_read_unread_notifications.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_04_regular_background.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -24,7 +23,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
-import '../../../ui-01-get-started.dart';
+import '../../../ui_01_get_started.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:misc/misc.dart';
@@ -205,7 +204,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                     children: [
                       SingleChildScrollView(
                         physics: const NeverScrollableScrollPhysics(),
-                        child: SizedBox(height: SizeConfig.screenHeight, child: const MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
+                        child: SizedBox(height: SizeConfig.screenHeight, child: const MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
                       ),
 
                       Container(

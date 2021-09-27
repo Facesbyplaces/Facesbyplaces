@@ -1,5 +1,3 @@
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_01_blm_input_field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_04_blm_background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home_create_memorial_blm_03_create_memorial.dart';
 import 'package:better_player/better_player.dart';
@@ -28,7 +26,7 @@ class HomeBLMCreateMemorial2 extends StatefulWidget{
 }
 
 class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
   TextEditingController controllerStory = TextEditingController(text: '');
   ValueNotifier<List<File> > slideImages = ValueNotifier<List<File>>([]);
   ValueNotifier<File> videoFile = ValueNotifier<File>(File(''));
@@ -95,14 +93,14 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
             ),
             body: Stack(
               children: [
-                SingleChildScrollView(physics: const NeverScrollableScrollPhysics(), child: SizedBox(height: SizeConfig.screenHeight, child: const MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
+                SingleChildScrollView(physics: const NeverScrollableScrollPhysics(), child: SizedBox(height: SizeConfig.screenHeight, child: const MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
 
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                   child: ListView(
                     physics: const ClampingScrollPhysics(),
                     children: [
-                      MiscBLMInputFieldTemplate(
+                      MiscInputFieldTemplate(
                         key: _key1, 
                         labelText: 'Name of your Memorial Page',
                         labelTextStyle: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xff000000),),

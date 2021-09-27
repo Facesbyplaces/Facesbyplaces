@@ -1,6 +1,5 @@
 import 'package:facesbyplaces/API/BLM/04-Create-Memorial/api_create_memorial_blm_01_create_memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home_view_memorial_blm_01_managed_memorial.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_04_blm_background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
@@ -88,7 +87,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
             ),
             body: Stack(
               children: [
-                const MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
+                const MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
 
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),

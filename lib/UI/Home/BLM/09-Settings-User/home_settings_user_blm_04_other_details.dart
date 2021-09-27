@@ -5,7 +5,6 @@ import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_08_
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_09_hide_address.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_10_hide_email.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_11_hide_phone_number.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_01_blm_input_field.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'home_settings_use_blm_01_user_details.dart';
@@ -29,11 +28,11 @@ class HomeBLMUserOtherDetails extends StatefulWidget{
 }
 
 class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
-  final GlobalKey<MiscBLMInputFieldDateTimeTemplateState> _key1 = GlobalKey<MiscBLMInputFieldDateTimeTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key3 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key4 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMPhoneNumberTemplateState> _key5 = GlobalKey<MiscBLMPhoneNumberTemplateState>();
+  final GlobalKey<MiscInputFieldDateTimeTemplateState> _key1 = GlobalKey<MiscInputFieldDateTimeTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key3 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key4 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscPhoneNumberTemplateState> _key5 = GlobalKey<MiscPhoneNumberTemplateState>();
   ValueNotifier<bool> toggle1 = ValueNotifier<bool>(false);
   ValueNotifier<bool> toggle2 = ValueNotifier<bool>(false);
   ValueNotifier<bool> toggle3 = ValueNotifier<bool>(false);
@@ -104,7 +103,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                 Row(
                                   children: [
                                     Expanded(
-                                      child: MiscBLMInputFieldDateTimeTemplate(
+                                      child: MiscInputFieldDateTimeTemplate(
                                         key: _key1,
                                         labelText: 'Birthdate',
                                         displayText: details.data!.blmShowOtherDetailsBirthdate != '' ? details.data!.blmShowOtherDetailsBirthdate.substring(0, details.data!.blmShowOtherDetailsBirthdate.indexOf('T'),) : details.data!.blmShowOtherDetailsBirthdate,
@@ -130,7 +129,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                 Row(
                                   children: [
                                     Expanded(
-                                      child: MiscBLMInputFieldTemplate(
+                                      child: MiscInputFieldTemplate(
                                         key: _key2,
                                         labelText: 'Birthplace',
                                         displayText: details.data!.blmShowOtherDetailsBirthplace,
@@ -157,7 +156,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                 Row(
                                   children: [
                                     Expanded(
-                                      child: MiscBLMInputFieldTemplate(
+                                      child: MiscInputFieldTemplate(
                                         key: _key3,
                                         labelText: 'Home Address',
                                         displayText: details.data!.blmShowOtherDetailsAddress,
@@ -185,7 +184,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                 Row(
                                   children: [
                                     Expanded(
-                                      child: MiscBLMInputFieldTemplate(
+                                      child: MiscInputFieldTemplate(
                                         key: _key4,
                                         labelText: 'Email',
                                         type: TextInputType.emailAddress,
@@ -213,7 +212,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                 Row(
                                   children: [
                                     Expanded(
-                                      child: MiscBLMPhoneNumberTemplate(
+                                      child: MiscPhoneNumberTemplate(
                                         key: _key5,
                                         labelText: 'Contact Number',
                                         type: TextInputType.phone,

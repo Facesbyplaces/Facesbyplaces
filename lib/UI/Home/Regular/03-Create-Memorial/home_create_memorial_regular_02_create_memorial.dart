@@ -1,5 +1,3 @@
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_01_regular_input_field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_04_regular_background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home_create_memorial_regular_03_create_memorial.dart';
 import 'package:better_player/better_player.dart';
@@ -27,7 +25,7 @@ class HomeRegularCreateMemorial2 extends StatefulWidget{
 }
 
 class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
   ValueNotifier<List<File>> slideImages = ValueNotifier<List<File>>([]);
   TextEditingController controllerStory = TextEditingController();
   ValueNotifier<File> videoFile = ValueNotifier<File>(File(''));
@@ -96,7 +94,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
               children: [
                 SingleChildScrollView(
                   physics: const NeverScrollableScrollPhysics(),
-                  child: SizedBox(height: SizeConfig.screenHeight, child: const MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
+                  child: SizedBox(height: SizeConfig.screenHeight, child: const MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
                 ),
 
                 Container(
@@ -104,7 +102,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                   child: ListView(
                     physics: const ClampingScrollPhysics(),
                     children: [
-                      MiscRegularInputFieldTemplate(
+                      MiscInputFieldTemplate(
                         key: _key1,
                         labelText: 'Name of your Memorial Page',
                         labelTextStyle: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xff000000),),

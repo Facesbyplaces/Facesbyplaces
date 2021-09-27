@@ -1,7 +1,6 @@
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home_view_memorial_regular_01_managed_memorial.dart';
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_02_show_page_images.dart';
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_08_update_page_image.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_04_regular_background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -105,7 +104,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                 if(memorialImageSettings.hasData){
                   return Stack(
                     children: [
-                      const MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
+                      const MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
 
                       Container(
                         padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),

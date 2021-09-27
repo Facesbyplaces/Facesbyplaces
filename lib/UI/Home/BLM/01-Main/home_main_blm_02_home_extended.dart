@@ -4,7 +4,6 @@ import 'package:facesbyplaces/UI/Home/BLM/10-Settings-Notifications/home_setting
 import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home_show_post_blm_01_show_original_post_comments.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home_view_memorial_regular_02_profile_memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home_show_post_regular_01_show_original_post_comments.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_04_blm_background.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api_main_blm_01_logout.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api_main_blm_02_show_user_information.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api_main_blm_03_show_notifications_settings.dart';
@@ -24,7 +23,7 @@ import 'home_main_blm_03_03_post_tab.dart';
 import 'home_main_blm_03_04_notifications_tab.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
-import '../../../ui-01-get-started.dart';
+import '../../../ui_01_get_started.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:misc/misc.dart';
@@ -203,7 +202,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                     children: [
                       SingleChildScrollView(
                         physics: const NeverScrollableScrollPhysics(),
-                        child: SizedBox(height: SizeConfig.screenHeight, child: const MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
+                        child: SizedBox(height: SizeConfig.screenHeight, child: const MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
                       ),
 
                       Container(

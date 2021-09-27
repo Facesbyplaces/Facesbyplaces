@@ -13,7 +13,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:image_picker/image_picker.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
-import '../../../ui-01-get-started.dart';
+import '../../../ui_01_get_started.dart';
 import 'package:we_slide/we_slide.dart';
 import 'package:flutter/material.dart';
 import 'package:misc/misc.dart';

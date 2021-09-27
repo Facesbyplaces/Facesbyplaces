@@ -1,5 +1,3 @@
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_01_regular_input_field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_04_regular_background.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -34,9 +32,9 @@ class HomeRegularCreateMemorial1 extends StatefulWidget{
 }
 
 class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
-  final GlobalKey<MiscRegularInputFieldDropDownState> _key1 = GlobalKey<MiscRegularInputFieldDropDownState>();
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key6 = GlobalKey<MiscRegularInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldDropDownState> _key1 = GlobalKey<MiscInputFieldDropDownState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key6 = GlobalKey<MiscInputFieldTemplateState>();
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
   TextEditingController controller3 = TextEditingController();
@@ -77,7 +75,7 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
               children: [
                 SingleChildScrollView(
                   physics: const NeverScrollableScrollPhysics(),
-                  child: SizedBox(height: SizeConfig.screenHeight, child: const MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
+                  child: SizedBox(height: SizeConfig.screenHeight, child: const MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
                 ),
 
                 Container(
@@ -85,11 +83,11 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                   child: ListView(
                     physics: const ClampingScrollPhysics(),
                     children: [
-                      MiscRegularInputFieldDropDown(key: _key1,),
+                      MiscInputFieldDropDown(key: _key1,),
 
                       const SizedBox(height: 20,),
                       
-                      MiscRegularInputFieldTemplate(
+                      MiscInputFieldTemplate(
                         key: _key2, 
                         labelText: 'Birthplace',
                         labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
@@ -200,7 +198,7 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                       
                       const SizedBox(height: 20,),
 
-                      MiscRegularInputFieldTemplate(
+                      MiscInputFieldTemplate(
                         key: _key6, 
                         labelText: 'Country',
                         labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),

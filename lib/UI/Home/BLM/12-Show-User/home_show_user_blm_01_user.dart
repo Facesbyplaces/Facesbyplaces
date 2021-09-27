@@ -1,5 +1,5 @@
 import 'package:facesbyplaces/API/BLM/13-Show-User/api_show_user_blm_01_show_user_information.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_06_blm_user_details.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_04_blm_user_details.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';

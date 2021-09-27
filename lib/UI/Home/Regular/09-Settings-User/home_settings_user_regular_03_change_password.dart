@@ -1,6 +1,5 @@
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_regular_05_change_password.dart';
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_regular_13_add_password.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_01_regular_input_field.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home_settings_user_regular_01_user_details.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -19,8 +18,8 @@ class HomeRegularUserChangePassword extends StatefulWidget{
 }
 
 class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePassword>{
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
 
   @override
   Widget build(BuildContext context){
@@ -54,7 +53,7 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
               physics: const ClampingScrollPhysics(),
               child: Column(
                 children: [
-                  MiscRegularInputFieldTemplate(
+                  MiscInputFieldTemplate(
                     key: _key1,
                     labelText: widget.isAddPassword == true ? 'New Password' : 'Current Password',
                     obscureText: true,
@@ -63,7 +62,7 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
 
                   const SizedBox(height: 20,),
 
-                  MiscRegularInputFieldTemplate(
+                  MiscInputFieldTemplate(
                     key: _key2,
                     labelText: widget.isAddPassword == true ? 'Confirm Password' : 'New Password',
                     obscureText: true,

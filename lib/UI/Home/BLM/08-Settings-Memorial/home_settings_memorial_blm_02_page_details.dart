@@ -1,7 +1,6 @@
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home_view_memorial_blm_01_managed_memorial.dart';
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_01_show_page_details.dart';
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_07_update_page_details.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_01_blm_input_field.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -20,13 +19,13 @@ class HomeBLMPageDetails extends StatefulWidget{
 }
 
 class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldDropDownState> _key3 = GlobalKey<MiscBLMInputFieldDropDownState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key4 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key7 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key8 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key9 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldDropDownState> _key3 = GlobalKey<MiscInputFieldDropDownState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key4 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key7 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key8 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key9 = GlobalKey<MiscInputFieldTemplateState>();
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
   Future<APIBLMShowPageDetailsMain>? futureMemorialSettings;
@@ -84,7 +83,7 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                         child: ListView(
                           physics: const ClampingScrollPhysics(),
                           children: [
-                            MiscBLMInputFieldTemplate(
+                            MiscInputFieldTemplate(
                               key: _key1,
                               labelText: 'Page Name',
                               labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
@@ -93,7 +92,7 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
 
                             const SizedBox(height: 20,),
 
-                            MiscBLMInputFieldTemplate(
+                            MiscInputFieldTemplate(
                               key: _key2,
                               labelText: 'Description',
                               labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
@@ -102,14 +101,14 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
 
                             const SizedBox(height: 20,),
 
-                            MiscBLMInputFieldDropDown(
+                            MiscInputFieldDropDown(
                               key: _key3,
                               displayText: memorialSettings.data!.blmMemorial.showPageDetailsRelationship,
                             ),
 
                             const SizedBox(height: 20,),
 
-                            MiscBLMInputFieldTemplate(
+                            MiscInputFieldTemplate(
                               key: _key4,
                               labelText: 'Location',
                               displayText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsLocation,
@@ -180,7 +179,7 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                             
                             const SizedBox(height: 20,),
 
-                            MiscBLMInputFieldTemplate(
+                            MiscInputFieldTemplate(
                               key: _key7,
                               labelText: 'State',
                               displayText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsState,
@@ -189,7 +188,7 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
 
                             const SizedBox(height: 20,),
 
-                            MiscBLMInputFieldTemplate(
+                            MiscInputFieldTemplate(
                               key: _key8,
                               labelText: 'Country',
                               displayText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry,
@@ -198,7 +197,7 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
 
                             const SizedBox(height: 20,),
 
-                            MiscBLMInputFieldTemplate(
+                            MiscInputFieldTemplate(
                               key: _key9,
                               labelText: 'Precinct',
                               displayText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsPrecinct,

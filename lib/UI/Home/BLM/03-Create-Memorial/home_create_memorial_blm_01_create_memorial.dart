@@ -1,5 +1,3 @@
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_01_blm_input_field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_04_blm_background.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -35,10 +33,10 @@ class HomeBLMCreateMemorial1 extends StatefulWidget{
 }
 
 class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
-  final GlobalKey<MiscBLMInputFieldDropDownState> _key1 = GlobalKey<MiscBLMInputFieldDropDownState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key3 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key6 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key7 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldDropDownState> _key1 = GlobalKey<MiscInputFieldDropDownState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key3 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key6 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key7 = GlobalKey<MiscInputFieldTemplateState>();
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
   TextEditingController controller3 = TextEditingController();
@@ -76,14 +74,14 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
             ),
             body: Stack(
               children: [
-                SingleChildScrollView(physics: const NeverScrollableScrollPhysics(), child: SizedBox(height: SizeConfig.screenHeight, child: const MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
+                SingleChildScrollView(physics: const NeverScrollableScrollPhysics(), child: SizedBox(height: SizeConfig.screenHeight, child: const MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
 
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                   child: ListView(
                     physics: const ClampingScrollPhysics(),
                     children: [
-                      MiscBLMInputFieldDropDown(key: _key1,),
+                      MiscInputFieldDropDown(key: _key1,),
 
                       const SizedBox(height: 20,),
 
@@ -113,7 +111,7 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
 
                       const SizedBox(height: 20,),
 
-                      MiscBLMInputFieldTemplate(
+                      MiscInputFieldTemplate(
                         key: _key3,
                         labelText: 'Precinct / Station House (Optional)',
                         labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
@@ -197,7 +195,7 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
 
                       const SizedBox(height: 20,),
 
-                      MiscBLMInputFieldTemplate(
+                      MiscInputFieldTemplate(
                         key: _key6, 
                         labelText: 'Country',
                         labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
@@ -205,7 +203,7 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
 
                       const SizedBox(height: 20,),
 
-                      MiscBLMInputFieldTemplate(
+                      MiscInputFieldTemplate(
                         key: _key7, 
                         labelText: 'State',
                         labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),

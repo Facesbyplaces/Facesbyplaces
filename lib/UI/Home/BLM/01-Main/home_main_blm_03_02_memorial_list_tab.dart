@@ -1,5 +1,5 @@
 import 'package:facesbyplaces/API/BLM/02-Main/api_main_blm_04_02_00_home_memorials_tab.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_02_blm_manage_memorial.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_01_blm_manage_memorial.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:loader_overlay/loader_overlay.dart';

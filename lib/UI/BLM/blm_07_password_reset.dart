@@ -1,5 +1,4 @@
 import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_09_password_change.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_01_blm_input_field.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -17,8 +16,8 @@ class BLMPasswordReset extends StatefulWidget{
 }
 
 class BLMPasswordResetState extends State<BLMPasswordReset>{
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
 
   @override
   void initState(){
@@ -77,7 +76,7 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
 
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: MiscBLMInputFieldTemplate(
+                            child: MiscInputFieldTemplate(
                               key: _key1,
                               labelText: 'New Password',
                               labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
@@ -90,7 +89,7 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
 
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: MiscBLMInputFieldTemplate(
+                            child: MiscInputFieldTemplate(
                               key: _key2,
                               labelText: 'Confirm Password',
                               labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),

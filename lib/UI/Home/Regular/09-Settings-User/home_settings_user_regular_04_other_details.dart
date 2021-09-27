@@ -5,7 +5,6 @@ import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_reg
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_regular_10_hide_email.dart';
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_regular_09_hide_address.dart';
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_regular_11_hide_phone_number.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_01_regular_input_field.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home_settings_user_regular_01_user_details.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -29,11 +28,11 @@ class HomeRegularUserOtherDetails extends StatefulWidget{
 }
 
 class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails>{
-  final GlobalKey<MiscRegularInputFieldDateTimeTemplateState> _key1 = GlobalKey<MiscRegularInputFieldDateTimeTemplateState>();
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key3 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key4 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  final GlobalKey<MiscRegularPhoneNumberTemplateState> _key5 = GlobalKey<MiscRegularPhoneNumberTemplateState>();
+  final GlobalKey<MiscInputFieldDateTimeTemplateState> _key1 = GlobalKey<MiscInputFieldDateTimeTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key3 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key4 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscPhoneNumberTemplateState> _key5 = GlobalKey<MiscPhoneNumberTemplateState>();
   ValueNotifier<bool> toggle1 = ValueNotifier<bool>(false);
   ValueNotifier<bool> toggle2 = ValueNotifier<bool>(false);
   ValueNotifier<bool> toggle3 = ValueNotifier<bool>(false);
@@ -105,7 +104,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                   Row(
                                     children: [
                                       Expanded(
-                                        child: MiscRegularInputFieldDateTimeTemplate(
+                                        child: MiscInputFieldDateTimeTemplate(
                                           key: _key1,
                                           labelText: 'Birthdate',
                                           displayText: details.data!.showOtherDetailsBirthdate != '' ? details.data!.showOtherDetailsBirthdate.substring(0, details.data!.showOtherDetailsBirthdate.indexOf('T'),) : details.data!.showOtherDetailsBirthdate,
@@ -131,7 +130,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                   Row(
                                     children: [
                                       Expanded(
-                                        child: MiscRegularInputFieldTemplate(
+                                        child: MiscInputFieldTemplate(
                                           key: _key2,
                                           labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                                           displayText: details.data!.showOtherDetailsBirthplace,
@@ -158,7 +157,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                   Row(
                                     children: [
                                       Expanded(
-                                        child: MiscRegularInputFieldTemplate(
+                                        child: MiscInputFieldTemplate(
                                           key: _key3,
                                           labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                                           displayText: details.data!.showOtherDetailsAddress,
@@ -185,7 +184,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                   Row(
                                     children: [
                                       Expanded(
-                                        child: MiscRegularInputFieldTemplate(
+                                        child: MiscInputFieldTemplate(
                                           key: _key4,
                                           labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                                           displayText: details.data!.showOtherDetailsEmail,
@@ -213,7 +212,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                   Row(
                                     children: [
                                       Expanded(
-                                        child: MiscRegularPhoneNumberTemplate(
+                                        child: MiscPhoneNumberTemplate(
                                           key: _key5,
                                           labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',color: Color(0xffBDC3C7),),
                                           displayText: details.data!.showOtherDetailsPhoneNumber,

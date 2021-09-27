@@ -1,6 +1,5 @@
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home_view_memorial_regular_01_managed_memorial.dart';
 import 'package:facesbyplaces/API/Regular/04-Create-Memorial/api_create_memorial_regular_01_create_memorial.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_04_regular_background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
@@ -87,7 +86,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
             ),
             body: Stack(
               children: [
-                const MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
+                const MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
 
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),

@@ -1,6 +1,5 @@
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_01_show_account_details.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_04_update_account_details.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_01_blm_input_field.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -19,11 +18,11 @@ class HomeBLMUserUpdateDetails extends StatefulWidget{
 }
 
 class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key3 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMPhoneNumberTemplateState> _key4 = GlobalKey<MiscBLMPhoneNumberTemplateState>();
-  final GlobalKey<MiscBLMInputFieldSecurityQuestionsState> _key5 = GlobalKey<MiscBLMInputFieldSecurityQuestionsState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key3 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscPhoneNumberTemplateState> _key4 = GlobalKey<MiscPhoneNumberTemplateState>();
+  final GlobalKey<MiscInputFieldSecurityQuestionsState> _key5 = GlobalKey<MiscInputFieldSecurityQuestionsState>();
   Future<APIBLMShowAccountDetails>? accountDetails;
 
   @override
@@ -76,7 +75,7 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
                     physics: const ClampingScrollPhysics(),
                     child: Column(
                       children: [
-                        MiscBLMInputFieldTemplate(
+                        MiscInputFieldTemplate(
                           key: _key1,
                           labelText: 'First Name',
                           displayText: details.data!.showAccountDetailsFirstName,
@@ -85,7 +84,7 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
 
                         const SizedBox(height: 20,),
 
-                        MiscBLMInputFieldTemplate(
+                        MiscInputFieldTemplate(
                           key: _key2,
                           labelText: 'Last Name',
                           displayText: details.data!.showAccountDetailsLastName,
@@ -94,7 +93,7 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
 
                         const SizedBox(height: 20,),
 
-                        MiscBLMInputFieldTemplate(
+                        MiscInputFieldTemplate(
                           key: _key3,
                           labelText: 'Email Address',
                           displayText: details.data!.showAccountDetailsEmail,
@@ -104,7 +103,7 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
 
                         const SizedBox(height: 20,),
 
-                        MiscBLMPhoneNumberTemplate(
+                        MiscPhoneNumberTemplate(
                           key: _key4,
                           labelText: 'Mobile Number',
                           displayText: details.data!.showAccountDetailsPhoneNumber,
@@ -114,7 +113,7 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
 
                         const SizedBox(height: 20,),
 
-                        MiscBLMInputFieldSecurityQuestions(
+                        MiscInputFieldSecurityQuestions(
                           key: _key5,
                           displayText: details.data!.showAccountDetailsQuestion != ''  ? details.data!.showAccountDetailsQuestion : 'What\'s the name of your first dog?',
                         ),

@@ -1,6 +1,5 @@
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_05_change_password.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_13_add_password.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_01_blm_input_field.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home_settings_use_blm_01_user_details.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -19,8 +18,8 @@ class HomeBLMUserChangePassword extends StatefulWidget{
 }
 
 class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
 
   @override
   Widget build(BuildContext context){
@@ -53,7 +52,7 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-                MiscBLMInputFieldTemplate(
+                MiscInputFieldTemplate(
                   key: _key1,
                   obscureText: true,
                   labelText: widget.isAddPassword == true ? 'New Password' : 'Current Password',
@@ -62,7 +61,7 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
 
                 const SizedBox(height: 20,),
 
-                MiscBLMInputFieldTemplate(
+                MiscInputFieldTemplate(
                   key: _key2,
                   obscureText: true,
                   labelText: widget.isAddPassword == true ? 'Confirm Password' : 'New Password',

@@ -1,6 +1,6 @@
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_03_blm_post.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_02_blm_post.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api_main_blm_04_01_home_feed_tab.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_03_regular_post.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_02_regular_post.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';

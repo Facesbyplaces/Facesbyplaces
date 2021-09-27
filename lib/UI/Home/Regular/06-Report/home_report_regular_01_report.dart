@@ -1,5 +1,4 @@
 import 'package:facesbyplaces/API/Regular/07-Report/api_report_regular_01_report.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_01_regular_input_field.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
@@ -12,8 +11,8 @@ class HomeRegularReport extends StatelessWidget{
   final String reportType;
   HomeRegularReport({Key? key, required this.postId, required this.reportType}) : super(key: key);
 
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  final GlobalKey<MiscRegularInputFieldMultiTextTemplateState> _key2 = GlobalKey<MiscRegularInputFieldMultiTextTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldMultiTextTemplateState> _key2 = GlobalKey<MiscInputFieldMultiTextTemplateState>();
 
   @override
   Widget build(BuildContext context){
@@ -53,7 +52,7 @@ class HomeRegularReport extends StatelessWidget{
 
                 const SizedBox(height: 25,),
 
-                MiscRegularInputFieldTemplate(
+                MiscInputFieldTemplate(
                   key: _key1,
                   labelText: 'Subject',
                   type: TextInputType.text,
@@ -62,7 +61,7 @@ class HomeRegularReport extends StatelessWidget{
 
                 const SizedBox(height: 25,),
 
-                MiscRegularInputFieldMultiTextTemplate(
+                MiscInputFieldMultiTextTemplate(
                   key: _key2,
                   labelText: 'Body',
                   labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xfFB1B1B1),),

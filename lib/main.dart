@@ -15,17 +15,17 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
-import 'UI/Regular/regular-01-join.dart';
-import 'UI/Regular/regular-02-login.dart';
-import 'UI/Regular/regular-03-register.dart';
-import 'UI/Regular/regular-05-upload-photo.dart';
+import 'UI/Regular/regular_01_join.dart';
+import 'UI/Regular/regular_02_login.dart';
+import 'UI/Regular/regular_03_register.dart';
+import 'UI/Regular/regular_05_upload_photo.dart';
 import 'UI/BLM/blm_01_join.dart';
 import 'UI/BLM/blm_02_login.dart';
 import 'UI/BLM/blm_03_register.dart';
 import 'UI/BLM/blm_05_upload_photo.dart';
-import 'UI/ui-01-get-started.dart';
-import 'UI/ui-02-login.dart';
-import 'UI/ui-03-newly-installed.dart';
+import 'UI/ui_01_get_started.dart';
+import 'UI/ui_02_login.dart';
+import 'UI/ui_03_newly_installed.dart';
 import 'dart:async';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
