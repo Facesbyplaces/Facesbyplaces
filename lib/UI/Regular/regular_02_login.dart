@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../ui_01_get_started.dart';
 import 'package:misc/misc.dart';
+import 'package:dialog/dialog.dart';
 
 class RegularLogin extends StatefulWidget{
   const RegularLogin({Key? key}) : super(key: key);
@@ -387,6 +388,17 @@ class RegularLoginState extends State<RegularLogin>{
                                     final sharedPrefs = await SharedPreferences.getInstance();
                                     sharedPrefs.setBool('user-guest-session', true);
                                     Navigator.pushReplacementNamed(context, '/home/regular');
+                                    // await showDialog(
+                                    //   context: context,
+                                    //   builder: (context) => CustomDialog(
+                                    //     imageWidget: Image.asset('assets/icons/cover-icon.png'),
+                                    //     title: const Text('Guest'),
+                                    //     description: const Text('Welcome guest!'),
+                                    //     // okButton: (){},
+                                    //     // cancelButton: (){},
+                                    //     animationEntry: AnimationEntry.bottom,
+                                    //   ),
+                                    // );
                                   },
                                 ),
 

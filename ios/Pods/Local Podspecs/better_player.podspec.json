@@ -19,12 +19,15 @@
     "Flutter": [
 
     ],
-    "KTVHTTPCache": [
-      "~> 2.0.0"
+    "Cache": [
+      "~> 6.0.0"
+    ],
+    "HLSCachingReverseProxyServer": [
+
     ]
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "11.0"
   },
   "pod_target_xcconfig": {
     "DEFINES_MODULE": "YES",

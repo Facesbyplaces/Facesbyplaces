@@ -75,6 +75,7 @@ void main() async{
         child: MaterialApp(
           // checkerboardRasterCacheImages: true,
           // showPerformanceOverlay: true,
+          debugShowCheckedModeBanner: false,
           title: 'Faces by Places',
           home: ((){
             if(newlyInstalled){

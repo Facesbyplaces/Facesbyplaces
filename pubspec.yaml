@@ -90,6 +90,8 @@ dev_dependencies:
   pay: ^1.0.5
   misc:
     path: packages/misc
+  dialog:
+    path: packages/dialog
 
 
 # For information on the generic Dart part of this file, see the
