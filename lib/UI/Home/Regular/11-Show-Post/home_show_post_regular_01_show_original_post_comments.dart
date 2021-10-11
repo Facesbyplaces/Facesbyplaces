@@ -30,11 +30,12 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:giffy_dialog/giffy_dialog.dart';
+// // ignore: import_of_legacy_library_into_null_safe
+// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:dialog/dialog.dart';
 import 'package:mime/mime.dart';
 import 'package:misc/misc.dart';
 import 'dart:ui';
@@ -1354,18 +1355,28 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                     child: const Text('Post', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
                     onTap: () async{
                       if(controller.text == ''){
+                        // await showDialog(
+                        //   context: context,
+                        //   builder: (_) => AssetGiffyDialog(
+                        //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                        //     description: const Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                        //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        //     entryAnimation: EntryAnimation.DEFAULT,
+                        //     buttonOkColor: Colors.red,
+                        //     onlyOkButton: true,
+                        //     onOkButtonPressed: (){
+                        //       Navigator.pop(context, true);
+                        //     },
+                        //   ),
+                        // );
                         await showDialog(
                           context: context,
-                          builder: (_) => AssetGiffyDialog(
-                            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                            description: const Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                          builder: (context) => CustomDialog(
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            entryAnimation: EntryAnimation.DEFAULT,
-                            buttonOkColor: Colors.red,
-                            onlyOkButton: true,
-                            onOkButtonPressed: (){
-                              Navigator.pop(context, true);
-                            },
+                            title: 'Error',
+                            description: 'Please input a comment.',
+                            okButtonColor: const Color(0xfff44336), // RED
+                            includeOkButton: true,
                           ),
                         );
                       }else if(isComment == true && controller.text != ''){
@@ -1458,18 +1469,28 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
               child: const Text('Post', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
               onTap: () async{
                 if(controller.text == ''){
+                  // await showDialog(
+                  //   context: context,
+                  //   builder: (_) => AssetGiffyDialog(
+                  //     description: const Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                  //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                  //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                  //     entryAnimation: EntryAnimation.DEFAULT,
+                  //     onlyOkButton: true,
+                  //     buttonOkColor: Colors.red,
+                  //     onOkButtonPressed: (){
+                  //       Navigator.pop(context, true);
+                  //     },
+                  //   ),
+                  // );
                   await showDialog(
                     context: context,
-                    builder: (_) => AssetGiffyDialog(
-                      description: const Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                      title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                    builder: (context) => CustomDialog(
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      entryAnimation: EntryAnimation.DEFAULT,
-                      onlyOkButton: true,
-                      buttonOkColor: Colors.red,
-                      onOkButtonPressed: (){
-                        Navigator.pop(context, true);
-                      },
+                      title: 'Error',
+                      description: 'Please input a comment.',
+                      okButtonColor: const Color(0xfff44336), // RED
+                      includeOkButton: true,
                     ),
                   );
                 }else if(isComment == true && controller.text != ''){
@@ -1569,18 +1590,28 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
               child: const Text('Post', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
               onTap: () async{
                 if(controller.text == ''){
+                  // await showDialog(
+                  //   context: context,
+                  //   builder: (_) => AssetGiffyDialog(
+                  //     description: const Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                  //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                  //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                  //     entryAnimation: EntryAnimation.DEFAULT,
+                  //     buttonOkColor: Colors.red,
+                  //     onlyOkButton: true,
+                  //     onOkButtonPressed: (){
+                  //       Navigator.pop(context, true);
+                  //     },
+                  //   ),
+                  // );
                   await showDialog(
                     context: context,
-                    builder: (_) => AssetGiffyDialog(
-                      description: const Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                      title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                    builder: (context) => CustomDialog(
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      entryAnimation: EntryAnimation.DEFAULT,
-                      buttonOkColor: Colors.red,
-                      onlyOkButton: true,
-                      onOkButtonPressed: (){
-                        Navigator.pop(context, true);
-                      },
+                      title: 'Error',
+                      description: 'Please input a comment.',
+                      okButtonColor: const Color(0xfff44336), // RED
+                      includeOkButton: true,
                     ),
                   );
                 }else if(isEdit == true){

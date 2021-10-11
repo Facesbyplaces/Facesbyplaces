@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
+import 'package:dialog/dialog.dart';
 import 'package:misc/misc.dart';
 
 class HomeBLMNotificationsTab extends StatefulWidget{
@@ -68,7 +69,20 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
   void onLoading() async{
     if(itemRemaining != 0){
       context.loaderOverlay.show();
-      var newValue = await apiBLMHomeNotificationsTab(page: page);
+      var newValue = await apiBLMHomeNotificationsTab(page: page).onError((error, stackTrace) async{
+        context.loaderOverlay.hide();
+        showDialog(
+          context: context,
+          builder: (context) => CustomDialog(
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            title: 'Error',
+            description: 'Something went wrong. Please try again.',
+            okButtonColor: const Color(0xfff44336), // RED
+            includeOkButton: true,
+          ),
+        );
+        return Future.error('Error occurred: $error');
+      });
       context.loaderOverlay.hide();
 
       itemRemaining = newValue.blmItemsRemaining;

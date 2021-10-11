@@ -1,11 +1,12 @@
 import 'package:facesbyplaces/API/Regular/01-Start/api_start_regular_02_registration.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:giffy_dialog/giffy_dialog.dart';
+// // ignore: import_of_legacy_library_into_null_safe
+// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'regular_04_verify_email.dart';
+import 'package:dialog/dialog.dart';
 import 'package:misc/misc.dart';
 
 class RegularRegister extends StatelessWidget{
@@ -137,33 +138,53 @@ class RegularRegister extends StatelessWidget{
                                     validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key4.currentState!.controller.text);
 
                                     if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == '' || _key3.currentState!.controller.text == '' || _key4.currentState!.controller.text == '' || _key5.currentState!.controller.text == '' || _key6.currentState!.controller.text == ''){
+                                      // await showDialog(
+                                      //   context: context,
+                                      //   builder: (_) => AssetGiffyDialog(
+                                      //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                      //     description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                      //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      //     entryAnimation: EntryAnimation.DEFAULT,
+                                      //     buttonOkColor: const Color(0xffff0000),
+                                      //     onlyOkButton: true,
+                                      //     onOkButtonPressed: (){
+                                      //       Navigator.pop(context, true);
+                                      //     },
+                                      //   ),
+                                      // );
                                       await showDialog(
                                         context: context,
-                                        builder: (_) => AssetGiffyDialog(
-                                          title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                          description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                        builder: (context) => CustomDialog(
                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          entryAnimation: EntryAnimation.DEFAULT,
-                                          buttonOkColor: const Color(0xffff0000),
-                                          onlyOkButton: true,
-                                          onOkButtonPressed: (){
-                                            Navigator.pop(context, true);
-                                          },
+                                          title: 'Error',
+                                          description: 'Please complete the form before submitting.',
+                                          okButtonColor: const Color(0xfff44336), // RED
+                                          includeOkButton: true,
                                         ),
                                       );
                                     }else if(!validEmail){
+                                      // await showDialog(
+                                      //   context: context,
+                                      //   builder: (_) => AssetGiffyDialog(
+                                      //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                      //     description: const Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                      //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      //     entryAnimation: EntryAnimation.DEFAULT,
+                                      //     buttonOkColor: const Color(0xffff0000),
+                                      //     onlyOkButton: true,
+                                      //     onOkButtonPressed: (){
+                                      //       Navigator.pop(context, true);
+                                      //     },
+                                      //   ),
+                                      // );
                                       await showDialog(
                                         context: context,
-                                        builder: (_) => AssetGiffyDialog(
-                                          title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                          description: const Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                        builder: (context) => CustomDialog(
                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          entryAnimation: EntryAnimation.DEFAULT,
-                                          buttonOkColor: const Color(0xffff0000),
-                                          onlyOkButton: true,
-                                          onOkButtonPressed: (){
-                                            Navigator.pop(context, true);
-                                          },
+                                          title: 'Error',
+                                          description: 'Invalid email address. Please try again.',
+                                          okButtonColor: const Color(0xfff44336), // RED
+                                          includeOkButton: true,
                                         ),
                                       );
                                     }else{
@@ -176,18 +197,28 @@ class RegularRegister extends StatelessWidget{
                                       if(result == 'Success'){
                                         Navigator.push(context, MaterialPageRoute(builder: (context) => RegularVerifyEmail()));
                                       }else{
+                                        // await showDialog(
+                                        //   context: context,
+                                        //   builder: (_) => AssetGiffyDialog(
+                                        //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                        //     description: Text(result, textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                        //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        //     entryAnimation: EntryAnimation.DEFAULT,
+                                        //     buttonOkColor: const Color(0xffff0000),
+                                        //     onlyOkButton: true,
+                                        //     onOkButtonPressed: (){
+                                        //       Navigator.pop(context, true);
+                                        //     },
+                                        //   ),
+                                          // );
                                         await showDialog(
                                           context: context,
-                                          builder: (_) => AssetGiffyDialog(
-                                            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                            description: Text(result, textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                          builder: (context) => CustomDialog(
                                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                            entryAnimation: EntryAnimation.DEFAULT,
-                                            buttonOkColor: const Color(0xffff0000),
-                                            onlyOkButton: true,
-                                            onOkButtonPressed: (){
-                                              Navigator.pop(context, true);
-                                            },
+                                            title: 'Error',
+                                            description: result,
+                                            okButtonColor: const Color(0xfff44336), // RED
+                                            includeOkButton: true,
                                           ),
                                         );
                                       }

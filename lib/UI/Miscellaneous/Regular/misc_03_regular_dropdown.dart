@@ -3,14 +3,15 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc_03_bloc_regular_misc.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:path_provider/path_provider.dart';
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:giffy_dialog/giffy_dialog.dart';
+// // ignore: import_of_legacy_library_into_null_safe
+// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:dialog/dialog.dart';
 import 'package:share/share.dart';
 import 'package:misc/misc.dart';
 import 'dart:typed_data';
@@ -81,18 +82,28 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
 
         Share.shareFiles([file.path], text: 'QR Code');
       }else{
+        // await showDialog(
+        //   context: context,
+        //   builder: (_) => AssetGiffyDialog(
+        //     description: const Text('Invalid QR Code.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+        //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+        //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+        //     entryAnimation: EntryAnimation.DEFAULT,
+        //     buttonOkColor: const Color(0xffff0000),
+        //     onlyOkButton: true,
+        //     onOkButtonPressed: (){
+        //       Navigator.pop(context, true);
+        //     },
+        //   ),
+        // );
         await showDialog(
           context: context,
-          builder: (_) => AssetGiffyDialog(
-            description: const Text('Invalid QR Code.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+          builder: (context) => CustomDialog(
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-            entryAnimation: EntryAnimation.DEFAULT,
-            buttonOkColor: const Color(0xffff0000),
-            onlyOkButton: true,
-            onOkButtonPressed: (){
-              Navigator.pop(context, true);
-            },
+            title: 'Error',
+            description: 'Invalid QR Code.',
+            okButtonColor: const Color(0xfff44336), // RED
+            includeOkButton: true,
           ),
         );
       }
@@ -133,17 +144,27 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                 );
 
                 if(response.success){
+                  // await showDialog(
+                  //   context: context,
+                  //   builder: (_) => AssetGiffyDialog(
+                  //     description: const Text('Successfully shared the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                  //     title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                  //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                  //     entryAnimation: EntryAnimation.DEFAULT,
+                  //     onlyOkButton: true,
+                  //     onOkButtonPressed: (){
+                  //       Navigator.pop(context, true);
+                  //     },
+                  //   ),
+                  // );
                   await showDialog(
                     context: context,
-                    builder: (_) => AssetGiffyDialog(
-                      description: const Text('Successfully shared the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                      title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                    builder: (context) => CustomDialog(
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      entryAnimation: EntryAnimation.DEFAULT,
-                      onlyOkButton: true,
-                      onOkButtonPressed: (){
-                        Navigator.pop(context, true);
-                      },
+                      title: 'Success',
+                      description: 'Successfully shared the link.',
+                      okButtonColor: const Color(0xff4caf50), // GREEN
+                      includeOkButton: true,
                     ),
                   );
                 }else{
@@ -234,17 +255,27 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
 
                 BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo!, linkProperties: lp!);
                 if(response.success){
+                  // await showDialog(
+                  //   context: context,
+                  //   builder: (_) => AssetGiffyDialog(
+                  //     description: const Text('Successfully copied the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                  //     title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                  //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                  //     entryAnimation: EntryAnimation.DEFAULT,
+                  //     onlyOkButton: true,
+                  //     onOkButtonPressed: (){
+                  //       Navigator.pop(context, true);
+                  //     },
+                  //   ),
+                  // );
                   await showDialog(
                     context: context,
-                    builder: (_) => AssetGiffyDialog(
-                      description: const Text('Successfully copied the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                      title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                    builder: (context) => CustomDialog(
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      entryAnimation: EntryAnimation.DEFAULT,
-                      onlyOkButton: true,
-                      onOkButtonPressed: (){
-                        Navigator.pop(context, true);
-                      },
+                      title: 'Success',
+                      description: 'Successfully copied the link.',
+                      okButtonColor: const Color(0xff4caf50), // GREEN
+                      includeOkButton: true,
                     ),
                   );
                 }else{
@@ -326,18 +357,28 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
 
         Share.shareFiles([file.path], text: 'QR Code');
       }else{
+        // await showDialog(
+        //   context: context,
+        //   builder: (_) => AssetGiffyDialog(
+        //     description: const Text('Invalid QR Code.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',)),
+        //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+        //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+        //     entryAnimation: EntryAnimation.DEFAULT, 
+        //     buttonOkColor: const Color(0xffff0000),
+        //     onlyOkButton: true,
+        //     onOkButtonPressed: (){
+        //       Navigator.pop(context, true);
+        //     },
+        //   ),
+        // );
         await showDialog(
           context: context,
-          builder: (_) => AssetGiffyDialog(
-            description: const Text('Invalid QR Code.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',)),
-            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+          builder: (context) => CustomDialog(
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-            entryAnimation: EntryAnimation.DEFAULT, 
-            buttonOkColor: const Color(0xffff0000),
-            onlyOkButton: true,
-            onOkButtonPressed: (){
-              Navigator.pop(context, true);
-            },
+            title: 'Error',
+            description: 'Invalid QR Code.',
+            okButtonColor: const Color(0xfff44336), // RED
+            includeOkButton: true,
           ),
         );
       }
@@ -378,17 +419,27 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                 );
 
                 if(response.success){
+                  // await showDialog(
+                  //   context: context,
+                  //   builder: (_) => AssetGiffyDialog(
+                  //     description: const Text('Successfully copied the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                  //     title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                  //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                  //     entryAnimation: EntryAnimation.DEFAULT,
+                  //     onlyOkButton: true,
+                  //     onOkButtonPressed: (){
+                  //       Navigator.pop(context, true);
+                  //     },
+                  //   ),
+                  // );
                   await showDialog(
                     context: context,
-                    builder: (_) => AssetGiffyDialog(
-                      description: const Text('Successfully copied the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                      title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                    builder: (context) => CustomDialog(
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      entryAnimation: EntryAnimation.DEFAULT,
-                      onlyOkButton: true,
-                      onOkButtonPressed: (){
-                        Navigator.pop(context, true);
-                      },
+                      title: 'Success',
+                      description: 'Successfully copied the link.',
+                      okButtonColor: const Color(0xff4caf50), // GREEN
+                      includeOkButton: true,
                     ),
                   );
                 }else{
@@ -479,17 +530,27 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
 
                 BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo!, linkProperties: lp!);
                 if(response.success){
+                  // await showDialog(
+                  //   context: context,
+                  //   builder: (_) => AssetGiffyDialog(
+                  //     description: const Text('Successfully copied the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                  //     title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                  //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                  //     entryAnimation: EntryAnimation.DEFAULT,
+                  //     onlyOkButton: true,
+                  //     onOkButtonPressed: (){
+                  //       Navigator.pop(context, true);
+                  //     },
+                  //   ),
+                  // );
                   await showDialog(
                     context: context,
-                    builder: (_) => AssetGiffyDialog(
-                      description: const Text('Successfully copied the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                      title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                    builder: (context) => CustomDialog(
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      entryAnimation: EntryAnimation.DEFAULT,
-                      onlyOkButton: true,
-                      onOkButtonPressed: (){
-                        Navigator.pop(context, true);
-                      },
+                      title: 'Success',
+                      description: 'Successfully copied the link.',
+                      okButtonColor: const Color(0xff4caf50), // GREEN
+                      includeOkButton: true,
                     ),
                   );
                 }else{

@@ -8,9 +8,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:giffy_dialog/giffy_dialog.dart';
+// // ignore: import_of_legacy_library_into_null_safe
+// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:dialog/dialog.dart';
 import 'package:mime/mime.dart';
 import 'package:misc/misc.dart';
 
@@ -100,18 +101,28 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
       context.loaderOverlay.show();
       var newValue = await apiRegularHomeFeedTab(page: page).onError((error, stackTrace){
         context.loaderOverlay.hide();
+        // showDialog(
+        //   context: context,
+        //   builder: (_) => AssetGiffyDialog(
+        //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+        //     description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+        //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+        //     entryAnimation: EntryAnimation.DEFAULT,
+        //     buttonOkColor: const Color(0xffff0000),
+        //     onlyOkButton: true,
+        //     onOkButtonPressed: (){
+        //       Navigator.pop(context, true);
+        //     },
+        //   ),
+        // );
         showDialog(
           context: context,
-          builder: (_) => AssetGiffyDialog(
-            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-            description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+          builder: (context) => CustomDialog(
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-            entryAnimation: EntryAnimation.DEFAULT,
-            buttonOkColor: const Color(0xffff0000),
-            onlyOkButton: true,
-            onOkButtonPressed: (){
-              Navigator.pop(context, true);
-            },
+            title: 'Error',
+            description: 'Error: $error.',
+            okButtonColor: const Color(0xfff44336), // RED
+            includeOkButton: true,
           ),
         );
         throw Exception('$error');

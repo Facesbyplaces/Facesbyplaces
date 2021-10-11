@@ -6,11 +6,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:giffy_dialog/giffy_dialog.dart';
+// // ignore: import_of_legacy_library_into_null_safe
+// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:dialog/dialog.dart';
 import 'package:misc/misc.dart';
 import 'dart:typed_data';
 import 'dart:io';
@@ -272,34 +273,54 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                   context.loaderOverlay.hide();
 
                                   if(result){
+                                    // await showDialog(
+                                    //   context: context,
+                                    //   builder: (_) => AssetGiffyDialog(
+                                    //     title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                    //     description: const Text('Successfully updated the memorial image.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                    //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    //     entryAnimation: EntryAnimation.DEFAULT,
+                                    //     onlyOkButton: true,
+                                    //     onOkButtonPressed: (){
+                                    //       Navigator.pop(context, true);
+                                    //     },
+                                    //   ),
+                                    // );
                                     await showDialog(
                                       context: context,
-                                      builder: (_) => AssetGiffyDialog(
-                                        title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                        description: const Text('Successfully updated the memorial image.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                      builder: (context) => CustomDialog(
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        entryAnimation: EntryAnimation.DEFAULT,
-                                        onlyOkButton: true,
-                                        onOkButtonPressed: (){
-                                          Navigator.pop(context, true);
-                                        },
+                                        title: 'Success',
+                                        description: 'Successfully updated the memorial image.',
+                                        okButtonColor: const Color(0xff4caf50), // GREEN
+                                        includeOkButton: true,
                                       ),
                                     );
                                     Route route = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: widget.memorialId, managed: true, newlyCreated: false, relationship: memorialImageSettings.data!.almMemorial.showPageImagesRelationship));
                                     Navigator.of(context).pushAndRemoveUntil(route, ModalRoute.withName('/home/regular'));
                                   }else{
+                                    // await showDialog(
+                                    //   context: context,
+                                    //   builder: (_) => AssetGiffyDialog(
+                                    //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                    //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                    //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    //     entryAnimation: EntryAnimation.DEFAULT,
+                                    //     buttonOkColor: const Color(0xffff0000),
+                                    //     onlyOkButton: true,
+                                    //     onOkButtonPressed: (){
+                                    //       Navigator.pop(context, true);
+                                    //     },
+                                    //   ),
+                                    // );
                                     await showDialog(
                                       context: context,
-                                      builder: (_) => AssetGiffyDialog(
-                                        title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                        description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                      builder: (context) => CustomDialog(
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        entryAnimation: EntryAnimation.DEFAULT,
-                                        buttonOkColor: const Color(0xffff0000),
-                                        onlyOkButton: true,
-                                        onOkButtonPressed: (){
-                                          Navigator.pop(context, true);
-                                        },
+                                        title: 'Error',
+                                        description: 'Something went wrong. Please try again.',
+                                        okButtonColor: const Color(0xfff44336), // RED
+                                        includeOkButton: true,
                                       ),
                                     );
                                   }

@@ -3,9 +3,10 @@ import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memo
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_10_remove_admin.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:giffy_dialog/giffy_dialog.dart';
+// // ignore: import_of_legacy_library_into_null_safe
+// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:dialog/dialog.dart';
 
 class RegularShowAdminSettings{
   final int userId;
@@ -87,19 +88,29 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
       context.loaderOverlay.show();
       var newValue = await apiRegularShowAdminSettings(memorialId: widget.memorialId, page: page1).onError((error, stackTrace){
         context.loaderOverlay.hide();
+        // showDialog(
+        //   context: context,
+        //   builder: (_) => AssetGiffyDialog(
+        //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+        //     description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+        //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+        //     entryAnimation: EntryAnimation.DEFAULT,
+        //     buttonOkColor: const Color(0xffff0000),
+        //     onlyOkButton: true,
+        //     onOkButtonPressed: (){
+        //       Navigator.pop(context, true);
+        //       Navigator.pop(context, true);
+        //     },
+        //   ),
+        // );
         showDialog(
           context: context,
-          builder: (_) => AssetGiffyDialog(
-            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-            description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+          builder: (context) => CustomDialog(
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-            entryAnimation: EntryAnimation.DEFAULT,
-            buttonOkColor: const Color(0xffff0000),
-            onlyOkButton: true,
-            onOkButtonPressed: (){
-              Navigator.pop(context, true);
-              Navigator.pop(context, true);
-            },
+            title: 'Error',
+            description: 'Error: $error.',
+            okButtonColor: const Color(0xfff44336), // RED
+            includeOkButton: true,
           ),
         );
         throw Exception('$error');
@@ -147,20 +158,30 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
               padding: EdgeInsets.zero,
               height: 40,
               onPressed: () async{
+                // bool confirmation = await showDialog(
+                //   context: context,
+                //   builder: (_) => AssetGiffyDialog(
+                //     title: const Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                //     description: const Text('Are you sure you want to remove this user?', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                //     entryAnimation: EntryAnimation.DEFAULT,
+                //     onlyOkButton: false,
+                //     onOkButtonPressed: (){
+                //       Navigator.pop(context, true);
+                //     },
+                //     onCancelButtonPressed: (){
+                //       Navigator.pop(context, false);
+                //     },
+                //   ),
+                // );
                 bool confirmation = await showDialog(
                   context: context,
-                  builder: (_) => AssetGiffyDialog(
-                    title: const Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                    description: const Text('Are you sure you want to remove this user?', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                  builder: (context) => CustomDialog(
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    entryAnimation: EntryAnimation.DEFAULT,
-                    onlyOkButton: false,
-                    onOkButtonPressed: (){
-                      Navigator.pop(context, true);
-                    },
-                    onCancelButtonPressed: (){
-                      Navigator.pop(context, false);
-                    },
+                    title: 'Confirm',
+                    description: 'Are you sure you want to remove this user?',
+                    includeOkButton: true,
+                    includeCancelButton: true,
                   ),
                 );
 
@@ -170,30 +191,62 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                   context.loaderOverlay.hide();
 
                   if(result != 'Success'){
+                    // await showDialog(
+                    //   context: context,
+                    //   builder: (_) => AssetGiffyDialog(
+                    //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                    //     description: Text('Error: $result.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                    //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    //     entryAnimation: EntryAnimation.DEFAULT,
+                    //     buttonOkColor: const Color(0xffff0000),
+                    //     onlyOkButton: true,
+                    //     onOkButtonPressed: (){
+                    //       Navigator.pop(context, true);
+                    //     },
+                    //   ),
+                    // );
                     await showDialog(
                       context: context,
-                      builder: (_) => AssetGiffyDialog(
-                        title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                        description: Text('Error: $result.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                      builder: (context) => CustomDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        entryAnimation: EntryAnimation.DEFAULT,
-                        buttonOkColor: const Color(0xffff0000),
-                        onlyOkButton: true,
-                        onOkButtonPressed: (){
-                          Navigator.pop(context, true);
-                        },
+                        title: 'Error',
+                        description: 'Error: $result.',
+                        okButtonColor: const Color(0xfff44336), // RED
+                        includeOkButton: true,
                       ),
                     );
                   }else{
+                    // await showDialog(
+                    //   context: context,
+                    //   builder: (_) => AssetGiffyDialog(
+                    //     title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                    //     description: const Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                    //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    //     entryAnimation: EntryAnimation.DEFAULT,
+                    //     onlyOkButton: true,
+                    //     onOkButtonPressed: (){
+                    //       managers = [];
+                    //       adminItemsRemaining = 1;
+                    //       familyItemsRemaining = 1;
+                    //       page1 = 1;
+                    //       page2 = 1;
+                    //       flag1 = false;
+                    //       addManagers1();
+                    //       onLoading();
+
+                    //       Navigator.pop(context, true);
+                    //     },
+                    //   ),
+                    // );
                     await showDialog(
                       context: context,
-                      builder: (_) => AssetGiffyDialog(
-                        title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                        description: const Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                      builder: (context) => CustomDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        entryAnimation: EntryAnimation.DEFAULT,
-                        onlyOkButton: true,
-                        onOkButtonPressed: (){
+                        title: 'Success',
+                        description: 'Successfully removed the user from the list.',
+                        okButtonColor: const Color(0xff4caf50), // GREEN
+                        includeOkButton: true,
+                        okButton: (){
                           managers = [];
                           adminItemsRemaining = 1;
                           familyItemsRemaining = 1;
@@ -262,20 +315,30 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
               padding: EdgeInsets.zero,
               height: 40,
               onPressed: () async{
+                // bool confirmation = await showDialog(
+                //   context: context,
+                //   builder: (_) => AssetGiffyDialog(
+                //     title: const Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                //     description: const Text('Are you sure you want to make this user a manager?', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                //     entryAnimation: EntryAnimation.DEFAULT,
+                //     onlyOkButton: false,
+                //     onOkButtonPressed: () async{
+                //       Navigator.pop(context, true);
+                //     },
+                //     onCancelButtonPressed: (){
+                //       Navigator.pop(context, false);
+                //     },
+                //   ),
+                // );
                 bool confirmation = await showDialog(
                   context: context,
-                  builder: (_) => AssetGiffyDialog(
-                    title: const Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                    description: const Text('Are you sure you want to make this user a manager?', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                  builder: (context) => CustomDialog(
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    entryAnimation: EntryAnimation.DEFAULT,
-                    onlyOkButton: false,
-                    onOkButtonPressed: () async{
-                      Navigator.pop(context, true);
-                    },
-                    onCancelButtonPressed: (){
-                      Navigator.pop(context, false);
-                    },
+                    title: 'Confirm',
+                    description: 'Are you sure you want to make this user a manager?',
+                    includeOkButton: true,
+                    includeCancelButton: true,
                   ),
                 );
 
@@ -285,30 +348,62 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                   context.loaderOverlay.hide();
 
                   if(result != 'Success'){
+                    // await showDialog(
+                    //   context: context,
+                    //   builder: (_) => AssetGiffyDialog(
+                    //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                    //     description: Text('Error: $result.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                    //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    //     entryAnimation: EntryAnimation.DEFAULT,
+                    //     buttonOkColor: const Color(0xffff0000),
+                    //     onlyOkButton: true,
+                    //     onOkButtonPressed: (){
+                    //       Navigator.pop(context, true);
+                    //     },
+                    //   ),
+                    // );
                     await showDialog(
                       context: context,
-                      builder: (_) => AssetGiffyDialog(
-                        title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                        description: Text('Error: $result.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                      builder: (context) => CustomDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        entryAnimation: EntryAnimation.DEFAULT,
-                        buttonOkColor: const Color(0xffff0000),
-                        onlyOkButton: true,
-                        onOkButtonPressed: (){
-                          Navigator.pop(context, true);
-                        },
+                        title: 'Error',
+                        description: 'Error: $result.',
+                        okButtonColor: const Color(0xfff44336), // RED
+                        includeOkButton: true,
                       ),
                     );
                   }else{
+                    // await showDialog(
+                    //   context: context,
+                    //   builder: (_) => AssetGiffyDialog(
+                    //     title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                    //     description: const Text('Successfully added as an admin.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                    //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    //     entryAnimation: EntryAnimation.DEFAULT,
+                    //     onlyOkButton: true,
+                    //     onOkButtonPressed: (){
+                    //       managers = [];
+                    //       adminItemsRemaining = 1;
+                    //       familyItemsRemaining = 1;
+                    //       page1 = 1;
+                    //       page2 = 1;
+                    //       flag1 = false;
+                    //       addManagers1();
+                    //       onLoading();
+
+                    //       Navigator.pop(context, true);
+                    //     },
+                    //   ),
+                    // );
                     await showDialog(
                       context: context,
-                      builder: (_) => AssetGiffyDialog(
-                        title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                        description: const Text('Successfully added as an admin.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                      builder: (context) => CustomDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        entryAnimation: EntryAnimation.DEFAULT,
-                        onlyOkButton: true,
-                        onOkButtonPressed: (){
+                        title: 'Success',
+                        description: 'Successfully added as an admin.',
+                        okButtonColor: const Color(0xff4caf50), // GREEN
+                        includeOkButton: true,
+                        okButton: (){
                           managers = [];
                           adminItemsRemaining = 1;
                           familyItemsRemaining = 1;
