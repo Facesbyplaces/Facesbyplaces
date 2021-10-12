@@ -8,8 +8,6 @@ import 'package:facesbyplaces/API/Regular/02-Main/api_main_regular_04_02_01_leav
 import 'package:facesbyplaces/API/Regular/02-Main/api_main_regular_04_02_02_follow_page.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// // ignore: import_of_legacy_library_into_null_safe
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 
@@ -91,22 +89,6 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                   elevation: 0,
                   height: 35,
                   onPressed: () async{
-                    // bool confirmResult = await showDialog(
-                    //   context: context,
-                    //   builder: (_) => AssetGiffyDialog(
-                    //     description: const Text('Are you sure you want to leave this page?', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                    //     title: const Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                    //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    //     entryAnimation: EntryAnimation.DEFAULT,
-                    //     onlyOkButton: false,
-                    //     onOkButtonPressed: (){
-                    //       Navigator.pop(context, true);
-                    //     },
-                    //     onCancelButtonPressed: (){
-                    //       Navigator.pop(context, false);
-                    //     },
-                    //   ),
-                    // );
                     bool confirmResult = await showDialog(
                       context: context,
                       builder: (context) => CustomDialog(
@@ -131,19 +113,6 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                       if(result != 'Failed'){
                         followButton.value = false;
 
-                        // await showDialog(
-                        //   context: context,
-                        //   builder: (_) => AssetGiffyDialog(
-                        //     description: const Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                        //     title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                        //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        //     entryAnimation: EntryAnimation.DEFAULT,
-                        //     onlyOkButton: true,
-                        //     onOkButtonPressed: (){
-                        //       Navigator.pop(context, true);
-                        //     },
-                        //   ),
-                        // );
                         await showDialog(
                           context: context,
                           builder: (context) => CustomDialog(
@@ -155,20 +124,6 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                           ),
                         );
                       }else{
-                        // await showDialog(
-                        //   context: context,
-                        //   builder: (_) => AssetGiffyDialog(
-                        //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                        //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                        //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        //     entryAnimation: EntryAnimation.DEFAULT,
-                        //     buttonOkColor: const Color(0xffff0000),
-                        //     onlyOkButton: true,
-                        //     onOkButtonPressed: (){
-                        //       Navigator.pop(context, true);
-                        //     },
-                        //   ),
-                        // );
                         await showDialog(
                           context: context,
                           builder: (context) => CustomDialog(
@@ -194,23 +149,6 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                   elevation: 0,
                   height: 35,
                   onPressed: () async{
-                    // bool confirmResult = await showDialog(
-                    //   context: context,
-                    //   builder: (_) => AssetGiffyDialog(
-                    //     description: const Text('Are you sure you want to leave this page?', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                    //     title: const Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                    //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    //     entryAnimation: EntryAnimation.DEFAULT,
-                    //     onlyOkButton: false,
-                    //     onOkButtonPressed: (){
-                    //       Navigator.pop(context, true);
-                    //     },
-                    //     onCancelButtonPressed: (){
-                    //       Navigator.pop(context, false);
-                    //     },
-                    //   ),
-                    // );
-
                     bool confirmResult = await showDialog(
                       context: context,
                       builder: (context) => CustomDialog(
@@ -230,19 +168,6 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                       if(result){
                         followButton.value = false;
 
-                        // await showDialog(
-                        //   context: context,
-                        //   builder: (_) => AssetGiffyDialog(
-                        //     description: const Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                        //     title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                        //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        //     entryAnimation: EntryAnimation.DEFAULT,
-                        //     onlyOkButton: true,
-                        //     onOkButtonPressed: (){
-                        //       Navigator.pop(context, true);
-                        //     },
-                        //   ),
-                        // );
                         await showDialog(
                           context: context,
                           builder: (context) => CustomDialog(
@@ -254,20 +179,6 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                           ),
                         );
                       }else{
-                        // await showDialog(
-                        //   context: context,
-                        //   builder: (_) => AssetGiffyDialog(
-                        //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                        //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                        //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        //     entryAnimation: EntryAnimation.DEFAULT,
-                        //     buttonOkColor: const Color(0xffff0000),
-                        //     onlyOkButton: true,
-                        //     onOkButtonPressed: (){
-                        //       Navigator.pop(context, true);
-                        //     },
-                        //   ),
-                        // );
                         await showDialog(
                           context: context,
                           builder: (context) => CustomDialog(
@@ -300,19 +211,6 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                     if(result){
                       followButton.value = true;
 
-                      // await showDialog(
-                      //   context: context,
-                      //   builder: (_) => AssetGiffyDialog(
-                      //     description: const Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle( fontSize: 24, fontFamily: 'NexaRegular', ),),
-                      //     title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                      //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      //     entryAnimation: EntryAnimation.DEFAULT,
-                      //     onlyOkButton: true,
-                      //     onOkButtonPressed: (){
-                      //       Navigator.pop(context, true);
-                      //     },
-                      //   ),
-                      // );
                       await showDialog(
                         context: context,
                         builder: (context) => CustomDialog(
@@ -324,20 +222,6 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                         ),
                       );
                     }else{
-                      // await showDialog(
-                      //   context: context,
-                      //   builder: (_) => AssetGiffyDialog(
-                      //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                      //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                      //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      //     entryAnimation: EntryAnimation.DEFAULT,
-                      //     buttonOkColor: const Color(0xffff0000),
-                      //     onlyOkButton: true,
-                      //     onOkButtonPressed: (){
-                      //       Navigator.pop(context, true);
-                      //     },
-                      //   ),
-                      // );
                       await showDialog(
                         context: context,
                         builder: (context) => CustomDialog(

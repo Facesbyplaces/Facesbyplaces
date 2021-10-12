@@ -2,8 +2,6 @@ import 'package:facesbyplaces/API/Regular/02-Main/api_main_regular_04_02_01_leav
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memorial_regular_17_set_relationship.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// // ignore: import_of_legacy_library_into_null_safe
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 import 'package:misc/misc.dart';
@@ -143,19 +141,6 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
               bool result = await apiRegularMemorialSetRelationship(memorialId: memorialId, relationship: choice);
 
               if(result == true){
-                // await showDialog(
-                //   context: context,
-                //   builder: (_) => AssetGiffyDialog(
-                //     title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                //     description: const Text('Successfully updated the relationship setting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                //     entryAnimation: EntryAnimation.DEFAULT,
-                //     onlyOkButton: true,
-                //     onOkButtonPressed: (){
-                //       Navigator.pop(context, true);
-                //     },
-                //   ),
-                // );
                 await showDialog(
                   context: context,
                   builder: (context) => CustomDialog(
@@ -167,20 +152,6 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
                   ),
                 );
               }else{
-                // await showDialog(
-                //   context: context,
-                //   builder: (_) => AssetGiffyDialog(
-                //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                //     entryAnimation: EntryAnimation.DEFAULT,
-                //     buttonOkColor: const Color(0xffff0000),
-                //     onlyOkButton: true,
-                //     onOkButtonPressed: (){
-                //       Navigator.pop(context, true);
-                //     },
-                //   ),
-                // );
                 await showDialog(
                   context: context,
                   builder: (context) => CustomDialog(
@@ -214,20 +185,6 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
                   Navigator.popAndPushNamed(context, '/home/regular');
                 }
               }else{
-                // await showDialog(
-                //   context: context,
-                //   builder: (_) => AssetGiffyDialog(
-                //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                //     entryAnimation: EntryAnimation.DEFAULT,
-                //     buttonOkColor: const Color(0xffff0000),
-                //     onlyOkButton: true,
-                //     onOkButtonPressed: (){
-                //       Navigator.pop(context, true);
-                //     },
-                //   ),
-                // );
                 await showDialog(
                   context: context,
                   builder: (context) => CustomDialog(

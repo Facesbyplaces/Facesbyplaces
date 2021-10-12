@@ -5,8 +5,6 @@ import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home_show_user_regula
 import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home_show_user_blm_01_user.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// // ignore: import_of_legacy_library_into_null_safe
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 
@@ -104,21 +102,6 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
       context.loaderOverlay.show();
       var newValue = await apiBLMConnectionListFamily(memorialId: widget.memorialId, page: page1).onError((error, stackTrace){
         context.loaderOverlay.hide();
-        // showDialog(
-        //   context: context,
-        //   builder: (_) => AssetGiffyDialog(
-        //     description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-        //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-        //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-        //     entryAnimation: EntryAnimation.DEFAULT,
-        //     buttonOkColor: const Color(0xffff0000),
-        //     onlyOkButton: true,
-        //     onOkButtonPressed: (){
-        //       Navigator.pop(context, true);
-        //       Navigator.pop(context, true);
-        //     },
-        //   ),
-        // );
         showDialog(
           context: context,
           builder: (context) => CustomDialog(
@@ -127,6 +110,10 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
             description: 'Error: $error.',
             okButtonColor: const Color(0xfff44336), // RED
             includeOkButton: true,
+            okButton: (){
+              Navigator.pop(context, true);
+              Navigator.pop(context, true);
+            },
           ),
         );
         throw Exception('$error');
@@ -160,21 +147,6 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
       context.loaderOverlay.show();
       var newValue = await apiBLMConnectionListFriends(memorialId: widget.memorialId, page: page2).onError((error, stackTrace){
         context.loaderOverlay.hide();
-        // showDialog(
-        //   context: context,
-        //   builder: (_) => AssetGiffyDialog(
-        //     description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-        //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-        //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-        //     entryAnimation: EntryAnimation.DEFAULT,
-        //     buttonOkColor: const Color(0xffff0000),
-        //     onlyOkButton: true,
-        //     onOkButtonPressed: (){
-        //       Navigator.pop(context, true);
-        //       Navigator.pop(context, true);
-        //     },
-        //   ),
-        // );
         showDialog(
           context: context,
           builder: (context) => CustomDialog(
@@ -183,6 +155,10 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
             description: 'Error: $error.',
             okButtonColor: const Color(0xfff44336), // RED
             includeOkButton: true,
+            okButton: (){
+              Navigator.pop(context, true);
+              Navigator.pop(context, true);
+            },
           ),
         );
         throw Exception('$error');
@@ -216,21 +192,6 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
       context.loaderOverlay.show();
       var newValue = await apiBLMConnectionListFollowers(memorialId: widget.memorialId, page: page3).onError((error, stackTrace){
         context.loaderOverlay.hide();
-        // showDialog(
-        //   context: context,
-        //   builder: (_) => AssetGiffyDialog(
-        //     description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-        //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-        //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-        //     entryAnimation: EntryAnimation.DEFAULT,
-        //     buttonOkColor: const Color(0xffff0000),
-        //     onlyOkButton: true,
-        //     onOkButtonPressed: (){
-        //       Navigator.pop(context, true);
-        //       Navigator.pop(context, true);
-        //     },
-        //   ),
-        // );
         showDialog(
           context: context,
           builder: (context) => CustomDialog(
@@ -239,6 +200,10 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
             description: 'Error: $error.',
             okButtonColor: const Color(0xfff44336), // RED
             includeOkButton: true,
+            okButton: (){
+              Navigator.pop(context, true);
+              Navigator.pop(context, true);
+            },
           ),
         );
         throw Exception('$error');

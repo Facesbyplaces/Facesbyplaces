@@ -2,8 +2,6 @@ import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_03_verify_email.dar
 import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_10_verification_code_resend.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// // ignore: import_of_legacy_library_into_null_safe
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -110,19 +108,6 @@ class BLMVerifyEmail extends StatelessWidget{
                                         context.loaderOverlay.hide();
 
                                         if(result == true){
-                                          // await showDialog(
-                                          //   context: context,
-                                          //   builder: (_) => AssetGiffyDialog(
-                                          //     title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                          //     description: const Text('Another code has been sent to your email address. Please check your inbox.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                          //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          //     entryAnimation: EntryAnimation.DEFAULT,
-                                          //     onlyOkButton: true,
-                                          //     onOkButtonPressed: (){
-                                          //       Navigator.pop(context, true);
-                                          //     },
-                                          //   ),
-                                          // );
                                           await showDialog(
                                             context: context,
                                             builder: (context) => CustomDialog(
@@ -134,20 +119,6 @@ class BLMVerifyEmail extends StatelessWidget{
                                             ),
                                           );
                                         }else{
-                                          // await showDialog(
-                                          //   context: context,
-                                          //   builder: (_) => AssetGiffyDialog(
-                                          //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                          //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                          //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          //     entryAnimation: EntryAnimation.DEFAULT,
-                                          //     buttonOkColor: const Color(0xffff0000),
-                                          //     onlyOkButton: true,
-                                          //     onOkButtonPressed: (){
-                                          //       Navigator.pop(context, true);
-                                          //     },
-                                          //   ),
-                                          // );
                                           await showDialog(
                                             context: context,
                                             builder: (context) => CustomDialog(
@@ -175,20 +146,6 @@ class BLMVerifyEmail extends StatelessWidget{
                                 height: 50,
                                 onPressed: () async{
                                   if(controller.text.length != 3){
-                                    // await showDialog(
-                                    //   context: context,
-                                    //   builder: (_) => AssetGiffyDialog(
-                                    //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                    //     description: const Text('Please enter the verification code.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                    //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    //     entryAnimation: EntryAnimation.DEFAULT,
-                                    //     buttonOkColor: const Color(0xffff0000),
-                                    //     onlyOkButton: true,
-                                    //     onOkButtonPressed: (){
-                                    //       Navigator.pop(context, true);
-                                    //     },
-                                    //   ),
-                                    // );
                                     await showDialog(
                                       context: context,
                                       builder: (context) => CustomDialog(
@@ -207,20 +164,6 @@ class BLMVerifyEmail extends StatelessWidget{
                                     if(result == 'Success'){
                                       Navigator.pushNamed(context, '/blm/upload-photo');
                                     }else{
-                                      // await showDialog(
-                                      //   context: context,
-                                      //   builder: (_) => AssetGiffyDialog(
-                                      //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                      //     description: Text('Error: $result', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                      //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      //     entryAnimation: EntryAnimation.DEFAULT,
-                                      //     buttonOkColor: const Color(0xffff0000),
-                                      //     onlyOkButton: true,
-                                      //     onOkButtonPressed: (){
-                                      //       Navigator.pop(context, true);
-                                      //     },
-                                      //   ),
-                                      // );
                                       await showDialog(
                                         context: context,
                                         builder: (context) => CustomDialog(

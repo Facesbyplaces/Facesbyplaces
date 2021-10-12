@@ -11,11 +11,10 @@ import 'home_settings_user_blm_04_other_details.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:image_picker/image_picker.dart';
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:giffy_dialog/giffy_dialog.dart';
 import '../../../ui_01_get_started.dart';
 import 'package:we_slide/we_slide.dart';
 import 'package:flutter/material.dart';
+import 'package:dialog/dialog.dart';
 import 'package:misc/misc.dart';
 import 'dart:io';
 
@@ -97,16 +96,12 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                             context.loaderOverlay.hide();
                             showDialog(
                               context: context,
-                              builder: (_) => AssetGiffyDialog(
-                                description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                              builder: (context) => CustomDialog(
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                buttonOkColor: const Color(0xffff0000),
-                                onlyOkButton: true,
-                                onOkButtonPressed: (){
-                                  Navigator.pop(context, true);
-                                },
+                                title: 'Error',
+                                description: 'Error: $error.',
+                                okButtonColor: const Color(0xfff44336), // RED
+                                includeOkButton: true,
                               ),
                             );
                             throw Exception('$error');
@@ -167,16 +162,12 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                             }else{
                               await showDialog(
                                 context: context,
-                                builder: (_) => AssetGiffyDialog(
-                                  description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                  title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                builder: (context) => CustomDialog(
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  entryAnimation: EntryAnimation.DEFAULT,
-                                  buttonOkColor: const Color(0xffff0000),
-                                  onlyOkButton: true,
-                                  onOkButtonPressed: (){
-                                    Navigator.pop(context, true);
-                                  },
+                                  title: 'Error',
+                                  description: 'Something went wrong. Please try again.',
+                                  okButtonColor: const Color(0xfff44336), // RED
+                                  includeOkButton: true,
                                 ),
                               );
                             }
@@ -235,30 +226,23 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                                 if(result){
                                   await showDialog(
                                     context: context,
-                                    builder: (_) => AssetGiffyDialog(
-                                      description: const Text('Successfully updated the profile picture.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                      title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                    builder: (context) => CustomDialog(
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      entryAnimation: EntryAnimation.DEFAULT,
-                                      onlyOkButton: true,
-                                      onOkButtonPressed: (){
-                                        Navigator.pop(context, true);
-                                      },
+                                      title: 'Success',
+                                      description: 'Successfully updated the profile picture.',
+                                      okButtonColor: const Color(0xff4caf50), // GREEN
+                                      includeOkButton: true,
                                     ),
                                   );
                                 }else{
                                   await showDialog(
                                     context: context,
-                                    builder: (_) => AssetGiffyDialog(
-                                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                      title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                    builder: (context) => CustomDialog(
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      entryAnimation: EntryAnimation.DEFAULT,
-                                      buttonOkColor: const Color(0xffff0000),
-                                      onlyOkButton: true,
-                                      onOkButtonPressed: (){
-                                        Navigator.pop(context, true);
-                                      },
+                                      title: 'Error',
+                                      description: 'Something went wrong. Please try again.',
+                                      okButtonColor: const Color(0xfff44336), // RED
+                                      includeOkButton: true,
                                     ),
                                   );
                                 }

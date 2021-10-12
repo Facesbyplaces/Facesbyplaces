@@ -1,14 +1,12 @@
 import 'package:facesbyplaces/API/BLM/06-Donate/api_donate_blm_01_donate.dart';
 import 'package:facesbyplaces/API/BLM/06-Donate/api_donate_blm_02_confirm_payment.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// // ignore: import_of_legacy_library_into_null_safe
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:pay/pay.dart' as pay;
 import 'package:dialog/dialog.dart';
@@ -258,21 +256,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                                 PaymentMethodParams.card(billingDetails: BillingDetails.fromJson(newCard!.toJson(),),),
                                                               ).onError((error, stackTrace){
                                                                 context.loaderOverlay.hide();
-                                                                // showDialog(
-                                                                //   context: context,
-                                                                //   builder: (_) => AssetGiffyDialog(
-                                                                //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                                //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                                                //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                                //     entryAnimation: EntryAnimation.DEFAULT,
-                                                                //     buttonOkColor: const Color(0xffff0000),
-                                                                //     onlyOkButton: true,
-                                                                //     onOkButtonPressed: (){
-                                                                //       Navigator.pop(context, true);
-                                                                //       Navigator.pop(context, true);
-                                                                //     },
-                                                                //   ),
-                                                                // );
                                                                 showDialog(
                                                                   context: context,
                                                                   builder: (context) => CustomDialog(
@@ -292,21 +275,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                               
                                                               List<String> newValue = await apiBLMDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: paymentMethod.id).onError((error, stackTrace){
                                                                 context.loaderOverlay.hide();
-                                                                // showDialog(
-                                                                //   context: context,
-                                                                //   builder: (_) => AssetGiffyDialog(
-                                                                //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                                //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                                                //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                                //     entryAnimation: EntryAnimation.DEFAULT,
-                                                                //     buttonOkColor: const Color(0xffff0000),
-                                                                //     onlyOkButton: true,
-                                                                //     onOkButtonPressed: (){
-                                                                //       Navigator.pop(context, true);
-                                                                //       Navigator.pop(context, true);
-                                                                //     },
-                                                                //   ),
-                                                                // );
                                                                 showDialog(
                                                                   context: context,
                                                                   builder: (context) => CustomDialog(
@@ -326,21 +294,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
 
                                                               bool confirmPaymentResult = await apiBLMConfirmPayment(clientSecret: newValue[0], paymentMethod: newValue[1]).onError((error, stackTrace){
                                                                 context.loaderOverlay.hide();
-                                                                // showDialog(
-                                                                //   context: context,
-                                                                //   builder: (_) => AssetGiffyDialog(
-                                                                //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                                //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                                                //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                                //     entryAnimation: EntryAnimation.DEFAULT,
-                                                                //     buttonOkColor: const Color(0xffff0000),
-                                                                //     onlyOkButton: true,
-                                                                //     onOkButtonPressed: (){
-                                                                //       Navigator.pop(context, true);
-                                                                //       Navigator.pop(context, true);
-                                                                //     },
-                                                                //   ),
-                                                                // );
                                                                 showDialog(
                                                                   context: context,
                                                                   builder: (context) => CustomDialog(
@@ -361,19 +314,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                               context.loaderOverlay.hide();
 
                                                               if(confirmPaymentResult == true){
-                                                                // await showDialog(
-                                                                //   context: context,
-                                                                //   builder: (_) => AssetGiffyDialog(
-                                                                //     title: const Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                                //     description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular',),),
-                                                                //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                                //     entryAnimation: EntryAnimation.DEFAULT,
-                                                                //     onlyOkButton: true,
-                                                                //     onOkButtonPressed: (){
-                                                                //       Navigator.pop(context);
-                                                                //     },
-                                                                //   ),
-                                                                // );
                                                                 await showDialog(
                                                                   context: context,
                                                                   builder: (context) => CustomDialog(
@@ -385,20 +325,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                                   ),
                                                                 );
                                                               }else{
-                                                                // await showDialog(
-                                                                //   context: context,
-                                                                //   builder: (_) => AssetGiffyDialog(
-                                                                //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                                //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                                                //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                                //     entryAnimation: EntryAnimation.DEFAULT,
-                                                                //     buttonOkColor: const Color(0xffff0000),
-                                                                //     onlyOkButton: true,
-                                                                //     onOkButtonPressed: (){
-                                                                //       Navigator.pop(context, true);
-                                                                //     },
-                                                                //   ),
-                                                                // );
                                                                 await showDialog(
                                                                   context: context,
                                                                   builder: (context) => CustomDialog(
@@ -411,20 +337,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                                 );
                                                               }
                                                             }else{
-                                                              // await showDialog(
-                                                              //   context: context,
-                                                              //   builder: (_) => AssetGiffyDialog(
-                                                              //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                              //     description: const Text('Please input your card information first before proceeding.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                                              //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                              //     entryAnimation: EntryAnimation.DEFAULT,
-                                                              //     buttonOkColor: const Color(0xffff0000),
-                                                              //     onlyOkButton: true,
-                                                              //     onOkButtonPressed: (){
-                                                              //       Navigator.pop(context, true);
-                                                              //     },
-                                                              //   )
-                                                              // );
                                                               await showDialog(
                                                                 context: context,
                                                                 builder: (context) => CustomDialog(
@@ -465,21 +377,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                   );
 
                                                   List<String> newValue = await apiBLMDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: '').onError((error, stackTrace){
-                                                    // showDialog(
-                                                    //   context: context,
-                                                    //   builder: (_) => AssetGiffyDialog(
-                                                    //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                    //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                                    //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                    //     entryAnimation: EntryAnimation.DEFAULT,
-                                                    //     buttonOkColor: const Color(0xffff0000),
-                                                    //     onlyOkButton: true,
-                                                    //     onOkButtonPressed: (){
-                                                    //       Navigator.pop(context, true);
-                                                    //       Navigator.pop(context, true);
-                                                    //     },
-                                                    //   ),
-                                                    // );
                                                     showDialog(
                                                       context: context,
                                                       builder: (context) => CustomDialog(
@@ -502,20 +399,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                     await Stripe.instance.confirmApplePayPayment(newValue[0]);
                                                   }
                                                 }else{
-                                                  // await showDialog(
-                                                  //   context: context,
-                                                  //   builder: (_) => AssetGiffyDialog(
-                                                  //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                  //     description: const Text('Apple pay is not setup on this phone\'s settings. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                                  //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                  //     entryAnimation: EntryAnimation.DEFAULT,
-                                                  //     buttonOkColor: const Color(0xffff0000),
-                                                  //     onlyOkButton: true,
-                                                  //     onOkButtonPressed: (){
-                                                  //       Navigator.pop(context, true);
-                                                  //     },
-                                                  //   ),
-                                                  // );
                                                   await showDialog(
                                                     context: context,
                                                     builder: (context) => CustomDialog(
@@ -545,28 +428,13 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                               type: pay.GooglePayButtonType.donate,
                                               onPaymentResult: (paymentResult) async{
                                                 try{
-                                                    debugPrint('the payment result is $paymentResult');
-                                                    final token = paymentResult['paymentMethodData']['tokenizationData']['token'];
-                                                    final tokenJson = Map.castFrom(json.decode(token));
+                                                  debugPrint('the payment result is $paymentResult');
+                                                  final token = paymentResult['paymentMethodData']['tokenizationData']['token'];
+                                                  final tokenJson = Map.castFrom(json.decode(token));
 
                                                   bool onError = false;
 
                                                   List<String> newValue = await apiBLMDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: '').onError((error, stackTrace){
-                                                    // showDialog(
-                                                    //   context: context,
-                                                    //   builder: (_) => AssetGiffyDialog(
-                                                    //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                    //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                                    //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                    //     entryAnimation: EntryAnimation.DEFAULT,
-                                                    //     buttonOkColor: const Color(0xffff0000),
-                                                    //     onlyOkButton: true,
-                                                    //     onOkButtonPressed: (){
-                                                    //       Navigator.pop(context, true);
-                                                    //       Navigator.pop(context, true);
-                                                    //     },
-                                                    //   ),
-                                                    // );
                                                     showDialog(
                                                       context: context,
                                                       builder: (context) => CustomDialog(
@@ -591,19 +459,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                     PaymentIntent confirmGooglePayment = await Stripe.instance.confirmPayment(newValue[0], params,);
 
                                                     if(confirmGooglePayment.status == PaymentIntentsStatus.Succeeded){
-                                                      // await showDialog(
-                                                      //   context: context,
-                                                      //   builder: (_) => AssetGiffyDialog(
-                                                      //     title: const Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                      //     description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular',),),
-                                                      //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                      //     entryAnimation: EntryAnimation.DEFAULT,
-                                                      //     onlyOkButton: true,
-                                                      //     onOkButtonPressed: (){
-                                                      //       Navigator.pop(context);
-                                                      //     },
-                                                      //   ),
-                                                      // );
                                                       await showDialog(
                                                         context: context,
                                                         builder: (context) => CustomDialog(
@@ -615,20 +470,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                         ),
                                                       );
                                                     }else{
-                                                      // await showDialog(
-                                                      //   context: context,
-                                                      //   builder: (_) => AssetGiffyDialog(
-                                                      //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                      //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                                      //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                      //     entryAnimation: EntryAnimation.DEFAULT,
-                                                      //     buttonOkColor: const Color(0xffff0000),
-                                                      //     onlyOkButton: true,
-                                                      //     onOkButtonPressed: (){
-                                                      //       Navigator.pop(context, true);
-                                                      //     },
-                                                      //   ),
-                                                      // );
                                                       await showDialog(
                                                         context: context,
                                                         builder: (context) => CustomDialog(
@@ -642,20 +483,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                     }
                                                   }
                                                 }catch(e){
-                                                  // await showDialog(
-                                                  //   context: context,
-                                                  //   builder: (_) => AssetGiffyDialog(
-                                                  //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                  //     description: Text('Error: $e', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                                  //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                  //     entryAnimation: EntryAnimation.DEFAULT,
-                                                  //     buttonOkColor: const Color(0xffff0000),
-                                                  //     onlyOkButton: true,
-                                                  //     onOkButtonPressed: (){
-                                                  //       Navigator.pop(context, true);
-                                                  //     },
-                                                  //   ),
-                                                  // );
                                                   await showDialog(
                                                     context: context,
                                                     builder: (context) => CustomDialog(
@@ -669,25 +496,10 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                 }
                                               },
                                               loadingIndicator: const Center(child: CircularProgressIndicator(),),
-                                              // onPressed: () async{},
                                               onPressed: () async{
                                                 await debugChangedStripePublishableKey();
                                               },
                                               onError: (e) async{
-                                                // await showDialog(
-                                                //   context: context,
-                                                //   builder: (_) => AssetGiffyDialog(
-                                                //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                                //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                                //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                //     entryAnimation: EntryAnimation.DEFAULT,
-                                                //     buttonOkColor: const Color(0xffff0000),
-                                                //     onlyOkButton: true,
-                                                //     onOkButtonPressed: (){
-                                                //       Navigator.pop(context, true);
-                                                //     },
-                                                //   ),
-                                                // );
                                                 await showDialog(
                                                   context: context,
                                                   builder: (context) => CustomDialog(

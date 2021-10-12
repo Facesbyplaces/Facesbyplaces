@@ -7,8 +7,6 @@ import 'package:loader_overlay/loader_overlay.dart';
 // ignore: library_prefixes
 import 'package:location/location.dart' as Location;
 import 'package:better_player/better_player.dart';
-// // ignore: import_of_legacy_library_into_null_safe
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
@@ -181,20 +179,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                               if(permissionGranted == Location.PermissionStatus.denied){
                                 permissionGranted = await location.requestPermission();
                                 if(permissionGranted != Location.PermissionStatus.granted){
-                                  // await showDialog(
-                                  //   context: context,
-                                  //   builder: (_) => AssetGiffyDialog(
-                                  //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                  //     description: const Text('Permission to access location has been denied from this app. In order to turn it on, go to settings and allow location access permission for this app.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                  //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  //     entryAnimation: EntryAnimation.DEFAULT,
-                                  //     buttonOkColor: const Color(0xffff0000),
-                                  //     onlyOkButton: true,
-                                  //     onOkButtonPressed: (){
-                                  //       Navigator.pop(context, true);
-                                  //     },
-                                  //   ),
-                                  // );
                                   await showDialog(
                                     context: context,
                                     builder: (context) => CustomDialog(
@@ -241,20 +225,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                             if(result){
                               Navigator.popAndPushNamed(context, '/home/regular');
                             }else{
-                              // await showDialog(
-                              //   context: context,
-                              //   builder: (_) => AssetGiffyDialog(
-                              //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                              //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                              //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              //     entryAnimation: EntryAnimation.DEFAULT,
-                              //     buttonOkColor: const Color(0xffff0000),
-                              //     onlyOkButton: true,
-                              //     onOkButtonPressed: (){
-                              //       Navigator.pop(context, true);
-                              //     },
-                              //   ),
-                              // );
                               await showDialog(
                                 context: context,
                                 builder: (context) => CustomDialog(

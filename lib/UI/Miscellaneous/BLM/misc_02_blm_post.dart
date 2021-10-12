@@ -7,8 +7,6 @@ import 'package:facesbyplaces/API/BLM/12-Show-Post/api_show_post_blm_05_post_lik
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-// // ignore: import_of_legacy_library_into_null_safe
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
@@ -236,19 +234,6 @@ class MiscBLMPostState extends State<MiscBLMPost>{
                         );
 
                         if(response.success){
-                          // await showDialog(
-                          //   context: context,
-                          //   builder: (_) => AssetGiffyDialog(
-                          //     description: const Text('Successfully shared the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                          //     title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                          //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          //     entryAnimation: EntryAnimation.DEFAULT,
-                          //     onlyOkButton: true,
-                          //     onOkButtonPressed: (){
-                          //       Navigator.pop(context, true);
-                          //     },
-                          //   ),
-                          // );
                           await showDialog(
                             context: context,
                             builder: (context) => CustomDialog(

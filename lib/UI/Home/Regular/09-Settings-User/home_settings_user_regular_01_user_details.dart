@@ -11,8 +11,6 @@ import 'home_settings_user_regular_04_other_details.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// // ignore: import_of_legacy_library_into_null_safe
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:we_slide/we_slide.dart';
 import 'package:flutter/material.dart';
@@ -96,20 +94,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                           context.loaderOverlay.show();
                           bool checkAccount = await apiRegularCheckAccount(email: profile.data!.showProfileInformationEmail).onError((error, stackTrace){
                             context.loaderOverlay.hide();
-                            // showDialog(
-                            //   context: context,
-                            //   builder: (_) => AssetGiffyDialog(
-                            //     description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                            //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                            //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            //     entryAnimation: EntryAnimation.DEFAULT,
-                            //     buttonOkColor: const Color(0xffff0000),
-                            //     onlyOkButton: true,
-                            //     onOkButtonPressed: (){
-                            //       Navigator.pop(context, true);
-                            //     },
-                            //   ),
-                            // );
                             showDialog(
                               context: context,
                               builder: (context) => CustomDialog(
@@ -176,20 +160,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                               Route newRoute = MaterialPageRoute(builder: (BuildContext context) => const UIGetStarted());
                               Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
                             }else{
-                              // await showDialog(
-                              //   context: context,
-                              //   builder: (_) => AssetGiffyDialog(
-                              //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                              //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                              //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              //     entryAnimation: EntryAnimation.DEFAULT,
-                              //     buttonOkColor: const Color(0xffff0000),
-                              //     onlyOkButton: true,
-                              //     onOkButtonPressed: (){
-                              //       Navigator.pop(context, true);
-                              //     },
-                              //   ),
-                              // );
                               await showDialog(
                                 context: context,
                                 builder: (context) => CustomDialog(
@@ -256,19 +226,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                 context.loaderOverlay.hide();
 
                                 if(result){
-                                  // await showDialog(
-                                  //   context: context,
-                                  //   builder: (_) => AssetGiffyDialog(
-                                  //     title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                  //     description: const Text('Successfully updated the profile picture.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                  //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  //     entryAnimation: EntryAnimation.DEFAULT,
-                                  //     onlyOkButton: true,
-                                  //     onOkButtonPressed: (){
-                                  //       Navigator.pop(context, true);
-                                  //     },
-                                  //   ),
-                                  // );
                                   await showDialog(
                                     context: context,
                                     builder: (context) => CustomDialog(
@@ -280,20 +237,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                     ),
                                   );
                                 }else{
-                                  // await showDialog(
-                                  //   context: context,
-                                  //   builder: (_) => AssetGiffyDialog(
-                                  //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                  //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                  //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  //     entryAnimation: EntryAnimation.DEFAULT,
-                                  //     buttonOkColor: const Color(0xffff0000),
-                                  //     onlyOkButton: true,
-                                  //     onOkButtonPressed: (){
-                                  //       Navigator.pop(context, true);
-                                  //     },
-                                  //   ),
-                                  // );
                                   await showDialog(
                                     context: context,
                                     builder: (context) => CustomDialog(

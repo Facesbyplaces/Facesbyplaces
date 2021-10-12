@@ -3,8 +3,6 @@ import 'home_search_regular_02_search_extended.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 // ignore: library_prefixes
 import 'package:location/location.dart' as Location;
-// // ignore: import_of_legacy_library_into_null_safe
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
@@ -85,28 +83,12 @@ class HomeRegularSearchState extends State<HomeRegularSearch>{
                             Location.PermissionStatus permissionGranted = await location.hasPermission();
 
                             if(permissionGranted != Location.PermissionStatus.granted){
-                              // bool confirmation = await showDialog(
-                              //   context: context,
-                              //   builder: (_) => AssetGiffyDialog(
-                              //     title: const Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                              //     description: const Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                              //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              //     entryAnimation: EntryAnimation.DEFAULT,
-                              //     onlyOkButton: false,
-                              //     onOkButtonPressed: (){
-                              //       Navigator.pop(context, true);
-                              //     },
-                              //     onCancelButtonPressed: (){
-                              //       Navigator.pop(context, false);
-                              //     },
-                              //   ),
-                              // );
                               bool confirmation = await showDialog(
                                 context: context,
                                 builder: (context) => CustomDialog(
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                   title: 'Confirm',
-                                  description: 'FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
+                                  description: 'FacesbyPlaces needs to access the location to locate the memorials. Do you wish to turn it on?',
                                   includeOkButton: true,
                                   includeCancelButton: true,
                                 ),

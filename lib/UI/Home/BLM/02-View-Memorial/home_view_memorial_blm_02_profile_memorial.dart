@@ -15,8 +15,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
-// // ignore: import_of_legacy_library_into_null_safe
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'home_view_memorial_blm_04_maps.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
@@ -447,19 +445,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                 }
 
                                                                 if(result){
-                                                                  // await showDialog(
-                                                                  //   context: context,
-                                                                  //   builder: (_) => AssetGiffyDialog(
-                                                                  //     description: Text(join.value != true ? 'Successfully unfollowed the page. You will no longer receive notifications from this page.' : 'Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                                                  //     title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                                                  //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                                  //     entryAnimation: EntryAnimation.DEFAULT,
-                                                                  //     onlyOkButton: true,
-                                                                  //     onOkButtonPressed: (){
-                                                                  //       Navigator.pop(context, true);
-                                                                  //     },
-                                                                  //   ),
-                                                                  // );
                                                                   await showDialog(
                                                                     context: context,
                                                                     builder: (context) => CustomDialog(
@@ -471,20 +456,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                     ),
                                                                   );
                                                                 }else{
-                                                                  // await showDialog(
-                                                                  //   context: context,
-                                                                  //   builder: (_) => AssetGiffyDialog(
-                                                                  //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                                                  //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                                                  //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                                  //     entryAnimation: EntryAnimation.DEFAULT,
-                                                                  //     buttonOkColor: const Color(0xffff0000),
-                                                                  //     onlyOkButton: true,
-                                                                  //     onOkButtonPressed: (){
-                                                                  //       Navigator.pop(context, true);
-                                                                  //     },
-                                                                  //   ),
-                                                                  // );
                                                                   await showDialog(
                                                                     context: context,
                                                                     builder: (context) => CustomDialog(

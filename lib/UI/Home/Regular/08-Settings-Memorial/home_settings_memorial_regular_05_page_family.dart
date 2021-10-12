@@ -3,8 +3,6 @@ import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api_settings_memo
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home_settings_memorial_regular_07_search_user_settings.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// // ignore: import_of_legacy_library_into_null_safe
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 
@@ -55,21 +53,6 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
       context.loaderOverlay.show();
       var newValue = await apiRegularShowFamilySettings(memorialId: widget.memorialId, page: page).onError((error, stackTrace){
         context.loaderOverlay.hide();
-        // showDialog(
-        //   context: context,
-        //   builder: (_) => AssetGiffyDialog(
-        //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 36, fontFamily: 'NexaRegular'),),
-        //     description: Text('Error: $error.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-        //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-        //     entryAnimation: EntryAnimation.DEFAULT,
-        //     buttonOkColor: const Color(0xffff0000),
-        //     onlyOkButton: true,
-        //     onOkButtonPressed: (){
-        //       Navigator.pop(context, true);
-        //       Navigator.pop(context, true);
-        //     },
-        //   ),
-        // );
         showDialog(
           context: context,
           builder: (context) => CustomDialog(
@@ -78,6 +61,10 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
             description: 'Error: $error.',
             okButtonColor: const Color(0xfff44336), // RED
             includeOkButton: true,
+            okButton: (){
+              Navigator.pop(context, true);
+              Navigator.pop(context, true);
+            }
           ),
         );
         throw Exception('$error');
@@ -113,22 +100,6 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
               color: const Color(0xffE74C3C),
               height: 40,
               onPressed: () async{
-                // bool confirmation = await showDialog(
-                //   context: context,
-                //   builder: (_) => AssetGiffyDialog(
-                //     title: const Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                //     description: const Text('Are you sure you want to remove this user?', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                //     entryAnimation: EntryAnimation.DEFAULT,
-                //     onlyOkButton: false,
-                //     onOkButtonPressed: () async{
-                //       Navigator.pop(context, true);
-                //     },
-                //     onCancelButtonPressed: (){
-                //       Navigator.pop(context, false);
-                //     },
-                //   ),
-                // );
                 bool confirmation = await showDialog(
                   context: context,
                   builder: (context) => CustomDialog(
@@ -146,20 +117,6 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
                   context.loaderOverlay.hide();
 
                   if(result != 'Success'){
-                    // await showDialog(
-                    //   context: context,
-                    //   builder: (_) => AssetGiffyDialog(
-                    //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                    //     description: Text('Error: $result.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                    //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    //     entryAnimation: EntryAnimation.DEFAULT,
-                    //     buttonOkColor: const Color(0xffff0000),
-                    //     onlyOkButton: true,
-                    //     onOkButtonPressed: (){
-                    //       Navigator.pop(context, true);
-                    //     },
-                    //   ),
-                    // );
                     await showDialog(
                       context: context,
                       builder: (context) => CustomDialog(
@@ -171,25 +128,6 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
                       ),
                     );
                   }else{
-                    // await showDialog(
-                    //   context: context,
-                    //   builder: (_) => AssetGiffyDialog(
-                    //     title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                    //     description: const Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',)),
-                    //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    //     entryAnimation: EntryAnimation.DEFAULT,
-                    //     onlyOkButton: true,
-                    //     onOkButtonPressed: (){
-                    //       family = [];
-                    //       familyItemsRemaining = 1;
-                    //       page = 1;
-                    //       count.value = 0;
-                    //       onLoading();
-
-                    //       Navigator.pop(context, true);
-                    //     },
-                    //   ),
-                    // );
                     await showDialog(
                       context: context,
                       builder: (context) => CustomDialog(

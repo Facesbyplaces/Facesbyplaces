@@ -21,8 +21,6 @@ import 'home_main_blm_03_01_feed_tab.dart';
 import 'home_main_blm_03_02_memorial_list_tab.dart';
 import 'home_main_blm_03_03_post_tab.dart';
 import 'home_main_blm_03_04_notifications_tab.dart';
-// // ignore: import_of_legacy_library_into_null_safe
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import '../../../ui_01_get_started.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
@@ -99,20 +97,6 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
         }
       }
     }else{
-      // await showDialog(
-      //   context: context, 
-      //   builder: (_) => AssetGiffyDialog(
-      //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-      //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-      //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-      //     entryAnimation: EntryAnimation.DEFAULT,
-      //     buttonOkColor: const Color(0xffff0000),
-      //     onlyOkButton: true,
-      //     onOkButtonPressed: (){
-      //       Navigator.pop(context, true);
-      //     },
-      //   ),
-      // );
       await showDialog(
         context: context,
         builder: (context) => CustomDialog(
@@ -487,20 +471,6 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                           Route newRoute = MaterialPageRoute(builder: (BuildContext context) => const UIGetStarted());
                                           Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
                                         }else{
-                                          // await showDialog(
-                                          //   context: context,
-                                          //   builder: (_) => AssetGiffyDialog(
-                                          //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                          //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                          //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          //     entryAnimation: EntryAnimation.DEFAULT,
-                                          //     buttonOkColor: const Color(0xffff0000),
-                                          //     onlyOkButton: true,
-                                          //     onOkButtonPressed: (){
-                                          //       Navigator.pop(context, true);
-                                          //     },
-                                          //   ),
-                                          // );
                                           await showDialog(
                                             context: context,
                                             builder: (context) => CustomDialog(

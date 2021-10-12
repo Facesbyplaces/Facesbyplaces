@@ -3,8 +3,6 @@ import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_reg
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home_settings_user_regular_01_user_details.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// // ignore: import_of_legacy_library_into_null_safe
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 import 'package:misc/misc.dart';
@@ -80,26 +78,12 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
                     height: 50,
                     onPressed: () async{
                       if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
-                        // await showDialog(
-                        //   context: context,
-                        //   builder: (_) => AssetGiffyDialog(
-                        //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                        //     description: const Text('Password can\'t be empty. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                        //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        //     entryAnimation: EntryAnimation.DEFAULT,
-                        //     buttonOkColor: const Color(0xffff0000),
-                        //     onlyOkButton: true,
-                        //     onOkButtonPressed: (){
-                        //       Navigator.pop(context, true);
-                        //     },
-                        //   ),
-                        // );
                         await showDialog(
                           context: context,
                           builder: (context) => CustomDialog(
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             title: 'Error',
-                            description: 'Something went wrong. Please try again.',
+                            description: 'Password can\'t be empty. Please try again.',
                             okButtonColor: const Color(0xfff44336), // RED
                             includeOkButton: true,
                           ),
@@ -112,19 +96,6 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
                             context.loaderOverlay.hide();
 
                             if(result){
-                              // await showDialog(
-                              //   context: context,
-                              //   builder: (_) => AssetGiffyDialog(
-                              //     title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                              //     description: const Text('Successfully added a password.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                              //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              //     entryAnimation: EntryAnimation.DEFAULT,
-                              //     onlyOkButton: true,
-                              //     onOkButtonPressed: (){
-                              //       Navigator.pop(context, true);
-                              //     },
-                              //   ),
-                              // );
                               await showDialog(
                                 context: context,
                                 builder: (context) => CustomDialog(
@@ -137,20 +108,6 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
                               );
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: widget.userId,)));
                             }else{
-                              // await showDialog(
-                              //   context: context,
-                              //   builder: (_) => AssetGiffyDialog(
-                              //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                              //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                              //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              //     entryAnimation: EntryAnimation.DEFAULT,
-                              //     buttonOkColor: const Color(0xffff0000),
-                              //     onlyOkButton: true,
-                              //     onOkButtonPressed: (){
-                              //       Navigator.pop(context, true);
-                              //     },
-                              //   ),
-                              // );
                               await showDialog(
                                 context: context,
                                 builder: (context) => CustomDialog(
@@ -163,20 +120,6 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
                               );
                             }
                           }else{
-                            // await showDialog(
-                            //   context: context,
-                            //   builder: (_) => AssetGiffyDialog(
-                            //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                            //     description: const Text('Passwords don\'t match. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                            //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            //     entryAnimation: EntryAnimation.DEFAULT,
-                            //     buttonOkColor: const Color(0xffff0000),
-                            //     onlyOkButton: true,
-                            //     onOkButtonPressed: (){
-                            //       Navigator.pop(context, true);
-                            //     },
-                            //   ),
-                            // );
                             await showDialog(
                               context: context,
                               builder: (context) => CustomDialog(
@@ -194,19 +137,6 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
                           context.loaderOverlay.hide();
 
                           if(result){
-                            // await showDialog(
-                            //   context: context,
-                            //   builder: (_) => AssetGiffyDialog(
-                            //     title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                            //     description: const Text('Successfully updated the password.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                            //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            //     entryAnimation: EntryAnimation.DEFAULT,
-                            //     onlyOkButton: true,
-                            //     onOkButtonPressed: (){
-                            //       Navigator.pop(context, true);
-                            //     },
-                            //   ),
-                            // );
                             await showDialog(
                               context: context,
                               builder: (context) => CustomDialog(
@@ -219,20 +149,6 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
                             );
                             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: widget.userId,)));
                           }else{
-                            // await showDialog(
-                            //   context: context,
-                            //   builder: (_) => AssetGiffyDialog(
-                            //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                            //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                            //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            //     entryAnimation: EntryAnimation.DEFAULT,
-                            //     buttonOkColor: const Color(0xffff0000),
-                            //     onlyOkButton: true,
-                            //     onOkButtonPressed: (){
-                            //       Navigator.pop(context, true);
-                            //     },
-                            //   ),
-                            // );
                             await showDialog(
                               context: context,
                               builder: (context) => CustomDialog(

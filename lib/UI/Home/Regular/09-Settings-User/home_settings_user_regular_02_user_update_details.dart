@@ -4,8 +4,6 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home_settings_user_regular_01_user_details.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// // ignore: import_of_legacy_library_into_null_safe
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 import 'package:misc/misc.dart';
@@ -136,19 +134,6 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                                 context.loaderOverlay.hide();
 
                                 if(result){
-                                  // await showDialog(
-                                  //   context: context,
-                                  //   builder: (_) => AssetGiffyDialog(
-                                  //     title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                  //     description: const Text('Successfully updated the account details.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                  //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  //     entryAnimation: EntryAnimation.DEFAULT,
-                                  //     onlyOkButton: true,
-                                  //     onOkButtonPressed: (){
-                                  //       Navigator.pop(context, true);
-                                  //     },
-                                  //   ),
-                                  // );
                                   await showDialog(
                                     context: context,
                                     builder: (context) => CustomDialog(
@@ -161,20 +146,6 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                                   );
                                   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: widget.userId,)));
                                 }else{
-                                  // await showDialog(
-                                  //   context: context,
-                                  //   builder: (_) => AssetGiffyDialog(
-                                  //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                  //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                  //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  //     entryAnimation: EntryAnimation.DEFAULT,
-                                  //     buttonOkColor: const Color(0xffff0000),
-                                  //     onlyOkButton: true,
-                                  //     onOkButtonPressed: (){
-                                  //       Navigator.pop(context, true);
-                                  //     },
-                                  //   ),
-                                  // );
                                   await showDialog(
                                     context: context,
                                     builder: (context) => CustomDialog(

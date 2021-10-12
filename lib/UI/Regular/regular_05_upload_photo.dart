@@ -1,8 +1,6 @@
 import 'package:facesbyplaces/API/Regular/01-Start/api_start_regular_04_upload_photo.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// // ignore: import_of_legacy_library_into_null_safe
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
@@ -130,20 +128,6 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                 if(result){
                                   Navigator.pushReplacementNamed(context, '/home/regular');
                                 }else{
-                                  // await showDialog(
-                                  //   context: context,
-                                  //   builder: (_) => AssetGiffyDialog(
-                                  //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                  //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                  //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  //     entryAnimation: EntryAnimation.DEFAULT,
-                                  //     buttonOkColor: const Color(0xffff0000),
-                                  //     onlyOkButton: true,
-                                  //     onOkButtonPressed: (){
-                                  //       Navigator.pop(context, true);
-                                  //     },
-                                  //   ),
-                                  // );
                                   await showDialog(
                                     context: context,
                                     builder: (context) => CustomDialog(
@@ -156,20 +140,6 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                   );
                                 }
                               }else{
-                                // await showDialog(
-                                //   context: context,
-                                //   builder: (_) => AssetGiffyDialog(
-                                //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                                //     description: const Text('Please upload a photo.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                                //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                //     entryAnimation: EntryAnimation.DEFAULT,
-                                //     buttonOkColor: const Color(0xffff0000),
-                                //     onlyOkButton: true,
-                                //     onOkButtonPressed: (){
-                                //       Navigator.pop(context, true);
-                                //     },
-                                //   ),
-                                // );
                                 await showDialog(
                                   context: context,
                                   builder: (context) => CustomDialog(

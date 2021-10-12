@@ -3,10 +3,9 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'api_start_regular_06_sign_in_google.dart';
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
+import 'package:dialog/dialog.dart';
 
 class RegularGoogleAuthentication {
   static Future<FirebaseApp> initializeFirebase({required BuildContext context}) async{
@@ -55,17 +54,13 @@ class RegularGoogleAuthentication {
         context.loaderOverlay.hide();
         showDialog(
           context: context,
-          builder: (_) => AssetGiffyDialog(
-            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-            description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center,),
+          builder: (context) => CustomDialog(
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-            entryAnimation: EntryAnimation.DEFAULT,
-            buttonOkColor: const Color(0xffff0000),
-            onlyOkButton: true,
-            onOkButtonPressed: (){
-              Navigator.pop(context, true);
-            },
-          )
+            title: 'Error',
+            description: 'Something went wrong. Please try again.',
+            okButtonColor: const Color(0xfff44336), // RED
+            includeOkButton: true,
+          ),
         );
         throw Exception('$error');
       });
@@ -79,52 +74,37 @@ class RegularGoogleAuthentication {
         if(e.code == 'account-exists-with-different-credential'){
           await showDialog(
             context: context,
-            builder: (_) => AssetGiffyDialog(
-              title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-              description: const Text('The account already exists with a different credential.', textAlign: TextAlign.center,),
+            builder: (context) => CustomDialog(
               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-              entryAnimation: EntryAnimation.DEFAULT,
-              buttonOkColor: const Color(0xffff0000),
-              onlyOkButton: true,
-              onOkButtonPressed: (){
-                Navigator.pop(context, true);
-              },
-            )
+              title: 'Error',
+              description: 'The account already exists with a different credential.',
+              okButtonColor: const Color(0xfff44336), // RED
+              includeOkButton: true,
+            ),
           );
         }
         else if(e.code == 'invalid-credential'){
           await showDialog(
             context: context,
-            builder: (_) => 
-              AssetGiffyDialog(
+            builder: (context) => CustomDialog(
               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-              title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-              entryAnimation: EntryAnimation.DEFAULT,
-              description: const Text('Error occurred while accessing credentials. Try again.',
-                textAlign: TextAlign.center,
-              ),
-              onlyOkButton: true,
-              buttonOkColor: const Color(0xffff0000),
-              onOkButtonPressed: () {
-                Navigator.pop(context, true);
-              },
-            )
+              title: 'Error',
+              description: 'Error occurred while accessing credentials. Try again.',
+              okButtonColor: const Color(0xfff44336), // RED
+              includeOkButton: true,
+            ),
           );
         }
-      } catch (e) {
+      }catch (e){
         await showDialog(
           context: context,
-          builder: (_) => AssetGiffyDialog(
-            title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-            description: const Text('Error occurred while accessing credentials. Try again.', textAlign: TextAlign.center,),
+          builder: (context) => CustomDialog(
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-            entryAnimation: EntryAnimation.DEFAULT,
-            buttonOkColor: const Color(0xffff0000),
-            onlyOkButton: true,
-            onOkButtonPressed: (){
-              Navigator.pop(context, true);
-            },
-          )
+            title: 'Error',
+            description: 'Error occurred while accessing credentials. Try again.',
+            okButtonColor: const Color(0xfff44336), // RED
+            includeOkButton: true,
+          ),
         );
       }
     }
@@ -139,17 +119,13 @@ class RegularGoogleAuthentication {
     }catch (e){
       await showDialog(
         context: context,
-        builder: (_) => AssetGiffyDialog(
-          title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-          description: const Text('Error signing out. Try again.', textAlign: TextAlign.center,),
+        builder: (context) => CustomDialog(
           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-          entryAnimation: EntryAnimation.DEFAULT,
-          buttonOkColor: const Color(0xffff0000),
-          onlyOkButton: true,
-          onOkButtonPressed: (){
-            Navigator.pop(context, true);
-          },
-        )
+          title: 'Error',
+          description: 'Error signing out. Try again.',
+          okButtonColor: const Color(0xfff44336), // RED
+          includeOkButton: true,
+        ),
       );
     }
   }

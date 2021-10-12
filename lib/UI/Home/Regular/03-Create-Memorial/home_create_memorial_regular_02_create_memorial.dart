@@ -1,8 +1,6 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home_create_memorial_regular_03_create_memorial.dart';
 import 'package:better_player/better_player.dart';
-// // ignore: import_of_legacy_library_into_null_safe
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
@@ -170,20 +168,6 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                         height: 50,
                         onPressed: () async{
                           if(_key1.currentState!.controller.text == ''){
-                            // await showDialog(
-                            //   context: context,
-                            //   builder: (_) => AssetGiffyDialog(
-                            //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                            //     description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                            //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            //     entryAnimation: EntryAnimation.DEFAULT,
-                            //     buttonOkColor: const Color(0xffff0000),
-                            //     onlyOkButton: true,
-                            //     onOkButtonPressed: (){
-                            //       Navigator.pop(context, true);
-                            //     },
-                            //   ),
-                            // );
                             await showDialog(
                               context: context,
                               builder: (context) => CustomDialog(

@@ -3,8 +3,6 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'home_create_memorial_blm_02_create_memorial.dart';
 import 'home_create_memorial_blm_04_locate_map.dart';
-// // ignore: import_of_legacy_library_into_null_safe
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 import 'package:misc/misc.dart';
@@ -218,20 +216,6 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                         height: 50,
                         onPressed: () async{
                           if(controller3.text == '' || controller1.text == '' || controller2.text == '' || _key6.currentState!.controller.text == '' || _key7.currentState!.controller.text == ''){
-                            // await showDialog(
-                            //   context: context,
-                            //   builder: (_) => AssetGiffyDialog(
-                            //     description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                            //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                            //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            //     entryAnimation: EntryAnimation.DEFAULT,
-                            //     buttonOkColor: const Color(0xffff0000),
-                            //     onlyOkButton: true,
-                            //     onOkButtonPressed: (){
-                            //       Navigator.pop(context, true);
-                            //     },
-                            //   ),
-                            // );
                             await showDialog(
                               context: context,
                               builder: (context) => CustomDialog(
@@ -243,20 +227,6 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                               ),
                             );
                           }else if(locationListener == null){
-                            // await showDialog(
-                            //   context: context,
-                            //   builder: (_) => AssetGiffyDialog(
-                            //     description: const Text('Pin the location of the cemetery first before proceeding.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                            //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                            //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            //     entryAnimation: EntryAnimation.DEFAULT,
-                            //     buttonOkColor: const Color(0xffff0000),
-                            //     onlyOkButton: true,
-                            //     onOkButtonPressed: (){
-                            //       Navigator.pop(context, true);
-                            //     },
-                            //   ),
-                            // );
                             await showDialog(
                               context: context,
                               builder: (context) => CustomDialog(

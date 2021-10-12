@@ -2,8 +2,6 @@ import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_08_password_reset.d
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// // ignore: import_of_legacy_library_into_null_safe
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 import 'package:misc/misc.dart';
@@ -91,20 +89,6 @@ class BLMPasswordResetEmail extends StatelessWidget{
                               bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(controller.text);
 
                               if(controller.text == ''){
-                                // await showDialog(
-                                //   context: context,
-                                //   builder: (_) => AssetGiffyDialog(
-                                //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                //     description: const Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                //     entryAnimation: EntryAnimation.DEFAULT,
-                                //     buttonOkColor: const Color(0xffff0000),
-                                //     onlyOkButton: true,
-                                //     onOkButtonPressed: (){
-                                //       Navigator.pop(context, true);
-                                //     },
-                                //   ),
-                                // );
                                 await showDialog(
                                   context: context,
                                   builder: (context) => CustomDialog(
@@ -116,20 +100,6 @@ class BLMPasswordResetEmail extends StatelessWidget{
                                   ),
                                 );
                               }else if(!validEmail){
-                                // await showDialog(
-                                //   context: context,
-                                //   builder: (_) => AssetGiffyDialog(
-                                //     description: const Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                //     entryAnimation: EntryAnimation.DEFAULT,
-                                //     buttonOkColor: const Color(0xffff0000),
-                                //     onlyOkButton: true,
-                                //     onOkButtonPressed: (){
-                                //       Navigator.pop(context, true);
-                                //     },
-                                //   ),
-                                // );
                                 await showDialog(
                                   context: context,
                                   builder: (context) => CustomDialog(
@@ -169,19 +139,6 @@ class BLMPasswordResetEmail extends StatelessWidget{
                                   context.loaderOverlay.hide();
 
                                   if(result == true){
-                                    // await showDialog(
-                                    //   context: context,
-                                    //   builder: (_) => AssetGiffyDialog(
-                                    //     title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                    //     description: Text('An email has been sent to ${controller.text} containing instructions for resetting your password.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular'),),
-                                    //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    //     entryAnimation: EntryAnimation.DEFAULT,
-                                    //     onlyOkButton: true,
-                                    //     onOkButtonPressed: (){
-                                    //       Navigator.pop(context, true);
-                                    //     },
-                                    //   ),
-                                    // );
                                     await showDialog(
                                       context: context,
                                       builder: (context) => CustomDialog(
@@ -193,20 +150,6 @@ class BLMPasswordResetEmail extends StatelessWidget{
                                       ),
                                     );
                                   }else{
-                                    // await showDialog(
-                                    //   context: context,
-                                    //   builder: (_) => AssetGiffyDialog(
-                                    //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                    //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                    //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    //     entryAnimation: EntryAnimation.DEFAULT,
-                                    //     buttonOkColor: const Color(0xffff0000),
-                                    //     onlyOkButton: true,
-                                    //     onOkButtonPressed: (){
-                                    //       Navigator.pop(context, true);
-                                    //     },
-                                    //   ),
-                                    // );
                                     await showDialog(
                                       context: context,
                                       builder: (context) => CustomDialog(
@@ -219,20 +162,6 @@ class BLMPasswordResetEmail extends StatelessWidget{
                                     );
                                   }
                                 }else{
-                                  // await showDialog(
-                                  //   context: context,
-                                  //   builder: (_) => AssetGiffyDialog(
-                                  //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
-                                  //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                                  //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  //     entryAnimation: EntryAnimation.DEFAULT,
-                                  //     buttonOkColor: const Color(0xffff0000),
-                                  //     onlyOkButton: true,
-                                  //     onOkButtonPressed: (){
-                                  //       Navigator.pop(context, true);
-                                  //     },
-                                  //   ),
-                                  // );
                                   await showDialog(
                                     context: context,
                                     builder: (context) => CustomDialog(

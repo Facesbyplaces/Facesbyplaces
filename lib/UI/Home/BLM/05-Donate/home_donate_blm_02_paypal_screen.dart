@@ -3,8 +3,6 @@ import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_20_paypal_connect.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-// // ignore: import_of_legacy_library_into_null_safe
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 
@@ -54,21 +52,6 @@ class HomeBLMPaypalState extends State<HomeBLMPaypal>{
                 bool result = await apiBLMMemorialPaypalConnect(userId: userInformation.userId, name: userInformation.name, email: userInformation.emails[0].email, memorialId: widget.pageId);
 
                 if(result == false){
-                  // await showDialog(
-                  //   context: context,
-                  //   builder: (_) => AssetGiffyDialog(
-                  //     title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
-                  //     description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
-                  //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                  //     entryAnimation: EntryAnimation.DEFAULT,
-                  //     buttonOkColor: const Color(0xffff0000),
-                  //     onlyOkButton: true,
-                  //     onOkButtonPressed: (){
-                  //       Navigator.pop(context, true);
-                  //       Navigator.pop(context, true);
-                  //     },
-                  //   )
-                  // );
                   await showDialog(
                     context: context,
                     builder: (context) => CustomDialog(
