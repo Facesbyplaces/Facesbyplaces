@@ -74,13 +74,17 @@ class MemorialSerializer < ActiveModel::Serializer
   
   def backgroundImage
     if object.backgroundImage.present?
-      url_for(object.backgroundImage)
+      # url_for(object.backgroundImage)
+      ActiveStorage::Current.host = "https://facesbyplaces.com/"
+      object.backgroundImage.service_url
     end
   end
 
   def profileImage
     if object.profileImage.present?
-      url_for(object.profileImage)
+      # url_for(object.profileImage)
+      ActiveStorage::Current.host = "https://facesbyplaces.com/"
+      object.profileImage.service_url
     end
   end
 
@@ -148,7 +152,8 @@ class MemorialSerializer < ActiveModel::Serializer
   def getImage(images)
     sendImages = []
     images.each do |image|
-      sendImages.push(url_for(image))
+      ActiveStorage::Current.host = "https://facesbyplaces.com/"
+      sendImages.push(image.service_url)
     end
     return sendImages
   end

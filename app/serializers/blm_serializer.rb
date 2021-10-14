@@ -155,7 +155,8 @@ class BlmSerializer < ActiveModel::Serializer
   def getImage(images)
     sendImages = []
     images.each do |image|
-      sendImages.push(url_for(image))
+      ActiveStorage::Current.host = "https://facesbyplaces.com/"
+      sendImages.push(image.service_url)
     end
     return sendImages
   end

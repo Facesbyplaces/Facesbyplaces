@@ -4,7 +4,8 @@ class UserSerializer < ActiveModel::Serializer
 
   def image
     if object.image.attached?
-      url_for(object.image)
+      ActiveStorage::Current.host = "https://facesbyplaces.com/"
+      object.image.service_url
     end
   end
 end
