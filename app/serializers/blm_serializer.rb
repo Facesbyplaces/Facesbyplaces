@@ -77,13 +77,15 @@ class BlmSerializer < ActiveModel::Serializer
    
   def backgroundImage
     if object.backgroundImage.present?
-      url_for(object.backgroundImage)
+      # url_for(object.backgroundImage)
+      object.backgroundImage.service_url
     end
   end
 
   def profileImage
     if object.profileImage.present?
-      url_for(object.profileImage)
+      # url_for(object.profileImage)
+      object.profileImage.service_url
     end
   end
 
