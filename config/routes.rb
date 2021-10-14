@@ -379,7 +379,7 @@ Rails.application.routes.draw do
   
   # default_url_options :host => "http://localhost:3000"
   # default_url_options :host => "http://fbp.dev1.koda.ws"
-  default_url_options :host => "http://45.33.66.25:3001"
+  default_url_options :host => "https://facesbyplaces.com"
 
   # shares controller
     #user's shares
