@@ -9,7 +9,7 @@ Future<APIRegularSearchSuggestedMain> apiRegularSearchSuggested({required int pa
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/search/suggested/?page=$page',
+  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/search/suggested/?page=$page',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

@@ -15,7 +15,7 @@ Future<bool> apiBLMAddPassword({required String newPassword}) async{
     MapEntry('password_confirmation', MultipartFile.fromString(newPassword)),
   ]);
 
-  var response = await dioRequest.put('http://facesbyplaces.com/auth/password', data: formData,
+  var response = await dioRequest.put('https://facesbyplaces.com/auth/password', data: formData,
     options: Options(
       followRedirects: false,
       validateStatus: (status){

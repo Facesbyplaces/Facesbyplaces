@@ -9,7 +9,7 @@ Future<APIBLMHomeTabFeedMain> apiBLMHomeFeedTab({required int page}) async{
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/mainpages/feed/?page=$page',
+  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/mainpages/feed/?page=$page',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

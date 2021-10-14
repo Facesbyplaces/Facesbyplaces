@@ -9,7 +9,7 @@ Future<APIRegularShowOtherDetails> apiRegularShowOtherDetails({required int user
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/users/getOtherInfos?user_id=$userId',
+  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/users/getOtherInfos?user_id=$userId',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

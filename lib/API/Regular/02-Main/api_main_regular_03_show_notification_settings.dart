@@ -9,7 +9,7 @@ Future<APIRegularShowNotificationStatus> apiRegularShowNotificationStatus({requi
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/notifications/notifSettingsStatus',
+  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/notifications/notifSettingsStatus',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

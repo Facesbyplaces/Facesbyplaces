@@ -21,10 +21,10 @@ Future<bool> apiBLMConfirmPayment({required String clientSecret, required String
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.post('http://facesbyplaces.com/api/v1/payments/confirm_payment_intent',
+  var response = await dioRequest.post('https://facesbyplaces.com/api/v1/payments/confirm_payment_intent',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{

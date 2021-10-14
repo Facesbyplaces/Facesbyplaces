@@ -9,7 +9,7 @@ Future<APIRegularHomeProfilePostMain> apiRegularProfilePost({required int memori
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/posts/page/Memorial/$memorialId?page=$page',
+  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/posts/page/Memorial/$memorialId?page=$page',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

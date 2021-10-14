@@ -9,7 +9,7 @@ Future<APIRegularSearchNearbyMain> apiRegularSearchNearby({required int page, re
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/search/nearby?longitude=$longitude&latitude=$latitude&page=$page',
+  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/search/nearby?longitude=$longitude&latitude=$latitude&page=$page',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 Future<bool> apiBLMSignInWithGoogle({required String firstName, required String lastName, required String email, required String username, required String googleId, required String image}) async{
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.post('http://facesbyplaces.com/auth/sign_in?account_type=1&first_name=$firstName&last_name=$lastName&email=$email&username=$username&google_id=$googleId&image=$image',
+  var response = await dioRequest.post('https://facesbyplaces.com/auth/sign_in?account_type=1&first_name=$firstName&last_name=$lastName&email=$email&username=$username&google_id=$googleId&image=$image',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

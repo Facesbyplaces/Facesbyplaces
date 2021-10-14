@@ -21,7 +21,7 @@ Future<APIRegularShowListOfComments> apiRegularShowListOfComments({required int 
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/posts/index/comments/$postId?page=$page',
+  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/posts/index/comments/$postId?page=$page',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

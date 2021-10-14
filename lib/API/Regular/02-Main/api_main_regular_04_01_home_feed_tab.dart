@@ -9,7 +9,7 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab({required int page}) asy
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/mainpages/feed/?page=$page',
+  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/mainpages/feed/?page=$page',
     options: Options(
       followRedirects: false,
       validateStatus: (status){
@@ -23,8 +23,11 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab({required int page}) asy
     ),
   );
 
+  // print('Response: $response');
+
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
+    print('The data is $newData');
     return APIRegularHomeTabFeedMain.fromJson(newData);
   }else{
     throw Exception('Error occurred in main page: ${response.statusMessage}');
@@ -66,9 +69,22 @@ class APIRegularHomeTabFeedExtended{
     List<dynamic>? newList1;
 
     if(parsedJson['imagesOrVideos'] != null){
+      // print('The value is ${parsedJson['imagesOrVideos']}');
       var list = parsedJson['imagesOrVideos'];
       newList1 = List<dynamic>.from(list);
+
+      // if(newList1.isNotEmpty){
+      //   for(int i = 0; i < newList1.length; i++){
+      //     print('The attachment is ${newList1[i]}');
+      //   }
+      // }
     }
+
+    // if(newList1!.isNotEmpty){
+    //   for(int i = 0; i < newList1.length; i++){
+    //     print('The attachment is ${newList1[i]}');
+    //   }
+    // }
 
     var newList2 = parsedJson['tag_people'] as List;
     List<APIRegularHomeTabFeedExtendedTagged> taggedList = newList2.map((i) => APIRegularHomeTabFeedExtendedTagged.fromJson(i)).toList();

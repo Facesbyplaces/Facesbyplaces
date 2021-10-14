@@ -34,7 +34,7 @@ Future<bool> apiBLMHomeCreatePost({required APIBLMCreatePost post}) async{
     }
   }
 
-  var response = await dioRequest.post('http://facesbyplaces.com/api/v1/posts', data: formData,
+  var response = await dioRequest.post('https://facesbyplaces.com/api/v1/posts', data: formData,
     options: Options(
       followRedirects: false,
       validateStatus: (status){

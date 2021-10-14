@@ -11,7 +11,7 @@ Future<bool> apiRegularUpdateUserProfilePicture({required dynamic image}) async{
   FormData formData = FormData();
   formData = FormData.fromMap({'image': await MultipartFile.fromFile(image.path, filename: image.path),});
 
-  var response = await dioRequest.put('http://facesbyplaces.com/api/v1/users/image_upload', data: formData,
+  var response = await dioRequest.put('https://facesbyplaces.com/api/v1/users/image_upload', data: formData,
     options: Options(
       followRedirects: false,
       validateStatus: (status){

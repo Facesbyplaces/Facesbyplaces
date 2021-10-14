@@ -21,7 +21,7 @@ Future<APIRegularConnectionListFriendsMain> apiRegularConnectionListFriends({req
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/pages/memorials/$memorialId/friends/index?page=$page',
+  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/pages/memorials/$memorialId/friends/index?page=$page',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

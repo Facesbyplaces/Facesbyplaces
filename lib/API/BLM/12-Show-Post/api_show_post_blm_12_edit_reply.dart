@@ -21,7 +21,7 @@ Future<bool> apiBLMEditReply({required int replyId, required String replyBody}) 
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('http://facesbyplaces.com/api/v1/posts/reply',
+  var response = await dioRequest.put('https://facesbyplaces.com/api/v1/posts/reply',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

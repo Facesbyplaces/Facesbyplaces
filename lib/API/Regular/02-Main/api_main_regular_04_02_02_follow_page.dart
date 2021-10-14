@@ -21,7 +21,7 @@ Future<bool> apiRegularModifyFollowPage({required String pageType, required int 
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('http://facesbyplaces.com/api/v1/followers/follow',
+  var response = await dioRequest.put('https://facesbyplaces.com/api/v1/followers/follow',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

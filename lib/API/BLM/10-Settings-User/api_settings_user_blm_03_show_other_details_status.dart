@@ -9,7 +9,7 @@ Future<APIBLMShowOtherDetailsStatus> apiBLMShowOtherDetailsStatus({required int 
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/users/otherDetailsStatus',
+  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/users/otherDetailsStatus',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

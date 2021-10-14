@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 Future<bool> apiBLMPasswordReset({required String email, required String redirectLink}) async{
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.post('http://facesbyplaces.com/auth/password?email=$email&redirect_url=$redirectLink',
+  var response = await dioRequest.post('https://facesbyplaces.com/auth/password?email=$email&redirect_url=$redirectLink',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

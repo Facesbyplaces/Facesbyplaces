@@ -21,7 +21,7 @@ Future<bool> apiBLMLikeOrUnlikeCommentReply({required String commentableType, re
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('http://facesbyplaces.com/api/v1/posts/comment/unlikeOrLikeComment?commentable_type=$commentableType&commentable_id=$commentableId&like=$likeStatus',
+  var response = await dioRequest.put('https://facesbyplaces.com/api/v1/posts/comment/unlikeOrLikeComment?commentable_type=$commentableType&commentable_id=$commentableId&like=$likeStatus',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

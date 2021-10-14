@@ -9,7 +9,7 @@ Future<APIRegularShowFamilySettingsMain> apiRegularShowFamilySettings({required 
   
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/pages/memorials/$memorialId/family/index?page=$page',
+  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/pages/memorials/$memorialId/family/index?page=$page',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

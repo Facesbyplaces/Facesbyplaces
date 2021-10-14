@@ -21,7 +21,7 @@ Future<APIBLMShowCommentOrReplyLikeStatus> apiBLMShowCommentOrReplyLikeStatus({r
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/posts/comment/likeCommentStatus?commentable_type=$commentableType&commentable_id=$commentableId',
+  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/posts/comment/likeCommentStatus?commentable_type=$commentableType&commentable_id=$commentableId',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

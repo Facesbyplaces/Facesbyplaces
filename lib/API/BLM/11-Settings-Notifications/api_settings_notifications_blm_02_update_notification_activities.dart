@@ -9,7 +9,7 @@ Future<bool> apiBLMUpdateNotificationActivities({required bool hide}) async{
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('http://facesbyplaces.com/api/v1/notifications/newActivities?setting=$hide',
+  var response = await dioRequest.put('https://facesbyplaces.com/api/v1/notifications/newActivities?setting=$hide',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

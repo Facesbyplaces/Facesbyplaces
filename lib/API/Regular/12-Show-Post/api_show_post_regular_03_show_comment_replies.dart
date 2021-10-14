@@ -21,7 +21,7 @@ Future<APIRegularShowListOfReplies> apiRegularShowListOfReplies({required int po
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/posts/index/replies/$postId?page=$page',
+  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/posts/index/replies/$postId?page=$page',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

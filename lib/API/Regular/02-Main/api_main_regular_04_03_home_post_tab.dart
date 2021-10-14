@@ -9,7 +9,7 @@ Future<APIRegularHomeTabPostMain> apiRegularHomePostTab({required int page}) asy
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/mainpages/posts/?page=$page',
+  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/mainpages/posts/?page=$page',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

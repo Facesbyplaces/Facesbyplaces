@@ -9,7 +9,7 @@ Future<bool> apiRegularUpdateSwitchStatusFamily({required int memorialId, requir
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('http://facesbyplaces.com/api/v1/pageadmin/unhideOrHideFamily/Memorial/$memorialId?hide=$status',
+  var response = await dioRequest.put('https://facesbyplaces.com/api/v1/pageadmin/unhideOrHideFamily/Memorial/$memorialId?hide=$status',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

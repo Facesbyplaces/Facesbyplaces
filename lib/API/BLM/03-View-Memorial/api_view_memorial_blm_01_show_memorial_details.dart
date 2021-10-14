@@ -22,7 +22,7 @@ Future<APIBLMShowMemorialMain> apiBLMShowMemorial({required int memorialId}) asy
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/pages/blm/$memorialId',
+  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/pages/blm/$memorialId',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

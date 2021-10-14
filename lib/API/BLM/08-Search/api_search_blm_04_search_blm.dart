@@ -9,7 +9,7 @@ Future<APIBLMSearchMemorialMain> apiBLMSearchBLM({required String keywords, requ
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/search/memorials?keywords=$keywords&page=$page',
+  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/search/memorials?keywords=$keywords&page=$page',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

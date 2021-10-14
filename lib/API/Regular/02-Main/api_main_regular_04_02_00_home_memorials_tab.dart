@@ -9,7 +9,7 @@ Future<APIRegularHomeTabMemorialMain> apiRegularHomeMemorialsTab({required int p
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/mainpages/memorials?page=$page',
+  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/mainpages/memorials?page=$page',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

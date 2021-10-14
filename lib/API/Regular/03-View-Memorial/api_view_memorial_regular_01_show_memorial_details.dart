@@ -22,7 +22,7 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial({required int memorial
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/pages/memorials/$memorialId',
+  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/pages/memorials/$memorialId',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

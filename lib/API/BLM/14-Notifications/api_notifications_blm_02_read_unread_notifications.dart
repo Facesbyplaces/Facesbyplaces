@@ -9,7 +9,7 @@ Future<bool> apiBLMReadUnreadNotifications() async{
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/notifications/read',
+  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/notifications/read',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

@@ -9,7 +9,7 @@ Future<APIRegularHomeTabNotificationMain> apiRegularHomeNotificationsTab({requir
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/mainpages/notifications/?page=$page',
+  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/mainpages/notifications/?page=$page',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

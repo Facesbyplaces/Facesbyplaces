@@ -22,7 +22,7 @@ Future<APIRegularShowUserInformation> apiRegularShowUserInformation({required in
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/users/showDetails?user_id=$userId&account_type=$accountType',
+  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/users/showDetails?user_id=$userId&account_type=$accountType',
     options: Options(
       followRedirects: false,
       validateStatus: (status){
