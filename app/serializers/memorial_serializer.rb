@@ -91,6 +91,8 @@ class MemorialSerializer < ActiveModel::Serializer
   def imagesOrVideos
     if object.imagesOrVideos.present?
       getImage(object.imagesOrVideos)
+    else
+      return ""
     end
   end
 
