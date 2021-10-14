@@ -45,4 +45,11 @@ class Blm < ApplicationRecord
   def page_name
       "blm"
   end
+
+  def image_url
+    ActiveStorage::Current.host = "https://facesbyplaces.com/"
+    self.backgroundImage.attached? ? self.backgroundImage.service_url : ""
+    self.profileImage.attached? ? self.profileImage.service_url : ""
+    self.imagesOrVideos.attached? ? self.imagesOrVideos.service_url : ""
+  end
 end
