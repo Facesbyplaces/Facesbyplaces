@@ -77,6 +77,8 @@ class MemorialSerializer < ActiveModel::Serializer
       # url_for(object.backgroundImage)
       ActiveStorage::Current.host = "https://facesbyplaces.com/"
       object.backgroundImage.service_url
+    else
+      return ""
     end
   end
 
@@ -85,6 +87,8 @@ class MemorialSerializer < ActiveModel::Serializer
       # url_for(object.profileImage)
       ActiveStorage::Current.host = "https://facesbyplaces.com/"
       object.profileImage.service_url
+    else
+      return ""
     end
   end
 
