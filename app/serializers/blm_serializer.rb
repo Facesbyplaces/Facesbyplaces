@@ -99,7 +99,7 @@ class BlmSerializer < ActiveModel::Serializer
     if object.imagesOrVideos.present?
       getImage(object.imagesOrVideos)
     else
-      return ""
+      return []
     end
   end
 
