@@ -78,6 +78,7 @@ class BlmSerializer < ActiveModel::Serializer
   def backgroundImage
     if object.backgroundImage.present?
       # url_for(object.backgroundImage)
+      ActiveStorage::Current.host = "https://facesbyplaces.com/"
       object.backgroundImage.service_url
     end
   end
@@ -85,6 +86,7 @@ class BlmSerializer < ActiveModel::Serializer
   def profileImage
     if object.profileImage.present?
       # url_for(object.profileImage)
+      ActiveStorage::Current.host = "https://facesbyplaces.com/"
       object.profileImage.service_url
     end
   end
