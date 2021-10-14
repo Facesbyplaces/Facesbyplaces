@@ -5,6 +5,8 @@ class PostSerializer < ActiveModel::Serializer
   def imagesOrVideos
     if object.imagesOrVideos.attached?
       getImage(object.imagesOrVideos)
+    else
+      return ""
     end
   end
 
