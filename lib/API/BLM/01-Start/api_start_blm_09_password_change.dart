@@ -6,13 +6,13 @@ Future<bool> apiBLMPasswordChange({required String password, required String pas
 
   var response = await dioRequest.put('https://facesbyplaces.com/auth/password?password=$password&password_confirmation=$passwordConfirmation&reset_password_token=$resetToken',
     options: Options(
-      followRedirects: false,
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+      },
       validateStatus: (status){
         return status! < 600;
       },
-      headers: <String, dynamic>{
-        'Content-Type': 'application/json',
-      }
+      followRedirects: false,
     ),
   );
 

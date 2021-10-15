@@ -11,16 +11,16 @@ Future<APIBLMSearchNearbyMain> apiBLMSearchNearby({required int page, required d
 
   var response = await dioRequest.get('https://facesbyplaces.com/api/v1/search/nearby?longitude=$longitude&latitude=$latitude&page=$page',
     options: Options(
-      followRedirects: false,
-      validateStatus: (status){
-        return status! < 600;
-      },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
-      }
+      },
+      validateStatus: (status){
+        return status! < 600;
+      },
+      followRedirects: false,
     ),  
   );
 

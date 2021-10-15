@@ -6,13 +6,13 @@ Future<bool> apiBLMSignInWithApple({required String userIdentification, required
 
   var response = await dioRequest.post('https://facesbyplaces.com/auth/sign_in?account_type=1&first_name=&last_name=&user_identification=$userIdentification&identity_token=$identityToken&image=',
     options: Options(
-      followRedirects: false,
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+      },
       validateStatus: (status){
         return status! < 600;
       },
-      headers: <String, dynamic>{
-        'Content-Type': 'application/json',
-      }
+      followRedirects: false, 
     ),  
   );
 

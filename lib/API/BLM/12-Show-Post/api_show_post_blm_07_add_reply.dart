@@ -29,15 +29,15 @@ Future<bool> apiBLMAddReply({required int commentId, required dynamic replyBody}
 
   var response = await dioRequest.post('https://facesbyplaces.com/api/v1/posts/reply', data: formData,
     options: Options(
-      followRedirects: false,
-      validateStatus: (status){
-        return status! < 600;
-      },
       headers: <String, String>{
         'access-token': getAccessToken!,
         'uid': getUID!,
         'client': getClient!,
-      }
+      },
+      validateStatus: (status){
+        return status! < 600;
+      },
+      followRedirects: false,
     ),  
   );
 

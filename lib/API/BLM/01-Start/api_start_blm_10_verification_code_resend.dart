@@ -12,16 +12,16 @@ Future<bool> apiBLMVerificationCodeResend() async{
 
   var response = await dioRequest.post('https://facesbyplaces.com/api/v1/users/resend_verification_code?user_id=$prefsUserID&account_type=1',
     options: Options(
-      followRedirects: false,
-      validateStatus: (status){
-        return status! < 600;
-      },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient, 
-      }
+      },
+      validateStatus: (status){
+        return status! < 600;
+      },
+      followRedirects: false,
     ),
   );
 

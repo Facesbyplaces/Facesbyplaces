@@ -11,17 +11,17 @@ Future<bool> apiBLMUpdateOtherDetails({required String birthdate, required Strin
 
   var response = await dioRequest.put('https://facesbyplaces.com/api/v1/users/updateOtherInfos?birthdate=$birthdate&birthplace=$birthplace&email=$email&address=$address&phone_number=$phoneNumber',
     options: Options(
-      followRedirects: false,
-      validateStatus: (status){
-        return status! < 600;
-      },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
-      }
-    ),  
+      },
+      validateStatus: (status){
+        return status! < 600;
+      },
+      followRedirects: false,
+    ),
   );
 
   if(response.statusCode == 200){

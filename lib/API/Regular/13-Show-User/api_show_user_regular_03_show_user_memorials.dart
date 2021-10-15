@@ -23,16 +23,16 @@ Future<APIRegularShowUserMemorialsMain> apiRegularShowUserMemorials({required in
 
   var response = await dioRequest.get('https://facesbyplaces.com/api/v1/users/memorials?user_id=$userId&page=$page&account_type=$accountType',
     options: Options(
-      followRedirects: false,
-      validateStatus: (status){
-        return status! < 600;
-      },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
-      }
+      },
+      validateStatus: (status){
+        return status! < 600;
+      },
+      followRedirects: false,
     ),  
   );
 

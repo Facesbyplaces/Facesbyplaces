@@ -23,15 +23,15 @@ Future<bool> apiRegularEditComment({required int commentId, required String comm
 
   var response = await dioRequest.put('https://facesbyplaces.com/api/v1/posts/comment',
     options: Options(
-      followRedirects: false,
-      validateStatus: (status){
-        return status! < 600;
-      },
       headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
-      }
+      },
+      validateStatus: (status){
+        return status! < 600;
+      },
+      followRedirects: false,
     ),
     queryParameters: <String, dynamic>{
       'comment_id': commentId,

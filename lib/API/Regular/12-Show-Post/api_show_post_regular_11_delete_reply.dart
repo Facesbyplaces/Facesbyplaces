@@ -23,15 +23,15 @@ Future<bool> apiRegularDeleteReply({required int replyId}) async{
 
   var response = await dioRequest.delete('https://facesbyplaces.com/api/v1/posts/reply?reply_id=$replyId',
     options: Options(
-      followRedirects: false,
-      validateStatus: (status){
-        return status! < 600;
-      },
       headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
-      }
+      },
+      validateStatus: (status){
+        return status! < 600;
+      },
+      followRedirects: false,
     ),
   );
 

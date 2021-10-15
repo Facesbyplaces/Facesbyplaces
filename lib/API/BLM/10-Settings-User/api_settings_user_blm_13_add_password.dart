@@ -17,15 +17,15 @@ Future<bool> apiBLMAddPassword({required String newPassword}) async{
 
   var response = await dioRequest.put('https://facesbyplaces.com/auth/password', data: formData,
     options: Options(
-      followRedirects: false,
-      validateStatus: (status){
-        return status! < 600;
-      },
       headers: <String, String>{
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
-      }
+      },
+      validateStatus: (status){
+        return status! < 600;
+      },
+      followRedirects: false,
     ),
   );
 

@@ -23,16 +23,16 @@ Future<List<String>> apiBLMDonate({required String pageType, required int pageId
 
   var response = await dioRequest.post('https://facesbyplaces.com/api/v1/payments/payment_intent',
     options: Options(
-      followRedirects: false,
-      validateStatus: (status){
-        return status! < 600;
-      },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
       },
+      validateStatus: (status){
+        return status! < 600;
+      },
+      followRedirects: false,
     ),
     queryParameters: <String, dynamic>{
       'page_type': pageType,

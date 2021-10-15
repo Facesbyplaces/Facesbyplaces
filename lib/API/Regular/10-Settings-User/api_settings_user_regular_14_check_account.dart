@@ -11,15 +11,15 @@ Future<bool> apiRegularCheckAccount({required String email}) async{
 
   var response = await dioRequest.get('https://facesbyplaces.com/api/v1/users/check_password?account_type=2&email=$email',
     options: Options(
-      followRedirects: false,
-      validateStatus: (status){
-        return status! < 600;
-      },
       headers: <String, String>{
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
-      }
+      },
+      validateStatus: (status){
+        return status! < 600;
+      },
+      followRedirects: false,
     ),  
   );
 

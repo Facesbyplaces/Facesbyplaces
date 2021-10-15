@@ -11,16 +11,16 @@ Future<APIBLMHomeTabFeedMain> apiBLMHomeFeedTab({required int page}) async{
 
   var response = await dioRequest.get('https://facesbyplaces.com/api/v1/mainpages/feed/?page=$page',
     options: Options(
-      followRedirects: false,
-      validateStatus: (status){
-        return status! < 600;
-      },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
-      }
+      },
+      validateStatus: (status){
+        return status! < 600;
+      },
+      followRedirects: false,
     ),  
   );
 
@@ -63,7 +63,6 @@ class APIBLMHomeTabFeedExtended{
   APIBLMHomeTabFeedExtended({required this.homeTabFeedId, required this.homeTabFeedPage, required this.homeTabFeedBody, required this.homeTabFeedLocation, required this.homeTabFeedLatitude, required this.homeTabFeedLongitude, required this.homeTabFeedImagesOrVideos, required this.homeTabFeedPostTagged, required this.homeTabFeedCreatedAt, required this.homeTabFeedNumberOfLikes, required this.homeTabFeedNumberOfComments, required this.homeTabFeedLikeStatus});
 
   factory APIBLMHomeTabFeedExtended.fromJson(Map<String, dynamic> parsedJson){
-    
     List<dynamic>? newList1;
 
     if(parsedJson['imagesOrVideos'] != null){

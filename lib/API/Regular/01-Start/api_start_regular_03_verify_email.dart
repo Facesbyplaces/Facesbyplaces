@@ -12,16 +12,16 @@ Future<String> apiRegularVerifyEmail({required String verificationCode}) async{
 
   var response = await dioRequest.post('https://facesbyplaces.com/api/v1/users/verify_code?user_id=$prefsUserID&verification_code=$verificationCode&account_type=2',
     options: Options(
-      followRedirects: false,
-      validateStatus: (status){
-        return status! < 600;
-      },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
-      }
+      },
+      validateStatus: (status){
+        return status! < 600;
+      },
+      followRedirects: false,
     ),  
   );
 

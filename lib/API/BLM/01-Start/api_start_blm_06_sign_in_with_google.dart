@@ -6,13 +6,13 @@ Future<bool> apiBLMSignInWithGoogle({required String firstName, required String 
 
   var response = await dioRequest.post('https://facesbyplaces.com/auth/sign_in?account_type=1&first_name=$firstName&last_name=$lastName&email=$email&username=$username&google_id=$googleId&image=$image',
     options: Options(
-      followRedirects: false,
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+      },
       validateStatus: (status){
         return status! < 600;
       },
-      headers: <String, dynamic>{
-        'Content-Type': 'application/json',
-      }
+      followRedirects: false,
     ),  
   );
 

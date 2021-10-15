@@ -24,15 +24,15 @@ Future<bool> apiBLMUpdatePageDetails({required int memorialId, required String n
 
   var response = await dioRequest.put('https://facesbyplaces.com/api/v1/pages/blm/$memorialId', data: formData,
     options: Options(
-      followRedirects: false,
-      validateStatus: (status){
-        return status! < 600;
-      },
       headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
-      }
+      },
+      validateStatus: (status){
+        return status! < 600;
+      },
+      followRedirects: false,
     ),  
   );
 

@@ -22,15 +22,15 @@ Future<bool> apiRegularUpdatePageImages({required int memorialId, required dynam
 
   var response = await dioRequest.put('https://facesbyplaces.com/api/v1/pages/memorials/$memorialId/images', data: formData,
     options: Options(
-      followRedirects: false,
-      validateStatus: (status){
-        return status! < 600;
-      },
       headers: <String, String>{
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
-      }
+      },
+      validateStatus: (status){
+        return status! < 600;
+      },
+      followRedirects: false,
     ),
   );
 

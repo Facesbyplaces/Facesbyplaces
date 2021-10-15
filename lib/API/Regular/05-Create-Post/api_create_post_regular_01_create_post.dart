@@ -36,15 +36,15 @@ Future<bool> apiRegularHomeCreatePost({required APIRegularCreatePost post}) asyn
 
   var response = await dioRequest.post('https://facesbyplaces.com/api/v1/posts', data: formData,
     options: Options(
-      followRedirects: false,
-      validateStatus: (status){
-        return status! < 600;
-      },
       headers: <String, String>{
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
-      }
+      },
+      validateStatus: (status){
+        return status! < 600;
+      },
+      followRedirects: false,
     ),  
   );
 

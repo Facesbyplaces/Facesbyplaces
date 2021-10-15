@@ -5,13 +5,13 @@ Future<bool> apiBLMPasswordReset({required String email, required String redirec
 
   var response = await dioRequest.post('https://facesbyplaces.com/auth/password?email=$email&redirect_url=$redirectLink',
     options: Options(
-      followRedirects: false,
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+      },
       validateStatus: (status){
         return status! < 600;
       },
-      headers: <String, dynamic>{
-        'Content-Type': 'application/json',
-      }
+      followRedirects: false,
     ),
   );
 

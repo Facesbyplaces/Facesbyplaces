@@ -12,12 +12,12 @@ Future<String> apiRegularMemorialPaypalAccessToken({required String code}) async
 
   var response = await dioRequest.post('https://api-m.sandbox.paypal.com/v1/oauth2/token',
     options: Options(
-      followRedirects: false,
+      headers: <String, String>{'authorization': auth},
+      contentType: Headers.formUrlEncodedContentType,
       validateStatus: (status){
         return status! < 600;
       },
-      headers: <String, String>{'authorization': auth},
-      contentType: Headers.formUrlEncodedContentType,
+      followRedirects: false,
     ),
     data: data
   );

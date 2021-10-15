@@ -23,10 +23,10 @@ Future<bool> apiBLMEditReply({required int replyId, required String replyBody}) 
 
   var response = await dioRequest.put('https://facesbyplaces.com/api/v1/posts/reply',
     options: Options(
-      followRedirects: false,
       validateStatus: (status){
         return status! < 600;
       },
+      followRedirects: false,
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,

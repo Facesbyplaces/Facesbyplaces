@@ -11,15 +11,15 @@ Future<bool> apiBLMChangePassword({required String currentPassword, required Str
 
   var response = await dioRequest.put('https://facesbyplaces.com/auth/password?password=$currentPassword&password_confirmation=$newPassword',
     options: Options(
-      followRedirects: false,
-      validateStatus: (status){
-        return status! < 600;
-      },
       headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
-      }
+      },
+      validateStatus: (status){
+        return status! < 600;
+      },
+      followRedirects: false,
     ),  
   );
 

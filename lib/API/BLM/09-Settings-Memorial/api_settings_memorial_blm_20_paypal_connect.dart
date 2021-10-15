@@ -5,10 +5,10 @@ Future<bool> apiBLMMemorialPaypalConnect({required String userId, required Strin
 
   var response = await dioRequest.post('https://facesbyplaces.com/api/v1/payments/braintree?paypal_user_id=$userId&paypalable_id=$memorialId&paypalable_type=Blm&name=$name&email=$email',
     options: Options(
-      followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
+      followRedirects: false,
     ),
   );
 

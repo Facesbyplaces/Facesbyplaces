@@ -23,15 +23,15 @@ Future<APIRegularShowCommentOrReplyLikeStatus> apiRegularShowCommentOrReplyLikeS
 
   var response = await dioRequest.get('https://facesbyplaces.com/api/v1/posts/comment/likeCommentStatus?commentable_type=$commentableType&commentable_id=$commentableId',
     options: Options(
-      followRedirects: false,
-      validateStatus: (status){
-        return status! < 600;
-      },
       headers: <String, dynamic>{
         'access-token': getAccessToken!,
         'uid': getUID!,
         'client': getClient!,
-      }
+      },
+      validateStatus: (status){
+        return status! < 600;
+      },
+      followRedirects: false,
     ),
   );
 

@@ -11,16 +11,16 @@ Future<bool> apiBLMReadUnreadNotifications() async{
 
   var response = await dioRequest.get('https://facesbyplaces.com/api/v1/notifications/read',
     options: Options(
-      followRedirects: false,
-      validateStatus: (status){
-        return status! < 600;
-      },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
-      }
+      },
+      validateStatus: (status){
+        return status! < 600;
+      },
+      followRedirects: false,
     ),  
   );
 

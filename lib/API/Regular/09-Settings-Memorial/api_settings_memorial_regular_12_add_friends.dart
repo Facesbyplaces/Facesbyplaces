@@ -20,15 +20,15 @@ Future<String> apiRegularAddFriends({required int memorialId, required int userI
 
   var response = await dioRequest.post('https://facesbyplaces.com/api/v1/pageadmin/addFriend', data: formData,
     options: Options(
-      followRedirects: false,
-      validateStatus: (status){
-        return status! < 600;
-      },
       headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
       },
+      validateStatus: (status){
+        return status! < 600;
+      },
+      followRedirects: false,
     ),
   );
 
