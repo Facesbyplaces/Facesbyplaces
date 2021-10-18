@@ -1,4 +1,4 @@
-name: misc
+name: matchtext
 description: A new Flutter package project.
 version: 0.0.1
 homepage:
@@ -15,11 +15,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
-  flutter_datetime_picker: ^1.5.1
-  intl_phone_number_input: ^0.7.0+2
-  matchtext:
-    path: ../matchtext
-  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

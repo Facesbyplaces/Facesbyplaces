@@ -67,7 +67,6 @@ dev_dependencies:
   sign_in_with_apple: ^3.2.0
   carousel_slider: ^4.0.0
   intl_phone_number_input: ^0.7.0+2
-  fluttericon: ^2.0.0
   flutter_svg: ^0.22.0
   flutter_branch_sdk: ^3.4.0
   auth_buttons: ^1.0.1+4
@@ -77,7 +76,6 @@ dev_dependencies:
   flutter_login_facebook: ^1.1.0
   extended_image: ^5.1.2
   google_maps_flutter: ^2.0.11
-  easy_rich_text: ^0.5.7
   flutter_stripe: ^2.0.0
   flutter_launcher_icons: ^0.9.2
   google_place: ^0.4.3
@@ -91,6 +89,8 @@ dev_dependencies:
     path: packages/misc
   dialog:
     path: packages/dialog
+  matchtext:
+    path: packages/matchtext
 
 
 # For information on the generic Dart part of this file, see the

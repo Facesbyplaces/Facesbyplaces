@@ -29,9 +29,10 @@ class MiscNotificationDisplayTemplate extends StatelessWidget{
         ),
         onTap: imageOnPressed,
       ),
-      title: EasyRichText(notification,
+      title: MatchText(
+        notification,
         patternList: [
-          EasyRichTextPattern(
+          MatchTextPattern(
             targetString: actor,
             matchOption: 'first',
             style: const TextStyle(color: Color(0xff000000), fontFamily: 'NexaBold',),

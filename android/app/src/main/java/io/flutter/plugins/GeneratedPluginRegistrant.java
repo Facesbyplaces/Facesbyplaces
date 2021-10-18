@@ -141,11 +141,6 @@ public final class GeneratedPluginRegistrant {
       Log.e(TAG, "Error registering plugin stripe_android, com.flutter.stripe.StripeAndroidPlugin", e);
     }
     try {
-      flutterEngine.getPlugins().add(new io.flutter.plugins.urllauncher.UrlLauncherPlugin());
-    } catch(Exception e) {
-      Log.e(TAG, "Error registering plugin url_launcher, io.flutter.plugins.urllauncher.UrlLauncherPlugin", e);
-    }
-    try {
       flutterEngine.getPlugins().add(new creativemaybeno.wakelock.WakelockPlugin());
     } catch(Exception e) {
       Log.e(TAG, "Error registering plugin wakelock, creativemaybeno.wakelock.WakelockPlugin", e);

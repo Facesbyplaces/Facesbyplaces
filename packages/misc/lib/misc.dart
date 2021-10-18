@@ -2,7 +2,7 @@ library misc;
 
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:easy_rich_text/easy_rich_text.dart';
+import 'package:matchtext/matchtext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
