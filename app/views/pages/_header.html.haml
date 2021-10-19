@@ -1,19 +1,23 @@
-.header
-  .logo-container
-    .logo
-  .tabs-container
-    / %a.tab PRIVACY POLICY
-    / %a.tab TERMS & CONDITIONS
-    %a.tab{href: "/about"} ABOUT
-    %a.tab{href: "/"} HOME
 .header-logo
   .logo-container
-    .logo
+    %a{href:"/"}
+      .logo
 .header-sub
   .logo-container
     .logo
   .tabs-container
+    %a.tab{href:"/sign-up"} SIGNUP
     %a.tab{href: "/"} HOME
     %a.tab{href: "/about"} ABOUT
-    / %a.tab TERMS & CONDITIONS
-    / %a.tab PRIVACY POLICY
+    %a.tab{href: "/terms"} TERMS & CONDITIONS
+    %a.tab{href: "/privacy"} PRIVACY POLICY
+.header
+  .logo-container
+    %a{href:"/"}
+      .logo
+  .tabs-container
+    %a.tab{href:"/sign-up"} SIGNUP
+    %a.tab{href:"/privacy"} PRIVACY POLICY
+    %a.tab{href: "/terms"} TERMS & CONDITIONS
+    %a.tab{href: "/about"} ABOUT
+    %a.tab{href: "/"} HOME

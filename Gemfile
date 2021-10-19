@@ -61,7 +61,7 @@ gem 'omniauth-apple'
 gem 'omniauth-google-oauth2'
 gem 'activerecord-session_store'
 
-gem 'pg', '~> 0.18.4'
+gem 'pg'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'fcm', '~> 0.0.6'

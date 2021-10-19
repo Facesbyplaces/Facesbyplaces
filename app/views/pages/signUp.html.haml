@@ -1,0 +1,28 @@
+.sign-up
+  .title-container
+    .title.bold Sign Up for an Account
+    .title-image-container
+  .body
+    .title 
+      %p
+        %strong FacesByPlaces 
+        is a new exciting Memorial App that is allowing friends and family to stay connected by sharing stories, videos, and memories of adeparted loved one, helping to keep their memory and legacy alive.
+      
+      %h3
+        FaceByPlaces Pre-registration
+      %p
+        Fill up the form below to pre-register and you'll be notified once the app is available.
+
+    .form
+      = form_for(:user, url: sign_up_user_path) do |f|
+        = f.label :first_name
+        = f.text_field :first_name, :placeholder => "Your First Name"
+        = f.label :last_name
+        = f.text_field :last_name, :placeholder => "Your Last Name"
+        = f.label :email
+        = f.email_field :email, :placeholder => "Your Email Address"
+        = f.label :phone
+        = f.phone_field :phone_number, :placeholder => "Your Phone Number"
+        = f.label :password
+        = f.password_field :password, :placeholder => "Password"
+        = f.submit "Register"

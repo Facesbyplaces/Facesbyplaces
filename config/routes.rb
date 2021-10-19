@@ -387,5 +387,8 @@ Rails.application.routes.draw do
 
   root 'pages#home'
   get 'about', to: 'pages#about'
-  
+  get 'terms', to: 'pages#terms'
+  get 'privacy', to: 'pages#privacy'
+  get 'sign-up', to: 'pages#signUp'
+  post 'sign-up-user', to: 'pages#create'
  end
