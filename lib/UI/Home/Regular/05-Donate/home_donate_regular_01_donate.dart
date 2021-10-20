@@ -382,6 +382,8 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                       ),
                                                     );
 
+                                                    print('here here here');
+
                                                     List<String> newValue = await apiRegularDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: '').onError((error, stackTrace){
                                                       showDialog(
                                                         context: context,
@@ -427,6 +429,8 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                 )
                                               ];
 
+                                              print('android here');
+
                                               return pay.GooglePayButton(
                                                 paymentConfigurationAsset: 'google_pay_payment_profile.json',
                                                 paymentItems: _paymentItems,
@@ -435,6 +439,8 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                 loadingIndicator: const Center(child: CircularProgressIndicator(),),
                                                 onPaymentResult: (paymentResult) async{
                                                   try{
+                                                    print('The paymentResult is $paymentResult');
+
                                                     debugPrint('the payment result is $paymentResult');
                                                     final token = paymentResult['paymentMethodData']['tokenizationData']['token'];
                                                     final tokenJson = Map.castFrom(json.decode(token));
@@ -481,7 +487,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                           builder: (context) => CustomDialog(
                                                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                             title: 'Error',
-                                                            description: 'Something went wrong. Please try again.',
+                                                            description: 'Error: Something went wrong. Please try again.',
                                                             okButtonColor: const Color(0xfff44336), // RED
                                                             includeOkButton: true,
                                                           ),
@@ -505,12 +511,13 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                   await debugChangedStripePublishableKey();
                                                 },
                                                 onError: (e) async{
+                                                  print('The error is $e');
                                                   await showDialog(
                                                     context: context,
                                                     builder: (context) => CustomDialog(
                                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                       title: 'Error',
-                                                      description: 'Something went wrong. Please try again.',
+                                                      description: 'Error: Something went wrong. Please try again.',
                                                       okButtonColor: const Color(0xfff44336), // RED
                                                       includeOkButton: true,
                                                     ),
@@ -547,7 +554,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
   Future<void> debugChangedStripePublishableKey() async {
     if(kDebugMode){
       final profile = await rootBundle.loadString('assets/google_pay_payment_profile.json');
-      final isValidKey = profile.contains('pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik');
+      final isValidKey = profile.contains('pk_test_51JF87VLLSR5xZm4pkKAGeRgKbp66uS2FJjo915T2971ILVjs5eQieiVD0Oi3bB6nV0WUJcDqx95uqY7puKVyI22u00fQNVPcpB');
       assert(isValidKey, 'No stripe publishable key added to assets/google_pay_payment_profile.json',);
     }
   }

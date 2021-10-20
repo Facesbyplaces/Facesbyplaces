@@ -541,7 +541,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
   Future<void> debugChangedStripePublishableKey() async {
     if(kDebugMode){
       final profile = await rootBundle.loadString('assets/google_pay_payment_profile.json');
-      final isValidKey = profile.contains('pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik');
+      final isValidKey = profile.contains('pk_test_51JF87VLLSR5xZm4pkKAGeRgKbp66uS2FJjo915T2971ILVjs5eQieiVD0Oi3bB6nV0WUJcDqx95uqY7puKVyI22u00fQNVPcpB');
       assert(isValidKey, 'No stripe publishable key added to assets/google_pay_payment_profile.json',);
     }
   }

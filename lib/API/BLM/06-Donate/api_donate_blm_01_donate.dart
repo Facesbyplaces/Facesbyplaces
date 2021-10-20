@@ -50,8 +50,7 @@ Future<List<String>> apiBLMDonate({required String pageType, required int pageId
       return [clientSecret, paymentMethod];
     }else{
       String clientSecret = newData['client_secret'];
-      String token = newData['token'];
-      return [clientSecret, token];
+      return [clientSecret, ''];
     }
   }else{
     throw Exception('Something went wrong. Please try again.');
