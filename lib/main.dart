@@ -9,7 +9,6 @@ import 'UI/Home/BLM/07-Search/home_search_blm_01_search.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,6 +25,7 @@ import 'UI/BLM/blm_05_upload_photo.dart';
 import 'UI/ui_01_get_started.dart';
 import 'UI/ui_02_login.dart';
 import 'UI/ui_03_newly_installed.dart';
+import 'package:loader/loader.dart';
 import 'dart:async';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -39,7 +39,6 @@ void main() async{
   // debugRepaintTextRainbowEnabled = true;
 
   WidgetsFlutterBinding.ensureInitialized();
-  // Stripe.publishableKey =  'pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik';
   Stripe.publishableKey =  'pk_test_51JF87VLLSR5xZm4pkKAGeRgKbp66uS2FJjo915T2971ILVjs5eQieiVD0Oi3bB6nV0WUJcDqx95uqY7puKVyI22u00fQNVPcpB';
   Stripe.merchantIdentifier = 'merchant.com.facesbyplaces.facesbyplaces';
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
@@ -70,9 +69,9 @@ void main() async{
     RepaintBoundary(
       child: GlobalLoaderOverlay(
         useDefaultLoading: false,
-        overlayWidget: const Center(child: SpinKitThreeBounce(color: Color(0xff000000)),),
+        overlayWidget: const Center(child: CustomLoader(),),
         overlayOpacity: 0.5,
-        overlayColor: Colors.grey,
+        overlayColor: Colors.white,
         child: MaterialApp(
           // checkerboardRasterCacheImages: true,
           // showPerformanceOverlay: true,
@@ -91,6 +90,7 @@ void main() async{
               }
             }
           }()),
+          // home: const NewLogoSample(),
           builder: (context, widget) => ResponsiveWrapper.builder(
             BouncingScrollWrapper.builder(context, widget!),
             maxWidth: 1200,

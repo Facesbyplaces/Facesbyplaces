@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<List<String>> apiRegularDonate({required String pageType, required int pageId, required double amount, required String paymentMethod}) async{
-  print('donate here');
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -43,11 +42,8 @@ Future<List<String>> apiRegularDonate({required String pageType, required int pa
     },
   );
 
-  print('The status code is ${response.statusCode}');
-
   if(response.statusCode == 200 || response.statusCode == 422){
     var newData = Map<String, dynamic>.from(response.data);
-    print('The newData is $newData');
     if(paymentMethod != ''){
       String clientSecret = newData['payment_intent'];
       String paymentMethod = newData['payment_method'];

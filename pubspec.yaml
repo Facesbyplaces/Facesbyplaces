@@ -91,6 +91,8 @@ dev_dependencies:
     path: packages/dialog
   matchtext:
     path: packages/matchtext
+  loader:
+    path: packages/loader
 
 
 # For information on the generic Dart part of this file, see the

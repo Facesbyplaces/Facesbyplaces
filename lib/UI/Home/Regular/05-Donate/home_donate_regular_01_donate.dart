@@ -382,8 +382,6 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                       ),
                                                     );
 
-                                                    print('here here here');
-
                                                     List<String> newValue = await apiRegularDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: '').onError((error, stackTrace){
                                                       showDialog(
                                                         context: context,
@@ -429,8 +427,6 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                 )
                                               ];
 
-                                              print('android here');
-
                                               return pay.GooglePayButton(
                                                 paymentConfigurationAsset: 'google_pay_payment_profile.json',
                                                 paymentItems: _paymentItems,
@@ -439,8 +435,6 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                 loadingIndicator: const Center(child: CircularProgressIndicator(),),
                                                 onPaymentResult: (paymentResult) async{
                                                   try{
-                                                    print('The paymentResult is $paymentResult');
-
                                                     debugPrint('the payment result is $paymentResult');
                                                     final token = paymentResult['paymentMethodData']['tokenizationData']['token'];
                                                     final tokenJson = Map.castFrom(json.decode(token));
@@ -511,7 +505,6 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                   await debugChangedStripePublishableKey();
                                                 },
                                                 onError: (e) async{
-                                                  print('The error is $e');
                                                   await showDialog(
                                                     context: context,
                                                     builder: (context) => CustomDialog(

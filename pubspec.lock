@@ -679,6 +679,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+  loader:
+    dependency: "direct dev"
+    description:
+      path: "packages/loader"
+      relative: true
+    source: path
+    version: "0.0.1"
   loader_overlay:
     dependency: "direct dev"
     description:
