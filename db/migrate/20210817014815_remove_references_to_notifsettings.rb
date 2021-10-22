@@ -13,5 +13,6 @@ class RemoveReferencesToNotifsettings < ActiveRecord::Migration[6.0]
     remove_reference :tagpeople, :user, null: false, foreign_key: true if Tagperson.column_names.include?('user_id')
     remove_column :comments, :user_id, :integer if Comment.column_names.include?('user_id')
     remove_column :transactions, :user_id, :integer if Transaction.column_names.include?('user_id')
+    remove_column :followers, :user_id, :integer if Follower.column_names.include?('user_id')
   end
 end
