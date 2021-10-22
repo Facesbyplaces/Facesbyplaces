@@ -187,7 +187,8 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                               var memorialLocation = await Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeRegularCreateMemorialLocateMap()));
 
                               if(memorialLocation != null){
-                                location.value = memorialLocation;
+                                location.value = memorialLocation[0];
+                                controller4.text = memorialLocation[1];
                               }
                             },
                           ),

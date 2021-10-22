@@ -101,7 +101,8 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                               var memorialLocation = await Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeBLMCreateMemorialLocateMap()));
 
                               if(memorialLocation != null){
-                                location.value = memorialLocation;
+                                location.value = memorialLocation[0];
+                                controller3.text = memorialLocation[1];
                               }
                             },
                           ),

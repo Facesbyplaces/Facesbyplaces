@@ -1,3 +1,4 @@
+import 'package:facesbyplaces/API/Regular/04-Create-Memorial/api_create_memorial_regular_02_convert_name.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:custom_info_window/custom_info_window.dart';
@@ -57,7 +58,8 @@ class HomeRegularCreateMemorialLocateMapState extends State<HomeRegularCreateMem
                   ),
                 );
               }else{
-                Navigator.pop(context, memorial);
+                APIRegularConvertCoordinates location = await apiRegularConvertCoordinates(latLng: memorial!);
+                Navigator.pop(context, [memorial, location.result[0].formatttedAddress]);
               }
             },
             icon: const Icon(Icons.send_outlined),

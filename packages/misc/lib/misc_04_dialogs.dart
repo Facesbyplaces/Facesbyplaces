@@ -99,6 +99,24 @@ class MiscRelationshipFromDialog extends StatelessWidget{
             const SizedBox(height: 40,),
 
             GestureDetector(
+              child: Text('Son', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),
+              onTap: (){
+                Navigator.pop(context, 'Son');
+              },
+            ),
+
+            const SizedBox(height: 40,),
+
+            GestureDetector(
+              child: Text('Daughter', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),
+              onTap: (){
+                Navigator.pop(context, 'Daughter');
+              },
+            ),
+
+            const SizedBox(height: 40,),
+
+            GestureDetector(
               child: Text('Aunt', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),
               onTap: (){
                 Navigator.pop(context, 'Aunt');

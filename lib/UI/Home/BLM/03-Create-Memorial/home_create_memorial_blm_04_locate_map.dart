@@ -1,3 +1,4 @@
+import 'package:facesbyplaces/API/BLM/04-Create-Memorial/api_create_memorial_blm_02_convert_name.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:custom_info_window/custom_info_window.dart';
@@ -57,7 +58,8 @@ class HomeBLMCreateMemorialLocateMapState extends State<HomeBLMCreateMemorialLoc
                   ),
                 );
               }else{
-                Navigator.pop(context, memorial);
+                APIBLMConvertCoordinates location = await apiBLMConvertCoordinates(latLng: memorial!);
+                Navigator.pop(context, [memorial, location.result[0].formatttedAddress]);
               }
             },
             icon: const Icon(Icons.send_outlined),
