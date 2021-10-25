@@ -19,11 +19,11 @@ import 'home_main_regular_03_01_feed_tab.dart';
 import 'home_main_regular_03_02_memorial_list_tab.dart';
 import 'home_main_regular_03_03_post_tab.dart';
 import 'home_main_regular_03_04_notifications_tab.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import '../../../ui_01_get_started.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:loader/loader.dart';
 import 'package:dialog/dialog.dart';
 import 'package:misc/misc.dart';
 import 'dart:async';
@@ -543,7 +543,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                           ),
                         );
                       }else{
-                        return Center(child: Container(child: const SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),);
+                        return const Center(child: CustomLoader(),);
                       }
                     },
                   )

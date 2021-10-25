@@ -3,10 +3,10 @@ import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial_blm_07_update_page_details.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
+import 'package:loader/loader.dart';
 import 'package:misc/misc.dart';
 
 class HomeBLMPageDetails extends StatefulWidget{
@@ -262,10 +262,7 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                     child: const Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),),
                   );
                 }else{
-                  return SizedBox(
-                    height: SizeConfig.screenHeight,
-                    child: Center(child: Container(child: const SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),
-                  );
+                  return const Center(child: CustomLoader(),);
                 }
               },
             ),

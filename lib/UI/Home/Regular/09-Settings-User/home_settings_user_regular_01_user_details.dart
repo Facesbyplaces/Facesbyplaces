@@ -9,12 +9,12 @@ import 'home_settings_user_regular_02_user_update_details.dart';
 import 'home_settings_user_regular_03_change_password.dart';
 import 'home_settings_user_regular_04_other_details.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:we_slide/we_slide.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
+import 'package:loader/loader.dart';
 import 'package:misc/misc.dart';
 import 'dart:io';
 
@@ -289,7 +289,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
             }else if(profile.hasError){
               return const MiscErrorMessageTemplate();
             }else{
-              return SizedBox(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
+              return const Center(child: CustomLoader(),);
             }
           },
         ),

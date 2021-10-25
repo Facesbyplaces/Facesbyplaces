@@ -6,11 +6,11 @@ import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_09_
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_10_hide_email.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_11_hide_phone_number.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'home_settings_use_blm_01_user_details.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
+import 'package:loader/loader.dart';
 import 'package:misc/misc.dart';
 
 class HomeBLMUserOtherDetails extends StatefulWidget{
@@ -287,7 +287,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                         }else if(details.hasError){
                           return SizedBox(height: SizeConfig.screenHeight, child: const Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),),);
                         }else{
-                          return SizedBox(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
+                          return const Center(child: CustomLoader(),);
                         }
                       },
                     ),

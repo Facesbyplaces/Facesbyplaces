@@ -2,10 +2,10 @@ import 'package:facesbyplaces/API/BLM/13-Show-User/api_show_user_blm_01_show_use
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_04_blm_user_details.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:we_slide/we_slide.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
+import 'package:loader/loader.dart';
 import 'package:misc/misc.dart';
 import 'dart:ui';
 
@@ -331,7 +331,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
             }else if(profile.hasError){
               return const MiscErrorMessageTemplate();
             }else{
-              return SizedBox(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
+              return const Center(child: CustomLoader(),);
             }
           }
         ),

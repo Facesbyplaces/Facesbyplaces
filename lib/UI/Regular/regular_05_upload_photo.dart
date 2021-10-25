@@ -1,5 +1,6 @@
 import 'package:facesbyplaces/API/Regular/01-Start/api_start_regular_04_upload_photo.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';

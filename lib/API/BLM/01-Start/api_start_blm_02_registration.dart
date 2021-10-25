@@ -16,6 +16,9 @@ Future<String> apiBLMRegistration({required APIBLMAccountRegistration account}) 
     ),
   );
 
+  print('The status code in registration is ${response.statusCode}');
+  print('The status data in registration is ${response.data}');
+
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     var user = newData['data'];

@@ -90,7 +90,6 @@ void main() async{
               }
             }
           }()),
-          // home: const NewLogoSample(),
           builder: (context, widget) => ResponsiveWrapper.builder(
             BouncingScrollWrapper.builder(context, widget!),
             maxWidth: 1200,
@@ -107,8 +106,6 @@ void main() async{
           ),
           theme: ThemeData(
             primaryColor: const Color(0xFF000000),
-            // accentColor: const Color(0xff4EC9D4),
-            // colorScheme: ColorScheme(secondary: const Color(0xff4EC9D4),),
             cardColor: const Color(0xffffffff),
           ),
           routes: <String, WidgetBuilder>{ // NAMED ROUTES USED FOR NAVIGATING

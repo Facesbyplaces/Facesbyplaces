@@ -25,6 +25,9 @@ Future<String> apiRegularVerifyEmail({required String verificationCode}) async{
     ),  
   );
 
+  print('The status code in verify email is ${response.statusCode}');
+  print('The status data in verify email is ${response.data}');
+
   if(response.statusCode == 200){
     sharedPrefs.setBool('regular-user-session', true);
     sharedPrefs.setBool('user-guest-session', false);
