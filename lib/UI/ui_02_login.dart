@@ -49,11 +49,10 @@ class UILogin01 extends StatelessWidget{
                                 backgroundColor: const Color(0xff000000),
                               ),
 
-                              Expanded(
-                                child: Container(
-                                  child: const Text('Speak for a loved one killed by law enforcement', style: TextStyle(fontSize: 22, color: Color(0xff2F353D), fontFamily: 'NexaRegular'),),
-                                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                                  alignment: Alignment.center,
+                              const Expanded(
+                                child: Padding(
+                                  child: Text('Speak for a loved one killed by law enforcement', style: TextStyle(fontSize: 22, color: Color(0xff2F353D), fontFamily: 'NexaRegular'),),
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
                                 ),
                               ),
                             ],
@@ -77,18 +76,17 @@ class UILogin01 extends StatelessWidget{
                           shape: const StadiumBorder(),
                           padding: EdgeInsets.zero,
                           child: Row(
-                            children: [
-                              const CircleAvatar(
+                            children: const [
+                              CircleAvatar(
                                 child: Icon(Icons.favorite, size: 50, color: Color(0xffffffff),),
                                 backgroundColor: Color(0xff04ECFF),
                                 minRadius: 35,
                               ),
 
                               Expanded(
-                                child: Container(
-                                  child: const Text('Remembering friends and family', style: TextStyle(fontSize: 22, color: Color(0xff2F353D), fontFamily: 'NexaRegular'),),
-                                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                                  alignment: Alignment.center,
+                                child: Padding(
+                                  child: Text('Remembering friends and family', style: TextStyle(fontSize: 22, color: Color(0xff2F353D), fontFamily: 'NexaRegular'),),
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
                                 ),
                               ),
                             ],

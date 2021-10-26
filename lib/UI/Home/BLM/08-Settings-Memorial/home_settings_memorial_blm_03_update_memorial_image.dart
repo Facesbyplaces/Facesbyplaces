@@ -98,13 +98,13 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
             ),
             body: FutureBuilder<APIBLMShowPageImagesMain>(
               future: futureMemorialSettings,
-              builder: (context, memorialImageSettings) {
+              builder: (context, memorialImageSettings){
                 if(memorialImageSettings.hasData){
                   return Stack(
                     children: [
                       const MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
 
-                      Container(
+                      Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                         child: ListView(
                           physics: const ClampingScrollPhysics(),
@@ -152,6 +152,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                       await getProfileImage();
                                     },
                                   ),
+
                                   Positioned(
                                     bottom: 40,
                                     left: SizeConfig.screenWidth! / 2,
@@ -161,6 +162,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                       child: CircleAvatar(radius: 25, backgroundColor: Colors.transparent, child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: 45,),),
                                     ),
                                   ),
+                                  
                                   const Positioned(
                                     top: 10,
                                     right: 10,

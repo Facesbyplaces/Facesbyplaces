@@ -17,16 +17,13 @@ const double pi = 3.1415926535897932;
 class PushNotificationService{
   final FirebaseMessaging fcm;
   final BuildContext context;
-
   PushNotificationService(this.fcm, this.context);
 
   Future initialise() async{
     (await fcm.getToken())!;
-
     FirebaseMessaging.onMessage.listen((message) {});
 
     FirebaseMessaging.onMessageOpenedApp.listen((event) async{
-
       if(event.data['dataType'] == 'Post'){
         if(event.data['postType'] == 'Blm'){
           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: int.parse(event.data['dataID']))));
@@ -65,7 +62,7 @@ class UIGetStartedState extends State<UIGetStarted>{
       }else if(data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true){
         initUnit(resetType: data["reset-type"]);
       }
-    }, onError: (error) {
+    },onError: (error){
       PlatformException platformException = error as PlatformException;
       throw Exception('InitSession error: ${platformException.code} - ${platformException.message}');
     });
@@ -164,9 +161,9 @@ class UIGetStartedState extends State<UIGetStarted>{
 
                             const SizedBox(height: 30),
 
-                            Container(
-                              padding: const EdgeInsets.only(left: 30, right: 30),
-                              child: const Center(
+                            const Padding(
+                              padding: EdgeInsets.only(left: 30, right: 30),
+                              child: Center(
                                 child: Text('Create a Memorial Page for Loved Ones by Sharing Stories, photos of Special Events & Occasions. Keeping their Memories alive for Generations',
                                   style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffffffff),),
                                   textAlign: TextAlign.center,
@@ -176,7 +173,7 @@ class UIGetStartedState extends State<UIGetStarted>{
 
                             const SizedBox(height: 50),
 
-                            Expanded(child: Container(),),
+                            const Expanded(child: SizedBox(),),
 
                             const SizedBox(height: 50),
 

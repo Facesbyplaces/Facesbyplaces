@@ -327,7 +327,7 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
       }
     }
 
-    if(mounted) {
+    if(mounted){
       page2++;
     }
   }

@@ -1,7 +1,6 @@
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api_view_memorial_regular_05_maps.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api_view_memorial_regular_06_directions.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:custom_info_window/custom_info_window.dart';
 import 'package:flutter/material.dart';
@@ -19,11 +18,11 @@ class HomeBLMMaps extends StatefulWidget{
 }
 
 class HomeRegularMapsState extends State<HomeBLMMaps>{
-  CameraPosition? initialCameraPosition;
+  CustomInfoWindowController customInfoWindowController = CustomInfoWindowController();
   GoogleMapController? googleMapController;
+  CameraPosition? initialCameraPosition;
   Marker? origin;
   Marker? destination;
-  CustomInfoWindowController customInfoWindowController = CustomInfoWindowController();
   Set<Marker> markers = {};
   RegularDirections? info;
 
@@ -38,7 +37,6 @@ class HomeRegularMapsState extends State<HomeBLMMaps>{
         customInfoWindowController.addInfoWindow!(
           ClipPath(
             clipper: MessageClipper(borderRadius: 10),
-            // clipper: MiscRegularMessageClipper(),
             child: Container(
               color: const Color(0xffffffff),
               child: Column(
@@ -76,11 +74,10 @@ class HomeRegularMapsState extends State<HomeBLMMaps>{
 
   @override
   Widget build(BuildContext context){
-    SizeConfig.init(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: Text(widget.memorialName, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
+        title: Text(widget.memorialName, style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xffffffff),),),
         backgroundColor: const Color(0xff04ECFF),
         actions: [
           IconButton(
@@ -134,25 +131,18 @@ class HomeRegularMapsState extends State<HomeBLMMaps>{
           ? Positioned(
             top: 20.0,
             child: Container(
-              padding: const EdgeInsets.symmetric(
-                vertical: 6.0,
-                horizontal: 12.0,
-              ),
+              padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 12.0,),
               decoration: BoxDecoration(
                 color: Colors.yellowAccent,
                 borderRadius: BorderRadius.circular(20.0),
                 boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black26,
-                    offset: Offset(0, 2),
-                    blurRadius: 6.0,
-                  ),
+                  BoxShadow(color: Colors.black26, offset: Offset(0, 2), blurRadius: 6.0,),
                 ],
               ),
               child: Text('${info!.totalDistance}, ${info!.totalDuration}', style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600)),
             ),
           )
-          : Container(),
+          : const SizedBox(),
         ],
       ),
     );

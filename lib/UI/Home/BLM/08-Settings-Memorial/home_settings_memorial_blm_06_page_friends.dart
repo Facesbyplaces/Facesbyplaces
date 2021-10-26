@@ -178,7 +178,7 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return ValueListenableBuilder(
       valueListenable: count,

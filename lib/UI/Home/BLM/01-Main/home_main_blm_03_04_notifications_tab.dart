@@ -53,7 +53,7 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
     final sharedPrefs = await SharedPreferences.getInstance();
     isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
 
-    if (isGuestLoggedIn != true) {
+    if(isGuestLoggedIn != true){
       onLoading();
     }
   }
@@ -123,7 +123,7 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
         );
       }
 
-      if(mounted) {
+      if(mounted){
         page++;
       }
     }

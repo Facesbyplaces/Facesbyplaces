@@ -178,7 +178,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                             },
                           );
                         }else{
-                          return Container(child: const CircularProgressIndicator(), padding: const EdgeInsets.all(20.0),);
+                          return const Padding(child: CircularProgressIndicator(), padding: EdgeInsets.all(20.0),);
                         }
                       },
                     ),
@@ -200,7 +200,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                         child: SizedBox(height: SizeConfig.screenHeight, child: const MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
                       ),
 
-                      Container(
+                      SizedBox(
                         child: ((){
                           switch (toggleBottomListener){
                             case 0: return const HomeBLMFeedTab();
@@ -340,6 +340,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                               child: Column(
                                 children: [
                                   const SizedBox(height: 20),
+
                                   GestureDetector(
                                     child: manageDrawer.data!.showProfileInformationImage != ''
                                     ? Container(
@@ -501,7 +502,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
 
                                 const CircleAvatar(radius: 100, backgroundColor: Color(0xff888888), foregroundImage: AssetImage('assets/icons/user-placeholder.png'),),
 
-                                Expanded(child: Container(),),
+                                const Expanded(child: SizedBox(),),
 
                                 GestureDetector(
                                   child: const Text('Something went wrong. Please try again.', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),), textAlign: TextAlign.center,),
@@ -510,7 +511,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                   },
                                 ),
 
-                                Expanded(child: Container(),),
+                                const Expanded(child: SizedBox(),),
 
                                 GestureDetector(
                                   child: Row(
@@ -529,7 +530,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                   },
                                 ),
 
-                                Expanded(child: Container(),),
+                                const Expanded(child: SizedBox(),),
                               ],
                             ),
                           ),

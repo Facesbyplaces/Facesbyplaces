@@ -110,7 +110,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                             },
                           ),
 
-                          Expanded(child: Container()),
+                          const Expanded(child: SizedBox()),
 
                           const SizedBox(height: 50),
 

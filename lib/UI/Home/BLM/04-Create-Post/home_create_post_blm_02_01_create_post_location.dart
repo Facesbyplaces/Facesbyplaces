@@ -45,7 +45,7 @@ class HomeBLMCreatePostSearchLocationState extends State<HomeBLMCreatePostSearch
                   appBar: PreferredSize(
                     preferredSize: const Size.fromHeight(70),
                       child: AppBar(
-                      leading: Container(),
+                      leading: const SizedBox(),
                       backgroundColor: const Color(0xff04ECFF),
                       flexibleSpace: Column(
                         children: [

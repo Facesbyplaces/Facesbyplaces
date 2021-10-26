@@ -63,7 +63,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
 
                         const Text('Send a Gift', style: TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold',),),
 
-                        Expanded(child: Container(),),
+                        const Expanded(child: SizedBox(),),
                       ],
                     ),
 
@@ -92,7 +92,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
 
                                     const SizedBox(height: 10,),
 
-                                    Container(
+                                    SizedBox(
                                       child: ((){
                                         switch(index){
                                           case 0: return const Text('\$1.00', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff000000),),);
@@ -205,7 +205,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
 
                                       const SizedBox(height: 10,),
 
-                                      Container(
+                                      Align(
                                         alignment: Alignment.center,
                                         child: ((){
                                           if(paymentToggle == 0){

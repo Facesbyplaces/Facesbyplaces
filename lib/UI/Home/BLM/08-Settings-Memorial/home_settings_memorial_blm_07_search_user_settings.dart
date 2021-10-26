@@ -136,7 +136,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
             appBar: PreferredSize(
               preferredSize: const Size.fromHeight(70.0),
               child: AppBar(
-                leading: Container(),
+                leading: const SizedBox(),
                 backgroundColor: const Color(0xff04ECFF),
                 flexibleSpace: Column(
                   children: [
@@ -222,7 +222,6 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                 padding: EdgeInsets.zero,
                 child: Column(
                   children: [
-
                     SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
 
                     Image.asset('assets/icons/search-user.png', height: 240, width: 240,),

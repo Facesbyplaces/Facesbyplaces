@@ -73,7 +73,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                   height: SizeConfig.screenHeight! / 1.5,
                   child: Column(
                     children: [
-                      Expanded(child: Container(),),
+                      const Expanded(child: SizedBox(),),
 
                       ListTile(
                         title: const Text('Update Details', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
@@ -91,6 +91,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                         onTap: () async{
                           final sharedPrefs = await SharedPreferences.getInstance();
                           bool socialAppSession = sharedPrefs.getBool('blm-social-app-session') ?? false;
+
                           context.loaderOverlay.show();
                           bool checkAccount = await apiBLMCheckAccount(email: profile.data!.showProfileInformationEmail).onError((error, stackTrace){
                             context.loaderOverlay.hide();
@@ -179,7 +180,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
 
                       const Text('V.1.1.0', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff888888),),),
 
-                      Expanded(child: Container(),),
+                      const Expanded(child: SizedBox(),),
                     ],
                   ),
                 ),
@@ -252,6 +253,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                         ],
                       ),
                     ),
+
                     SafeArea(
                       child: Padding(
                         padding: const EdgeInsets.only(left: 20),
@@ -263,6 +265,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                         ),
                       ),
                     ),
+                    
                     Positioned(
                       top: SizeConfig.screenHeight! / 2.5,
                       child: SizedBox(

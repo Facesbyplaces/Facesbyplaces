@@ -70,7 +70,7 @@ class BLMRegister extends StatelessWidget{
 
                               const SizedBox(height: 10,),
 
-                              Container(
+                              Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 40),
                                 child: Column(
                                   children: [
@@ -120,7 +120,7 @@ class BLMRegister extends StatelessWidget{
                                 ),
                               ),
 
-                              Expanded(child: Container()),
+                              const Expanded(child: SizedBox()),
                               
                               const SizedBox(height: 50,),
 

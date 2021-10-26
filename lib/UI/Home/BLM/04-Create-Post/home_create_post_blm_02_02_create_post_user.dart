@@ -119,7 +119,7 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
             appBar: PreferredSize(
               preferredSize: const Size.fromHeight(70.0),
               child: AppBar(
-                leading: Container(),
+                leading: const SizedBox(),
                 backgroundColor: const Color(0xff04ECFF),
                 flexibleSpace: Column(
                   children: [
@@ -152,7 +152,7 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
                               focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: Color(0xffffffff)), borderRadius: BorderRadius.all(Radius.circular(25)),),
                               prefixIcon: IconButton(
                                 icon: const Icon(Icons.search, color: Color(0xff888888),),
-                                onPressed: () {
+                                onPressed: (){
                                   onLoading();
                                 },
                               ),

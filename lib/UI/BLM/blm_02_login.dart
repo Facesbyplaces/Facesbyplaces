@@ -242,7 +242,7 @@ class BLMLogin extends StatelessWidget{
 
                               const SizedBox(height: 20,),
 
-                              Container(
+                              Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 40),
                                 child: Row(
                                   children: [
@@ -261,7 +261,7 @@ class BLMLogin extends StatelessWidget{
                                 ),
                               ),
 
-                              Expanded(child: Container(),),
+                              const Expanded(child: SizedBox(),),
 
                               const SizedBox(height: 30,),
 

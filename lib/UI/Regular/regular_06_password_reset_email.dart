@@ -75,7 +75,7 @@ class RegularPasswordResetEmail extends StatelessWidget{
                             ),
                           ),
 
-                          Expanded(child: Container()),
+                          const Expanded(child: SizedBox()),
 
                           const SizedBox(height: 50,),
 

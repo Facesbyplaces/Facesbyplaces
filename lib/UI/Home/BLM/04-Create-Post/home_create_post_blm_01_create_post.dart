@@ -45,14 +45,15 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
   TextEditingController controller = TextEditingController();
   ValueNotifier<int> slideCount = ValueNotifier<int>(0);
   ValueNotifier<int> userCount = ValueNotifier<int>(0);
-  double latitude = 0.0;
-  double longitude = 0.0;
   List<BLMManagedPages> managedPages = [];
   List<BLMTaggedUsers> users = [];
   final picker = ImagePicker();
   String currentSelection = '';
+  double latitude = 0.0;
+  double longitude = 0.0;
   int currentIdSelected = 0;
   int maxLines = 5;
+  
 
   @override
   void initState(){
@@ -295,6 +296,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                 ],
                               ),
                             ),
+
                             FocusScope(
                               child: Focus(
                                 child: Container(
@@ -318,13 +320,13 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                   ),
                                 ),
                               ),
-                                onFocusChange: (focus){
-                                  if(focus){
-                                    maxLines = 10;
-                                  }else{
-                                    maxLines = 5;
-                                  }
-                                },
+                              onFocusChange: (focus){
+                                if(focus){
+                                  maxLines = 10;
+                                }else{
+                                  maxLines = 5;
+                                }
+                              },
                             ),
 
                             const SizedBox(height: 10,),
@@ -354,7 +356,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                 ],
                               ),
                             )
-                            : Container(height: 0,),
+                            : const SizedBox(height: 0,),
 
                             const SizedBox(height: 10,),
 
@@ -386,11 +388,11 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                 ],
                               ),
                             )
-                            : Container(height: 0,),
+                            : const SizedBox(height: 0,),
 
                             const SizedBox(height: 10,),
 
-                            Container(
+                            SizedBox(
                               child: ((){
                                 if(slideCountListener != 0){
                                   return Container(
@@ -438,7 +440,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                     },
                                                   ),
                                                 )
-                                                : Container(height: 0),
+                                                : const SizedBox(height: 0),
                                               ],
                                             )
                                             : SizedBox(
@@ -467,7 +469,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                       },
                                                     ),
                                                   )
-                                                  : Container(height: 0),
+                                                  : const SizedBox(height: 0),
                                                 ],
                                               ),
                                             ),
@@ -533,7 +535,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                     ),
                                   );
                                 }else{
-                                  return Container(height: 0,);
+                                  return const SizedBox(height: 0,);
                                 }
                               }()),
                             ),

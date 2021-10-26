@@ -50,7 +50,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
   Widget build(BuildContext context){
     SizeConfig.init(context);
     return WillPopScope(
-      onWillPop: () async {
+      onWillPop: () async{
         return Navigator.canPop(context);
       },
       child: GestureDetector(
@@ -89,6 +89,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                         body: Stack(
                           children: [
                             const MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
+
                             SingleChildScrollView(
                               physics: const ClampingScrollPhysics(),
                               padding: const EdgeInsets.all(20.0),
@@ -127,6 +128,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                           ),
                                         ],
                                       ),
+
                                       Row(
                                         children: [
                                           const Expanded(child: Text('New Activities', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: Color(0xff000000),),),),
@@ -158,6 +160,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                           ),
                                         ],
                                       ),
+
                                       Row(
                                         children: [
                                           const Expanded(child: Text('Post Likes', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: Color(0xff000000),),)),
@@ -189,6 +192,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                           ),
                                         ],
                                       ),
+
                                       Row(
                                         children: [
                                           const Expanded(child: Text('Post Comments', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: Color(0xff000000),),),),
@@ -267,6 +271,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                           ),
                                         ],
                                       ),
+
                                       Row(
                                         children: [
                                           const Expanded(child: Text('Add as Friend', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: Color(0xff000000),),),),
@@ -298,6 +303,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                           ),
                                         ],
                                       ),
+                                      
                                       Row(
                                         children: [
                                           const Expanded(child: Text('Add as Page Admin', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: Color(0xff000000),),),),

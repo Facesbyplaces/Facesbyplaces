@@ -82,7 +82,6 @@ class UINewlyInstalled01State extends State<UINewlyInstalled01>{
               padding: const EdgeInsets.only(left: 20.0, right: 20.0),
               physics: const ClampingScrollPhysics(),
               child: Align(
-                alignment: Alignment.center,
                 child: Column(
                   children: [
                     const SizedBox(height: 50,),
@@ -234,7 +233,6 @@ class UINewlyInstalled02State extends State<UINewlyInstalled02>{
             padding: const EdgeInsets.only(left: 20.0, right: 20.0),
             physics: const ClampingScrollPhysics(),
             child: Align(
-              alignment: Alignment.center,
               child: Column(
                 children: [
                   const SizedBox(height: 50,),
@@ -385,7 +383,6 @@ class UINewlyInstalled03State extends State<UINewlyInstalled03>{
               padding: const EdgeInsets.only(left: 20.0, right: 20.0),
               physics: const ClampingScrollPhysics(),
               child: Align(
-                alignment: Alignment.center,
                 child: Column(
                   children: [
                     const SizedBox(height: 50,),

@@ -36,7 +36,7 @@ class HomeBLMCreateMemorialLocateMapState extends State<HomeBLMCreateMemorialLoc
         actions: [
           IconButton(
             onPressed: (){
-              setState(() {
+              setState((){
                 markers.clear();
                 pinned = false;
               });

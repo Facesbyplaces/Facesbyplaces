@@ -324,10 +324,10 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                   ),
                                                                 );
                                                               }else{
-                                                                return Container(height: 0,);
+                                                                return const SizedBox(height: 0,);
                                                               }
                                                             }else{
-                                                              return Container(height: 0,);
+                                                              return const SizedBox(height: 0,);
                                                             }
                                                           }()),
                                                           onTap: (){
@@ -399,7 +399,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                               alignment: Alignment.center,
                                                             );
                                                           }else{
-                                                            return Container(height: 0,);
+                                                            return const SizedBox(height: 0,);
                                                           }
                                                         }()),
                                                       ],
@@ -417,6 +417,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                             },
                                                           ),
                                                         ),
+
                                                         Expanded(
                                                           flex: 2,
                                                           child: Padding(
@@ -471,6 +472,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                             ),
                                                           ),
                                                         ),
+
                                                         Expanded(
                                                           child: GestureDetector(
                                                             child: const CircleAvatar(radius: 25, backgroundColor: Color(0xff3498DB), child: Icon(Icons.share, color: Color(0xffffffff), size: 25,),),
@@ -771,7 +773,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                             const SizedBox(height: 20),
                                                           ],
                                                         )
-                                                        : Container(height: 0,),
+                                                        : const SizedBox(height: 0,),
                                                       ],
                                                     ),
 
@@ -894,7 +896,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                 }else if(profile.hasError){
                                   return const MiscErrorMessageTemplate();
                                 }else{
-                                  return Container(height: SizeConfig.screenHeight);
+                                  return SizedBox(height: SizeConfig.screenHeight);
                                 }
                               }
                             ),
@@ -935,14 +937,14 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                           latitude: posts[i].latitude,
                                           longitude: posts[i].longitude,
                                           contents: [
-                                            Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
+                                            Align(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 
                                             posts[i].imagesOrVideos.isNotEmpty
                                             ? Column(
                                               children: [
                                                 const SizedBox(height: 20),
 
-                                                Container(
+                                                SizedBox(
                                                   child: ((){
                                                     if(posts[i].imagesOrVideos.length == 1){
                                                       if(lookupMimeType(posts[i].imagesOrVideos[0])?.contains('video') == true){
@@ -1093,7 +1095,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                 ),
                                               ],
                                             )
-                                            : Container(height: 0),
+                                            : const SizedBox(height: 0),
                                           ],
                                         ),
                                       ),

@@ -43,7 +43,7 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return ValueListenableBuilder(
       valueListenable: toggle,
@@ -91,7 +91,7 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
                           ),
                         ),
                         Expanded(
-                          child: Container(
+                          child: SizedBox(
                             child: ((){
                               switch (toggleListener){
                                 case 0: return settingsTab1(widget.memorialId);
@@ -324,7 +324,7 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
 
               const SizedBox(height: 80),
 
-              Expanded(child: Container()),
+              const Expanded(child: SizedBox()),
 
               Image.asset('assets/icons/logo.png', height: 100, width: 100,),
 

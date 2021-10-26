@@ -103,7 +103,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                           },
                         ),
 
-                        Expanded(child: Container()),
+                        const Expanded(child: SizedBox()),
 
                         const SizedBox(height: 50),
 

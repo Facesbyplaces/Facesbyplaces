@@ -127,7 +127,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
 
                                   Center(child: Text('Slide', style: TextStyle(fontSize: 14, fontFamily: 'NexaRegular',),),),
                                 ],
-                                onTap: (int number) {
+                                onTap: (int number){
                                   toggle.value = number;
                                 },
                               ),
@@ -138,7 +138,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
 
                       const SizedBox(height: 20,),
 
-                      Container(
+                      SizedBox(
                         child: ((){
                           switch (toggleListener){
                             case 0: return shareStory1();

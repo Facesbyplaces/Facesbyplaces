@@ -253,7 +253,7 @@ class RegularLoginState extends State<RegularLogin>{
 
                                 const SizedBox(height: 20,),
 
-                                Container(
+                                Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 40),
                                   child: Row(
                                     children: [
@@ -272,7 +272,7 @@ class RegularLoginState extends State<RegularLogin>{
                                   ),
                                 ),
 
-                                Expanded(child: Container(),),
+                                const Expanded(child: SizedBox(),),
 
                                 const SizedBox(height: 30,),
 
@@ -371,7 +371,7 @@ class RegularLoginState extends State<RegularLogin>{
 
                                 const SizedBox(height: 20,),
 
-                                Container(
+                                Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 40),
                                   child: RichText(
                                     text: const TextSpan(

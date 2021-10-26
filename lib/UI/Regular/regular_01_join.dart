@@ -37,7 +37,7 @@ class RegularJoin extends StatelessWidget{
 
                         const SizedBox(height: 50,),
 
-                        Expanded(child: Container()),
+                        const Expanded(child: SizedBox()),
 
                         const Center(child: Text('All Lives Matter', style: TextStyle(fontSize: 42, color: Color(0xffffffff), fontFamily: 'NexaBold',),),),
 

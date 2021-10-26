@@ -294,7 +294,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                   body: Stack(
                     children: [
                       isGuestLoggedInListener
-                      ? Container(height: 0,)
+                      ? const SizedBox(height: 0,)
                       : IgnorePointer(
                           ignoring: isGuestLoggedInListener,
                           child: FutureBuilder<APIBLMShowOriginalPostMain>(
@@ -344,8 +344,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                       foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
                                                     ),
                                                   ),
+
                                                   Expanded(
-                                                    child: Container(
+                                                    child: Padding(
                                                       padding: const EdgeInsets.only(left: 10.0),
                                                       child: GestureDetector(
                                                         onTap: () async{
@@ -378,6 +379,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                 ),
                                                               ),
                                                             ),
+
                                                             Expanded(
                                                               child: Align(
                                                                 alignment: Alignment.topLeft,
@@ -399,17 +401,19 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                 ],
                                               ),
                                             ),
+
                                             Container(
                                               padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                                               alignment: Alignment.centerLeft,
                                               child: Text(originalPost.data!.blmPost.showOriginalPostBody, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
                                             ),
+
                                             originalPost.data!.blmPost.showOriginalPostImagesOrVideos.isNotEmpty
                                             ? Column(
                                               children: [
                                                 const SizedBox(height: 20),
 
-                                                Container(
+                                                SizedBox(
                                                   child: ((){
                                                     if(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length == 1){
                                                       return GestureDetector(
@@ -440,7 +444,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                         const SizedBox(height: 10,),
 
                                                                         Expanded(
-                                                                          child: (() {
+                                                                          child: ((){
                                                                             if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                                               return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0]}',
                                                                                 betterPlayerConfiguration: BetterPlayerConfiguration(
@@ -594,6 +598,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                               ),
                                                                             ),
                                                                           ),
+
                                                                           Row(
                                                                             mainAxisAlignment: MainAxisAlignment.center,
                                                                             children: [
@@ -783,6 +788,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                               ),
                                                                             ),
                                                                           ),
+
                                                                           Row(
                                                                             mainAxisAlignment: MainAxisAlignment.center,
                                                                             children: [
@@ -851,7 +857,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                 ),
                                               ],
                                             )
-                                            : Container(height: 0,),
+                                            : const SizedBox(height: 0,),
 
                                             originalPost.data!.blmPost.showOriginalPostLocation != ''
                                             ? Column(
@@ -878,12 +884,13 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                 ),
                                               ],
                                             )
-                                            : Container(height: 0,),
+                                            : const SizedBox(height: 0,),
 
                                             Container(
                                               height: 40,
                                               padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                                              child: Row(mainAxisAlignment: MainAxisAlignment.end,
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.end,
                                                 children: [
                                                   Row(
                                                     children: [
@@ -914,6 +921,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                           ],
                                         ),
                                       ),
+
                                       SliverToBoxAdapter(
                                         child: Column(
                                           children: [
@@ -1038,6 +1046,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                     ),
                                                                   ),
                                                                 ),
+
                                                                 Expanded(
                                                                   child: Align(
                                                                     alignment: Alignment.centerRight,
@@ -1095,7 +1104,6 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                     GestureDetector(
                                                                      child: const Text('Reply', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
                                                                       onTap: () async{
-
                                                                         if(controller.text != ''){
                                                                           controller.clear();
                                                                         }
@@ -1131,6 +1139,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                             await showModalBottomSheet(context: context, builder: (context) => showKeyboardEdit(isEdit: false, editId: commentsListener[i].listOfReplies[index].replyId),);
                                                                           },
                                                                         ),
+
                                                                         ListTile(
                                                                           title: const Text('Delete'),
                                                                           leading: const Icon(Icons.delete),
@@ -1188,7 +1197,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                           ),
                                                         ),
                                                       )
-                                                      : Container(height: 0,),
+                                                      : const SizedBox(height: 0,),
                                                     ],
                                                   ),
                                                   onTap: (){
@@ -1211,6 +1220,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                   await showModalBottomSheet(context: context, builder: (context) => showKeyboardEdit(isEdit: true, editId: commentsListener[i].commentId),);
                                                                 },
                                                               ),
+                                                              
                                                               ListTile(
                                                                 title: const Text('Delete'),
                                                                 leading: const Icon(Icons.delete),
@@ -1278,7 +1288,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                             }else if(originalPost.hasError) {
                               return const MiscErrorMessageTemplate();
                             }else{
-                              return Container(height: 0);
+                              return const SizedBox(height: 0);
                             }
                           },
                         ),
@@ -1286,7 +1296,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
 
                       isGuestLoggedInListener
                       ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: const MiscLoginToContinue(),)
-                      : Container(height: 0),
+                      : const SizedBox(height: 0),
                     ],
                   ),
                 ),

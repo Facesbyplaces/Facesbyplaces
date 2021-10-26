@@ -430,7 +430,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                 appBar: PreferredSize(
                   preferredSize: const Size.fromHeight(70.0),
                   child: AppBar(
-                    leading: Container(),
+                    leading: const SizedBox(),
                     backgroundColor: const Color(0xff04ECFF),
                     flexibleSpace: Column(
                       children: [
@@ -632,11 +632,12 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                           ),
                         ),
                       ),
-                      Container(
+
+                      SizedBox(
                         child: ((){
                           switch(toggleListener){
-                            case 0: return Container(height: 20,);
-                            case 1: return Container(height: 20,);
+                            case 0: return const SizedBox(height: 20,);
+                            case 1: return const SizedBox(height: 20,);
                             case 2: return 
                             SizedBox(
                               height: 40,
@@ -690,7 +691,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                       ),
 
                       Expanded(
-                        child: Container(
+                        child: SizedBox(
                           child: isGuestLoggedInListener 
                           ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: const MiscLoginToContinue(),)
                           : ((){
@@ -755,14 +756,14 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                 latitude: feeds[i].latitude,
                 longitude: feeds[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
+                  Align(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 
                   feeds[i].imagesOrVideos.isNotEmpty
                   ? Column(
                     children: [
                       const SizedBox(height: 20),
 
-                      Container(
+                      SizedBox(
                         child: ((){
                           if(feeds[i].imagesOrVideos.length == 1){
                             if(lookupMimeType(feeds[i].imagesOrVideos[0])?.contains('video') == true){
@@ -913,7 +914,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                       ),
                     ],
                   )
-                  : Container(height: 0),
+                  : const SizedBox(height: 0),
                 ],
               )
               : MiscRegularPost(
@@ -940,14 +941,14 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                 latitude: feeds[i].latitude,
                 longitude: feeds[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
+                  Align(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 
                   feeds[i].imagesOrVideos.isNotEmpty
                   ? Column(
                     children: [
                       const SizedBox(height: 20),
 
-                      Container(
+                      SizedBox(
                         child: ((){
                           if(feeds[i].imagesOrVideos.length == 1){
                             if(lookupMimeType(feeds[i].imagesOrVideos[0])?.contains('video') == true){
@@ -1098,7 +1099,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                       ),
                     ],
                   )
-                  : Container(height: 0),
+                  : const SizedBox(height: 0),
                 ],
               );
             }
@@ -1135,14 +1136,14 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                 latitude: searchFeeds[i].latitude,
                 longitude: searchFeeds[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
+                  Align(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 
                   searchFeeds[i].imagesOrVideos.isNotEmpty
                   ? Column(
                     children: [
                       const SizedBox(height: 20),
 
-                      Container(
+                      SizedBox(
                         child: ((){
                           if(searchFeeds[i].imagesOrVideos.length == 1){
                             if(lookupMimeType(searchFeeds[i].imagesOrVideos[0])?.contains('video') == true){
@@ -1293,7 +1294,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                       ),
                     ],
                   )
-                  : Container(height: 0),
+                  : const SizedBox(height: 0),
                 ],
               )
               : MiscRegularPost(
@@ -1320,14 +1321,14 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                 latitude: searchFeeds[i].latitude,
                 longitude: searchFeeds[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
+                  Align(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 
                   searchFeeds[i].imagesOrVideos.isNotEmpty
                   ? Column(
                     children: [
                       const SizedBox(height: 20),
 
-                      Container(
+                      SizedBox(
                         child: ((){
                           if(searchFeeds[i].imagesOrVideos.length == 1){
                             if(lookupMimeType(searchFeeds[i].imagesOrVideos[0])?.contains('video') == true){
@@ -1478,7 +1479,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                       ),
                     ],
                   )
-                  : Container(height: 0),
+                  : const SizedBox(height: 0),
                 ],
               );
             }
