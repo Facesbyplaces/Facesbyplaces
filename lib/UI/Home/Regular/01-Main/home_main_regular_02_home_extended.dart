@@ -182,7 +182,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                             },
                           );
                         }else{
-                          return Container(child: const CircularProgressIndicator(), padding: const EdgeInsets.all(20.0),);
+                          return const Padding(child: CircularProgressIndicator(), padding: EdgeInsets.all(20.0),);
                         }
                       },
                     ),
@@ -202,7 +202,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                         child: SizedBox(height: SizeConfig.screenHeight, child: const MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
                       ),
 
-                      Container(
+                      SizedBox(
                         child: ((){
                           switch (toggleBottomListener){
                             case 0: return const HomeRegularFeedTab();
@@ -259,6 +259,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                 ],
                               ),
                             ),
+
                             SizedBox(
                               width: SizeConfig.screenWidth! / 4,
                               child: Column(
@@ -271,6 +272,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                 ],
                               ),
                             ),
+
                             SizedBox(
                               width: SizeConfig.screenWidth! / 4,
                               child: Column(
@@ -283,6 +285,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                 ],
                               ),
                             ),
+
                             SizedBox(
                               width: SizeConfig.screenWidth! / 4,
                               child: Stack(
@@ -297,6 +300,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                       Text('Notification', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight',),),
                                     ],
                                   ),
+
                                   Positioned(
                                     top: 0,
                                     right: 20,
@@ -509,7 +513,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
                                 ),
 
-                                Expanded(child: Container(),),
+                                const Expanded(child: SizedBox(),),
 
                                 GestureDetector(
                                   child: const Text('Something went wrong. Please try again.', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),), textAlign: TextAlign.center,),
@@ -518,7 +522,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   },
                                 ),
 
-                                Expanded(child: Container(),),
+                                const Expanded(child: SizedBox(),),
 
                                 GestureDetector(
                                   child: Row(
@@ -537,7 +541,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   },
                                 ),
 
-                                Expanded(child: Container(),),
+                                const Expanded(child: SizedBox(),),
                               ],
                             ),
                           ),

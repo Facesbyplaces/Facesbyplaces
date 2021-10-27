@@ -297,7 +297,22 @@ class MiscInputFieldTemplateState extends State<MiscInputFieldTemplate>{
       obscureText: widget.obscureText,
       cursorColor: const Color(0xff000000),
       style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
-      decoration: InputDecoration(alignLabelWithHint: true, labelText: widget.labelText, labelStyle: widget.labelTextStyle, focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),),
+      validator: (value){
+        if(value!.isEmpty){
+          return '';
+        }
+      },
+      decoration: InputDecoration(
+        alignLabelWithHint: true, 
+        labelText: widget.labelText, 
+        labelStyle: widget.labelTextStyle, 
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: Color(0xff000000),),
+        ),
+        errorBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.red,),
+        ),
+      ),
     );
   }
 }

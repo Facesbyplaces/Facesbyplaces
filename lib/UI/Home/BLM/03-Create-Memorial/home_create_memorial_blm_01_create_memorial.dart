@@ -33,15 +33,16 @@ class HomeBLMCreateMemorial1 extends StatefulWidget{
 
 class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
   final GlobalKey<MiscInputFieldDropDownState> _key1 = GlobalKey<MiscInputFieldDropDownState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
   final GlobalKey<MiscInputFieldTemplateState> _key3 = GlobalKey<MiscInputFieldTemplateState>();
-  final GlobalKey<MiscInputFieldTemplateState> _key6 = GlobalKey<MiscInputFieldTemplateState>();
-  final GlobalKey<MiscInputFieldTemplateState> _key7 = GlobalKey<MiscInputFieldTemplateState>();
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
   TextEditingController controller3 = TextEditingController();
+  TextEditingController controller4 = TextEditingController();
   ValueNotifier<LatLng?> location = ValueNotifier(null);
   DateTime dob = DateTime(1000);
   DateTime rip = DateTime.now();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context){
@@ -77,173 +78,228 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
 
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                  child: ListView(
-                    physics: const ClampingScrollPhysics(),
-                    children: [
-                      MiscInputFieldDropDown(key: _key1,),
+                  child: Form(
+                    key: _formKey,
+                    child: ListView(
+                      physics: const ClampingScrollPhysics(),
+                      children: [
+                        MiscInputFieldDropDown(key: _key1,),
 
-                      const SizedBox(height: 20,),
+                        const SizedBox(height: 20,),
 
-                      TextFormField(
-                        controller: controller3,
-                        style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
-                        cursorColor: const Color(0xff000000),
-                        keyboardType: TextInputType.text,
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                          labelText: 'Location of the incident',
-                          labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
-                          focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
-                          alignLabelWithHint: true,
-                          suffixIcon: IconButton(
-                            icon: const Icon(Icons.add_location), 
-                            onPressed: () async{
-                              var memorialLocation = await Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeBLMCreateMemorialLocateMap()));
+                        TextFormField(
+                          controller: controller1,
+                          style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
+                          cursorColor: const Color(0xff000000),
+                          keyboardType: TextInputType.text,
+                          maxLines: 1,
+                          decoration: InputDecoration(
+                            labelText: 'Location of the incident',
+                            labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                            focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
+                            alignLabelWithHint: true,
+                            suffixIcon: IconButton(
+                              icon: const Icon(Icons.add_location),
+                              onPressed: () async{
+                                var memorialLocation = await Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeBLMCreateMemorialLocateMap()));
 
-                              if(memorialLocation != null){
-                                location.value = memorialLocation[0];
-                                controller3.text = memorialLocation[1];
-                              }
-                            },
+                                if(memorialLocation != null){
+                                  location.value = memorialLocation[0];
+                                  controller1.text = memorialLocation[1];
+                                }
+                              },
+                            ),
                           ),
                         ),
-                      ),
 
-                      const SizedBox(height: 20,),
+                        const SizedBox(height: 20,),
 
-                      MiscInputFieldTemplate(
-                        key: _key3,
-                        labelText: 'Precinct / Station House (Optional)',
-                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
-                      ),
-
-                      const SizedBox(height: 20,),
-
-                      TextFormField(
-                        controller: controller1,
-                        cursorColor: const Color(0xff000000),
-                        keyboardType: TextInputType.text,
-                        readOnly: true,
-                        style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
-                        decoration: InputDecoration(
-                          labelText: 'DOB',
-                          alignLabelWithHint: true,
-                          focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
-                          labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
-                          suffixIcon: IconButton(
-                            icon: const Icon(Icons.close),
-                            onPressed: (){
-                              controller1.text = '';
-                              dob = DateTime(1000);
-                            },
+                        // MiscInputFieldTemplate(
+                        //   key: _key3,
+                        //   labelText: 'Precinct / Station House (Optional)',
+                        //   labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                        // ),
+                        
+                        TextFormField(
+                          controller: controller2,
+                          keyboardType: TextInputType.text,
+                          cursorColor: const Color(0xff000000),
+                          style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
+                          decoration: const InputDecoration(
+                            alignLabelWithHint: true, 
+                            labelText: 'Precinct / Station House (Optional)',
+                            labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xff000000),),
+                            ),
                           ),
                         ),
-                        onTap: (){
-                          DatePicker.showDatePicker(
-                            context,
-                            showTitleActions: true,
-                            minTime: dob,
-                            maxTime: rip,
-                            currentTime: DateTime.now(),
-                            locale: LocaleType.en,
-                            onConfirm: (date) {
-                              String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-                              dob = date;
-                              controller1.text = format;
-                            },
-                          );
-                        },
-                      ),
-                      
-                      const SizedBox(height: 20,),
 
-                      TextFormField(
-                        controller: controller2,
-                        cursorColor: const Color(0xff000000),
-                        keyboardType: TextInputType.text,
-                        readOnly: true,
-                        style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
-                        decoration: InputDecoration(
-                          labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
-                          focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
-                          alignLabelWithHint: true,
-                          labelText: 'RIP',
-                          suffixIcon: IconButton(
-                            icon: const Icon(Icons.close),
-                            onPressed: (){
-                              controller2.text = '';
-                              rip = DateTime.now();
-                            },
+                        const SizedBox(height: 20,),
+
+                        TextFormField(
+                          controller: controller3,
+                          cursorColor: const Color(0xff000000),
+                          keyboardType: TextInputType.text,
+                          readOnly: true,
+                          style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
+                          validator: (value){
+                            if(value!.isEmpty){
+                              return '';
+                            }
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'DOB',
+                            alignLabelWithHint: true,
+                            focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
+                            labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                            errorBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red),),
+                            suffixIcon: IconButton(
+                              icon: const Icon(Icons.close),
+                              onPressed: (){
+                                controller3.text = '';
+                                dob = DateTime(1000);
+                              },
+                            ),
                           ),
-                        ),
-                        onTap: () {
-                          DatePicker.showDatePicker(
-                            context,
-                            showTitleActions: true,
-                            minTime: dob,
-                            maxTime: DateTime.now(),
-                            currentTime: DateTime.now(),
-                            locale: LocaleType.en,
-                            onConfirm: (date) {
-                              String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-                              rip = date;
-                              controller2.text = format;
-                            },
-                          );
-                        },
-                      ),
-
-                      const SizedBox(height: 20,),
-
-                      MiscInputFieldTemplate(
-                        key: _key6, 
-                        labelText: 'Country',
-                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
-                      ),
-
-                      const SizedBox(height: 20,),
-
-                      MiscInputFieldTemplate(
-                        key: _key7, 
-                        labelText: 'State',
-                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
-                      ),
-
-                      const SizedBox(height: 40,),
-
-                      MiscButtonTemplate(
-                        buttonTextStyle: const TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold',),
-                        width: SizeConfig.screenWidth! / 2,
-                        height: 50,
-                        onPressed: () async{
-                          if(controller3.text == '' || controller1.text == '' || controller2.text == '' || _key6.currentState!.controller.text == '' || _key7.currentState!.controller.text == ''){
-                            await showDialog(
-                              context: context,
-                              builder: (context) => CustomDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: 'Error',
-                                description: 'Please complete the form before submitting.',
-                                okButtonColor: const Color(0xfff44336), // RED
-                                includeOkButton: true,
-                              ),
+                          onTap: (){
+                            DatePicker.showDatePicker(
+                              context,
+                              showTitleActions: true,
+                              minTime: dob,
+                              maxTime: rip,
+                              currentTime: DateTime.now(),
+                              locale: LocaleType.en,
+                              onConfirm: (date) {
+                                String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+                                dob = date;
+                                controller3.text = format;
+                              },
                             );
-                          }else if(locationListener == null){
-                            await showDialog(
-                              context: context,
-                              builder: (context) => CustomDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: 'Error',
-                                description: 'Pin the location of the cemetery first before proceeding.',
-                                okButtonColor: const Color(0xfff44336), // RED
-                                includeOkButton: true,
-                              ),
+                          },
+                        ),
+                        
+                        const SizedBox(height: 20,),
+
+                        TextFormField(
+                          controller: controller4,
+                          cursorColor: const Color(0xff000000),
+                          keyboardType: TextInputType.text,
+                          readOnly: true,
+                          style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
+                          validator: (value){
+                            if(value!.isEmpty){
+                              return '';
+                            }
+                          },
+                          decoration: InputDecoration(
+                            labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                            focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
+                            alignLabelWithHint: true,
+                            labelText: 'RIP',
+                            suffixIcon: IconButton(
+                              icon: const Icon(Icons.close),
+                              onPressed: (){
+                                controller4.text = '';
+                                rip = DateTime.now();
+                              },
+                            ),
+                          ),
+                          onTap: () {
+                            DatePicker.showDatePicker(
+                              context,
+                              showTitleActions: true,
+                              minTime: dob,
+                              maxTime: DateTime.now(),
+                              currentTime: DateTime.now(),
+                              locale: LocaleType.en,
+                              onConfirm: (date) {
+                                String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+                                rip = date;
+                                controller4.text = format;
+                              },
                             );
-                          }else{
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreateMemorial2(relationship: _key1.currentState!.currentSelection, locationOfIncident: controller3.text, precinct: _key3.currentState!.controller.text, dob: controller1.text, rip: controller2.text, country: _key6.currentState!.controller.text, state: _key7.currentState!.controller.text, latitude: '${location.value!.latitude}', longitude: '${location.value!.longitude}',),),);
-                          }
-                        },
-                      ),
-                    ],
+                          },
+                        ),
+
+                        const SizedBox(height: 20,),
+
+                        MiscInputFieldTemplate(
+                          key: _key2, 
+                          labelText: 'Country',
+                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                        ),
+
+                        const SizedBox(height: 20,),
+
+                        MiscInputFieldTemplate(
+                          key: _key3, 
+                          labelText: 'State',
+                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                        ),
+
+                        const SizedBox(height: 40,),
+
+                        MiscButtonTemplate(
+                          buttonTextStyle: const TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold',),
+                          width: SizeConfig.screenWidth! / 2,
+                          height: 50,
+                          onPressed: () async{
+                            if(!(_formKey.currentState!.validate())){
+                              await showDialog(
+                                context: context,
+                                builder: (context) => CustomDialog(
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  title: 'Error',
+                                  description: 'Please complete the form before submitting.',
+                                  okButtonColor: const Color(0xfff44336), // RED
+                                  includeOkButton: true,
+                                ),
+                              );
+                            }else if(locationListener == null){
+                              await showDialog(
+                                context: context,
+                                builder: (context) => CustomDialog(
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  title: 'Error',
+                                  description: 'Pin the location of the incident first before proceeding.',
+                                  okButtonColor: const Color(0xfff44336), // RED
+                                  includeOkButton: true,
+                                ),
+                              );
+                            }else{
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreateMemorial2(relationship: _key1.currentState!.currentSelection, locationOfIncident: controller1.text, precinct: controller2.text, dob: controller3.text, rip: controller4.text, country: _key2.currentState!.controller.text, state: _key3.currentState!.controller.text, latitude: '${location.value!.latitude}', longitude: '${location.value!.longitude}',),),);
+                            }
+
+                            // if(controller3.text == '' || controller1.text == '' || controller2.text == '' || _key6.currentState!.controller.text == '' || _key7.currentState!.controller.text == ''){
+                            //   await showDialog(
+                            //     context: context,
+                            //     builder: (context) => CustomDialog(
+                            //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            //       title: 'Error',
+                            //       description: 'Please complete the form before submitting.',
+                            //       okButtonColor: const Color(0xfff44336), // RED
+                            //       includeOkButton: true,
+                            //     ),
+                            //   );
+                            // }else if(locationListener == null){
+                            //   await showDialog(
+                            //     context: context,
+                            //     builder: (context) => CustomDialog(
+                            //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            //       title: 'Error',
+                            //       description: 'Pin the location of the cemetery first before proceeding.',
+                            //       okButtonColor: const Color(0xfff44336), // RED
+                            //       includeOkButton: true,
+                            //     ),
+                            //   );
+                            // }else{
+                            //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreateMemorial2(relationship: _key1.currentState!.currentSelection, locationOfIncident: controller3.text, precinct: _key3.currentState!.controller.text, dob: controller1.text, rip: controller2.text, country: _key6.currentState!.controller.text, state: _key7.currentState!.controller.text, latitude: '${location.value!.latitude}', longitude: '${location.value!.longitude}',),),);
+                            // }
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

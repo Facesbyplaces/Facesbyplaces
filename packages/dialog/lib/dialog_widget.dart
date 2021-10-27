@@ -7,8 +7,6 @@ class CustomDialog extends StatefulWidget{
   final double buttonRadius;
   final String title;
   final String description;
-  // final Text title;
-  // final Text description;
   final bool includeOkButton;
   final bool includeCancelButton;
   final VoidCallback? okButton;
@@ -85,14 +83,19 @@ class CustomDialogState extends State<CustomDialog> with TickerProviderStateMixi
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
-                // child: widget.title,
                 child: Text(widget.title, textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                // child: widget.description,
-                child: Text(widget.description, overflow: TextOverflow.ellipsis, maxLines: 2, textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+
+              Expanded(
+                child: SingleChildScrollView(
+                  physics: const ClampingScrollPhysics(),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(widget.description, textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                  ),
+                ),
               ),
+
               buttonsBar(context),
             ],
           ),
@@ -118,12 +121,10 @@ class CustomDialogState extends State<CustomDialog> with TickerProviderStateMixi
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
-                // child: widget.title,
                 child: Text(widget.title, textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
               ),
               Padding(
                 padding: const EdgeInsets.all(3.0),
-                // child: widget.description,
                 child: Text(widget.description, overflow: TextOverflow.ellipsis, maxLines: 2, textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
               ),
 

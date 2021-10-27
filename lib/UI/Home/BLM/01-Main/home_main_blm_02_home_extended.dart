@@ -251,6 +251,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                               ],
                             ),
                           ),
+
                           SizedBox(
                             width: SizeConfig.screenWidth! / 4,
                             child: Column(
@@ -263,6 +264,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                               ],
                             ),
                           ),
+
                           SizedBox(
                             width: SizeConfig.screenWidth! / 4,
                             child: Column(
@@ -275,6 +277,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                               ],
                             ),
                           ),
+                          
                           SizedBox(
                             width: SizeConfig.screenWidth! / 4,
                             child: Stack(

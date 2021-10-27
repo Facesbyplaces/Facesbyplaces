@@ -209,14 +209,14 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                     latitude: feedsListener[i].latitude,
                     longitude: feedsListener[i].longitude,
                     contents: [
-                      Container(alignment: Alignment.centerLeft, child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
+                      Align(alignment: Alignment.centerLeft, child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                           
                       feedsListener[i].imagesOrVideos.isNotEmpty
                       ? Column(
                         children: [
                           const SizedBox(height: 20),
                           
-                          Container(
+                          SizedBox(
                             child: ((){
                               if(feedsListener[i].imagesOrVideos.length == 1){
                                 if(lookupMimeType(feedsListener[i].imagesOrVideos[0])?.contains('video') == true){
@@ -367,7 +367,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                           ),
                         ],
                       )
-                      : Container(height: 0),
+                      : const SizedBox(height: 0),
                     ],
                   )
                   : MiscRegularPost(
@@ -394,14 +394,14 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                     latitude: feedsListener[i].latitude,
                     longitude: feedsListener[i].longitude,
                     contents: [
-                      Container(alignment: Alignment.centerLeft, child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
+                      Align(alignment: Alignment.centerLeft, child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                       
                       feedsListener[i].imagesOrVideos.isNotEmpty
                       ? Column(
                         children: [
                           const SizedBox(height: 20),
 
-                          Container(
+                          SizedBox(
                             child: ((){
                               if(feedsListener[i].imagesOrVideos.length == 1){
                                 if(lookupMimeType(feedsListener[i].imagesOrVideos[0])?.contains('video') == true){
@@ -553,7 +553,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                           ),
                         ],
                       )
-                      : Container(height: 0),
+                      : const SizedBox(height: 0),
                     ],
                   );
                 }    
@@ -588,7 +588,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                 
                 const SizedBox(height: 20),
 
-                Container(
+                Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Image.asset('assets/icons/Welcome.png', width: SizeConfig.screenWidth, fit: BoxFit.cover,),
                 ),
@@ -608,7 +608,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                 const SizedBox(height: 20),
 
                 isGuestLoggedInListener
-                ? Container(height: 0,)
+                ? const SizedBox(height: 0,)
                 : MiscButtonTemplate(
                   buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                   buttonColor: const Color(0xff04ECFF),

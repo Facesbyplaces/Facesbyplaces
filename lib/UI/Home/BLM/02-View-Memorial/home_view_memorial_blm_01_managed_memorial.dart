@@ -753,6 +753,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                             ),
                                           ),
                                         ),
+
                                         Expanded(
                                           child: Align(
                                             alignment: Alignment.centerRight,
@@ -780,6 +781,25 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         GestureDetector(
+                                          child: CircleAvatar( // PROFILE IMAGE - PROFILE PICTURE
+                                            backgroundColor: const Color(0xff04ECFF),
+                                            radius: 100,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(5),
+                                              child: profile.data!.blmMemorial.memorialProfileImage != ''
+                                              ? CircleAvatar(
+                                                radius: 100,
+                                                backgroundColor: const Color(0xff888888),
+                                                foregroundImage: NetworkImage(profile.data!.blmMemorial.memorialProfileImage),
+                                                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                              )
+                                              : const CircleAvatar(
+                                                radius: 100,
+                                                backgroundColor: Color(0xff888888),
+                                                foregroundImage: AssetImage('assets/icons/app-icon.png'),
+                                              ),
+                                            ),
+                                          ),
                                           onTap: (){
                                             showGeneralDialog(
                                               context: context,
@@ -824,25 +844,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                               },
                                             );
                                           },
-                                          child: CircleAvatar( // PROFILE IMAGE - PROFILE PICTURE
-                                            backgroundColor: const Color(0xff04ECFF),
-                                            radius: 100,
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(5),
-                                              child: profile.data!.blmMemorial.memorialProfileImage != ''
-                                              ? CircleAvatar(
-                                                radius: 100,
-                                                backgroundColor: const Color(0xff888888),
-                                                foregroundImage: NetworkImage(profile.data!.blmMemorial.memorialProfileImage),
-                                                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
-                                              )
-                                              : const CircleAvatar(
-                                                radius: 100,
-                                                backgroundColor: Color(0xff888888),
-                                                foregroundImage: AssetImage('assets/icons/app-icon.png'),
-                                              ),
-                                            ),
-                                          ),
                                         ),
                                       ],
                                     ),
