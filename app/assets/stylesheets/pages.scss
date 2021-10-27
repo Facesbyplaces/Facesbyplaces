@@ -4,6 +4,11 @@ body {
   background: #1b1e22;
   color: #ffffff;
 }
+.description{
+  font-size: 18px;
+  font-weight: 400;
+  padding-top: 7pc;
+}
 .header,
 .header-sub,
 .header-logo {
@@ -45,7 +50,7 @@ body {
 .footer {
   float: left;
   width: 100%;
-  background: #30343d 0% 0% no-repeat padding-box;
+  background: #212121 0% 0% no-repeat padding-box;
   .text {
     text-align: center;
     float: left;
@@ -82,6 +87,116 @@ body {
 }
 .bold {
   font-weight: bold;
+  font-size: 28px;
+  margin-left: 35%;
+}
+
+.new-home{
+  float: center;
+  width: 100%;
+  padding: 5% 0 0;
+
+  .button {
+    background-color: Transparent;
+    border: 2px solid #fff;
+    border-radius: 25px;
+    padding: 15px 50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    color: #fff;
+    font-size: 16px;
+    margin: 20px 0;
+    cursor: pointer;
+  }
+
+  .bgVideo {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    object-fit: cover;
+    top: 0;
+    z-index: -2;
+    transform: rotateY(180deg);
+  }
+
+  .home-page-image-container {
+    float: left;
+    width: 44%;
+    position: relative;
+    .home-page-image {
+      float: left;
+      width: 120%;
+      height: 35%;
+      margin: 5% 0% 0 20%;
+      background-image: url(asset_path("new_home"));
+      background-size: 100% auto;
+      background-repeat: no-repeat;
+    }
+  }
+
+
+  .home-page-form-image {
+    float: right;
+    width: 1080px;
+    height: 1000px;
+    //margin: 20% 0 0 20%;
+    background-image: url(asset_path("path"));
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+  }
+
+
+  .main-container {
+    float: left;
+    width: 50%;
+    margin: 3% 0 0 8%;
+    padding: 0 6% 0 0;
+    .main-title {
+      color: #fff;
+      font-size: 3em;
+      font-weight: bold;
+      p {
+        float: left;
+        width: 100%;
+        margin: 40px 0 0;
+      }
+    }
+  }
+
+  .container{
+    float: left;
+    width: 50%;
+    margin: 5px;
+    padding: 80px 20px 20px 80px;
+  }
+
+  .social-buttons {
+    float: left;
+    padding-top: 25px;
+    padding-left: 60px;
+
+    .googleplay,
+    .appstore {
+      float: left;
+      background-size: 100%;
+      background-repeat: no-repeat;
+
+    }
+    .googleplay {
+      height: 70px;
+      width: 200px;
+      margin: 15px 15px 25px 65px;
+      background-image: url(asset_path("googleplay_cropped.png"));
+    }
+    .appstore {
+      width: 225px;
+      height: 69px;
+      margin: 15px 0 0 0;
+      background-image: url(asset_path("appstore.png"));
+    }
+  }
+  
 }
 .home {
   float: left;
@@ -699,6 +814,62 @@ body {
     .opened {
       display: block !important;
     }
+  }
+
+  .description{
+    font-size: 18px;
+    font-weight: 400;
+    padding-top: 10pc;
+  }
+  .new-home{
+
+    .container{
+      margin-top: 35%;
+    }
+
+    .home-page-image-container{
+      .home-page-image{
+        margin: -15% 0 0 1%;
+        width: 110%;
+      }
+    }
+
+    .main-title{
+      padding-right: 25px;
+    }
+
+    .row .col, .row .col-2 {
+      width: 90%;
+      padding: 10% 0%;
+    }
+    .container{
+      .coming-soon{
+        margin-top: 0%;
+        margin-left: 20%;
+      }
+    }
+
+    .social-buttons{
+      float: left;
+      width: 100%;
+      padding: 25px 0 0 0;
+
+      .googleplay{
+        height: 11%;
+        width: 50%;
+        margin: 10px 0 0 24%;
+      }
+      .appstore{
+        float: right;
+        width: 53%;
+        height: 11%;
+        margin: 1% 25% 0 0;
+      }
+    }
+    .home-page-image-container{
+      margin-bottom: -100%;
+    }
+  
   }
   .home {
     background-color: #000000;

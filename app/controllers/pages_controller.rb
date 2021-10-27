@@ -27,6 +27,10 @@ class PagesController < ApplicationController
     end
   end
 
+  def newHome
+    
+  end
+
   private
     def user_params
       params.require(:user).permit(:first_name, :last_name, :email, :phone_number, :password, :password_confirmation)
