@@ -14,11 +14,39 @@ import PostTable from "../Posts/PostTable/PostTable";
 import ReportTable from "../Reports/ReportTable/ReportTable";
 import TransactionTable from "../Transactions/TransactionTable/TransactionTable";
 
+import axios from "../../../auxiliary/axios";
+
 const Dashboard = (props) => {
   const [loading, setLoading] = useState(false);
   const [item, setItem] = useState(props.match.path.substring(1));
+  const [release, setRelease] = useState();
+
+  const onReleaseAppClicked = () => {
+    console.log("Yeah!");
+    axios
+      .post(`/api/v1/newsletter/notify_subscribed_users`)
+      .then((response) => {
+        setRelease(true);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
+
+  const checkAppReleaseStatus = () => {
+    axios
+      .get(`/api/v1/newsletter/app_released`)
+      .then((response) => {
+        setRelease(response.data.condition);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
 
   useEffect(() => {
+    checkAppReleaseStatus();
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
@@ -43,6 +71,19 @@ const Dashboard = (props) => {
               <div id="kt_header" className="header">
                 <div className="container-fluid d-flex align-items-stretch justify-content-between">
                   <Navbar item={item} />
+                  {release ? (
+                    ""
+                  ) : (
+                    <div className="navi mt-auto mb-auto">
+                      <a
+                        className="btn btn-sm btn-light-success font-weight-bolder py-2 px-5"
+                        onClick={onReleaseAppClicked}
+                      >
+                        RELEASE APP
+                      </a>
+                    </div>
+                  )}
+
                   <Topbar />
                 </div>
               </div>
