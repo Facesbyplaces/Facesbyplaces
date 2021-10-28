@@ -1,20 +1,13 @@
 class Api::V1::NewsletterController < ApplicationController
+    before_action :verify_admin, only: [:app_released]
 
     def create
         @newsletter = Newsletter.new(newsletter_params)
-        
-        if Newsletter.find_by(email_address: newsletter_params[:email_address])
-            render json: {
-                success: false,
-                message: "Oops! Looks like you are already subscribed to the newsletter. We’ll send you an email as soon as the app is available for download. Thank you for your support!",
-                status: 400}, status: 400
-        else
             @newsletter.save!
             render json: {
                 success: true,
                 message: "Thank you! You will now receive the latest news from Faces by places. We’ll send you an email as soon as the app is available for download.",
                 status: 200}, status: 200
-        end
     end
 
     def notify_subscribed_users
@@ -32,9 +25,21 @@ class Api::V1::NewsletterController < ApplicationController
          render json: { success: true, message: "Emails sent!", status: 200 }, status: 200
     end
 
+    def app_released
+        if Newsletter.first.have_notified
+            render json: { success: true, condition: true, status: 200 }, status: 200
+        else
+            render json: { success: true, condition: false, status: 200 }, status: 200
+        end
+    end
+
     private
     def newsletter_params
         params.permit(:phone_number, :email_address, :message)
+    end
+
+    def verify_admin
+        return render json: {status: "Must be an admin to continue"}, status: 401 unless user().has_role? :admin 
     end
 
   
