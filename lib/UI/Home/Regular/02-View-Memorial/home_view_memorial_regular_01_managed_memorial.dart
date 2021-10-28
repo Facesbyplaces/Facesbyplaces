@@ -213,6 +213,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                       fit: BoxFit.cover,
                                     ),
                                   ),
+
                                   Column(
                                     children: [
                                       GestureDetector( // BACKGROUND IMAGE FOR ZOOMING IN
@@ -262,6 +263,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                           );
                                         },
                                       ),
+
                                       Container(
                                         width: SizeConfig.screenWidth,
                                         decoration: const BoxDecoration(borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20),), color: Color(0xffffffff),),
@@ -305,10 +307,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                           ),
                                                         );
                                                       }else{
-                                                        return Container(height: 0,);
+                                                        return const SizedBox(height: 0,);
                                                       }
                                                     }else{
-                                                      return Container(height: 0,);
+                                                      return const SizedBox(height: 0,);
                                                     }
                                                   }()),
                                                   onTap: (){
@@ -385,7 +387,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                       ),
                                                     );
                                                   }else{
-                                                    return Container(height: 0,);
+                                                    return const SizedBox(height: 0,);
                                                   }
                                                 }()),
                                               ],
@@ -395,7 +397,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                             Row(
                                               children: [
-                                                Expanded(child: Container(),),
+                                                const Expanded(child: SizedBox(),),
 
                                                 Expanded(
                                                   flex: 2,
@@ -665,6 +667,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                                 ),
                                                                               ),
                                                                             ),
+
                                                                             Row(
                                                                               mainAxisAlignment: MainAxisAlignment.center,
                                                                               children: [
@@ -723,7 +726,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                     const SizedBox(height: 20),
                                                   ],
                                                 )
-                                                : Container(height: 0,),
+                                                : const SizedBox(height: 0,),
                                               ],
                                             ),
 
@@ -761,8 +764,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                               ),
                                             ),
                                           ),
+
                                           Expanded(
-                                            child: Container(
+                                            child: Align(
                                               alignment: Alignment.centerRight,
                                               child: widget.managed == true
                                               ? GestureDetector(
@@ -771,13 +775,14 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePost(name: profile.data!.almMemorial.showMemorialName, memorialId: profile.data!.almMemorial.showMemorialId)));
                                                 },
                                               )
-                                              : Container(height: 0,),
+                                              : const SizedBox(height: 0,),
                                             ),
                                           ),
                                         ],
                                       ),
                                     ),
                                   ),
+
                                   Positioned(
                                     top: SizeConfig.screenHeight! / 5,
                                     child: SizedBox(
@@ -861,7 +866,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                         }else if(profile.hasError){
                           return const MiscErrorMessageTemplate();
                         }else{
-                          return Container(height: SizeConfig.screenHeight);
+                          return SizedBox(height: SizeConfig.screenHeight);
                         }
                       },
                     ),
@@ -902,14 +907,14 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                   latitude: posts[i].latitude,
                                   longitude: posts[i].longitude,
                                   contents: [
-                                    Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),), overflow: TextOverflow.ellipsis, maxLines: 5,),),
+                                    Align(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),), overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
                                     posts[i].imagesOrVideos.isNotEmpty
                                     ? Column(
                                       children: [
                                         const SizedBox(height: 20),
 
-                                        Container(
+                                        SizedBox(
                                           child: ((){
                                             if(posts[i].imagesOrVideos.length == 1){
                                               if(lookupMimeType(posts[i].imagesOrVideos[0])?.contains('video') == true){
@@ -1061,7 +1066,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         ),
                                       ],
                                     )
-                                    : Container(height: 0),
+                                    : const SizedBox(height: 0),
                                   ],
                                 ),
                               ),

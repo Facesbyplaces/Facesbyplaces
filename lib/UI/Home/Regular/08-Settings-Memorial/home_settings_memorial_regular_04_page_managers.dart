@@ -238,8 +238,20 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
               backgroundColor: Color(0xff888888),
               foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
             ),
-            title: Text('${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000),),),
-            subtitle: Text(newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail, style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+            title: Text('${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}',
+              style: const TextStyle(
+                fontSize: 20, 
+                fontFamily: 'NexaBold', 
+                color: Color(0xff000000),
+              ),
+            ),
+            subtitle: Text(newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail,
+              style: const TextStyle(
+                fontSize: 16, 
+                fontFamily: 'NexaRegular', 
+                color: Color(0xffBDC3C7),
+              ),
+            ),
             trailing: MaterialButton(
               child: const Text('Make Manager', style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular',),),
               shape: const StadiumBorder(side: BorderSide(color: Color(0xff04ECFF)),),
@@ -309,7 +321,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
       }
     }
 
-    if(mounted) {
+    if(mounted){
       page2++;
     }
   }

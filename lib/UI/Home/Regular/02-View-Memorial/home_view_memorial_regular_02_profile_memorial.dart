@@ -332,10 +332,10 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                   ),
                                                                 );
                                                               }else{
-                                                                return Container(height: 0,);
+                                                                return const SizedBox(height: 0,);
                                                               }
                                                             }else{
-                                                              return Container(height: 0,);
+                                                              return const SizedBox(height: 0,);
                                                             }
                                                           }()),
                                                           onTap: (){
@@ -411,7 +411,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                               child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDescription, textAlign: TextAlign.center, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
                                                             );
                                                           }else{
-                                                            return Container(height: 0,);
+                                                            return const SizedBox(height: 0,);
                                                           }
                                                         }()),
                                                       ],
@@ -812,7 +812,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                             const SizedBox(height: 20),
                                                           ],
                                                         )
-                                                        : Container(height: 0,),
+                                                        : const SizedBox(height: 0,),
                                                       ],
                                                     ),
 
@@ -965,14 +965,14 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                 latitude: posts[i].latitude,
                                                 longitude: posts[i].longitude,
                                                 contents: [
-                                                  Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
+                                                  Align(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 
                                                   posts[i].imagesOrVideos.isNotEmpty
                                                   ? Column(
                                                     children: [
                                                       const SizedBox(height: 20),
 
-                                                      Container(
+                                                      SizedBox(
                                                         child: ((){
                                                           if(posts[i].imagesOrVideos.length == 1){
                                                             if(lookupMimeType(posts[i].imagesOrVideos[0])?.contains('video') == true){
@@ -1123,7 +1123,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                       ),
                                                     ],
                                                   )
-                                                  : Container(height: 0),
+                                                  : const SizedBox(height: 0),
                                                 ],
                                               ),
                                             ),
@@ -1152,10 +1152,9 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                             ),
                           );
                         }else if(profile.hasError){
-                          // return const MiscRegularErrorMessageTemplate();
                           return const MiscErrorMessageTemplate();
                         }else{
-                          return Container(height: SizeConfig.screenHeight);
+                          return SizedBox(height: SizeConfig.screenHeight);
                         }
                       }
                     ),
@@ -1163,7 +1162,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
                   isGuestLoggedInListener
                   ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: const MiscLoginToContinue(),)
-                  : Container(height: 0),
+                  : const SizedBox(height: 0),
                 ],
               ),
               floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

@@ -24,10 +24,10 @@ class HomeRegularMemorialPageImage extends StatefulWidget{
 
 class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageImage>{
   List<String> backgroundImages = ['assets/icons/alm-memorial-cover-1.jpeg', 'assets/icons/alm-memorial-cover-2.jpeg'];
-  Future<APIRegularShowPageImagesMain>? futureMemorialSettings;
   ValueNotifier<File> backgroundImage = ValueNotifier<File>(File(''));
   ValueNotifier<File> profileImage = ValueNotifier<File>(File(''));
   ValueNotifier<int> backgroundImageToggle = ValueNotifier<int>(0);
+  Future<APIRegularShowPageImagesMain>? futureMemorialSettings;
   final picker = ImagePicker();
 
   Future getProfileImage() async{
@@ -105,7 +105,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                     children: [
                       const MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
 
-                      Container(
+                      Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                         child: ListView(
                           physics: const ClampingScrollPhysics(),

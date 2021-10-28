@@ -21,6 +21,7 @@ class PushNotificationService{
 
   Future initialise() async{
     (await fcm.getToken())!;
+
     FirebaseMessaging.onMessage.listen((message) {});
 
     FirebaseMessaging.onMessageOpenedApp.listen((event) async{

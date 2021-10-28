@@ -15,6 +15,7 @@ class RegularRegister extends StatelessWidget{
   final GlobalKey<MiscInputFieldTemplateState> _key4 = GlobalKey<MiscInputFieldTemplateState>();
   final GlobalKey<MiscInputFieldTemplateState> _key5 = GlobalKey<MiscInputFieldTemplateState>();
   final GlobalKey<MiscInputFieldTemplateState> _key6 = GlobalKey<MiscInputFieldTemplateState>();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context){
@@ -52,160 +53,163 @@ class RegularRegister extends StatelessWidget{
                         constraints: BoxConstraints(minHeight: constraint.maxHeight),
                         child: IntrinsicHeight(
                           child: SafeArea(
-                            child: Column(
-                              children: [
-                                Container(
-                                  height: SizeConfig.screenHeight! / 6,
-                                  decoration: const BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/regular-background.png'),),),
-                                  child: Align(
-                                    alignment: Alignment.topLeft,
-                                    child: IconButton(
-                                      icon: const Icon(Icons.arrow_back, color: Color(0xffFFFFFF), size: 35),
-                                      onPressed: (){
-                                        Navigator.pop(context);
-                                      },
+                            child: Form(
+                              key: _formKey,
+                              child: Column(
+                                children: [
+                                  Container(
+                                    height: SizeConfig.screenHeight! / 6,
+                                    decoration: const BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/regular-background.png'),),),
+                                    child: Align(
+                                      alignment: Alignment.topLeft,
+                                      child: IconButton(
+                                        icon: const Icon(Icons.arrow_back, color: Color(0xffFFFFFF), size: 35),
+                                        onPressed: (){
+                                          Navigator.pop(context);
+                                        },
+                                      ),
                                     ),
                                   ),
-                                ),
 
-                                const SizedBox(height: 10,),
+                                  const SizedBox(height: 10,),
 
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 40),
-                                  child: Column(
-                                    children: [
-                                      MiscInputFieldTemplate(
-                                        key: _key1,
-                                        labelText: 'First Name',
-                                        type: TextInputType.name,
-                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
-                                      ),
-
-                                      MiscInputFieldTemplate(
-                                        key: _key2,
-                                        labelText: 'Last Name',
-                                        type: TextInputType.name,
-                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
-                                      ),
-
-                                      MiscPhoneNumberTemplate(
-                                        key: _key3,
-                                        labelText: 'Mobile #',
-                                        type: TextInputType.phone,
-                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                                    child: Column(
+                                      children: [
+                                        MiscInputFieldTemplate(
+                                          key: _key1,
+                                          labelText: 'First Name',
+                                          type: TextInputType.name,
+                                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                         ),
-                                      ),
 
-                                      MiscInputFieldTemplate(
-                                        key: _key4,
-                                        labelText: 'Email Address',
-                                        type: TextInputType.emailAddress,
-                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
-                                      ),
+                                        MiscInputFieldTemplate(
+                                          key: _key2,
+                                          labelText: 'Last Name',
+                                          type: TextInputType.name,
+                                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                                        ),
 
-                                      MiscInputFieldTemplate(
-                                        key: _key5,
-                                        labelText: 'Username',
-                                        type: TextInputType.text,
-                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
-                                      ),
+                                        MiscPhoneNumberTemplate(
+                                          key: _key3,
+                                          labelText: 'Mobile #',
+                                          type: TextInputType.phone,
+                                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),
+                                          ),
+                                        ),
 
-                                      MiscInputFieldTemplate(
-                                        key: _key6,
-                                        labelText: 'Password',
-                                        type: TextInputType.text,
-                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
-                                        obscureText: true,
-                                      ),
-                                    ],
+                                        MiscInputFieldTemplate(
+                                          key: _key4,
+                                          labelText: 'Email Address',
+                                          type: TextInputType.emailAddress,
+                                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                                        ),
+
+                                        MiscInputFieldTemplate(
+                                          key: _key5,
+                                          labelText: 'Username',
+                                          type: TextInputType.text,
+                                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                                        ),
+
+                                        MiscInputFieldTemplate(
+                                          key: _key6,
+                                          labelText: 'Password',
+                                          type: TextInputType.text,
+                                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                                          obscureText: true,
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
 
-                                const Expanded(child: SizedBox()),
-                                
-                                const SizedBox(height: 50,),
+                                  const Expanded(child: SizedBox()),
+                                  
+                                  const SizedBox(height: 50,),
 
-                                MiscButtonTemplate(
-                                  buttonText: 'Next',
-                                  buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
-                                  width: SizeConfig.screenWidth! / 2,
-                                  height: 50,
-                                  buttonColor: const Color(0xff04ECFF),
-                                  onPressed: () async{
-                                    bool validEmail = false;
-                                    validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key4.currentState!.controller.text);
+                                  MiscButtonTemplate(
+                                    buttonText: 'Next',
+                                    buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
+                                    width: SizeConfig.screenWidth! / 2,
+                                    height: 50,
+                                    buttonColor: const Color(0xff04ECFF),
+                                    onPressed: () async{
+                                      bool validEmail = false;
+                                      validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key4.currentState!.controller.text);
 
-                                    if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == '' || _key3.currentState!.controller.text == '' || _key4.currentState!.controller.text == '' || _key5.currentState!.controller.text == '' || _key6.currentState!.controller.text == ''){
-                                      await showDialog(
-                                        context: context,
-                                        builder: (context) => CustomDialog(
-                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          title: 'Error',
-                                          description: 'Please complete the form before submitting.',
-                                          okButtonColor: const Color(0xfff44336), // RED
-                                          includeOkButton: true,
-                                        ),
-                                      );
-                                    }else if(!validEmail){
-                                      await showDialog(
-                                        context: context,
-                                        builder: (context) => CustomDialog(
-                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          title: 'Error',
-                                          description: 'Invalid email address. Please try again.',
-                                          okButtonColor: const Color(0xfff44336), // RED
-                                          includeOkButton: true,
-                                        ),
-                                      );
-                                    }else{
-                                      APIRegularAccountRegistration account = APIRegularAccountRegistration(firstName: _key1.currentState!.controller.text, lastName: _key2.currentState!.controller.text, phoneNumber: _key3.currentState!.controller.text, email: _key4.currentState!.controller.text, username: _key5.currentState!.controller.text, password: _key6.currentState!.controller.text,);
-
-                                      context.loaderOverlay.show();
-                                      String result = await apiRegularRegistration(account: account);
-                                      context.loaderOverlay.hide();
-
-                                      if(result == 'Success'){
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => RegularVerifyEmail()));
-                                      }else{
+                                      if(!(_formKey.currentState!.validate())){
                                         await showDialog(
                                           context: context,
                                           builder: (context) => CustomDialog(
                                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                             title: 'Error',
-                                            description: result,
+                                            description: 'Please complete the form before submitting.',
                                             okButtonColor: const Color(0xfff44336), // RED
                                             includeOkButton: true,
                                           ),
                                         );
+                                      }else if(!validEmail){
+                                        await showDialog(
+                                          context: context,
+                                          builder: (context) => CustomDialog(
+                                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                            title: 'Error',
+                                            description: 'Invalid email address. Please try again.',
+                                            okButtonColor: const Color(0xfff44336), // RED
+                                            includeOkButton: true,
+                                          ),
+                                        );
+                                      }else{
+                                        APIRegularAccountRegistration account = APIRegularAccountRegistration(firstName: _key1.currentState!.controller.text, lastName: _key2.currentState!.controller.text, phoneNumber: _key3.currentState!.controller.text, email: _key4.currentState!.controller.text, username: _key5.currentState!.controller.text, password: _key6.currentState!.controller.text,);
+
+                                        context.loaderOverlay.show();
+                                        String result = await apiRegularRegistration(account: account);
+                                        context.loaderOverlay.hide();
+
+                                        if(result == 'Success'){
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => RegularVerifyEmail()));
+                                        }else{
+                                          await showDialog(
+                                            context: context,
+                                            builder: (context) => CustomDialog(
+                                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                              title: 'Error',
+                                              description: result,
+                                              okButtonColor: const Color(0xfff44336), // RED
+                                              includeOkButton: true,
+                                            ),
+                                          );
+                                        }
                                       }
-                                    }
-                                  },
-                                ),
-
-                                const SizedBox(height: 50,),
-
-                                RichText(
-                                  text: TextSpan(
-                                    children: <TextSpan>[
-                                      const TextSpan(
-                                        text: 'Already have an account? ', 
-                                        style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
-                                      ),
-
-                                      TextSpan(
-                                        text: 'Login',
-                                        style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff04ECFF),),
-                                        recognizer: TapGestureRecognizer()
-                                        ..onTap = (){
-                                          Navigator.pushNamed(context, '/regular/login');
-                                        },
-                                      ),
-                                    ],
+                                    },
                                   ),
-                                ),
-                                
-                                const SizedBox(height: 50,),
-                              ],
+
+                                  const SizedBox(height: 50,),
+
+                                  RichText(
+                                    text: TextSpan(
+                                      children: <TextSpan>[
+                                        const TextSpan(
+                                          text: 'Already have an account? ', 
+                                          style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                                        ),
+
+                                        TextSpan(
+                                          text: 'Login',
+                                          style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff04ECFF),),
+                                          recognizer: TapGestureRecognizer()
+                                          ..onTap = (){
+                                            Navigator.pushNamed(context, '/regular/login');
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  
+                                  const SizedBox(height: 50,),
+                                ],
+                              ),
                             ),
                           ),
                         ),

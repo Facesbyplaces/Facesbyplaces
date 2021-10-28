@@ -67,8 +67,8 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
           body: SafeArea(
             child: FutureBuilder<APIRegularShowAccountDetails>(
               future: accountDetails,
-              builder: (context, details) {
-                if (details.hasData) {
+              builder: (context, details){
+                if(details.hasData){
                   return SingleChildScrollView(
                     padding: const EdgeInsets.all(20),
                     physics: const ClampingScrollPhysics(),
@@ -144,6 +144,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                                       includeOkButton: true,
                                     ),
                                   );
+                                  
                                   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: widget.userId,)));
                                 }else{
                                   await showDialog(

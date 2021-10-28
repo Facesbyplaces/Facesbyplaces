@@ -73,7 +73,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                   decoration: const BoxDecoration(color: Color(0xffffffff), borderRadius: BorderRadius.only(topLeft: Radius.circular(50.0),),),
                   child: Column(
                     children: [
-                      Expanded(child: Container(),),
+                      const Expanded(child: SizedBox(),),
 
                       ListTile(
                         title: const Text('Update Details', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
@@ -179,111 +179,113 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
 
                       const Text('V.1.1.0', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff888888),),),
 
-                      Expanded(child: Container(),),
+                      const Expanded(child: SizedBox(),),
                     ],
                   ),
                 ),
                 body: SingleChildScrollView(
                   physics: const ClampingScrollPhysics(),
                   child: Stack(
-                  children: [
-                    Container(height: SizeConfig.screenHeight, color: const Color(0xffECF0F1),),
+                    children: [
+                      Container(height: SizeConfig.screenHeight, color: const Color(0xffECF0F1),),
 
-                    SizedBox(
-                      height: SizeConfig.screenHeight! / 2.5,
-                      child: Stack(
-                        children: [
-                          CustomPaint(size: Size.infinite, painter: MiscCurvePainter(),),
-
-                          GestureDetector( // BACKGROUND IMAGE FOR ZOOMING IN
-                            child: Container(
-                              padding: const EdgeInsets.only(bottom: 20.0),
-                              alignment: Alignment.bottomCenter,
-                              child: profile.data!.showProfileInformationImage != ''
-                              ? Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(color: const Color(0xffffffff), width: 3,),
-                                ),
-                                child: CircleAvatar(
-                                  radius: 100,
-                                  backgroundColor: const Color(0xff888888),
-                                  foregroundImage: NetworkImage(profile.data!.showProfileInformationImage),
-                                ),
-                              )
-                              : const CircleAvatar(
-                                radius: 100, 
-                                backgroundColor: Color(0xff888888), 
-                                foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
-                              ),
-                            ),
-                            onTap: () async{
-                              bool getImage = await getProfileImage();
-
-                              if(getImage){
-                                context.loaderOverlay.show();
-                                bool result = await apiRegularUpdateUserProfilePicture(image: profileImage.value);
-                                context.loaderOverlay.hide();
-
-                                if(result){
-                                  await showDialog(
-                                    context: context,
-                                    builder: (context) => CustomDialog(
-                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: 'Success',
-                                      description: 'Successfully updated the profile picture.',
-                                      okButtonColor: const Color(0xff4caf50), // GREEN
-                                      includeOkButton: true,
-                                    ),
-                                  );
-                                }else{
-                                  await showDialog(
-                                    context: context,
-                                    builder: (context) => CustomDialog(
-                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: 'Error',
-                                      description: 'Something went wrong. Please try again.',
-                                      okButtonColor: const Color(0xfff44336), // RED
-                                      includeOkButton: true,
-                                    ),
-                                  );
-                                }
-                              }
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                    SafeArea(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: IconButton(
-                          icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35),
-                          onPressed: (){
-                            Navigator.of(context).popAndPushNamed('/home/regular');
-                          },
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: SizeConfig.screenHeight! / 2.5,
-                      child: SizedBox(
-                        width: SizeConfig.screenWidth,
-                        child: Column(
+                      SizedBox(
+                        height: SizeConfig.screenHeight! / 2.5,
+                        child: Stack(
                           children: [
-                            Center(child: Text(profile.data!.showProfileInformationFirstName + ' ' + profile.data!.showProfileInformationLastName, style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xff000000),),),),
+                            CustomPaint(size: Size.infinite, painter: MiscCurvePainter(),),
 
-                            const SizedBox(height: 20),
+                            GestureDetector( // BACKGROUND IMAGE FOR ZOOMING IN
+                              child: Container(
+                                padding: const EdgeInsets.only(bottom: 20.0),
+                                alignment: Alignment.bottomCenter,
+                                child: profile.data!.showProfileInformationImage != ''
+                                ? Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(color: const Color(0xffffffff), width: 3,),
+                                  ),
+                                  child: CircleAvatar(
+                                    radius: 100,
+                                    backgroundColor: const Color(0xff888888),
+                                    foregroundImage: NetworkImage(profile.data!.showProfileInformationImage),
+                                  ),
+                                )
+                                : const CircleAvatar(
+                                  radius: 100, 
+                                  backgroundColor: Color(0xff888888), 
+                                  foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
+                                ),
+                              ),
+                              onTap: () async{
+                                bool getImage = await getProfileImage();
 
-                            Center(child: Text(profile.data!.showProfileInformationEmail, style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),),
+                                if(getImage){
+                                  context.loaderOverlay.show();
+                                  bool result = await apiRegularUpdateUserProfilePicture(image: profileImage.value);
+                                  context.loaderOverlay.hide();
 
-                            const SizedBox(height: 40,),
+                                  if(result){
+                                    await showDialog(
+                                      context: context,
+                                      builder: (context) => CustomDialog(
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        title: 'Success',
+                                        description: 'Successfully updated the profile picture.',
+                                        okButtonColor: const Color(0xff4caf50), // GREEN
+                                        includeOkButton: true,
+                                      ),
+                                    );
+                                  }else{
+                                    await showDialog(
+                                      context: context,
+                                      builder: (context) => CustomDialog(
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        title: 'Error',
+                                        description: 'Something went wrong. Please try again.',
+                                        okButtonColor: const Color(0xfff44336), // RED
+                                        includeOkButton: true,
+                                      ),
+                                    );
+                                  }
+                                }
+                              },
+                            ),
                           ],
                         ),
                       ),
-                    ),
-                  ],
-                ),
+
+                      SafeArea(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child: IconButton(
+                            icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35),
+                            onPressed: (){
+                              Navigator.of(context).popAndPushNamed('/home/regular');
+                            },
+                          ),
+                        ),
+                      ),
+                      
+                      Positioned(
+                        top: SizeConfig.screenHeight! / 2.5,
+                        child: SizedBox(
+                          width: SizeConfig.screenWidth,
+                          child: Column(
+                            children: [
+                              Center(child: Text(profile.data!.showProfileInformationFirstName + ' ' + profile.data!.showProfileInformationLastName, style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xff000000),),),),
+
+                              const SizedBox(height: 20),
+
+                              Center(child: Text(profile.data!.showProfileInformationEmail, style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),),
+
+                              const SizedBox(height: 40,),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               );
             }else if(profile.hasError){

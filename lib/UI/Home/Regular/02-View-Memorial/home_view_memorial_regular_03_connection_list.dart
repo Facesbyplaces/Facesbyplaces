@@ -61,13 +61,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
         if(itemRemaining1 != 0){
           onLoading1();
         }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('No more connection list family to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
-            ),
-          );
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more connection list family to show'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
         }
       }
     });
@@ -76,13 +70,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
         if(itemRemaining2 != 0){
           onLoading1();
         }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('No more connection list friends to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
-            ),
-          );
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more connection list friends to show'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
         }
       }
     });
@@ -91,13 +79,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
         if(itemRemaining3 != 0){
           onLoading1();
         }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('No more connection list followers to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
-            ),
-          );
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more connection list followers to show'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
         }
       }
     });
@@ -244,7 +226,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
         );
       }
 
-      if (mounted) {
+      if(mounted){
         page3++;
       }
     }
@@ -270,7 +252,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
             appBar: PreferredSize(
               preferredSize: const Size.fromHeight(70.0),
               child: AppBar(
-                leading: Container(),
+                leading: const SizedBox(),
                 backgroundColor: const Color(0xff04ECFF),
                 flexibleSpace: Column(
                   children: [
@@ -378,7 +360,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                       indicatorColor: const Color(0xff04ECFF),
                       labelColor: const Color(0xff04ECFF),
                       indicatorWeight: 5,
-                      onTap: (int number) {
+                      onTap: (int number){
                         toggle.value = number;
                         searches = [];
 

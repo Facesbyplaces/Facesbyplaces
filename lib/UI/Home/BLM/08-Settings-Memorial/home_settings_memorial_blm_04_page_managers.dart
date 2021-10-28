@@ -247,8 +247,8 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
             title: Text('${newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}',
               style: const TextStyle(
                 fontSize: 20,
-                fontFamily: 'NexaRegular',
-                color: Color(0xffBDC3C7),
+                fontFamily: 'NexaBold',
+                color: Color(0xff000000),
               ),
             ),
             subtitle: Text(newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail,

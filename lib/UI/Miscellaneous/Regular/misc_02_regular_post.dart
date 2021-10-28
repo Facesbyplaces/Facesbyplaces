@@ -152,7 +152,7 @@ class MiscRegularPostState extends State<MiscRegularPost>{
                       ),
                     ],
                   )
-                : Container(height: 0,),
+                : const SizedBox(height: 0,),
                 
                 widget.location != ''
                 ? Column(
@@ -168,7 +168,7 @@ class MiscRegularPostState extends State<MiscRegularPost>{
                     ),
                   ],
                 )
-                : Container(height: 0,),
+                : const SizedBox(height: 0,),
 
                 Row(
                   children: [
@@ -200,7 +200,7 @@ class MiscRegularPostState extends State<MiscRegularPost>{
                       },
                     ),
 
-                    Expanded(child: Container(),),
+                    const Expanded(child: SizedBox(),),
 
                     IconButton(
                       alignment: Alignment.centerRight,

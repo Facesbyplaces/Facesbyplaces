@@ -38,13 +38,7 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
         if(itemRemaining != 0){
           onLoading();
         }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('No more users to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
-            ),
-          );
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more users to show'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
         }
       }
     });
@@ -120,7 +114,7 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
             appBar: PreferredSize(
               preferredSize: const Size.fromHeight(70.0),
               child: AppBar(
-                leading: Container(),
+                leading: const SizedBox(),
                 backgroundColor: const Color(0xff04ECFF),
                 flexibleSpace: Column(
                   children: [

@@ -128,7 +128,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
             appBar: PreferredSize(
               preferredSize: const Size.fromHeight(70.0),
               child: AppBar(
-                leading: Container(),
+                leading: const SizedBox(),
                 backgroundColor: const Color(0xff04ECFF),
                 flexibleSpace: Column(
                   children: [
@@ -163,7 +163,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                               filled: true,
                               prefixIcon: IconButton(
                                 icon: const Icon(Icons.search, color: Color(0xff888888), size: 35,),
-                                onPressed: () {
+                                onPressed: (){
                                   keywords = controller.text;
 
                                   if(controller.text != ''){

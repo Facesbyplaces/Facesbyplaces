@@ -37,13 +37,7 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
         if(itemRemaining != 0){
           onLoading();
         }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('No more notifications to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
-            ),
-          );
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more notifications to show'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
         }
       }
     });
@@ -137,19 +131,19 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
       builder: (_, int countListener, __) => SizedBox(
         width: SizeConfig.screenWidth,
         child: countListener != 0
-          ? SafeArea(
-            child: RefreshIndicator(
-              onRefresh: onRefresh,
-              child: ListView.separated(
-                controller: scrollController,
-                separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-                itemBuilder: (c, i) => notifications[i],
-                physics: const ClampingScrollPhysics(),
-                itemCount: countListener,
-              )
-            ),
-          )
-          : SingleChildScrollView(
+        ? SafeArea(
+          child: RefreshIndicator(
+            onRefresh: onRefresh,
+            child: ListView.separated(
+              controller: scrollController,
+              separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+              itemBuilder: (c, i) => notifications[i],
+              physics: const ClampingScrollPhysics(),
+              itemCount: countListener,
+            )
+          ),
+        )
+        : SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,

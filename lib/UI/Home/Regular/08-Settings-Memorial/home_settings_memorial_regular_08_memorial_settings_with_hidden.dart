@@ -64,8 +64,9 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
                             ),
                           ),
                         ),
+
                         Expanded(
-                          child: Container(
+                          child: SizedBox(
                             child: ((){
                               switch(toggleListener){
                                 case 0: return settingsTab1(widget.memorialId);
@@ -204,7 +205,7 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
 
         const SizedBox(height: 10,),
 
-        Expanded(child: Container()),
+        const Expanded(child: SizedBox()),
 
         Image.asset('assets/icons/logo.png', height: 100, width: 100,),
 
@@ -301,7 +302,7 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
 
         const SizedBox(height: 80,),
 
-        Expanded(child: Container()),
+        const Expanded(child: SizedBox()),
 
         Image.asset('assets/icons/logo.png', height: 100, width: 100,),
 

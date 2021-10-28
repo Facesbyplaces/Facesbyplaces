@@ -27,11 +27,12 @@ class HomeBLMCreateMemorial2 extends StatefulWidget{
 class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
   final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
   TextEditingController controllerStory = TextEditingController(text: '');
-  ValueNotifier<List<File> > slideImages = ValueNotifier<List<File>>([]);
+  ValueNotifier<List<XFile>> slideImages = ValueNotifier<List<XFile>>([]);
   ValueNotifier<File> videoFile = ValueNotifier<File>(File(''));
   ValueNotifier<int> slideCount = ValueNotifier<int>(0);
   ValueNotifier<int> toggle = ValueNotifier<int>(0);
   final picker = ImagePicker();
+  final _formKey = GlobalKey<FormState>();
 
   Future getVideo() async{
     try{
@@ -49,13 +50,13 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
 
   Future getSlideImage() async{
     try{
-      final pickedFile = await picker.pickImage(source: ImageSource.gallery).then((picture){
+      final pickedFile = await picker.pickMultiImage().then((picture){
         return picture;
       });
 
       if(pickedFile != null){
-        slideImages.value.add(File(pickedFile.path));
-        slideCount.value++;
+        slideImages.value.addAll(pickedFile);
+        slideCount.value += pickedFile.length;
       }
     }catch (error){
       throw Exception('Error: $error');
@@ -96,96 +97,99 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
 
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                  child: ListView(
-                    physics: const ClampingScrollPhysics(),
-                    children: [
-                      MiscInputFieldTemplate(
-                        key: _key1, 
-                        labelText: 'Name of your Memorial Page',
-                        labelTextStyle: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xff000000),),
-                      ),
+                  child: Form(
+                    key: _formKey,
+                    child: ListView(
+                      physics: const ClampingScrollPhysics(),
+                      children: [
+                        MiscInputFieldTemplate(
+                          key: _key1, 
+                          labelText: 'Name of your Memorial Page',
+                          labelTextStyle: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                        ),
 
-                      const SizedBox(height: 40,),
+                        const SizedBox(height: 40,),
 
-                      Row(
-                        children: [
-                          const Text('Share your Story', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                        Row(
+                          children: [
+                            const Text('Share your Story', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
 
-                          Expanded(
-                            child: DefaultTabController(
-                              length: 3,
-                              child: TabBar(
-                                indicator: const BoxDecoration(border: Border(left: BorderSide(width: 1, color: Color(0xff000000)), right: BorderSide(width: 1, color: Color(0xff000000),),),),
-                                unselectedLabelColor: const Color(0xff000000),
-                                labelColor: const Color(0xff04ECFF),
-                                indicatorColor: Colors.transparent,
-                                isScrollable: false,
-                                tabs: const [
-                                  Center(child: Text('Text', style: TextStyle(fontSize: 14, fontFamily: 'NexaRegular',),),),
+                            Expanded(
+                              child: DefaultTabController(
+                                length: 3,
+                                child: TabBar(
+                                  indicator: const BoxDecoration(border: Border(left: BorderSide(width: 1, color: Color(0xff000000)), right: BorderSide(width: 1, color: Color(0xff000000),),),),
+                                  unselectedLabelColor: const Color(0xff000000),
+                                  labelColor: const Color(0xff04ECFF),
+                                  indicatorColor: Colors.transparent,
+                                  isScrollable: false,
+                                  tabs: const [
+                                    Center(child: Text('Text', style: TextStyle(fontSize: 14, fontFamily: 'NexaRegular',),),),
 
-                                  Center(child: Text('Video', style: TextStyle(fontSize: 14, fontFamily: 'NexaRegular',),),),
+                                    Center(child: Text('Video', style: TextStyle(fontSize: 14, fontFamily: 'NexaRegular',),),),
 
-                                  Center(child: Text('Slide', style: TextStyle(fontSize: 14, fontFamily: 'NexaRegular',),),),
-                                ],
-                                onTap: (int number){
-                                  toggle.value = number;
-                                },
+                                    Center(child: Text('Slide', style: TextStyle(fontSize: 14, fontFamily: 'NexaRegular',),),),
+                                  ],
+                                  onTap: (int number){
+                                    toggle.value = number;
+                                  },
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
 
-                      const SizedBox(height: 20,),
+                        const SizedBox(height: 20,),
 
-                      SizedBox(
-                        child: ((){
-                          switch (toggleListener){
-                            case 0: return shareStory1();
-                            case 1: return shareStory2();
-                            case 2: return shareStory3();
-                          }
-                        }()),
-                      ),
-                      
-                      const SizedBox(height: 20),
-                      
-                      const Text('Describe the events that happened to your love one.', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
-                      
-                      const SizedBox(height: 80,),
-                      
-                      MiscButtonTemplate(
-                        buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),
-                        width: 150,
-                        height: 50,
-                        onPressed: () async{
-                          if(_key1.currentState!.controller.text == ''){
-                            await showDialog(
-                              context: context,
-                              builder: (context) => CustomDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: 'Error',
-                                description: 'Please complete the form before submitting.',
-                                okButtonColor: const Color(0xfff44336), // RED
-                                includeOkButton: true,
-                              ),
-                            );
-                          }else{
-                            List<File> newFiles = [];
-
-                            if(videoFile.value.path != ''){
-                              newFiles.add(videoFile.value);
+                        SizedBox(
+                          child: ((){
+                            switch (toggleListener){
+                              case 0: return shareStory1();
+                              case 1: return shareStory2();
+                              case 2: return shareStory3();
                             }
+                          }()),
+                        ),
+                        
+                        const SizedBox(height: 20),
+                        
+                        const Text('Describe the events that happened to your love one.', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
+                        
+                        const SizedBox(height: 80,),
+                        
+                        MiscButtonTemplate(
+                          buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),
+                          width: 150,
+                          height: 50,
+                          onPressed: () async{
+                            if(!(_formKey.currentState!.validate())){
+                              await showDialog(
+                                context: context,
+                                builder: (context) => CustomDialog(
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  title: 'Error',
+                                  description: 'Please complete the form before submitting.',
+                                  okButtonColor: const Color(0xfff44336), // RED
+                                  includeOkButton: true,
+                                ),
+                              );
+                            }else{
+                              List<dynamic> newFiles = [];
 
-                            if(slideImages.value != []){
-                              newFiles.addAll(slideImages.value);
+                              if(videoFile.value.path != ''){
+                                newFiles.add(videoFile.value);
+                              }
+
+                              if(slideImages.value != []){
+                                newFiles.addAll(slideImages.value);
+                              }
+
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreateMemorial3(relationship: widget.relationship, locationOfIncident: widget.locationOfIncident, precinct: widget.precinct, dob: widget.dob, rip: widget.rip, country: widget.country, state: widget.state, latitude: widget.latitude, longitude: widget.longitude,  description: controllerStory.text, memorialName: _key1.currentState!.controller.text, imagesOrVideos: newFiles,),),);
                             }
-
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreateMemorial3(relationship: widget.relationship, locationOfIncident: widget.locationOfIncident, precinct: widget.precinct, dob: widget.dob, rip: widget.rip, country: widget.country, state: widget.state, latitude: widget.latitude, longitude: widget.longitude,  description: controllerStory.text, memorialName: _key1.currentState!.controller.text, imagesOrVideos: newFiles,),),);
-                          }
-                        },
-                      ),
-                    ],
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -310,7 +314,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
   shareStory3(){
     return ValueListenableBuilder(
       valueListenable: slideImages,
-      builder: (_, List<File> slideImagesListener, __) => ValueListenableBuilder(
+      builder: (_, List<XFile> slideImagesListener, __) => ValueListenableBuilder(
         valueListenable: slideCount,
         builder: (_, int slideCountListener, __) => Column(
           children: [
@@ -346,7 +350,8 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                               children: [
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
-                                  child: Image.file(slideImagesListener[index], fit: BoxFit.cover,),
+                                  // child: Image.file(slideImagesListener[index], fit: BoxFit.cover,),
+                                  child: Image.file(File(slideImagesListener[index].path), fit: BoxFit.cover,),
                                 ),
 
                                 Stack(
@@ -397,7 +402,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                                           
                                           const SizedBox(height: 20,),
                                           
-                                          Expanded(child: Image.asset(slideImagesListener[index].path, fit: BoxFit.cover, scale: 1.0,),),
+                                          Expanded(child: Image.file(File(slideImagesListener[index].path), fit: BoxFit.contain,),),
 
                                           const SizedBox(height: 80,),
                                         ],

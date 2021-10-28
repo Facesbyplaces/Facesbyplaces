@@ -33,7 +33,7 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
   bool manageButton = false;
 
   @override
-  void initState() {
+  void initState(){
     super.initState();
     followButton.value = widget.follower;
     manageButton = widget.managed;

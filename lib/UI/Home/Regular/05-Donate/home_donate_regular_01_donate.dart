@@ -64,7 +64,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
 
                           const Text('Send a Gift', style: TextStyle(fontSize: 24,),),
 
-                          Expanded(child: Container(),)
+                          const Expanded(child: SizedBox(),)
                         ],
                       ),
 
@@ -93,7 +93,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
 
                                       const SizedBox(height: 10),
 
-                                      Container(
+                                      SizedBox(
                                         child: ((){
                                           switch(index){
                                             case 0: return const Text('\$1.00', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff000000),),);
@@ -211,7 +211,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
 
                                         const SizedBox(height: 10,),
 
-                                        Container(
+                                        Align(
                                           alignment: Alignment.center,
                                           child: ((){
                                             if(paymentToggle == 0){

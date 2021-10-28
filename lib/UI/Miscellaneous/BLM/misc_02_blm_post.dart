@@ -152,7 +152,7 @@ class MiscBLMPostState extends State<MiscBLMPost>{
                     ),
                   ],
                 )
-                : Container(height: 0,),
+                : const SizedBox(height: 0,),
 
                 widget.location != ''
                 ? Column(
@@ -168,7 +168,7 @@ class MiscBLMPostState extends State<MiscBLMPost>{
                     ),
                   ],
                 )
-                : Container(height: 0,),
+                : const SizedBox(height: 0,),
 
                 Row(
                   children: [
@@ -198,7 +198,7 @@ class MiscBLMPostState extends State<MiscBLMPost>{
                       },
                     ),
 
-                    Expanded(child: Container(),),
+                    const Expanded(child: SizedBox(),),
 
                     IconButton(
                       alignment: Alignment.centerRight,

@@ -113,12 +113,6 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                         ),
 
                         const SizedBox(height: 20,),
-
-                        // MiscInputFieldTemplate(
-                        //   key: _key3,
-                        //   labelText: 'Precinct / Station House (Optional)',
-                        //   labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
-                        // ),
                         
                         TextFormField(
                           controller: controller2,
@@ -270,32 +264,6 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                             }else{
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreateMemorial2(relationship: _key1.currentState!.currentSelection, locationOfIncident: controller1.text, precinct: controller2.text, dob: controller3.text, rip: controller4.text, country: _key2.currentState!.controller.text, state: _key3.currentState!.controller.text, latitude: '${location.value!.latitude}', longitude: '${location.value!.longitude}',),),);
                             }
-
-                            // if(controller3.text == '' || controller1.text == '' || controller2.text == '' || _key6.currentState!.controller.text == '' || _key7.currentState!.controller.text == ''){
-                            //   await showDialog(
-                            //     context: context,
-                            //     builder: (context) => CustomDialog(
-                            //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            //       title: 'Error',
-                            //       description: 'Please complete the form before submitting.',
-                            //       okButtonColor: const Color(0xfff44336), // RED
-                            //       includeOkButton: true,
-                            //     ),
-                            //   );
-                            // }else if(locationListener == null){
-                            //   await showDialog(
-                            //     context: context,
-                            //     builder: (context) => CustomDialog(
-                            //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            //       title: 'Error',
-                            //       description: 'Pin the location of the cemetery first before proceeding.',
-                            //       okButtonColor: const Color(0xfff44336), // RED
-                            //       includeOkButton: true,
-                            //     ),
-                            //   );
-                            // }else{
-                            //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreateMemorial2(relationship: _key1.currentState!.currentSelection, locationOfIncident: controller3.text, precinct: _key3.currentState!.controller.text, dob: controller1.text, rip: controller2.text, country: _key6.currentState!.controller.text, state: _key7.currentState!.controller.text, latitude: '${location.value!.latitude}', longitude: '${location.value!.longitude}',),),);
-                            // }
                           },
                         ),
                       ],

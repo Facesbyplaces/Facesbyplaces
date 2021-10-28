@@ -348,13 +348,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         if(postItemRemaining != 0){
           onLoading1();
         }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('No more posts to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
-            ),
-          );
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more posts to show'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
         }
       }
     });
@@ -363,13 +357,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         if(suggestedItemRemaining != 0){
           onLoading2();
         }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('No more suggested memorials to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
-            ),
-          );
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more suggested memorials to show'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
         }
       }
     });
@@ -378,13 +366,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         if(nearbyBlmItemsRemaining != 0 && nearbyMemorialItemsRemaining != 0){
           onLoading3();
         }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('No more nearby memorials to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
-            ),
-          );
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more nearby memorials to show'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
         }
       }
     });
@@ -393,13 +375,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         if(nearbyBlmItemsRemaining != 0 && nearbyMemorialItemsRemaining != 0){
           onLoading4();
         }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('No more BLM memorials to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
-            ),
-          );
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more BLM memorials to show'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
         }
       }
     });
@@ -429,7 +405,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 appBar: PreferredSize(
                   preferredSize: const Size.fromHeight(70.0),
                   child: AppBar(
-                    leading: Container(),
+                    leading: const SizedBox(),
                     backgroundColor: const Color(0xff04ECFF),
                     flexibleSpace: Column(
                       children: [
@@ -631,7 +607,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                           ),
                         ),
                       ),
-                      Container(
+
+                      SizedBox(
                         child: ((){
                           switch (toggleListener){
                             case 0: return const SizedBox(height: 20,);
@@ -689,7 +666,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                       Expanded(
                         child: Container(
                           child: isGuestLoggedInListener
-                          // ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: const MiscRegularLoginToContinue(),)
                           ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: const MiscLoginToContinue(),)
                           : ((){
                             switch (toggleListener){
@@ -753,14 +729,14 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 latitude: feeds[i].latitude,
                 longitude: feeds[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
+                  Align(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                   
                   feeds[i].imagesOrVideos.isNotEmpty
                   ? Column(
                     children: [
                       const SizedBox(height: 20),
 
-                      Container(
+                      SizedBox(
                         child: ((){
                           if(feeds[i].imagesOrVideos.length == 1){
                             if(lookupMimeType(feeds[i].imagesOrVideos[0])?.contains('video') == true){
@@ -912,7 +888,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                       ),
                     ],
                   )
-                  : Container(height: 0),
+                  : const SizedBox(height: 0),
                 ],
               )
               : MiscRegularPost(
@@ -939,14 +915,14 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 latitude: feeds[i].latitude,
                 longitude: feeds[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
+                  Align(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                   
                   feeds[i].imagesOrVideos.isNotEmpty
                   ? Column(
                     children: [
                       const SizedBox(height: 20),
 
-                      Container(
+                      SizedBox(
                         child: ((){
                           if(feeds[i].imagesOrVideos.length == 1){
                             if(lookupMimeType(feeds[i].imagesOrVideos[0])?.contains('video') == true){
@@ -1099,7 +1075,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                       ),
                     ],
                   )
-                  : Container(height: 0),
+                  : const SizedBox(height: 0),
                 ],
               );
             }
@@ -1136,14 +1112,14 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 latitude: feeds[i].latitude,
                 longitude: feeds[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
+                  Align(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                   
                   searchFeeds[i].imagesOrVideos.isNotEmpty
                   ? Column(
                       children: [
                         const SizedBox(height: 20),
 
-                        Container(
+                        SizedBox(
                           child: ((){
                             if(searchFeeds[i].imagesOrVideos.length == 1){
                               if(lookupMimeType(searchFeeds[i].imagesOrVideos[0])?.contains('video') == true){
@@ -1295,7 +1271,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                       ),
                     ],
                   )
-                  : Container(height: 0),
+                  : const SizedBox(height: 0),
                 ],
               )
               : MiscRegularPost(
@@ -1322,15 +1298,15 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 latitude: feeds[i].latitude,
                 longitude: feeds[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
+                  Align(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                   
                   searchFeeds[i].imagesOrVideos.isNotEmpty
                   ? Column(
                     children: [
                       const SizedBox(height: 20),
                       
-                      Container(
-                        child: (() {
+                      SizedBox(
+                        child: ((){
                           if(searchFeeds[i].imagesOrVideos.length == 1){
                             if(lookupMimeType(searchFeeds[i].imagesOrVideos[0])?.contains('video') == true){
                               return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[0]}',
@@ -1481,7 +1457,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                       ),
                     ],
                   )
-                  : Container(height: 0),
+                  : const SizedBox(height: 0),
                 ],
               );
             }

@@ -134,13 +134,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
           if(itemRemaining != 0){
             onLoading();
           }else{
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('No more comments to show'),
-                duration: Duration(seconds: 1),
-                backgroundColor: Color(0xff4EC9D4),
-              ),
-            );
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more comments to show'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
           }
         }
       });
@@ -239,6 +233,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
       if(mounted){
         page1++;
       }
+
       context.loaderOverlay.hide();
     }
   }
@@ -288,7 +283,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                   body: Stack(
                     children: [
                       isGuestLoggedInListener
-                      ? Container(height: 0,)
+                      ? const SizedBox(height: 0,)
                       : IgnorePointer(
                         ignoring: isGuestLoggedInListener,
                         child: FutureBuilder<APIRegularShowOriginalPostMain>(
@@ -339,8 +334,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                         }
                                                       },
                                                     ),
+
                                                     Expanded(
-                                                      child: Container(
+                                                      child: Padding(
                                                         padding: const EdgeInsets.only(left: 10.0),
                                                         child: GestureDetector(
                                                           child: Column(
@@ -354,6 +350,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                   ),
                                                                 ),
                                                               ),
+
                                                               Expanded(
                                                                 child: Align(
                                                                   alignment: Alignment.topLeft,
@@ -386,17 +383,19 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                   ],
                                                 ),
                                               ),
+
                                               Container(
                                                 padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                                                 alignment: Alignment.centerLeft,
                                                 child: Text(originalPost.data!.almPost.showOriginalPostBody, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
                                               ),
+
                                               originalPost.data!.almPost.showOriginalPostImagesOrVideos.isNotEmpty
                                               ? Column(
                                                 children: [
                                                   const SizedBox(height: 20),
 
-                                                  Container(
+                                                  SizedBox(
                                                     child: ((){
                                                       if(originalPost.data!.almPost.showOriginalPostImagesOrVideos.length == 1){
                                                         return GestureDetector(
@@ -576,6 +575,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                                 ),
                                                                               ),
                                                                             ),
+
                                                                             Row(
                                                                               mainAxisAlignment: MainAxisAlignment.center,
                                                                               children: [
@@ -835,7 +835,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                   ),
                                                 ],
                                               )
-                                              : Container(height: 0,),
+                                              : const SizedBox(height: 0,),
 
                                               originalPost.data!.almPost.showOriginalPostLocation != ''
                                               ? Column(
@@ -862,7 +862,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                   ),
                                                 ],
                                               )
-                                              : Container(height: 0,),
+                                              : const SizedBox(height: 0,),
 
                                               Container(
                                                 height: 40,
@@ -881,6 +881,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                         Text('$numberOfLikes', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
                                                       ],
                                                     ),
+
                                                     const SizedBox(width: 40,),
 
                                                     Row(
@@ -898,6 +899,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                             ],
                                           ),
                                         ),
+
                                         SliverToBoxAdapter(
                                           child: Column(
                                             children: [
@@ -1012,6 +1014,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                 ? const Text('You', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000),),)
                                                                 : Text(commentsListener[i].listOfReplies[index].firstName + ' ' + commentsListener[i].listOfReplies[index].lastName, style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000)),),
                                                               ),
+
                                                               Expanded(
                                                                 child: Align(
                                                                   alignment: Alignment.centerRight,
@@ -1157,7 +1160,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                           },
                                                         ),),
                                                       )
-                                                      : Container(height: 0,),
+                                                      : const SizedBox(height: 0,),
                                                     ],
                                                   ),
                                                   onTap: (){
@@ -1183,6 +1186,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                   );
                                                                 },
                                                               ),
+
                                                               ListTile(
                                                                 title: const Text('Delete'),
                                                                 leading: const Icon(Icons.delete),
@@ -1251,14 +1255,14 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                             }else if(originalPost.hasError) {
                               return const MiscErrorMessageTemplate();
                             }else{
-                              return Container(height: 0,);
+                              return const SizedBox(height: 0,);
                             }
                           },
                         ),
                       ),
                       isGuestLoggedInListener
                       ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: const MiscLoginToContinue(),)
-                      : Container(height: 0),
+                      : const SizedBox(height: 0),
                     ],
                   ),
                 ),
@@ -1328,6 +1332,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                     backgroundColor: Color(0xff888888),
                     foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
                   ),
+
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -1349,6 +1354,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                       ),
                     ),
                   ),
+
                   GestureDetector(
                     child: const Text('Post', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
                     onTap: () async{
@@ -1388,7 +1394,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                         onLoading();
                       }else{
                         context.loaderOverlay.show();
-                        apiRegularAddReply(commentId: currentCommentId, replyBody: controller.text);
+                        await apiRegularAddReply(commentId: currentCommentId, replyBody: controller.text);
                         context.loaderOverlay.hide();
 
                         controller.clear();
@@ -1449,6 +1455,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                 ),
               ),
             ),
+
             GestureDetector(
               child: const Text('Post', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
               onTap: () async{
@@ -1488,7 +1495,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                   onLoading();
                 }else{
                   context.loaderOverlay.show();
-                  apiRegularAddReply(commentId: currentCommentId, replyBody: controller.text);
+                  await apiRegularAddReply(commentId: currentCommentId, replyBody: controller.text);
                   context.loaderOverlay.hide();
 
                   controller.clear();
@@ -1535,6 +1542,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
               backgroundColor: Color(0xff888888),
               foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
             ),
+
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -1556,6 +1564,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                 ),
               ),
             ),
+
             GestureDetector(
               child: const Text('Post', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
               onTap: () async{

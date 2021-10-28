@@ -88,7 +88,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
               children: [
                 const MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
 
-                Container(
+                Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                   child: ListView(
                     physics: const ClampingScrollPhysics(),

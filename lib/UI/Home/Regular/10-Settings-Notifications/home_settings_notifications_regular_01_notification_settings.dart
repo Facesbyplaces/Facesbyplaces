@@ -302,6 +302,7 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                             ),
                                           ],
                                         ),
+                                        
                                         Row(
                                           children: [
                                             const Expanded(child: Text('Add as Page Admin', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: Color(0xff000000),),)),

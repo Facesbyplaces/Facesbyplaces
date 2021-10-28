@@ -1011,10 +1011,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                       ),
 
                                                       const SizedBox(height: 20,),
-                                                          
-                                                      commentsListener[i].listOfReplies.isNotEmpty
-                                                      ? Column(
-                                                          children: List.generate(commentsListener[i].listOfReplies.length,
+
+                                                      Column(
+                                                        children: List.generate(commentsListener[i].listOfReplies.length,
                                                           (index) => ListTile(
                                                             contentPadding: EdgeInsets.zero, 
                                                             visualDensity: const VisualDensity(vertical: 4.0),
@@ -1197,7 +1196,6 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                           ),
                                                         ),
                                                       )
-                                                      : const SizedBox(height: 0,),
                                                     ],
                                                   ),
                                                   onTap: (){
@@ -1404,8 +1402,6 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                       }else if(isComment == true){
                         context.loaderOverlay.show();
                         await apiBLMAddComment(postId: widget.postId, commentBody: controller.text);
-                        context.loaderOverlay.hide();
-
                         controller.clear();
                         itemRemaining = 1;
                         repliesRemaining = 1;
@@ -1422,12 +1418,32 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                         isComment = true;
                         numberOfLikes = 0;
                         numberOfComments = 0;
+                        context.loaderOverlay.hide();
+
+                        // controller.clear();
+                        // itemRemaining = 1;
+                        // repliesRemaining = 1;
+                        // comments.value = [];
+                        // replies.value = [];
+                        // numberOfReplies = 0;
+                        // page1 = 1;
+                        // page2 = 1;
+                        // count.value = 0;
+                        // commentsLikes = [];
+                        // commentsNumberOfLikes = [];
+                        // repliesLikes = [];
+                        // repliesNumberOfLikes = [];
+                        // isComment = true;
+                        // numberOfLikes = 0;
+                        // numberOfComments = 0;
+
+                        // likePost = false;
+
                         getOriginalPostInformation();
                         onLoading();
                       }else{
                         context.loaderOverlay.show();
-                        apiBLMAddReply(commentId: currentCommentId, replyBody: controller.text);
-                        context.loaderOverlay.hide();
+                        await apiBLMAddReply(commentId: currentCommentId, replyBody: controller.text);
 
                         controller.clear();
                         itemRemaining = 1;
@@ -1445,6 +1461,24 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                         isComment = true;
                         numberOfLikes = 0;
                         numberOfComments = 0;
+                        context.loaderOverlay.hide();
+
+                        // controller.clear();
+                        // itemRemaining = 1;
+                        // repliesRemaining = 1;
+                        // comments.value = [];
+                        // replies.value = [];
+                        // numberOfReplies = 0;
+                        // page1 = 1;
+                        // page2 = 1;
+                        // count.value = 0;
+                        // commentsLikes = [];
+                        // commentsNumberOfLikes = [];
+                        // repliesLikes = [];
+                        // repliesNumberOfLikes = [];
+                        // isComment = true;
+                        // numberOfLikes = 0;
+                        // numberOfComments = 0;
                         getOriginalPostInformation();
                         onLoading();
                       }
@@ -1526,7 +1560,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                   onLoading();
                 }else{
                   context.loaderOverlay.show();
-                  apiBLMAddReply(commentId: currentCommentId, replyBody: controller.text);
+                  await apiBLMAddReply(commentId: currentCommentId, replyBody: controller.text);
                   context.loaderOverlay.hide();
 
                   controller.clear();

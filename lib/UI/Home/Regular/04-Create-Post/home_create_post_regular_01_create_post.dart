@@ -299,6 +299,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                 ],
                               ),
                             ),
+
                             FocusScope(
                               child: Focus(
                                 child: Container(
@@ -358,7 +359,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                 ],
                               ),
                             )
-                            : Container(height: 0,),
+                            : const SizedBox(height: 0,),
 
                             const SizedBox(height: 10,),
 
@@ -391,11 +392,11 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                 ],
                               ),
                             )
-                            : Container(height: 0,),
+                            : const SizedBox(height: 0,),
 
                             const SizedBox(height: 10,),
 
-                            Container(
+                            SizedBox(
                               child: ((){
                                 if(slideCountListener != 0){
                                   return Container(
@@ -443,7 +444,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                                     },
                                                   ),
                                                 )
-                                                : Container(height: 0),
+                                                : const SizedBox(height: 0),
                                               ],
                                             )
                                             : SizedBox(
@@ -476,7 +477,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                                       },
                                                     ),
                                                   )
-                                                  : Container(height: 0),
+                                                  : const SizedBox(height: 0),
                                                 ],
                                               ),
                                             ),
@@ -544,7 +545,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                     ),
                                   );
                                 }else{
-                                  return Container(height: 0,);
+                                  return const SizedBox(height: 0,);
                                 }
                               }()),
                             ),

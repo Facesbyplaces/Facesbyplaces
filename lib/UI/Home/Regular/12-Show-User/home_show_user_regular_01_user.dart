@@ -271,7 +271,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                         ),
                                       ),
 
-                                      Expanded(child:  Text(profile.data!.showUserInformationHomeAddress, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
+                                      Expanded(child: Text(profile.data!.showUserInformationHomeAddress, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
                                     ],
                                   ),
 

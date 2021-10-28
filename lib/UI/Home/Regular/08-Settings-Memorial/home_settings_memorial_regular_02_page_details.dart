@@ -73,7 +73,7 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
               if(memorialSettings.hasData){
                 return Stack(
                   children: [
-                    Container(
+                    Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                       child: ListView(
                         physics: const ClampingScrollPhysics(),

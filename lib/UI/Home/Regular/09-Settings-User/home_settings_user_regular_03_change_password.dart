@@ -106,6 +106,7 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
                                   includeOkButton: true,
                                 ),
                               );
+                              
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: widget.userId,)));
                             }else{
                               await showDialog(

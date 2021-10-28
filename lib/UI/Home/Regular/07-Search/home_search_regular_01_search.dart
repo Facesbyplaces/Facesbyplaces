@@ -35,7 +35,7 @@ class HomeRegularSearchState extends State<HomeRegularSearch>{
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(70.0),
             child: AppBar(
-              leading: Container(),
+              leading: const SizedBox(),
               backgroundColor: const Color(0xff04ECFF),
               flexibleSpace: Column(
                 children: [

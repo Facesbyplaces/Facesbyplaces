@@ -44,13 +44,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
         if(blmFamilyItemsRemaining != 0 && memorialFamilyItemsRemaining != 0 && blmFamilyItemsRemaining != 0 && blmFriendsItemsRemaining != 0){
           onLoading();
         }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('No more posts to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
-            ),
-          );
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more posts to show'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
         }
       }
     });
@@ -99,6 +93,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
                 child: Text('My Family', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
               ),
             ),
+            
             Expanded(
               child: GestureDetector(
                 child: const Align(

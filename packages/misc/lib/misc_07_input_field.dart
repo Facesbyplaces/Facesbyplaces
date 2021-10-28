@@ -146,6 +146,7 @@ class MiscPhoneNumberTemplateState extends State<MiscPhoneNumberTemplate>{
       textStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
       selectorConfig: const SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET, showFlags: false,),
       textFieldController: controller,
+      errorMessage: '',
       onInputChanged: (PhoneNumber number){
       },
       onInputValidated: (bool value){

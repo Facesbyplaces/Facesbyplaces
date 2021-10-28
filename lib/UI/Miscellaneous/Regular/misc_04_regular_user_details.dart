@@ -64,13 +64,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
         if(itemRemaining != 0){
           onLoading();
         }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('No more posts to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
-            ),
-          );
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more posts to show'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
         }
       }
     });
@@ -181,14 +175,14 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                 latitude: posts[i].latitude,
                 longitude: posts[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
+                  Align(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 
                   posts[i].imagesOrVideos.isNotEmpty
                   ? Column(
                     children: [
                       const SizedBox(height: 20),
 
-                      Container(
+                      SizedBox(
                         child: ((){
                           if(posts[i].imagesOrVideos.length == 1){
                             if(lookupMimeType(posts[i].imagesOrVideos[0])?.contains('video') == true){
@@ -337,7 +331,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                       ),
                     ],
                   )
-                  : Container(height: 0),
+                  : const SizedBox(height: 0),
                 ],
               );
             },
@@ -395,13 +389,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
         if(ownedItemsRemaining != 0 && followedItemsRemaining != 0){
           onLoading();
         }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('No more memorials to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
-            ),
-          );
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more memorials to show'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
         }
       }
     });
