@@ -50,8 +50,8 @@ class APIRegularShowCommentOrReplyLikeStatus{
 
   factory APIRegularShowCommentOrReplyLikeStatus.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowCommentOrReplyLikeStatus(
-      showCommentOrReplyLikeStatus: parsedJson['like'],
-      showCommentOrReplyNumberOfLikes: parsedJson['numberOfLikes'],
+      showCommentOrReplyLikeStatus: parsedJson['like'] ?? false,
+      showCommentOrReplyNumberOfLikes: parsedJson['numberOfLikes'] ?? 0,
     );
   }
 }

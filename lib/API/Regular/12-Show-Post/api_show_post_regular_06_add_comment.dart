@@ -41,6 +41,9 @@ Future<bool> apiRegularAddComment({required int postId, required dynamic comment
     ),  
   );
 
+  print('The response status code of add comment is ${response.statusCode}');
+  print('The response status data of add comment is ${response.data}');
+
   if(response.statusCode == 200){
     return true;
   }else{
