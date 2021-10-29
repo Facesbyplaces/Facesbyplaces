@@ -88,7 +88,6 @@ body {
 .bold {
   font-weight: bold;
   font-size: 28px;
-  margin-left: 35%;
 }
 
 .new-home{
@@ -140,6 +139,7 @@ body {
     float: right;
     width: 1080px;
     height: 1000px;
+    margin-top: -57%;
     //margin: 20% 0 0 20%;
     background-image: url(asset_path("path"));
     background-size: 100% auto;
@@ -763,6 +763,7 @@ body {
   }
   
 }
+/* mobile screens */
 @media only screen and (max-width: 800px) {
   .row {
     .col,
@@ -868,6 +869,13 @@ body {
     }
     .home-page-image-container{
       margin-bottom: -100%;
+    }
+
+    .home-page-form-image{
+      float: right;
+      width: 100%;
+      height: 55%;
+      margin-top: -50%;
     }
   
   }
@@ -977,4 +985,27 @@ body {
   }
   
 
+}
+
+/* large screen */
+@media screen and (max-width: 1600px) {
+  .new-home{
+    .home-page-image-container {
+      float: left;
+      width: 45%;
+      position: relative;
+    }
+    
+    .home-page-image {
+      float: left;
+      width: 120%;
+      height: 39%;
+      margin: 5% 0% 0 20%;
+      background-image: url(asset_path("new_home"));
+      background-size: 100% auto;
+      background-repeat: no-repeat;
+    }
+
+
+  }
 }
