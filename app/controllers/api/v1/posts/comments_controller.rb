@@ -4,6 +4,7 @@ class Api::V1::Posts::CommentsController < ApplicationController
     before_action :set_comments, only: [:commentsIndex]
     before_action :set_comments2, only: [:commentsIndex2]
     before_action :set_replies, only: [:repliesIndex]
+    before_action :set_replies2, only: [:repliesIndex2]
     before_action :set_comment, only: [:editComment, :deleteComment]
     before_action :set_reply, only: [:editReply, :deleteReply]
     # before_action :no_guest_users, only: [:addComment, :addReply, :likeOrUnlike, :likeStatus]
@@ -65,6 +66,15 @@ class Api::V1::Posts::CommentsController < ApplicationController
     
     def repliesIndex
         render json: {  itemsremaining:  itemsRemaining(@replies),
+                        replies: ActiveModel::SerializableResource.new(
+                                    @replies, 
+                                    each_serializer: ReplySerializer
+                                )
+                    }
+    end
+
+    def repliesIndex2
+        render json: {  
                         replies: ActiveModel::SerializableResource.new(
                                     @replies, 
                                     each_serializer: ReplySerializer

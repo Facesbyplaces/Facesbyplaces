@@ -199,6 +199,8 @@ Rails.application.routes.draw do
         get '/index/comments2/:id', to: 'comments#commentsIndex2'
         # Replies index
         get '/index/replies/:id', to: 'comments#repliesIndex'
+        # Replies index
+        get '/index/replies2/:id', to: 'comments#repliesIndex2'
         # Delete Comment
         delete 'comment', to: 'comments#deleteComment'
         # Delete reply

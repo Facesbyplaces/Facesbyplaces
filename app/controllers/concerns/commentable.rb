@@ -41,6 +41,11 @@ module Commentable
         @replies = replies.page(params[:page]).per(numberOfPage)
     end
 
+    def set_replies2
+        comment = Comment.find(params[:id])
+        @replies = comment.replies
+    end
+
     def set_comment
         @comment = Comment.find(params[:comment_id])
     end
