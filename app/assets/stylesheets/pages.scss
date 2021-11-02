@@ -4,6 +4,19 @@ body {
   background: #1b1e22;
   color: #ffffff;
 }
+.description{
+  font-size: 18px;
+  font-weight: 400;
+  padding-top: 7pc;
+}
+
+.get-in-touch{
+  margin-top: 40%;
+  margin-left: 65%;
+  font-size: 41px;
+  font-weight: 600;
+}
+
 .header,
 .header-sub-menu,
 .header-logo {
@@ -50,7 +63,7 @@ body {
 .footer {
   float: left;
   width: 100%;
-  background: #30343d 0% 0% no-repeat padding-box;
+  background: #212121 0% 0% no-repeat padding-box;
   .text {
     text-align: center;
     float: left;
@@ -59,7 +72,16 @@ body {
     margin: 30px 0;
     color: #ffffff;
   }
+<<<<<<< HEAD
   .term {
+=======
+  .sections {
+    text-decoration:none ;
+    color: #fff;
+  }
+
+  .term{
+>>>>>>> new-web-homepage
     text-align: center;
     float: left;
     width: 100%;
@@ -67,6 +89,7 @@ body {
     color: #ffffff;
     margin: 30px 0 0;
   }
+<<<<<<< HEAD
   .sections {
     text-decoration: none;
     color: #ffffff;
@@ -74,6 +97,8 @@ body {
       color: #04ecff;
     }
   }
+=======
+>>>>>>> new-web-homepage
 }
 .row {
   float: left;
@@ -89,6 +114,175 @@ body {
 }
 .bold {
   font-weight: bold;
+  font-size: 28px;
+}
+
+.new-home{
+  float: center;
+  width: 100%;
+  padding: 5% 0 0;
+
+  .button {
+    background-color: Transparent;
+    border: 2px solid #fff;
+    border-radius: 25px;
+    padding: 15px 50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    color: #fff;
+    font-size: 16px;
+    margin: 20px 0;
+    cursor: pointer;
+  }
+
+  .bgVideo {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    object-fit: cover;
+    top: 0;
+    z-index: -2;
+    transform: rotateY(180deg);
+  }
+
+  .home-page-image-container {
+    float: left;
+    width: 44%;
+    position: relative;
+    .home-page-image {
+      float: left;
+      width: 120%;
+      height: 35%;
+      margin: 5% 0% 0 20%;
+      background-image: url(asset_path("new_home"));
+      background-size: 100% auto;
+      background-repeat: no-repeat;
+    }
+  }
+
+
+  .home-page-form-image {
+    float: right;
+    width: 1080px;
+    height: 1000px;
+    margin-top: -57%;
+    //margin: 20% 0 0 20%;
+    background-image: url(asset_path("path"));
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+  }
+
+
+  .main-container {
+    float: left;
+    width: 50%;
+    margin: 3% 0 0 8%;
+    padding: 0 6% 0 0;
+    .main-title {
+      color: #fff;
+      font-size: 3em;
+      font-weight: bold;
+      p {
+        float: left;
+        width: 100%;
+        margin: 40px 0 0;
+      }
+    }
+  }
+
+  .coming-soon{
+    margin-left: 35%;
+  }
+
+  .container{
+    float: left;
+    width: 50%;
+    margin: 5px;
+    padding: 80px 20px 20px 80px;
+  }
+
+  .social-buttons {
+    float: left;
+    padding-top: 25px;
+    padding-left: 60px;
+
+    .googleplay,
+    .appstore {
+      float: left;
+      background-size: 100%;
+      background-repeat: no-repeat;
+
+    }
+    .googleplay {
+      height: 70px;
+      width: 200px;
+      margin: 15px 15px 25px 65px;
+      background-image: url(asset_path("googleplay_cropped.png"));
+    }
+    .appstore {
+      width: 225px;
+      height: 69px;
+      margin: 15px 0 0 0;
+      background-image: url(asset_path("appstore.png"));
+    }
+  }
+
+  .form{
+   margin-left: 62%;
+    margin-top: 3%;
+
+    textarea {
+      width: 85%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      columns: 70;
+      rows: 10;   
+      resize: none;
+    }
+
+    select, 
+    input[type=password], 
+    input[type=email],
+    input[type=phone],
+    input[type=tel] {
+      width: 85%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    
+    input[type=submit] {
+      width: 40%;
+      background-color: #000;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      margin-left: 45%;
+    }
+    
+    input[type=submit]:hover {
+      background-color: #fff;
+      color: #000000;
+    }
+    
+    div {
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+  }
+  
 }
 .home {
   float: left;
@@ -261,7 +455,11 @@ body {
   }
 }
 
+<<<<<<< HEAD
 .terms {
+=======
+.terms{
+>>>>>>> new-web-homepage
   float: left;
   width: 100%;
   background: #ffffff;
@@ -269,7 +467,11 @@ body {
     float: left;
     width: 100%;
     padding: 9% 0 4%;
+<<<<<<< HEAD
     background: #ffffff;
+=======
+    background: #3b3b3b;
+>>>>>>> new-web-homepage
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
@@ -280,6 +482,144 @@ body {
       width: 100%;
       font-size: 2em;
       text-align: center;
+    }
+<<<<<<< HEAD
+=======
+    .title-terms{
+      margin: 20px;
+    }
+>>>>>>> new-web-homepage
+    .title-image-container {
+      float: left;
+      width: 12%;
+      height: 20px;
+      margin: 0px 0 0 44%;
+      text-align: center;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 100% auto;
+      background-image: url(asset_path("title_border.png"));
+    }
+  }
+  .body {
+    float: left;
+    width: 80%;
+    padding: 0 10%;
+    .title,
+    .main-text {
+      float: left;
+      width: 100%;
+      font-size: 1em;
+      color: #000000;
+      text-align: left;
+      margin: 40px 0;
+    }
+<<<<<<< HEAD
+=======
+    .title-terms{
+      margin: 20px 0;
+    }
+    .main-text {
+      font-size: 0.8em;
+      margin: 10px 0;
+      line-height: 20px;
+    }
+    .list-margin{
+      margin: 10px;
+      line-height: 20px;
+    }
+    .image-container {
+      float: left;
+      width: 25%;
+      margin: 0 2.5%;
+      min-height: 50px;
+      .image {
+        float: left;
+        width: 80%;
+        height: 300px;
+      }
+      .image_1,
+      .image_2 {
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: url(asset_path("about_image_1.png"));
+      }
+      .image_2 {
+        background-image: url(asset_path("about_image_2.png"));
+      }
+    }
+    .section-container {
+      float: left;
+      width: 65%;
+      padding: 5% 2.5% 0;
+      .title {
+        font-size: 1.3em;
+        margin: 25px 0;
+      }
+      .main-text {
+        text-align: left;
+      }
+    }
+    .sections:link{
+      text-decoration: none;
+      color: #000000;
+    }
+    .sections:hover{
+      text-decoration: underline;
+    }
+
+>>>>>>> new-web-homepage
+    .footer-title {
+      float: left;
+      width: 100%;
+      font-size: 1em;
+      color: #000000;
+      text-align: center;
+      margin: 40px 0 0;
+      padding-top: 5%;
+    }
+<<<<<<< HEAD
+=======
+  }
+}
+
+.privacies{
+  float: left;
+  width: 100%;
+  background: #ffffff;
+  color: #000000;
+
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    color: #000000;
+  }
+  th, td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .title-container {
+    float: left;
+    width: 100%;
+    padding: 9% 0 4%;
+    background: #3b3b3b;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(asset_path("about_main_background_image.png"));
+    .title {
+      float: left;
+      color: #ffffff;
+      width: 100%;
+      font-size: 2em;
+      text-align: center;
+    }
+    .title-terms{
+      margin: 20px;
     }
     .title-image-container {
       float: left;
@@ -306,20 +646,16 @@ body {
       text-align: left;
       margin: 40px 0;
     }
-    .footer-title {
-      float: left;
-      width: 100%;
-      font-size: 1em;
-      color: #000000;
-      text-align: center;
-      margin: 40px 0 0;
-      padding-top: 5%;
+    .title-terms{
+      margin: 20px 0;
     }
+>>>>>>> new-web-homepage
     .main-text {
       font-size: 0.8em;
       margin: 10px 0;
       line-height: 20px;
     }
+<<<<<<< HEAD
     .sections:link {
       text-decoration: none;
       color: #000000;
@@ -344,6 +680,220 @@ body {
   }
 }
 
+=======
+    .list-margin{
+      margin: 10px;
+      line-height: 20px;
+    }
+    .image-container {
+      float: left;
+      width: 25%;
+      margin: 0 2.5%;
+      min-height: 50px;
+      .image {
+        float: left;
+        width: 80%;
+        height: 300px;
+      }
+      .image_1,
+      .image_2 {
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: url(asset_path("about_image_1.png"));
+      }
+      .image_2 {
+        background-image: url(asset_path("about_image_2.png"));
+      }
+    }
+    .section-container {
+      float: left;
+      width: 65%;
+      padding: 5% 2.5% 0;
+      .title {
+        font-size: 1.3em;
+        margin: 25px 0;
+      }
+      .main-text {
+        text-align: left;
+      }
+    }
+    .sections:link{
+      text-decoration: none;
+      color: #000000;
+    }
+    .sections:hover{
+      text-decoration: underline;
+    }
+
+    .footer-title {
+      float: left;
+      width: 100%;
+      font-size: 1em;
+      color: #000000;
+      text-align: center;
+      margin: 40px 0 0;
+      padding-top: 5%;
+    }
+  }
+}
+
+.sign-up{
+  float: left;
+  width: 100%;
+  background: #ffffff;
+  color: #000000;
+
+  .title-container {
+    float: left;
+    width: 100%;
+    padding: 9% 0 4%;
+    background: #3b3b3b;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(asset_path("about_main_background_image.png"));
+    .title {
+      float: left;
+      color: #ffffff;
+      width: 100%;
+      font-size: 2em;
+      text-align: center;
+    }
+    .title-terms{
+      margin: 20px;
+    }
+    .title-image-container {
+      float: left;
+      width: 12%;
+      height: 20px;
+      margin: 0px 0 0 44%;
+      text-align: center;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 100% auto;
+      background-image: url(asset_path("title_border.png"));
+    }
+    
+  }
+  .body {
+    float: left;
+    width: 80%;
+    padding: 0 10%;
+    .title,
+    .main-text {
+      float: left;
+      width: 100%;
+      font-size: 1em;
+      color: #000000;
+      text-align: left;
+      margin: 40px 0;
+    }
+    .title-terms{
+      margin: 20px 0;
+    }
+    .main-text {
+      font-size: 0.8em;
+      margin: 10px 0;
+      line-height: 20px;
+    }
+    .list-margin{
+      margin: 10px;
+      line-height: 20px;
+    }
+    .image-container {
+      float: left;
+      width: 25%;
+      margin: 0 2.5%;
+      min-height: 50px;
+      .image {
+        float: left;
+        width: 80%;
+        height: 300px;
+      }
+      .image_1,
+      .image_2 {
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: url(asset_path("about_image_1.png"));
+      }
+      .image_2 {
+        background-image: url(asset_path("about_image_2.png"));
+      }
+    }
+    .section-container {
+      float: left;
+      width: 65%;
+      padding: 5% 2.5% 0;
+      .title {
+        font-size: 1.3em;
+        margin: 25px 0;
+      }
+      .main-text {
+        text-align: left;
+      }
+    }
+    .sections:link{
+      text-decoration: none;
+      color: #000000;
+    }
+    .sections:hover{
+      text-decoration: underline;
+    }
+
+    .footer-title {
+      float: left;
+      width: 100%;
+      font-size: 1em;
+      color: #000000;
+      text-align: center;
+      margin: 40px 0 0;
+      padding-top: 5%;
+    }
+
+    .form{
+      input[type=text], select, 
+      input[type=password], 
+      input[type=email],
+      input[type=phone],
+      input[type=tel] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      
+      input[type=submit] {
+        width: 100%;
+        background-color: #4DECFF;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      
+      input[type=submit]:hover {
+        background-color: #4dedfff1;
+      }
+      
+      div {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+      }
+    }
+    
+  }
+  
+}
+/* mobile screens */
+>>>>>>> new-web-homepage
 @media only screen and (max-width: 800px) {
   .row {
     .col,
@@ -424,6 +974,69 @@ body {
       display: block !important;
     }
   }
+
+  .description{
+    font-size: 18px;
+    font-weight: 400;
+    padding-top: 10pc;
+  }
+  .new-home{
+
+    .container{
+      margin-top: 35%;
+    }
+
+    .home-page-image-container{
+      .home-page-image{
+        margin: -15% 0 0 1%;
+        width: 110%;
+      }
+    }
+
+    .main-title{
+      padding-right: 25px;
+    }
+
+    .row .col, .row .col-2 {
+      width: 90%;
+      padding: 10% 0%;
+    }
+    .container{
+      .coming-soon{
+        margin-top: 0%;
+        margin-left: 20%;
+      }
+    }
+
+    .social-buttons{
+      float: left;
+      width: 100%;
+      padding: 25px 0 0 0;
+
+      .googleplay{
+        height: 11%;
+        width: 50%;
+        margin: 10px 0 0 24%;
+      }
+      .appstore{
+        float: right;
+        width: 53%;
+        height: 11%;
+        margin: 1% 25% 0 0;
+      }
+    }
+    .home-page-image-container{
+      margin-bottom: -100%;
+    }
+
+    .home-page-form-image{
+      float: left;
+      width: 100%;
+      height: 55%;
+      margin-top: -50%;
+    }
+  
+  }
   .home {
     background-color: #000000;
     background-size: 100%;
@@ -482,5 +1095,80 @@ body {
         }
       }
     }
+  }
+  .sign-up{
+    .title-container{
+      padding: 20% 0 4%;
+    }
+    .logo-container{
+      height: 75px;
+      width: 60px;
+    }
+  }
+
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+  
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    display: block;
+  }
+  
+  table td {
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+    
+  .get-in-touch {
+    margin-top: 70%;
+    margin-left: 38%;
+    font-size: 35px;
+    font-weight: 600;
+  }
+}
+
+/* large screen */
+@media screen and (max-width: 1600px) {
+  .new-home{
+    .home-page-image-container {
+      float: left;
+      width: 45%;
+      position: relative;
+    }
+    
+    .home-page-image {
+      float: left;
+      width: 120%;
+      height: 39%;
+      margin: 5% 0% 0 20%;
+      background-image: url(asset_path("new_home"));
+      background-size: 100% auto;
+      background-repeat: no-repeat;
+    }
+
+
   }
 }

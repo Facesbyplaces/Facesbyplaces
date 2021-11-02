@@ -24,5 +24,6 @@ module FbpApi
             methods: [:get, :post, :options, :delete, :put]
         end
       end
+      config.assets.paths << "#{Rails.root}/app/assets/videos"
   end
 end

@@ -1,0 +1,25 @@
+.new-home
+  = video_tag "bg-video.mp4", autoplay: :autoplay, loop: :loop, muted: :muted, class: "bgVideo"
+  .row 
+    .col.col-2.main-container
+      .main-title
+        %p
+          FACES BY PLACES
+        .description
+          %strong FacesByPlaces.com 
+          us taking memorials to  a higher standard. A platform that celebrates life’s journey by keeping yesterday’s moments alive today one face and place at a time.
+        %a.button{href:"/about"} Learn more
+    .col.col-2.home-page-image-container
+      .home-page-image
+    .col.col-2.container
+      .text.bold.coming-soon COMING SOON
+      .social-buttons
+        .googleplay
+        .appstore
+    .home-page-form-image
+      .text.get-in-touch GET IN TOUCH
+      .form
+        %input#phone{:name => "phone", :type => "tel", :placeholder => "Your Phone Number"}
+        %input#email{:name => "email", :type => "email", :placeholder => "Your Email Address"}
+        %textarea#message{:name => "message", :placeholder => "Message" }
+        %input#submit{:name => "submit", :type => "submit", :placeholder => "Submit" }
