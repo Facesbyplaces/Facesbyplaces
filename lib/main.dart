@@ -28,6 +28,8 @@ import 'UI/ui_03_newly_installed.dart';
 import 'package:loader/loader.dart';
 import 'dart:async';
 
+import 'UI/ui_04_new_test.dart';
+
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
 }
