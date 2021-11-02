@@ -372,6 +372,9 @@ Rails.application.routes.draw do
         resources :braintree, only: [:new, :create, :show]
       end
 
+        resources :newsletter, only: [:create]
+        post  'newsletter/notify_subscribed_users',   to: 'newsletter#notify_subscribed_users'
+        get  'newsletter/app_released',   to: 'newsletter#app_released'
     end
   end
   
