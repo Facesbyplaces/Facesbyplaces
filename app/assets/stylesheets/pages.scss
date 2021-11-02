@@ -12,7 +12,7 @@ body {
 
 .get-in-touch{
   margin-top: 40%;
-  margin-left: 65%;
+  margin-left: 71%;
   font-size: 41px;
   font-weight: 600;
 }
@@ -59,12 +59,18 @@ body {
   float: left;
   width: 100%;
   background: #212121 0% 0% no-repeat padding-box;
+
+  a:hover{
+    color: #5EEFFF;
+  }
+  
   .text {
-    text-align: center;
     float: left;
-    width: 100%;
-    font-size: 3vh;
-    margin: 30px 0;
+    width: 60%;
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 30%;
     color: #ffffff;
   }
   .sections {
@@ -73,12 +79,25 @@ body {
   }
 
   .term{
-    text-align: center;
     float: left;
-    width: 100%;
-    font-size: 3vh;
+    text-align: right;
+    width: 20%;
+    font-size: 16px;
     color: #ffffff;
-    margin: 30px 0 0;
+    margin-top: -39px;
+    margin-left: 48%;
+    padding-top: 5px;
+  }
+
+  .privacy{
+    float: right;
+    text-align: right;
+    width: 20%;
+    font-size: 16px;
+    color: #ffffff;
+    margin-top: -39px;
+    margin-right: 15%;
+    padding-top: 5px;
   }
 }
 .row {
@@ -146,9 +165,8 @@ body {
   .home-page-form-image {
     float: right;
     width: 1080px;
-    height: 1000px;
-    margin-top: -57%;
-    //margin: 20% 0 0 20%;
+    height: 800px;
+    margin-top: -55%;
     background-image: url(asset_path("path"));
     background-size: 100% auto;
     background-repeat: no-repeat;
@@ -210,8 +228,8 @@ body {
   }
 
   .form{
-   margin-left: 62%;
-    margin-top: 3%;
+    margin-left: 62%;
+    margin-top: 0%;
 
     textarea {
       width: 85%;
@@ -830,6 +848,28 @@ body {
   }
   
 }
+/* smallers screen devices ex. iPads and other tablets */
+@media screen and (max-width: 1200px){
+  .new-home{
+    .home-page-form-image{
+      margin-top: -60%;
+    }
+    .coming-soon{
+      margin-left: 26%;
+      margin-top: -20%;
+    }
+    .social-buttons{
+      padding-top: 25px;
+      padding-left: 0;
+      margin-left: -35px;
+    }
+  }
+  .footer{
+    .text{
+      margin-left: 15%;
+    }
+  }
+}
 /* mobile screens */
 @media only screen and (max-width: 800px) {
   .row {
@@ -912,8 +952,8 @@ body {
     }
     .container{
       .coming-soon{
-        margin-top: 0%;
-        margin-left: 20%;
+        margin-top: 2%;
+        margin-left: 25%;
       }
     }
 
@@ -921,6 +961,7 @@ body {
       float: left;
       width: 100%;
       padding: 25px 0 0 0;
+      margin-left: 4%;
 
       .googleplay{
         height: 11%;
@@ -941,8 +982,13 @@ body {
     .home-page-form-image{
       float: left;
       width: 100%;
-      height: 55%;
-      margin-top: -50%;
+      height: 50%;
+      margin-top: -15%;
+    }
+
+    .form{
+      margin-left: 13%;
+      margin-top: 5%;
     }
   
   }
@@ -1052,10 +1098,30 @@ body {
   }
     
   .get-in-touch {
-    margin-top: 70%;
-    margin-left: 38%;
+    margin-top: 15%;
+    margin-left: 17%;
     font-size: 35px;
     font-weight: 600;
+  }
+
+  .footer{
+    .text{
+      font-size: 24px;
+      text-align: center;
+      margin-left: 20%;
+    }
+    .term{
+      margin-top: 2%;
+      margin-left: -28%;
+      margin-bottom: 15%;
+      width: 100%;
+    }
+
+    .privacy{
+      width: 100%;
+      margin-top: -11%;
+      margin-right: 34%;
+    }
   }
 }
 
@@ -1066,18 +1132,52 @@ body {
       float: left;
       width: 45%;
       position: relative;
+
+      .home-page-image {
+        width: 120%;
+        height: 40%;
+      }
     }
-    
-    .home-page-image {
+    .home-page-form-image{
+      margin-top: -50%;
+    }
+
+    .coming-soon{
+      margin-left: 40%;
+    }
+
+    .social-buttons{
+      margin-left: 5%;
+    }
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .new-home{
+    .container{
+      padding: 80px 20px 20px 130px;
+    }
+
+    .home-page-image-container {
       float: left;
-      width: 120%;
-      height: 39%;
-      margin: 5% 0% 0 20%;
-      background-image: url(asset_path("new_home"));
-      background-size: 100% auto;
-      background-repeat: no-repeat;
+      width: 50%;
+      position: relative;
+
+      .home-page-image {
+        width: 120%;
+        height: 50%;
+      }
+    }
+    .home-page-form-image{
+      margin-top: -45%;
     }
 
+    .coming-soon{
+      margin-left: 40%;
+    }
 
+    .social-buttons{
+      margin-left: 15%;
+    }
   }
 }
