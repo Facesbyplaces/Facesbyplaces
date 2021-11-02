@@ -195,6 +195,8 @@ Rails.application.routes.draw do
         put '/comment/unlikeOrLikeComment', to: 'comments#likeOrUnlike'
         # Comments index
         get '/index/comments/:id', to: 'comments#commentsIndex'
+        # Comments index
+        get '/index/comments2/:id', to: 'comments#commentsIndex2'
         # Replies index
         get '/index/replies/:id', to: 'comments#repliesIndex'
         # Delete Comment

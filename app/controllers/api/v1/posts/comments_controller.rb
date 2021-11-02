@@ -2,6 +2,7 @@ class Api::V1::Posts::CommentsController < ApplicationController
     include Commentable
     before_action :authenticate_user
     before_action :set_comments, only: [:commentsIndex]
+    before_action :set_comments2, only: [:commentsIndex2]
     before_action :set_replies, only: [:repliesIndex]
     before_action :set_comment, only: [:editComment, :deleteComment]
     before_action :set_reply, only: [:editReply, :deleteReply]
@@ -43,8 +44,17 @@ class Api::V1::Posts::CommentsController < ApplicationController
         render json: {status: :success, reply: @reply}
     end
 
-    # itemsremaining:  itemsRemaining(@comments),
+    
     def commentsIndex
+        render json: {  itemsremaining:  itemsRemaining(@comments), 
+                        comments: ActiveModel::SerializableResource.new(
+                                        @comments, 
+                                        each_serializer: CommentSerializer
+                                    )
+                    }
+    end
+
+    def commentsIndex2
         render json: {  
                         comments: ActiveModel::SerializableResource.new(
                                         @comments, 
