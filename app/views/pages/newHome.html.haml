@@ -17,5 +17,9 @@
         .googleplay
         .appstore
     .home-page-form-image
+      .text.get-in-touch GET IN TOUCH
       .form
-        
+        %input#phone{:name => "phone", :type => "tel", :placeholder => "Your Phone Number"}
+        %input#email{:name => "email", :type => "email", :placeholder => "Your Email Address"}
+        %textarea#message{:name => "message", :placeholder => "Message" }
+        %input#submit{:name => "submit", :type => "submit", :placeholder => "Submit" }
