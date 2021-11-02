@@ -43,8 +43,9 @@ class Api::V1::Posts::CommentsController < ApplicationController
         render json: {status: :success, reply: @reply}
     end
 
+    # itemsremaining:  itemsRemaining(@comments),
     def commentsIndex
-        render json: {  itemsremaining:  itemsRemaining(@comments),
+        render json: {  
                         comments: ActiveModel::SerializableResource.new(
                                         @comments, 
                                         each_serializer: CommentSerializer

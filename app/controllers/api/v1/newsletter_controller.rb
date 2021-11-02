@@ -3,11 +3,16 @@ class Api::V1::NewsletterController < ApplicationController
 
     def create
         @newsletter = Newsletter.new(newsletter_params)
-            @newsletter.save!
-            render json: {
-                success: true,
-                message: "Thank you! You will now receive the latest news from Faces by places. We’ll send you an email as soon as the app is available for download.",
-                status: 200}, status: 200
+        @newsletter.save!
+
+        respond_to do |format|
+            format.html
+            format.js
+          end
+        # flash[:notice] = "Thank you! You will now receive the latest news from Faces by places. We’ll send you an email as soon as the app is available for download."
+        # render (html: "<script>alert('Thank you! You will now receive the latest news from Faces by places. We’ll send you an email as soon as the app is available for download.')</script>".html_safe, layout: 'application')
+        # redirect_to new_home_path(newsletter: @newsletter)
+        # return render html: "<script>alert('Thank you! You will now receive the latest news from Faces by places. We’ll send you an email as soon as the app is available for download.')</script>".html_safe
     end
 
     def notify_subscribed_users
@@ -35,13 +40,12 @@ class Api::V1::NewsletterController < ApplicationController
 
     private
     def newsletter_params
-        params.permit(:phone_number, :email_address, :message)
+        params.require(:newsletter).permit(:phone_number, :email_address, :message)
     end
 
     def verify_admin
         return render json: {status: "Must be an admin to continue"}, status: 401 unless user().has_role? :admin 
     end
-
   
   end
   
