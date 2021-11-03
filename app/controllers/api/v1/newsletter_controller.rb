@@ -6,9 +6,7 @@ class Api::V1::NewsletterController < ApplicationController
         @newsletter.save!
 
         # flash[:notice] = "Thank you! You will now receive the latest news from Faces by places. We’ll send you an email as soon as the app is available for download."
-        render (html: "<script>alert('Thank you! You will now receive the latest news from Faces by places. We’ll send you an email as soon as the app is available for download.')</script>".html_safe, layout: 'application')
-        # redirect_to new_home_path(newsletter: @newsletter)
-        # return render html: "<script>alert('Thank you! You will now receive the latest news from Faces by places. We’ll send you an email as soon as the app is available for download.')</script>".html_safe
+        return render html: "<script>alert('Thank you! You will now receive the latest news from Faces by places. We’ll send you an email as soon as the app is available for download.')</script>".html_safe
     end
 
     def notify_subscribed_users
