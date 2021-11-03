@@ -5,12 +5,8 @@ class Api::V1::NewsletterController < ApplicationController
         @newsletter = Newsletter.new(newsletter_params)
         @newsletter.save!
 
-        respond_to do |format|
-            format.html
-            format.js
-          end
         # flash[:notice] = "Thank you! You will now receive the latest news from Faces by places. We’ll send you an email as soon as the app is available for download."
-        # render (html: "<script>alert('Thank you! You will now receive the latest news from Faces by places. We’ll send you an email as soon as the app is available for download.')</script>".html_safe, layout: 'application')
+        render (html: "<script>alert('Thank you! You will now receive the latest news from Faces by places. We’ll send you an email as soon as the app is available for download.')</script>".html_safe, layout: 'application')
         # redirect_to new_home_path(newsletter: @newsletter)
         # return render html: "<script>alert('Thank you! You will now receive the latest news from Faces by places. We’ll send you an email as soon as the app is available for download.')</script>".html_safe
     end
