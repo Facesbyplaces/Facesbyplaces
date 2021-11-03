@@ -1,0 +1,39 @@
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %link{:href => "https://fonts.googleapis.com/css?family=Montserrat", :rel => "stylesheet", :type => "text/css"}/
+    :css
+      a:link {
+        color: #04ECFF;
+        background-color: transparent;
+        text-decoration: none;
+      }
+
+      a:visited {
+        color: #04ECFF;
+        background-color: transparent;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: #FFB112;
+        background-color: transparent;
+        text-decoration: none;
+      }
+
+      a:active {
+        color: #FFB112;
+        background-color: transparent;
+        text-decoration: none;
+      }
+  %body{:style => "background-color: #f4f0ed; padding: 20px 0; font-family: Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;"}
+    .mail-container{:style => "width: 700px; margin: auto"}
+      .header{:style => "background-color: #04ECFF; height: 130px; text-align: center; border-radius: 15px 15px 0 0;"}
+        = image_tag("/images/logo.png")
+      .body{:style => "background-color: #fff; padding: 40px 30px; text-align: center; border-radius: 0 0 10px 10px;"}
+        %div{:style => "width: 450px; margin: auto"}
+          %p{:style => "text-align: center; font-size: 15px; line-height: 1.8;"}
+            FacesByPlaces is now available to download! Visit the link for more information.
+        %div{:style => "width: 200px; margin: auto"}
+          %h2{:style => "color: #fff; margin: auto"}
+            %a{:href => "https://facesbyplaces.com/", :target => "_blank"} Click Here!
