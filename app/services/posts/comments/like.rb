@@ -1,8 +1,8 @@
 class Posts::Comments::Like
 
     def initialize( like:, user: )
-        @like                = like
-        @user                   = user
+        @like = like
+        @user = user
     end
 
     def execute
@@ -11,7 +11,7 @@ class Posts::Comments::Like
 
         if like.save 
             # Add to notification
-            notify_followers_of_a_like
+            notify_followers_of_a_like(like, user)
 
             return true
         else
@@ -21,31 +21,31 @@ class Posts::Comments::Like
 
     private
 
-    def notify_followers_of_a_like
-        if @like.commentable_type == "Comment"
-            if @like.commentable.account != @user && @like.commentable.account.notifsetting.postLikes == true
+    def notify_followers_of_a_like(like, user)
+        if like.commentable_type == "Comment"
+            if like.commentable.account != user && like.commentable.account.notifsetting.postLikes == true
                 Notification::Builder.new(
-                        device_tokens:  @like.commentable.account.device_token,
+                        device_tokens:  like.commentable.account.device_token,
                         title:          "FacesByPlaces Notification",
                         message:        "#{user().first_name} liked your comment",
-                        recipient:      @like.commentable.account,
-                        actor:          @user,
-                        data:           @like.commentable.post.id,
+                        recipient:      like.commentable.account,
+                        actor:          user,
+                        data:           like.commentable.post.id,
                         type:           "Post",
-                        postType:       @like.commentable.post.page_type,
+                        postType:       like.commentable.post.page_type,
                 ).notify
             end
         else
             if like.commentable.account != user() && like.commentable.account.notifsetting.postLikes == true
                 Notification::Builder.new(
-                        device_tokens:  @like.commentable.account.device_token,
+                        device_tokens:  like.commentable.account.device_token,
                         title:          "FacesByPlaces Notification",
                         message:        "#{user().first_name} liked your reply",
-                        recipient:      @like.commentable.account,
-                        actor:          @user,
-                        data:           @like.commentable.post.id,
+                        recipient:      like.commentable.account,
+                        actor:          user,
+                        data:           like.commentable.post.id,
                         type:           "Post",
-                        postType:       @like.commentable.post.page_type,
+                        postType:       like.commentable.post.page_type,
                 ).notify
             end
         end
