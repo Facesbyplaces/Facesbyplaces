@@ -388,7 +388,7 @@ Rails.application.routes.draw do
     #user's shares
     get 'shares/:userId', to: 'shares#index', as: 'sharesIndex' 
 
-  root 'pages#home'
+  root 'pages#newHome'
   get 'about', to: 'pages#about'
   get 'terms', to: 'pages#terms'
 <<<<<<< HEAD
@@ -398,6 +398,6 @@ Rails.application.routes.draw do
   post 'sign-up-user', to: 'pages#create'
 >>>>>>> new-web-homepage
   
-  get 'new-home', to: 'pages#newHome'
+  get 'old-home', to: 'pages#home'
 
  end
