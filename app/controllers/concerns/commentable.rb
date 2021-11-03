@@ -11,7 +11,7 @@ module Commentable
     
     def set_comments
         post = Post.find(params[:id])
-        @comments = post.comments
+        comments = post.comments
         @comments = comments.page(params[:page]).per(numberOfPage)
     end
 
