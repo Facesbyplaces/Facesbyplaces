@@ -66,4 +66,3 @@ gem 'jquery-ui-rails'
 gem 'fcm', '~> 0.0.6'
 gem "braintree", "~> 3.2.0"
 gem "haml-rails", "~> 2.0"
-      

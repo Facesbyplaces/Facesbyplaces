@@ -9,6 +9,9 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.paths << Rails.root.join('node_modules')
 Rails.application.config.assets.precompile += %w( application.js )
 Rails.application.config.assets.precompile += %w( header.js )
+Rails.application.config.assets.precompile += %w( success_modal.js )
+Rails.application.config.assets.precompile += %w( bg-video.mp4 )
+Rails.application.config.assets.paths << "#{Rails.root}/app/assets/videos"
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets

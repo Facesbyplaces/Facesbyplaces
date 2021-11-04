@@ -195,8 +195,12 @@ Rails.application.routes.draw do
         put '/comment/unlikeOrLikeComment', to: 'comments#likeOrUnlike'
         # Comments index
         get '/index/comments/:id', to: 'comments#commentsIndex'
+        # Comments index
+        get '/index/comments2/:id', to: 'comments#commentsIndex2'
         # Replies index
         get '/index/replies/:id', to: 'comments#repliesIndex'
+        # Replies index
+        get '/index/replies2/:id', to: 'comments#repliesIndex2'
         # Delete Comment
         delete 'comment', to: 'comments#deleteComment'
         # Delete reply
@@ -388,16 +392,21 @@ Rails.application.routes.draw do
     #user's shares
     get 'shares/:userId', to: 'shares#index', as: 'sharesIndex' 
 
+<<<<<<< HEAD
   root 'pages#newHome'
+=======
+  # root 'pages#home'
+>>>>>>> 4f06ad8f027b123dc3635baa68770e2f177e6850
   get 'about', to: 'pages#about'
   get 'terms', to: 'pages#terms'
-<<<<<<< HEAD
-=======
   get 'privacy', to: 'pages#privacy'
   get 'sign-up', to: 'pages#signUp'
   post 'sign-up-user', to: 'pages#create'
->>>>>>> new-web-homepage
   
+<<<<<<< HEAD
   get 'old-home', to: 'pages#home'
+=======
+  root 'pages#newHome'
+>>>>>>> 4f06ad8f027b123dc3635baa68770e2f177e6850
 
  end

@@ -11,8 +11,14 @@ module Commentable
     
     def set_comments
         post = Post.find(params[:id])
-        comments = post.comments 
+        comments = post.comments
         @comments = comments.page(params[:page]).per(numberOfPage)
+    end
+
+    def set_comments2
+        post = Post.find(params[:id])
+        @comments = post.comments
+        # @comments = comments.page(params[:page]).per(numberOfPage)
     end
 
     def set_search_comments
@@ -33,6 +39,11 @@ module Commentable
         comment = Comment.find(params[:id])
         replies = comment.replies
         @replies = replies.page(params[:page]).per(numberOfPage)
+    end
+
+    def set_replies2
+        comment = Comment.find(params[:id])
+        @replies = comment.replies
     end
 
     def set_comment

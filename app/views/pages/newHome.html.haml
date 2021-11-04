@@ -1,3 +1,6 @@
+-# - if flash[:notice]
+-#   .notice= flash[:notice]
+= javascript_include_tag 'success_modal.js'
 .new-home
   = video_tag "bg-video.mp4", autoplay: :autoplay, loop: :loop, muted: :muted, class: "bgVideo"
   .row 
@@ -17,9 +20,13 @@
         .googleplay
         .appstore
     .home-page-form-image
-      .text.get-in-touch Get in touch
+      .text.get-in-touch GET IN TOUCH
       .form
-        %input#phone{:name => "phone", :type => "tel", :placeholder => "Your Phone Number"}
-        %input#email{:name => "email", :type => "email", :placeholder => "Your Email Address"}
-        %textarea#message{:name => "message", :placeholder => "Message" }
-        %input#submit{:name => "submit", :type => "submit", :placeholder => "Submit" }
+        = form_for(:newsletter, url: api_v1_newsletter_index_path) do |f|
+          = f.phone_field :name, :placeholder => "Your Name"
+          = f.email_field :email_address, :placeholder => "Your Email Address"
+          = f.text_area :message, :placeholder => "Message"
+          = f.submit "Submit", :id => 'success-modal-button'
+
+- content_for :modal do
+  =render partial: "success_modal"
