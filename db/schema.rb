@@ -174,7 +174,7 @@ ActiveRecord::Schema.define(version: 2021_10_27_094750) do
   end
 
   create_table "newsletters", force: :cascade do |t|
-    t.string "phone_number"
+    t.string "name"
     t.string "email_address"
     t.text "message"
     t.boolean "have_notified", default: false

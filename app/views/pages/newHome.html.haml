@@ -1,5 +1,6 @@
 -# - if flash[:notice]
 -#   .notice= flash[:notice]
+-# = javascript_include_tag 'success_modal.js'
 .new-home
   = video_tag "bg-video.mp4", autoplay: :autoplay, loop: :loop, muted: :muted, class: "bgVideo"
   .row 
@@ -22,9 +23,9 @@
       .text.get-in-touch GET IN TOUCH
       .form
         = form_for(:newsletter, url: api_v1_newsletter_index_path) do |f|
-          = f.phone_field :phone_number, :placeholder => "Your Phone Number"
+          = f.phone_field :name, :placeholder => "Your Name"
           = f.email_field :email_address, :placeholder => "Your Email Address"
           = f.text_area :message, :placeholder => "Message"
-          = f.submit "Submit"
+          = f.submit "Submit", {"data-modal-open" => "#success-modal"}
 
 -# =render partial: 'success_modal'

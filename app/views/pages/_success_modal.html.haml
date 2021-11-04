@@ -1,12 +1,24 @@
-.modal{:role => "dialog", :tabindex => "-1"}
-  .modal-dialog{:role => "document"}
+/ begin::Modal
+#success-modal.modal-fade{"aria-labelledby" => "exampleModalSizeDefault", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog.modal-dialog-centered{:role => "document"}
     .modal-content
-      .modal-header
-        %h5.modal-title Modal title
-        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-          %span{"aria-hidden" => "true"} ×
-      .modal-body
-        %p Modal body text goes here.
-      .modal-footer
-        %button.btn.btn-primary{:type => "button"} Save changes
-        %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close
+      %div.pt-10
+        %span.svg-icon.svg-icon-10x.svg-icon-success
+          %svg{:height => "24px", :version => "1.1", :viewbox => "0 0 24 24", :width => "24px", :xmlns => "http://www.w3.org/2000/svg", "xmlns:xlink" => "http://www.w3.org/1999/xlink"}
+            / Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch
+            %title Stockholm-icons / Code / Done-circle
+            %desc Created with Sketch.
+            %defs
+            %g{:fill => "none", "fill-rule" => "evenodd", :id => "Stockholm-icons-/-Code-/-Done-circle", :stroke => "none", "stroke-width" => "1"}
+              %rect#bound{:height => "24", :width => "24", :x => "0", :y => "0"}
+              %circle#Oval-5{:cx => "12", :cy => "12", :fill => "#000000", :opacity => "0.3", :r => "10"}
+              %path#Path-92{:d => "M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z", :fill => "#000000", "fill-rule" => "nonzero"}
+      .modal-header{style: "border-bottom: 0px"}
+        %h2.modal-title 
+          %b
+            Success!
+      .modal-body.pt-8.pb-5
+        %h5.model-dialog#modal-message
+      .modal-footer{style: "border-top: 0px"}
+        %button.btn.btn-success.font-weight-bold{style: "width: 150px", :type => "button", "data-modal-close" => ""} Okay
+/ end::Modal
