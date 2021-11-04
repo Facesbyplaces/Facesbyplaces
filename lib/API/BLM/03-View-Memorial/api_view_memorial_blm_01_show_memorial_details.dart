@@ -104,18 +104,15 @@ class APIBLMShowMemorialExtendedDetails{
   String memorialDetailsDescription;
   String memorialDetailsLocation;
   String memorialDetailsPrecinct;
-  String memorialDetailsDob;
   String memorialDetailsRip;
   String memorialDetailsState;
   String memorialDetailsCountry;
   bool memorialAcceptDonations;
   double memorialLatitude;
   double memorialLongitude;
-  APIBLMShowMemorialExtendedDetails({required this.memorialDetailsDescription, required this.memorialDetailsLocation, required this.memorialDetailsPrecinct, required this.memorialDetailsDob, required this.memorialDetailsRip, required this.memorialDetailsState, required this.memorialDetailsCountry, required this.memorialAcceptDonations, required this.memorialLatitude, required this.memorialLongitude});
+  APIBLMShowMemorialExtendedDetails({required this.memorialDetailsDescription, required this.memorialDetailsLocation, required this.memorialDetailsPrecinct, required this.memorialDetailsRip, required this.memorialDetailsState, required this.memorialDetailsCountry, required this.memorialAcceptDonations, required this.memorialLatitude, required this.memorialLongitude});
 
   factory APIBLMShowMemorialExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
-    String newDOB = parsedJson['dob'];
-    DateTime dob = DateTime.parse(newDOB);
     String newRIP = parsedJson['rip'];
     DateTime rip = DateTime.parse(newRIP);
 
@@ -123,7 +120,6 @@ class APIBLMShowMemorialExtendedDetails{
       memorialDetailsDescription: parsedJson['description'] ?? '',
       memorialDetailsLocation: parsedJson['location'] ?? '',
       memorialDetailsPrecinct: parsedJson['precinct'] ?? '',
-      memorialDetailsDob: dob.format(AmericanDateFormats.standardWithComma),
       memorialDetailsRip: rip.format(AmericanDateFormats.standardWithComma),
       memorialDetailsState: parsedJson['state'] ?? '',
       memorialDetailsCountry: parsedJson['country'] ?? '',

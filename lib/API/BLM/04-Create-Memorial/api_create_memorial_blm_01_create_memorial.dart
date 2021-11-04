@@ -14,11 +14,9 @@ Future<int> apiBLMCreateMemorial({required APIBLMCreateMemorial blmMemorial}) as
     MapEntry('blm[name]', MultipartFile.fromString(blmMemorial.blmMemorialName,),),
     MapEntry('blm[description]', MultipartFile.fromString(blmMemorial.blmDescription,),),
     MapEntry('blm[location]', MultipartFile.fromString(blmMemorial.blmLocationOfIncident,),),
-    MapEntry('blm[dob]', MultipartFile.fromString(blmMemorial.blmDob,),),
     MapEntry('blm[rip]', MultipartFile.fromString(blmMemorial.blmRip,),),
     MapEntry('blm[state]', MultipartFile.fromString(blmMemorial.blmState,),),
     MapEntry('blm[country]', MultipartFile.fromString(blmMemorial.blmCountry,),),
-    MapEntry('blm[precinct]', MultipartFile.fromString(blmMemorial.blmPrecinct,),),
     MapEntry('relationship', MultipartFile.fromString(blmMemorial.blmRelationship,),),
     MapEntry('blm[latitude]', MultipartFile.fromString(blmMemorial.blmLatitude,),),
     MapEntry('blm[longitude]', MultipartFile.fromString(blmMemorial.blmLongitude,),),
@@ -71,16 +69,14 @@ class APIBLMCreateMemorial{
   String blmMemorialName;
   String blmDescription;
   String blmLocationOfIncident;
-  String blmDob;
   String blmRip;
   String blmState;
   String blmCountry;
-  String blmPrecinct;
   String blmRelationship;
   dynamic blmBackgroundImage;
   dynamic blmProfileImage;
   List<dynamic> blmImagesOrVideos;
   String blmLatitude;
   String blmLongitude;
-  APIBLMCreateMemorial({required this.blmMemorialName, required this.blmDescription, required this.blmLocationOfIncident, required this.blmDob, required this.blmRip, required this.blmState, required this.blmCountry, required this.blmPrecinct, required this.blmRelationship, required this.blmBackgroundImage, required this.blmProfileImage, required this.blmImagesOrVideos, required this.blmLatitude, required this.blmLongitude,});
+  APIBLMCreateMemorial({required this.blmMemorialName, required this.blmDescription, required this.blmLocationOfIncident, required this.blmRip, required this.blmState, required this.blmCountry, required this.blmRelationship, required this.blmBackgroundImage, required this.blmProfileImage, required this.blmImagesOrVideos, required this.blmLatitude, required this.blmLongitude,});
 }

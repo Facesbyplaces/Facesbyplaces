@@ -586,7 +586,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
 
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Image.asset('assets/icons/Welcome.png', width: SizeConfig.screenWidth, fit: BoxFit.cover,),
+                  child: Image.asset('assets/icons/Welcome-new.png', width: SizeConfig.screenWidth, fit: BoxFit.cover,),
                 ),
 
                 const SizedBox(height: 50,),

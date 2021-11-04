@@ -467,18 +467,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                                                 Row(
                                                   children: [
-                                                    const Icon(Icons.star, color: Color(0xff000000), size: 25,),
-
-                                                    const SizedBox(width: 20,),
-
-                                                    Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsDob, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
-                                                  ],
-                                                ),
-
-                                                const SizedBox(height: 20),
-
-                                                Row(
-                                                  children: [
                                                     Image.asset('assets/icons/grave_logo.png', height: 25,),
 
                                                     const SizedBox(width: 20,),

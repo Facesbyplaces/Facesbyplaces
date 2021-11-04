@@ -36,9 +36,9 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
   final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
   final GlobalKey<MiscInputFieldTemplateState> _key3 = GlobalKey<MiscInputFieldTemplateState>();
   TextEditingController controller1 = TextEditingController();
+  // TextEditingController controller2 = TextEditingController();
+  // TextEditingController controller3 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
-  TextEditingController controller3 = TextEditingController();
-  TextEditingController controller4 = TextEditingController();
   ValueNotifier<LatLng?> location = ValueNotifier(null);
   DateTime dob = DateTime(1000);
   DateTime rip = DateTime.now();
@@ -62,7 +62,7 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
           valueListenable: location,
           builder: (_, LatLng? locationListener, __) => Scaffold(
             appBar: AppBar(
-              title: const Text('Cry out for the Victims', maxLines: 2, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
+              title: const Text('Cry out for the Victim', maxLines: 2, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
               backgroundColor: const Color(0xff04ECFF),
               centerTitle: true,
               leading: IconButton(
@@ -114,69 +114,69 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
 
                         const SizedBox(height: 20,),
                         
+                        // TextFormField(
+                        //   controller: controller2,
+                        //   keyboardType: TextInputType.text,
+                        //   cursorColor: const Color(0xff000000),
+                        //   style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
+                        //   decoration: const InputDecoration(
+                        //     alignLabelWithHint: true, 
+                        //     labelText: 'Precinct / Station House (Optional)',
+                        //     labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                        //     focusedBorder: UnderlineInputBorder(
+                        //       borderSide: BorderSide(color: Color(0xff000000),),
+                        //     ),
+                        //   ),
+                        // ),
+
+                        // const SizedBox(height: 20,),
+
+                        // TextFormField(
+                        //   controller: controller3,
+                        //   cursorColor: const Color(0xff000000),
+                        //   keyboardType: TextInputType.text,
+                        //   readOnly: true,
+                        //   style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
+                        //   validator: (value){
+                        //     if(value!.isEmpty){
+                        //       return '';
+                        //     }
+                        //   },
+                        //   decoration: InputDecoration(
+                        //     labelText: 'DOB',
+                        //     alignLabelWithHint: true,
+                        //     focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
+                        //     labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                        //     errorBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red),),
+                        //     suffixIcon: IconButton(
+                        //       icon: const Icon(Icons.close),
+                        //       onPressed: (){
+                        //         controller3.text = '';
+                        //         dob = DateTime(1000);
+                        //       },
+                        //     ),
+                        //   ),
+                        //   onTap: (){
+                        //     DatePicker.showDatePicker(
+                        //       context,
+                        //       showTitleActions: true,
+                        //       minTime: dob,
+                        //       maxTime: rip,
+                        //       currentTime: DateTime.now(),
+                        //       locale: LocaleType.en,
+                        //       onConfirm: (date) {
+                        //         String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+                        //         dob = date;
+                        //         controller3.text = format;
+                        //       },
+                        //     );
+                        //   },
+                        // ),
+                        
+                        // const SizedBox(height: 20,),
+
                         TextFormField(
                           controller: controller2,
-                          keyboardType: TextInputType.text,
-                          cursorColor: const Color(0xff000000),
-                          style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
-                          decoration: const InputDecoration(
-                            alignLabelWithHint: true, 
-                            labelText: 'Precinct / Station House (Optional)',
-                            labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xff000000),),
-                            ),
-                          ),
-                        ),
-
-                        const SizedBox(height: 20,),
-
-                        TextFormField(
-                          controller: controller3,
-                          cursorColor: const Color(0xff000000),
-                          keyboardType: TextInputType.text,
-                          readOnly: true,
-                          style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
-                          validator: (value){
-                            if(value!.isEmpty){
-                              return '';
-                            }
-                          },
-                          decoration: InputDecoration(
-                            labelText: 'DOB',
-                            alignLabelWithHint: true,
-                            focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
-                            labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
-                            errorBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red),),
-                            suffixIcon: IconButton(
-                              icon: const Icon(Icons.close),
-                              onPressed: (){
-                                controller3.text = '';
-                                dob = DateTime(1000);
-                              },
-                            ),
-                          ),
-                          onTap: (){
-                            DatePicker.showDatePicker(
-                              context,
-                              showTitleActions: true,
-                              minTime: dob,
-                              maxTime: rip,
-                              currentTime: DateTime.now(),
-                              locale: LocaleType.en,
-                              onConfirm: (date) {
-                                String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-                                dob = date;
-                                controller3.text = format;
-                              },
-                            );
-                          },
-                        ),
-                        
-                        const SizedBox(height: 20,),
-
-                        TextFormField(
-                          controller: controller4,
                           cursorColor: const Color(0xff000000),
                           keyboardType: TextInputType.text,
                           readOnly: true,
@@ -194,7 +194,7 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                             suffixIcon: IconButton(
                               icon: const Icon(Icons.close),
                               onPressed: (){
-                                controller4.text = '';
+                                controller2.text = '';
                                 rip = DateTime.now();
                               },
                             ),
@@ -210,7 +210,7 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                               onConfirm: (date) {
                                 String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
                                 rip = date;
-                                controller4.text = format;
+                                controller2.text = format;
                               },
                             );
                           },
@@ -232,7 +232,7 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                           labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                         ),
 
-                        const SizedBox(height: 40,),
+                        const SizedBox(height: 100,),
 
                         MiscButtonTemplate(
                           buttonTextStyle: const TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold',),
@@ -262,10 +262,12 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                                 ),
                               );
                             }else{
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreateMemorial2(relationship: _key1.currentState!.currentSelection, locationOfIncident: controller1.text, precinct: controller2.text, dob: controller3.text, rip: controller4.text, country: _key2.currentState!.controller.text, state: _key3.currentState!.controller.text, latitude: '${location.value!.latitude}', longitude: '${location.value!.longitude}',),),);
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreateMemorial2(relationship: _key1.currentState!.currentSelection, locationOfIncident: controller1.text, rip: controller2.text, country: _key2.currentState!.controller.text, state: _key3.currentState!.controller.text, latitude: '${location.value!.latitude}', longitude: '${location.value!.longitude}',),),);
                             }
                           },
                         ),
+
+                        const SizedBox(height: 20,),
                       ],
                     ),
                   ),

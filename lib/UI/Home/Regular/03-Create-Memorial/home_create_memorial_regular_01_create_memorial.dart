@@ -250,6 +250,8 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                             }
                           },
                         ),
+
+                        const SizedBox(height: 20,),
                       ],
                     ),
                   ),

@@ -1,7 +1,9 @@
 import 'package:facesbyplaces/API/Regular/02-Main/api_main_regular_02_show_user_information.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api_show_post_regular_01_show_original_post.dart';
-import 'package:facesbyplaces/API/Regular/12-Show-Post/api_show_post_regular_02_show_post_comments.dart';
-import 'package:facesbyplaces/API/Regular/12-Show-Post/api_show_post_regular_03_show_comment_replies.dart';
+// import 'package:facesbyplaces/API/Regular/12-Show-Post/api_show_post_regular_02_show_post_comments.dart';
+import 'package:facesbyplaces/API/Regular/12-Show-Post/api_show_post_regular_02_show_post_comments_2.dart';
+// import 'package:facesbyplaces/API/Regular/12-Show-Post/api_show_post_regular_03_show_comment_replies.dart';
+import 'package:facesbyplaces/API/Regular/12-Show-Post/api_show_post_regular_03_show_comment_replies_2.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api_show_post_regular_04_show_comment_or_reply_like_status.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api_show_post_regular_06_add_comment.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api_show_post_regular_07_add_reply.dart';
@@ -58,7 +60,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
   List<bool> commentsLikes = [];
   List<int> repliesNumberOfLikes = [];
   List<bool> repliesLikes = [];
-  String currentUserImage = '';
+  // String currentUserImage = '';
+  ValueNotifier<String> currentUserImage = ValueNotifier<String>('');
   String pageName = '';
   int currentAccountType = 1;
   int numberOfComments = 0;
@@ -91,11 +94,12 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
       getProfilePicture();
       scrollController.addListener((){
         if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
-          if(commentsRemaining != 0){
-            onRefresh();
-          }else{
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more comments to show'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
-          }
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more comments to show'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
+          // if(commentsRemaining != 0){
+          //   // onRefresh();
+          // }else{
+          //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more comments to show'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
+          // }
         }
       });
     }
@@ -111,7 +115,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
       commentsLikes = [];
       repliesNumberOfLikes = [];
       repliesLikes = [];
-      currentUserImage = '';
+      // currentUserImage = '';
+      currentUserImage.value = '';
       pageName = '';
       commentsRemaining = 1;
       repliesRemaining = 1;
@@ -131,7 +136,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
 
   void getProfilePicture() async{
     var getProfilePicture = await apiRegularShowProfileInformation();
-    currentUserImage = getProfilePicture.showProfileInformationImage;
+    currentUserImage.value = getProfilePicture.showProfileInformationImage;
     currentUserId = getProfilePicture.showProfileInformationUserId;
     currentAccountType = getProfilePicture.showProfileInformationAccountType;
   }
@@ -140,43 +145,29 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
     return await apiRegularShowOriginalPost(postId: postId);
   }
 
-  Future<APIRegularShowListOfComments> getListOfComments() async{
-    APIRegularShowListOfComments? newValue;
+  Future<APIRegularShowListOfCommentsDuplicate> getListOfComments() async{
+    APIRegularShowListOfCommentsDuplicate newValue = await apiRegularShowListOfCommentsDuplicate(postId: widget.postId,);
 
-    while(commentsRemaining != 0){
-      newValue = await apiRegularShowListOfComments(postId: widget.postId, page: page1);
-      page1++;
-      commentsRemaining = newValue.almItemsRemaining;
-
-      for(int i = 0; i < newValue.almCommentsList.length; i++){
-        APIRegularShowCommentOrReplyLikeStatus commentLikeStatus = await apiRegularShowCommentOrReplyLikeStatus(commentableType: 'Comment', commentableId: newValue.almCommentsList[i].showListOfCommentsCommentId);
-        commentsNumberOfLikes.add(commentLikeStatus.showCommentOrReplyNumberOfLikes);
-        commentsLikes.add(commentLikeStatus.showCommentOrReplyLikeStatus);
-      }
+    for(int i = 0; i < newValue.almCommentsList.length; i++){
+      APIRegularShowCommentOrReplyLikeStatus commentLikeStatus = await apiRegularShowCommentOrReplyLikeStatus(commentableType: 'Comment', commentableId: newValue.almCommentsList[i].showListOfCommentsCommentId);
+      commentsNumberOfLikes.add(commentLikeStatus.showCommentOrReplyNumberOfLikes);
+      commentsLikes.add(commentLikeStatus.showCommentOrReplyLikeStatus);
     }
 
-    page1 = 0;
-    return newValue!;
+    return newValue;
   }
 
 
-  Future<APIRegularShowListOfReplies> getListOfReplies({required int commentId}) async{
-    APIRegularShowListOfReplies? newValue;
-    
-    while(repliesRemaining != 0){
-      newValue = await apiRegularShowListOfReplies(postId: commentId, page: page2);
-      page2++;
-      repliesRemaining = newValue.almItemsRemaining;
+  Future<APIRegularShowListOfRepliesDuplicate> getListOfReplies({required int commentId}) async{
+    APIRegularShowListOfRepliesDuplicate newValue = await apiRegularShowListOfRepliesDuplicate(postId: commentId);
 
-      for(int i = 0; i < newValue.almRepliesList.length; i++){
-        APIRegularShowCommentOrReplyLikeStatus commentLikeStatus = await apiRegularShowCommentOrReplyLikeStatus(commentableType: 'Reply', commentableId: newValue.almRepliesList[i].showListOfRepliesCommentId);
-        repliesNumberOfLikes.add(commentLikeStatus.showCommentOrReplyNumberOfLikes);
-        repliesLikes.add(commentLikeStatus.showCommentOrReplyLikeStatus);
-      }
+    for(int i = 0; i < newValue.almRepliesList.length; i++){
+      APIRegularShowCommentOrReplyLikeStatus commentLikeStatus = await apiRegularShowCommentOrReplyLikeStatus(commentableType: 'Reply', commentableId: newValue.almRepliesList[i].showListOfRepliesCommentId);
+      repliesNumberOfLikes.add(commentLikeStatus.showCommentOrReplyNumberOfLikes);
+      repliesLikes.add(commentLikeStatus.showCommentOrReplyLikeStatus);
     }
 
-    page2 = 0;
-    return newValue!;
+    return newValue;
   }
 
   @override
@@ -197,1002 +188,1005 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
           valueListenable: isGuestLoggedIn,
           builder: (_, bool isGuestLoggedInListener, __) => ValueListenableBuilder(
             valueListenable: isRefreshed,
-            builder: (_, bool isRefreshedListener, __) => Scaffold(
-              appBar: AppBar(
-                backgroundColor: const Color(0xff04ECFF),
-                title: const Text('Post', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
-                centerTitle: false,
-                leading: IconButton(
-                  icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35),
-                  onPressed: (){
-                    Navigator.pop(context, numberOfComments);
-                  },
+            builder: (_, bool isRefreshedListener, __) => ValueListenableBuilder(
+              valueListenable: currentUserImage,
+              builder: (_, String currentUserImageListener, __) => Scaffold(
+                appBar: AppBar(
+                  backgroundColor: const Color(0xff04ECFF),
+                  title: const Text('Post', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
+                  centerTitle: false,
+                  leading: IconButton(
+                    icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35),
+                    onPressed: (){
+                      Navigator.pop(context, numberOfComments);
+                    },
+                  ),
+                  actions: [
+                    MiscRegularDropDownTemplate(postId: widget.postId, likePost: likePost, likesCount: numberOfLikes, reportType: 'Post', pageType: 'Alm', pageName: pageName),
+                  ],
                 ),
-                actions: [
-                  MiscRegularDropDownTemplate(postId: widget.postId, likePost: likePost, likesCount: numberOfLikes, reportType: 'Post', pageType: 'Alm', pageName: pageName),
-                ],
-              ),
-              backgroundColor: const Color(0xffffffff),
-              body: Stack(
-                children: [
-                  isGuestLoggedInListener
-                  ? const SizedBox(height: 0,)
-                  : IgnorePointer(
-                    ignoring: isGuestLoggedInListener,
-                    child: SafeArea(
-                      child: FooterLayout(
-                        footer: showKeyboard(),
-                        child: RefreshIndicator(
-                          onRefresh: onRefresh,
-                          child: FutureBuilder<APIRegularShowOriginalPostMain>(
-                            future: showOriginalPost,
-                            builder: (context, originalPost){
-                              if(originalPost.connectionState != ConnectionState.done){
-                                return const Center(child: CustomLoader(),);
-                              }
-                              else if(originalPost.hasError){
-                                return const MiscErrorMessageTemplate();
-                              }
-                              else if(originalPost.hasData){
-                                return CustomScrollView(
-                                  physics: const ClampingScrollPhysics(),
-                                  controller: scrollController,
-                                  slivers: <Widget>[
-                                    SliverToBoxAdapter(
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                                            height: 80,
-                                            child: Row(
-                                              children: [
-                                                GestureDetector(
-                                                  child: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageProfileImage != ''
-                                                  ? CircleAvatar(
-                                                    backgroundColor: const Color(0xff888888),
-                                                    foregroundImage: NetworkImage(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageProfileImage),
-                                                  )
-                                                  : const CircleAvatar(
-                                                    backgroundColor: Color(0xff888888),
-                                                    foregroundImage: AssetImage('assets/icons/app-icon.png'),
-                                                  ),
-                                                  onTap: () async{
-                                                    if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
-                                                      if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
-                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,),),);
-                                                      }else{
-                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFollower,),),);
-                                                      }
-                                                    }else{
-                                                      if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
-                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage,newlyCreated: false,),),);
-                                                      }else{
-                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFollower,),),);
-                                                      }
-                                                    }
-                                                  },
-                                                ),
-
-                                                Expanded(
-                                                  child: Padding(
-                                                    padding: const EdgeInsets.only(left: 10.0),
-                                                    child: GestureDetector(
-                                                      child: Column(
-                                                        children: [
-                                                          Expanded(
-                                                            child: Align(
-                                                              alignment: Alignment.bottomLeft,
-                                                              child: Text(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageName,
-                                                                overflow: TextOverflow.ellipsis,
-                                                                style: const TextStyle(fontSize: 22, fontFamily: 'NexaBold', color: Color(0xff000000),),
-                                                              ),
-                                                            ),
-                                                          ),
-
-                                                          Expanded(
-                                                            child: Align(
-                                                              alignment: Alignment.topLeft,
-                                                              child: Text(timeago.format(DateTime.parse(originalPost.data!.almPost.showOriginalPostCreatedAt),),
-                                                                maxLines: 1,
-                                                                style: const TextStyle(fontSize: 18, fontFamily: 'NexaBold', color: Color(0xffBDC3C7),),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      onTap: () async{
-                                                        if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
-                                                          if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
-                                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,),),);
-                                                          }else{
-                                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFollower,),),);
-                                                          }
-                                                        }else{
-                                                          if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
-                                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,),),);
-                                                          }else{
-                                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFollower,),));
-                                                          }
-                                                        }
-                                                      },
+                backgroundColor: const Color(0xffffffff),
+                body: Stack(
+                  children: [
+                    isGuestLoggedInListener
+                    ? const SizedBox(height: 0,)
+                    : IgnorePointer(
+                      ignoring: isGuestLoggedInListener,
+                      child: SafeArea(
+                        child: FooterLayout(
+                          footer: showKeyboard(),
+                          child: RefreshIndicator(
+                            onRefresh: onRefresh,
+                            child: FutureBuilder<APIRegularShowOriginalPostMain>(
+                              future: showOriginalPost,
+                              builder: (context, originalPost){
+                                if(originalPost.connectionState != ConnectionState.done){
+                                  return const Center(child: CustomLoader(),);
+                                }
+                                else if(originalPost.hasError){
+                                  return const MiscErrorMessageTemplate();
+                                }
+                                else if(originalPost.hasData){
+                                  return CustomScrollView(
+                                    physics: const ClampingScrollPhysics(),
+                                    controller: scrollController,
+                                    slivers: <Widget>[
+                                      SliverToBoxAdapter(
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                                              height: 80,
+                                              child: Row(
+                                                children: [
+                                                  GestureDetector(
+                                                    child: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageProfileImage != ''
+                                                    ? CircleAvatar(
+                                                      backgroundColor: const Color(0xff888888),
+                                                      foregroundImage: NetworkImage(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageProfileImage),
+                                                    )
+                                                    : const CircleAvatar(
+                                                      backgroundColor: Color(0xff888888),
+                                                      foregroundImage: AssetImage('assets/icons/app-icon.png'),
                                                     ),
+                                                    onTap: () async{
+                                                      if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
+                                                        if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,),),);
+                                                        }else{
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFollower,),),);
+                                                        }
+                                                      }else{
+                                                        if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage,newlyCreated: false,),),);
+                                                        }else{
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFollower,),),);
+                                                        }
+                                                      }
+                                                    },
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
 
-                                          Container(
-                                            padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                                            alignment: Alignment.centerLeft,
-                                            child: Text(originalPost.data!.almPost.showOriginalPostBody, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
-                                          ),
-
-                                          originalPost.data!.almPost.showOriginalPostImagesOrVideos.isNotEmpty
-                                          ? Column(
-                                            children: [
-                                              const SizedBox(height: 20),
-
-                                              SizedBox(
-                                                child: ((){
-                                                  if(originalPost.data!.almPost.showOriginalPostImagesOrVideos.length == 1){
-                                                    return GestureDetector(
-                                                      onTap: (){
-                                                        showGeneralDialog(
-                                                          context: context,
-                                                          transitionDuration: const Duration(milliseconds: 0),
-                                                          barrierDismissible: true,
-                                                          barrierLabel: 'Dialog',
-                                                          pageBuilder: (_, __, ___){
-                                                            return Scaffold(
-                                                              backgroundColor: Colors.black12.withOpacity(0.7),
-                                                              body: SizedBox.expand(
-                                                                child: SafeArea(
-                                                                  child: Column(
-                                                                    children: [
-                                                                      Container(
-                                                                        alignment: Alignment.centerRight,
-                                                                        padding: const EdgeInsets.only(right: 20.0),
-                                                                        child: GestureDetector(
-                                                                          child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
-                                                                          onTap: (){
-                                                                            Navigator.pop(context);
-                                                                          },
-                                                                        ),
-                                                                      ),
-
-                                                                      const SizedBox(height: 10,),
-
-                                                                      Expanded(
-                                                                        child: ((){
-                                                                          if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
-                                                                            return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[0]}',
-                                                                              betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                                placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                                                placeholderOnTop: false,
-                                                                                deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-                                                                                aspectRatio: 16 / 9,
-                                                                                fit: BoxFit.contain,
-                                                                              ),
-                                                                            );
-                                                                          }else{
-                                                                            return ExtendedImage.network(
-                                                                              originalPost.data!.almPost.showOriginalPostImagesOrVideos[0],
-                                                                              fit: BoxFit.contain,
-                                                                              loadStateChanged: (ExtendedImageState loading){
-                                                                                if(loading.extendedImageLoadState == LoadState.loading || loading.extendedImageLoadState == LoadState.failed){
-                                                                                  return Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,);
-                                                                                }
-                                                                              },
-                                                                              mode: ExtendedImageMode.gesture,
-                                                                            );
-                                                                          }
-                                                                        }()),
-                                                                      ),
-
-                                                                      const SizedBox(height: 85,),
-                                                                    ],
-                                                                  ),
+                                                  Expanded(
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.only(left: 10.0),
+                                                      child: GestureDetector(
+                                                        child: Column(
+                                                          children: [
+                                                            Expanded(
+                                                              child: Align(
+                                                                alignment: Alignment.bottomLeft,
+                                                                child: Text(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageName,
+                                                                  overflow: TextOverflow.ellipsis,
+                                                                  style: const TextStyle(fontSize: 22, fontFamily: 'NexaBold', color: Color(0xff000000),),
                                                                 ),
                                                               ),
-                                                            );
-                                                          },
-                                                        );
-                                                      },
-                                                      child: ((){
-                                                        if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
-                                                          return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[0]}',
-                                                            betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                              placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                                              aspectRatio: 16 / 9,
-                                                              fit: BoxFit.contain,
-                                                              controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                             ),
+
+                                                            Expanded(
+                                                              child: Align(
+                                                                alignment: Alignment.topLeft,
+                                                                child: Text(timeago.format(DateTime.parse(originalPost.data!.almPost.showOriginalPostCreatedAt),),
+                                                                  maxLines: 1,
+                                                                  style: const TextStyle(fontSize: 18, fontFamily: 'NexaBold', color: Color(0xffBDC3C7),),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        onTap: () async{
+                                                          if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
+                                                            if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,),),);
+                                                            }else{
+                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFollower,),),);
+                                                            }
+                                                          }else{
+                                                            if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,),),);
+                                                            }else{
+                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFollower,),));
+                                                            }
+                                                          }
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+
+                                            Container(
+                                              padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                                              alignment: Alignment.centerLeft,
+                                              child: Text(originalPost.data!.almPost.showOriginalPostBody, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                                            ),
+
+                                            originalPost.data!.almPost.showOriginalPostImagesOrVideos.isNotEmpty
+                                            ? Column(
+                                              children: [
+                                                const SizedBox(height: 20),
+
+                                                SizedBox(
+                                                  child: ((){
+                                                    if(originalPost.data!.almPost.showOriginalPostImagesOrVideos.length == 1){
+                                                      return GestureDetector(
+                                                        onTap: (){
+                                                          showGeneralDialog(
+                                                            context: context,
+                                                            transitionDuration: const Duration(milliseconds: 0),
+                                                            barrierDismissible: true,
+                                                            barrierLabel: 'Dialog',
+                                                            pageBuilder: (_, __, ___){
+                                                              return Scaffold(
+                                                                backgroundColor: Colors.black12.withOpacity(0.7),
+                                                                body: SizedBox.expand(
+                                                                  child: SafeArea(
+                                                                    child: Column(
+                                                                      children: [
+                                                                        Container(
+                                                                          alignment: Alignment.centerRight,
+                                                                          padding: const EdgeInsets.only(right: 20.0),
+                                                                          child: GestureDetector(
+                                                                            child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
+                                                                            onTap: (){
+                                                                              Navigator.pop(context);
+                                                                            },
+                                                                          ),
+                                                                        ),
+
+                                                                        const SizedBox(height: 10,),
+
+                                                                        Expanded(
+                                                                          child: ((){
+                                                                            if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
+                                                                              return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[0]}',
+                                                                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                                                  placeholderOnTop: false,
+                                                                                  deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+                                                                                  aspectRatio: 16 / 9,
+                                                                                  fit: BoxFit.contain,
+                                                                                ),
+                                                                              );
+                                                                            }else{
+                                                                              return ExtendedImage.network(
+                                                                                originalPost.data!.almPost.showOriginalPostImagesOrVideos[0],
+                                                                                fit: BoxFit.contain,
+                                                                                loadStateChanged: (ExtendedImageState loading){
+                                                                                  if(loading.extendedImageLoadState == LoadState.loading || loading.extendedImageLoadState == LoadState.failed){
+                                                                                    return Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,);
+                                                                                  }
+                                                                                },
+                                                                                mode: ExtendedImageMode.gesture,
+                                                                              );
+                                                                            }
+                                                                          }()),
+                                                                        ),
+
+                                                                        const SizedBox(height: 85,),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            },
                                                           );
-                                                        }else{
-                                                          return CachedNetworkImage(
-                                                            fit: BoxFit.cover,
-                                                            imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[0],
-                                                            placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                          );
-                                                        }
-                                                      }()),
-                                                    );
-                                                  }else if(originalPost.data!.almPost.showOriginalPostImagesOrVideos.length == 2){
-                                                    return StaggeredGridView.countBuilder(
-                                                      staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                                                      physics: const NeverScrollableScrollPhysics(),
-                                                      padding: EdgeInsets.zero,
-                                                      crossAxisSpacing: 4.0,
-                                                      mainAxisSpacing: 4.0,
-                                                      crossAxisCount: 4,
-                                                      shrinkWrap: true,
-                                                      itemCount: 2,
-                                                      itemBuilder: (BuildContext context, int index) => GestureDetector(
+                                                        },
                                                         child: ((){
-                                                          if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
-                                                            return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
+                                                          if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
+                                                            return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[0]}',
                                                               betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                                controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                                                                 aspectRatio: 16 / 9,
                                                                 fit: BoxFit.contain,
+                                                                controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                               ),
                                                             );
                                                           }else{
                                                             return CachedNetworkImage(
                                                               fit: BoxFit.cover,
-                                                              imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
+                                                              imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[0],
                                                               placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                             );
                                                           }
                                                         }()),
-                                                        onTap: (){
-                                                          showGeneralDialog(
-                                                            context: context,
-                                                            transitionDuration: const Duration(milliseconds: 0),
-                                                            barrierDismissible: true,
-                                                            barrierLabel: 'Dialog',
-                                                            pageBuilder: (_, __, ___){
-                                                              return Scaffold(
-                                                                backgroundColor: Colors.black12.withOpacity(0.7),
-                                                                body: SizedBox.expand(
-                                                                  child: SafeArea(
-                                                                    child: Column(
-                                                                      children: [
-                                                                        Container(
-                                                                          alignment: Alignment.centerRight,
-                                                                          padding: const EdgeInsets.only(right: 20.0),
-                                                                          child: GestureDetector(
-                                                                            child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
-                                                                            onTap: (){
-                                                                              Navigator.pop(context);
-                                                                            },
-                                                                          ),
-                                                                        ),
-
-                                                                        const SizedBox(height: 10,),
-
-                                                                        Expanded(
-                                                                          child: CarouselSlider(
-                                                                            carouselController: buttonCarouselController,
-                                                                            items: List.generate(
-                                                                              originalPost.data!.almPost.showOriginalPostImagesOrVideos.length, (next) => ((){
-                                                                                if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
-                                                                                  return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
-                                                                                    betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                                                                      deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-                                                                                      autoDispose: false,
-                                                                                      aspectRatio: 16 / 9,
-                                                                                      fit: BoxFit.contain,
-                                                                                    ),
-                                                                                  );
-                                                                                }else{
-                                                                                  return ExtendedImage.network(
-                                                                                    originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
-                                                                                    fit: BoxFit.contain,
-                                                                                    loadStateChanged: (ExtendedImageState loading){
-                                                                                      if(loading.extendedImageLoadState == LoadState.loading || loading.extendedImageLoadState == LoadState.failed){
-                                                                                        return Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,);
-                                                                                      }
-                                                                                    },
-                                                                                    mode: ExtendedImageMode.gesture,
-                                                                                  );
-                                                                                }
-                                                                              }()),
-                                                                            ),
-                                                                            options: CarouselOptions(
-                                                                              autoPlay: false,
-                                                                              enlargeCenterPage: true,
-                                                                              aspectRatio: 1,
-                                                                              viewportFraction: 1,
-                                                                              initialPage: index,
-                                                                            ),
-                                                                          ),
-                                                                        ),
-
-                                                                        Row(
-                                                                          mainAxisAlignment: MainAxisAlignment.center,
-                                                                          children: [
-                                                                            IconButton(
-                                                                              onPressed: () => buttonCarouselController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                              icon: const Icon(Icons.arrow_back_rounded, color: Color(0xffffffff),),
-                                                                            ),
-                                                                            IconButton(
-                                                                              onPressed: () => buttonCarouselController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                              icon: const Icon(Icons.arrow_forward_rounded, color: Color(0xffffffff),),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-
-                                                                        const SizedBox(height: 85,),
-                                                                      ],
-                                                                    ),
-                                                                  ),
+                                                      );
+                                                    }else if(originalPost.data!.almPost.showOriginalPostImagesOrVideos.length == 2){
+                                                      return StaggeredGridView.countBuilder(
+                                                        staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
+                                                        physics: const NeverScrollableScrollPhysics(),
+                                                        padding: EdgeInsets.zero,
+                                                        crossAxisSpacing: 4.0,
+                                                        mainAxisSpacing: 4.0,
+                                                        crossAxisCount: 4,
+                                                        shrinkWrap: true,
+                                                        itemCount: 2,
+                                                        itemBuilder: (BuildContext context, int index) => GestureDetector(
+                                                          child: ((){
+                                                            if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
+                                                              return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
+                                                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                  aspectRatio: 16 / 9,
+                                                                  fit: BoxFit.contain,
                                                                 ),
                                                               );
-                                                            },
-                                                          );
-                                                        },
-                                                      ),
-                                                    );
-                                                  }else{
-                                                    return StaggeredGridView.countBuilder(
-                                                      staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                                                      physics: const NeverScrollableScrollPhysics(),
-                                                      padding: EdgeInsets.zero,
-                                                      crossAxisSpacing: 4.0,
-                                                      mainAxisSpacing: 4.0,
-                                                      crossAxisCount: 4,
-                                                      shrinkWrap: true,
-                                                      itemCount: 3,
-                                                      itemBuilder: (BuildContext context, int index) => GestureDetector(
-                                                        child: ((){
-                                                          if(index != 1){
-                                                            return lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true 
-                                                            ? BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
-                                                              betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                                controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                                                aspectRatio: 16 / 9,
-                                                                fit: BoxFit.contain,
-                                                              ),
-                                                            )
-                                                            : CachedNetworkImage(
-                                                              fit: BoxFit.cover,
-                                                              imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
-                                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                            }else{
+                                                              return CachedNetworkImage(
+                                                                fit: BoxFit.cover,
+                                                                imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
+                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                              );
+                                                            }
+                                                          }()),
+                                                          onTap: (){
+                                                            showGeneralDialog(
+                                                              context: context,
+                                                              transitionDuration: const Duration(milliseconds: 0),
+                                                              barrierDismissible: true,
+                                                              barrierLabel: 'Dialog',
+                                                              pageBuilder: (_, __, ___){
+                                                                return Scaffold(
+                                                                  backgroundColor: Colors.black12.withOpacity(0.7),
+                                                                  body: SizedBox.expand(
+                                                                    child: SafeArea(
+                                                                      child: Column(
+                                                                        children: [
+                                                                          Container(
+                                                                            alignment: Alignment.centerRight,
+                                                                            padding: const EdgeInsets.only(right: 20.0),
+                                                                            child: GestureDetector(
+                                                                              child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
+                                                                              onTap: (){
+                                                                                Navigator.pop(context);
+                                                                              },
+                                                                            ),
+                                                                          ),
+
+                                                                          const SizedBox(height: 10,),
+
+                                                                          Expanded(
+                                                                            child: CarouselSlider(
+                                                                              carouselController: buttonCarouselController,
+                                                                              items: List.generate(
+                                                                                originalPost.data!.almPost.showOriginalPostImagesOrVideos.length, (next) => ((){
+                                                                                  if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
+                                                                                    return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
+                                                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                                        placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                                                        deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+                                                                                        autoDispose: false,
+                                                                                        aspectRatio: 16 / 9,
+                                                                                        fit: BoxFit.contain,
+                                                                                      ),
+                                                                                    );
+                                                                                  }else{
+                                                                                    return ExtendedImage.network(
+                                                                                      originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
+                                                                                      fit: BoxFit.contain,
+                                                                                      loadStateChanged: (ExtendedImageState loading){
+                                                                                        if(loading.extendedImageLoadState == LoadState.loading || loading.extendedImageLoadState == LoadState.failed){
+                                                                                          return Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,);
+                                                                                        }
+                                                                                      },
+                                                                                      mode: ExtendedImageMode.gesture,
+                                                                                    );
+                                                                                  }
+                                                                                }()),
+                                                                              ),
+                                                                              options: CarouselOptions(
+                                                                                autoPlay: false,
+                                                                                enlargeCenterPage: true,
+                                                                                aspectRatio: 1,
+                                                                                viewportFraction: 1,
+                                                                                initialPage: index,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+
+                                                                          Row(
+                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                            children: [
+                                                                              IconButton(
+                                                                                onPressed: () => buttonCarouselController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
+                                                                                icon: const Icon(Icons.arrow_back_rounded, color: Color(0xffffffff),),
+                                                                              ),
+                                                                              IconButton(
+                                                                                onPressed: () => buttonCarouselController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
+                                                                                icon: const Icon(Icons.arrow_forward_rounded, color: Color(0xffffffff),),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+
+                                                                          const SizedBox(height: 85,),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              },
                                                             );
-                                                          }else{
-                                                            return ((){
-                                                              if(originalPost.data!.almPost.showOriginalPostImagesOrVideos.length - 3 > 0){
-                                                                if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
-                                                                  return Stack(
-                                                                    fit: StackFit.expand,
-                                                                    children: [
-                                                                      BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
-                                                                        betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                          placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                                          controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                                                          aspectRatio: 16 / 9,
-                                                                          fit: BoxFit.contain,
-                                                                        ),
-                                                                      ),
-
-                                                                      Container(color: const Color(0xff000000).withOpacity(0.5),),
-
-                                                                      Center(
-                                                                        child: CircleAvatar(
-                                                                          radius: 25,
-                                                                          backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                                          child: Text('${originalPost.data!.almPost.showOriginalPostImagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  );
-                                                                }else{
-                                                                  return Stack(
-                                                                    fit: StackFit.expand,
-                                                                    children: [
-                                                                      CachedNetworkImage(
-                                                                        fit: BoxFit.cover,
-                                                                        imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
-                                                                        placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                      ),
-
-                                                                      Container(color: const Color(0xff000000).withOpacity(0.5),),
-
-                                                                      Center(
-                                                                        child: CircleAvatar(
-                                                                          radius: 25,
-                                                                          backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                                          child: Text('${originalPost.data!.almPost.showOriginalPostImagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  );
-                                                                }
-                                                              }else{
-                                                                if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
-                                                                  return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
-                                                                    betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                                                      aspectRatio: 16 / 9,
-                                                                      fit: BoxFit.contain,
-                                                                    ),
-                                                                  );
-                                                                }else{
-                                                                  return CachedNetworkImage(
-                                                                    fit: BoxFit.cover,
-                                                                    imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
-                                                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                  );
-                                                                }
-                                                              }
-                                                            }());
-                                                          }
-                                                        }()),
-                                                        onTap: (){
-                                                          showGeneralDialog(
-                                                            context: context,
-                                                            transitionDuration: const Duration(milliseconds: 0),
-                                                            barrierDismissible: true,
-                                                            barrierLabel: 'Dialog',
-                                                            pageBuilder: (_, __, ___){
-                                                              return Scaffold(
-                                                                backgroundColor: Colors.black12.withOpacity(0.7),
-                                                                body: SizedBox.expand(
-                                                                  child: SafeArea(
-                                                                    child: Column(
+                                                          },
+                                                        ),
+                                                      );
+                                                    }else{
+                                                      return StaggeredGridView.countBuilder(
+                                                        staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                                                        physics: const NeverScrollableScrollPhysics(),
+                                                        padding: EdgeInsets.zero,
+                                                        crossAxisSpacing: 4.0,
+                                                        mainAxisSpacing: 4.0,
+                                                        crossAxisCount: 4,
+                                                        shrinkWrap: true,
+                                                        itemCount: 3,
+                                                        itemBuilder: (BuildContext context, int index) => GestureDetector(
+                                                          child: ((){
+                                                            if(index != 1){
+                                                              return lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true 
+                                                              ? BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
+                                                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                  aspectRatio: 16 / 9,
+                                                                  fit: BoxFit.contain,
+                                                                ),
+                                                              )
+                                                              : CachedNetworkImage(
+                                                                fit: BoxFit.cover,
+                                                                imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
+                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                              );
+                                                            }else{
+                                                              return ((){
+                                                                if(originalPost.data!.almPost.showOriginalPostImagesOrVideos.length - 3 > 0){
+                                                                  if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
+                                                                    return Stack(
+                                                                      fit: StackFit.expand,
                                                                       children: [
-                                                                        Container(
-                                                                          alignment: Alignment.centerRight,
-                                                                          padding: const EdgeInsets.only(right: 20.0),
-                                                                          child: GestureDetector(
-                                                                            child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
-                                                                            onTap: (){
-                                                                              Navigator.pop(context);
-                                                                            },
-                                                                          ),
-                                                                        ),
-                                                                        
-                                                                        const SizedBox(height: 10,),
-
-                                                                        Expanded(
-                                                                          child: CarouselSlider(
-                                                                            carouselController: buttonCarouselController,
-                                                                            items: List.generate(
-                                                                              originalPost.data!.almPost.showOriginalPostImagesOrVideos.length, (next) => ((){
-                                                                                if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
-                                                                                  return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[next]}',
-                                                                                    betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                                                                      deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-                                                                                      autoDispose: false,
-                                                                                      aspectRatio: 16 / 9,
-                                                                                      fit: BoxFit.contain,
-                                                                                    ),
-                                                                                  );
-                                                                                }else{
-                                                                                  return ExtendedImage.network(
-                                                                                    originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
-                                                                                    fit: BoxFit.contain,
-                                                                                    loadStateChanged: (ExtendedImageState loading){
-                                                                                      if(loading.extendedImageLoadState == LoadState.loading || loading.extendedImageLoadState == LoadState.failed){
-                                                                                        return Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,);
-                                                                                      }
-                                                                                    },
-                                                                                    mode: ExtendedImageMode.gesture,
-                                                                                  );
-                                                                                }
-                                                                              }()),
-                                                                            ),
-                                                                            options: CarouselOptions(
-                                                                              autoPlay: false,
-                                                                              enlargeCenterPage: true,
-                                                                              aspectRatio: 1,
-                                                                              viewportFraction: 1,
-                                                                              initialPage: index,
-                                                                            ),
+                                                                        BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
+                                                                          betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                            placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                                            controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                            aspectRatio: 16 / 9,
+                                                                            fit: BoxFit.contain,
                                                                           ),
                                                                         ),
 
-                                                                        Row(
-                                                                          mainAxisAlignment: MainAxisAlignment.center,
-                                                                          children: [
-                                                                            IconButton(
-                                                                              onPressed: () => buttonCarouselController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                              icon: const Icon(Icons.arrow_back_rounded, color: Color(0xffffffff),),
-                                                                            ),
-                                                                            IconButton(
-                                                                              onPressed: () => buttonCarouselController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                              icon: const Icon(Icons.arrow_forward_rounded, color: Color(0xffffffff),),
-                                                                            ),
-                                                                          ],
-                                                                        ),
+                                                                        Container(color: const Color(0xff000000).withOpacity(0.5),),
 
-                                                                        const SizedBox(height: 85,),
+                                                                        Center(
+                                                                          child: CircleAvatar(
+                                                                            radius: 25,
+                                                                            backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                                            child: Text('${originalPost.data!.almPost.showOriginalPostImagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
+                                                                          ),
+                                                                        ),
                                                                       ],
+                                                                    );
+                                                                  }else{
+                                                                    return Stack(
+                                                                      fit: StackFit.expand,
+                                                                      children: [
+                                                                        CachedNetworkImage(
+                                                                          fit: BoxFit.cover,
+                                                                          imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
+                                                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                        ),
+
+                                                                        Container(color: const Color(0xff000000).withOpacity(0.5),),
+
+                                                                        Center(
+                                                                          child: CircleAvatar(
+                                                                            radius: 25,
+                                                                            backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                                            child: Text('${originalPost.data!.almPost.showOriginalPostImagesOrVideos.length - 3}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    );
+                                                                  }
+                                                                }else{
+                                                                  if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
+                                                                    return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
+                                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                        placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                                        controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                        aspectRatio: 16 / 9,
+                                                                        fit: BoxFit.contain,
+                                                                      ),
+                                                                    );
+                                                                  }else{
+                                                                    return CachedNetworkImage(
+                                                                      fit: BoxFit.cover,
+                                                                      imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
+                                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                    );
+                                                                  }
+                                                                }
+                                                              }());
+                                                            }
+                                                          }()),
+                                                          onTap: (){
+                                                            showGeneralDialog(
+                                                              context: context,
+                                                              transitionDuration: const Duration(milliseconds: 0),
+                                                              barrierDismissible: true,
+                                                              barrierLabel: 'Dialog',
+                                                              pageBuilder: (_, __, ___){
+                                                                return Scaffold(
+                                                                  backgroundColor: Colors.black12.withOpacity(0.7),
+                                                                  body: SizedBox.expand(
+                                                                    child: SafeArea(
+                                                                      child: Column(
+                                                                        children: [
+                                                                          Container(
+                                                                            alignment: Alignment.centerRight,
+                                                                            padding: const EdgeInsets.only(right: 20.0),
+                                                                            child: GestureDetector(
+                                                                              child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
+                                                                              onTap: (){
+                                                                                Navigator.pop(context);
+                                                                              },
+                                                                            ),
+                                                                          ),
+                                                                          
+                                                                          const SizedBox(height: 10,),
+
+                                                                          Expanded(
+                                                                            child: CarouselSlider(
+                                                                              carouselController: buttonCarouselController,
+                                                                              items: List.generate(
+                                                                                originalPost.data!.almPost.showOriginalPostImagesOrVideos.length, (next) => ((){
+                                                                                  if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
+                                                                                    return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[next]}',
+                                                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                                        placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                                                        deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+                                                                                        autoDispose: false,
+                                                                                        aspectRatio: 16 / 9,
+                                                                                        fit: BoxFit.contain,
+                                                                                      ),
+                                                                                    );
+                                                                                  }else{
+                                                                                    return ExtendedImage.network(
+                                                                                      originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
+                                                                                      fit: BoxFit.contain,
+                                                                                      loadStateChanged: (ExtendedImageState loading){
+                                                                                        if(loading.extendedImageLoadState == LoadState.loading || loading.extendedImageLoadState == LoadState.failed){
+                                                                                          return Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,);
+                                                                                        }
+                                                                                      },
+                                                                                      mode: ExtendedImageMode.gesture,
+                                                                                    );
+                                                                                  }
+                                                                                }()),
+                                                                              ),
+                                                                              options: CarouselOptions(
+                                                                                autoPlay: false,
+                                                                                enlargeCenterPage: true,
+                                                                                aspectRatio: 1,
+                                                                                viewportFraction: 1,
+                                                                                initialPage: index,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+
+                                                                          Row(
+                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                            children: [
+                                                                              IconButton(
+                                                                                onPressed: () => buttonCarouselController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
+                                                                                icon: const Icon(Icons.arrow_back_rounded, color: Color(0xffffffff),),
+                                                                              ),
+                                                                              IconButton(
+                                                                                onPressed: () => buttonCarouselController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
+                                                                                icon: const Icon(Icons.arrow_forward_rounded, color: Color(0xffffffff),),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+
+                                                                          const SizedBox(height: 85,),
+                                                                        ],
+                                                                      ),
                                                                     ),
                                                                   ),
+                                                                );
+                                                              },
+                                                            );
+                                                          },
+                                                        ),
+                                                      );
+                                                    }
+                                                  }()),
+                                                ),
+
+                                                const SizedBox(height: 20),
+                                              ],
+                                            )
+                                            : Container(color: const Color(0xffff0000), height: 0,),
+
+                                            originalPost.data!.almPost.showOriginalPostPostTagged.isNotEmpty
+                                            ? Column(
+                                              children: [
+                                                const SizedBox(height: 10),
+
+                                                Container(
+                                                  alignment: Alignment.centerLeft,
+                                                  padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                                                  child: RichText(
+                                                    text: TextSpan(
+                                                      children: [
+                                                        const TextSpan(style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: Color(0xff888888)), text: 'with '),
+
+                                                        TextSpan(
+                                                          children: List.generate(
+                                                            originalPost.data!.almPost.showOriginalPostPostTagged.length, (index) => TextSpan(
+                                                              style: const TextStyle(fontSize: 18, fontFamily: 'NexaBold', color: Color(0xff000000),),
+                                                              children: <TextSpan>[
+                                                                TextSpan(text: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedFirstName + ' ' + originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedLastName,
+                                                                recognizer: TapGestureRecognizer()
+                                                                  ..onTap = (){
+                                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId, accountType: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostAccountType)));
+                                                                  },
                                                                 ),
-                                                              );
-                                                            },
-                                                          );
-                                                        },
-                                                      ),
-                                                    );
-                                                  }
-                                                }()),
-                                              ),
-
-                                              const SizedBox(height: 20),
-                                            ],
-                                          )
-                                          : Container(color: const Color(0xffff0000), height: 0,),
-
-                                          originalPost.data!.almPost.showOriginalPostPostTagged.isNotEmpty
-                                          ? Column(
-                                            children: [
-                                              const SizedBox(height: 10),
-
-                                              Container(
-                                                alignment: Alignment.centerLeft,
-                                                padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                                                child: RichText(
-                                                  text: TextSpan(
-                                                    children: [
-                                                      const TextSpan(style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: Color(0xff888888)), text: 'with '),
-
-                                                      TextSpan(
-                                                        children: List.generate(
-                                                          originalPost.data!.almPost.showOriginalPostPostTagged.length, (index) => TextSpan(
-                                                            style: const TextStyle(fontSize: 18, fontFamily: 'NexaBold', color: Color(0xff000000),),
-                                                            children: <TextSpan>[
-                                                              TextSpan(text: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedFirstName + ' ' + originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedLastName,
-                                                              recognizer: TapGestureRecognizer()
-                                                                ..onTap = (){
-                                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId, accountType: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostAccountType)));
-                                                                },
-                                                              ),
-                                                              index < originalPost.data!.almPost.showOriginalPostPostTagged.length - 1 ? const TextSpan(text: ', ') : const TextSpan(text: ''),
-                                                            ],
+                                                                index < originalPost.data!.almPost.showOriginalPostPostTagged.length - 1 ? const TextSpan(text: ', ') : const TextSpan(text: ''),
+                                                              ],
+                                                            ),
                                                           ),
                                                         ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                            : const SizedBox(height: 0,),
+
+                                            originalPost.data!.almPost.showOriginalPostLocation != ''
+                                            ? Column(
+                                              children: [
+                                                const SizedBox(height: 10,),
+
+                                                Padding(
+                                                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                                                  child: Row(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    children: [
+                                                      const Icon(Icons.place, color: Color(0xff888888)),
+
+                                                      Expanded(
+                                                        child: GestureDetector(
+                                                          child: Text(originalPost.data!.almPost.showOriginalPostLocation, style: const TextStyle(fontSize: 18, fontFamily: 'NexaBold', color: Color(0xff000000),),),
+                                                          onTap: (){
+                                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMaps(latitude: originalPost.data!.almPost.showOriginalPostLatitude, longitude: originalPost.data!.almPost.showOriginalPostLongitude, isMemorial: false, memorialName: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageName, memorialImage: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageProfileImage,)));
+                                                          },
+                                                        ),  
                                                       ),
                                                     ],
                                                   ),
                                                 ),
-                                              ),
-                                            ],
-                                          )
-                                          : const SizedBox(height: 0,),
-
-                                          originalPost.data!.almPost.showOriginalPostLocation != ''
-                                          ? Column(
-                                            children: [
-                                              const SizedBox(height: 10,),
-
-                                              Padding(
-                                                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                                                child: Row(
-                                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                                  children: [
-                                                    const Icon(Icons.place, color: Color(0xff888888)),
-
-                                                    Expanded(
-                                                      child: GestureDetector(
-                                                        child: Text(originalPost.data!.almPost.showOriginalPostLocation, style: const TextStyle(fontSize: 18, fontFamily: 'NexaBold', color: Color(0xff000000),),),
-                                                        onTap: (){
-                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMaps(latitude: originalPost.data!.almPost.showOriginalPostLatitude, longitude: originalPost.data!.almPost.showOriginalPostLongitude, isMemorial: false, memorialName: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageName, memorialImage: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageProfileImage,)));
-                                                        },
-                                                      ),  
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          )
-                                          : const SizedBox(height: 0,),
-
-                                          Container(
-                                            height: 40,
-                                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.end,
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    likePost == true
-                                                    ? const FaIcon(FontAwesomeIcons.heart, color: Color(0xffE74C3C),)
-                                                    : const FaIcon(FontAwesomeIcons.heart, color: Color(0xff000000),),
-
-                                                    const SizedBox(width: 10,),
-
-                                                    Text('$numberOfLikes', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                                                  ],
-                                                ),
-
-                                                const SizedBox(width: 40,),
-
-                                                Row(
-                                                  children: [
-                                                    const FaIcon(FontAwesomeIcons.comment, color: Color(0xff000000),),
-
-                                                    const SizedBox(width: 10,),
-
-                                                    Text('$numberOfComments', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                                                  ],
-                                                ),
                                               ],
+                                            )
+                                            : const SizedBox(height: 0,),
+
+                                            Container(
+                                              height: 40,
+                                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      likePost == true
+                                                      ? const FaIcon(FontAwesomeIcons.heart, color: Color(0xffE74C3C),)
+                                                      : const FaIcon(FontAwesomeIcons.heart, color: Color(0xff000000),),
+
+                                                      const SizedBox(width: 10,),
+
+                                                      Text('$numberOfLikes', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                                                    ],
+                                                  ),
+
+                                                  const SizedBox(width: 40,),
+
+                                                  Row(
+                                                    children: [
+                                                      const FaIcon(FontAwesomeIcons.comment, color: Color(0xff000000),),
+
+                                                      const SizedBox(width: 10,),
+
+                                                      Text('$numberOfComments', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
 
-                                    SliverToBoxAdapter( // COMMENTS AND REPLIES
-                                      child: !isRefreshedListener
-                                      ? FutureBuilder<APIRegularShowListOfComments>(
-                                        future: getListOfComments(),
-                                        builder: (context, listOfComments){
-                                          if(listOfComments.connectionState != ConnectionState.done){
-                                            return const Center(child: CustomLoader(),);
-                                          }
-                                          else if(listOfComments.hasData){
-                                            return Column(
-                                              children: List.generate(listOfComments.data!.almCommentsList.length, (i) => ListTile(
-                                                visualDensity: const VisualDensity(vertical: 4.0),
-                                                leading: listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserImage != ''
-                                                ? CircleAvatar(
-                                                  backgroundColor: const Color(0xff888888),
-                                                  foregroundImage: NetworkImage(listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserImage),
-                                                )
-                                                : const CircleAvatar(
-                                                  backgroundColor: Color(0xff888888),
-                                                  foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
-                                                ),
-                                                title: Row(
-                                                  children: [
-                                                    Expanded(
-                                                      child: currentUserId == listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserId && currentAccountType == listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserAccountType
-                                                      ? const Text('You', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000),),)
-                                                      : Text('${listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserFirstName} ${listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserLastName}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000),),),
-                                                    ),
+                                      SliverToBoxAdapter( // COMMENTS AND REPLIES
+                                        child: !isRefreshedListener
+                                        ? FutureBuilder<APIRegularShowListOfCommentsDuplicate>(
+                                          future: getListOfComments(),
+                                          builder: (context, listOfComments){
+                                            if(listOfComments.connectionState != ConnectionState.done){
+                                              return const Center(child: CustomLoaderThreeDots());
+                                            }
+                                            else if(listOfComments.hasData){
+                                              return Column(
+                                                children: List.generate(listOfComments.data!.almCommentsList.length, (i) => ListTile(
+                                                  visualDensity: const VisualDensity(vertical: 4.0),
+                                                  leading: listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserImage != ''
+                                                  ? CircleAvatar(
+                                                    backgroundColor: const Color(0xff888888),
+                                                    foregroundImage: NetworkImage(listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserImage),
+                                                  )
+                                                  : const CircleAvatar(
+                                                    backgroundColor: Color(0xff888888),
+                                                    foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
+                                                  ),
+                                                  title: Row(
+                                                    children: [
+                                                      Expanded(
+                                                        child: currentUserId == listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserId && currentAccountType == listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserAccountType
+                                                        ? const Text('You', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000),),)
+                                                        : Text('${listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserFirstName} ${listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserLastName}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000),),),
+                                                      ),
 
-                                                    Expanded(
-                                                      child: Align(
-                                                        alignment: Alignment.centerRight,
-                                                        child: TextButton.icon(
-                                                          onPressed: () async{
-                                                            if(commentsLikes[i] == true){
-                                                              commentsLikes[i] = false;
-                                                              commentsNumberOfLikes[i]--;
+                                                      Expanded(
+                                                        child: Align(
+                                                          alignment: Alignment.centerRight,
+                                                          child: TextButton.icon(
+                                                            onPressed: () async{
+                                                              if(commentsLikes[i] == true){
+                                                                commentsLikes[i] = false;
+                                                                commentsNumberOfLikes[i]--;
 
-                                                              await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: listOfComments.data!.almCommentsList[i].showListOfCommentsCommentId, likeStatus: false);
-                                                            }else{
-                                                              commentsLikes[i] = true;
-                                                              commentsNumberOfLikes[i]++;
+                                                                await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: listOfComments.data!.almCommentsList[i].showListOfCommentsCommentId, likeStatus: false);
+                                                              }else{
+                                                                commentsLikes[i] = true;
+                                                                commentsNumberOfLikes[i]++;
 
-                                                              await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: listOfComments.data!.almCommentsList[i].showListOfCommentsCommentId, likeStatus: true);
-                                                            }
-                                                          },
-                                                          icon: commentsLikes[i] == true
-                                                          ? const FaIcon(FontAwesomeIcons.solidHeart, color: Color(0xffE74C3C),)
-                                                          : const FaIcon(FontAwesomeIcons.heart, color: Color(0xff888888),),
-                                                          label: Text('${commentsNumberOfLikes[i]}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                                                        ),
-                                                      )
-                                                    ),
-                                                  ],
-                                                ),
-                                                subtitle: Column(
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        Expanded(
-                                                          child: Container(
-                                                            padding: const EdgeInsets.all(10.0),
-                                                            child: Text(listOfComments.data!.almCommentsList[i].showListOfCommentsCommentBody, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),),
-                                                            decoration: const BoxDecoration(color: Color(0xff4EC9D4), borderRadius: BorderRadius.all(Radius.circular(10.0)),),
+                                                                await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: listOfComments.data!.almCommentsList[i].showListOfCommentsCommentId, likeStatus: true);
+                                                              }
+                                                            },
+                                                            icon: commentsLikes[i] == true
+                                                            ? const FaIcon(FontAwesomeIcons.solidHeart, color: Color(0xffE74C3C),)
+                                                            : const FaIcon(FontAwesomeIcons.heart, color: Color(0xff888888),),
+                                                            label: Text('${commentsNumberOfLikes[i]}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
                                                           ),
-                                                        ),
-                                                      ],
-                                                    ),
+                                                        )
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  subtitle: Column(
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Expanded(
+                                                            child: Container(
+                                                              padding: const EdgeInsets.all(10.0),
+                                                              child: Text(listOfComments.data!.almCommentsList[i].showListOfCommentsCommentBody, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),),
+                                                              decoration: const BoxDecoration(color: Color(0xff4EC9D4), borderRadius: BorderRadius.all(Radius.circular(10.0)),),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
 
-                                                    const SizedBox(height: 5,),
+                                                      const SizedBox(height: 5,),
 
-                                                    Row(
-                                                      children: [
-                                                        Text(timeago.format(DateTime.parse(listOfComments.data!.almCommentsList[i].showListOfCommentsCreatedAt)), style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                                                      Row(
+                                                        children: [
+                                                          Text(timeago.format(DateTime.parse(listOfComments.data!.almCommentsList[i].showListOfCommentsCreatedAt)), style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
 
-                                                        const SizedBox(width: 20,),
+                                                          const SizedBox(width: 20,),
 
-                                                        GestureDetector(
-                                                          child: const Text('Reply', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
-                                                          onTap: () async{
-                                                            if(controller.text != ''){
-                                                              controller.clear();
-                                                            }
+                                                          GestureDetector(
+                                                            child: const Text('Reply', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                                                            onTap: () async{
+                                                              if(controller.text != ''){
+                                                                controller.clear();
+                                                              }
 
-                                                            await showModalBottomSheet(context: context, builder: (context) => showKeyboard(
-                                                              isReply: true, 
-                                                              toReply: listOfComments.data!.almCommentsList[i].showListOfCommentsCommentBody, 
-                                                              replyFrom: '${listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserFirstName}' '${listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserLastName}',
-                                                              currentCommentId: listOfComments.data!.almCommentsList[i].showListOfCommentsCommentId,
-                                                            ),);
-                                                          },
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    
-                                                    const SizedBox(height: 20,),
+                                                              await showModalBottomSheet(context: context, builder: (context) => showKeyboard(
+                                                                isReply: true, 
+                                                                toReply: listOfComments.data!.almCommentsList[i].showListOfCommentsCommentBody, 
+                                                                replyFrom: '${listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserFirstName}' '${listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserLastName}',
+                                                                currentCommentId: listOfComments.data!.almCommentsList[i].showListOfCommentsCommentId,
+                                                              ),);
+                                                            },
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      
+                                                      const SizedBox(height: 20,),
 
-                                                    FutureBuilder<APIRegularShowListOfReplies>(
-                                                      future: getListOfReplies(commentId: listOfComments.data!.almCommentsList[i].showListOfCommentsCommentId),
-                                                      builder: (context, listOfReplies){
-                                                        if(listOfReplies.connectionState != ConnectionState.done){
-                                                          return const SizedBox(height: 0,);
-                                                        }else if(listOfReplies.hasError){
-                                                          return const SizedBox(height: 0,);
-                                                        }
-                                                        else if(listOfReplies.hasData){
-                                                          return Column(
-                                                            children: List.generate(listOfReplies.data!.almRepliesList.length, (index) => ListTile(
-                                                              contentPadding: EdgeInsets.zero,
-                                                              visualDensity: const VisualDensity(vertical: 4.0),
-                                                              leading: listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserImage != ''
-                                                              ? CircleAvatar(
-                                                                backgroundColor: const Color(0xff888888),
-                                                                foregroundImage: NetworkImage(listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserImage),
-                                                              )
-                                                              : const CircleAvatar(
-                                                                backgroundColor: Color(0xff888888),
-                                                                foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
-                                                              ),
-                                                              title: Row(
-                                                                children: [
-                                                                  Expanded(
-                                                                    child: currentUserId == listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserUserId && currentAccountType == listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListOfCommentsUserAccountType
-                                                                    ? const Text('You', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000),),)
-                                                                    : Text(listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserFirstName + ' ' + listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserLastName, style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000)),),
-                                                                  ),
-
-                                                                  Expanded(
-                                                                    child: Align(
-                                                                      alignment: Alignment.centerRight,
-                                                                      child: TextButton.icon(
-                                                                        onPressed: () async{
-                                                                          if(repliesLikes[index] == true){
-                                                                            repliesLikes[index] = false;
-                                                                            repliesNumberOfLikes[index]--;
-
-                                                                            await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: listOfReplies.data!.almRepliesList[index].showListOfRepliesReplyId, likeStatus: false);
-                                                                          }else{
-                                                                            repliesLikes[index] = true;
-                                                                            repliesNumberOfLikes[index]++;
-
-                                                                            await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: listOfReplies.data!.almRepliesList[index].showListOfRepliesReplyId, likeStatus: true);
-                                                                          }
-                                                                        },
-                                                                        icon: repliesLikes[index] == true
-                                                                        ? const FaIcon(FontAwesomeIcons.solidHeart, color: Color(0xffE74C3C),)
-                                                                        : const FaIcon(FontAwesomeIcons.heart, color: Color(0xff888888),),
-                                                                        label: Text('${repliesNumberOfLikes[index]}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                                                                      ),
+                                                      FutureBuilder<APIRegularShowListOfRepliesDuplicate>(
+                                                        future: getListOfReplies(commentId: listOfComments.data!.almCommentsList[i].showListOfCommentsCommentId),
+                                                        builder: (context, listOfReplies){
+                                                          if(listOfReplies.connectionState != ConnectionState.done){
+                                                            return const Center(child: CustomLoaderThreeDots());
+                                                          }else if(listOfReplies.hasError){
+                                                            return const SizedBox(height: 0,);
+                                                          }
+                                                          else if(listOfReplies.hasData){
+                                                            return Column(
+                                                              children: List.generate(listOfReplies.data!.almRepliesList.length, (index) => ListTile(
+                                                                contentPadding: EdgeInsets.zero,
+                                                                visualDensity: const VisualDensity(vertical: 4.0),
+                                                                leading: listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserImage != ''
+                                                                ? CircleAvatar(
+                                                                  backgroundColor: const Color(0xff888888),
+                                                                  foregroundImage: NetworkImage(listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserImage),
+                                                                )
+                                                                : const CircleAvatar(
+                                                                  backgroundColor: Color(0xff888888),
+                                                                  foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
+                                                                ),
+                                                                title: Row(
+                                                                  children: [
+                                                                    Expanded(
+                                                                      child: currentUserId == listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserUserId && currentAccountType == listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserAccountType
+                                                                      ? const Text('You', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000),),)
+                                                                      : Text(listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserFirstName + ' ' + listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserLastName, style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000)),),
                                                                     ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              subtitle: Column(
-                                                                children: [
-                                                                  Row(
-                                                                    children: [
-                                                                      Expanded(
-                                                                        child: Container(
-                                                                          padding: const EdgeInsets.all(10.0),
-                                                                          child: Text(listOfReplies.data!.almRepliesList[index].showListOfRepliesReplyBody, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),),
-                                                                          decoration: const BoxDecoration(color: Color(0xff4EC9D4), borderRadius: BorderRadius.all(Radius.circular(10.0)),),
+
+                                                                    Expanded(
+                                                                      child: Align(
+                                                                        alignment: Alignment.centerRight,
+                                                                        child: TextButton.icon(
+                                                                          onPressed: () async{
+                                                                            if(repliesLikes[index] == true){
+                                                                              repliesLikes[index] = false;
+                                                                              repliesNumberOfLikes[index]--;
+
+                                                                              await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: listOfReplies.data!.almRepliesList[index].showListOfRepliesReplyId, likeStatus: false);
+                                                                            }else{
+                                                                              repliesLikes[index] = true;
+                                                                              repliesNumberOfLikes[index]++;
+
+                                                                              await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: listOfReplies.data!.almRepliesList[index].showListOfRepliesReplyId, likeStatus: true);
+                                                                            }
+                                                                          },
+                                                                          icon: repliesLikes[index] == true
+                                                                          ? const FaIcon(FontAwesomeIcons.solidHeart, color: Color(0xffE74C3C),)
+                                                                          : const FaIcon(FontAwesomeIcons.heart, color: Color(0xff888888),),
+                                                                          label: Text('${repliesNumberOfLikes[index]}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
                                                                         ),
                                                                       ),
-                                                                    ],
-                                                                  ),
-
-                                                                  const SizedBox(height: 5,),
-
-                                                                  Row(
-                                                                    children: [
-                                                                      Text(timeago.format(DateTime.parse(listOfReplies.data!.almRepliesList[index].showListOfRepliesCreatedAt),), style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
-
-                                                                      const SizedBox(width: 40,),
-
-                                                                      GestureDetector(
-                                                                        child: const Text('Reply', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
-                                                                        onTap: () async{
-                                                                          if(controller.text != ''){
-                                                                            controller.clear();
-                                                                          }
-
-                                                                          controller.text = listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserFirstName + ' ' + listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserLastName + ' ';
-
-                                                                          await showModalBottomSheet(context: context, builder: (context) => showKeyboard(
-                                                                            isReply: true, 
-                                                                            toReply: listOfReplies.data!.almRepliesList[index].showListOfRepliesReplyBody, 
-                                                                            replyFrom: '${listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserFirstName} ${listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserLastName}',
-                                                                            currentCommentId: listOfReplies.data!.almRepliesList[index].showListOfRepliesCommentId,
-                                                                          ));
-                                                                        },
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              onTap: (){
-                                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserUserId, accountType: listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListOfCommentsUserAccountType,),),);
-                                                              },
-                                                              onLongPress: () async{
-                                                                if(currentUserId == listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserUserId && currentAccountType == listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListOfCommentsUserAccountType){
-                                                                  await showMaterialModalBottomSheet(
-                                                                    context: context,
-                                                                    builder: (context) => SafeArea(
-                                                                      top: false,
-                                                                      child: Column(
-                                                                        mainAxisSize: MainAxisSize.min,
-                                                                        children: <Widget>[
-                                                                          ListTile(
-                                                                            title: const Text('Edit'),
-                                                                            leading: const Icon(Icons.edit),
-                                                                            onTap: () async{
-                                                                              controller.text = controller.text + listOfReplies.data!.almRepliesList[index].showListOfRepliesReplyBody;
-                                                                              await showModalBottomSheet(
-                                                                                context: context,
-                                                                                builder: (context) => showKeyboardEdit(isEdit: false, editId: listOfReplies.data!.almRepliesList[index].showListOfRepliesReplyId),
-                                                                              );
-                                                                            },
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                subtitle: Column(
+                                                                  children: [
+                                                                    Row(
+                                                                      children: [
+                                                                        Expanded(
+                                                                          child: Container(
+                                                                            padding: const EdgeInsets.all(10.0),
+                                                                            child: Text(listOfReplies.data!.almRepliesList[index].showListOfRepliesReplyBody, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),),
+                                                                            decoration: const BoxDecoration(color: Color(0xff4EC9D4), borderRadius: BorderRadius.all(Radius.circular(10.0)),),
                                                                           ),
-                                                                          ListTile(
-                                                                            title: const Text('Delete'),
-                                                                            leading: const Icon(Icons.delete),
-                                                                            onTap: () async{
-                                                                              context.loaderOverlay.show();
-                                                                              await apiRegularDeleteReply(replyId: listOfReplies.data!.almRepliesList[index].showListOfRepliesReplyId);
+                                                                        ),
+                                                                      ],
+                                                                    ),
+
+                                                                    const SizedBox(height: 5,),
+
+                                                                    Row(
+                                                                      children: [
+                                                                        Text(timeago.format(DateTime.parse(listOfReplies.data!.almRepliesList[index].showListOfRepliesCreatedAt),), style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+
+                                                                        const SizedBox(width: 40,),
+
+                                                                        GestureDetector(
+                                                                          child: const Text('Reply', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                                                                          onTap: () async{
+                                                                            if(controller.text != ''){
                                                                               controller.clear();
-                                                                              onRefresh();
-                                                                              context.loaderOverlay.hide();
-                                                                              Navigator.pop(context);
-                                                                            },
-                                                                          )
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                  );
-                                                                }else{
-                                                                  await showMaterialModalBottomSheet(
-                                                                    context: context,
-                                                                    builder: (context) => SafeArea(
-                                                                      top: false,
-                                                                      child: Column(
-                                                                        mainAxisSize: MainAxisSize.min,
-                                                                        children: <Widget>[
-                                                                          ListTile(
-                                                                            title: const Text('Report'),
-                                                                            leading: const Icon(Icons.edit),
-                                                                            onTap: (){
-                                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: widget.postId, reportType: 'Post')));
-                                                                            },
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                  );
-                                                                }
-                                                              },
-                                                              ),
-                                                            ),
-                                                          );
-                                                        }else{
-                                                          return const SizedBox(height: 0,);
-                                                        }
-                                                      }
-                                                    ),
-                                                  ],
-                                                ),
-                                                onTap: (){
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserId, accountType: listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserAccountType,)));
-                                                },
-                                                onLongPress: () async{
-                                                  if(currentUserId == listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserId && currentAccountType == listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserAccountType){
-                                                    await showMaterialModalBottomSheet(
-                                                      context: context,
-                                                      builder: (context) => SafeArea(
-                                                        top: false,
-                                                        child: Column(
-                                                          mainAxisSize: MainAxisSize.min,
-                                                          children: <Widget>[
-                                                            ListTile(
-                                                              title: const Text('Edit'),
-                                                              leading: const Icon(Icons.edit),
-                                                              onTap: () async {
-                                                                controller.text = controller.text + listOfComments.data!.almCommentsList[i].showListOfCommentsCommentBody;
-                                                                await showModalBottomSheet(
-                                                                  context: context,
-                                                                  builder: (context) => showKeyboardEdit(isEdit: true, editId: listOfComments.data!.almCommentsList[i].showListOfCommentsCommentId),
-                                                                );
-                                                              },
-                                                            ),
+                                                                            }
 
-                                                            ListTile(
-                                                              title: const Text('Delete'),
-                                                              leading: const Icon(Icons.delete),
-                                                              onTap: () async{
-                                                                context.loaderOverlay.show();
-                                                                await apiRegularDeleteComment(commentId: listOfComments.data!.almCommentsList[i].showListOfCommentsCommentId);
-                                                                controller.clear();
-                                                                onRefresh();
-                                                                context.loaderOverlay.hide();
-                                                                Navigator.pop(context);
-                                                              },
-                                                            )
-                                                          ],
-                                                        ),
+                                                                            controller.text = listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserFirstName + ' ' + listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserLastName + ' ';
+
+                                                                            await showModalBottomSheet(context: context, builder: (context) => showKeyboard(
+                                                                              isReply: true, 
+                                                                              toReply: listOfReplies.data!.almRepliesList[index].showListOfRepliesReplyBody, 
+                                                                              replyFrom: '${listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserFirstName} ${listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserLastName}',
+                                                                              currentCommentId: listOfReplies.data!.almRepliesList[index].showListOfRepliesCommentId,
+                                                                            ));
+                                                                          },
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                onTap: (){
+                                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserUserId, accountType: listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserAccountType,),),);
+                                                                },
+                                                                onLongPress: () async{
+                                                                  if(currentUserId == listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserUserId && currentAccountType == listOfReplies.data!.almRepliesList[index].showListOfRepliesUser.showListRepliesUserAccountType){
+                                                                    await showMaterialModalBottomSheet(
+                                                                      context: context,
+                                                                      builder: (context) => SafeArea(
+                                                                        top: false,
+                                                                        child: Column(
+                                                                          mainAxisSize: MainAxisSize.min,
+                                                                          children: <Widget>[
+                                                                            ListTile(
+                                                                              title: const Text('Edit'),
+                                                                              leading: const Icon(Icons.edit),
+                                                                              onTap: () async{
+                                                                                controller.text = controller.text + listOfReplies.data!.almRepliesList[index].showListOfRepliesReplyBody;
+                                                                                await showModalBottomSheet(
+                                                                                  context: context,
+                                                                                  builder: (context) => showKeyboardEdit(isEdit: false, editId: listOfReplies.data!.almRepliesList[index].showListOfRepliesReplyId),
+                                                                                );
+                                                                              },
+                                                                            ),
+                                                                            ListTile(
+                                                                              title: const Text('Delete'),
+                                                                              leading: const Icon(Icons.delete),
+                                                                              onTap: () async{
+                                                                                context.loaderOverlay.show();
+                                                                                await apiRegularDeleteReply(replyId: listOfReplies.data!.almRepliesList[index].showListOfRepliesReplyId);
+                                                                                controller.clear();
+                                                                                onRefresh();
+                                                                                context.loaderOverlay.hide();
+                                                                                Navigator.pop(context);
+                                                                              },
+                                                                            )
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  }else{
+                                                                    await showMaterialModalBottomSheet(
+                                                                      context: context,
+                                                                      builder: (context) => SafeArea(
+                                                                        top: false,
+                                                                        child: Column(
+                                                                          mainAxisSize: MainAxisSize.min,
+                                                                          children: <Widget>[
+                                                                            ListTile(
+                                                                              title: const Text('Report'),
+                                                                              leading: const Icon(Icons.edit),
+                                                                              onTap: (){
+                                                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: widget.postId, reportType: 'Post')));
+                                                                              },
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  }
+                                                                },
+                                                                ),
+                                                              ),
+                                                            );
+                                                          }else{
+                                                            return const SizedBox(height: 0,);
+                                                          }
+                                                        }
                                                       ),
-                                                    );
-                                                  }else{
-                                                    await showMaterialModalBottomSheet(
-                                                      context: context,
-                                                      builder: (context) => SafeArea(
-                                                        top: false,
-                                                        child: Column(
-                                                          mainAxisSize: MainAxisSize.min,
-                                                          children: <Widget>[
-                                                            ListTile(
-                                                              title: const Text('Report'),
-                                                              leading: const Icon(Icons.edit),
-                                                              onTap: (){
-                                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: widget.postId, reportType: 'Post')));
-                                                              },
-                                                            ),
-                                                          ],
+                                                    ],
+                                                  ),
+                                                  onTap: (){
+                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserId, accountType: listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserAccountType,)));
+                                                  },
+                                                  onLongPress: () async{
+                                                    if(currentUserId == listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserId && currentAccountType == listOfComments.data!.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserAccountType){
+                                                      await showMaterialModalBottomSheet(
+                                                        context: context,
+                                                        builder: (context) => SafeArea(
+                                                          top: false,
+                                                          child: Column(
+                                                            mainAxisSize: MainAxisSize.min,
+                                                            children: <Widget>[
+                                                              ListTile(
+                                                                title: const Text('Edit'),
+                                                                leading: const Icon(Icons.edit),
+                                                                onTap: () async {
+                                                                  controller.text = controller.text + listOfComments.data!.almCommentsList[i].showListOfCommentsCommentBody;
+                                                                  await showModalBottomSheet(
+                                                                    context: context,
+                                                                    builder: (context) => showKeyboardEdit(isEdit: true, editId: listOfComments.data!.almCommentsList[i].showListOfCommentsCommentId),
+                                                                  );
+                                                                },
+                                                              ),
+
+                                                              ListTile(
+                                                                title: const Text('Delete'),
+                                                                leading: const Icon(Icons.delete),
+                                                                onTap: () async{
+                                                                  context.loaderOverlay.show();
+                                                                  await apiRegularDeleteComment(commentId: listOfComments.data!.almCommentsList[i].showListOfCommentsCommentId);
+                                                                  controller.clear();
+                                                                  onRefresh();
+                                                                  context.loaderOverlay.hide();
+                                                                  Navigator.pop(context);
+                                                                },
+                                                              )
+                                                            ],
+                                                          ),
                                                         ),
-                                                      ),
-                                                    );
-                                                  }
-                                                },
+                                                      );
+                                                    }else{
+                                                      await showMaterialModalBottomSheet(
+                                                        context: context,
+                                                        builder: (context) => SafeArea(
+                                                          top: false,
+                                                          child: Column(
+                                                            mainAxisSize: MainAxisSize.min,
+                                                            children: <Widget>[
+                                                              ListTile(
+                                                                title: const Text('Report'),
+                                                                leading: const Icon(Icons.edit),
+                                                                onTap: (){
+                                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: widget.postId, reportType: 'Post')));
+                                                                },
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                  },
+                                                  ),
                                                 ),
-                                              ),
-                                            );
-                                          }else if(listOfComments.hasError){
-                                            return const MiscErrorMessageTemplate();
+                                              );
+                                            }else if(listOfComments.hasError){
+                                              return const MiscErrorMessageTemplate();
+                                            }
+                                            else{
+                                              return const SizedBox(height: 0,);
+                                            }
                                           }
-                                          else{
-                                            return const SizedBox(height: 0,);
-                                          }
-                                        }
-                                      )
-                                      : const SizedBox(height: 0,),
-                                    ),
-                                  ],
-                                );
-                              }else{
-                                return const SizedBox(height: 0,);
-                              }
-                            },
+                                        )
+                                        : const SizedBox(height: 100,),
+                                      ),
+                                    ],
+                                  );
+                                }else{
+                                  return const SizedBox(height: 0,);
+                                }
+                              },
+                            ),
                           ),
                         ),
-                      ),
-                    )
-                  ),
-                  isGuestLoggedInListener
-                  ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: const MiscLoginToContinue(),)
-                  : const SizedBox(height: 0),
-                ],
+                      )
+                    ),
+                    isGuestLoggedInListener
+                    ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: const MiscLoginToContinue(),)
+                    : const SizedBox(height: 0),
+                  ],
+                ),
               ),
             ),
           ),
@@ -1250,10 +1244,10 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
 
               Row(
                 children: [
-                  currentUserImage != ''
+                  currentUserImage.value != ''
                   ? CircleAvatar(
                     backgroundColor: const Color(0xff888888),
-                    foregroundImage: NetworkImage(currentUserImage),
+                    foregroundImage: NetworkImage(currentUserImage.value),
                   )
                   : const CircleAvatar(
                     backgroundColor: Color(0xff888888),
@@ -1312,10 +1306,10 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
         )
         : Row(
           children: [
-            currentUserImage != ''
+            currentUserImage.value != ''
             ? CircleAvatar(
               backgroundColor: const Color(0xff888888),
-              foregroundImage: NetworkImage(currentUserImage),
+              foregroundImage: NetworkImage(currentUserImage.value),
             )
             : const CircleAvatar(
               backgroundColor: Color(0xff888888),
@@ -1380,10 +1374,10 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
         padding: const EdgeInsets.symmetric(horizontal: 20.0,),
         child: Row(
           children: [
-            currentUserImage != ''
+            currentUserImage.value != ''
             ? CircleAvatar(
               backgroundColor: const Color(0xff888888),
-              foregroundImage: NetworkImage(currentUserImage),
+              foregroundImage: NetworkImage(currentUserImage.value),
             )
             : const CircleAvatar(
               backgroundColor: Color(0xff888888),

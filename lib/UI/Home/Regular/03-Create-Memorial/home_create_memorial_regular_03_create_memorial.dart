@@ -299,6 +299,8 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                           Navigator.pushReplacement(context, newRoute); 
                         },
                       ),
+
+                      const SizedBox(height: 20,),
                     ],
                   ),
                 ),

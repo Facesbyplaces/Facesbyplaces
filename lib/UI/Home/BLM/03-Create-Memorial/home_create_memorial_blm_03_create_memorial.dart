@@ -13,8 +13,6 @@ import 'dart:io';
 class HomeBLMCreateMemorial3 extends StatefulWidget{
   final String relationship;
   final String locationOfIncident;
-  final String precinct;
-  final String dob;
   final String rip;
   final String country;
   final String state;
@@ -23,7 +21,7 @@ class HomeBLMCreateMemorial3 extends StatefulWidget{
   final String description;
   final String memorialName;
   final List<dynamic> imagesOrVideos;
-  const HomeBLMCreateMemorial3({Key? key, required this.relationship, required this.locationOfIncident, required this.precinct, required this.dob, required this.rip, required this.country, required this.latitude, required this.longitude,  required this.state, required this.description, required this.memorialName, required this.imagesOrVideos,}) : super(key: key);
+  const HomeBLMCreateMemorial3({Key? key, required this.relationship, required this.locationOfIncident, required this.rip, required this.country, required this.latitude, required this.longitude,  required this.state, required this.description, required this.memorialName, required this.imagesOrVideos,}) : super(key: key);
 
   @override
   HomeBLMCreateMemorial3State createState() => HomeBLMCreateMemorial3State();
@@ -279,11 +277,9 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                             blmMemorialName: widget.memorialName,
                             blmDescription: widget.description,
                             blmLocationOfIncident: widget.locationOfIncident,
-                            blmDob: widget.dob,
                             blmRip: widget.rip,
                             blmState: widget.state,
                             blmCountry: widget.country,
-                            blmPrecinct: widget.precinct,
                             blmRelationship: widget.relationship,
                             blmBackgroundImage: backgroundImage.value,
                             blmProfileImage: profileImage.value,
@@ -300,6 +296,8 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                           Navigator.pushReplacement(context, newRoute);
                         },
                       ),
+
+                      const SizedBox(height: 20,),
                     ],
                   ),
                 ),

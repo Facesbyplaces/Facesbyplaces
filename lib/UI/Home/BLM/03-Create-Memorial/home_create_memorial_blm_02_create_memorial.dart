@@ -11,14 +11,12 @@ import 'dart:io';
 class HomeBLMCreateMemorial2 extends StatefulWidget{
   final String relationship;
   final String locationOfIncident;
-  final String precinct;
-  final String dob;
   final String rip;
   final String country;
   final String state;
   final String latitude;
   final String longitude;
-  const HomeBLMCreateMemorial2({Key? key, required this.relationship, required this.locationOfIncident, required this.precinct, required this.dob, required this.rip, required this.country, required this.state, required this.latitude, required this.longitude}) : super(key: key);
+  const HomeBLMCreateMemorial2({Key? key, required this.relationship, required this.locationOfIncident, required this.rip, required this.country, required this.state, required this.latitude, required this.longitude}) : super(key: key);
 
   @override
   HomeBLMCreateMemorial2State createState() => HomeBLMCreateMemorial2State();
@@ -184,10 +182,12 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                                 newFiles.addAll(slideImages.value);
                               }
 
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreateMemorial3(relationship: widget.relationship, locationOfIncident: widget.locationOfIncident, precinct: widget.precinct, dob: widget.dob, rip: widget.rip, country: widget.country, state: widget.state, latitude: widget.latitude, longitude: widget.longitude,  description: controllerStory.text, memorialName: _key1.currentState!.controller.text, imagesOrVideos: newFiles,),),);
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreateMemorial3(relationship: widget.relationship, locationOfIncident: widget.locationOfIncident, rip: widget.rip, country: widget.country, state: widget.state, latitude: widget.latitude, longitude: widget.longitude,  description: controllerStory.text, memorialName: _key1.currentState!.controller.text, imagesOrVideos: newFiles,),),);
                             }
                           },
                         ),
+
+                        const SizedBox(height: 20,),
                       ],
                     ),
                   ),
