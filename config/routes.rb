@@ -392,21 +392,13 @@ Rails.application.routes.draw do
     #user's shares
     get 'shares/:userId', to: 'shares#index', as: 'sharesIndex' 
 
-<<<<<<< HEAD
-  root 'pages#newHome'
-=======
   # root 'pages#home'
->>>>>>> 4f06ad8f027b123dc3635baa68770e2f177e6850
   get 'about', to: 'pages#about'
   get 'terms', to: 'pages#terms'
   get 'privacy', to: 'pages#privacy'
   get 'sign-up', to: 'pages#signUp'
   post 'sign-up-user', to: 'pages#create'
   
-<<<<<<< HEAD
-  get 'old-home', to: 'pages#home'
-=======
   root 'pages#newHome'
->>>>>>> 4f06ad8f027b123dc3635baa68770e2f177e6850
 
  end
