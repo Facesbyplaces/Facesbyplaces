@@ -6,7 +6,7 @@ class Api::V1::NewsletterController < ApplicationController
         @newsletter.save!
 
         # flash[:notice] = "Thank you! You will now receive the latest news from Faces by places. We’ll send you an email as soon as the app is available for download."
-        redirect_to root_path(newsletter: @newsletter)
+        # redirect_to root_path
         # return render html: "<script>alert('Thank you! You will now receive the latest news from Faces by places. We’ll send you an email as soon as the app is available for download.')</script>".html_safe
     end
 

@@ -1,6 +1,6 @@
 -# - if flash[:notice]
 -#   .notice= flash[:notice]
--# = javascript_include_tag 'success_modal.js'
+= javascript_include_tag 'success_modal.js'
 .new-home
   = video_tag "bg-video.mp4", autoplay: :autoplay, loop: :loop, muted: :muted, class: "bgVideo"
   .row 
@@ -26,6 +26,7 @@
           = f.phone_field :name, :placeholder => "Your Name"
           = f.email_field :email_address, :placeholder => "Your Email Address"
           = f.text_area :message, :placeholder => "Message"
-          = f.submit "Submit", {"data-modal-open" => "#success-modal"}
+          = f.submit "Submit", :id => 'success-modal-button'
 
--# =render partial: 'success_modal'
+- content_for :modal do
+  =render partial: "success_modal"

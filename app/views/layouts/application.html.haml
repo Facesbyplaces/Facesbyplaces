@@ -33,6 +33,7 @@
     %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
   %body
+    = yield :modal
     = render "header"
     = yield
     - if !(controller_name == "pages" && action_name == "home")

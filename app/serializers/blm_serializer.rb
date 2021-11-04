@@ -8,8 +8,8 @@ class BlmSerializer < ActiveModel::Serializer
       {
         description:        object.description,
         location:           object.location,
-        precinct:           object.precinct,
-        dob:                object.dob.to_date,
+        # precinct:           object.precinct,
+        # dob:                object.dob.to_date,
         rip:                object.rip.to_date,
         state:              object.state,
         country:            object.country,
@@ -23,8 +23,8 @@ class BlmSerializer < ActiveModel::Serializer
           {
             description:        object.description,
             location:           object.location,
-            precinct:           object.precinct,
-            dob:                object.dob.to_date,
+            # precinct:           object.precinct,
+            # dob:                object.dob.to_date,
             rip:                object.rip.to_date,
             state:              object.state,
             country:            object.country,
@@ -40,8 +40,8 @@ class BlmSerializer < ActiveModel::Serializer
           {
             description:        object.description,
             location:           object.location,
-            precinct:           object.precinct,
-            dob:                object.dob.to_date,
+            # precinct:           object.precinct,
+            # dob:                object.dob.to_date,
             rip:                object.rip.to_date,
             state:              object.state,
             country:            object.country,
