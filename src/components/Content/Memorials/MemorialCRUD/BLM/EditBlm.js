@@ -715,7 +715,7 @@ export default function EditMemorial() {
                           </div>
                           {/*end::Row*/}
                           {/*begin::Group*/}
-                          <div className="form-group row">
+                          {/* <div className="form-group row">
                             <label className="col-form-label col-3 text-lg-right text-left">
                               Date of Birth
                             </label>
@@ -728,7 +728,7 @@ export default function EditMemorial() {
                                 defaultValue={memorialDetails.dob}
                               />
                             </div>
-                          </div>
+                          </div> */}
                           {/*end::Group*/}
                           {/*begin::Group*/}
                           <div className="form-group row">
@@ -774,7 +774,7 @@ export default function EditMemorial() {
                           </div>
                           {/*end::Group*/}
                           {/*begin::Group*/}
-                          <div className="form-group row">
+                          {/* <div className="form-group row">
                             <label className="col-form-label col-3 text-lg-right text-left">
                               Precinct
                             </label>
@@ -787,7 +787,7 @@ export default function EditMemorial() {
                                 defaultValue={memorialDetails.precinct}
                               />
                             </div>
-                          </div>
+                          </div> */}
                           {/*end::Group*/}
                           {/*begin::Group*/}
                           <div className="form-group row">

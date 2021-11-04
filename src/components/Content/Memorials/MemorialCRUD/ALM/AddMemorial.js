@@ -660,7 +660,7 @@ export default function AddMemorial() {
                           </div>
                           {/*end::Row*/}
                           {/*begin::Group*/}
-                          <div className="form-group row">
+                          {/* <div className="form-group row">
                             <label className="col-form-label col-3 text-lg-right text-left">
                               Date of Birth
                             </label>
@@ -673,7 +673,7 @@ export default function AddMemorial() {
                                 required
                               />
                             </div>
-                          </div>
+                          </div> */}
                           {/*end::Group*/}
                           {/*begin::Group*/}
                           <div className="form-group row">
