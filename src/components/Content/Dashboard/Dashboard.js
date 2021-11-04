@@ -13,6 +13,7 @@ import MemorialsTable from "../Memorials/MemorialTable/MemorialsTable";
 import PostTable from "../Posts/PostTable/PostTable";
 import ReportTable from "../Reports/ReportTable/ReportTable";
 import TransactionTable from "../Transactions/TransactionTable/TransactionTable";
+import { SuccessModal } from "./Modal/SuccessModal";
 
 import axios from "../../../auxiliary/axios";
 
@@ -20,13 +21,14 @@ const Dashboard = (props) => {
   const [loading, setLoading] = useState(false);
   const [item, setItem] = useState(props.match.path.substring(1));
   const [release, setRelease] = useState();
+  const [showModal, setShowModal] = useState(false);
 
   const onReleaseAppClicked = () => {
-    console.log("Yeah!");
     axios
       .post(`/api/v1/newsletter/notify_subscribed_users`)
       .then((response) => {
         setRelease(true);
+        setShowModal(!showModal);
       })
       .catch((error) => {
         console.log(error.response);
@@ -56,6 +58,7 @@ const Dashboard = (props) => {
   return (
     <div>
       <Assets />
+      <SuccessModal showModal={showModal} setShowModal={setShowModal} />
       <div className="content-height d-flex flex-column flex-root">
         {loading ? (
           <div className="loader-container">
