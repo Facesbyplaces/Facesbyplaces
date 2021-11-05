@@ -1,7 +1,9 @@
 $(document).ready(function () {
   const modal = document.getElementById("success-modal");
   const btn = document.getElementById("success-modal-button");
-  const span = document.getElementsByClassName("close")[0];
+  const button = document.getElementsByClassName("button")[0];
+
+  console.log(button);
 
   // When the user clicks on the button, open the modal
   btn.onclick = function () {
@@ -9,7 +11,7 @@ $(document).ready(function () {
   };
 
   // When the user clicks on <span> (x), close the modal
-  span.onclick = function () {
+  button.onclick = function () {
     modal.style.display = "none";
     location.reload();
   };
