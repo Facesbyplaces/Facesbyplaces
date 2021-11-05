@@ -2,8 +2,13 @@ class Api::V1::NewsletterController < ApplicationController
     before_action :verify_admin, only: [:app_released]
 
     def create
-        @newsletter = Newsletter.new(newsletter_params)
-        @newsletter.save!
+
+        if newsletter_params.present?
+            @newsletter = Newsletter.new(newsletter_params)
+            @newsletter.save!
+        else
+            render json: { success: false, message: "Params empty!", status: 400 }, status: 400
+        end
 
         # flash[:notice] = "Thank you! You will now receive the latest news from Faces by places. We’ll send you an email as soon as the app is available for download."
         # redirect_to root_path
@@ -22,7 +27,7 @@ class Api::V1::NewsletterController < ApplicationController
             end
         }
 
-         render json: { success: true, message: "Emails sent!", status: 200 }, status: 200
+        render json: { success: true, message: "Emails sent!", status: 200 }, status: 200
     end
 
     def app_released
