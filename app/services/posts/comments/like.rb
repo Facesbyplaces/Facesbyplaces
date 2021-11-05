@@ -37,7 +37,7 @@ class Posts::Comments::Like
                 ).notify
             end
         else
-            if like.commentable.account != user() && like.commentable.account.notifsetting.postLikes == true
+            if like.commentable.account != @user && like.commentable.account.notifsetting.postLikes == true
                 Notification::Builder.new(
                         device_tokens:  like.commentable.account.device_token,
                         title:          "FacesByPlaces Notification",
