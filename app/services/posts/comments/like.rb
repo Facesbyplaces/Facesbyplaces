@@ -1,4 +1,5 @@
 class Posts::Comments::Like
+    require 'json'
 
     def initialize( user:, like: )
         @user = user
@@ -42,7 +43,7 @@ class Posts::Comments::Like
                         title:          "FacesByPlaces Notification",
                         message:        "#{user().first_name} liked your reply",
                         recipient:      like.commentable.account,
-                        actor:          @user,
+                        actor:          user(),
                         data:           like.commentable.post.id,
                         type:           "Post",
                         postType:       like.commentable.post.page_type,
