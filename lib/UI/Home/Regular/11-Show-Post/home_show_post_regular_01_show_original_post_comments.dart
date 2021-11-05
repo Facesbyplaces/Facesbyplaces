@@ -52,6 +52,7 @@ class HomeRegularShowOriginalPostComments extends StatefulWidget{
 class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOriginalPostComments>{
   CarouselController buttonCarouselController = CarouselController();
   TextEditingController controller = TextEditingController(text: '');
+  ValueNotifier<String> currentUserImage = ValueNotifier<String>('');
   ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(true);
   ValueNotifier<bool> isRefreshed = ValueNotifier<bool>(false);
   Future<APIRegularShowOriginalPostMain>? showOriginalPost;
@@ -60,8 +61,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
   List<bool> commentsLikes = [];
   List<int> repliesNumberOfLikes = [];
   List<bool> repliesLikes = [];
-  // String currentUserImage = '';
-  ValueNotifier<String> currentUserImage = ValueNotifier<String>('');
   String pageName = '';
   int currentAccountType = 1;
   int numberOfComments = 0;
@@ -95,11 +94,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
       scrollController.addListener((){
         if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more comments to show'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
-          // if(commentsRemaining != 0){
-          //   // onRefresh();
-          // }else{
-          //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more comments to show'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
-          // }
         }
       });
     }
@@ -107,22 +101,16 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
 
   Future<void> onRefresh() async{
     isRefreshed.value = true;
-
-    Future.delayed(const Duration(seconds: 3), (){
-      getOriginalPostInformation();
-      isRefreshed.value = false;
-      commentsNumberOfLikes = [];
-      commentsLikes = [];
-      repliesNumberOfLikes = [];
-      repliesLikes = [];
-      // currentUserImage = '';
-      currentUserImage.value = '';
-      pageName = '';
-      commentsRemaining = 1;
-      repliesRemaining = 1;
-      page1 = 1;
-      page2 = 1;
-    });
+    getOriginalPostInformation();
+    isRefreshed.value = false;
+    commentsNumberOfLikes = [];
+    commentsLikes = [];
+    repliesNumberOfLikes = [];
+    repliesLikes = [];
+    commentsRemaining = 1;
+    repliesRemaining = 1;
+    page1 = 1;
+    page2 = 1;
   }
 
 
@@ -832,8 +820,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                       ),
 
                                       SliverToBoxAdapter( // COMMENTS AND REPLIES
-                                        child: !isRefreshedListener
-                                        ? FutureBuilder<APIRegularShowListOfCommentsDuplicate>(
+                                        child: FutureBuilder<APIRegularShowListOfCommentsDuplicate>(
                                           future: getListOfComments(),
                                           builder: (context, listOfComments){
                                             if(listOfComments.connectionState != ConnectionState.done){
@@ -865,6 +852,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                           alignment: Alignment.centerRight,
                                                           child: TextButton.icon(
                                                             onPressed: () async{
+                                                              isRefreshed.value = true;
+                                                              
                                                               if(commentsLikes[i] == true){
                                                                 commentsLikes[i] = false;
                                                                 commentsNumberOfLikes[i]--;
@@ -876,6 +865,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
 
                                                                 await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: listOfComments.data!.almCommentsList[i].showListOfCommentsCommentId, likeStatus: true);
                                                               }
+
+                                                              isRefreshed.value = false;
                                                             },
                                                             icon: commentsLikes[i] == true
                                                             ? const FaIcon(FontAwesomeIcons.solidHeart, color: Color(0xffE74C3C),)
@@ -963,6 +954,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                         alignment: Alignment.centerRight,
                                                                         child: TextButton.icon(
                                                                           onPressed: () async{
+                                                                            isRefreshed.value = true;
+
                                                                             if(repliesLikes[index] == true){
                                                                               repliesLikes[index] = false;
                                                                               repliesNumberOfLikes[index]--;
@@ -974,6 +967,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
 
                                                                               await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: listOfReplies.data!.almRepliesList[index].showListOfRepliesReplyId, likeStatus: true);
                                                                             }
+
+                                                                            isRefreshed.value = false;
                                                                           },
                                                                           icon: repliesLikes[index] == true
                                                                           ? const FaIcon(FontAwesomeIcons.solidHeart, color: Color(0xffE74C3C),)
@@ -1168,8 +1163,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                               return const SizedBox(height: 0,);
                                             }
                                           }
-                                        )
-                                        : const SizedBox(height: 100,),
+                                        ),
                                       ),
                                     ],
                                   );
