@@ -3,12 +3,8 @@ class Api::V1::NewsletterController < ApplicationController
 
     def create
 
-        if newsletter_params.present?
-            @newsletter = Newsletter.new(newsletter_params)
-            @newsletter.save!
-        else
-            render json: { success: false, message: "Params empty!", status: 400 }, status: 400
-        end
+        # @newsletter = Newsletter.new(newsletter_params)
+        # @newsletter.save!
 
         # flash[:notice] = "Thank you! You will now receive the latest news from Faces by places. We’ll send you an email as soon as the app is available for download."
         # redirect_to root_path
