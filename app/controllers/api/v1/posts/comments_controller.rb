@@ -114,7 +114,7 @@ class Api::V1::Posts::CommentsController < ApplicationController
 
     def likeOrUnlike
         if params[:like].downcase == 'true'
-            return render json: {}, status: 409 unless Commentslike.where(account: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first == nil
+            return render json: {}, status: 400 unless Commentslike.where(account: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first == nil
             like = Posts::Comments::Like.new( user: user(), like: comment_like_params ).execute
 
             if like 

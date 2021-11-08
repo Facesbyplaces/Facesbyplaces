@@ -1,30 +1,31 @@
 :css
-  /* The Modal (background) */
-  .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+
+  .button {
+    background-color: Transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 2% 2%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1vw;
+    cursor: pointer;
+    border-radius: 25px;
+    margin: auto;
+    width: 30%;
+    cursor: pointer;
   }
 
-  /* Modal Content/Box */
-  .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    border-radius: 3%;
-    width: 25%; /* Could be more or less, depending on screen size */
-    height: 30%;
+  .button:hover {
+    background-color: #E6E6E6;
+    color: black;
   }
 
-  /* The Close Button */
+  .button2 {background-color: black;}
+  .button-container{
+    margin: auto;
+  }
+
   .close {
     color: #aaa;
     float: right;
@@ -38,15 +39,137 @@
     text-decoration: none;
     cursor: pointer;
   }
-  .body {
 
+  h2 {
+      font-size: 1.9vw; 
+      color: #ffffff; 
+      font-weight: 500; 
+      margin-left: 20px; 
+      margin-right: 20px; 
+      line-height: 1.2;
+    }
+
+  h5 {
+    font-size: 1.1vw; 
+    font-weight: 400; 
+    line-height: 1.5; 
+    color: #3f4254; 
+    text-align: left; 
+    font-style: normal;
   }
+
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1050;
+    width: 100%;
+    height: 100%;
+    outline: 0;
+    background: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  .modal-body {
+    flex: 1 1 auto;
+    padding: 1.75rem;
+  }
+
+  .modal-content {
+    position: relative;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    pointer-events: auto;
+    background-color: #ffffff;
+    background-clip: padding-box;
+    border: 0 solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.42rem;
+    outline: 0;
+  }
+
+  .modal-dialog {
+    position: relative;
+    width: auto;
+    pointer-events: none;
+    text-align: center;
+    max-width: 25%;
+    margin: 1.75rem auto;
+  }
+
+  .modal-dialog-centered {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    min-height: calc(100% - 3.5rem);
+  }
+
+  .modal-header {
+    background-color: #04ecff;
+    justify-content: space-between;
+    padding: 0 1.5rem 0 1.75rem;
+    border-top-left-radius: 0.42rem;
+    border-top-right-radius: 0.42rem;
+  }
+
+  .modal-footer {
+    color: black;
+    display: flex;
+    flex-wrap: wrap;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: center;
+    padding: 1rem;
+    border-bottom-right-radius: 0.42rem;
+    border-bottom-left-radius: 0.42rem;
+  }
+
+  @media only screen and (max-width: 1600px) {
+    .button {
+      font-size: 1rem;
+      width: 40%;
+    }
+
+    h2 {
+      font-size: 1.25rem; 
+    }
+
+    h5 {
+      font-size: 1rem; 
+    }
+
+    .modal-body {
+      flex: 1 1 auto;
+      padding: 1rem;
+    }
+
+    .modal-dialog {
+      max-width: 70%;
+    }
+
+    .modal-footer {
+      padding: 0.5rem;
+    }
+  }
+  
+
 #success-modal.modal
-  / Modal content
-  .modal-content
-    .modal-header
-      %span.close{:style => "color: #04ecff; margin-right: 20px;"} ×
-      %h2{:style => "font-size: 2rem; color: #3f4254; font-weight: 500; margin-left: 20px; margin-right: 20px"} Success!
-    %hr{:style => "border-style: inset; color: #d8d8d8; opacity: 0.2;"}
-    .modal-body
-      %p{:style => "font-size: 1.2rem; font-weight: 400; line-height: 1.5; color: #3f4254; text-align: left; font-style: normal; margin-left: 20px; margin-right: 20px"} Thank you for your support! We’ll send you an email as soon as the app is available for download.
+  .modal-dialog.modal-dialog-centered
+    / Modal content
+    .modal-content
+      .modal-header
+        -# %span.close{:style => "color: #04ecff; margin-right: 20px;"} ×
+        %h2
+          %b Success!
+      .modal-body
+        %h5
+          Thank you for your support! We’ll send you an email as soon as the app is available for download.
+      .modal-footer
+        %button.button.button2 Okay

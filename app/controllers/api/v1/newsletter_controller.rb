@@ -2,6 +2,7 @@ class Api::V1::NewsletterController < ApplicationController
     before_action :verify_admin, only: [:app_released]
 
     def create
+
         @newsletter = Newsletter.new(newsletter_params)
         @newsletter.save!
 
@@ -22,7 +23,7 @@ class Api::V1::NewsletterController < ApplicationController
             end
         }
 
-         render json: { success: true, message: "Emails sent!", status: 200 }, status: 200
+        render json: { success: true, message: "Emails sent!", status: 200 }, status: 200
     end
 
     def app_released

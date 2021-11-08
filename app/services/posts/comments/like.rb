@@ -1,8 +1,9 @@
 class Posts::Comments::Like
+    require 'json'
 
-    def initialize( like:, user: )
-        @like = like
+    def initialize( user:, like: )
         @user = user
+        @like = like
     end
 
     def execute
@@ -36,13 +37,13 @@ class Posts::Comments::Like
                 ).notify
             end
         else
-            if like.commentable.account != user() && like.commentable.account.notifsetting.postLikes == true
+            if like.commentable.account != @user && like.commentable.account.notifsetting.postLikes == true
                 Notification::Builder.new(
                         device_tokens:  like.commentable.account.device_token,
                         title:          "FacesByPlaces Notification",
                         message:        "#{user().first_name} liked your reply",
                         recipient:      like.commentable.account,
-                        actor:          @user,
+                        actor:          user(),
                         data:           like.commentable.post.id,
                         type:           "Post",
                         postType:       like.commentable.post.page_type,
