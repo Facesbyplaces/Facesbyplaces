@@ -3,5 +3,5 @@
 //= require rails-ujs
 //= require social-share-button
 
-//audio script 
-//=require audio
+//audio script
+// =require audio
