@@ -2,9 +2,18 @@ class Api::V1::NewsletterController < ApplicationController
     before_action :verify_admin, only: [:app_released]
 
     def create
-
-        @newsletter = Newsletter.new(newsletter_params)
-        @newsletter.save!
+        if newsletter_params[:name] === ""
+            redirect_to root_path, notice: "Form cannot be empty."
+        elsif newsletter_params[:email_address] === ""
+            redirect_to root_path, notice: "Form cannot be empty."
+        else   
+            @newsletter = Newsletter.new(newsletter_params)
+            begin
+                @newsletter.save!
+            rescue ActiveRecord::RecordInvalid
+                redirect_to root_path, notice: "Email address has already been taken."
+            end
+        end
 
         # flash[:notice] = "Thank you! You will now receive the latest news from Faces by places. We’ll send you an email as soon as the app is available for download."
         # redirect_to root_path

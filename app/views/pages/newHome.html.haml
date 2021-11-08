@@ -22,6 +22,9 @@
     .home-page-form-image
       .text.get-in-touch GET IN TOUCH
       .form
+        - flash.each do |type, msg|
+          %div{:style => "width: 75%; padding: 12px 20px; margin: 8px 0; background-color: #FF2F12"}
+            = msg
         = form_for(:newsletter, url: api_v1_newsletter_index_path) do |f|
           = f.text_field :name, :placeholder => "Your Name"
           = f.email_field :email_address, :placeholder => "Your Email Address"
