@@ -3,15 +3,15 @@ class Api::V1::NewsletterController < ApplicationController
 
     def create
         if newsletter_params[:name] === ""
-            redirect_to root_path, notice: "Form cannot be empty."
+            redirect_to_home("Form cannot be empty.")
         elsif newsletter_params[:email_address] === ""
-            redirect_to root_path, notice: "Form cannot be empty."
+            redirect_to_home("Form cannot be empty.")
         else   
             @newsletter = Newsletter.new(newsletter_params)
             begin
                 @newsletter.save!
             rescue ActiveRecord::RecordInvalid
-                redirect_to root_path, notice: "Email address has already been taken."
+                redirect_to_home("Email address has already been taken.")
             end
         end
 
@@ -44,6 +44,10 @@ class Api::V1::NewsletterController < ApplicationController
     end
 
     private
+    def redirect_to_home(message)
+        redirect_to root_path, notice: message
+    end
+
     def newsletter_params
         params.require(:newsletter).permit(:name, :email_address, :message)
     end
