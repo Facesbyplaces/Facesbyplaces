@@ -459,7 +459,9 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                                                     const SizedBox(width: 20,),
 
-                                                    Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsCountry, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                                                    Flexible(
+                                                      child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsCountry, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                                                    ),
                                                   ],
                                                 ),
 

@@ -68,7 +68,7 @@ class RegularPasswordResetEmail extends StatelessWidget{
                               decoration: const InputDecoration(
                                 alignLabelWithHint: true,
                                 labelText: 'Email Address',
-                                labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                                labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff888888),),
                                 focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xffffffff), width: 0,),),
                                 border: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
                               ),

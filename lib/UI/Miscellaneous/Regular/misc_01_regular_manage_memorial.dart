@@ -118,7 +118,7 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                           builder: (context) => CustomDialog(
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             title: 'Success',
-                            description: 'Successfully followed the page. You will receive notifications from this page.',
+                            description: 'Successfully unfollowed the page. You will no longer receive notifications from this page.',
                             okButtonColor: const Color(0xff4caf50), // GREEN
                             includeOkButton: true,
                           ),
@@ -173,7 +173,7 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                           builder: (context) => CustomDialog(
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             title: 'Success',
-                            description: 'Successfully followed the page. You will receive notifications from this page.',
+                            description: 'Successfully unfollowed the page. You will no longer receive notifications from this page.',
                             okButtonColor: const Color(0xff4caf50), // GREEN
                             includeOkButton: true,
                           ),

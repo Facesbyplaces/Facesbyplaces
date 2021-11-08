@@ -78,7 +78,7 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                             child: MiscInputFieldTemplate(
                               key: _key1,
                               labelText: 'New Password',
-                              labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                              labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff888888),),
                               type: TextInputType.emailAddress,
                               obscureText: true,
                             ),
@@ -91,7 +91,7 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                             child: MiscInputFieldTemplate(
                               key: _key2,
                               labelText: 'Confirm Password',
-                              labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                              labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff888888),),
                               type: TextInputType.emailAddress,
                               obscureText: true,
                             ),

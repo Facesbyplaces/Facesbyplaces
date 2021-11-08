@@ -91,7 +91,6 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                         MiscInputFieldTemplate(
                           key: _key2, 
                           labelText: 'Birthplace',
-                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                         ),
 
                         const SizedBox(height: 20,),
@@ -108,7 +107,7 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                             }
                           },
                           decoration: InputDecoration(
-                            labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                            labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff888888),),
                             focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
                             alignLabelWithHint: true,
                             labelText: 'DOB',
@@ -151,7 +150,7 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                             }
                           },
                           decoration: InputDecoration(
-                            labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                            labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff888888),),
                             focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
                             alignLabelWithHint: true,
                             labelText: 'RIP',
@@ -191,7 +190,7 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                           decoration: InputDecoration(
                             alignLabelWithHint: true, 
                             labelText: 'Cemetery', 
-                            labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                            labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff888888),),
                             focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
                             suffixIcon: IconButton(
                               icon: const Icon(Icons.add_location), 
@@ -213,7 +212,6 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                         MiscInputFieldTemplate(
                           key: _key3, 
                           labelText: 'Country',
-                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                         ),
 
                         const SizedBox(height: 40,),

@@ -81,42 +81,36 @@ class BLMRegister extends StatelessWidget{
                                         key: _key1,
                                         labelText: 'Your Name',
                                         type: TextInputType.name,
-                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                       ),
 
                                       MiscInputFieldTemplate(
                                         key: _key2,
                                         labelText: 'Last Name',
                                         type: TextInputType.name,
-                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                       ),
 
                                       MiscPhoneNumberTemplate(
                                         key: _key3,
                                         labelText: 'Mobile #',
                                         type: TextInputType.phone,
-                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                       ),
 
                                       MiscInputFieldTemplate(
                                         key: _key4,
                                         labelText: 'Email Address',
                                         type: TextInputType.emailAddress,
-                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                       ),
 
                                       MiscInputFieldTemplate(
                                         key: _key5,
                                         labelText: 'Username',
                                         type: TextInputType.text,
-                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                       ),
 
                                       MiscInputFieldTemplate(
                                         key: _key6,
                                         labelText: 'Password',
                                         type: TextInputType.text,
-                                        labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                         obscureText: true,
                                       ),
                                     ],

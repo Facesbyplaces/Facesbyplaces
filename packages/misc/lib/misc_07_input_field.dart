@@ -80,7 +80,7 @@ class MiscInputFieldDateTimeTemplateState extends State<MiscInputFieldDateTimeTe
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: widget.labelText,
-        labelStyle: const TextStyle(fontSize: 24, fontWeight: FontWeight.w400, color: Color(0xffBDC3C7),),
+        labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
         focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
       ),
       cursorColor: const Color(0xff000000),
@@ -116,7 +116,7 @@ class MiscPhoneNumberTemplate extends StatefulWidget{
   const MiscPhoneNumberTemplate({
     Key? key,
     this.labelText = '',
-    this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xff888888),),
+    this.labelTextStyle = const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff888888),),
     this.obscureText = false,
     this.type = TextInputType.text,
     this.maxLines = 1,
@@ -182,7 +182,7 @@ class MiscInputFieldDropDownState extends State<MiscInputFieldDropDown>{
       decoration: const InputDecoration(
         alignLabelWithHint: true,
         labelText: 'Relationship',
-        labelStyle: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+        labelStyle: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xff888888),),
         focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
       ),
       child: DropdownButtonHideUnderline(
@@ -216,7 +216,7 @@ class MiscInputFieldMultiTextTemplate extends StatefulWidget{
   const MiscInputFieldMultiTextTemplate({
     Key? key,
     this.labelText = '',
-    this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xff888888),),
+    this.labelTextStyle = const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff888888),),
     this.type = TextInputType.text,
     this.maxLines = 10,
     this.readOnly = false,
@@ -265,7 +265,8 @@ class MiscInputFieldTemplate extends StatefulWidget{
   const MiscInputFieldTemplate({
     Key? key,
     this.labelText = '',
-    this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xff888888),),
+    // this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xff888888),),
+    this.labelTextStyle = const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff888888),),
     this.obscureText = false,
     this.type = TextInputType.text,
     this.maxLines = 1,

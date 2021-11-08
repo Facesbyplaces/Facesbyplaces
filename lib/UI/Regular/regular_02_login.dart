@@ -237,7 +237,6 @@ class RegularLoginState extends State<RegularLogin>{
                                     padding: const EdgeInsets.symmetric(horizontal: 40),
                                     child: MiscInputFieldTemplate(
                                       key: _key1,
-                                      labelTextStyle: const TextStyle(fontSize: 24, color: Color(0xff000000), fontFamily: 'NexaRegular',),
                                       type: TextInputType.emailAddress,
                                       labelText: 'Email Address',
                                     ),
@@ -247,7 +246,6 @@ class RegularLoginState extends State<RegularLogin>{
                                     padding: const EdgeInsets.symmetric(horizontal: 40),
                                     child: MiscInputFieldTemplate(
                                       key: _key2,
-                                      labelTextStyle: const TextStyle(fontSize: 24, color: Color(0xff000000), fontFamily: 'NexaRegular'),
                                       type: TextInputType.text,
                                       labelText: 'Password',
                                       obscureText: true,

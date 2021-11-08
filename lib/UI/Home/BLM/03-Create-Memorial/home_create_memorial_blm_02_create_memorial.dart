@@ -103,7 +103,6 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                         MiscInputFieldTemplate(
                           key: _key1, 
                           labelText: 'Name of your Memorial Page',
-                          labelTextStyle: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                         ),
 
                         const SizedBox(height: 40,),

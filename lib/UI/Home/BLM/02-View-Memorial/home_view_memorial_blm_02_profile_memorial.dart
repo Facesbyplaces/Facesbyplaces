@@ -423,7 +423,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                           child: Padding(
                                                             padding: const EdgeInsets.symmetric(horizontal: 10.0),
                                                             child: MaterialButton(
-                                                              child: Text(joinListener ? 'Unjoin' : 'Join', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
+                                                              child: Text(joinListener ? 'Unfollow' : 'Follow', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                                                               color: joinListener ? const Color(0xff888888) : const Color(0xff04ECFF),
                                                               minWidth: SizeConfig.screenWidth! / 2,
                                                               shape: const StadiumBorder(),
@@ -511,11 +511,13 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                                                               const SizedBox(width: 20,),
 
-                                                              GestureDetector(
+                                                              Flexible(
+                                                                child: GestureDetector(
                                                                 child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsLocation, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff3498DB),),),
-                                                                onTap: () async{
-                                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMaps(latitude: profile.data!.blmMemorial.memorialDetails.memorialLatitude, longitude: profile.data!.blmMemorial.memorialDetails.memorialLongitude, isMemorial: true, memorialName: profile.data!.blmMemorial.memorialName, memorialImage: profile.data!.blmMemorial.memorialBackgroundImage)));
-                                                                },
+                                                                  onTap: () async{
+                                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMaps(latitude: profile.data!.blmMemorial.memorialDetails.memorialLatitude, longitude: profile.data!.blmMemorial.memorialDetails.memorialLongitude, isMemorial: true, memorialName: profile.data!.blmMemorial.memorialName, memorialImage: profile.data!.blmMemorial.memorialBackgroundImage)));
+                                                                  },
+                                                                ),
                                                               ),
                                                             ],
                                                           ),

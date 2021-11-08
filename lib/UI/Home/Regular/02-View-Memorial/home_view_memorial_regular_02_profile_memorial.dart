@@ -435,7 +435,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                           child: Padding(
                                                             padding: const EdgeInsets.symmetric(horizontal: 10.0),
                                                             child: MaterialButton(
-                                                              child: Text(joinListener ? 'Unjoin' : 'Join', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
+                                                              child: Text(joinListener ? 'Unfollow' : 'Follow', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
                                                               color: joinListener ? const Color(0xff888888) : const Color(0xff04ECFF),
                                                               minWidth: SizeConfig.screenWidth! / 2,
                                                               shape: const StadiumBorder(),
@@ -521,23 +521,13 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                         children: [
                                                           Row(
                                                             children: [
-                                                              Image.asset('assets/icons/prayer_logo.png', height: 25,),
-
-                                                              const SizedBox(width: 20,),
-
-                                                              const Text('Roman Catholic', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
-                                                            ],
-                                                          ),
-
-                                                          const SizedBox(height: 20,),
-
-                                                          Row(
-                                                            children: [
                                                               const Icon(Icons.place, color: Color(0xff000000), size: 25,),
 
                                                               const SizedBox(width: 20,),
 
-                                                              Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsBirthPlace, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                                                              Flexible(
+                                                                child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsBirthPlace, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                                                              ),
                                                             ],
                                                           ),
 

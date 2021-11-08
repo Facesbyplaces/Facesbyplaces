@@ -7,7 +7,7 @@ import 'package:facesbyplaces/API/BLM/12-Show-Post/api_show_post_blm_03_show_com
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api_show_post_blm_04_show_comment_or_reply_like_status.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api_show_post_blm_06_add_comment.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api_show_post_blm_07_add_reply.dart';
-import 'package:facesbyplaces/API/BLM/12-Show-Post/api_show_post_blm_08_comment_reply_like_or_unlike.dart';
+// import 'package:facesbyplaces/API/BLM/12-Show-Post/api_show_post_blm_08_comment_reply_like_or_unlike.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api_show_post_blm_09_delete_comment.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api_show_post_blm_10_edit_comment.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api_show_post_blm_11_delete_reply.dart';
@@ -792,12 +792,12 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                   Row(
                                                     children: [
                                                       likePost == true
-                                                      ? const FaIcon(FontAwesomeIcons.heart, color: Color(0xffE74C3C),)
-                                                      : const FaIcon(FontAwesomeIcons.heart, color: Color(0xff000000),),
+                                                      ? const FaIcon(FontAwesomeIcons.peace, color: Color(0xffff0000),) 
+                                                      : const FaIcon(FontAwesomeIcons.peace, color: Color(0xff888888),),
 
                                                       const SizedBox(width: 10,),
 
-                                                      Text('$numberOfLikes', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                                                      Text('${originalPost.data!.blmPost.showOriginalPostNumberOfLikes}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
                                                     ],
                                                   ),
 
@@ -809,7 +809,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
 
                                                       const SizedBox(width: 10,),
 
-                                                      Text('$numberOfComments', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                                                      Text('${originalPost.data!.blmPost.showOriginalPostNumberOfComments}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
                                                     ],
                                                   ),
                                                 ],
@@ -850,29 +850,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                       Expanded(
                                                         child: Align(
                                                           alignment: Alignment.centerRight,
-                                                          child: TextButton.icon(
-                                                            onPressed: () async{
-                                                              isRefreshed.value = true;
-
-                                                              if(commentsLikes[i] == true){
-                                                                commentsLikes[i] = false;
-                                                                commentsNumberOfLikes[i]--;
-
-                                                                await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: listOfComments.data!.blmCommentsList[i].showListOfCommentsCommentId, likeStatus: false);
-                                                              }else{
-                                                                commentsLikes[i] = true;
-                                                                commentsNumberOfLikes[i]++;
-
-                                                                await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: listOfComments.data!.blmCommentsList[i].showListOfCommentsCommentId, likeStatus: true);
-                                                              }
-
-                                                              isRefreshed.value = false;
-                                                            },
-                                                            icon: commentsLikes[i] == true
-                                                            ? const FaIcon(FontAwesomeIcons.solidHeart, color: Color(0xffE74C3C),)
-                                                            : const FaIcon(FontAwesomeIcons.heart, color: Color(0xff888888),),
-                                                            label: Text('${commentsNumberOfLikes[i]}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                                                          ),
+                                                          child: MiscLikeButtonTemplate(likeStatus: commentsLikes[i], numberOfLikes: commentsNumberOfLikes[i], commentableType: 'Comment', commentableId: listOfComments.data!.blmCommentsList[i].showListOfCommentsCommentId),
                                                         ),
                                                       ),
                                                     ],
@@ -952,29 +930,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                     Expanded(
                                                                       child: Align(
                                                                         alignment: Alignment.centerRight,
-                                                                        child: TextButton.icon(
-                                                                          onPressed: () async{
-                                                                            isRefreshed.value = true;
-
-                                                                            if(repliesLikes[index] == true){
-                                                                              repliesLikes[index] = false;
-                                                                              repliesNumberOfLikes[index]--;
-
-                                                                              await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: listOfReplies.data!.blmRepliesList[index].showListOfRepliesReplyId, likeStatus: false);
-                                                                            }else{
-                                                                              repliesLikes[index] = true;
-                                                                              repliesNumberOfLikes[index]++;
-
-                                                                              await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: listOfReplies.data!.blmRepliesList[index].showListOfRepliesReplyId, likeStatus: true);
-                                                                            }
-
-                                                                            isRefreshed.value = false;
-                                                                          },
-                                                                          icon: repliesLikes[index] == true
-                                                                          ? const FaIcon(FontAwesomeIcons.solidHeart, color: Color(0xffE74C3C),)
-                                                                          : const FaIcon(FontAwesomeIcons.heart, color: Color(0xff888888),),
-                                                                          label: Text('${repliesNumberOfLikes[index]}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                                                                        ),
+                                                                        child: MiscLikeButtonTemplate(likeStatus: repliesLikes[index], numberOfLikes: repliesNumberOfLikes[index], commentableType: 'Reply', commentableId: listOfReplies.data!.blmRepliesList[index].showListOfRepliesReplyId),
                                                                       ),
                                                                     ),
                                                                   ],

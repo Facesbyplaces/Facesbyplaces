@@ -304,14 +304,14 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   Positioned(
                                     top: 0,
                                     right: 20,
-                                    child: CircleAvatar(
+                                    child: isGuestLoggedInListener || unreadNotificationListener == 0
+                                    ? const SizedBox(height: 0,)
+                                    : CircleAvatar(
                                       radius: 12,
                                       backgroundColor: const Color(0xffff0000),
-                                      child: isGuestLoggedInListener == true
-                                      ? const Text('0', style: TextStyle(color: Color(0xffffffff), fontSize: 12),)
-                                      : Text(unreadNotificationListener > 99 ? '99+' : '$unreadNotificationListener', style: const TextStyle(color: Color(0xffffffff), fontSize: 12),),
+                                      child: Text(unreadNotificationListener > 99 ? '99+' : '$unreadNotificationListener', style: const TextStyle(color: Color(0xffffffff), fontSize: 12),),
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),

@@ -7,7 +7,7 @@ import 'package:facesbyplaces/API/Regular/12-Show-Post/api_show_post_regular_03_
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api_show_post_regular_04_show_comment_or_reply_like_status.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api_show_post_regular_06_add_comment.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api_show_post_regular_07_add_reply.dart';
-import 'package:facesbyplaces/API/Regular/12-Show-Post/api_show_post_regular_08_comment_reply_like_or_unlike.dart';
+// import 'package:facesbyplaces/API/Regular/12-Show-Post/api_show_post_regular_08_comment_reply_like_or_unlike.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api_show_post_regular_09_delete_comment.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api_show_post_regular_10_edit_comment.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api_show_post_regular_11_delete_reply.dart';
@@ -797,7 +797,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
 
                                                       const SizedBox(width: 10,),
 
-                                                      Text('$numberOfLikes', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                                                      Text('${originalPost.data!.almPost.showOriginalPostNumberOfLikes}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
                                                     ],
                                                   ),
 
@@ -809,7 +809,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
 
                                                       const SizedBox(width: 10,),
 
-                                                      Text('$numberOfComments', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                                                      Text('${originalPost.data!.almPost.showOriginalPostNumberOfComments}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
                                                     ],
                                                   ),
                                                 ],
@@ -850,29 +850,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                       Expanded(
                                                         child: Align(
                                                           alignment: Alignment.centerRight,
-                                                          child: TextButton.icon(
-                                                            onPressed: () async{
-                                                              isRefreshed.value = true;
-                                                              
-                                                              if(commentsLikes[i] == true){
-                                                                commentsLikes[i] = false;
-                                                                commentsNumberOfLikes[i]--;
-
-                                                                await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: listOfComments.data!.almCommentsList[i].showListOfCommentsCommentId, likeStatus: false);
-                                                              }else{
-                                                                commentsLikes[i] = true;
-                                                                commentsNumberOfLikes[i]++;
-
-                                                                await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: listOfComments.data!.almCommentsList[i].showListOfCommentsCommentId, likeStatus: true);
-                                                              }
-
-                                                              isRefreshed.value = false;
-                                                            },
-                                                            icon: commentsLikes[i] == true
-                                                            ? const FaIcon(FontAwesomeIcons.solidHeart, color: Color(0xffE74C3C),)
-                                                            : const FaIcon(FontAwesomeIcons.heart, color: Color(0xff888888),),
-                                                            label: Text('${commentsNumberOfLikes[i]}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                                                          ),
+                                                          child: MiscLikeButtonTemplate(likeStatus: commentsLikes[i], numberOfLikes: commentsNumberOfLikes[i], commentableType: 'Comment', commentableId: listOfComments.data!.almCommentsList[i].showListOfCommentsCommentId),
                                                         )
                                                       ),
                                                     ],
@@ -952,29 +930,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                     Expanded(
                                                                       child: Align(
                                                                         alignment: Alignment.centerRight,
-                                                                        child: TextButton.icon(
-                                                                          onPressed: () async{
-                                                                            isRefreshed.value = true;
-
-                                                                            if(repliesLikes[index] == true){
-                                                                              repliesLikes[index] = false;
-                                                                              repliesNumberOfLikes[index]--;
-
-                                                                              await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: listOfReplies.data!.almRepliesList[index].showListOfRepliesReplyId, likeStatus: false);
-                                                                            }else{
-                                                                              repliesLikes[index] = true;
-                                                                              repliesNumberOfLikes[index]++;
-
-                                                                              await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: listOfReplies.data!.almRepliesList[index].showListOfRepliesReplyId, likeStatus: true);
-                                                                            }
-
-                                                                            isRefreshed.value = false;
-                                                                          },
-                                                                          icon: repliesLikes[index] == true
-                                                                          ? const FaIcon(FontAwesomeIcons.solidHeart, color: Color(0xffE74C3C),)
-                                                                          : const FaIcon(FontAwesomeIcons.heart, color: Color(0xff888888),),
-                                                                          label: Text('${repliesNumberOfLikes[index]}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                                                                        ),
+                                                                        child: MiscLikeButtonTemplate(likeStatus: repliesLikes[index], numberOfLikes: repliesNumberOfLikes[index], commentableType: 'Reply', commentableId: listOfReplies.data!.almRepliesList[index].showListOfRepliesReplyId),
                                                                       ),
                                                                     ),
                                                                   ],

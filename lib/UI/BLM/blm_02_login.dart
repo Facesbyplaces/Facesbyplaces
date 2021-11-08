@@ -227,7 +227,6 @@ class BLMLogin extends StatelessWidget{
                                     key: _key1,
                                     labelText: 'Email Address',
                                     type: TextInputType.emailAddress,
-                                    labelTextStyle: const TextStyle(fontSize: 24, color: Color(0xff000000), fontFamily: 'NexaRegular',),
                                   ),
                                 ),
 
@@ -239,7 +238,6 @@ class BLMLogin extends StatelessWidget{
                                     labelText: 'Password',
                                     obscureText: true,
                                     type: TextInputType.text,
-                                    labelTextStyle: const TextStyle(fontSize: 24, color: Color(0xff000000), fontFamily: 'NexaRegular',),
                                   ),
                                 ),
 

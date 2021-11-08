@@ -466,7 +466,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                                       const SizedBox(width: 20,),
 
-                                                      Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsCountry, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                                                      Flexible(
+                                                        child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsCountry, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                                                      ),
                                                     ],
                                                   ),
 

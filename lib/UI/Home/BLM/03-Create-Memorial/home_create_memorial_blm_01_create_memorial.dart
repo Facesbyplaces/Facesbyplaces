@@ -95,7 +95,7 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                           maxLines: 1,
                           decoration: InputDecoration(
                             labelText: 'Location of the incident',
-                            labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                            labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff888888),),
                             focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
                             alignLabelWithHint: true,
                             suffixIcon: IconButton(
@@ -113,67 +113,6 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                         ),
 
                         const SizedBox(height: 20,),
-                        
-                        // TextFormField(
-                        //   controller: controller2,
-                        //   keyboardType: TextInputType.text,
-                        //   cursorColor: const Color(0xff000000),
-                        //   style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
-                        //   decoration: const InputDecoration(
-                        //     alignLabelWithHint: true, 
-                        //     labelText: 'Precinct / Station House (Optional)',
-                        //     labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
-                        //     focusedBorder: UnderlineInputBorder(
-                        //       borderSide: BorderSide(color: Color(0xff000000),),
-                        //     ),
-                        //   ),
-                        // ),
-
-                        // const SizedBox(height: 20,),
-
-                        // TextFormField(
-                        //   controller: controller3,
-                        //   cursorColor: const Color(0xff000000),
-                        //   keyboardType: TextInputType.text,
-                        //   readOnly: true,
-                        //   style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
-                        //   validator: (value){
-                        //     if(value!.isEmpty){
-                        //       return '';
-                        //     }
-                        //   },
-                        //   decoration: InputDecoration(
-                        //     labelText: 'DOB',
-                        //     alignLabelWithHint: true,
-                        //     focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
-                        //     labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
-                        //     errorBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red),),
-                        //     suffixIcon: IconButton(
-                        //       icon: const Icon(Icons.close),
-                        //       onPressed: (){
-                        //         controller3.text = '';
-                        //         dob = DateTime(1000);
-                        //       },
-                        //     ),
-                        //   ),
-                        //   onTap: (){
-                        //     DatePicker.showDatePicker(
-                        //       context,
-                        //       showTitleActions: true,
-                        //       minTime: dob,
-                        //       maxTime: rip,
-                        //       currentTime: DateTime.now(),
-                        //       locale: LocaleType.en,
-                        //       onConfirm: (date) {
-                        //         String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-                        //         dob = date;
-                        //         controller3.text = format;
-                        //       },
-                        //     );
-                        //   },
-                        // ),
-                        
-                        // const SizedBox(height: 20,),
 
                         TextFormField(
                           controller: controller2,
@@ -187,7 +126,7 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                             }
                           },
                           decoration: InputDecoration(
-                            labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                            labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff888888),),
                             focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
                             alignLabelWithHint: true,
                             labelText: 'RIP',
@@ -221,7 +160,6 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                         MiscInputFieldTemplate(
                           key: _key2, 
                           labelText: 'Country',
-                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                         ),
 
                         const SizedBox(height: 20,),
@@ -229,7 +167,6 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                         MiscInputFieldTemplate(
                           key: _key3, 
                           labelText: 'State',
-                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                         ),
 
                         const SizedBox(height: 100,),
