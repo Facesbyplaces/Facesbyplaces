@@ -1,0 +1,11 @@
+$(document).ready(function(){
+    var audio;
+    audio = new Audio();
+    audio.src = "<%= asset_path('tha-crossroads-trimmed') %>";
+    audio.loop = true;
+
+    window.addEventListener("mousemove", function(){
+        audio.play();
+    });
+    
+});
