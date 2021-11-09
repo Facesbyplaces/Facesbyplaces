@@ -398,7 +398,7 @@ Rails.application.routes.draw do
   get 'privacy', to: 'pages#privacy'
   get 'sign-up', to: 'pages#signUp'
   post 'sign-up-user', to: 'pages#create'
+  post 'submit_newsletter', to: 'pages#createNewsletter'
   
   root 'pages#newHome'
-
  end

@@ -1,25 +1,6 @@
 class Api::V1::NewsletterController < ApplicationController
     before_action :verify_admin, only: [:app_released]
 
-    def create
-        if newsletter_params[:name] === ""
-            redirect_to_home("Form cannot be empty.")
-        elsif newsletter_params[:email_address] === ""
-            redirect_to_home("Form cannot be empty.")
-        else   
-            @newsletter = Newsletter.new(newsletter_params)
-            begin
-                @newsletter.save!
-            rescue ActiveRecord::RecordInvalid
-                redirect_to_home("Email address has already been taken.")
-            end
-        end
-
-        # flash[:notice] = "Thank you! You will now receive the latest news from Faces by places. We’ll send you an email as soon as the app is available for download."
-        # redirect_to root_path
-        # return render html: "<script>alert('Thank you! You will now receive the latest news from Faces by places. We’ll send you an email as soon as the app is available for download.')</script>".html_safe
-    end
-
     def notify_subscribed_users
         @users = Newsletter.all
 
@@ -44,13 +25,6 @@ class Api::V1::NewsletterController < ApplicationController
     end
 
     private
-    def redirect_to_home(message)
-        redirect_to root_path, notice: message
-    end
-
-    def newsletter_params
-        params.require(:newsletter).permit(:name, :email_address, :message)
-    end
 
     def verify_admin
         return render json: {status: "Must be an admin to continue"}, status: 401 unless user().has_role? :admin 
