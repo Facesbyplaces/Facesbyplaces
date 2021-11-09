@@ -288,7 +288,7 @@ body {
   width: 100%;
   padding: 5% 0 0;
 
-  background-image: url(asset_path("bg-video"));
+  background-image: url(asset_path("background_candles.png"));
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-position: 0 40%;
@@ -416,7 +416,7 @@ body {
     .main-text {
       font-size: 25px;
       margin: 10px 0;
-      line-height: 28px;
+      line-height: 27px;
     }
     .image-container {
       float: left;
@@ -506,9 +506,9 @@ body {
       margin: 20px 0;
     }
     .main-text {
-      font-size: 1.6em;
+      font-size: 0.8em;
       margin: 10px 0;
-      line-height: 27px;
+      line-height: 20px;
     }
     .list-margin {
       margin: 10px;
