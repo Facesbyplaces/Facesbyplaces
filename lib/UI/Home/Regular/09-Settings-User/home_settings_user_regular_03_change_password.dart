@@ -56,7 +56,6 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
                     key: _key1,
                     labelText: widget.isAddPassword == true ? 'New Password' : 'Current Password',
                     obscureText: true,
-                    labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                   ),
 
                   const SizedBox(height: 20,),
@@ -65,7 +64,6 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
                     key: _key2,
                     labelText: widget.isAddPassword == true ? 'Confirm Password' : 'New Password',
                     obscureText: true,
-                    labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                   ),
 
                   const SizedBox(height: 80,),
