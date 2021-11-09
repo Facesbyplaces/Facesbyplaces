@@ -219,10 +219,10 @@ body {
       height: 70px;
       width: 200px;
       margin: 15px 15px 25px 65px;
-      background-image: url(asset_path("googleplay_cropped.png"));
+      background-image: url(asset_path("googleplay.png"));
     }
     .appstore {
-      width: 225px;
+      width: 210px;
       height: 69px;
       margin: 15px 0 0 0;
       background-image: url(asset_path("appstore.png"));
@@ -242,7 +242,6 @@ body {
       border-radius: 4px;
       box-sizing: border-box;
       columns: 70;
-      rows: 10;
       resize: none;
     }
 
@@ -415,9 +414,9 @@ body {
       margin: 40px 0;
     }
     .main-text {
-      font-size: 0.9em;
+      font-size: 25px;
       margin: 10px 0;
-      line-height: 20px;
+      line-height: 27px;
     }
     .image-container {
       float: left;
@@ -974,11 +973,12 @@ body {
 
     .main-title {
       padding-right: 25px;
+      word-break: break-all;
     }
 
     .row .col,
     .row .col-2 {
-      width: 90%;
+      width: 80%;
       padding: 10% 0%;
     }
     .container {

@@ -24,7 +24,7 @@ development:
   encoding: unicode
   database: kk40
   pool: 5
-  username: kk40
+  username: kk39
   password:
   timeout: 5000
 
