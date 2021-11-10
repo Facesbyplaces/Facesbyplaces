@@ -30,7 +30,7 @@
         = form_for(:newsletter, url: submit_newsletter_path) do |f|
           = f.text_field :name, :placeholder => "Your Name"
           = f.email_field :email_address, :placeholder => "Your Email Address"
-          = f.text_area :message, :placeholder => "Message"
+          = f.text_area :message, style: 'font-family: inherit; ', :placeholder => "Message" 
           = f.submit "Submit", :id => 'success-modal-button'
 
 - content_for :modal do
