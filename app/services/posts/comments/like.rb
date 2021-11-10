@@ -41,12 +41,12 @@ class Posts::Comments::Like
                 Notification::Builder.new(
                         device_tokens:  like.commentable.account.device_token,
                         title:          "FacesByPlaces Notification",
-                        message:        "#{user().first_name} liked your reply",
+                        message:        "#{@user.first_name} liked your reply",
                         recipient:      like.commentable.account,
-                        actor:          user(),
-                        data:           like.commentable.post.id,
+                        actor:          @user,
+                        data:           like.commentable.comment.post.id,
                         type:           "Post",
-                        postType:       like.commentable.post.page_type,
+                        postType:       like.commentable.comment.post.page_type,
                 ).notify
             end
         end
