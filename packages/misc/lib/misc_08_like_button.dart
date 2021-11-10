@@ -5,7 +5,8 @@ class MiscLikeButtonTemplate extends StatefulWidget{
   final int numberOfLikes;
   final String commentableType;
   final int commentableId;
-  const MiscLikeButtonTemplate({Key? key, required this.likeStatus, required this.numberOfLikes, required this.commentableType, required this.commentableId}) : super(key: key);
+  final int postType; // ALM OR BLM (1 - BLM | 2 - ALM)
+  const MiscLikeButtonTemplate({Key? key, required this.likeStatus, required this.numberOfLikes, required this.commentableType, required this.commentableId, required this.postType}) : super(key: key);
 
   @override
   MiscLikeButtonTemplateState createState() => MiscLikeButtonTemplateState();
@@ -42,9 +43,21 @@ class MiscLikeButtonTemplateState extends State<MiscLikeButtonTemplate>{
               await apiLikeOrUnlikeCommentReply(commentableType: widget.commentableType, commentableId: widget.commentableId, likeStatus: true);
             }
           },
-          icon: _likeStatusListener == true
-          ? const FaIcon(FontAwesomeIcons.solidHeart, color: Color(0xffE74C3C),)
-          : const FaIcon(FontAwesomeIcons.heart, color: Color(0xff888888),),
+          icon: ((){
+            if(widget.postType == 1){ // BLM ICON
+              if(_likeStatusListener){
+                return const FaIcon(FontAwesomeIcons.peace, color: Color(0xffff0000),);
+              }else{
+                return const FaIcon(FontAwesomeIcons.peace, color: Color(0xff888888),);
+              }
+            }else{ // ALM ICON
+              if(_likeStatusListener){
+                return const FaIcon(FontAwesomeIcons.solidHeart, color: Color(0xffE74C3C),);
+              }else{
+                return const FaIcon(FontAwesomeIcons.heart, color: Color(0xff888888),);
+              }
+            }
+          }()),
           label: Text('$_numberOfLikesListener', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
         ),
       ),
