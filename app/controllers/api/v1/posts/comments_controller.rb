@@ -97,7 +97,7 @@ class Api::V1::Posts::CommentsController < ApplicationController
     end
 
     def likeStatus
-        numberOfLikes = Commentslike.where(commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).count
+        numberOfLikes = Commentslike.where(account: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).count
         
         if Commentslike.where(account: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first
             render json: {

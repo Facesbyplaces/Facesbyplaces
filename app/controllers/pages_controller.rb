@@ -28,9 +28,7 @@ class PagesController < ApplicationController
   end
 
   def createNewsletter
-    if newsletter_params[:name] === ""
-        redirect_to_home("Form cannot be empty.")
-    elsif newsletter_params[:email_address] === ""
+    if newsletter_params[:name] === "" || newsletter_params[:email_address] === ""
         redirect_to_home("Form cannot be empty.")
     else   
         @newsletter = Newsletter.new(newsletter_params)
