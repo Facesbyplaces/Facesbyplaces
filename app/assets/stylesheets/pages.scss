@@ -7,7 +7,7 @@ body {
 .description {
   font-size: 18px;
   font-weight: 400;
-  padding-top: 7pc;
+  padding-top: 10pc;
 }
 
 .get-in-touch {
@@ -967,7 +967,7 @@ body {
   .description {
     font-size: 18px;
     font-weight: 400;
-    padding-top: 10pc;
+    padding-top: 9pc;
   }
   .new-home {
     .container {
@@ -982,8 +982,9 @@ body {
     }
 
     .main-title {
-      padding-right: 25px;
-      word-break: break-all;
+      //padding-right: 25px;
+      font-size: 2.3em !important;
+      word-break: break-word;
     }
 
     .row .col,
