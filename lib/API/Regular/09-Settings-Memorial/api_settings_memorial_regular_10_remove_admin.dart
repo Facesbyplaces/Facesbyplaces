@@ -28,7 +28,8 @@ Future<String> apiRegularDeleteMemorialAdmin({required String pageType, required
     'user_id': userId,
   });
 
-  var response = await dioRequest.delete('https://facesbyplaces.com/api/v1/pageadmin', data: formData,
+  // var response = await dioRequest.delete('https://facesbyplaces.com/api/v1/pageadmin', data: formData,
+  var response = await dioRequest.delete('https://www.facesbyplaces.com/api/v1/pageadmin', data: formData,
     options: Options(
       headers: <String, String>{
         'access-token': getAccessToken!,

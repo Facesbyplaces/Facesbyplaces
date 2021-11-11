@@ -21,7 +21,8 @@ Future<APIBLMConnectionListFollowersMain> apiBLMConnectionListFollowers({require
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/pages/blm/$memorialId/followers/index?page=$page',
+  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/pages/blm/$memorialId/followers/index?page=$page',
+  var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/pages/blm/$memorialId/followers/index?page=$page',
     options: Options(
       headers: <String, dynamic>{
         'Content-Type': 'application/json',

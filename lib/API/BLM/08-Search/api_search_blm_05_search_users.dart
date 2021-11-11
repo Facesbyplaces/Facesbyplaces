@@ -9,7 +9,8 @@ Future<APIBLMSearchUsersMain> apiBLMSearchUsers({required String keywords, requi
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/search/users?page=$page&keywords=$keywords',
+  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/search/users?page=$page&keywords=$keywords',
+  var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/search/users?page=$page&keywords=$keywords',
     options: Options(
       headers: <String, dynamic>{
         'Content-Type': 'application/json',

@@ -21,7 +21,8 @@ Future<APIRegularShowListOfComments> apiRegularShowListOfComments({required int 
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/posts/index/comments/$postId?page=$page',
+  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/posts/index/comments/$postId?page=$page',
+  var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/posts/index/comments/$postId?page=$page',
     options: Options(
       headers: <String, dynamic>{
         'access-token': getAccessToken,

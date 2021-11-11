@@ -9,7 +9,8 @@ Future<APIRegularSearchBLMMemorialMain> apiRegularSearchBLM({required String key
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/search/memorials?keywords=$keywords&page=$page',
+  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/search/memorials?keywords=$keywords&page=$page',
+  var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/search/memorials?keywords=$keywords&page=$page',
     options: Options(
       headers: <String, dynamic>{
         'Content-Type': 'application/json',

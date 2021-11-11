@@ -22,7 +22,8 @@ Future<APIBLMShowMemorialMain> apiBLMShowMemorial({required int memorialId}) asy
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/pages/blm/$memorialId',
+  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/pages/blm/$memorialId',
+  var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/pages/blm/$memorialId',
     options: Options(
       headers: <String, dynamic>{
         'Content-Type': 'application/json',

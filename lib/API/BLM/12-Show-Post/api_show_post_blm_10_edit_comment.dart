@@ -21,7 +21,8 @@ Future<bool> apiBLMEditComment({required int commentId, required String commentB
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('https://facesbyplaces.com/api/v1/posts/comment',
+  // var response = await dioRequest.put('https://facesbyplaces.com/api/v1/posts/comment',
+  var response = await dioRequest.put('https://www.facesbyplaces.com/api/v1/posts/comment',
     options: Options(
       headers: <String, dynamic>{
         'Content-Type': 'application/json',

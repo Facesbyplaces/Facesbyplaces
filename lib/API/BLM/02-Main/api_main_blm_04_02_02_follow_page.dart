@@ -21,7 +21,8 @@ Future<bool> apiBLMModifyFollowPage({required String pageType, required int page
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('https://facesbyplaces.com/api/v1/followers/follow',
+  // var response = await dioRequest.put('https://facesbyplaces.com/api/v1/followers/follow',
+  var response = await dioRequest.put('https://www.facesbyplaces.com/api/v1/followers/follow',
     options: Options(
       headers: <String, dynamic>{
         'Content-Type': 'application/json',

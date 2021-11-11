@@ -10,7 +10,8 @@ Future<String> apiBLMVerifyEmail({required String verificationCode}) async{
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.post('https://facesbyplaces.com/api/v1/users/verify_code?user_id=$prefsUserID&verification_code=$verificationCode&account_type=1',
+  // var response = await dioRequest.post('https://facesbyplaces.com/api/v1/users/verify_code?user_id=$prefsUserID&verification_code=$verificationCode&account_type=1',
+  var response = await dioRequest.post('https://www.facesbyplaces.com/api/v1/users/verify_code?user_id=$prefsUserID&verification_code=$verificationCode&account_type=1',
     options: Options(
       headers: <String, dynamic>{
         'Content-Type': 'application/json',

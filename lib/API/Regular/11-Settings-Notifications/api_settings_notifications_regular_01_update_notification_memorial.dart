@@ -9,7 +9,8 @@ Future<bool> apiRegularUpdateNotificationMemorial({required bool hide}) async{
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('https://facesbyplaces.com/api/v1/notifications/newMemorial?setting=$hide',
+  // var response = await dioRequest.put('https://facesbyplaces.com/api/v1/notifications/newMemorial?setting=$hide',
+  var response = await dioRequest.put('https://www.facesbyplaces.com/api/v1/notifications/newMemorial?setting=$hide',
     options: Options(
       headers: <String, dynamic>{
         'access-token': getAccessToken,

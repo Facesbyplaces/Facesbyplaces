@@ -9,7 +9,8 @@ Future<bool> apiBLMReport({required int postId, required String reportType, requ
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.post('https://facesbyplaces.com/api/v1/reports/report?report[reportable_type]=$reportType&report[reportable_id]=$postId&report[subject]=$subject&report[description]=$body',
+  // var response = await dioRequest.post('https://facesbyplaces.com/api/v1/reports/report?report[reportable_type]=$reportType&report[reportable_id]=$postId&report[subject]=$subject&report[description]=$body',
+  var response = await dioRequest.post('https://www.facesbyplaces.com/api/v1/reports/report?report[reportable_type]=$reportType&report[reportable_id]=$postId&report[subject]=$subject&report[description]=$body',
     options: Options(
       headers: <String, dynamic>{
         'Content-Type': 'application/json',

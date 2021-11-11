@@ -18,7 +18,8 @@ Future<bool> apiRegularUpdateAccountDetails({required String firstName, required
     MapEntry('question', MultipartFile.fromString(question)),
   ]);
 
-  var response = await dioRequest.put('https://facesbyplaces.com/api/v1/users/updateDetails', data: formData,
+  // var response = await dioRequest.put('https://facesbyplaces.com/api/v1/users/updateDetails', data: formData,
+  var response = await dioRequest.put('https://www.facesbyplaces.com/api/v1/users/updateDetails', data: formData,
     options: Options(
       headers: <String, dynamic>{
         'access-token': getAccessToken,

@@ -9,7 +9,8 @@ Future<bool> apiRegularUpdateNotificationAddFamily({required bool hide}) async{
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('https://facesbyplaces.com/api/v1/notifications/addFamily?setting=$hide',
+  // var response = await dioRequest.put('https://facesbyplaces.com/api/v1/notifications/addFamily?setting=$hide',
+  var response = await dioRequest.put('https://www.facesbyplaces.com/api/v1/notifications/addFamily?setting=$hide',
     options: Options(
       headers: <String, dynamic>{
         'access-token': getAccessToken,

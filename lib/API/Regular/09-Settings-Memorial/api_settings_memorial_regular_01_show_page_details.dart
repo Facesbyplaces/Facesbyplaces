@@ -9,7 +9,8 @@ Future<APIRegularShowPageDetailsMain> apiRegularShowPageDetails({required int me
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/pages/memorials/$memorialId',
+  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/pages/memorials/$memorialId',
+  var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/pages/memorials/$memorialId',
     options: Options(
       headers: <String, dynamic>{
         'access-token': getAccessToken,

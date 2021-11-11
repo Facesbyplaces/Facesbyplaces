@@ -9,7 +9,8 @@ Future<bool> apiBLMUpdateSwitchStatusFriends({required int memorialId, required 
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('https://facesbyplaces.com/api/v1/pageadmin/unhideOrHideFriends/Blm/$memorialId?hide=$status',
+  // var response = await dioRequest.put('https://facesbyplaces.com/api/v1/pageadmin/unhideOrHideFriends/Blm/$memorialId?hide=$status',
+  var response = await dioRequest.put('https://www.facesbyplaces.com/api/v1/pageadmin/unhideOrHideFriends/Blm/$memorialId?hide=$status',
     options: Options(
       headers: <String, dynamic>{
         'Content-Type': 'application/json',

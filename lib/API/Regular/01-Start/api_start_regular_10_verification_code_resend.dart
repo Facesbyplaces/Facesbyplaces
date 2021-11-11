@@ -10,7 +10,8 @@ Future<bool> apiRegularVerificationCodeResend() async{
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.post('https://facesbyplaces.com/api/v1/users/resend_verification_code?user_id=$prefsUserID&account_type=2',
+  // var response = await dioRequest.post('https://facesbyplaces.com/api/v1/users/resend_verification_code?user_id=$prefsUserID&account_type=2',
+  var response = await dioRequest.post('https://www.facesbyplaces.com/api/v1/users/resend_verification_code?user_id=$prefsUserID&account_type=2',
     options: Options(
       headers: <String, dynamic>{
         'Content-Type': 'application/json',

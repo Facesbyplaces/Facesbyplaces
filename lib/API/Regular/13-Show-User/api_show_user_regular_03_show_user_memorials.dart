@@ -21,7 +21,8 @@ Future<APIRegularShowUserMemorialsMain> apiRegularShowUserMemorials({required in
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/users/memorials?user_id=$userId&page=$page&account_type=$accountType',
+  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/users/memorials?user_id=$userId&page=$page&account_type=$accountType',
+  var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/users/memorials?user_id=$userId&page=$page&account_type=$accountType',
     options: Options(
       headers: <String, dynamic>{
         'Content-Type': 'application/json',

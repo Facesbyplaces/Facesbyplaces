@@ -21,7 +21,8 @@ Future<APIBLMShowListOfReplies> apiBLMShowListOfReplies({required int postId, re
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/posts/index/replies/$postId?page=$page',
+  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/posts/index/replies/$postId?page=$page',
+  var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/posts/index/replies/$postId?page=$page',
     options: Options(
       headers: <String, dynamic>{
         'Content-Type': 'application/json',

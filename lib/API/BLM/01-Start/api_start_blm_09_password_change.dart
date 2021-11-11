@@ -4,7 +4,8 @@ import 'package:dio/dio.dart';
 Future<bool> apiBLMPasswordChange({required String password, required String passwordConfirmation, required String resetToken}) async{
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('https://facesbyplaces.com/auth/password?password=$password&password_confirmation=$passwordConfirmation&reset_password_token=$resetToken',
+  // var response = await dioRequest.put('https://facesbyplaces.com/auth/password?password=$password&password_confirmation=$passwordConfirmation&reset_password_token=$resetToken',
+  var response = await dioRequest.put('https://www.facesbyplaces.com/auth/password?password=$password&password_confirmation=$passwordConfirmation&reset_password_token=$resetToken',
     options: Options(
       headers: <String, dynamic>{
         'Content-Type': 'application/json',

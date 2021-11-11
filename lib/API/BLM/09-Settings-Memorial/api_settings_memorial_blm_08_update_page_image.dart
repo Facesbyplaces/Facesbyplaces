@@ -20,7 +20,8 @@ Future<bool> apiBLMUpdatePageImages({required int memorialId, required dynamic b
     formData.files.add(MapEntry('profileImage', file));
   }
 
-  var response = await dioRequest.put('https://facesbyplaces.com/api/v1/pages/blm/$memorialId/images', data: formData,
+  // var response = await dioRequest.put('https://facesbyplaces.com/api/v1/pages/blm/$memorialId/images', data: formData,
+  var response = await dioRequest.put('https://www.facesbyplaces.com/api/v1/pages/blm/$memorialId/images', data: formData,
     options: Options(
       headers: <String, String>{
         'access-token': getAccessToken,

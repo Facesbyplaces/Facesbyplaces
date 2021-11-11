@@ -18,7 +18,8 @@ Future<String> apiRegularAddFriends({required int memorialId, required int userI
      'account_type': '$accountType',
   });
 
-  var response = await dioRequest.post('https://facesbyplaces.com/api/v1/pageadmin/addFriend', data: formData,
+  // var response = await dioRequest.post('https://facesbyplaces.com/api/v1/pageadmin/addFriend', data: formData,
+  var response = await dioRequest.post('https://www.facesbyplaces.com/api/v1/pageadmin/addFriend', data: formData,
     options: Options(
       headers: <String, dynamic>{
         'access-token': getAccessToken,

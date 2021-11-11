@@ -29,7 +29,8 @@ Future<String> apiBLMDeleteMemorialAdmin({required String pageType, required int
     'account_type': '1'
   });
 
-  var response = await dioRequest.delete('https://facesbyplaces.com/api/v1/pageadmin', data: formData,
+  // var response = await dioRequest.delete('https://facesbyplaces.com/api/v1/pageadmin', data: formData,
+  var response = await dioRequest.delete('https://www.facesbyplaces.com/api/v1/pageadmin', data: formData,
     options: Options(
       headers: <String, String>{
         'access-token': getAccessToken!,

@@ -21,7 +21,8 @@ Future<APIRegularShowCommentOrReplyLikeStatus> apiRegularShowCommentOrReplyLikeS
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/posts/comment/likeCommentStatus?commentable_type=$commentableType&commentable_id=$commentableId',
+  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/posts/comment/likeCommentStatus?commentable_type=$commentableType&commentable_id=$commentableId',
+  var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/posts/comment/likeCommentStatus?commentable_type=$commentableType&commentable_id=$commentableId',
     options: Options(
       headers: <String, dynamic>{
         'access-token': getAccessToken!,

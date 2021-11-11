@@ -9,7 +9,8 @@ Future<bool> apiRegularChangePassword({required String currentPassword, required
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('https://facesbyplaces.com/alm_auth/password?password=$currentPassword&password_confirmation=$newPassword',
+  // var response = await dioRequest.put('https://facesbyplaces.com/alm_auth/password?password=$currentPassword&password_confirmation=$newPassword',
+  var response = await dioRequest.put('https://www.facesbyplaces.com/alm_auth/password?password=$currentPassword&password_confirmation=$newPassword',
     options: Options(
       headers: <String, dynamic>{
         'access-token': getAccessToken,

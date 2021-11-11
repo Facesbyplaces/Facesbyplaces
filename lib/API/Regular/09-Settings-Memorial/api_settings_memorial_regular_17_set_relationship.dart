@@ -9,7 +9,8 @@ Future<bool> apiRegularMemorialSetRelationship({required int memorialId, require
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.post('https://facesbyplaces.com/api/v1/pages/memorials/relationship',
+  // var response = await dioRequest.post('https://facesbyplaces.com/api/v1/pages/memorials/relationship',
+  var response = await dioRequest.post('https://www.facesbyplaces.com/api/v1/pages/memorials/relationship',
     options: Options(
       headers: <String, dynamic>{
         'access-token': getAccessToken,

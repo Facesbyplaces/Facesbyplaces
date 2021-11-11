@@ -21,7 +21,8 @@ Future<bool> apiRegularModifyUnfollowPage({required String pageType, required in
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('https://facesbyplaces.com/api/v1/followers/unfollow',
+  // var response = await dioRequest.put('https://facesbyplaces.com/api/v1/followers/unfollow',
+  var response = await dioRequest.put('https://www.facesbyplaces.com/api/v1/followers/unfollow',
     options: Options(
       headers: <String, dynamic>{
         'access-token': getAccessToken,

@@ -9,7 +9,8 @@ Future<APIRegularShowNotificationStatus> apiRegularShowNotificationStatus({requi
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/notifications/notifSettingsStatus',
+  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/notifications/notifSettingsStatus',
+  var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/notifications/notifSettingsStatus',
     options: Options(
       headers: <String, dynamic>{
         'access-token': getAccessToken,

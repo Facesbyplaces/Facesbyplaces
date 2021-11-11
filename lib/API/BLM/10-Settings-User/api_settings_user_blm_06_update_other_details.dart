@@ -9,7 +9,8 @@ Future<bool> apiBLMUpdateOtherDetails({required String birthdate, required Strin
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('https://facesbyplaces.com/api/v1/users/updateOtherInfos?birthdate=$birthdate&birthplace=$birthplace&email=$email&address=$address&phone_number=$phoneNumber',
+  // var response = await dioRequest.put('https://facesbyplaces.com/api/v1/users/updateOtherInfos?birthdate=$birthdate&birthplace=$birthplace&email=$email&address=$address&phone_number=$phoneNumber',
+  var response = await dioRequest.put('https://www.facesbyplaces.com/api/v1/users/updateOtherInfos?birthdate=$birthdate&birthplace=$birthplace&email=$email&address=$address&phone_number=$phoneNumber',
     options: Options(
       headers: <String, dynamic>{
         'Content-Type': 'application/json',

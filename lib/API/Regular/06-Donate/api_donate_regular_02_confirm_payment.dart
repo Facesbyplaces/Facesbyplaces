@@ -22,7 +22,8 @@ Future<bool> apiRegularConfirmPayment({required String clientSecret, required St
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.post('https://facesbyplaces.com/api/v1/payments/confirm_payment_intent',
+  // var response = await dioRequest.post('https://facesbyplaces.com/api/v1/payments/confirm_payment_intent',
+  var response = await dioRequest.post('https://www.facesbyplaces.com/api/v1/payments/confirm_payment_intent',
     options: Options(
       headers: <String, dynamic>{
         'Content-Type': 'application/json',

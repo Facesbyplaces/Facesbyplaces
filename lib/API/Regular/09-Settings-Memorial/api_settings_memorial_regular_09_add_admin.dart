@@ -28,7 +28,8 @@ Future<String> apiRegularAddMemorialAdmin({required String pageType, required in
     'user_id': userId,
   });
 
-  var response = await dioRequest.post('https://facesbyplaces.com/api/v1/pageadmin', data: formData,
+  // var response = await dioRequest.post('https://facesbyplaces.com/api/v1/pageadmin', data: formData,
+  var response = await dioRequest.post('https://www.facesbyplaces.com/api/v1/pageadmin', data: formData,
     options: Options(
       headers: <String, String>{
         'access-token': getAccessToken!,

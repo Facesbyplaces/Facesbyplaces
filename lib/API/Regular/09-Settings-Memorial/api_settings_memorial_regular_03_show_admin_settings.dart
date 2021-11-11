@@ -9,7 +9,8 @@ Future<APIRegularShowAdminsSettingsMain> apiRegularShowAdminSettings({required i
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('https://facesbyplaces.com/api/v1/pages/memorials/adminIndex/index?page=$page&page_id=$memorialId',
+  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/pages/memorials/adminIndex/index?page=$page&page_id=$memorialId',
+  var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/pages/memorials/adminIndex/index?page=$page&page_id=$memorialId',
     options: Options(
       headers: <String, dynamic>{
         'access-token': getAccessToken,

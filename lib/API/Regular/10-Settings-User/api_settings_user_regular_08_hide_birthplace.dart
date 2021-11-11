@@ -9,7 +9,8 @@ Future<bool> apiRegularHideBirthplace({required bool hide}) async{
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('https://facesbyplaces.com/api/v1/users/hideOrUnhideBirthplace?hide=$hide',
+  // var response = await dioRequest.put('https://facesbyplaces.com/api/v1/users/hideOrUnhideBirthplace?hide=$hide',
+  var response = await dioRequest.put('https://www.facesbyplaces.com/api/v1/users/hideOrUnhideBirthplace?hide=$hide',
     options: Options(
       headers: <String, dynamic>{
         'access-token': getAccessToken,

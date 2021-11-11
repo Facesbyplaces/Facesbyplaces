@@ -42,7 +42,8 @@ Future<int> apiRegularCreateMemorial({required APIRegularCreateMemorial memorial
     }
   }
 
-  var response = await dioRequest.post('https://facesbyplaces.com/api/v1/pages/memorials', data: formData,
+  // var response = await dioRequest.post('https://facesbyplaces.com/api/v1/pages/memorials', data: formData,
+  var response = await dioRequest.post('https://www.facesbyplaces.com/api/v1/pages/memorials', data: formData,
     options: Options(
       headers: <String, dynamic>{
         'access-token': getAccessToken,
