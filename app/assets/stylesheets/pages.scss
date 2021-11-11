@@ -7,7 +7,7 @@ body {
 .description {
   font-size: 18px;
   font-weight: 400;
-  padding-top: 7pc;
+  padding-top: 10pc;
 }
 
 .get-in-touch {
@@ -103,6 +103,14 @@ body {
     margin-top: -39px;
     margin-right: 15%;
     padding-top: 5px;
+  }
+
+  .disclaimer{
+    margin-top: 15px;
+    margin-bottom: 13px;
+    margin-left: 24%;
+    font-size: 12px;
+    font-style: italic;
   }
 }
 .row {
@@ -235,6 +243,7 @@ body {
 
     textarea {
       width: 85%;
+      height: 10%;
       padding: 12px 20px;
       margin: 8px 0;
       display: inline-block;
@@ -870,6 +879,8 @@ body {
       margin-left: 15%;
     }
   }
+
+
 }
 /* mobile screens */
 @media only screen and (max-width: 800px) {
@@ -957,7 +968,7 @@ body {
   .description {
     font-size: 18px;
     font-weight: 400;
-    padding-top: 10pc;
+    padding-top: 9pc;
   }
   .new-home {
     .container {
@@ -972,8 +983,9 @@ body {
     }
 
     .main-title {
-      padding-right: 25px;
-      word-break: break-all;
+      //padding-right: 25px;
+      font-size: 2.1em !important;
+      word-break: break-word;
     }
 
     .row .col,
@@ -1001,7 +1013,7 @@ body {
       }
       .appstore {
         float: right;
-        width: 53%;
+        width: 50%;
         height: 11%;
         margin: 1% 25% 0 0;
       }
@@ -1013,7 +1025,7 @@ body {
     .home-page-form-image {
       float: left;
       width: 100%;
-      height: 55%;
+      height: 58%;
       margin-top: 0% !important;
     }
 
@@ -1021,6 +1033,10 @@ body {
       margin-left: 13%;
       margin-top: 5%;
       margin-bottom: 25%;
+
+      textarea{
+        height: 20%;
+      }
     }
   }
   .home {
@@ -1152,6 +1168,13 @@ body {
       width: 100%;
       margin-top: -11%;
       margin-right: 34%;
+    }
+
+    .disclaimer{
+      margin-top: 10%;
+      margin-bottom: 10%;
+      margin-left: 20%;
+      width: 66%;
     }
   }
 }
