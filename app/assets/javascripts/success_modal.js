@@ -9,7 +9,7 @@ $(document).ready(function () {
   btn.onclick = function () {
     setTimeout(function () {
       modal.style.display = "block";
-    }, 1000);
+    }, 2000);
   };
 
   // When the user clicks on <span> (x), close the modal
