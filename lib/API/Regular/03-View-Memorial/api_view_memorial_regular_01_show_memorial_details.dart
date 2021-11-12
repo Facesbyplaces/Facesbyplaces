@@ -22,7 +22,6 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial({required int memorial
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/pages/memorials/$memorialId',
   var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/pages/memorials/$memorialId',
     options: Options(
       headers: <String, dynamic>{
@@ -108,17 +107,41 @@ class APIRegularShowMemorialExtendedDetails{
   APIRegularShowMemorialExtendedDetails({required this.showMemorialDetailsDescription, required this.showMemorialDetailsBirthPlace, required this.showMemorialDetailsDob, required this.showMemorialDetailsRip, required this.showMemorialDetailsCemetery, required this.showMemorialDetailsCountry, required this.showMemorialAcceptDonations, required this.showMemorialLatitude, required this.showMemorialLongitude});
 
   factory APIRegularShowMemorialExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
-    String newDOB = parsedJson['dob'];
-    DateTime dob = DateTime.parse(newDOB);
+    // String newDOB = parsedJson['dob'];
+    // DateTime dob = DateTime.parse(newDOB);
 
-    String newRIP = parsedJson['rip'];
-    DateTime rip = DateTime.parse(newRIP);
+    // String newRIP = parsedJson['rip'];
+    // DateTime rip = DateTime.parse(newRIP);
+
+    // String newDOB = parsedJson['dob'] ?? 'Unknown';
+    // DateTime dob = DateTime.parse(newDOB);
+
+    // String newRIP = parsedJson['rip'] ?? 'Unknown';
+    // DateTime rip = DateTime.parse(newRIP);
     
     return APIRegularShowMemorialExtendedDetails(
       showMemorialDetailsDescription: parsedJson['description'] ?? '',
-      showMemorialDetailsBirthPlace: parsedJson['birthplace'] ?? '',
-      showMemorialDetailsDob: dob.format(AmericanDateFormats.standardWithComma),
-      showMemorialDetailsRip: rip.format(AmericanDateFormats.standardWithComma),
+      showMemorialDetailsBirthPlace: parsedJson['birthplace'] ?? 'Unknown',
+      // showMemorialDetailsDob: dob.format(AmericanDateFormats.standardWithComma),
+      // showMemorialDetailsRip: rip.format(AmericanDateFormats.standardWithComma),
+      showMemorialDetailsDob: ((){
+        if(parsedJson['dob'] == null){
+          return 'Unknown';
+        }else{
+          String newDOB = parsedJson['dob'];
+          DateTime dob = DateTime.parse(newDOB);
+          return dob.format(AmericanDateFormats.standardWithComma);
+        }
+      }()),
+      showMemorialDetailsRip: ((){
+        if(parsedJson['rip'] == null){
+          return 'Unknown';
+        }else{
+          String newRIP = parsedJson['rip'];
+          DateTime rip = DateTime.parse(newRIP);
+          return rip.format(AmericanDateFormats.standardWithComma);
+        }
+      }()),
       showMemorialDetailsCemetery: parsedJson['cemetery'] ?? '',
       showMemorialDetailsCountry: parsedJson['country'] ?? '',
       showMemorialAcceptDonations: parsedJson['accept_donations'] ?? false,

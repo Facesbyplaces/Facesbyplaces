@@ -21,7 +21,6 @@ Future<List<String>> apiBLMDonate({required String pageType, required int pageId
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.post('https://facesbyplaces.com/api/v1/payments/payment_intent',
   var response = await dioRequest.post('https://www.facesbyplaces.com/api/v1/payments/payment_intent',
     options: Options(
       headers: <String, dynamic>{

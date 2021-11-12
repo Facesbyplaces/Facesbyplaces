@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 Future<bool> apiBLMSignInWithApple({required String userIdentification, required String identityToken}) async{
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.post('https://facesbyplaces.com/auth/sign_in?account_type=1&first_name=&last_name=&user_identification=$userIdentification&identity_token=$identityToken&image=',
   var response = await dioRequest.post('https://www.facesbyplaces.com/auth/sign_in?account_type=1&first_name=&last_name=&user_identification=$userIdentification&identity_token=$identityToken&image=',
     options: Options(
       headers: <String, dynamic>{

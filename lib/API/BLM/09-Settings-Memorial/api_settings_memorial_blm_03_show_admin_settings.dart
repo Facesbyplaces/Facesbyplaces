@@ -9,7 +9,6 @@ Future<APIBLMShowAdminsSettingMain> apiBLMShowAdminSettings({required int memori
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/pages/blm/adminIndex/index?page=$page&page_id=$memorialId',
   var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/pages/blm/adminIndex/index?page=$page&page_id=$memorialId',
     options: Options(
       headers: <String, dynamic>{

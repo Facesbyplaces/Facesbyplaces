@@ -85,7 +85,7 @@ Future<bool> apiLikeOrUnlikeCommentReply({required String commentableType, requi
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('https://facesbyplaces.com/api/v1/posts/comment/unlikeOrLikeComment?commentable_type=$commentableType&commentable_id=$commentableId&like=$likeStatus',
+  var response = await dioRequest.put('https://www.facesbyplaces.com/api/v1/posts/comment/unlikeOrLikeComment?commentable_type=$commentableType&commentable_id=$commentableId&like=$likeStatus',
     options: Options(
       headers: <String, dynamic>{
         'access-token': getAccessToken,

@@ -9,7 +9,6 @@ Future<APIBLMShowOtherDetails> apiBLMShowOtherDetails({required int userId}) asy
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/users/getOtherInfos?user_id=$userId&account_type=1',
   var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/users/getOtherInfos?user_id=$userId&account_type=1',
     options: Options(
       headers: <String, dynamic>{

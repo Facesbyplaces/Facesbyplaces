@@ -1,5 +1,6 @@
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'home_create_memorial_regular_02_create_memorial.dart';
 import 'home_create_memorial_regular_04_locate_map.dart';
@@ -32,11 +33,12 @@ class HomeRegularCreateMemorial1 extends StatefulWidget{
 
 class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
   final GlobalKey<MiscInputFieldDropDownState> _key1 = GlobalKey<MiscInputFieldDropDownState>();
-  final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
+  // final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
   final GlobalKey<MiscInputFieldTemplateState> _key3 = GlobalKey<MiscInputFieldTemplateState>();
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
   TextEditingController controller3 = TextEditingController();
+  TextEditingController birthplaceController = TextEditingController();
   ValueNotifier<LatLng?> location = ValueNotifier(null);
   DateTime dob = DateTime(1000);
   DateTime rip = DateTime.now();
@@ -88,9 +90,44 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
 
                         const SizedBox(height: 20,),
                         
-                        MiscInputFieldTemplate(
-                          key: _key2, 
-                          labelText: 'Birthplace',
+                        // MiscInputFieldTemplate(
+                        //   key: _key2, 
+                        //   labelText: 'Birthplace',
+                        // ),
+
+                        TextFormField(
+                          controller: birthplaceController,
+                          keyboardType: TextInputType.text,
+                          cursorColor: const Color(0xff000000),
+                          style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
+                          validator: (value){
+                            if(value!.isEmpty){
+                              return '';
+                            }
+                          },
+                          decoration: InputDecoration(
+                            alignLabelWithHint: true, 
+                            labelText: 'Birthplace', 
+                            labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7)), 
+                            prefixIcon: IconButton(
+                              icon: const Icon(MdiIcons.headQuestion),
+                              onPressed: (){
+                                birthplaceController.text = 'Unknown';
+                              },
+                            ),
+                            suffixIcon: IconButton(
+                              icon: const Icon(Icons.close), 
+                              onPressed: (){
+                                birthplaceController.text = '';
+                              },
+                            ),
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xff000000),),
+                            ),
+                            errorBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.red,),
+                            ),
+                          ),
                         ),
 
                         const SizedBox(height: 20,),
@@ -111,6 +148,12 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                             focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
                             alignLabelWithHint: true,
                             labelText: 'DOB',
+                            prefixIcon: IconButton(
+                              icon: const Icon(MdiIcons.headQuestion),
+                              onPressed: (){
+                                controller1.text = 'Unknown';
+                              },
+                            ),
                             suffixIcon: IconButton(
                               icon: const Icon(Icons.close), 
                               onPressed: (){
@@ -154,6 +197,12 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                             focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
                             alignLabelWithHint: true,
                             labelText: 'RIP',
+                            prefixIcon: IconButton(
+                              icon: const Icon(MdiIcons.headQuestion),
+                              onPressed: (){
+                                controller2.text = 'Unknown';
+                              },
+                            ),
                             suffixIcon: IconButton(
                               icon: const Icon(Icons.close), 
                               onPressed: (){
@@ -244,7 +293,8 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                                 ),
                               );
                             }else{
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreateMemorial2(relationship: _key1.currentState!.currentSelection, birthplace: _key2.currentState!.controller.text, dob: controller1.text, rip: controller2.text, cemetery: controller3.text, country: _key3.currentState!.controller.text, latitude: '${location.value!.latitude}', longitude: '${location.value!.longitude}',),),);
+                              // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreateMemorial2(relationship: _key1.currentState!.currentSelection, birthplace: _key2.currentState!.controller.text, dob: controller1.text, rip: controller2.text, cemetery: controller3.text, country: _key3.currentState!.controller.text, latitude: '${location.value!.latitude}', longitude: '${location.value!.longitude}',),),);
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreateMemorial2(relationship: _key1.currentState!.currentSelection, birthplace: birthplaceController.text, dob: controller1.text, rip: controller2.text, cemetery: controller3.text, country: _key3.currentState!.controller.text, latitude: '${location.value!.latitude}', longitude: '${location.value!.longitude}',),),);
                             }
                           },
                         ),

@@ -9,7 +9,6 @@ Future<APIBLMSearchSuggestedMain> apiBLMSearchSuggested({required int page}) asy
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/search/suggested/?page=$page',
   var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/search/suggested/?page=$page',
     options: Options(
       headers: <String, dynamic>{

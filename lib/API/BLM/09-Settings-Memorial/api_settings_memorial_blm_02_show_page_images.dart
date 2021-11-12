@@ -9,7 +9,6 @@ Future<APIBLMShowPageImagesMain> apiBLMShowPageImages({required int memorialId})
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/pages/blm/$memorialId/editImages',
   var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/pages/blm/$memorialId/editImages',
     options: Options(
       headers: <String, dynamic>{

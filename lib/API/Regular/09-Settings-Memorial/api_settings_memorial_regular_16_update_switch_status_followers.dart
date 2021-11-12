@@ -9,7 +9,6 @@ Future<bool> apiRegularUpdateSwitchStatusFollowers({required int memorialId, req
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.put('https://facesbyplaces.com/api/v1/pageadmin/unhideOrHideFollowers/Memorial/$memorialId?hide=$status',
   var response = await dioRequest.put('https://www.facesbyplaces.com/api/v1/pageadmin/unhideOrHideFollowers/Memorial/$memorialId?hide=$status',
     options: Options(
       headers: <String, dynamic>{

@@ -21,7 +21,6 @@ Future<APIRegularShowListOfRepliesDuplicate> apiRegularShowListOfRepliesDuplicat
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/posts/index/replies2/$postId',
   var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/posts/index/replies2/$postId',
     options: Options(
       headers: <String, dynamic>{

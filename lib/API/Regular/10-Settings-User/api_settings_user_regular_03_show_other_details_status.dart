@@ -9,7 +9,6 @@ Future<APIRegularShowOtherDetailsStatus> apiRegularShowOtherDetailsStatus({requi
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/users/otherDetailsStatus',
   var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/users/otherDetailsStatus',
     options: Options(
       headers: <String, dynamic>{

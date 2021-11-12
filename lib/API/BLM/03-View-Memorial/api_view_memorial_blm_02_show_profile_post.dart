@@ -9,7 +9,6 @@ Future<APIBLMHomeProfilePostMain> apiBLMProfilePost({required int memorialId, re
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/posts/page/Blm/$memorialId?page=$page',
   var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/posts/page/Blm/$memorialId?page=$page',
     options: Options(
       headers: <String, dynamic>{

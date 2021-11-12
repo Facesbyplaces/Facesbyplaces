@@ -18,7 +18,6 @@ Future<bool> apiRegularUpdateOtherDetails({required String birthdate, required S
     MapEntry('phone_number', MultipartFile.fromString(phoneNumber)),
   ]);
 
-  // var response = await dioRequest.put('https://facesbyplaces.com/api/v1/users/updateOtherInfos', data: formData,
   var response = await dioRequest.put('https://www.facesbyplaces.com/api/v1/users/updateOtherInfos', data: formData,
     options: Options(
       headers: <String, dynamic>{

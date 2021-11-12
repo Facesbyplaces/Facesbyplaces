@@ -9,7 +9,6 @@ Future<bool> apiRegularCheckAccount({required String email}) async{
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/users/check_password?account_type=2&email=$email',
   var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/users/check_password?account_type=2&email=$email',
     options: Options(
       headers: <String, String>{

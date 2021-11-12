@@ -135,16 +135,16 @@ class BLMPasswordResetEmail extends StatelessWidget{
 
                                 if(response.success){
                                   context.loaderOverlay.show();
-                                  bool result = await apiBLMPasswordReset(email: controller.text, redirectLink: response.result);
+                                  List<dynamic> result = await apiBLMPasswordReset(email: controller.text, redirectLink: response.result);
                                   context.loaderOverlay.hide();
 
-                                  if(result == true){
+                                  if(result[0] == true){
                                     await showDialog(
                                       context: context,
                                       builder: (context) => CustomDialog(
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         title: 'Success',
-                                        description: 'An email has been sent to ${controller.text} containing instructions for resetting your password.',
+                                        description: result[1],
                                         okButtonColor: const Color(0xff4caf50), // GREEN
                                         includeOkButton: true,
                                       ),
@@ -155,7 +155,7 @@ class BLMPasswordResetEmail extends StatelessWidget{
                                       builder: (context) => CustomDialog(
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         title: 'Error',
-                                        description: 'Something went wrong. Please try again.',
+                                        description: result[1],
                                         okButtonColor: const Color(0xfff44336), // RED
                                         includeOkButton: true,
                                       ),

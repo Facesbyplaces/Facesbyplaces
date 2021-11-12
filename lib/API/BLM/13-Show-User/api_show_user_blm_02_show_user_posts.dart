@@ -21,7 +21,6 @@ Future<APIBLMShowUsersPostsMain> apiBLMShowUserPosts({required int userId, requi
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/users/posts?user_id=$userId&page=$page&account_type=$accountType',
   var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/users/posts?user_id=$userId&page=$page&account_type=$accountType',
     options: Options(
       headers: <String, dynamic>{

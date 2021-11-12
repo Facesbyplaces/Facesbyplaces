@@ -9,7 +9,6 @@ Future<bool> apiRegularDeleteMemorial({required int memorialId}) async{
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.delete('https://facesbyplaces.com/api/v1/pages/memorials/$memorialId',
   var response = await dioRequest.delete('https://www.facesbyplaces.com/api/v1/pages/memorials/$memorialId',
     options: Options(
       headers: <String, dynamic>{

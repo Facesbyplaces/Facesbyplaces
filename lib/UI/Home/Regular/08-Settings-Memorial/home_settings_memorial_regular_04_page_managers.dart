@@ -295,7 +295,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                       builder: (context) => CustomDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         title: 'Success',
-                        description: 'Successfully added as an admin.',
+                        description: 'Successfully added as a Manager.',
                         okButtonColor: const Color(0xff4caf50), // GREEN
                         includeOkButton: true,
                         okButton: (){

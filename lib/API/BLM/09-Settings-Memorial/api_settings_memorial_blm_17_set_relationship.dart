@@ -9,7 +9,6 @@ Future<bool> apiBLMMemorialSetRelationship({required int memorialId, required St
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.post('https://facesbyplaces.com/api/v1/pages/blm/relationship',
   var response = await dioRequest.post('https://www.facesbyplaces.com/api/v1/pages/blm/relationship',
     options: Options(
       headers: <String, dynamic>{

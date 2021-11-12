@@ -9,7 +9,6 @@ Future<APIRegularShowFriendsSettingsMain> apiRegularShowFriendsSettings({require
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/pages/memorials/$memorialId/friends/index?page=$page',
   var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/pages/memorials/$memorialId/friends/index?page=$page',
     options: Options(
       headers: <String, dynamic>{

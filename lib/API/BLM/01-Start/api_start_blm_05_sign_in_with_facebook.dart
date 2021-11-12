@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 Future<bool> apiBLMSignInWithFacebook({required String firstName, required String lastName, required String email, required String username, required String facebookId, required String image}) async{
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.post('https://facesbyplaces.com/auth/sign_in?account_type=1&first_name=$firstName&last_name=$lastName&email=$email&username=$username&facebook_id=$facebookId&image=$image',
   var response = await dioRequest.post('https://www.facesbyplaces.com/auth/sign_in?account_type=1&first_name=$firstName&last_name=$lastName&email=$email&username=$username&facebook_id=$facebookId&image=$image',
     options: Options(
       headers: <String, dynamic>{

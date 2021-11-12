@@ -11,7 +11,6 @@ Future<bool> apiRegularLogout() async{
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.delete('https://facesbyplaces.com/alm_auth/sign_out',
   var response = await dioRequest.delete('https://www.facesbyplaces.com/alm_auth/sign_out',
     options: Options(
       headers: <String, dynamic>{

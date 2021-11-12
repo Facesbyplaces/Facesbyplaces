@@ -9,7 +9,6 @@ Future<APIRegularShowPageImagesMain> apiRegularShowPageImages({required int memo
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/pages/memorials/$memorialId/editImages',
   var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/pages/memorials/$memorialId/editImages',
     options: Options(
       headers: <String, dynamic>{

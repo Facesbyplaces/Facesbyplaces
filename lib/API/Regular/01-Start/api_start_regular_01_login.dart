@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 Future<String> apiRegularLogin({required String email, required String password, required String deviceToken}) async{
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.post('https://facesbyplaces.com/alm_auth/sign_in?account_type=2&password=$password&email=$email&device_token=$deviceToken',
   var response = await dioRequest.post('https://www.facesbyplaces.com/alm_auth/sign_in?account_type=2&password=$password&email=$email&device_token=$deviceToken',
     options: Options(
       headers: <String, dynamic>{
@@ -16,6 +15,9 @@ Future<String> apiRegularLogin({required String email, required String password,
       followRedirects: false,
     ),
   );
+
+  print('The status code of login is ${response.statusCode}');
+  print('The status data of login is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

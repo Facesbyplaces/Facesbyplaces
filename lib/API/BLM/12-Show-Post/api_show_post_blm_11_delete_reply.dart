@@ -21,7 +21,6 @@ Future<bool> apiBLMDeleteReply({required int replyId}) async{
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.delete('https://facesbyplaces.com/api/v1/posts/reply?reply_id=$replyId',
   var response = await dioRequest.delete('https://www.facesbyplaces.com/api/v1/posts/reply?reply_id=$replyId',
     options: Options(
       headers: <String, dynamic>{

@@ -21,7 +21,6 @@ Future<bool> apiRegularEditComment({required int commentId, required String comm
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.put('https://facesbyplaces.com/api/v1/posts/comment',
   var response = await dioRequest.put('https://www.facesbyplaces.com/api/v1/posts/comment',
     options: Options(
       headers: <String, dynamic>{

@@ -10,7 +10,6 @@ Future<String> apiBLMLeavePage({required int memorialId}) async{
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.delete('https://facesbyplaces.com/api/v1/pages/blm/$memorialId/relationship/leave',
   var response = await dioRequest.delete('https://www.facesbyplaces.com/api/v1/pages/blm/$memorialId/relationship/leave',
     options: Options(
       headers: <String, dynamic>{

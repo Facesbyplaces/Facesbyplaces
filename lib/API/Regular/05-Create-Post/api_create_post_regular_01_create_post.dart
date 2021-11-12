@@ -24,6 +24,7 @@ Future<bool> apiRegularHomeCreatePost({required APIRegularCreatePost post}) asyn
     'post[longitude]': post.almLongitude,
     'tag_people': tagPeopleValue,
   });
+  
 
   if(post.almImagesOrVideos != []){
     for(int i = 0; i < post.almImagesOrVideos.length; i++){
@@ -34,7 +35,6 @@ Future<bool> apiRegularHomeCreatePost({required APIRegularCreatePost post}) asyn
     }
   }
 
-  // var response = await dioRequest.post('https://facesbyplaces.com/api/v1/posts', data: formData,
   var response = await dioRequest.post('https://www.facesbyplaces.com/api/v1/posts', data: formData,
     options: Options(
       headers: <String, String>{

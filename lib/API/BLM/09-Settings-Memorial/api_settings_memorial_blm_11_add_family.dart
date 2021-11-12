@@ -18,7 +18,6 @@ Future<String> apiBLMAddFamily({required int memorialId, required int userId, re
     MapEntry('account_type', MultipartFile.fromString(accountType.toString()),),
   ]);
 
-  // var response = await dioRequest.post('https://facesbyplaces.com/api/v1/pageadmin/addFamily', data: formData,
   var response = await dioRequest.post('https://www.facesbyplaces.com/api/v1/pageadmin/addFamily', data: formData,
     options: Options(
       headers: <String, dynamic>{

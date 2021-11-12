@@ -21,7 +21,6 @@ Future<APIBLMShowOriginalPostMain> apiBLMShowOriginalPost({required int postId})
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.get('https://facesbyplaces.com/api/v1/posts/$postId',
   var response = await dioRequest.get('https://www.facesbyplaces.com/api/v1/posts/$postId',
     options: Options(
       headers: <String, dynamic>{

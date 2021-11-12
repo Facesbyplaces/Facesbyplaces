@@ -21,7 +21,6 @@ Future<bool> apiBLMModifyUnfollowPage({required String pageType, required int pa
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.put('https://facesbyplaces.com/api/v1/followers/unfollow',
   var response = await dioRequest.put('https://www.facesbyplaces.com/api/v1/followers/unfollow',
     options: Options(
       headers: <String, dynamic>{

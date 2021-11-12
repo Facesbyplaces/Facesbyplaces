@@ -27,7 +27,6 @@ Future<bool> apiRegularLikeOrUnlikePost({required int postId, required bool like
     'like': like,
   });
 
-  // var response = await dioRequest.put('https://facesbyplaces.com/api/v1/posts/likePost/unlikeOrLike', data: formData,
   var response = await dioRequest.put('https://www.facesbyplaces.com/api/v1/posts/likePost/unlikeOrLike', data: formData,
     options: Options(
       headers: <String, String>{

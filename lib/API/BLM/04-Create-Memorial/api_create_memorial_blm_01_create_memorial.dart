@@ -41,7 +41,6 @@ Future<int> apiBLMCreateMemorial({required APIBLMCreateMemorial blmMemorial}) as
     }
   }
 
-  // var response = await dioRequest.post('https://facesbyplaces.com/api/v1/pages/blm', data: formData,
   var response = await dioRequest.post('https://www.facesbyplaces.com/api/v1/pages/blm', data: formData,
     options: Options(
       headers: <String, dynamic>{
