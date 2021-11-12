@@ -10,7 +10,7 @@ class BlmSerializer < ActiveModel::Serializer
         location:           object.location,
         # precinct:           object.precinct,
         # dob:                object.dob.to_date,
-        rip:                object.rip.to_date,
+        rip:                restInPeace,
         state:              object.state,
         country:            object.country,
         longitude:          object.longitude,
@@ -25,7 +25,7 @@ class BlmSerializer < ActiveModel::Serializer
             location:           object.location,
             # precinct:           object.precinct,
             # dob:                object.dob.to_date,
-            rip:                object.rip.to_date,
+            rip:                restInPeace,
             state:              object.state,
             country:            object.country,
             longitude:          object.longitude,
@@ -42,7 +42,7 @@ class BlmSerializer < ActiveModel::Serializer
             location:           object.location,
             # precinct:           object.precinct,
             # dob:                object.dob.to_date,
-            rip:                object.rip.to_date,
+            rip:                restInPeace,
             state:              object.state,
             country:            object.country,
             longitude:          object.longitude,
@@ -52,6 +52,10 @@ class BlmSerializer < ActiveModel::Serializer
         end
       end
     end
+  end
+
+  def restInPeace
+    object.rip.to_date == nil ? (return object.rip) : (return object.rip.to_date)
   end
 
   def manage

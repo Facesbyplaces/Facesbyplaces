@@ -8,8 +8,8 @@ class MemorialSerializer < ActiveModel::Serializer
       {
         description:        object.description,
         birthplace:         object.birthplace,
-        dob:                object.dob.to_date,
-        rip:                object.rip.to_date,
+        dob:                dateOfBirth,
+        rip:                object.rip.to_date unless object.rip == nil,
         cemetery:           object.cemetery,
         country:            object.country,
         longitude:          object.longitude,
@@ -22,8 +22,8 @@ class MemorialSerializer < ActiveModel::Serializer
           {
             description:        object.description,
             birthplace:         object.birthplace,
-            dob:                object.dob.to_date,
-            rip:                object.rip.to_date,
+            dob:                dateOfBirth,
+            rip:                object.rip.to_date unless object.rip == nil,
             cemetery:           object.cemetery,
             country:            object.country,
             longitude:          object.longitude,
@@ -38,8 +38,8 @@ class MemorialSerializer < ActiveModel::Serializer
           {
             description:        object.description,
             birthplace:         object.birthplace,
-            dob:                object.dob.to_date,
-            rip:                object.rip.to_date,
+            dob:                dateOfBirth,
+            rip:                object.rip.to_date unless object.rip == nil,
             cemetery:           object.cemetery,
             country:            object.country,
             longitude:          object.longitude,
@@ -49,6 +49,14 @@ class MemorialSerializer < ActiveModel::Serializer
         end
       end
     end
+  end
+
+  def dateOfBirth
+    object.dob == nil ? (return object.dob) : (return object.dob.to_date)
+  end
+
+  def restInPeace
+    object.rip == nil ? (return object.rip) : (return object.rip.to_date)
   end
 
   def manage
