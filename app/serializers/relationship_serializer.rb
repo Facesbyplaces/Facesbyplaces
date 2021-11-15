@@ -9,7 +9,7 @@ class RelationshipSerializer < ActiveModel::Serializer
   end
 
   def pageowner
-    if object.account.pageowners.where(page_id: object.page_id)
+    if object.account.pageowners.where(page_type: object.page_type, page_id: object.page_id).first
         return true
     else
         return false
