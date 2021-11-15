@@ -117,35 +117,35 @@ class Api::V1::Pages::BlmController < ApplicationController
     private
 
     def verify_user_account_type
-        return render json: {status: "Oops! Looks like your account is not registered as Black Lives Matter account. Register to continue."} unless user().account_type == 1
+        return render json: {status: 404, message: "Oops! Looks like your account is not registered as Black Lives Matter account. Register to continue."} unless user().account_type == 1
     end
 
     def verify_page_admin
-        return render json: {status: "Access Denied"} if user().has_role? :pageadmin, @blm == false
+        return render json: {status: 401, message: "Access Denied"} if user().has_role? :pageadmin, @blm == false
     end
 
     def verify_create_params
-        return render json: {status: "Params is empty"} unless params_presence(blm_params) == true
+        return render json: {status: 400, message: "Params is empty"} unless params_presence(blm_params) == true
     end
 
     def verify_update_params
-        return render json: {status: "Params is empty"} unless params_presence(blm_details_params) == true
+        return render json: {status: 400, message: "Params is empty"} unless params_presence(blm_details_params) == true
     end
 
     def verify_update_image_params
-        return render json: {status: 'Error'} unless @blm.update(blm_images_params) == true
+        return render json: {status: 400, message: 'Error'} unless @blm.update(blm_images_params) == true
     end
 
     def verify_relationship
-        return render json: {status: "You're not part of the family or friends"} unless @blm.relationships.where(account: user()).first == true
+        return render json: {status: 400, message: "You're not part of the family or friends"} unless @blm.relationships.where(account: user()).first == true
     end
 
     def blm_params
-        params.require(:blm).permit(:name, :description, :location, :precinct, :dob, :rip, :state, :country, :backgroundImage, :profileImage, :longitude, :latitude, imagesOrVideos: [])
+        params.require(:blm).permit(:name, :description, :location, :rip, :state, :country, :backgroundImage, :profileImage, :longitude, :latitude, imagesOrVideos: [])
     end
 
     def blm_details_params
-        params.permit(:name, :description, :location, :precinct, :dob, :rip, :state, :country, :longitude, :latitude)
+        params.permit(:name, :description, :location, :rip, :state, :country, :longitude, :latitude)
     end
 
     def blm_images_params
