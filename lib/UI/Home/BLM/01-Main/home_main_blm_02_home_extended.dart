@@ -433,7 +433,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                   const SizedBox(height: 45),
 
                                   GestureDetector(
-                                    child: const Text('Home', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+                                    child: const Text('Home', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
                                     onTap: (){
                                       Navigator.pop(context);
                                     },
@@ -442,7 +442,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                   const SizedBox(height: 25),
 
                                   GestureDetector(
-                                    child: const Text('Create Memorial Page', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+                                    child: const Text('Create Memorial Page', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
                                     onTap: (){
                                       Navigator.pop(context);
                                       Navigator.pushNamed(context, '/home/blm/create-memorial');
@@ -452,7 +452,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                   const SizedBox(height: 20),
 
                                   GestureDetector(
-                                    child: const Text('Notification Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+                                    child: const Text('Notification Settings', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
                                     onTap: () async{
                                       context.loaderOverlay.show();
                                       APIBLMShowNotificationStatus result = await apiBLMShowNotificationStatus(userId: manageDrawer.data!.showProfileInformationUserId);
@@ -466,7 +466,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                   const SizedBox(height: 20),
 
                                   GestureDetector(
-                                    child: const Text('Profile Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+                                    child: const Text('Profile Settings', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
                                     onTap: () async{
                                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: manageDrawer.data!.showProfileInformationUserId)));
                                     },
@@ -475,7 +475,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                   const SizedBox(height: 20),
 
                                   GestureDetector(
-                                    child: const Text('Log Out', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+                                    child: const Text('Log Out', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
                                     onTap: () async{
                                       bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscConfirmDialog(title: 'Log Out', content: 'Are you sure you want to logout from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),));
 

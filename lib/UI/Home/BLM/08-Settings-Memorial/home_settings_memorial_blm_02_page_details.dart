@@ -24,8 +24,8 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
   final GlobalKey<MiscInputFieldTemplateState> _key4 = GlobalKey<MiscInputFieldTemplateState>();
   final GlobalKey<MiscInputFieldTemplateState> _key7 = GlobalKey<MiscInputFieldTemplateState>();
   final GlobalKey<MiscInputFieldTemplateState> _key8 = GlobalKey<MiscInputFieldTemplateState>();
-  final GlobalKey<MiscInputFieldTemplateState> _key9 = GlobalKey<MiscInputFieldTemplateState>();
-  TextEditingController controller1 = TextEditingController();
+  // final GlobalKey<MiscInputFieldTemplateState> _key9 = GlobalKey<MiscInputFieldTemplateState>();
+  // TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
   Future<APIBLMShowPageDetailsMain>? futureMemorialSettings;
   DateTime dob = DateTime(1000);
@@ -39,7 +39,6 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
 
   Future<APIBLMShowPageDetailsMain> getMemorialSettings(int memorialId) async{
     var newValue = await apiBLMShowPageDetails(memorialId: memorialId);
-    controller1 = TextEditingController(text: newValue.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob);
     controller2 = TextEditingController(text: newValue.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsRip);
     return await apiBLMShowPageDetails(memorialId: memorialId);
   }
@@ -113,37 +112,37 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                               displayText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsLocation,
                             ),
 
-                            const SizedBox(height: 20,),
+                            // const SizedBox(height: 20,),
 
-                            TextFormField(
-                              controller: controller1,
-                              cursorColor: const Color(0xff000000),
-                              keyboardType: TextInputType.text,
-                              readOnly: true,
-                              style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
-                              decoration: const InputDecoration(
-                                labelText: 'DOB',
-                                alignLabelWithHint: true,
-                                focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
-                                labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
-                              ),
-                              onTap: (){
-                                DatePicker.showDatePicker(
-                                  context,
-                                  currentTime: DateTime.now(),
-                                  showTitleActions: true,
-                                  locale: LocaleType.en,
-                                  minTime: dob,
-                                  maxTime: rip,
-                                  onConfirm: (date){
-                                    String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-                                    dob = date;
-                                    controller1.text = format;
-                                  },
+                            // TextFormField(
+                            //   controller: controller1,
+                            //   cursorColor: const Color(0xff000000),
+                            //   keyboardType: TextInputType.text,
+                            //   readOnly: true,
+                            //   style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
+                            //   decoration: const InputDecoration(
+                            //     labelText: 'DOB',
+                            //     alignLabelWithHint: true,
+                            //     focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
+                            //     labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
+                            //   ),
+                            //   onTap: (){
+                            //     DatePicker.showDatePicker(
+                            //       context,
+                            //       currentTime: DateTime.now(),
+                            //       showTitleActions: true,
+                            //       locale: LocaleType.en,
+                            //       minTime: dob,
+                            //       maxTime: rip,
+                            //       onConfirm: (date){
+                            //         String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+                            //         dob = date;
+                            //         controller1.text = format;
+                            //       },
                                   
-                                );
-                              },
-                            ),
+                            //     );
+                            //   },
+                            // ),
 
                             const SizedBox(height: 20,),
 
@@ -194,14 +193,14 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                               labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
                             ),
 
-                            const SizedBox(height: 20,),
+                            // const SizedBox(height: 20,),
 
-                            MiscInputFieldTemplate(
-                              key: _key9,
-                              labelText: 'Precinct',
-                              displayText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsPrecinct,
-                              labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
-                            ),
+                            // MiscInputFieldTemplate(
+                            //   key: _key9,
+                            //   labelText: 'Precinct',
+                            //   displayText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsPrecinct,
+                            //   labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
+                            // ),
 
                             const SizedBox(height: 80,),
 
@@ -212,12 +211,16 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                               width: 150,
                               height: 50,
                               onPressed: () async{
-                                if(memorialSettings.data!.blmMemorial.showPageDetailsName != _key1.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDescription != _key2.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsRelationship != _key3.currentState!.currentSelection || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsLocation != _key4.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob != controller1.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsRip != controller2.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsState != _key7.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry != _key8.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsPrecinct != _key9.currentState!.controller.text){
+                                // if(memorialSettings.data!.blmMemorial.showPageDetailsName != _key1.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDescription != _key2.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsRelationship != _key3.currentState!.currentSelection || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsLocation != _key4.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob != controller1.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsRip != controller2.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsState != _key7.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry != _key8.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsPrecinct != _key9.currentState!.controller.text){
+                                  // if(memorialSettings.data!.blmMemorial.showPageDetailsName != _key1.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDescription != _key2.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsRelationship != _key3.currentState!.currentSelection || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsLocation != _key4.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob != controller1.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsRip != controller2.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsState != _key7.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry != _key8.currentState!.controller.text){
+                                    if(memorialSettings.data!.blmMemorial.showPageDetailsName != _key1.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDescription != _key2.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsRelationship != _key3.currentState!.currentSelection || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsLocation != _key4.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsRip != controller2.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsState != _key7.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry != _key8.currentState!.controller.text){
                                   bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),),);
 
                                   if(confirmResult){
                                     context.loaderOverlay.show();
-                                    bool result = await apiBLMUpdatePageDetails(memorialId: widget.memorialId, name: _key1.currentState!.controller.text, description: _key2.currentState!.controller.text,relationship: _key3.currentState!.currentSelection, location: _key4.currentState!.controller.text, dob: controller1.text, rip: controller2.text, state: _key7.currentState!.controller.text, country: _key8.currentState!.controller.text, precinct: _key9.currentState!.controller.text,);
+                                    // bool result = await apiBLMUpdatePageDetails(memorialId: widget.memorialId, name: _key1.currentState!.controller.text, description: _key2.currentState!.controller.text,relationship: _key3.currentState!.currentSelection, location: _key4.currentState!.controller.text, dob: controller1.text, rip: controller2.text, state: _key7.currentState!.controller.text, country: _key8.currentState!.controller.text, precinct: _key9.currentState!.controller.text,);
+                                    // bool result = await apiBLMUpdatePageDetails(memorialId: widget.memorialId, name: _key1.currentState!.controller.text, description: _key2.currentState!.controller.text,relationship: _key3.currentState!.currentSelection, location: _key4.currentState!.controller.text, dob: controller1.text, rip: controller2.text, state: _key7.currentState!.controller.text, country: _key8.currentState!.controller.text,);
+                                    bool result = await apiBLMUpdatePageDetails(memorialId: widget.memorialId, name: _key1.currentState!.controller.text, description: _key2.currentState!.controller.text,relationship: _key3.currentState!.currentSelection, location: _key4.currentState!.controller.text, rip: controller2.text, state: _key7.currentState!.controller.text, country: _key8.currentState!.controller.text,);
                                     context.loaderOverlay.hide();
 
                                     if(result){

@@ -422,7 +422,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   const SizedBox(height: 45),
 
                                   GestureDetector(
-                                    child: const Text('Home', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+                                    child: const Text('Home', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
                                     onTap: (){
                                       Navigator.pop(context);
                                     },
@@ -431,7 +431,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   const SizedBox(height: 25),
 
                                   GestureDetector(
-                                    child: const Text('Create Memorial Page', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+                                    child: const Text('Create Memorial Page', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
                                     onTap: (){
                                       Navigator.pop(context);
                                       Navigator.pushNamed(context, '/home/regular/create-memorial');
@@ -441,7 +441,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   const SizedBox(height: 20),
 
                                   GestureDetector(
-                                    child: const Text('Notification Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+                                    child: const Text('Notification Settings', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
                                     onTap: () async{
                                       context.loaderOverlay.show();
                                       APIRegularShowNotificationStatus result = await apiRegularShowNotificationStatus(userId: manageDrawer.data!.showProfileInformationUserId);
@@ -455,7 +455,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   const SizedBox(height: 20),
 
                                   GestureDetector(
-                                    child: const Text('Profile Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+                                    child: const Text('Profile Settings', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
                                     onTap: () async{
                                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: manageDrawer.data!.showProfileInformationUserId)));
                                     },
@@ -464,7 +464,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   const SizedBox(height: 20),
 
                                   GestureDetector(
-                                    child: const Text('Log Out', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+                                    child: const Text('Log Out', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
                                     onTap: () async{
                                       bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscConfirmDialog(title: 'Log Out', content: 'Are you sure you want to logout from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),));
 
@@ -516,7 +516,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                 const Expanded(child: SizedBox(),),
 
                                 GestureDetector(
-                                  child: const Text('Something went wrong. Please try again.', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),), textAlign: TextAlign.center,),
+                                  child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),),
                                   onTap: (){
                                     Navigator.pop(context);
                                   },
@@ -532,7 +532,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
                                       SizedBox(width: 20),
 
-                                      Text('Go back', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),),
+                                      Text('Go back', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),),
                                     ],
                                   ),
                                   onTap: (){
@@ -574,7 +574,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                             const SizedBox(height: 45,),
 
                             GestureDetector(
-                              child: const Text('Home', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+                              child: const Text('Home', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
                               onTap: (){
                                 Navigator.pop(context);
                               },
@@ -583,7 +583,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                             const SizedBox(height: 25,),
 
                             GestureDetector(
-                              child: const Text('Sign up or Sign in', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+                              child: const Text('Sign up or Sign in', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
                               onTap: () async{
                                 final sharedPrefs = await SharedPreferences.getInstance();
 

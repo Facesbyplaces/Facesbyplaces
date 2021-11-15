@@ -90,7 +90,8 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
             ),
             title: Text('${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsFirstName} ${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsLastName}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000),),),
             subtitle: Text(newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsEmail, style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-            trailing: MaterialButton(
+            trailing: newValue.almFamilyList[i].showFamilySettingsPageOwner
+            ? MaterialButton(
               child: const Text('Remove', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: Color(0xffffffff),),),
               shape: const StadiumBorder(side: BorderSide(color: Color(0xffE74C3C),),),
               minWidth: SizeConfig.screenWidth! / 3.5,
@@ -150,7 +151,8 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
                   }
                 }
               },
-            ),
+            )
+            : const SizedBox(height: 0,),
           ),
         );
       }

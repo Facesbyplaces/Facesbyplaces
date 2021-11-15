@@ -51,12 +51,14 @@ class APIRegularShowFamilySettingsMain{
 class APIRegularShowFamilySettingsExtended{
   APIRegularShowFamilySettingsExtendedDetails showFamilySettingsUser;
   String showFamilySettingsRelationship;
-  APIRegularShowFamilySettingsExtended({required this.showFamilySettingsUser, required this.showFamilySettingsRelationship});
+  bool showFamilySettingsPageOwner;
+  APIRegularShowFamilySettingsExtended({required this.showFamilySettingsUser, required this.showFamilySettingsRelationship, required this.showFamilySettingsPageOwner});
 
   factory APIRegularShowFamilySettingsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowFamilySettingsExtended(
       showFamilySettingsUser: APIRegularShowFamilySettingsExtendedDetails.fromJson(parsedJson['user']),
       showFamilySettingsRelationship: parsedJson['relationship'],
+      showFamilySettingsPageOwner: parsedJson['pageowner'],
     );
   }
 }

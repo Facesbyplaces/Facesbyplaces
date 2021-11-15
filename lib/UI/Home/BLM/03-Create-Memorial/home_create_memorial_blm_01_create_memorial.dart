@@ -6,23 +6,6 @@ import 'home_create_memorial_blm_04_locate_map.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 import 'package:misc/misc.dart';
-import 'dart:io';
-
-class BLMCreateMemorialValues{
-  final String blmName;
-  final String description;
-  final String location;
-  final String dob;
-  final String rip;
-  final String state;
-  final String country;
-  final String precinct;
-  final String relationship;
-  final List<File> imagesOrVideos;
-  final double longitude;
-  final double latitude;
-  const BLMCreateMemorialValues({required this.blmName, required this.description, required this.location, required this.dob, required this.rip, required this.state, required this.country, required this.precinct, required this.relationship, required this.imagesOrVideos, required this.latitude, required this.longitude,});
-}
 
 class HomeBLMCreateMemorial1 extends StatefulWidget{
   const HomeBLMCreateMemorial1({Key? key}) : super(key: key);
@@ -36,8 +19,6 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
   final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
   final GlobalKey<MiscInputFieldTemplateState> _key3 = GlobalKey<MiscInputFieldTemplateState>();
   TextEditingController controller1 = TextEditingController();
-  // TextEditingController controller2 = TextEditingController();
-  // TextEditingController controller3 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
   ValueNotifier<LatLng?> location = ValueNotifier(null);
   DateTime dob = DateTime(1000);

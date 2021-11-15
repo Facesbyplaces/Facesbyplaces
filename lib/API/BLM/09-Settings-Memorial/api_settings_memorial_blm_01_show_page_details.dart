@@ -64,18 +64,16 @@ class APIBLMShowPageDetailsExtendedDetails{
   String showPageDetailsDetailsDescription;
   String showPageDetailsDetailsLocation;
   String showPageDetailsDetailsPrecinct;
-  String showPageDetailsDetailsDob;
   String showPageDetailsDetailsRip;
   String showPageDetailsDetailsState;
   String showPageDetailsDetailsCountry;
-  APIBLMShowPageDetailsExtendedDetails({required this.showPageDetailsDetailsDescription, required this.showPageDetailsDetailsLocation, required this.showPageDetailsDetailsPrecinct, required this.showPageDetailsDetailsDob, required this.showPageDetailsDetailsRip, required this.showPageDetailsDetailsState, required this.showPageDetailsDetailsCountry});
+  APIBLMShowPageDetailsExtendedDetails({required this.showPageDetailsDetailsDescription, required this.showPageDetailsDetailsLocation, required this.showPageDetailsDetailsPrecinct, required this.showPageDetailsDetailsRip, required this.showPageDetailsDetailsState, required this.showPageDetailsDetailsCountry});
 
   factory APIBLMShowPageDetailsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowPageDetailsExtendedDetails(
       showPageDetailsDetailsDescription: parsedJson['description'] ?? '',
       showPageDetailsDetailsLocation: parsedJson['location'] ?? '',
       showPageDetailsDetailsPrecinct: parsedJson['precinct'] ?? '',
-      showPageDetailsDetailsDob: parsedJson['dob'] ?? '',
       showPageDetailsDetailsRip: parsedJson['rip'] ?? '',
       showPageDetailsDetailsState: parsedJson['state'] ?? '',
       showPageDetailsDetailsCountry: parsedJson['country'] ?? '',

@@ -109,6 +109,19 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
           ),
         );
       }
+
+      if(newValue.blmUsers.isEmpty){
+        await showDialog(
+          context: context,
+          builder: (context) => CustomDialog(
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            title: 'Error',
+            description: 'No user found with an email address.',
+            okButtonColor: const Color(0xfff44336), // RED
+            includeOkButton: true,
+          ),
+        );
+      }
     }
 
     if(mounted){

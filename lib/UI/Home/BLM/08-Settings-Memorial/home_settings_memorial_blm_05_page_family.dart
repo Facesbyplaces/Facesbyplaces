@@ -80,6 +80,8 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
       familyItemsRemaining = newValue.blmItemsRemaining;
       count.value = count.value + newValue.blmFamilyList.length;
 
+      
+
       for(int i = 0; i < newValue.blmFamilyList.length; i++){
         family.add(
           ListTile(
