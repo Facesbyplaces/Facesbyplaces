@@ -34,7 +34,7 @@ module Blmable
 
     def add_view_count
         page = Pageowner.where(page_type: 'Blm', page_id: @blm.id).first
-        # return render json: {errors: "Page not found"}, status: 400 unless page != nil
+        return render json: {errors: "Page not found"}, status: 400 unless page != nil
         
         if page.view == nil
             page.update(view: 1)
