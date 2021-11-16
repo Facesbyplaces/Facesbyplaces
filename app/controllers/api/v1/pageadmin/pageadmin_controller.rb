@@ -104,17 +104,17 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
 
     def check_is_page_admin
         if params[:account_type] == "1"
-            if User.with_role(:pageadmin, @page).where(id: @user.id).first == nil
-                return render json: {error: "User is not part of the admin"}, status: 422
-            else
-                return render json: {error: "User is already part of the admin or the admin"}, status: 409
-            end
+            return render json: {error: "User is already part of the admin or the admin"}, status: 409 unless User.with_role(:pageadmin, @page).where(id: @user.id).first == nil
+            #     return render json: {error: "User is not part of the admin"}, status: 422
+            # else
+            #     return render json: {error: "User is already part of the admin or the admin"}, status: 409
+            # end
         elsif params[:account_type] == "2"
-            if AlmUser.with_role(:pageadmin, @page).where(id: @user.id).first == nil 
-                return render json: {error: "User is not part of the admin"}, status: 422
-            else
-                return render json: {error: "User is already part of the admin or is the admin"}, status: 409
-            end
+            return render json: {error: "User is already part of the admin or is the admin"}, status: 409 unless AlmUser.with_role(:pageadmin, @page).where(id: @user.id).first == nil 
+            #     return render json: {error: "User is not part of the admin"}, status: 422
+            # else
+            #     return render json: {error: "User is already part of the admin or is the admin"}, status: 409
+            # end
         end  
     end
 
