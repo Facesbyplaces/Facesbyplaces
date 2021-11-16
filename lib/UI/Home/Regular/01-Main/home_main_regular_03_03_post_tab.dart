@@ -18,7 +18,7 @@ class HomeRegularPostTab extends StatefulWidget{
   HomeRegularPostTabState createState() => HomeRegularPostTabState();
 }
 
-class HomeRegularPostTabState extends State<HomeRegularPostTab>{
+class HomeRegularPostTabState extends State<HomeRegularPostTab> with AutomaticKeepAliveClientMixin<HomeRegularPostTab>{
   Future<List<APIRegularHomeTabPostExtended>>? showListOfPosts;
   ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(false);
   ScrollController scrollController = ScrollController();
@@ -27,6 +27,8 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
   ValueNotifier<bool> loaded = ValueNotifier<bool>(false);
   bool updatedPostsData = false;
 
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState(){
@@ -113,6 +115,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
 
   @override
   Widget build(BuildContext context){
+    super.build(context);
     SizeConfig.init(context);
     return ValueListenableBuilder(
       valueListenable: lengthOfPosts,

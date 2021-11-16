@@ -20,7 +20,7 @@ class HomeRegularFeedTab extends StatefulWidget{
   HomeRegularFeedTabState createState() => HomeRegularFeedTabState();
 }
 
-class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
+class HomeRegularFeedTabState extends State<HomeRegularFeedTab> with AutomaticKeepAliveClientMixin<HomeRegularFeedTab>{
   Future<List<APIRegularHomeTabFeedExtended>>? showListOfFeeds;
   ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(false);
   ScrollController scrollController = ScrollController();
@@ -28,6 +28,9 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
   int page1 = 1;
   ValueNotifier<bool> loaded = ValueNotifier<bool>(false);
   bool updatedFeedsData = false;
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState(){
@@ -114,6 +117,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
 
   @override
   Widget build(BuildContext context){
+    super.build(context);
     SizeConfig.init(context);
     return ValueListenableBuilder(
       valueListenable: isGuestLoggedIn,
@@ -611,8 +615,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                         }
                       );
                     }
-                  }
-                  else if(feeds.connectionState == ConnectionState.none){
+                  }else if(feeds.connectionState == ConnectionState.none){
                     return const Center(child: CustomLoader(),);
                   }
                   else if(feeds.hasError){

@@ -33,17 +33,17 @@ Future<APIRegularSearchBLMMemorialMain> apiRegularSearchBLM({required String key
 }
 
 class APIRegularSearchBLMMemorialMain{
-  int almItemsRemaining;
-  List<APIRegularSearchBLMMemorialExtended> almMemorialList;
-  APIRegularSearchBLMMemorialMain({required this.almItemsRemaining, required this.almMemorialList});
+  int blmItemsRemaining;
+  List<APIRegularSearchBLMMemorialExtended> blmMemorialList;
+  APIRegularSearchBLMMemorialMain({required this.blmItemsRemaining, required this.blmMemorialList});
 
   factory APIRegularSearchBLMMemorialMain.fromJson(Map<String, dynamic> parsedJson){
     var memorialList = parsedJson['memorials'] as List;
     List<APIRegularSearchBLMMemorialExtended> newMemorialList = memorialList.map((e) => APIRegularSearchBLMMemorialExtended.fromJson(e)).toList();
 
     return APIRegularSearchBLMMemorialMain(
-      almItemsRemaining: parsedJson['itemsremaining'],
-      almMemorialList: newMemorialList,
+      blmItemsRemaining: parsedJson['itemsremaining'],
+      blmMemorialList: newMemorialList,
     );
   }
 }

@@ -108,7 +108,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
           builder: (context) => CustomDialog(
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             title: 'Error',
-            description: 'No user found with an email address.',
+            description: 'No user found with the associated keyword.',
             okButtonColor: const Color(0xfff44336), // RED
             includeOkButton: true,
           ),

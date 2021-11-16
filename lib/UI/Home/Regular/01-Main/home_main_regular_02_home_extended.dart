@@ -205,10 +205,10 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                       SizedBox(
                         child: ((){
                           switch (toggleBottomListener){
-                            case 0: return const HomeRegularFeedTab();
-                            case 1: return const HomeRegularManageTab();
-                            case 2: return const HomeRegularPostTab();
-                            case 3: return const HomeRegularNotificationsTab();
+                            case 0: return const HomeRegularFeedTab(key: Key('1'));
+                            case 1: return const HomeRegularManageTab(key: Key('2'));
+                            case 2: return const HomeRegularPostTab(key: Key('3'));
+                            case 3: return const HomeRegularNotificationsTab(key: Key('4'));
                           }
                         }()),
                       ),

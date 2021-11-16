@@ -135,7 +135,8 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                 color: Color(0xffBDC3C7),
               ),
             ),
-            trailing: MaterialButton(
+            trailing: !newValue.almAdminList[i].showAdminsSettingsPageOwner
+            ? MaterialButton(
               child: const Text('Remove', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: Color(0xffffffff),),),
               shape: const StadiumBorder(side: BorderSide(color: Color(0xffE74C3C)),),
               minWidth: SizeConfig.screenWidth! / 3.5,
@@ -198,7 +199,8 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                   }
                 }
               },
-            ),
+            ) 
+            : const SizedBox(height: 0,),
           ),
         );
       }

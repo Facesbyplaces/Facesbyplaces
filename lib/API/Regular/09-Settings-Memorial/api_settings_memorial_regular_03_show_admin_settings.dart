@@ -57,12 +57,14 @@ class APIRegularShowAdminsSettingsMain{
 class APIRegularShowAdminsSettingsExtended{
   APIRegularShowAdminsSettingsExtendedUser showAdminsSettingsUser;
   String showAdminsSettingsRelationship;
-  APIRegularShowAdminsSettingsExtended({required this.showAdminsSettingsUser, required this.showAdminsSettingsRelationship});
+  bool showAdminsSettingsPageOwner;
+  APIRegularShowAdminsSettingsExtended({required this.showAdminsSettingsUser, required this.showAdminsSettingsRelationship, required this.showAdminsSettingsPageOwner});
 
   factory APIRegularShowAdminsSettingsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowAdminsSettingsExtended(
       showAdminsSettingsUser: APIRegularShowAdminsSettingsExtendedUser.fromJson(parsedJson['user']),
-      showAdminsSettingsRelationship: parsedJson['relationship']
+      showAdminsSettingsRelationship: parsedJson['relationship'],
+      showAdminsSettingsPageOwner: parsedJson['pageowner'],
     );
   }
 }
