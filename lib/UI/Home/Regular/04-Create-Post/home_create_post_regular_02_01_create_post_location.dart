@@ -16,7 +16,6 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
   ValueNotifier<List<List<double>>> locationPlaces = ValueNotifier<List<List<double>>>([]);
   ValueNotifier<bool> empty = ValueNotifier<bool>(true);
   TextEditingController controller = TextEditingController();
-  List<AutocompletePrediction> predictions = [];
   List<String> placeId = [];
 
   @override

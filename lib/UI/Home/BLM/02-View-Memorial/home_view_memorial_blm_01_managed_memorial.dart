@@ -1060,7 +1060,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                     children: [
                       const SizedBox(height: 40,),
 
-                      Center(child: Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),),
+                      Center(child: Image.asset('assets/icons/app-icon.png', height: 200, width: 200,),),
 
                       const SizedBox(height: 45,),
 

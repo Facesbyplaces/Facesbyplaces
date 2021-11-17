@@ -137,7 +137,7 @@ class APIRegularHomeTabFeedExtendedTagged{
 
   factory APIRegularHomeTabFeedExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabFeedExtendedTagged(
-      homeTabFeedTaggedId: parsedJson['id'],
+      homeTabFeedTaggedId: parsedJson['id'] ?? 0,
       homeTabFeedTaggedFirstName: parsedJson['first_name'] ?? '',
       homeTabFeedTaggedLastName: parsedJson['last_name'] ?? '',
       homeTabFeedTaggedImage: parsedJson['image'] ?? '',

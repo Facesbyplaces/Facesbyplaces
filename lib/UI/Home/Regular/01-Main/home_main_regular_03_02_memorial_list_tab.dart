@@ -14,7 +14,7 @@ class HomeRegularManageTab extends StatefulWidget{
 }
 
 class HomeRegularManageTabState extends State<HomeRegularManageTab> with AutomaticKeepAliveClientMixin<HomeRegularManageTab>{
-  Future<List<APIRegularHomeTabMemorialExtendedPage>>? showListOfMemorials;
+  Future<List<Widget>>? showListOfMemorials;
   ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(false);
   ScrollController scrollController = ScrollController();
   ValueNotifier<int> lengthOfMemorials = ValueNotifier<int>(0);
@@ -22,6 +22,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab> with Automat
   ValueNotifier<int> flag = ValueNotifier<int>(0);
   bool updatedMemorialsData = false;
   int page1 = 1;
+  bool added = false;
 
   @override
   bool get wantKeepAlive => true;
@@ -75,9 +76,39 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab> with Automat
     }
   }
 
-  Future<List<APIRegularHomeTabMemorialExtendedPage>> getListOfMemorials({required int page}) async{
+  Future<List<Widget>> getListOfMemorials({required int page}) async{
+    List<Widget> memorials = [];
     APIRegularHomeTabMemorialMain? newValue;
-    List<APIRegularHomeTabMemorialExtendedPage> listOfMemorials = [];
+
+    memorials.add(
+      Container(
+        height: 80,
+        padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+        color: const Color(0xffeeeeee),
+        child: Row(
+          children: [
+            const Expanded(
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text('My Family', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
+              ),
+            ),
+            
+            Expanded(
+              child: GestureDetector(
+                child: const Align(
+                  alignment: Alignment.centerRight,
+                  child: Text('Create', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
+                ),
+                onTap: (){
+                  Navigator.pushNamed(context, '/home/regular/create-memorial');
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
 
     do{
       newValue = await apiRegularHomeMemorialsTab(page: page).onError((error, stackTrace){
@@ -93,30 +124,100 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab> with Automat
         );
         throw Exception('$error');
       });
-      listOfMemorials.addAll(newValue.almFamilyMemorialList.memorialHomeTabMemorialPage);
-      listOfMemorials.addAll(newValue.almFamilyMemorialList.blmHomeTabMemorialPage);
 
-      flag.value = listOfMemorials.length; // FOR IDENTIFYING THE MIDDLE OF THE LIST
+      for(int i = 0; i < newValue.almFamilyMemorialList.memorialHomeTabMemorialPage.length; i++){
+        memorials.add(
+          MiscRegularManageMemorialTab(
+            index: i,
+            memorialName: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageName,
+            description: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageDetails.blmHomeTabMemorialPageDetailsDescription,
+            image: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageProfileImage,
+            memorialId: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageId,
+            managed: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageManage,
+            follower: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageFollower,
+            famOrFriends: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageFamOrFriends,
+            pageType: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPagePageType,
+            relationship: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageRelationship,
+          ),
+        );
+      }
 
-      listOfMemorials.addAll(newValue.almFriendsMemorialList.memorialHomeTabMemorialPage);
-      listOfMemorials.addAll(newValue.almFriendsMemorialList.blmHomeTabMemorialPage);
+      for(int i = 0; i < newValue.almFamilyMemorialList.blmHomeTabMemorialPage.length; i++){
+        memorials.add(
+          MiscRegularManageMemorialTab(
+            index: i,
+            memorialName: newValue.almFamilyMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageName,
+            description: newValue.almFamilyMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageDetails.blmHomeTabMemorialPageDetailsDescription,
+            image: newValue.almFamilyMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageProfileImage,
+            memorialId: newValue.almFamilyMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageId,
+            managed: newValue.almFamilyMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageManage,
+            follower: newValue.almFamilyMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageFollower,
+            famOrFriends: newValue.almFamilyMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageFamOrFriends,
+            pageType: newValue.almFamilyMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPagePageType,
+            relationship: newValue.almFamilyMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageRelationship,
+          ),
+        );
+      }
+
+      memorials.add(
+        Container(
+          height: 80,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          color: const Color(0xffeeeeee),
+          child: const Align(alignment: Alignment.centerLeft, child: Text('My Friends', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),),
+        ),
+      );
+
+      for(int i = 0; i < newValue.almFriendsMemorialList.memorialHomeTabMemorialPage.length; i++){
+        memorials.add(
+          MiscRegularManageMemorialTab(
+            index: i,
+            memorialName: newValue.almFriendsMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageName,
+            description: newValue.almFriendsMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageDetails.blmHomeTabMemorialPageDetailsDescription,
+            image: newValue.almFriendsMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageProfileImage,
+            memorialId: newValue.almFriendsMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageId,
+            managed: newValue.almFriendsMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageManage,
+            follower: newValue.almFriendsMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageFollower,
+            famOrFriends: newValue.almFriendsMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageFamOrFriends,
+            pageType: newValue.almFriendsMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPagePageType,
+            relationship: newValue.almFriendsMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageRelationship,
+          ),
+        );
+      }
+
+      for(int i = 0; i < newValue.almFriendsMemorialList.blmHomeTabMemorialPage.length; i++){
+        memorials.add(
+          MiscRegularManageMemorialTab(
+            index: i,
+            memorialName: newValue.almFriendsMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageName,
+            description: newValue.almFriendsMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageDetails.blmHomeTabMemorialPageDetailsDescription,
+            image: newValue.almFriendsMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageProfileImage,
+            memorialId: newValue.almFriendsMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageId,
+            managed: newValue.almFriendsMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageManage,
+            follower: newValue.almFriendsMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageFollower,
+            famOrFriends: newValue.almFriendsMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageFamOrFriends,
+            pageType: newValue.almFriendsMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPagePageType,
+            relationship: newValue.almFriendsMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageRelationship,
+          ),
+        );
+      }
 
       if(newValue.almFamilyMemorialList.memorialHomeTabMemorialFamilyItemsRemaining != 0 || newValue.almFamilyMemorialList.blmHomeTabMemorialFamilyItemsRemaining != 0 ||
       newValue.almFriendsMemorialList.memorialHomeTabMemorialFriendsItemsRemaining != 0 || newValue.almFriendsMemorialList.blmHomeTabMemorialFriendsItemsRemaining != 0
       ){
         page++;
-      }else if(lengthOfMemorials.value > 0 && listOfMemorials.length > lengthOfMemorials.value){
+      }else if(lengthOfMemorials.value > 0 && memorials.length > lengthOfMemorials.value){
         updatedMemorialsData = true;
       }
     }while(newValue.almFamilyMemorialList.memorialHomeTabMemorialFamilyItemsRemaining != 0 || newValue.almFamilyMemorialList.blmHomeTabMemorialFamilyItemsRemaining != 0 ||
       newValue.almFriendsMemorialList.memorialHomeTabMemorialFriendsItemsRemaining != 0 || newValue.almFriendsMemorialList.blmHomeTabMemorialFriendsItemsRemaining != 0
     );
 
-    lengthOfMemorials.value = listOfMemorials.length; // COMPARISON FOR NEXT PAGINATION & NUMBER OF FEEDS
+    lengthOfMemorials.value = memorials.length; // COMPARISON FOR NEXT PAGINATION & NUMBER OF FEEDS
     page1 = page;
     loaded.value = true;
     
-    return listOfMemorials;
+    return memorials;
   }
 
   @override
@@ -134,7 +235,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab> with Automat
             builder: (_, int flagListener, __) => SafeArea(
               child: RefreshIndicator(
                 onRefresh: onRefresh,
-                child: FutureBuilder<List<APIRegularHomeTabMemorialExtendedPage>>(
+                child: FutureBuilder<List<Widget>>(
                   future: showListOfMemorials,
                   builder: (context, memorials){
                     if(memorials.connectionState == ConnectionState.done){
@@ -147,7 +248,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab> with Automat
                             children: [
                               SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
 
-                              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+                              Image.asset('assets/icons/app-icon.png', height: 200, width: 200,),
 
                               const SizedBox(height: 45,),
 
@@ -163,57 +264,9 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab> with Automat
                           separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
                           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
                           physics: const ClampingScrollPhysics(),
-                          itemCount: lengthOfMemorialsListener + 1,
+                          itemCount: memorials.data!.length,
                           itemBuilder: (c, i){
-                            if(i == 0){
-                              return Container(
-                                height: 80,
-                                padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                                color: const Color(0xffeeeeee),
-                                child: Row(
-                                  children: [
-                                    const Expanded(
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text('My Family', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
-                                      ),
-                                    ),
-                                    
-                                    Expanded(
-                                      child: GestureDetector(
-                                        child: const Align(
-                                          alignment: Alignment.centerRight,
-                                          child: Text('Create', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
-                                        ),
-                                        onTap: (){
-                                          Navigator.pushNamed(context, '/home/regular/create-memorial');
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }else if((flagListener) == i){
-                              return Container(
-                                height: 80,
-                                padding: const EdgeInsets.symmetric(horizontal: 20),
-                                color: const Color(0xffeeeeee),
-                                child: const Align(alignment: Alignment.centerLeft, child: Text('My Friends', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),),
-                              );
-                            }else{
-                              return MiscRegularManageMemorialTab(
-                                index: i - 1,
-                                memorialName: memorials.data![i - 1].blmHomeTabMemorialPageName,
-                                description: memorials.data![i - 1].blmHomeTabMemorialPageDetails.blmHomeTabMemorialPageDetailsDescription,
-                                image: memorials.data![i - 1].blmHomeTabMemorialPageProfileImage,
-                                memorialId: memorials.data![i - 1].blmHomeTabMemorialPageId,
-                                managed: memorials.data![i - 1].blmHomeTabMemorialPageManage,
-                                follower: memorials.data![i - 1].blmHomeTabMemorialPageFollower,
-                                famOrFriends: memorials.data![i - 1].blmHomeTabMemorialPageFamOrFriends,
-                                pageType: memorials.data![i - 1].blmHomeTabMemorialPagePageType,
-                                relationship: memorials.data![i - 1].blmHomeTabMemorialPageRelationship,
-                              );
-                            }
+                            return memorials.data![i];
                           }
                         );
                       }

@@ -208,7 +208,7 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
               children: [
                 SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
 
-                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+                Image.asset('assets/icons/app-icon.png', height: 200, width: 200,),
 
                 const SizedBox(height: 45,),
 

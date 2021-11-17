@@ -345,7 +345,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
             children: [
               SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
 
-              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+              Image.asset('assets/icons/app-icon.png', height: 200, width: 200,),
 
               const SizedBox(height: 45,),
 
@@ -534,7 +534,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
             children: [
               SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
 
-              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+              Image.asset('assets/icons/app-icon.png', height: 200, width: 200,),
 
               const SizedBox(height: 45,),
 

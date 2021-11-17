@@ -1493,7 +1493,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
             children: [
               SizedBox(height: (SizeConfig.screenHeight! - 55 - kToolbarHeight) / 4,),
 
-              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+              Image.asset('assets/icons/app-icon.png', height: 200, width: 200,),
 
               const SizedBox(height: 45,),
 
@@ -1563,7 +1563,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
             children: [
               SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
 
-              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+              Image.asset('assets/icons/app-icon.png', height: 200, width: 200,),
 
               const SizedBox(height: 45,),
 
@@ -1633,7 +1633,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           children: [
             SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
 
-            Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+            Image.asset('assets/icons/app-icon.png', height: 200, width: 200,),
 
             const SizedBox(height: 45,),
 
@@ -1703,7 +1703,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
             children: [
               SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
 
-              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+              Image.asset('assets/icons/app-icon.png', height: 200, width: 200,),
 
               const SizedBox(height: 45,),
 
