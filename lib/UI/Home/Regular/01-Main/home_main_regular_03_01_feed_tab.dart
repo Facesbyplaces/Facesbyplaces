@@ -450,6 +450,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab> with AutomaticKe
                             location: feeds.data![i].homeTabFeedLocation,
                             latitude: feeds.data![i].homeTabFeedLatitude,
                             longitude: feeds.data![i].homeTabFeedLongitude,
+                            isGuest: isGuestLoggedInListener,
                             contents: [
                               Align(alignment: Alignment.centerLeft, child: Text(feeds.data![i].homeTabFeedBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                                   

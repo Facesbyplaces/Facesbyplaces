@@ -174,6 +174,8 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                 location: posts[i].location,
                 latitude: posts[i].latitude,
                 longitude: posts[i].longitude,
+                // isGuest: isGuestLoggedIn.value,
+                isGuest: false,
                 contents: [
                   Align(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 
@@ -455,6 +457,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
             famOrFriends: newValue.almOwned[i].showUserMemorialsPage.showUserMemorialsPageFamOrFriends,
             pageType: newValue.almOwned[i].showUserMemorialsPage.showUserMemorialsPageType,
             relationship: newValue.almOwned[i].showUserMemorialsPage.showUserMemorialsPageRelationship,
+            isGuest: false,
           ),
         );
       }
@@ -494,6 +497,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
             famOrFriends: newValue.almFollowed[i].showUserMemorialsPage.showUserMemorialsPageFamOrFriends,
             pageType: newValue.almFollowed[i].showUserMemorialsPage.showUserMemorialsPageType,
             relationship: newValue.almFollowed[i].showUserMemorialsPage.showUserMemorialsPageRelationship,
+            isGuest: false,
           ),
         );
       }

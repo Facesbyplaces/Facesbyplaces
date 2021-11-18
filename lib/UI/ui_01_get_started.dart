@@ -9,7 +9,7 @@ import 'Regular/regular_07_password_reset.dart';
 import 'BLM/blm_07_password_reset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'ui_02_login.dart';
+// import 'ui_02_login.dart';
 import 'dart:async';
 
 const double pi = 3.1415926535897932;
@@ -133,18 +133,20 @@ class UIGetStartedState extends State<UIGetStarted>{
               child: IntrinsicHeight(
                 child: Column(
                   children: [
-                    SizedBox(
+                    Container(
+                      color: Colors.red,
                       height: SizeConfig.screenHeight! / 2,
                       width: SizeConfig.screenWidth,
                       child: Stack(
-                      fit: StackFit.expand,
                         children: [
                           Container(
-                            child: Image.asset('assets/icons/Collage Image.png', fit: BoxFit.fill,),
+                            height: SizeConfig.screenHeight! / 2,
+                            width: SizeConfig.screenWidth,
+                            child: Image.asset('assets/icons/Collage Image.png', fit: BoxFit.cover,),
                             color: const Color(0xff000000),
                           ),
 
-                          Positioned(
+                          Center(
                             child: Image.asset('assets/icons/logo.png', height: 200, width: 200,),
                           ),
                         ],
@@ -153,10 +155,10 @@ class UIGetStartedState extends State<UIGetStarted>{
 
                     Expanded(
                       child: Container(
-                        decoration: const BoxDecoration(image: DecorationImage(fit: BoxFit.fill, image: AssetImage('assets/icons/background.png'),),),
+                        decoration: const BoxDecoration(image: DecorationImage(fit: BoxFit.fill, image: AssetImage('assets/icons/background.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),),
                         child: Column(
                           children: [
-                            const SizedBox(height: 30),
+                            // const SizedBox(height: 30),
 
                             const Center(child: Text('FacesByPlaces.com', style: TextStyle(fontSize: 28, color: Color(0xff04ECFF), fontFamily: 'NexaBold',),),),
 
@@ -166,17 +168,17 @@ class UIGetStartedState extends State<UIGetStarted>{
                               padding: EdgeInsets.only(left: 30, right: 30),
                               child: Center(
                                 child: Text('Create a Memorial Page for Loved Ones by Sharing Stories, photos of Special Events & Occasions. Keeping their Memories alive for Generations',
-                                  style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffffffff),),
+                                  style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
                                   textAlign: TextAlign.center,
                                 ),
                               ),
                             ),
 
-                            const SizedBox(height: 50),
+                            const SizedBox(height: 10),
 
                             const Expanded(child: SizedBox(),),
 
-                            const SizedBox(height: 50),
+                            const SizedBox(height: 10),
 
                             MaterialButton(
                               child: const Text('Get Started', style: TextStyle(fontSize: 24, color: Color(0xffffffff), fontFamily: 'NexaBold',),),
@@ -186,11 +188,18 @@ class UIGetStartedState extends State<UIGetStarted>{
                               padding: EdgeInsets.zero,
                               height: 50,
                               onPressed: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => const UILogin01()));
+                                // Navigator.push(context, MaterialPageRoute(builder: (context) => const UILogin01()));
+                                Navigator.pushNamed(context, '/regular/login');
                               },
                             ),
 
-                            const SizedBox(height: 50),
+                            const SizedBox(height: 10),
+
+                            const Expanded(child: SizedBox(),),
+
+                            const Text('Version: 1.69 / 1.0.0+8', style: TextStyle(fontSize: 14, color: Color(0xffffffff), fontFamily: 'NexaRegular'),),
+
+                            const SizedBox(height: 10),
                           ],
                         ),
                       ),

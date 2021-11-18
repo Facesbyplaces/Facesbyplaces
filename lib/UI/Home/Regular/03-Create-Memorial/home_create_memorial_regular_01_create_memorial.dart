@@ -3,6 +3,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'home_create_memorial_regular_02_create_memorial.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'home_create_memorial_regular_04_locate_map.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
@@ -90,11 +91,6 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
 
                         const SizedBox(height: 20,),
                         
-                        // MiscInputFieldTemplate(
-                        //   key: _key2, 
-                        //   labelText: 'Birthplace',
-                        // ),
-
                         TextFormField(
                           controller: birthplaceController,
                           keyboardType: TextInputType.text,
@@ -109,12 +105,6 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                             alignLabelWithHint: true, 
                             labelText: 'Birthplace', 
                             labelStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7)), 
-                            prefixIcon: IconButton(
-                              icon: const Icon(MdiIcons.headQuestion),
-                              onPressed: (){
-                                birthplaceController.text = 'Unknown';
-                              },
-                            ),
                             suffixIcon: IconButton(
                               icon: const Icon(Icons.close), 
                               onPressed: (){
@@ -148,12 +138,6 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                             focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
                             alignLabelWithHint: true,
                             labelText: 'DOB',
-                            prefixIcon: IconButton(
-                              icon: const Icon(MdiIcons.headQuestion),
-                              onPressed: (){
-                                controller1.text = 'Unknown';
-                              },
-                            ),
                             suffixIcon: IconButton(
                               icon: const Icon(Icons.close), 
                               onPressed: (){
@@ -162,19 +146,45 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                               },
                             ),
                           ),
-                          onTap: () {
-                            DatePicker.showDatePicker(
-                              context,
-                              currentTime: DateTime.now(),
-                              showTitleActions: true,
-                              locale: LocaleType.en,
-                              minTime: dob,
-                              maxTime: rip,
-                              onConfirm: (date){
-                                String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-                                dob = date;
-                                controller1.text = format;
-                              },
+                          onTap: () async{
+                            await showMaterialModalBottomSheet(
+                              context: context,
+                              builder: (context) => SafeArea(
+                                top: false,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    ListTile(
+                                      title: const Text('Unsure?'),
+                                      leading: const Icon(MdiIcons.headQuestion),
+                                      onTap: () async{
+                                        controller1.text = 'Unknown';
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                    ListTile(
+                                      title: const Text('Show Calendar'),
+                                      leading: const Icon(Icons.calendar_today),
+                                      onTap: () {
+                                        DatePicker.showDatePicker(
+                                          context,
+                                          currentTime: DateTime.now(),
+                                          showTitleActions: true,
+                                          locale: LocaleType.en,
+                                          minTime: dob,
+                                          maxTime: rip,
+                                          onConfirm: (date){
+                                            String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+                                            dob = date;
+                                            controller1.text = format;
+                                            Navigator.pop(context);
+                                          },
+                                        );
+                                      },
+                                    )
+                                  ],
+                                ),
+                              ),
                             );
                           },
                         ),
@@ -197,12 +207,6 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                             focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
                             alignLabelWithHint: true,
                             labelText: 'RIP',
-                            prefixIcon: IconButton(
-                              icon: const Icon(MdiIcons.headQuestion),
-                              onPressed: (){
-                                controller2.text = 'Unknown';
-                              },
-                            ),
                             suffixIcon: IconButton(
                               icon: const Icon(Icons.close), 
                               onPressed: (){
@@ -211,19 +215,45 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                               },
                             ),
                           ),
-                          onTap: (){
-                            DatePicker.showDatePicker(
-                              context,
-                              showTitleActions: true,
-                              minTime: dob,
-                              maxTime: DateTime.now(),
-                              currentTime: DateTime.now(),
-                              locale: LocaleType.en,
-                              onConfirm: (date){
-                                String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-                                rip = date;
-                                controller2.text = format;
-                              },
+                          onTap: () async{
+                            await showMaterialModalBottomSheet(
+                              context: context,
+                              builder: (context) => SafeArea(
+                                top: false,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    ListTile(
+                                      title: const Text('Unsure?'),
+                                      leading: const Icon(MdiIcons.headQuestion),
+                                      onTap: () async{
+                                        controller2.text = 'Unknown';
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                    ListTile(
+                                      title: const Text('Show Calendar'),
+                                      leading: const Icon(Icons.calendar_today),
+                                      onTap: () {
+                                        DatePicker.showDatePicker(
+                                          context,
+                                          showTitleActions: true,
+                                          minTime: dob,
+                                          maxTime: DateTime.now(),
+                                          currentTime: DateTime.now(),
+                                          locale: LocaleType.en,
+                                          onConfirm: (date){
+                                            String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+                                            rip = date;
+                                            controller2.text = format;
+                                            Navigator.pop(context);
+                                          },
+                                        );
+                                      },
+                                    )
+                                  ],
+                                ),
+                              ),
                             );
                           },
                         ),

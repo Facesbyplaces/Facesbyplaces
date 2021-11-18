@@ -14,22 +14,25 @@ class MiscLoginToContinue extends StatelessWidget{
           children: [
             const SizedBox(height: 30,),
 
-            Image.asset('assets/icons/app-icon.png', width: 300, height: 300,),
+            Image.asset('assets/icons/app-icon.png', width: 200, height: 200,),
 
             const SizedBox(height: 30,),
 
             const Text('FacesbyPlaces', textAlign: TextAlign.center, style: TextStyle(fontFamily: 'NexaBold', fontSize: 32),),
             
-            const SizedBox(height: 30,),
+            const SizedBox(height: 100,),
 
-            const Text('Sign in or sign up to get the most out of the FacesbyPlaces app; list of memorials nearby, posts and much more.', textAlign: TextAlign.center, style: TextStyle(fontFamily: 'NexaRegular', fontSize: 24,),),
+            const Text('Sign in or sign up to get the most out of the FacesbyPlaces app; list of memorials nearby, posts and much more.', textAlign: TextAlign.center, style: TextStyle(fontFamily: 'NexaBold', fontSize: 24,),),
 
             const SizedBox(height: 100,),
 
             GestureDetector(
               child: const Text('Sign in or sign up to continue', textAlign: TextAlign.center, style: TextStyle(fontFamily: 'NexaBold', fontSize: 24, color: Color(0xff4EC9D4)),),
               onTap: (){
-                Navigator.of(context).pushNamedAndRemoveUntil('/login', ModalRoute.withName('/login'));
+                // Navigator.of(context).pushNamedAndRemoveUntil('/login', ModalRoute.withName('/login'));
+                Navigator.of(context).pushNamedAndRemoveUntil('/start', ModalRoute.withName('/start'));
+                // Route newRoute = MaterialPageRoute(builder: (BuildContext context) => const UIGetStarted());
+                // Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
               },
             ),
 
@@ -54,7 +57,7 @@ class MiscErrorMessageTemplate extends StatelessWidget{
           children: [
             const SizedBox(height: 30,),
 
-            Image.asset('assets/icons/app-icon.png', width: 300, height: 300,),
+            Image.asset('assets/icons/app-icon.png', width: 200, height: 200,),
 
             const SizedBox(height: 100,),
 

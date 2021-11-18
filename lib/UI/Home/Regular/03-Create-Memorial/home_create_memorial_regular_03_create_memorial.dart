@@ -151,15 +151,15 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                               ),
                             ),
 
-                            const Positioned(
-                              right: 10,
-                              top: 10,
-                              child: CircleAvatar(
-                                child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: 45,),
-                                backgroundColor: Color(0xffffffff),
-                                radius: 25,
-                              ),
-                            ),
+                            // const Positioned(
+                            //   right: 10,
+                            //   top: 10,
+                            //   child: CircleAvatar(
+                            //     child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: 45,),
+                            //     backgroundColor: Color(0xffffffff),
+                            //     radius: 25,
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),

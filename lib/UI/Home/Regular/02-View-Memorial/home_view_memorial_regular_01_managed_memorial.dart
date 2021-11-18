@@ -299,9 +299,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                     if(profile.data!.almMemorial.showMemorialImagesOrVideos.isNotEmpty){
                                                       if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[0])?.contains('video') == true){
                                                         return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}',
-                                                          betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                            placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                                            controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                        // return BetterPlayer.network('\'${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}\'',
+                                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                            // placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                            controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),
                                                             aspectRatio: 16 / 9,
                                                             fit: BoxFit.contain,
                                                           ),
@@ -343,8 +344,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                     child: ((){
                                                                       if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[0])?.contains('video') == true){
                                                                         return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}',
-                                                                          betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                            placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                                        // return BetterPlayer.network('\'${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}\'',
+                                                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                            // placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                                                                             deviceOrientationsAfterFullScreen: [
                                                                               DeviceOrientation.portraitUp
                                                                             ],
@@ -908,6 +910,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                   location: posts[i].location,
                                   latitude: posts[i].latitude,
                                   longitude: posts[i].longitude,
+                                  isGuest: false,
                                   contents: [
                                     Align(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),), overflow: TextOverflow.ellipsis, maxLines: 5,),),
 

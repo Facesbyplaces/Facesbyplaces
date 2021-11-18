@@ -70,6 +70,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
   TextEditingController controller = TextEditingController();
   ScrollController scrollController = ScrollController();
   ValueNotifier<bool> join = ValueNotifier<bool>(false);
+  ValueNotifier<bool> filter = ValueNotifier<bool>(false);
   ValueNotifier<int> postCount = ValueNotifier<int>(0);
   Future<APIBLMShowMemorialMain>? showProfile;
   List<BLMProfilePosts> posts = [];
@@ -199,12 +200,12 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
           valueListenable: postCount,
           builder: (_, int postCountListener, __) => ValueListenableBuilder(
             valueListenable: join,
-            builder: (_, bool joinListener, __) => Scaffold(
-              body: Stack(
-                children: [
-                  IgnorePointer(
-                    ignoring: isGuestLoggedInListener,
-                    child: RefreshIndicator(
+            builder: (_, bool joinListener, __) => ValueListenableBuilder(
+              valueListenable: filter,
+              builder: (_, bool filterListener, __) => Scaffold(
+                body: Stack(
+                  children: [
+                    RefreshIndicator(
                       onRefresh: onRefresh,
                       child: CustomScrollView(
                         physics: const ClampingScrollPhysics(),
@@ -215,628 +216,39 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                               future: showProfile,
                               builder: (context, profile){
                                 if(profile.hasData){
-                                  return Column(
-                                    key: profileKey,
-                                    children: [
-                                      Stack(
+                                  return InkWell(
+                                    onTap: (){
+                                      filter.value = true;
+                                    },
+                                    child: IgnorePointer(
+                                      ignoring: isGuestLoggedInListener,
+                                      child: Column(
+                                        key: profileKey,
                                         children: [
-                                          SizedBox(
-                                            height: SizeConfig.screenHeight! / 3,
-                                            width: SizeConfig.screenWidth,
-                                            child: CachedNetworkImage(
-                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                              imageUrl: profile.data!.blmMemorial.memorialBackgroundImage,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-
-                                          Column(
+                                          Stack(
                                             children: [
-                                              GestureDetector( // BACKGROUND IMAGE FOR ZOOMING IN
-                                                child: Container(height: SizeConfig.screenHeight! / 3.5, color: Colors.transparent,),
-                                                onTap: (){
-                                                  showGeneralDialog(
-                                                    context: context,
-                                                    barrierLabel: 'Dialog',
-                                                    barrierDismissible: true,
-                                                    transitionDuration: const Duration(milliseconds: 0),
-                                                    pageBuilder: (_, __, ___) {
-                                                      return Scaffold(
-                                                        backgroundColor: Colors.black12.withOpacity(0.7),
-                                                        body: SizedBox.expand(
-                                                          child: SafeArea(
-                                                            child: Column(
-                                                              children: [
-                                                                Container(
-                                                                  padding: const EdgeInsets.only(right: 20.0),
-                                                                  alignment: Alignment.centerRight,
-                                                                  child: GestureDetector(
-                                                                    child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
-                                                                    onTap: (){
-                                                                      Navigator.pop(context);
-                                                                    },
-                                                                  ),
-                                                                ),
-
-                                                                const SizedBox(height: 20,),
-
-                                                                Expanded(
-                                                                  child: CachedNetworkImage(
-                                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                    imageUrl: profile.data!.blmMemorial.memorialBackgroundImage,
-                                                                    fit: BoxFit.contain,
-                                                                  ),
-                                                                ),
-
-                                                                const SizedBox(height: 80,),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  );
-                                                },
-                                              ),
-
-                                              Container(
+                                              SizedBox(
+                                                height: SizeConfig.screenHeight! / 3,
                                                 width: SizeConfig.screenWidth,
-                                                decoration: const BoxDecoration(borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)), color: Color(0xffffffff),),
-                                                child: Column(
-                                                  children: [
-                                                    const SizedBox(height: 150,),
-
-                                                    Center(
-                                                      child: Text(profile.data!.blmMemorial.memorialName,
-                                                        style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),
-                                                        textAlign: TextAlign.center,
-                                                        overflow: TextOverflow.clip,
-                                                        maxLines: 5,
-                                                      ),
-                                                    ),
-
-                                                    const SizedBox(height: 20,),
-
-                                                    TextButton.icon(
-                                                      label: Text('${profile.data!.blmMemorial.memorialFollowersCount}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
-                                                      icon: const CircleAvatar(radius: 15, backgroundColor: Color(0xff000000), child: CircleAvatar(radius: 10, backgroundColor: Colors.transparent, foregroundImage: AssetImage('assets/icons/fist.png'),),),
-                                                      onPressed: (){
-                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: widget.memorialId, newToggle: 2)));
-                                                      },
-                                                    ),
-
-                                                    const SizedBox(height: 20,),
-
-                                                    Column(
-                                                      children: [
-                                                        GestureDetector(
-                                                          child: ((){
-                                                            if(profile.data!.blmMemorial.memorialImagesOrVideos.isNotEmpty){
-                                                              if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[0])?.contains('video') == true){
-                                                                return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
-                                                                  betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                                                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                                                    aspectRatio: 16 / 9,
-                                                                    fit: BoxFit.contain,
-                                                                  ),
-                                                                );
-                                                              }else{
-                                                                return const SizedBox(height: 0,);
-                                                              }
-                                                            }else{
-                                                              return const SizedBox(height: 0,);
-                                                            }
-                                                          }()),
-                                                          onTap: (){
-                                                            showGeneralDialog(
-                                                              context: context,
-                                                              barrierLabel: 'Dialog',                                                                
-                                                              barrierDismissible: true,
-                                                              transitionDuration: const Duration(milliseconds: 0),
-                                                              pageBuilder: (_, __, ___) {
-                                                                return Scaffold(
-                                                                  backgroundColor: Colors.black12.withOpacity(0.7),
-                                                                  body: SizedBox.expand(
-                                                                    child: SafeArea(
-                                                                      child: Column(
-                                                                        children: [
-                                                                          Container(
-                                                                            padding: const EdgeInsets.only(right: 20.0),
-                                                                            alignment: Alignment.centerRight,
-                                                                            child: GestureDetector(
-                                                                              child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
-                                                                              onTap: (){
-                                                                                Navigator.pop(context);
-                                                                              },
-                                                                            ),
-                                                                          ),
-
-                                                                          const SizedBox(height: 10,),
-
-                                                                          Expanded(
-                                                                            child: ((){
-                                                                              if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[0])?.contains('video') == true){
-                                                                                return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
-                                                                                  betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                                                                    deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-                                                                                    aspectRatio: 16 / 9,
-                                                                                    fit: BoxFit.contain,
-                                                                                  ),
-                                                                                );
-                                                                              }else{
-                                                                                return CachedNetworkImage(
-                                                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                                                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                                  imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[0],
-                                                                                  fit: BoxFit.contain,
-                                                                                );
-                                                                              }
-                                                                            }()),
-                                                                          ),
-
-                                                                          const SizedBox(height: 85,),
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              },
-                                                            );
-                                                          },
-                                                        ),
-
-                                                        const SizedBox(height: 20,),
-
-                                                        ((){
-                                                          if(profile.data!.blmMemorial.memorialDetails.memorialDetailsDescription != ''){
-                                                            return Container(
-                                                              child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsDescription, textAlign: TextAlign.center, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
-                                                              padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                                                              alignment: Alignment.center,
-                                                            );
-                                                          }else{
-                                                            return const SizedBox(height: 0,);
-                                                          }
-                                                        }()),
-                                                      ],
-                                                    ),
-
-                                                    const SizedBox(height: 20,),
-
-                                                    Row(
-                                                      children: [
-                                                        Expanded(
-                                                          child: GestureDetector(
-                                                            child: const CircleAvatar(radius: 25, backgroundColor: Color(0xffE67E22), child: Icon(Icons.card_giftcard, color: Color(0xffffffff), size: 25,),),
-                                                            onTap: (){
-                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserDonate(pageType: widget.pageType, pageId: widget.memorialId, pageName: profile.data!.blmMemorial.memorialName)));
-                                                            },
-                                                          ),
-                                                        ),
-
-                                                        Expanded(
-                                                          flex: 2,
-                                                          child: Padding(
-                                                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                                                            child: MaterialButton(
-                                                              child: Text(joinListener ? 'Unfollow' : 'Follow', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
-                                                              color: joinListener ? const Color(0xff888888) : const Color(0xff04ECFF),
-                                                              minWidth: SizeConfig.screenWidth! / 2,
-                                                              shape: const StadiumBorder(),
-                                                              padding: EdgeInsets.zero,
-                                                              height: 50,
-                                                              onPressed: () async{
-                                                                join.value = !join.value;
-                                                                bool result = false;
-
-                                                                if(join.value == true){
-                                                                  profile.data!.blmMemorial.memorialFollowersCount++;
-                                                                  context.loaderOverlay.show();
-                                                                  result = await apiBLMModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId);
-                                                                  context.loaderOverlay.hide();
-                                                                }else{
-                                                                  profile.data!.blmMemorial.memorialFollowersCount--;
-                                                                  context.loaderOverlay.show();
-                                                                  result = await apiBLMModifyUnfollowPage(pageType: widget.pageType, pageId: widget.memorialId);
-                                                                  context.loaderOverlay.hide();
-                                                                }
-
-                                                                if(result){
-                                                                  await showDialog(
-                                                                    context: context,
-                                                                    builder: (context) => CustomDialog(
-                                                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                                      title: 'Success',
-                                                                      description: join.value != true ? 'Successfully unfollowed the page. You will no longer receive notifications from this page.' : 'Successfully followed the page. You will receive notifications from this page.',
-                                                                      okButtonColor: const Color(0xff4caf50), // GREEN
-                                                                      includeOkButton: true,
-                                                                    ),
-                                                                  );
-                                                                }else{
-                                                                  await showDialog(
-                                                                    context: context,
-                                                                    builder: (context) => CustomDialog(
-                                                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                                      title: 'Error',
-                                                                      description: 'Something went wrong. Please try again.',
-                                                                      okButtonColor: const Color(0xfff44336), // RED
-                                                                      includeOkButton: true,
-                                                                    ),
-                                                                  );
-                                                                }
-                                                              },
-                                                            ),
-                                                          ),
-                                                        ),
-
-                                                        Expanded(
-                                                          child: GestureDetector(
-                                                            child: const CircleAvatar(radius: 25, backgroundColor: Color(0xff3498DB), child: Icon(Icons.share, color: Color(0xffffffff), size: 25,),),
-                                                            onTap: () async{
-                                                              initBranchShare();
-                                                              FlutterBranchSdk.setIdentity('blm-share-link');
-
-                                                              BranchResponse response = await FlutterBranchSdk.showShareSheet(
-                                                                buo: buo!,
-                                                                linkProperties: lp!,
-                                                                messageText: 'FacesbyPlaces App',
-                                                                androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
-                                                                androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
-                                                              );
-
-                                                              if(response.success){
-                                                              }else{
-                                                                FlutterBranchSdk.logout();
-                                                                throw Exception('Error : ${response.errorCode} - ${response.errorMessage}');
-                                                              }
-                                                            },
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-
-                                                    const SizedBox(height: 20,),
-
-                                                    Padding(
-                                                      padding: const EdgeInsets.only(left: 20),
-                                                      child: Column(
-                                                        children: [
-                                                          Row(
-                                                            children: [
-                                                              const Icon(Icons.place, color: Color(0xff000000), size: 25,),
-
-                                                              const SizedBox(width: 20,),
-
-                                                              Flexible(
-                                                                child: GestureDetector(
-                                                                child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsLocation, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff3498DB),),),
-                                                                  onTap: () async{
-                                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMaps(latitude: profile.data!.blmMemorial.memorialDetails.memorialLatitude, longitude: profile.data!.blmMemorial.memorialDetails.memorialLongitude, isMemorial: true, memorialName: profile.data!.blmMemorial.memorialName, memorialImage: profile.data!.blmMemorial.memorialBackgroundImage)));
-                                                                  },
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-
-                                                          const SizedBox(height: 20,),
-
-                                                          Row(
-                                                            children: [
-                                                              Image.asset('assets/icons/grave_logo.png', height: 25),
-
-                                                              const SizedBox(width: 20,),
-
-                                                              Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsRip, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-
-                                                    const SizedBox(height: 20,),
-
-                                                    SizedBox(
-                                                      height: 50.0,
-                                                      child: Row(
-                                                        children: [
-                                                          Expanded(
-                                                            child: GestureDetector(
-                                                              child: Column(
-                                                                children: [
-                                                                  Text('${profile.data!.blmMemorial.memorialPostsCount}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
-
-                                                                  const Text('Post', style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: Color(0xff677375),),),
-                                                                ],
-                                                              ),
-                                                              onTap: (){
-                                                                Scrollable.ensureVisible(dataKey.currentContext!);
-                                                              },
-                                                            ),
-                                                          ),
-
-                                                          Container(width: 5, color: const Color(0xffeeeeee),),
-
-                                                          Expanded(
-                                                            child: GestureDetector(
-                                                              child: Column(
-                                                                children: [
-                                                                  Text('${profile.data!.blmMemorial.memorialFamilyCount}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
-
-                                                                  const Text('Family', style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: Color(0xff677375),),),
-                                                                ],
-                                                              ),
-                                                              onTap: (){
-                                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: widget.memorialId, newToggle: 0)));
-                                                              },
-                                                            ),
-                                                          ),
-
-                                                          Container(width: 5, color: const Color(0xffeeeeee),),
-
-                                                          Expanded(
-                                                            child: GestureDetector(
-                                                              child: Column(
-                                                                children: [
-                                                                  Text('${profile.data!.blmMemorial.memorialFriendsCount}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
-
-                                                                  const Text('Friends', style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: Color(0xff677375),),),
-                                                                ],
-                                                              ),
-                                                              onTap: (){
-                                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: widget.memorialId, newToggle: 1)));
-                                                              },
-                                                            ),
-                                                          ),
-
-                                                          Container(width: 5, color: const Color(0xffeeeeee),),
-
-                                                          Expanded(
-                                                            child: GestureDetector(
-                                                              child: Column(
-                                                                children: [
-                                                                  Text('${profile.data!.blmMemorial.memorialFollowersCount}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
-
-                                                                  const Text('Joined', style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: Color(0xff677375),),),
-                                                                ],
-                                                              ),
-                                                              onTap: (){
-                                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: widget.memorialId, newToggle: 2)));
-                                                              },
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-
-                                                    Container(height: 5, color: const Color(0xffffffff),),
-
-                                                    Container(height: 5, color: const Color(0xffeeeeee),),
-
-                                                    Column(
-                                                      children: [
-                                                        const SizedBox(height: 20,),
-
-                                                        Container(
-                                                          child: const Text('Post', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff000000),),),
-                                                          padding: const EdgeInsets.only(left: 20.0),
-                                                          alignment: Alignment.centerLeft,
-                                                        ),
-
-                                                        const SizedBox(height: 20,),
-
-                                                        profile.data!.blmMemorial.memorialImagesOrVideos.isNotEmpty
-                                                        ? Column(
-                                                          children: [
-                                                            Container(
-                                                              padding: const EdgeInsets.symmetric(horizontal: 20),
-                                                              width: SizeConfig.screenWidth,
-                                                              height: 100,
-                                                              child: ListView.separated(
-                                                                physics: const ClampingScrollPhysics(),
-                                                                scrollDirection: Axis.horizontal,
-                                                                separatorBuilder: (context, index){
-                                                                  return const SizedBox(width: 20);
-                                                                },
-                                                                itemCount: profile.data!.blmMemorial.memorialImagesOrVideos.length,
-                                                                itemBuilder: (context, index){
-                                                                  return GestureDetector(
-                                                                    child: ((){
-                                                                      if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[index])?.contains('video') == true){
-                                                                        return SizedBox(
-                                                                          height: 100,
-                                                                          width: 100,
-                                                                          child: BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[index]}',
-                                                                            betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                              placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                                              controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                                                              fit: BoxFit.contain,
-                                                                              aspectRatio: 1,
-                                                                            ),
-                                                                          ),
-                                                                        );
-                                                                      }else{
-                                                                        return SizedBox(
-                                                                          height: 100,
-                                                                          width: 100,
-                                                                          child: CachedNetworkImage(
-                                                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                            placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                            imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[index],
-                                                                            fit: BoxFit.cover,
-                                                                          ),
-                                                                        );
-                                                                      }
-                                                                    }()),
-                                                                    onTap: (){
-                                                                      showGeneralDialog(
-                                                                        context: context,
-                                                                        barrierLabel: 'Dialog',
-                                                                        barrierDismissible: true,
-                                                                        transitionDuration: const Duration(milliseconds: 0),
-                                                                        pageBuilder: (_, __, ___){
-                                                                          return Scaffold(
-                                                                            backgroundColor: Colors.black12.withOpacity(0.7),
-                                                                            body: SizedBox.expand(
-                                                                              child: SafeArea(
-                                                                                child: Column(
-                                                                                  children: [
-                                                                                    Container(
-                                                                                      padding: const EdgeInsets.only(right: 20.0),
-                                                                                      alignment: Alignment.centerRight,
-                                                                                      child: GestureDetector(
-                                                                                        child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
-                                                                                        onTap: (){
-                                                                                          Navigator.pop(context);
-                                                                                        },
-                                                                                      ),
-                                                                                    ),
-
-                                                                                    const SizedBox(height: 10,),
-
-                                                                                    Expanded(
-                                                                                      child: CarouselSlider(
-                                                                                        carouselController: buttonCarouselController,
-                                                                                        items: List.generate(profile.data!.blmMemorial.memorialImagesOrVideos.length, (next) => ((){
-                                                                                          if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[next])?.contains('video') == true){
-                                                                                            return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[index]}',
-                                                                                              betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                                                placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                                                                                deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-                                                                                                autoDispose: false,
-                                                                                                aspectRatio: 16 / 9,
-                                                                                                fit: BoxFit.contain,
-                                                                                              ),
-                                                                                            );
-                                                                                          }else{
-                                                                                            return CachedNetworkImage(
-                                                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                                                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                                              imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[next],
-                                                                                              fit: BoxFit.contain
-                                                                                            );
-                                                                                          }
-                                                                                          }()),
-                                                                                        ),
-                                                                                        options: CarouselOptions(
-                                                                                          enlargeCenterPage: true,
-                                                                                          viewportFraction: 1,
-                                                                                          initialPage: index,
-                                                                                          autoPlay: false,                                                                                            
-                                                                                          aspectRatio: 1,
-                                                                                        ),
-                                                                                      ),
-                                                                                    ),
-
-                                                                                    Row(
-                                                                                      mainAxisAlignment: MainAxisAlignment.center,
-                                                                                      children: [
-                                                                                        IconButton(
-                                                                                          onPressed: () => buttonCarouselController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                                          icon: const Icon(Icons.arrow_back_rounded, color: Color(0xffffffff),),
-                                                                                        ),
-
-                                                                                        IconButton(
-                                                                                          onPressed: () => buttonCarouselController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                                          icon: const Icon(Icons.arrow_forward_rounded, color: Color(0xffffffff),),
-                                                                                        ),
-                                                                                      ],
-                                                                                    ),
-
-                                                                                    const SizedBox(height: 85,),
-                                                                                  ],
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          );
-                                                                        },
-                                                                      );
-                                                                    },
-                                                                  );
-                                                                },
-                                                              ),
-                                                            ),
-
-                                                            const SizedBox(height: 20),
-                                                          ],
-                                                        )
-                                                        : const SizedBox(height: 0,),
-                                                      ],
-                                                    ),
-
-                                                    Container(height: 5, color: const Color(0xffeeeeee),),
-                                                  ],
+                                                child: CachedNetworkImage(
+                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                  imageUrl: profile.data!.blmMemorial.memorialBackgroundImage,
+                                                  fit: BoxFit.cover,
                                                 ),
                                               ),
-                                            ],
-                                          ),
 
-                                          SafeArea(
-                                            child: SizedBox(
-                                              height: Size.fromHeight(AppBar().preferredSize.height).height + (Size.fromHeight(AppBar().preferredSize.height).height / 2),
-                                              child: Row(
+                                              Column(
                                                 children: [
-                                                  TextButton.icon(
-                                                    icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35),
-                                                    label: const Text('Back', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
-                                                    onPressed: (){ // BACK BUTTON
-                                                      Navigator.pop(context, join.value);
-                                                    },
-                                                  ),
-
-                                                  Expanded(
-                                                    child: Container(
-                                                      padding: const EdgeInsets.only(right: 20.0),
-                                                      height: Size.fromHeight(AppBar().preferredSize.height).height + (Size.fromHeight(AppBar().preferredSize.height).height / 2),
-                                                      child: Align(
-                                                        child: MiscBLMDropDownMemorialTemplate(memorialName: profile.data!.blmMemorial.memorialName, memorialId: widget.memorialId, pageType: widget.pageType, reportType: 'Blm',),
-                                                        alignment: Alignment.centerRight,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-
-                                          Positioned(
-                                            top: SizeConfig.screenHeight! / 5,
-                                            child: SizedBox(
-                                              width: SizeConfig.screenWidth,
-                                              height: 140,
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  GestureDetector(
-                                                    child: CircleAvatar( // PROFILE IMAGE - PROFILE PICTURE
-                                                      backgroundColor: const Color(0xff04ECFF),
-                                                      radius: 100,
-                                                      child: Padding(
-                                                        padding: const EdgeInsets.all(5),
-                                                        child: profile.data!.blmMemorial.memorialProfileImage != ''
-                                                        ? CircleAvatar(
-                                                          radius: 100,
-                                                          backgroundColor: const Color(0xff888888),
-                                                          foregroundImage: NetworkImage(profile.data!.blmMemorial.memorialProfileImage),
-                                                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
-                                                        )
-                                                        : const CircleAvatar(
-                                                          radius: 100,
-                                                          backgroundColor: Color(0xff888888),
-                                                          foregroundImage: AssetImage('assets/icons/app-icon.png'),
-                                                        ),
-                                                      ),
-                                                    ),
+                                                  GestureDetector( // BACKGROUND IMAGE FOR ZOOMING IN
+                                                    child: Container(height: SizeConfig.screenHeight! / 3.5, color: Colors.transparent,),
                                                     onTap: (){
                                                       showGeneralDialog(
                                                         context: context,
                                                         barrierLabel: 'Dialog',
                                                         barrierDismissible: true,
                                                         transitionDuration: const Duration(milliseconds: 0),
-                                                        pageBuilder: (_, __, ___){
+                                                        pageBuilder: (_, __, ___) {
                                                           return Scaffold(
                                                             backgroundColor: Colors.black12.withOpacity(0.7),
                                                             body: SizedBox.expand(
@@ -860,7 +272,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                       child: CachedNetworkImage(
                                                                         errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                         placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                        imageUrl: profile.data!.blmMemorial.memorialProfileImage,
+                                                                        imageUrl: profile.data!.blmMemorial.memorialBackgroundImage,
                                                                         fit: BoxFit.contain,
                                                                       ),
                                                                     ),
@@ -875,13 +287,610 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                       );
                                                     },
                                                   ),
+
+                                                  Container(
+                                                    width: SizeConfig.screenWidth,
+                                                    decoration: const BoxDecoration(borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)), color: Color(0xffffffff),),
+                                                    child: Column(
+                                                      children: [
+                                                        const SizedBox(height: 150,),
+
+                                                        Center(
+                                                          child: Text(profile.data!.blmMemorial.memorialName,
+                                                            style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),
+                                                            textAlign: TextAlign.center,
+                                                            overflow: TextOverflow.clip,
+                                                            maxLines: 5,
+                                                          ),
+                                                        ),
+
+                                                        const SizedBox(height: 20,),
+
+                                                        TextButton.icon(
+                                                          label: Text('${profile.data!.blmMemorial.memorialFollowersCount}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+                                                          icon: const CircleAvatar(radius: 15, backgroundColor: Color(0xff000000), child: CircleAvatar(radius: 10, backgroundColor: Colors.transparent, foregroundImage: AssetImage('assets/icons/fist.png'),),),
+                                                          onPressed: (){
+                                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: widget.memorialId, newToggle: 2)));
+                                                          },
+                                                        ),
+
+                                                        const SizedBox(height: 20,),
+
+                                                        Column(
+                                                          children: [
+                                                            GestureDetector(
+                                                              child: ((){
+                                                                if(profile.data!.blmMemorial.memorialImagesOrVideos.isNotEmpty){
+                                                                  if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[0])?.contains('video') == true){
+                                                                    return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
+                                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                        placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                                        controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                        aspectRatio: 16 / 9,
+                                                                        fit: BoxFit.contain,
+                                                                      ),
+                                                                    );
+                                                                  }else{
+                                                                    return const SizedBox(height: 0,);
+                                                                  }
+                                                                }else{
+                                                                  return const SizedBox(height: 0,);
+                                                                }
+                                                              }()),
+                                                              onTap: (){
+                                                                showGeneralDialog(
+                                                                  context: context,
+                                                                  barrierLabel: 'Dialog',                                                                
+                                                                  barrierDismissible: true,
+                                                                  transitionDuration: const Duration(milliseconds: 0),
+                                                                  pageBuilder: (_, __, ___) {
+                                                                    return Scaffold(
+                                                                      backgroundColor: Colors.black12.withOpacity(0.7),
+                                                                      body: SizedBox.expand(
+                                                                        child: SafeArea(
+                                                                          child: Column(
+                                                                            children: [
+                                                                              Container(
+                                                                                padding: const EdgeInsets.only(right: 20.0),
+                                                                                alignment: Alignment.centerRight,
+                                                                                child: GestureDetector(
+                                                                                  child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
+                                                                                  onTap: (){
+                                                                                    Navigator.pop(context);
+                                                                                  },
+                                                                                ),
+                                                                              ),
+
+                                                                              const SizedBox(height: 10,),
+
+                                                                              Expanded(
+                                                                                child: ((){
+                                                                                  if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[0])?.contains('video') == true){
+                                                                                    return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
+                                                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                                        placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                                                        deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+                                                                                        aspectRatio: 16 / 9,
+                                                                                        fit: BoxFit.contain,
+                                                                                      ),
+                                                                                    );
+                                                                                  }else{
+                                                                                    return CachedNetworkImage(
+                                                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                                      imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[0],
+                                                                                      fit: BoxFit.contain,
+                                                                                    );
+                                                                                  }
+                                                                                }()),
+                                                                              ),
+
+                                                                              const SizedBox(height: 85,),
+                                                                            ],
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                );
+                                                              },
+                                                            ),
+
+                                                            const SizedBox(height: 20,),
+
+                                                            ((){
+                                                              if(profile.data!.blmMemorial.memorialDetails.memorialDetailsDescription != ''){
+                                                                return Container(
+                                                                  child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsDescription, textAlign: TextAlign.center, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                                                                  padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                                                                  alignment: Alignment.center,
+                                                                );
+                                                              }else{
+                                                                return const SizedBox(height: 0,);
+                                                              }
+                                                            }()),
+                                                          ],
+                                                        ),
+
+                                                        const SizedBox(height: 20,),
+
+                                                        Row(
+                                                          children: [
+                                                            Expanded(
+                                                              child: GestureDetector(
+                                                                child: const CircleAvatar(radius: 25, backgroundColor: Color(0xffE67E22), child: Icon(Icons.card_giftcard, color: Color(0xffffffff), size: 25,),),
+                                                                onTap: (){
+                                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserDonate(pageType: widget.pageType, pageId: widget.memorialId, pageName: profile.data!.blmMemorial.memorialName)));
+                                                                },
+                                                              ),
+                                                            ),
+
+                                                            Expanded(
+                                                              flex: 2,
+                                                              child: Padding(
+                                                                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                                                child: MaterialButton(
+                                                                  child: Text(joinListener ? 'Unfollow' : 'Follow', style: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
+                                                                  color: joinListener ? const Color(0xff888888) : const Color(0xff04ECFF),
+                                                                  minWidth: SizeConfig.screenWidth! / 2,
+                                                                  shape: const StadiumBorder(),
+                                                                  padding: EdgeInsets.zero,
+                                                                  height: 50,
+                                                                  onPressed: () async{
+                                                                    join.value = !join.value;
+                                                                    bool result = false;
+
+                                                                    if(join.value == true){
+                                                                      profile.data!.blmMemorial.memorialFollowersCount++;
+                                                                      context.loaderOverlay.show();
+                                                                      result = await apiBLMModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId);
+                                                                      context.loaderOverlay.hide();
+                                                                    }else{
+                                                                      profile.data!.blmMemorial.memorialFollowersCount--;
+                                                                      context.loaderOverlay.show();
+                                                                      result = await apiBLMModifyUnfollowPage(pageType: widget.pageType, pageId: widget.memorialId);
+                                                                      context.loaderOverlay.hide();
+                                                                    }
+
+                                                                    if(result){
+                                                                      await showDialog(
+                                                                        context: context,
+                                                                        builder: (context) => CustomDialog(
+                                                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                                          title: 'Success',
+                                                                          description: join.value != true ? 'Successfully unfollowed the page. You will no longer receive notifications from this page.' : 'Successfully followed the page. You will receive notifications from this page.',
+                                                                          okButtonColor: const Color(0xff4caf50), // GREEN
+                                                                          includeOkButton: true,
+                                                                        ),
+                                                                      );
+                                                                    }else{
+                                                                      await showDialog(
+                                                                        context: context,
+                                                                        builder: (context) => CustomDialog(
+                                                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                                          title: 'Error',
+                                                                          description: 'Something went wrong. Please try again.',
+                                                                          okButtonColor: const Color(0xfff44336), // RED
+                                                                          includeOkButton: true,
+                                                                        ),
+                                                                      );
+                                                                    }
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ),
+
+                                                            Expanded(
+                                                              child: GestureDetector(
+                                                                child: const CircleAvatar(radius: 25, backgroundColor: Color(0xff3498DB), child: Icon(Icons.share, color: Color(0xffffffff), size: 25,),),
+                                                                onTap: () async{
+                                                                  initBranchShare();
+                                                                  FlutterBranchSdk.setIdentity('blm-share-link');
+
+                                                                  BranchResponse response = await FlutterBranchSdk.showShareSheet(
+                                                                    buo: buo!,
+                                                                    linkProperties: lp!,
+                                                                    messageText: 'FacesbyPlaces App',
+                                                                    androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                                                                    androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                                                                  );
+
+                                                                  if(response.success){
+                                                                  }else{
+                                                                    FlutterBranchSdk.logout();
+                                                                    throw Exception('Error : ${response.errorCode} - ${response.errorMessage}');
+                                                                  }
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+
+                                                        const SizedBox(height: 20,),
+
+                                                        Padding(
+                                                          padding: const EdgeInsets.only(left: 20),
+                                                          child: Column(
+                                                            children: [
+                                                              Row(
+                                                                children: [
+                                                                  const Icon(Icons.place, color: Color(0xff000000), size: 25,),
+
+                                                                  const SizedBox(width: 20,),
+
+                                                                  Flexible(
+                                                                    child: GestureDetector(
+                                                                    child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsLocation, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff3498DB),),),
+                                                                      onTap: () async{
+                                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMaps(latitude: profile.data!.blmMemorial.memorialDetails.memorialLatitude, longitude: profile.data!.blmMemorial.memorialDetails.memorialLongitude, isMemorial: true, memorialName: profile.data!.blmMemorial.memorialName, memorialImage: profile.data!.blmMemorial.memorialBackgroundImage)));
+                                                                      },
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+
+                                                              const SizedBox(height: 20,),
+
+                                                              Row(
+                                                                children: [
+                                                                  Image.asset('assets/icons/grave_logo.png', height: 25),
+
+                                                                  const SizedBox(width: 20,),
+
+                                                                  Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsRip, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+
+                                                        const SizedBox(height: 20,),
+
+                                                        SizedBox(
+                                                          height: 50.0,
+                                                          child: Row(
+                                                            children: [
+                                                              Expanded(
+                                                                child: GestureDetector(
+                                                                  child: Column(
+                                                                    children: [
+                                                                      Text('${profile.data!.blmMemorial.memorialPostsCount}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+
+                                                                      const Text('Post', style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: Color(0xff677375),),),
+                                                                    ],
+                                                                  ),
+                                                                  onTap: (){
+                                                                    Scrollable.ensureVisible(dataKey.currentContext!);
+                                                                  },
+                                                                ),
+                                                              ),
+
+                                                              Container(width: 5, color: const Color(0xffeeeeee),),
+
+                                                              Expanded(
+                                                                child: GestureDetector(
+                                                                  child: Column(
+                                                                    children: [
+                                                                      Text('${profile.data!.blmMemorial.memorialFamilyCount}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+
+                                                                      const Text('Family', style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: Color(0xff677375),),),
+                                                                    ],
+                                                                  ),
+                                                                  onTap: (){
+                                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: widget.memorialId, newToggle: 0)));
+                                                                  },
+                                                                ),
+                                                              ),
+
+                                                              Container(width: 5, color: const Color(0xffeeeeee),),
+
+                                                              Expanded(
+                                                                child: GestureDetector(
+                                                                  child: Column(
+                                                                    children: [
+                                                                      Text('${profile.data!.blmMemorial.memorialFriendsCount}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+
+                                                                      const Text('Friends', style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: Color(0xff677375),),),
+                                                                    ],
+                                                                  ),
+                                                                  onTap: (){
+                                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: widget.memorialId, newToggle: 1)));
+                                                                  },
+                                                                ),
+                                                              ),
+
+                                                              Container(width: 5, color: const Color(0xffeeeeee),),
+
+                                                              Expanded(
+                                                                child: GestureDetector(
+                                                                  child: Column(
+                                                                    children: [
+                                                                      Text('${profile.data!.blmMemorial.memorialFollowersCount}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+
+                                                                      const Text('Joined', style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: Color(0xff677375),),),
+                                                                    ],
+                                                                  ),
+                                                                  onTap: (){
+                                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: widget.memorialId, newToggle: 2)));
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+
+                                                        Container(height: 5, color: const Color(0xffffffff),),
+
+                                                        Container(height: 5, color: const Color(0xffeeeeee),),
+
+                                                        Column(
+                                                          children: [
+                                                            const SizedBox(height: 20,),
+
+                                                            Container(
+                                                              child: const Text('Post', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff000000),),),
+                                                              padding: const EdgeInsets.only(left: 20.0),
+                                                              alignment: Alignment.centerLeft,
+                                                            ),
+
+                                                            const SizedBox(height: 20,),
+
+                                                            profile.data!.blmMemorial.memorialImagesOrVideos.isNotEmpty
+                                                            ? Column(
+                                                              children: [
+                                                                Container(
+                                                                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                                                                  width: SizeConfig.screenWidth,
+                                                                  height: 100,
+                                                                  child: ListView.separated(
+                                                                    physics: const ClampingScrollPhysics(),
+                                                                    scrollDirection: Axis.horizontal,
+                                                                    separatorBuilder: (context, index){
+                                                                      return const SizedBox(width: 20);
+                                                                    },
+                                                                    itemCount: profile.data!.blmMemorial.memorialImagesOrVideos.length,
+                                                                    itemBuilder: (context, index){
+                                                                      return GestureDetector(
+                                                                        child: ((){
+                                                                          if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[index])?.contains('video') == true){
+                                                                            return SizedBox(
+                                                                              height: 100,
+                                                                              width: 100,
+                                                                              child: BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[index]}',
+                                                                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                                  fit: BoxFit.contain,
+                                                                                  aspectRatio: 1,
+                                                                                ),
+                                                                              ),
+                                                                            );
+                                                                          }else{
+                                                                            return SizedBox(
+                                                                              height: 100,
+                                                                              width: 100,
+                                                                              child: CachedNetworkImage(
+                                                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                                imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[index],
+                                                                                fit: BoxFit.cover,
+                                                                              ),
+                                                                            );
+                                                                          }
+                                                                        }()),
+                                                                        onTap: (){
+                                                                          showGeneralDialog(
+                                                                            context: context,
+                                                                            barrierLabel: 'Dialog',
+                                                                            barrierDismissible: true,
+                                                                            transitionDuration: const Duration(milliseconds: 0),
+                                                                            pageBuilder: (_, __, ___){
+                                                                              return Scaffold(
+                                                                                backgroundColor: Colors.black12.withOpacity(0.7),
+                                                                                body: SizedBox.expand(
+                                                                                  child: SafeArea(
+                                                                                    child: Column(
+                                                                                      children: [
+                                                                                        Container(
+                                                                                          padding: const EdgeInsets.only(right: 20.0),
+                                                                                          alignment: Alignment.centerRight,
+                                                                                          child: GestureDetector(
+                                                                                            child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
+                                                                                            onTap: (){
+                                                                                              Navigator.pop(context);
+                                                                                            },
+                                                                                          ),
+                                                                                        ),
+
+                                                                                        const SizedBox(height: 10,),
+
+                                                                                        Expanded(
+                                                                                          child: CarouselSlider(
+                                                                                            carouselController: buttonCarouselController,
+                                                                                            items: List.generate(profile.data!.blmMemorial.memorialImagesOrVideos.length, (next) => ((){
+                                                                                              if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[next])?.contains('video') == true){
+                                                                                                return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[index]}',
+                                                                                                  betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                                                                    deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+                                                                                                    autoDispose: false,
+                                                                                                    aspectRatio: 16 / 9,
+                                                                                                    fit: BoxFit.contain,
+                                                                                                  ),
+                                                                                                );
+                                                                                              }else{
+                                                                                                return CachedNetworkImage(
+                                                                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                                                  imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[next],
+                                                                                                  fit: BoxFit.contain
+                                                                                                );
+                                                                                              }
+                                                                                              }()),
+                                                                                            ),
+                                                                                            options: CarouselOptions(
+                                                                                              enlargeCenterPage: true,
+                                                                                              viewportFraction: 1,
+                                                                                              initialPage: index,
+                                                                                              autoPlay: false,                                                                                            
+                                                                                              aspectRatio: 1,
+                                                                                            ),
+                                                                                          ),
+                                                                                        ),
+
+                                                                                        Row(
+                                                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                                                          children: [
+                                                                                            IconButton(
+                                                                                              onPressed: () => buttonCarouselController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
+                                                                                              icon: const Icon(Icons.arrow_back_rounded, color: Color(0xffffffff),),
+                                                                                            ),
+
+                                                                                            IconButton(
+                                                                                              onPressed: () => buttonCarouselController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
+                                                                                              icon: const Icon(Icons.arrow_forward_rounded, color: Color(0xffffffff),),
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+
+                                                                                        const SizedBox(height: 85,),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              );
+                                                                            },
+                                                                          );
+                                                                        },
+                                                                      );
+                                                                    },
+                                                                  ),
+                                                                ),
+
+                                                                const SizedBox(height: 20),
+                                                              ],
+                                                            )
+                                                            : const SizedBox(height: 0,),
+                                                          ],
+                                                        ),
+
+                                                        Container(height: 5, color: const Color(0xffeeeeee),),
+                                                      ],
+                                                    ),
+                                                  ),
                                                 ],
                                               ),
-                                            ),
+
+                                              SafeArea(
+                                                child: SizedBox(
+                                                  height: Size.fromHeight(AppBar().preferredSize.height).height + (Size.fromHeight(AppBar().preferredSize.height).height / 2),
+                                                  child: Row(
+                                                    children: [
+                                                      TextButton.icon(
+                                                        icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35),
+                                                        label: const Text('Back', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
+                                                        onPressed: (){ // BACK BUTTON
+                                                          Navigator.pop(context, join.value);
+                                                        },
+                                                      ),
+
+                                                      Expanded(
+                                                        child: Container(
+                                                          padding: const EdgeInsets.only(right: 20.0),
+                                                          height: Size.fromHeight(AppBar().preferredSize.height).height + (Size.fromHeight(AppBar().preferredSize.height).height / 2),
+                                                          child: Align(
+                                                            child: MiscBLMDropDownMemorialTemplate(memorialName: profile.data!.blmMemorial.memorialName, memorialId: widget.memorialId, pageType: widget.pageType, reportType: 'Blm',),
+                                                            alignment: Alignment.centerRight,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+
+                                              Positioned(
+                                                top: SizeConfig.screenHeight! / 5,
+                                                child: SizedBox(
+                                                  width: SizeConfig.screenWidth,
+                                                  height: 140,
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      GestureDetector(
+                                                        child: CircleAvatar( // PROFILE IMAGE - PROFILE PICTURE
+                                                          backgroundColor: const Color(0xff04ECFF),
+                                                          radius: 100,
+                                                          child: Padding(
+                                                            padding: const EdgeInsets.all(5),
+                                                            child: profile.data!.blmMemorial.memorialProfileImage != ''
+                                                            ? CircleAvatar(
+                                                              radius: 100,
+                                                              backgroundColor: const Color(0xff888888),
+                                                              foregroundImage: NetworkImage(profile.data!.blmMemorial.memorialProfileImage),
+                                                              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                                            )
+                                                            : const CircleAvatar(
+                                                              radius: 100,
+                                                              backgroundColor: Color(0xff888888),
+                                                              foregroundImage: AssetImage('assets/icons/app-icon.png'),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        onTap: (){
+                                                          showGeneralDialog(
+                                                            context: context,
+                                                            barrierLabel: 'Dialog',
+                                                            barrierDismissible: true,
+                                                            transitionDuration: const Duration(milliseconds: 0),
+                                                            pageBuilder: (_, __, ___){
+                                                              return Scaffold(
+                                                                backgroundColor: Colors.black12.withOpacity(0.7),
+                                                                body: SizedBox.expand(
+                                                                  child: SafeArea(
+                                                                    child: Column(
+                                                                      children: [
+                                                                        Container(
+                                                                          padding: const EdgeInsets.only(right: 20.0),
+                                                                          alignment: Alignment.centerRight,
+                                                                          child: GestureDetector(
+                                                                            child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
+                                                                            onTap: (){
+                                                                              Navigator.pop(context);
+                                                                            },
+                                                                          ),
+                                                                        ),
+
+                                                                        const SizedBox(height: 20,),
+
+                                                                        Expanded(
+                                                                          child: CachedNetworkImage(
+                                                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                            placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                            imageUrl: profile.data!.blmMemorial.memorialProfileImage,
+                                                                            fit: BoxFit.contain,
+                                                                          ),
+                                                                        ),
+
+                                                                        const SizedBox(height: 80,),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            },
+                                                          );
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
-                                    ],
+                                    ),
                                   );
                                 }else if(profile.hasError){
                                   return const MiscErrorMessageTemplate();
@@ -1113,22 +1122,24 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                         ],
                       ),
                     ),
-                  ),
+                    // ),
 
-                  isGuestLoggedInListener
-                  ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: const MiscLoginToContinue(),)
-                  : Container(height: 0),
-                ],
-              ),
-              floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-              floatingActionButton: Visibility(
-                visible: showFloatingButtonListener,
-                child: FloatingActionButton(
-                  child: const Icon(Icons.arrow_upward_rounded, color: Color(0xffffffff),),
-                  backgroundColor: const Color(0xff4EC9D4,),
-                  onPressed: (){
-                    Scrollable.ensureVisible(profileKey.currentContext!);
-                  },
+                    filterListener
+                    // ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0), child: const MiscLoginToContinue(),)
+                    ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0), child: const MiscLoginToContinue(),)
+                    : Container(height: 0),
+                  ],
+                ),
+                floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+                floatingActionButton: Visibility(
+                  visible: showFloatingButtonListener,
+                  child: FloatingActionButton(
+                    child: const Icon(Icons.arrow_upward_rounded, color: Color(0xffffffff),),
+                    backgroundColor: const Color(0xff4EC9D4,),
+                    onPressed: (){
+                      Scrollable.ensureVisible(profileKey.currentContext!);
+                    },
+                  ),
                 ),
               ),
             ),

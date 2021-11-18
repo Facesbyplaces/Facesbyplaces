@@ -153,11 +153,11 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                               ),
                             ),
 
-                            const Positioned(
-                              child: CircleAvatar(radius: 25, backgroundColor: Color(0xffffffff), child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: 45,),),
-                              right: 10,
-                              top: 10,
-                            ),
+                            // const Positioned(
+                            //   child: CircleAvatar(radius: 25, backgroundColor: Color(0xffffffff), child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: 45,),),
+                            //   right: 10,
+                            //   top: 10,
+                            // ),
                           ],
                         ),
                       ),

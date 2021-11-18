@@ -693,7 +693,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                       Expanded(
                         child: SizedBox(
                           child: isGuestLoggedInListener 
-                          ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: const MiscLoginToContinue(),)
+                          ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0), child: const MiscLoginToContinue(),)
                           : ((){
                             switch(toggleListener){
                               case 0: return searchPostExtended();
@@ -940,6 +940,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                 location: feeds[i].location,
                 latitude: feeds[i].latitude,
                 longitude: feeds[i].longitude,
+                isGuest: isGuestLoggedIn.value,
                 contents: [
                   Align(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 
@@ -1320,6 +1321,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                 location: searchFeeds[i].location,
                 latitude: searchFeeds[i].latitude,
                 longitude: searchFeeds[i].longitude,
+                isGuest: isGuestLoggedIn.value,
                 contents: [
                   Align(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 

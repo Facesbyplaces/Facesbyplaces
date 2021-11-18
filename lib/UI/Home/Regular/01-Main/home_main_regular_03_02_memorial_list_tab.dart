@@ -138,6 +138,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab> with Automat
             famOrFriends: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageFamOrFriends,
             pageType: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPagePageType,
             relationship: newValue.almFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageRelationship,
+            isGuest: isGuestLoggedIn.value,
           ),
         );
       }
@@ -155,6 +156,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab> with Automat
             famOrFriends: newValue.almFamilyMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageFamOrFriends,
             pageType: newValue.almFamilyMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPagePageType,
             relationship: newValue.almFamilyMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageRelationship,
+            isGuest: isGuestLoggedIn.value,
           ),
         );
       }
@@ -181,6 +183,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab> with Automat
             famOrFriends: newValue.almFriendsMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageFamOrFriends,
             pageType: newValue.almFriendsMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPagePageType,
             relationship: newValue.almFriendsMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageRelationship,
+            isGuest: isGuestLoggedIn.value,
           ),
         );
       }
@@ -198,6 +201,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab> with Automat
             famOrFriends: newValue.almFriendsMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageFamOrFriends,
             pageType: newValue.almFriendsMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPagePageType,
             relationship: newValue.almFriendsMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageRelationship,
+            isGuest: isGuestLoggedIn.value,
           ),
         );
       }

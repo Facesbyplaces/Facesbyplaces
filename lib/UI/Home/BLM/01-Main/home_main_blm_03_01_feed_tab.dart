@@ -395,6 +395,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                     location: feedsListener[i].location,
                     latitude: feedsListener[i].latitude,
                     longitude: feedsListener[i].longitude,
+                    isGuest: isGuestLoggedIn.value,
                     contents: [
                       Align(alignment: Alignment.centerLeft, child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 
