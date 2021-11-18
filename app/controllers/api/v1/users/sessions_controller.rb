@@ -159,7 +159,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
     end
 
     def render_create_success
-      # render json: { success: true, user:  user, status: 200 }, status: 200
+      # workaround for rendering success message
     end
 
     def render_create_success2

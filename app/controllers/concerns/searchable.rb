@@ -55,7 +55,7 @@ module Searchable
 
         user_location = Geocoder.search([lat,lon])
         # get account type
-        account
+        # account
         
         memorial_pages_owned = Pageowner.where(account: user()).first ? Pageowner.where(account: user(), page_type: 'Memorial').pluck('page_id') : []
         memorial = Memorial.where.not(id: memorial_pages_owned).near([lat,lon], 50)
@@ -69,7 +69,7 @@ module Searchable
 
         user_location = Geocoder.search([lat,lon])
         # get account type
-        account
+        # account
 
         blm_pages_owned = Pageowner.where(account: user()).first ? Pageowner.where(account: user(), page_type: 'Blm').pluck('page_id') : []
         blm = Blm.where.not(id: blm_pages_owned).near([lat,lon], 50)
