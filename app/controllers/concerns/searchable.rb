@@ -80,7 +80,7 @@ module Searchable
     def set_suggested_pages
         # get all the pages in descending order based on their view count
         
-        if !user()
+        if user()
             followers_page_type = user().followers.pluck("page_type")
             followers_page_id = user().followers.pluck("page_id")
             relationships_page_type = user().relationships.pluck("page_type")
