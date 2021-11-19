@@ -35,7 +35,8 @@ class MiscBLMPost extends StatefulWidget{
   final String location;
   final double latitude;
   final double longitude;
-  const MiscBLMPost({required Key key, required this.contents, required this.userId, required this.postId, required this.memorialId, required this.profileImage, this.memorialName = '', this.timeCreated = '', required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship, required this.location, required this.latitude, required this.longitude}) : super(key: key);
+  final bool isGuest;
+  const MiscBLMPost({required Key key, required this.contents, required this.userId, required this.postId, required this.memorialId, required this.profileImage, this.memorialName = '', this.timeCreated = '', required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship, required this.location, required this.latitude, required this.longitude, required this.isGuest}) : super(key: key);
 
   @override
   MiscBLMPostState createState() => MiscBLMPostState();
@@ -170,86 +171,89 @@ class MiscBLMPostState extends State<MiscBLMPost>{
                 )
                 : const SizedBox(height: 0,),
 
-                Row(
-                  children: [
-                    TextButton.icon(
-                      icon: likePostListener == true ? const FaIcon(FontAwesomeIcons.peace, color: Color(0xffff0000),) : const FaIcon(FontAwesomeIcons.peace, color: Color(0xff888888),),
-                      label: Text('$likesCount', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
-                      onPressed: () async{
-                        likePost.value = !likePost.value;
+                IgnorePointer(
+                  ignoring: widget.isGuest,
+                  child: Row(
+                    children: [
+                      TextButton.icon(
+                        icon: likePostListener == true ? const FaIcon(FontAwesomeIcons.peace, color: Color(0xffff0000),) : const FaIcon(FontAwesomeIcons.peace, color: Color(0xff888888),),
+                        label: Text('$likesCount', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                        onPressed: () async{
+                          likePost.value = !likePost.value;
 
-                        if(likePost.value == true){
-                          likesCount++;
-                        }else{
-                          likesCount--;
-                        }
+                          if(likePost.value == true){
+                            likesCount++;
+                          }else{
+                            likesCount--;
+                          }
 
-                        await apiBLMLikeOrUnlikePost(postId: widget.postId, like: likePost.value);
-                      },
-                    ),
+                          await apiBLMLikeOrUnlikePost(postId: widget.postId, like: likePost.value);
+                        },
+                      ),
 
-                    const SizedBox(width: 20),
+                      const SizedBox(width: 20),
 
-                    TextButton.icon(
-                      icon: const FaIcon(FontAwesomeIcons.solidComment, color: Color(0xff4EC9D4),),
-                      label: Text('$commentsCountListener', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
-                      onPressed: () async{
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: widget.postId)));
-                      },
-                    ),
+                      TextButton.icon(
+                        icon: const FaIcon(FontAwesomeIcons.solidComment, color: Color(0xff4EC9D4),),
+                        label: Text('$commentsCountListener', style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                        onPressed: () async{
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: widget.postId)));
+                        },
+                      ),
 
-                    const Expanded(child: SizedBox(),),
+                      const Expanded(child: SizedBox(),),
 
-                    IconButton(
-                      alignment: Alignment.centerRight,
-                      splashColor: Colors.transparent,
-                      icon: const CircleAvatar(backgroundColor: Color(0xff4EC9D4), child: Icon(Icons.share_rounded, color: Color(0xffffffff),),),
-                      onPressed: () async{
-                        BranchUniversalObject buo = BranchUniversalObject(
-                          canonicalIdentifier: 'FacesbyPlaces',
-                          title: 'FacesbyPlaces Link',
-                          contentDescription: 'FacesbyPlaces link to the app',
-                          keywords: ['FacesbyPlaces', 'Share', 'Link'],
-                          publiclyIndex: true,
-                          locallyIndex: true,
-                          contentMetadata: BranchContentMetaData()
-                          ..addCustomMetadata('link-category', 'Post')
-                          ..addCustomMetadata('link-post-id', widget.postId)
-                          ..addCustomMetadata('link-like-status', likePost.value)
-                          ..addCustomMetadata('link-number-of-likes', likesCount)
-                          ..addCustomMetadata('link-type-of-account', 'Blm',
-                          ),
-                        );
-
-                        BranchLinkProperties lp = BranchLinkProperties(feature: 'sharing', stage: 'new share', tags: ['one', 'two', 'three']);
-                        lp.addControlParam('url','https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
-
-                        FlutterBranchSdk.setIdentity('blm-share-link');
-                        BranchResponse response = await FlutterBranchSdk.showShareSheet(
-                          buo: buo,
-                          linkProperties: lp,
-                          messageText: 'FacesbyPlaces App',
-                          androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
-                          androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
-                        );
-
-                        if(response.success){
-                          await showDialog(
-                            context: context,
-                            builder: (context) => CustomDialog(
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: 'Success',
-                              description: 'Successfully shared the link.',
-                              okButtonColor: const Color(0xff4caf50), // GREEN
-                              includeOkButton: true,
+                      IconButton(
+                        alignment: Alignment.centerRight,
+                        splashColor: Colors.transparent,
+                        icon: const CircleAvatar(backgroundColor: Color(0xff4EC9D4), child: Icon(Icons.share_rounded, color: Color(0xffffffff),),),
+                        onPressed: () async{
+                          BranchUniversalObject buo = BranchUniversalObject(
+                            canonicalIdentifier: 'FacesbyPlaces',
+                            title: 'FacesbyPlaces Link',
+                            contentDescription: 'FacesbyPlaces link to the app',
+                            keywords: ['FacesbyPlaces', 'Share', 'Link'],
+                            publiclyIndex: true,
+                            locallyIndex: true,
+                            contentMetadata: BranchContentMetaData()
+                            ..addCustomMetadata('link-category', 'Post')
+                            ..addCustomMetadata('link-post-id', widget.postId)
+                            ..addCustomMetadata('link-like-status', likePost.value)
+                            ..addCustomMetadata('link-number-of-likes', likesCount)
+                            ..addCustomMetadata('link-type-of-account', 'Blm',
                             ),
                           );
-                        }else{
-                          FlutterBranchSdk.logout();
-                        }
-                      },
-                    ),
-                  ],
+
+                          BranchLinkProperties lp = BranchLinkProperties(feature: 'sharing', stage: 'new share', tags: ['one', 'two', 'three']);
+                          lp.addControlParam('url','https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+
+                          FlutterBranchSdk.setIdentity('blm-share-link');
+                          BranchResponse response = await FlutterBranchSdk.showShareSheet(
+                            buo: buo,
+                            linkProperties: lp,
+                            messageText: 'FacesbyPlaces App',
+                            androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                            androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                          );
+
+                          if(response.success){
+                            await showDialog(
+                              context: context,
+                              builder: (context) => CustomDialog(
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                title: 'Success',
+                                description: 'Successfully shared the link.',
+                                okButtonColor: const Color(0xff4caf50), // GREEN
+                                includeOkButton: true,
+                              ),
+                            );
+                          }else{
+                            FlutterBranchSdk.logout();
+                          }
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

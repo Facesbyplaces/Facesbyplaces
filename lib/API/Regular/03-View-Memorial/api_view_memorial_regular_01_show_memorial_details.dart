@@ -85,11 +85,11 @@ class APIRegularShowMemorialExtended{
       showMemorialBackgroundImage: parsedJson['backgroundImage'] ?? '',
       showMemorialProfileImage: parsedJson['profileImage'] ?? '',
       showMemorialImagesOrVideos: newList1 ?? [],
-      showMemorialFollower: parsedJson['follower'],
-      showMemorialPostsCount: parsedJson['postsCount'],
-      showMemorialFamilyCount: parsedJson['familyCount'],
-      showMemorialFriendsCount: parsedJson['friendsCount'],
-      showMemorialFollowersCount: parsedJson['followersCount'],
+      showMemorialFollower: parsedJson['follower'] ?? 0,
+      showMemorialPostsCount: parsedJson['postsCount'] ?? 0,
+      showMemorialFamilyCount: parsedJson['familyCount'] ?? 0,
+      showMemorialFriendsCount: parsedJson['friendsCount'] ?? 0,
+      showMemorialFollowersCount: parsedJson['followersCount'] ?? 0,
     );
   }
 }
@@ -125,7 +125,7 @@ class APIRegularShowMemorialExtendedDetails{
       // showMemorialDetailsDob: dob.format(AmericanDateFormats.standardWithComma),
       // showMemorialDetailsRip: rip.format(AmericanDateFormats.standardWithComma),
       showMemorialDetailsDob: ((){
-        if(parsedJson['dob'] == null){
+        if(parsedJson['dob'] == null || parsedJson['dob'] == 'Unknown'){
           return 'Unknown';
         }else{
           String newDOB = parsedJson['dob'];
@@ -134,7 +134,7 @@ class APIRegularShowMemorialExtendedDetails{
         }
       }()),
       showMemorialDetailsRip: ((){
-        if(parsedJson['rip'] == null){
+        if(parsedJson['rip'] == null || parsedJson['dob'] == 'Unknown'){
           return 'Unknown';
         }else{
           String newRIP = parsedJson['rip'];

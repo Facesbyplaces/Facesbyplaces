@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 
 class MiscBLMManageMemorialTab extends StatefulWidget{
-  final int index;
   final String memorialName;
   final String description;
   final String image;
@@ -22,7 +21,8 @@ class MiscBLMManageMemorialTab extends StatefulWidget{
   final bool famOrFriends;
   final String pageType;
   final String relationship;
-  const MiscBLMManageMemorialTab({Key? key, required this.index, this.memorialName = '', this.description = '', required this.image, required this.memorialId, required this.managed, required this.follower, required this.famOrFriends, required this.pageType, required this.relationship,}) : super(key: key);
+  final bool isGuest;
+  const MiscBLMManageMemorialTab({Key? key, this.memorialName = '', this.description = '', required this.image, required this.memorialId, required this.managed, required this.follower, required this.famOrFriends, required this.pageType, required this.relationship, required this.isGuest}) : super(key: key);
 
   @override
   MiscBLMManageMemorialTabState createState() => MiscBLMManageMemorialTabState();
@@ -77,109 +77,155 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
             ),
             title: Text(
               widget.memorialName,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
+              overflow: TextOverflow.fade,
+              maxLines: 3,
               style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),
             ),
             subtitle: Text(
               widget.description,
+              maxLines: 5, overflow: TextOverflow.fade,
               style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff888888),),
             ),
-            trailing: (() {
-              if(widget.managed == true || widget.famOrFriends == true){
-                return MaterialButton(
-                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5)), side: BorderSide(color: Color(0xff04ECFF),),),
-                  child: const Text('Leave', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
-                  splashColor: const Color(0xff4EC9D4),
-                  textColor: const Color(0xffffffff),
-                  color: const Color(0xff04ECFF),
-                  padding: EdgeInsets.zero,
-                  elevation: 0,
-                  height: 35,
-                  onPressed: () async{
-                    bool confirmResult = await showDialog(
-                      context: context,
-                      builder: (context) => CustomDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: 'Confirm',
-                        description: 'Are you sure you want to leave this page?',
-                        includeOkButton: true,
-                        includeCancelButton: true,
-                      ),
-                    );
+            trailing: IgnorePointer(
+              ignoring: widget.isGuest,
+              child: (() {
+                if(widget.managed == true || widget.famOrFriends == true){
+                  return MaterialButton(
+                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5)), side: BorderSide(color: Color(0xff04ECFF),),),
+                    child: const Text('Leave', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
+                    splashColor: const Color(0xff4EC9D4),
+                    textColor: const Color(0xffffffff),
+                    color: const Color(0xff04ECFF),
+                    padding: EdgeInsets.zero,
+                    elevation: 0,
+                    height: 35,
+                    onPressed: () async{
+                      bool confirmResult = await showDialog(
+                        context: context,
+                        builder: (context) => CustomDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: 'Confirm',
+                          description: 'Are you sure you want to leave this page?',
+                          includeOkButton: true,
+                          includeCancelButton: true,
+                        ),
+                      );
 
-                    if(confirmResult == true){
-                      String result = 'Failed';
-                      if(widget.pageType == 'Memorial'){
-                        result = await apiRegularLeavePage(memorialId: widget.memorialId);
-                      }else{
-                        result = await apiBLMLeavePage(memorialId: widget.memorialId);
+                      if(confirmResult == true){
+                        String result = 'Failed';
+                        if(widget.pageType == 'Memorial'){
+                          result = await apiRegularLeavePage(memorialId: widget.memorialId);
+                        }else{
+                          result = await apiBLMLeavePage(memorialId: widget.memorialId);
+                        }
+
+                        if(result != 'Failed'){
+                          followButton.value = false;
+
+                          await showDialog(
+                            context: context,
+                            builder: (context) => CustomDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: 'Success',
+                              description: 'Successfully unfollowed the page. You will no longer receive notifications from this page.',
+                              okButtonColor: const Color(0xff4caf50), // GREEN
+                              includeOkButton: true,
+                            ),
+                          );
+                        }else{
+                          await showDialog(
+                            context: context,
+                            builder: (context) => CustomDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: 'Error',
+                              description: 'Something went wrong. Please try again.',
+                              okButtonColor: const Color(0xfff44336), // RED
+                              includeOkButton: true,
+                            ),
+                          );
+                        }
                       }
+                    },
+                  );
+                }else if(followButtonListener == true){
+                  return MaterialButton(
+                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5)), side: BorderSide(color: Color(0xff04ECFF)),),
+                    child: const Text('Leave', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
+                    splashColor: const Color(0xff4EC9D4),
+                    textColor: const Color(0xffffffff),
+                    color: const Color(0xff04ECFF),
+                    padding: EdgeInsets.zero,
+                    elevation: 0,
+                    height: 35,
+                    onPressed: () async{
+                      bool confirmResult = await showDialog(
+                        context: context,
+                        builder: (context) => CustomDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: 'Confirm',
+                          description: 'Are you sure you want to leave this page?',
+                          includeOkButton: true,
+                          includeCancelButton: true,
+                        ),
+                      );
 
-                      if(result != 'Failed'){
-                        followButton.value = false;
+                      if(confirmResult == true){
+                        context.loaderOverlay.show();
+                        bool result = await apiBLMModifyUnfollowPage(pageType: widget.pageType, pageId: widget.memorialId);
+                        context.loaderOverlay.hide();
 
-                        await showDialog(
-                          context: context,
-                          builder: (context) => CustomDialog(
-                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: 'Success',
-                            description: 'Successfully unfollowed the page. You will no longer receive notifications from this page.',
-                            okButtonColor: const Color(0xff4caf50), // GREEN
-                            includeOkButton: true,
-                          ),
-                        );
-                      }else{
-                        await showDialog(
-                          context: context,
-                          builder: (context) => CustomDialog(
-                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: 'Error',
-                            description: 'Something went wrong. Please try again.',
-                            okButtonColor: const Color(0xfff44336), // RED
-                            includeOkButton: true,
-                          ),
-                        );
+                        if(result){
+                          followButton.value = false;
+
+                          await showDialog(
+                            context: context,
+                            builder: (context) => CustomDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: 'Success',
+                              description: 'Successfully unfollowed the page. You will no longer receive notifications from this page.',
+                              okButtonColor: const Color(0xff4caf50), // GREEN
+                              includeOkButton: true,
+                            ),
+                          );
+                        }else{
+                          await showDialog(
+                            context: context,
+                            builder: (context) => CustomDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: 'Error',
+                              description: 'Something went wrong. Please try again.',
+                              okButtonColor: const Color(0xfff44336), // RED
+                              includeOkButton: true,
+                            ),
+                          );
+                        }
                       }
-                    }
-                  },
-                );
-              }else if(followButtonListener == true){
-                return MaterialButton(
-                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5)), side: BorderSide(color: Color(0xff04ECFF)),),
-                  child: const Text('Leave', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
-                  splashColor: const Color(0xff4EC9D4),
-                  textColor: const Color(0xffffffff),
-                  color: const Color(0xff04ECFF),
-                  padding: EdgeInsets.zero,
-                  elevation: 0,
-                  height: 35,
-                  onPressed: () async{
-                    bool confirmResult = await showDialog(
-                      context: context,
-                      builder: (context) => CustomDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: 'Confirm',
-                        description: 'Are you sure you want to leave this page?',
-                        includeOkButton: true,
-                        includeCancelButton: true,
-                      ),
-                    );
-
-                    if(confirmResult == true){
+                    },
+                  );
+                }else{
+                  return MaterialButton(
+                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5)), side: BorderSide(color: Color(0xff4EC9D4)),),
+                    child: const Text('Join', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold',),),
+                    splashColor: const Color(0xff4EC9D4),
+                    textColor: const Color(0xff4EC9D4),
+                    color: const Color(0xffffffff),
+                    padding: EdgeInsets.zero,
+                    elevation: 0,
+                    height: 35,
+                    onPressed: () async{
                       context.loaderOverlay.show();
-                      bool result = await apiBLMModifyUnfollowPage(pageType: widget.pageType, pageId: widget.memorialId);
+                      bool result = await apiBLMModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId);
                       context.loaderOverlay.hide();
 
                       if(result){
-                        followButton.value = false;
+                        followButton.value = true;
 
                         await showDialog(
                           context: context,
                           builder: (context) => CustomDialog(
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             title: 'Success',
-                            description: 'Successfully unfollowed the page. You will no longer receive notifications from this page.',
+                            description: 'Successfully followed the page. You will receive notifications from this page.',
                             okButtonColor: const Color(0xff4caf50), // GREEN
                             includeOkButton: true,
                           ),
@@ -196,53 +242,11 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                           ),
                         );
                       }
-                    }
-                  },
-                );
-              }else{
-                return MaterialButton(
-                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5)), side: BorderSide(color: Color(0xff4EC9D4)),),
-                  child: const Text('Join', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold',),),
-                  splashColor: const Color(0xff4EC9D4),
-                  textColor: const Color(0xff4EC9D4),
-                  color: const Color(0xffffffff),
-                  padding: EdgeInsets.zero,
-                  elevation: 0,
-                  height: 35,
-                  onPressed: () async{
-                    context.loaderOverlay.show();
-                    bool result = await apiBLMModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId);
-                    context.loaderOverlay.hide();
-
-                    if(result){
-                      followButton.value = true;
-
-                      await showDialog(
-                        context: context,
-                        builder: (context) => CustomDialog(
-                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: 'Success',
-                          description: 'Successfully followed the page. You will receive notifications from this page.',
-                          okButtonColor: const Color(0xff4caf50), // GREEN
-                          includeOkButton: true,
-                        ),
-                      );
-                    }else{
-                      await showDialog(
-                        context: context,
-                        builder: (context) => CustomDialog(
-                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: 'Error',
-                          description: 'Something went wrong. Please try again.',
-                          okButtonColor: const Color(0xfff44336), // RED
-                          includeOkButton: true,
-                        ),
-                      );
-                    }
-                  },
-                );
-              }
-            }()),
+                    },
+                  );
+                }
+              }()),
+            ),
           ),
         ),
       ),

@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 
 class MiscRegularManageMemorialTab extends StatefulWidget{
-  final int index;
   final String memorialName;
   final String description;
   final String image;
@@ -23,7 +22,7 @@ class MiscRegularManageMemorialTab extends StatefulWidget{
   final String pageType;
   final String relationship;
   final bool isGuest;
-  const MiscRegularManageMemorialTab({Key? key, required this.index, this.memorialName = '', this.description = '', required this.image, required this.memorialId, required this.managed, required this.follower, required this.famOrFriends, required this.pageType, required this.relationship, required this.isGuest}) : super(key: key);
+  const MiscRegularManageMemorialTab({Key? key, this.memorialName = '', this.description = '', required this.image, required this.memorialId, required this.managed, required this.follower, required this.famOrFriends, required this.pageType, required this.relationship, required this.isGuest}) : super(key: key);
 
   @override
   MiscRegularManageMemorialTabState createState() => MiscRegularManageMemorialTabState();
@@ -76,8 +75,8 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
               backgroundColor: Color(0xff888888),
               foregroundImage: AssetImage('assets/icons/app-icon.png'),
             ),
-            title: Text(widget.memorialName, overflow: TextOverflow.ellipsis, maxLines: 2, style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
-            subtitle: Text(widget.description, style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff888888),),),
+            title: Text(widget.memorialName, overflow: TextOverflow.fade, maxLines: 3, style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
+            subtitle: Text(widget.description, maxLines: 5, overflow: TextOverflow.fade, style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff888888),),),
             trailing: IgnorePointer(
               ignoring: widget.isGuest,
               child: ((){

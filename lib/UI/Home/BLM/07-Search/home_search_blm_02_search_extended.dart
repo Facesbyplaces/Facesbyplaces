@@ -755,6 +755,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                 location: feeds[i].location,
                 latitude: feeds[i].latitude,
                 longitude: feeds[i].longitude,
+                isGuest: isGuestLoggedIn.value,
                 contents: [
                   Align(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 
@@ -1136,6 +1137,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                 location: searchFeeds[i].location,
                 latitude: searchFeeds[i].latitude,
                 longitude: searchFeeds[i].longitude,
+                isGuest: isGuestLoggedIn.value,
                 contents: [
                   Align(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 
@@ -1525,7 +1527,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
             physics: const ClampingScrollPhysics(),
             itemCount: suggested.length,
             itemBuilder: (c, i) => MiscBLMManageMemorialTab(
-              index: i,
               memorialName: suggested[i].memorialName,
               description: suggested[i].memorialDescription,
               image: suggested[i].image,
@@ -1535,6 +1536,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
               pageType: suggested[i].pageType,
               relationship: suggested[i].relationship,
               famOrFriends: suggested[i].famOrFriends,
+              isGuest: isGuestLoggedIn.value,
             ),
           )
           : ListView.separated(
@@ -1544,7 +1546,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
             physics: const ClampingScrollPhysics(),
             itemCount: searchSuggested.length,
             itemBuilder: (c, i) => MiscBLMManageMemorialTab(
-              index: i,
               memorialName: searchSuggested[i].memorialName,
               description: searchSuggested[i].memorialDescription,
               image: searchSuggested[i].image,
@@ -1554,6 +1555,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
               pageType: searchSuggested[i].pageType,
               relationship: searchSuggested[i].relationship,
               famOrFriends: searchSuggested[i].famOrFriends,
+              isGuest: isGuestLoggedIn.value,
             ),
           ),
         )
@@ -1595,7 +1597,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           physics: const ClampingScrollPhysics(),
           itemCount: nearby.length,
           itemBuilder: (c, i) => MiscBLMManageMemorialTab(
-            index: i,
             memorialName: nearby[i].memorialName,
             description: nearby[i].memorialDescription,
             image: nearby[i].image,
@@ -1605,6 +1606,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
             pageType: nearby[i].pageType,
             relationship: nearby[i].relationship,
             famOrFriends: nearby[i].famOrFriends,
+            isGuest: isGuestLoggedIn.value,
           ),
         )
         : ListView.separated(
@@ -1614,7 +1616,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           physics: const ClampingScrollPhysics(),
           itemCount: searchNearby.length,
           itemBuilder: (c, i) => MiscBLMManageMemorialTab(
-            index: i,
             memorialName: searchNearby[i].memorialName,
             description: searchNearby[i].memorialDescription,
             image: searchNearby[i].image,
@@ -1624,6 +1625,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
             pageType: searchNearby[i].pageType,
             relationship: searchNearby[i].relationship,
             famOrFriends: searchNearby[i].famOrFriends,
+            isGuest: isGuestLoggedIn.value,
           ),
         ),
       )
@@ -1665,7 +1667,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
             physics: const ClampingScrollPhysics(),
             itemCount: blm.length,
             itemBuilder: (c, i) => MiscBLMManageMemorialTab(
-              index: i,
               memorialName: blm[i].memorialName,
               description: blm[i].memorialDescription,
               image: blm[i].image,
@@ -1675,6 +1676,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
               pageType: blm[i].pageType,
               relationship: blm[i].relationship,
               famOrFriends: blm[i].famOrFriends,
+              isGuest: isGuestLoggedIn.value,
             ),
           )
           : ListView.separated(
@@ -1684,7 +1686,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
             physics: const ClampingScrollPhysics(),
             itemCount: searchBlm.length,
             itemBuilder: (c, i) => MiscBLMManageMemorialTab(
-              index: i,
               memorialName: searchBlm[i].memorialName,
               description: searchBlm[i].memorialDescription,
               image: searchBlm[i].image,
@@ -1694,6 +1695,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
               pageType: searchBlm[i].pageType,
               relationship: searchBlm[i].relationship,
               famOrFriends: searchBlm[i].famOrFriends,
+              isGuest: isGuestLoggedIn.value,
             ),
           ),
         )

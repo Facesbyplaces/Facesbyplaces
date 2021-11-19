@@ -190,6 +190,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
                   location: posts[i].location,
                   latitude: posts[i].latitude,
                   longitude: posts[i].longitude,
+                  isGuest: isGuestLoggedIn,
                   contents: [
                     Align(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 

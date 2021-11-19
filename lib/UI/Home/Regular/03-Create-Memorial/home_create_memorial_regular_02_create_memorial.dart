@@ -1,11 +1,15 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home_create_memorial_regular_03_create_memorial.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:better_player/better_player.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 import 'package:misc/misc.dart';
+import 'dart:typed_data';
 import 'dart:io';
 
 class HomeRegularCreateMemorial2 extends StatefulWidget{
@@ -32,6 +36,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
   ValueNotifier<int> toggle = ValueNotifier<int>(0);
   final picker = ImagePicker();
   final _formKey = GlobalKey<FormState>();
+  ValueNotifier<File> videoThumbnail = ValueNotifier<File>(File(''));
 
   Future getVideo() async{
     try{
@@ -40,7 +45,18 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
       });
 
       if(pickedFile != null){
-        videoFile.value = File(pickedFile.path);
+        videoFile.value = File(pickedFile.path);        
+
+        Uint8List? uint8list = await VideoThumbnail.thumbnailData(
+          video: videoFile.value.path,
+          imageFormat: ImageFormat.JPEG,
+        );
+
+        final tempDir = await getTemporaryDirectory();
+        final file = await File('${tempDir.path}/alm-qr-code.png').create();
+        file.writeAsBytesSync(uint8list!);
+
+        videoThumbnail.value = file;
       }
     }catch (error){
       throw Exception('Error: $error');
@@ -232,93 +248,33 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
   shareStory2(){
     return ValueListenableBuilder(
       valueListenable: videoFile,
-      builder: (_, File videoFileListener, __) => SizedBox(
-        width: SizeConfig.screenWidth,
-        child: GestureDetector(
+      builder: (_, File videoFileListener, __) => ValueListenableBuilder(
+        valueListenable: videoThumbnail,
+        builder: (_, File videoThumbnailListener, __) => SizedBox(
+          width: SizeConfig.screenWidth,
           child: videoFileListener.path != ''
-          ? Stack(
-            children: [
-              GestureDetector(
-                onTap: (){
-                  showGeneralDialog(
-                    context: context,
-                    transitionDuration: const Duration(milliseconds: 0),
-                    barrierDismissible: true,
-                    barrierLabel: 'Dialog',
-                    pageBuilder: (_, __, ___){
-                      return Scaffold(
-                        backgroundColor: Colors.black12.withOpacity(0.7),
-                        body: SizedBox.expand(
-                          child: SafeArea(
-                            child: Column(
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.only(right: 20.0),
-                                  alignment: Alignment.centerRight,
-                                  child: GestureDetector(
-                                    child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
-                                    onTap: (){
-                                      Navigator.pop(context);
-                                    },
-                                  ),
-                                ),
-
-                                const SizedBox(height: 10,),
-
-                                Expanded(
-                                  child: BetterPlayer.file(
-                                    videoFileListener.path,
-                                    betterPlayerConfiguration: BetterPlayerConfiguration(
-                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                      deviceOrientationsAfterFullScreen: [
-                                        DeviceOrientation.portraitUp
-                                      ],
-                                      aspectRatio: 16 / 9,
-                                    ),
-                                  ),
-                                ),
-
-                                const SizedBox(height: 85,),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                },
-                child: BetterPlayer.file(videoFileListener.path,
-                  betterPlayerConfiguration: BetterPlayerConfiguration(
-                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                    deviceOrientationsAfterFullScreen: [
-                      DeviceOrientation.portraitUp
-                    ],
-                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                    aspectRatio: 16 / 9,
-                  ),
-                ),
-              ),
-              Positioned(
-                right: 0,
-                child: IconButton(
-                  iconSize: 25,
-                  icon: const CircleAvatar(backgroundColor: Color(0xff000000), child: Icon(Icons.close, color: Color(0xffffffff),),),
-                  onPressed: (){
-                    videoFile.value = File('');
-                  },
-                ),
-              ),
-            ],
+          ? BetterPlayer.file(videoFileListener.path,
+              betterPlayerConfiguration: BetterPlayerConfiguration(
+              placeholder: videoThumbnailListener.path == ''
+              ? Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9)
+              : Image.file(videoThumbnailListener, fit: BoxFit.cover, scale: 16 / 9),
+              deviceOrientationsAfterFullScreen: [
+                DeviceOrientation.portraitUp
+              ],
+              aspectRatio: 16 / 9,
+            ),
           )
-          : Container(
-            decoration: BoxDecoration(color: const Color(0xffcccccc), border: Border.all(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
-            child: const Icon(Icons.file_upload, color: Color(0xff888888), size: 100,),
-            width: SizeConfig.screenWidth,
-            height: 260,
+          : GestureDetector(
+            onTap: () async{
+              await getVideo();
+            },
+            child: Container(
+              decoration: BoxDecoration(color: const Color(0xffcccccc), border: Border.all(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
+              child: const Icon(Icons.file_upload, color: Color(0xff888888), size: 100,),
+              width: SizeConfig.screenWidth,
+              height: 260,
+            ),
           ),
-          onTap: () async{
-            await getVideo();
-          },
         ),
       ),
     );

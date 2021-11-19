@@ -2479,6 +2479,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                           location: searchPosts.data![i].searchPostLocation,
                           latitude: searchPosts.data![i].searchPostLatitude,
                           longitude: searchPosts.data![i].searchPostLongitude,
+                          isGuest: isGuestLoggedIn.value,
                           contents: [
                             Align(alignment: Alignment.centerLeft, child: Text(searchPosts.data![i].searchPostBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                                 
@@ -2874,6 +2875,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                           numberOfLikes: searchPosts.data![i].searchPostNumberOfLikes,
                           likeStatus: searchPosts.data![i].searchPostLikeStatus,
                           numberOfTagged: searchPosts.data![i].searchPostPostTagged.length,
+                          isGuest: isGuestLoggedIn.value,
                           taggedFirstName: ((){
                             List<String> firstName = [];
                             for(int j = 0; j < searchPosts.data![i].searchPostPostTagged.length; j++){
@@ -3336,7 +3338,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                       itemCount: lengthOfSearchSuggestedListener,
                       separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
                       itemBuilder: (c, i) => MiscRegularManageMemorialTab(
-                        index: i,
                         memorialName: searchSuggested.data![i].searchSuggestedPage.searchSuggestedPageName,
                         description: searchSuggested.data![i].searchSuggestedPage.searchSuggestedPageDetails.searchSuggestedPageDetailsDescription,
                         image: searchSuggested.data![i].searchSuggestedPage.searchSuggestedPageProfileImage,
@@ -3362,7 +3363,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                       itemBuilder: (c, i){
                         return searchSuggested.data![i].searchSuggestedPage.searchSuggestedPageName.toUpperCase().contains(searchKey.toUpperCase())
                         ? MiscRegularManageMemorialTab(
-                          index: i,
                           memorialName: searchSuggested.data![i].searchSuggestedPage.searchSuggestedPageName,
                           description: searchSuggested.data![i].searchSuggestedPage.searchSuggestedPageDetails.searchSuggestedPageDetailsDescription,
                           image: searchSuggested.data![i].searchSuggestedPage.searchSuggestedPageProfileImage,
@@ -3442,7 +3442,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                       itemCount: lengthOfSearchNearbyListener,
                       separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
                       itemBuilder: (c, i) => MiscRegularManageMemorialTab(
-                        index: i,
                         memorialName: searchNearby.data![i].searchNearbyName,
                         description: searchNearby.data![i].searchNearbyDetails.searchNearbyPageDetailsDescription,
                         image: searchNearby.data![i].searchNearbyProfileImage,
@@ -3468,7 +3467,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                       itemBuilder: (c, i){
                         return searchNearby.data![i].searchNearbyName.toUpperCase().contains(searchKey.toUpperCase())
                         ? MiscRegularManageMemorialTab(
-                          index: i,
                           memorialName: searchNearby.data![i].searchNearbyName,
                           description: searchNearby.data![i].searchNearbyDetails.searchNearbyPageDetailsDescription,
                           image: searchNearby.data![i].searchNearbyProfileImage,
@@ -3548,7 +3546,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                       itemCount: lengthOfSearchBLMListener,
                       separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
                       itemBuilder: (c, i) => MiscRegularManageMemorialTab(
-                        index: i,
                         memorialName: searchBLM.data![i].searchBLMMemorialPage.searchBLMMemorialPageName,
                         description: searchBLM.data![i].searchBLMMemorialPage.searchBLMMemorialPageDetails.searchBLMMemorialPageDetailsDescription,
                         image: searchBLM.data![i].searchBLMMemorialPage.searchBLMMemorialPageProfileImage,
@@ -3574,7 +3571,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                       itemBuilder: (c, i){
                         return searchBLM.data![i].searchBLMMemorialPage.searchBLMMemorialPageName.toUpperCase().contains(searchKey.toUpperCase())
                         ? MiscRegularManageMemorialTab(
-                          index: i,
                           memorialName: searchBLM.data![i].searchBLMMemorialPage.searchBLMMemorialPageName,
                           description: searchBLM.data![i].searchBLMMemorialPage.searchBLMMemorialPageDetails.searchBLMMemorialPageDetailsDescription,
                           image: searchBLM.data![i].searchBLMMemorialPage.searchBLMMemorialPageProfileImage,

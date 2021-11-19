@@ -113,14 +113,23 @@ class APIBLMShowMemorialExtendedDetails{
   APIBLMShowMemorialExtendedDetails({required this.memorialDetailsDescription, required this.memorialDetailsLocation, required this.memorialDetailsPrecinct, required this.memorialDetailsRip, required this.memorialDetailsState, required this.memorialDetailsCountry, required this.memorialAcceptDonations, required this.memorialLatitude, required this.memorialLongitude});
 
   factory APIBLMShowMemorialExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
-    String newRIP = parsedJson['rip'];
-    DateTime rip = DateTime.parse(newRIP);
+    // String newRIP = parsedJson['rip'];
+    // DateTime rip = DateTime.parse(newRIP);
 
     return APIBLMShowMemorialExtendedDetails(
       memorialDetailsDescription: parsedJson['description'] ?? '',
       memorialDetailsLocation: parsedJson['location'] ?? '',
       memorialDetailsPrecinct: parsedJson['precinct'] ?? '',
-      memorialDetailsRip: rip.format(AmericanDateFormats.standardWithComma),
+      // memorialDetailsRip: rip.format(AmericanDateFormats.standardWithComma),
+      memorialDetailsRip: ((){
+        if(parsedJson['rip'] == null || parsedJson['dob'] == 'Unknown'){
+          return 'Unknown';
+        }else{
+          String newRIP = parsedJson['rip'];
+          DateTime rip = DateTime.parse(newRIP);
+          return rip.format(AmericanDateFormats.standardWithComma);
+        }
+      }()),
       memorialDetailsState: parsedJson['state'] ?? '',
       memorialDetailsCountry: parsedJson['country'] ?? '',
       memorialAcceptDonations: parsedJson['accept_donations'] ?? false,

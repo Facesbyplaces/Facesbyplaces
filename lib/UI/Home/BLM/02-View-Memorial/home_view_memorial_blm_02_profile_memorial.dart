@@ -80,6 +80,8 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
   bool empty = true;
   int page = 1;
 
+  String thumbnail = 'assets/icons/cover-icon.png';
+
   void onLoading() async{
     if(itemRemaining != 0){
       context.loaderOverlay.show();
@@ -181,7 +183,28 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
   }
 
   Future<APIBLMShowMemorialMain> getProfileInformation(int memorialId) async{
-    return await apiBLMShowMemorial(memorialId: memorialId);
+    // Directory dir = await getTemporaryDirectory();
+    // dir.deleteSync(recursive: true);
+    // dir.create(); 
+
+    // String path = (await getTemporaryDirectory()).path;
+    // context.loaderOverlay.show();
+    // APIBLMShowMemorialMain newValue = await apiBLMShowMemorial(memorialId: memorialId);
+    // context.loaderOverlay.hide();
+
+    // String videoThumbnail = newValue.blmMemorial.memorialImagesOrVideos[0];
+
+    // thumbnail = (await VideoThumbnail.thumbnailFile(
+    //   video: videoThumbnail,
+    //   thumbnailPath: path,
+    //   imageFormat: ImageFormat.WEBP,
+    // ))!;
+
+    context.loaderOverlay.show();
+    APIBLMShowMemorialMain newValue = await apiBLMShowMemorial(memorialId: memorialId);
+    context.loaderOverlay.hide();
+    
+    return newValue;
   }
 
   void isGuest() async{
@@ -323,9 +346,13 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                 if(profile.data!.blmMemorial.memorialImagesOrVideos.isNotEmpty){
                                                                   if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[0])?.contains('video') == true){
                                                                     return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
-                                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                        placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                                                        controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                        // placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                                        // placeholder: thumbnail == 'assets/icons/cover-icon.png'
+                                                                        // ? Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9)
+                                                                        // : Image.file(File(thumbnail), fit: BoxFit.cover, scale: 16 / 9),
+                                                                        autoPlay: true,
+                                                                        controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),
                                                                         aspectRatio: 16 / 9,
                                                                         fit: BoxFit.contain,
                                                                       ),
@@ -367,8 +394,12 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                                 child: ((){
                                                                                   if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[0])?.contains('video') == true){
                                                                                     return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
-                                                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                                        placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                        // placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                                                        // placeholder: thumbnail == 'assets/icons/cover-icon.png'
+                                                                                        // ? Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9)
+                                                                                        // : Image.file(File(thumbnail), fit: BoxFit.cover, scale: 16 / 9),
+                                                                                        autoPlay: true,
                                                                                         deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                                         aspectRatio: 16 / 9,
                                                                                         fit: BoxFit.contain,
@@ -657,9 +688,12 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                               height: 100,
                                                                               width: 100,
                                                                               child: BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[index]}',
-                                                                                betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                  // placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                                                  // placeholder: thumbnail == 'assets/icons/cover-icon.png'
+                                                                                  // ? Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9)
+                                                                                  // : Image.file(File(thumbnail), fit: BoxFit.cover, scale: 16 / 9),
+                                                                                  controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),
                                                                                   fit: BoxFit.contain,
                                                                                   aspectRatio: 1,
                                                                                 ),
@@ -710,8 +744,12 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                                             items: List.generate(profile.data!.blmMemorial.memorialImagesOrVideos.length, (next) => ((){
                                                                                               if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[next])?.contains('video') == true){
                                                                                                 return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[index]}',
-                                                                                                  betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                                                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                                    // placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                                                                    // placeholder: thumbnail == 'assets/icons/cover-icon.png'
+                                                                                                    // ? Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9)
+                                                                                                    // : Image.file(File(thumbnail), fit: BoxFit.cover, scale: 16 / 9),
+                                                                                                    autoPlay: true,
                                                                                                     deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                                                     autoDispose: false,
                                                                                                     aspectRatio: 16 / 9,
@@ -935,6 +973,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                           location: posts[i].location,
                                           latitude: posts[i].latitude,
                                           longitude: posts[i].longitude,
+                                          isGuest: isGuestLoggedIn.value,
                                           contents: [
                                             Align(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 
