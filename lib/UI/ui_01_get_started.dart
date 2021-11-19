@@ -9,7 +9,6 @@ import 'Regular/regular_07_password_reset.dart';
 import 'BLM/blm_07_password_reset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'ui_02_login.dart';
 import 'dart:async';
 
 const double pi = 3.1415926535897932;
@@ -158,8 +157,6 @@ class UIGetStartedState extends State<UIGetStarted>{
                         decoration: const BoxDecoration(image: DecorationImage(fit: BoxFit.fill, image: AssetImage('assets/icons/background.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),),
                         child: Column(
                           children: [
-                            // const SizedBox(height: 30),
-
                             const Center(child: Text('FacesByPlaces.com', style: TextStyle(fontSize: 28, color: Color(0xff04ECFF), fontFamily: 'NexaBold',),),),
 
                             const SizedBox(height: 30),
@@ -188,7 +185,6 @@ class UIGetStartedState extends State<UIGetStarted>{
                               padding: EdgeInsets.zero,
                               height: 50,
                               onPressed: (){
-                                // Navigator.push(context, MaterialPageRoute(builder: (context) => const UILogin01()));
                                 Navigator.pushNamed(context, '/regular/login');
                               },
                             ),
@@ -197,7 +193,7 @@ class UIGetStartedState extends State<UIGetStarted>{
 
                             const Expanded(child: SizedBox(),),
 
-                            const Text('Version: 1.69 / 1.0.0+8', style: TextStyle(fontSize: 14, color: Color(0xffffffff), fontFamily: 'NexaRegular'),),
+                            const Text('Version: 1.70 / 1.0.0+9', style: TextStyle(fontSize: 14, color: Color(0xffffffff), fontFamily: 'NexaRegular'),),
 
                             const SizedBox(height: 10),
                           ],
