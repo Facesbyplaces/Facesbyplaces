@@ -629,8 +629,6 @@ PODS:
   - StripeCore (21.9.0)
   - StripeUICore (21.9.0):
     - StripeCore (= 21.9.0)
-  - video_compress (0.3.0):
-    - Flutter
   - video_thumbnail (0.0.1):
     - Flutter
     - libwebp
@@ -667,7 +665,6 @@ DEPENDENCIES:
   - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - stripe_ios (from `.symlinks/plugins/stripe_ios/ios`)
-  - video_compress (from `.symlinks/plugins/video_compress/ios`)
   - video_thumbnail (from `.symlinks/plugins/video_thumbnail/ios`)
   - wakelock (from `.symlinks/plugins/wakelock/ios`)
 
@@ -765,8 +762,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sqflite/ios"
   stripe_ios:
     :path: ".symlinks/plugins/stripe_ios/ios"
-  video_compress:
-    :path: ".symlinks/plugins/video_compress/ios"
   video_thumbnail:
     :path: ".symlinks/plugins/video_thumbnail/ios"
   wakelock:
@@ -838,7 +833,6 @@ SPEC CHECKSUMS:
   stripe_ios: fce03ba840e641cc31ff5bdb67f5d5b9c938b897
   StripeCore: 2ea9531e863ef20f191a0d61f00dedb7f061baef
   StripeUICore: a0f9e40520823d34c63baec0782fc4a0c7fb7484
-  video_compress: fce97e4fb1dfd88175aa07d2ffc8a2f297f87fbe
   video_thumbnail: c4e2a3c539e247d4de13cd545344fd2d26ffafd1
   wakelock: d0fc7c864128eac40eba1617cb5264d9c940b46f
 

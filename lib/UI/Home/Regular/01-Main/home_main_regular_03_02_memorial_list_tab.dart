@@ -40,6 +40,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab> with Automat
           if(updatedMemorialsData){
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
+                elevation: 0,
                 content: const Text('New memorials available. Reload to view.'), 
                 duration: const Duration(seconds: 3), backgroundColor: const Color(0xff4EC9D4),
                 action: SnackBarAction(
@@ -52,7 +53,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab> with Automat
               ),
             );
           }else{
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more memorials to show.'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more memorials to show.'), elevation: 0, duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
           }
         }
       }
@@ -213,7 +214,14 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab> with Automat
       newValue.almFriendsMemorialList.memorialHomeTabMemorialFriendsItemsRemaining != 0 || newValue.almFriendsMemorialList.blmHomeTabMemorialFriendsItemsRemaining != 0
     );
 
-    lengthOfMemorials.value = memorials.length; // COMPARISON FOR NEXT PAGINATION & NUMBER OF FEEDS
+    // lengthOfMemorials.value = memorials.length; // COMPARISON FOR NEXT PAGINATION & NUMBER OF FEEDS
+    
+    if(memorials.length == 2){ // NO DATA FROM THE SERVER EXCEPT FOR THE TWO WIDGETS (MY FAMILY AND MY FRIENDS) AND NEEDS TO BE EMPTY
+      lengthOfMemorials.value = 0;
+    }else{
+      lengthOfMemorials.value = memorials.length;
+    }
+
     page1 = page;
     loaded.value = true;
     
@@ -242,20 +250,22 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab> with Automat
                       if(loadedListener && lengthOfMemorialsListener == 0){
                         return SingleChildScrollView(
                           physics: const ClampingScrollPhysics(),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+                          child: Align(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
 
-                              Image.asset('assets/icons/app-icon.png', height: 200, width: 200,),
+                                Image.asset('assets/icons/app-icon.png', height: 200, width: 200,),
 
-                              const SizedBox(height: 45,),
+                                const SizedBox(height: 45,),
 
-                              const Text('Memorial is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
+                                const Text('Memorial is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
 
-                              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
-                            ],
+                                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+                              ],
+                            ),
                           ),
                         );
                       }else{

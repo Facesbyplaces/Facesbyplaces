@@ -43,6 +43,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab> with AutomaticKe
           if(updatedPostsData){
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
+                elevation: 0,
                 content: const Text('New posts available. Reload to view.'), 
                 duration: const Duration(seconds: 3), backgroundColor: const Color(0xff4EC9D4),
                 action: SnackBarAction(
@@ -55,7 +56,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab> with AutomaticKe
               ),
             );
           }else{
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more posts to show.'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more posts to show.'), elevation: 0, duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
           }
         }
       }

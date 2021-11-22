@@ -397,11 +397,11 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                         }
                       },
                       tabs: const [
-                        Text('Family', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                        Text('Family', textAlign: TextAlign.center, overflow: TextOverflow.clip, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular',),),
 
-                        Text('Friends', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                        Text('Friends', textAlign: TextAlign.center, overflow: TextOverflow.clip, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular',),),
 
-                        Text('Followers', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                        Text('Followers', textAlign: TextAlign.center, overflow: TextOverflow.clip, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular',),),
                       ],
                     ),
                   ),

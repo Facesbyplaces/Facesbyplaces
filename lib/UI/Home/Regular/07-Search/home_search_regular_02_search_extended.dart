@@ -1812,7 +1812,6 @@ import 'package:flutter/material.dart';
 import 'package:loader/loader.dart';
 import 'package:dialog/dialog.dart';
 import 'package:mime/mime.dart';
-// import 'package:misc/misc.dart';
 import 'dart:ui';
 
 class HomeRegularPost extends StatefulWidget{
@@ -2268,10 +2267,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                     decoration: const BoxDecoration(color: Color(0xffffffff), image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),),
                     child: Column(
                       children: [
-                        // IgnorePointer(
-                        //   ignoring: isGuestLoggedInListener,
-                        //   child: 
-                        // ),
                         Container(
                           alignment: Alignment.center,
                           height: 55,
@@ -2359,20 +2354,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                           }()),
                         ),
 
-                        // Expanded(
-                        //   child: Container(
-                        //     child: isGuestLoggedInListener
-                        //     ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0), child: const MiscLoginToContinue(),)
-                        //     : ((){
-                        //       switch (toggleListener){
-                        //         case 0: return searchPostExtended(onSearch: onSearchListener, searchKey: searchKeyListener);
-                        //         case 1: return searchSuggestedExtended(onSearch: onSearchListener, searchKey: searchKeyListener);
-                        //         case 2: return searchNearbyExtended(onSearch: onSearchListener, searchKey: searchKeyListener);
-                        //         case 3: return searchBLMExtended(onSearch: onSearchListener, searchKey: searchKeyListener);
-                        //       }
-                        //     }()),
-                        //   ),
-                        // ),
                         Expanded(
                           child: Container(
                             child: ((){

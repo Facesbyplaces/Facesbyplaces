@@ -839,13 +839,20 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> wi
                     TabBarView(
                       controller: controller,
                       children: const [
-                        HomeRegularFeedTab(key: Key('1')),
+                        // HomeRegularFeedTab(key: Key('1')),
 
-                        HomeRegularManageTab(key: Key('2')),
+                        // HomeRegularManageTab(key: Key('2')),
 
-                        HomeRegularPostTab(key: Key('3')),
+                        // HomeRegularPostTab(key: Key('3')),
 
-                        HomeRegularNotificationsTab(key: Key('4')),
+                        // HomeRegularNotificationsTab(key: Key('4')),
+                        HomeRegularFeedTab(),
+
+                        HomeRegularManageTab(),
+
+                        HomeRegularPostTab(),
+
+                        HomeRegularNotificationsTab(),
                       ],
                     ),
                   ],

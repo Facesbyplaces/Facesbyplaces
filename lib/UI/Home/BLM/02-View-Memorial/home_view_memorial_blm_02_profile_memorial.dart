@@ -341,91 +341,111 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                                                         Column(
                                                           children: [
-                                                            GestureDetector(
-                                                              child: ((){
-                                                                if(profile.data!.blmMemorial.memorialImagesOrVideos.isNotEmpty){
-                                                                  if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[0])?.contains('video') == true){
-                                                                    return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
-                                                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                                        // placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                                                        // placeholder: thumbnail == 'assets/icons/cover-icon.png'
-                                                                        // ? Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9)
-                                                                        // : Image.file(File(thumbnail), fit: BoxFit.cover, scale: 16 / 9),
-                                                                        autoPlay: true,
-                                                                        controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),
-                                                                        aspectRatio: 16 / 9,
-                                                                        fit: BoxFit.contain,
-                                                                      ),
-                                                                    );
-                                                                  }else{
-                                                                    return const SizedBox(height: 0,);
-                                                                  }
+                                                            ((){
+                                                              if(profile.data!.blmMemorial.memorialImagesOrVideos.isNotEmpty){
+                                                                if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[0])?.contains('video') == true){
+                                                                  return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
+                                                                    betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                      // placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                                      // placeholder: thumbnail == 'assets/icons/cover-icon.png'
+                                                                      // ? Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9)
+                                                                      // : Image.file(File(thumbnail), fit: BoxFit.cover, scale: 16 / 9),
+                                                                      autoPlay: true,
+                                                                      aspectRatio: 16 / 9,
+                                                                      fit: BoxFit.contain,
+                                                                    ),
+                                                                  );
                                                                 }else{
                                                                   return const SizedBox(height: 0,);
                                                                 }
-                                                              }()),
-                                                              onTap: (){
-                                                                showGeneralDialog(
-                                                                  context: context,
-                                                                  barrierLabel: 'Dialog',                                                                
-                                                                  barrierDismissible: true,
-                                                                  transitionDuration: const Duration(milliseconds: 0),
-                                                                  pageBuilder: (_, __, ___) {
-                                                                    return Scaffold(
-                                                                      backgroundColor: Colors.black12.withOpacity(0.7),
-                                                                      body: SizedBox.expand(
-                                                                        child: SafeArea(
-                                                                          child: Column(
-                                                                            children: [
-                                                                              Container(
-                                                                                padding: const EdgeInsets.only(right: 20.0),
-                                                                                alignment: Alignment.centerRight,
-                                                                                child: GestureDetector(
-                                                                                  child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
-                                                                                  onTap: (){
-                                                                                    Navigator.pop(context);
-                                                                                  },
-                                                                                ),
-                                                                              ),
+                                                              }else{
+                                                                return const SizedBox(height: 0,);
+                                                              }
+                                                            }()),                                                            // GestureDetector(
+                                                            //   child: ((){
+                                                            //     if(profile.data!.blmMemorial.memorialImagesOrVideos.isNotEmpty){
+                                                            //       if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[0])?.contains('video') == true){
+                                                            //         return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
+                                                            //           betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                            //             // placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                            //             // placeholder: thumbnail == 'assets/icons/cover-icon.png'
+                                                            //             // ? Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9)
+                                                            //             // : Image.file(File(thumbnail), fit: BoxFit.cover, scale: 16 / 9),
+                                                            //             autoPlay: true,
+                                                            //             controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),
+                                                            //             aspectRatio: 16 / 9,
+                                                            //             fit: BoxFit.contain,
+                                                            //           ),
+                                                            //         );
+                                                            //       }else{
+                                                            //         return const SizedBox(height: 0,);
+                                                            //       }
+                                                            //     }else{
+                                                            //       return const SizedBox(height: 0,);
+                                                            //     }
+                                                            //   }()),
+                                                            //   onTap: (){
+                                                            //     showGeneralDialog(
+                                                            //       context: context,
+                                                            //       barrierLabel: 'Dialog',                                                                
+                                                            //       barrierDismissible: true,
+                                                            //       transitionDuration: const Duration(milliseconds: 0),
+                                                            //       pageBuilder: (_, __, ___) {
+                                                            //         return Scaffold(
+                                                            //           backgroundColor: Colors.black12.withOpacity(0.7),
+                                                            //           body: SizedBox.expand(
+                                                            //             child: SafeArea(
+                                                            //               child: Column(
+                                                            //                 children: [
+                                                            //                   Container(
+                                                            //                     padding: const EdgeInsets.only(right: 20.0),
+                                                            //                     alignment: Alignment.centerRight,
+                                                            //                     child: GestureDetector(
+                                                            //                       child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
+                                                            //                       onTap: (){
+                                                            //                         Navigator.pop(context);
+                                                            //                       },
+                                                            //                     ),
+                                                            //                   ),
 
-                                                                              const SizedBox(height: 10,),
+                                                            //                   const SizedBox(height: 10,),
 
-                                                                              Expanded(
-                                                                                child: ((){
-                                                                                  if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[0])?.contains('video') == true){
-                                                                                    return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
-                                                                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                                                        // placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                                                                        // placeholder: thumbnail == 'assets/icons/cover-icon.png'
-                                                                                        // ? Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9)
-                                                                                        // : Image.file(File(thumbnail), fit: BoxFit.cover, scale: 16 / 9),
-                                                                                        autoPlay: true,
-                                                                                        deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-                                                                                        aspectRatio: 16 / 9,
-                                                                                        fit: BoxFit.contain,
-                                                                                      ),
-                                                                                    );
-                                                                                  }else{
-                                                                                    return CachedNetworkImage(
-                                                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                                      imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[0],
-                                                                                      fit: BoxFit.contain,
-                                                                                    );
-                                                                                  }
-                                                                                }()),
-                                                                              ),
+                                                            //                   Expanded(
+                                                            //                     child: ((){
+                                                            //                       if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[0])?.contains('video') == true){
+                                                            //                         return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
+                                                            //                           betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                            //                             // placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                            //                             // placeholder: thumbnail == 'assets/icons/cover-icon.png'
+                                                            //                             // ? Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9)
+                                                            //                             // : Image.file(File(thumbnail), fit: BoxFit.cover, scale: 16 / 9),
+                                                            //                             autoPlay: true,
+                                                            //                             deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+                                                            //                             aspectRatio: 16 / 9,
+                                                            //                             fit: BoxFit.contain,
+                                                            //                           ),
+                                                            //                         );
+                                                            //                       }else{
+                                                            //                         return CachedNetworkImage(
+                                                            //                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                            //                           placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                            //                           imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[0],
+                                                            //                           fit: BoxFit.contain,
+                                                            //                         );
+                                                            //                       }
+                                                            //                     }()),
+                                                            //                   ),
 
-                                                                              const SizedBox(height: 85,),
-                                                                            ],
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    );
-                                                                  },
-                                                                );
-                                                              },
-                                                            ),
+                                                            //                   const SizedBox(height: 85,),
+                                                            //                 ],
+                                                            //               ),
+                                                            //             ),
+                                                            //           ),
+                                                            //         );
+                                                            //       },
+                                                            //     );
+                                                            //   },
+                                                            // ),
 
                                                             const SizedBox(height: 20,),
 

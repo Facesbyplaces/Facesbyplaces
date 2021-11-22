@@ -45,6 +45,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab> with AutomaticKe
           if(updatedFeedsData){
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
+                elevation: 0,
                 content: const Text('New feeds available. Reload to view.'), 
                 duration: const Duration(seconds: 3), backgroundColor: const Color(0xff4EC9D4),
                 action: SnackBarAction(
@@ -57,7 +58,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab> with AutomaticKe
               ),
             );
           }else{
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more feeds to show.'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more feeds to show.'), elevation: 0, duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
           }
         }
       }

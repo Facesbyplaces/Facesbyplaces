@@ -46,6 +46,7 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
           if(updatedNotificationsData){
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
+                elevation: 0,
                 content: const Text('New notifications available. Reload to view.'), 
                 duration: const Duration(seconds: 3), backgroundColor: const Color(0xff4EC9D4),
                 action: SnackBarAction(
@@ -58,7 +59,7 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
               ),
             );
           }else{
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more notifications to show.'), duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more notifications to show.'), elevation: 0, duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
           }
         }
       }
@@ -135,20 +136,22 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
                   if(loadedListener && lengthOfFeedsListener == 0){
                     return SingleChildScrollView(
                       physics: const ClampingScrollPhysics(),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+                      child: Align(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
 
-                          Image.asset('assets/icons/app-icon.png', height: 200, width: 200,),
+                            Image.asset('assets/icons/app-icon.png', height: 200, width: 200,),
 
-                          const SizedBox(height: 45,),
+                            const SizedBox(height: 45,),
 
-                          const Text('Notification is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
+                            const Text('Notification is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
 
-                          SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
-                        ],
+                            SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+                          ],
+                        ),
                       ),
                     );
                   }else{

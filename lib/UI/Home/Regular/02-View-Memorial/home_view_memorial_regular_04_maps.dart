@@ -419,7 +419,7 @@ class HomeRegularMapsState extends State<HomeRegularMaps>{
                           children: <Widget>[
                             IconButton(
                               splashColor: Colors.grey,
-                              icon: const Icon(Icons.menu),
+                              icon: const Icon(Icons.search),
                               onPressed: () {},
                             ),
                             Expanded(
