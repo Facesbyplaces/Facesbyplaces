@@ -354,7 +354,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                     );
                   }
                 }else if(posts.connectionState == ConnectionState.none || posts.connectionState == ConnectionState.waiting){
-                  return const Center(child: CustomLoader(),);
+                  return const Center(child: CustomLoaderThreeDots(),);
                 }
                 else if(posts.hasError){
                   return Center(
@@ -571,7 +571,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
                       );
                     }
                   }else if(memorials.connectionState == ConnectionState.none || memorials.connectionState == ConnectionState.waiting){
-                    return const Center(child: CustomLoader(),);
+                    return const Center(child: CustomLoaderThreeDots(),);
                   }
                   else if(memorials.hasError){
                     return Center(

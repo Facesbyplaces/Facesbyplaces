@@ -366,7 +366,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab> with AutomaticKe
                     );
                   }
                 }else if(posts.connectionState == ConnectionState.none){
-                  return const Center(child: CustomLoader(),);
+                  return const Center(child: CustomLoaderThreeDots(),);
                 }
                 else if(posts.hasError){
                   return Center(

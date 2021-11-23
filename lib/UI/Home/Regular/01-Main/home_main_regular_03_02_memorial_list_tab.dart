@@ -281,7 +281,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab> with Automat
                         );
                       }
                     }else if(memorials.connectionState == ConnectionState.none){
-                      return const Center(child: CustomLoader(),);
+                      return const Center(child: CustomLoaderThreeDots(),);
                     }
                     else if(memorials.hasError){
                       return Center(

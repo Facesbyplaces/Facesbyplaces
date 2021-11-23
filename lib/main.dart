@@ -69,7 +69,7 @@ void main() async{
     RepaintBoundary(
       child: GlobalLoaderOverlay(
         useDefaultLoading: false,
-        overlayWidget: const Center(child: CustomLoader(),),
+        overlayWidget: const Center(child: CustomLoaderThreeDots(),),
         overlayOpacity: 0.5,
         overlayColor: Colors.white,
         child: MaterialApp(

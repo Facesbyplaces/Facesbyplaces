@@ -27,16 +27,18 @@ class HomeRegularMemorialSettings extends StatefulWidget{
   HomeRegularMemorialSettingsState createState() => HomeRegularMemorialSettingsState();
 }
 
-class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings>{
+class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings> with TickerProviderStateMixin{
   ValueNotifier<bool> isSwitched1 = ValueNotifier<bool>(false);
   ValueNotifier<bool> isSwitched2 = ValueNotifier<bool>(false);
   ValueNotifier<bool> isSwitched3 = ValueNotifier<bool>(false);
   ValueNotifier<int> toggle = ValueNotifier<int>(0);
   Future<bool>? switchStatus;
+  TabController? controller;
 
   @override
   void initState(){
     super.initState();
+    controller = TabController(initialIndex: 0, length: 2, vsync: this);
     isSwitched1.value = widget.switchFamily;
     isSwitched2.value = widget.switchFriends;
     isSwitched3.value = widget.switchFollowers;
@@ -60,20 +62,20 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
             },
           ),
         ),
-        body: SafeArea(
-          child: LayoutBuilder(
-            builder: (context, constraint){
-              return SingleChildScrollView(
-                physics: const ClampingScrollPhysics(),
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(minHeight: constraint.maxHeight),
-                  child: IntrinsicHeight(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 70,
-                          child: DefaultTabController(
-                            length: 2,
+        body: DefaultTabController(
+          length: 2,
+          child: SafeArea(
+            child: LayoutBuilder(
+              builder: (context, constraint){
+                return SingleChildScrollView(
+                  physics: const ClampingScrollPhysics(),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(minHeight: constraint.maxHeight),
+                    child: IntrinsicHeight(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 70,
                             child: TabBar(
                               labelColor: const Color(0xff04ECFF),
                               unselectedLabelColor: const Color(0xff000000),
@@ -89,31 +91,31 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                               },
                             ),
                           ),
-                        ),
 
-                        Expanded(
-                          child: SizedBox(
-                            child: ((){
-                              switch (toggleListener){
-                                case 0: return settingsTab1(widget.memorialId);
-                                case 1: return settingsTab2(widget.memorialId);
-                              }
-                            }()),
+                          Expanded(
+                            child: SizedBox(
+                              child: ((){
+                                switch (toggleListener){
+                                  case 0: return settingsTab1();
+                                  case 1: return settingsTab2();
+                                }
+                              }()),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              );
-            }
+                );
+              }
+            ),
           ),
         ),
       ),
     );
   }
 
-  settingsTab1(int memorialId){
+  Widget settingsTab1(){
     return Column(
       children: [
         ListTile(
@@ -121,7 +123,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           subtitle: const Text('Update page details', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
           tileColor: const Color(0xffffffff),          
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageDetails(memorialId: memorialId,)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageDetails(memorialId: widget.memorialId,)));
           },
         ),
 
@@ -132,7 +134,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           subtitle: const Text('Update Page image and background image', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
           tileColor: const Color(0xffffffff),
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialPageImage(memorialId: memorialId,)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialPageImage(memorialId: widget.memorialId,)));
           },
         ),
 
@@ -143,7 +145,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           subtitle: const Text('Add or remove admins of this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
           tileColor: const Color(0xffffffff),
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageManagers(memorialId: memorialId,)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageManagers(memorialId: widget.memorialId,)));
           },
         ),
 
@@ -154,7 +156,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           subtitle: const Text('Add or remove family of this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
           tileColor: const Color(0xffffffff),
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageFamily(memorialId: memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageFamily(memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)));
           },
         ),
 
@@ -165,7 +167,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           subtitle: const Text('Add or remove friends of this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
           tileColor: const Color(0xffffffff),
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageFriends(memorialId: memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageFriends(memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)));
           },
         ),
 
@@ -176,7 +178,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           subtitle: const Text('Manage cards that receives the memorial gifts', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
           tileColor: const Color(0xffffffff),
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPaypal(pageId: memorialId)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPaypal(pageId: widget.memorialId)));
           },
         ),
 
@@ -191,7 +193,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
 
             if(confirmResult){
               context.loaderOverlay.show();
-              bool result = await apiRegularDeleteMemorial(memorialId: memorialId);
+              bool result = await apiRegularDeleteMemorial(memorialId: widget.memorialId);
               context.loaderOverlay.hide();
 
               if(result){
@@ -225,7 +227,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
     );
   }
 
-  settingsTab2(int memorialId){
+  Widget settingsTab2(){
     return ValueListenableBuilder(
       valueListenable: isSwitched1,
       builder: (_, bool isSwitched1Listener, __) => ValueListenableBuilder(
@@ -261,7 +263,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                       value: isSwitched1Listener,
                       onChanged: (value) async{
                         isSwitched1.value = value;
-                        await apiRegularUpdateSwitchStatusFamily(memorialId: memorialId, status: value);
+                        await apiRegularUpdateSwitchStatusFamily(memorialId: widget.memorialId, status: value);
                       },
                     ),
                   ],
@@ -289,7 +291,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                       value: isSwitched2Listener,
                       onChanged: (value) async{
                         isSwitched2.value = value;
-                        await apiRegularUpdateSwitchStatusFriends(memorialId: memorialId, status: value);
+                        await apiRegularUpdateSwitchStatusFriends(memorialId: widget.memorialId, status: value);
                       },
                     ),
                   ],
@@ -317,7 +319,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                       value: isSwitched3Listener,
                       onChanged: (value) async{
                         isSwitched3.value = value;
-                        await apiRegularUpdateSwitchStatusFollowers(memorialId: memorialId, status: value);
+                        await apiRegularUpdateSwitchStatusFollowers(memorialId: widget.memorialId, status: value);
                       },                      
                     ),
                   ],

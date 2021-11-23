@@ -289,7 +289,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
             }else if(profile.hasError){
               return const MiscErrorMessageTemplate();
             }else{
-              return const Center(child: CustomLoader(),);
+              return const Center(child: CustomLoaderThreeDots(),);
             }
           },
         ),

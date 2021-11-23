@@ -254,7 +254,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                             future: showOriginalPost,
                             builder: (context, originalPost){
                               if(originalPost.connectionState != ConnectionState.done){
-                                return const Center(child: CustomLoader(),);
+                                return const Center(child: CustomLoaderThreeDots(),);
                               }
                               else if(originalPost.hasError){
                                 return const MiscErrorMessageTemplate();
@@ -1236,7 +1236,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                     //           future: showOriginalPost,
                     //           builder: (context, originalPost){
                     //             if(originalPost.connectionState != ConnectionState.done){
-                    //               return const Center(child: CustomLoader(),);
+                    //               return const Center(child: CustomLoaderThreeDots(),);
                     //             }
                     //             else if(originalPost.hasError){
                     //               return const MiscErrorMessageTemplate();

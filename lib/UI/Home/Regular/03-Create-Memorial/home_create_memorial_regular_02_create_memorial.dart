@@ -191,7 +191,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                                 builder: (context) => CustomDialog(
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                   title: 'Error',
-                                  description: 'Please complete the form before submitting.',
+                                  description: 'Please input the name of the memorial page before proceeding to the next page.',
                                   okButtonColor: const Color(0xfff44336), // RED
                                   includeOkButton: true,
                                 ),

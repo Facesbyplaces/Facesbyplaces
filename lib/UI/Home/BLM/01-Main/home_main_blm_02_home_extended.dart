@@ -552,7 +552,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                           ),
                         );
                       }else{
-                        return const Center(child: CustomLoader(),);
+                        return const Center(child: CustomLoaderThreeDots(),);
                       }
                     }
                   )

@@ -6,16 +6,6 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 
-class RegularShowAdminSettings{
-  final int userId;
-  final String firstName;
-  final String lastName;
-  final String image;
-  final String relationship;
-  final String email;
-  const RegularShowAdminSettings({required this.userId, required this.firstName, required this.lastName, required this.image, required this.relationship, required this.email});
-}
-
 class HomeRegularPageManagers extends StatefulWidget{
   final int memorialId;
   const HomeRegularPageManagers({Key? key, required this.memorialId}) : super(key: key);

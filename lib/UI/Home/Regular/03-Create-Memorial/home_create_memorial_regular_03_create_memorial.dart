@@ -6,6 +6,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:loader/loader.dart';
+import 'package:dialog/dialog.dart';
 import 'package:misc/misc.dart';
 import 'dart:typed_data';
 import 'dart:io';
@@ -150,16 +152,6 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                                 radius: 25,
                               ),
                             ),
-
-                            // const Positioned(
-                            //   right: 10,
-                            //   top: 10,
-                            //   child: CircleAvatar(
-                            //     child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: 45,),
-                            //     backgroundColor: Color(0xffffffff),
-                            //     radius: 25,
-                            //   ),
-                            // ),
                           ],
                         ),
                       ),
@@ -291,12 +283,25 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                             almLongitude: widget.longitude,
                           );
 
-                          context.loaderOverlay.show();
+                          context.loaderOverlay.show(widget: const CustomLoaderTextLoader());
                           int result = await apiRegularCreateMemorial(memorial: memorial);
                           context.loaderOverlay.hide();
 
-                          Route newRoute = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: result, managed: true, newlyCreated: true, relationship: widget.relationship,),);
-                          Navigator.pushReplacement(context, newRoute); 
+                          if(result != 0){
+                            Route newRoute = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: result, managed: true, newlyCreated: true, relationship: widget.relationship,),);
+                            Navigator.pushReplacement(context, newRoute); 
+                          }else{
+                            await showDialog(
+                              context: context,
+                              builder: (context) => CustomDialog(
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                title: 'Error',
+                                description: 'Something went wrong. Please try again.',
+                                okButtonColor: const Color(0xfff44336), // RED
+                                includeOkButton: true,
+                              ),
+                            );
+                          }
                         },
                       ),
 

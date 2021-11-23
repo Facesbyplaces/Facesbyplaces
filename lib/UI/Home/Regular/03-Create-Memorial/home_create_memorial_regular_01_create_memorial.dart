@@ -8,22 +8,6 @@ import 'home_create_memorial_regular_04_locate_map.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 import 'package:misc/misc.dart';
-import 'dart:io';
-
-class RegularCreateMemorialValues{
-  final String memorialName;
-  final String description;
-  final String birthplace;
-  final String dob;
-  final String rip;
-  final String cemetery;
-  final String country;
-  final String relationship;
-  final List<File> imagesOrVideos;
-  final double longitude;
-  final double latitude;
-  const RegularCreateMemorialValues({required this.memorialName, required this.description, required this.birthplace, required this.dob, required this.rip, required this.cemetery, required this.country, required this.relationship, required this.imagesOrVideos, required this.latitude, required this.longitude,});
-}
 
 class HomeRegularCreateMemorial1 extends StatefulWidget{
   const HomeRegularCreateMemorial1({Key? key}) : super(key: key);
@@ -34,7 +18,6 @@ class HomeRegularCreateMemorial1 extends StatefulWidget{
 
 class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
   final GlobalKey<MiscInputFieldDropDownState> _key1 = GlobalKey<MiscInputFieldDropDownState>();
-  // final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
   final GlobalKey<MiscInputFieldTemplateState> _key3 = GlobalKey<MiscInputFieldTemplateState>();
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
@@ -323,7 +306,6 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                                 ),
                               );
                             }else{
-                              // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreateMemorial2(relationship: _key1.currentState!.currentSelection, birthplace: _key2.currentState!.controller.text, dob: controller1.text, rip: controller2.text, cemetery: controller3.text, country: _key3.currentState!.controller.text, latitude: '${location.value!.latitude}', longitude: '${location.value!.longitude}',),),);
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreateMemorial2(relationship: _key1.currentState!.currentSelection, birthplace: birthplaceController.text, dob: controller1.text, rip: controller2.text, cemetery: controller3.text, country: _key3.currentState!.controller.text, latitude: '${location.value!.latitude}', longitude: '${location.value!.longitude}',),),);
                             }
                           },

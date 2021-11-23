@@ -194,7 +194,7 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
                     );
                   }
                 }else if(notifications.connectionState == ConnectionState.none){
-                  return const Center(child: CustomLoader(),);
+                  return const Center(child: CustomLoaderThreeDots(),);
                 }
                 else if(notifications.hasError){
                   return Center(

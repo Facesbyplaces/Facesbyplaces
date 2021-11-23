@@ -287,7 +287,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                         }else if(details.hasError){
                           return SizedBox(height: SizeConfig.screenHeight, child: const Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),),);
                         }else{
-                          return const Center(child: CustomLoader(),);
+                          return const Center(child: CustomLoaderThreeDots(),);
                         }
                       },
                     ),
