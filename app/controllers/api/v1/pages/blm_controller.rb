@@ -62,7 +62,7 @@ class Api::V1::Pages::BlmController < ApplicationController
     end
     
     def leaveBLM        # leave blm page for family and friends
-        return render json: {}, status: 404 unless @blm.relationships.where(account: user()).first != nil
+        return render json: {'Creator cannot leave memorial.'}, status: 404 unless @blm.relationships.where(account: user()).first != nil
         return render json: {}, status: 401 unless user().has_role? :pageadmin, @blm && User.with_role(:pageadmin, @blm).count != 1 && @blm.relationships.where(account: user()).first.destroy 
         
         user().remove_role :pageadmin, @blm

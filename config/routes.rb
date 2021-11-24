@@ -328,6 +328,7 @@ Rails.application.routes.draw do
         
         post 'addFamily', to: 'pageadmin#addFamily'
         post 'addFriend', to: 'pageadmin#addFriend'
+        post 'addUnknown', to: 'pageadmin#addUnknown'
 
         delete 'removeFamilyorFriend', to: 'pageadmin#removeFamilyorFriend'
 

@@ -49,7 +49,8 @@ class Api::V1::Pages::MemorialsController < ApplicationController
         render json: {status: :success}
     end
 
-    def setRelationship   # for friends and families
+    def setRelationship   
+        # for friends and families
         @memorial.relationships.where(account: user()).first.update(relationship: params[:relationship])
         render json: {status: :success}
     end
@@ -61,13 +62,16 @@ class Api::V1::Pages::MemorialsController < ApplicationController
         return render json: {memorial: MemorialSerializer.new( @memorial ).attributes, status: "updated details"}
     end
 
-    def leaveMemorial       # leave memorial page for family and friends-]
-        return render json: {}, status: 404 unless @memorial.relationships.where(account: user()).first != nil
+    def leaveMemorial       
+        # leave memorial page for family and friends
+        return render json: {message: "Creator cannot leave memorial."}, status: 404 unless @memorial.relationships.where(account: user()).first != nil
+        return render json: {message: "User is not part of the family or friends."}, status: 404 unless @memorial.relationships.where(account: user()).first != nil
         
+        # creator leaves memorial if pageadmin exists
         if user().has_role? :pageadmin, @memorial && AlmUser.with_role(:pageadmin, @memorial).count != 1 && @memorial.relationships.where(account: user()).first.destroy 
             user().remove_role :pageadmin, @memorial
             render json: {}, status: 200
-        elsif @memorial.relationships.where(account: user()).first.destroy 
+        elsif @memorial.relationships.where(account: user()).first.destroy
             render json: {}, status: 200
         else
             render json: {}, status: 401

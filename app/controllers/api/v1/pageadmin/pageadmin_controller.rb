@@ -42,6 +42,10 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
         add_relationship("friend")
     end
 
+    def addUnknown
+        add_relationship("unknown")
+    end
+
     def removeFamilyorFriend
         return render json: {}, status: 400 unless @page.relationships.where(account: @user).first != nil && @page.relationships.where(account: @user).first.destroy 
         render json: {status: "Deleted Successfully"}
@@ -179,6 +183,27 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
                 end
             else
                 render json: {error: "This user declines all add friends invites"}, status: 406
+            end
+        when "unknown"
+            # add new unknown relationship to the page
+            relationship = @page.relationships.new(relationship: params[:relationship], account: @user)
+
+            Notification::Builder.new(
+                device_tokens:  @user.device_token,
+                title:          "FacesbyPlaces Notification",
+                message:        "#{user().first_name} added you on #{@page.name}.",
+                recipient:      @user,
+                actor:          user(),
+                data:           @page.id,
+                type:           params[:page_type],
+                postType:       " ",
+            ).notify
+
+            # save relationship
+            if relationship.save 
+                render json: {status: "Added Successfuly", relationship_id: relationship.id}
+            else
+                render json: {status: relationship.errors}
             end
         end
     end
