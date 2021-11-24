@@ -69,7 +69,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
         return render json: {message: "User is not part of the family or friends."}, status: 400 unless @memorial.relationships.where(account: user()).first != nil
         
         # creator leaves memorial if pageadmin exists
-        if user().has_role? :pageadmin, @memorial && AlmUser.with_role(:pageadmin, @memorial).count != 1
+        if (user().has_role? :pageadmin, @memorial) && (AlmUser.with_role(:pageadmin, @memorial).count != 1)
             if @memorial.relationships.where(account: user()).first.destroy 
                 user().remove_role :pageadmin, @memorial
                 render json: {}, status: 200
