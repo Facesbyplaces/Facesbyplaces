@@ -65,13 +65,15 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     def leaveMemorial       
         # leave memorial page for family and friends
         # return render json: {message: "Creator cannot leave memorial."}, status: 404 unless @memorial.relationships.where(account: user()).first != nil
-        return render json: {message: "Creator cannot leave memorial."}, status: 404 unless @memorial.pageowner.account_id != user().id
-        return render json: {message: "User is not part of the family or friends."}, status: 404 unless @memorial.relationships.where(account: user()).first != nil
+        return render json: {message: "Creator cannot leave memorial."}, status: 400 unless @memorial.pageowner.account_id != user().id
+        return render json: {message: "User is not part of the family or friends."}, status: 400 unless @memorial.relationships.where(account: user()).first != nil
         
         # creator leaves memorial if pageadmin exists
-        if user().has_role? :pageadmin, @memorial && AlmUser.with_role(:pageadmin, @memorial).count != 1 && @memorial.relationships.where(account: user()).first.destroy 
-            user().remove_role :pageadmin, @memorial
-            render json: {}, status: 200
+        if user().has_role? :pageadmin, @memorial && AlmUser.with_role(:pageadmin, @memorial).count != 1
+            if @memorial.relationships.where(account: user()).first.destroy 
+                user().remove_role :pageadmin, @memorial
+                render json: {}, status: 200
+            end
         elsif @memorial.relationships.where(account: user()).first.destroy
             render json: {}, status: 200
         else
