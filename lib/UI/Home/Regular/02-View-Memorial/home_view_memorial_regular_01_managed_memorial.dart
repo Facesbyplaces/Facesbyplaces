@@ -697,42 +697,95 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                             height: Size.fromHeight(AppBar().preferredSize.height).height + (Size.fromHeight(AppBar().preferredSize.height).height / 2),
                                                             child: Row(
                                                               children: [
-                                                                Expanded(
-                                                                  child: Padding(
-                                                                    padding: const EdgeInsets.only(left: 20.0),
-                                                                    child: GestureDetector(
-                                                                      onTap: (){
-                                                                        if(widget.newlyCreated == true){
-                                                                          Route newRoute = MaterialPageRoute(builder: (context) => const HomeRegularScreenExtended(newToggleBottom: 1,),);
-                                                                          Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
-                                                                        }else{
-                                                                          Navigator.pop(context);
-                                                                        }
-                                                                      },
-                                                                      child: Row(
-                                                                        children: const [
-                                                                          Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
+                                                                const SizedBox(width: 10,),
 
-                                                                          Text('Back', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
-                                                                        ],
-                                                                      ),
-                                                                    ),
+                                                                MaterialButton(
+                                                                  color: Colors.green,
+                                                                  onPressed: (){
+                                                                    if(widget.newlyCreated == true){
+                                                                      Route newRoute = MaterialPageRoute(builder: (context) => const HomeRegularScreenExtended(newToggleBottom: 1,),);
+                                                                      Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                                                                    }else{
+                                                                      Navigator.pop(context);
+                                                                    }
+                                                                  },
+                                                                  child: Row(
+                                                                    children: const [
+                                                                      Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
+
+                                                                      Text('Back', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
+                                                                    ],
                                                                   ),
                                                                 ),
+
+                                                                // Expanded(
+                                                                //   child: TextButton.icon(
+                                                                //     onPressed: (){}, 
+                                                                //     icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
+                                                                //     label: const Text('Back', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
+                                                                //   ),
+                                                                //       // child: Padding(
+                                                                //       //   padding: EdgeInsets.zero,
+                                                                //       //   child: Row(
+                                                                //       //   children: const [
+                                                                //       //     Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
+
+                                                                //       //     Text('Back', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
+                                                                //       //   ],
+                                                                //       // ),
+                                                                //       // ),
+                                                                //     // ),
+                                                                // ),
+
+                                                                // Expanded(
+                                                                //   child: Padding(
+                                                                //     // padding: const EdgeInsets.only(left: 20.0),
+                                                                //     child: 
+                                                                //     // child: GestureDetector(
+                                                                //     //   onTap: (){
+                                                                //     //     if(widget.newlyCreated == true){
+                                                                //     //       Route newRoute = MaterialPageRoute(builder: (context) => const HomeRegularScreenExtended(newToggleBottom: 1,),);
+                                                                //     //       Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                                                                //     //     }else{
+                                                                //     //       Navigator.pop(context);
+                                                                //     //     }
+                                                                //     //   },
+                                                                //     //   child: Row(
+                                                                //     //     children: const [
+                                                                //     //       Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
+
+                                                                //     //       Text('Back', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
+                                                                //     //     ],
+                                                                //     //   ),
+                                                                //     // ),
+                                                                //   ),
+                                                                // ),
 
                                                                 Expanded(
                                                                   child: Align(
                                                                     alignment: Alignment.centerRight,
                                                                     child: widget.managed == true
-                                                                    ? GestureDetector(
-                                                                      child: const Text('Create Post', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
-                                                                      onTap: () async{
+                                                                    ? MaterialButton(
+                                                                      color: Colors.green,
+                                                                      onPressed: (){
                                                                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePost(name: profile.data!.almMemorial.showMemorialName, memorialId: profile.data!.almMemorial.showMemorialId)));
                                                                       },
+                                                                      child: const Text('Create Post', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
+                                                                      // onTap: () async{
+                                                                      //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePost(name: profile.data!.almMemorial.showMemorialName, memorialId: profile.data!.almMemorial.showMemorialId)));
+                                                                      // },
                                                                     )
+                                                                    // ? GestureDetector(
+                                                                    //   child: const Text('Create Post', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
+                                                                    //   onTap: () async{
+                                                                    //     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePost(name: profile.data!.almMemorial.showMemorialName, memorialId: profile.data!.almMemorial.showMemorialId)));
+                                                                    //   },
+                                                                    // )
                                                                     : const SizedBox(height: 0,),
                                                                   ),
                                                                 ),
+
+                                                                const SizedBox(width: 10,),
                                                               ],
                                                             ),
                                                           ),

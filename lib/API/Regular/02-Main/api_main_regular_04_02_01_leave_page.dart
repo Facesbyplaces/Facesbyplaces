@@ -6,7 +6,8 @@ Future<String> apiRegularLeavePage({required int memorialId}) async{
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
-  String result = 'Failed';
+  // String result = 'Failed';
+  String result = 'Success';
 
   Dio dioRequest = Dio();
 
@@ -27,6 +28,8 @@ Future<String> apiRegularLeavePage({required int memorialId}) async{
   if(response.statusCode == 200){
     return result;
   }else{
-    return 'Failed';
+    // return 'Failed';
+    var newData = Map<String, dynamic>.from(response.data);
+    return newData['message'];
   }
 }

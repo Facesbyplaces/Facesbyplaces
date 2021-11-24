@@ -112,7 +112,8 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                         }
                         context.loaderOverlay.hide();
 
-                        if(result != 'Failed'){
+                        // if(result != 'Failed'){
+                        if(result == 'Success'){
                           followButton.value = false;
 
                           await showDialog(
@@ -131,7 +132,7 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                             builder: (context) => CustomDialog(
                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                               title: 'Error',
-                              description: 'Something went wrong. Please try again.',
+                              description: result,
                               okButtonColor: const Color(0xfff44336), // RED
                               includeOkButton: true,
                             ),

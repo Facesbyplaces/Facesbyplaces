@@ -495,12 +495,29 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
                                                                             const SizedBox(width: 20,),
 
-                                                                            GestureDetector(
-                                                                              child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsCemetery, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff3498DB),),),
-                                                                              onTap: () async{
-                                                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMaps(latitude: profile.data!.almMemorial.showMemorialDetails.showMemorialLatitude, longitude: profile.data!.almMemorial.showMemorialDetails.showMemorialLongitude, isMemorial: true, memorialName: profile.data!.almMemorial.showMemorialName, memorialImage: profile.data!.almMemorial.showMemorialProfileImage,)));
-                                                                              },
-                                                                            ),
+                                                                            ((){
+                                                                              if(profile.data!.almMemorial.showMemorialDetails.showMemorialLatitude == 0.0 && profile.data!.almMemorial.showMemorialDetails.showMemorialLongitude == 0.0){
+                                                                                return Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsCemetery, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),);
+                                                                              }else{
+                                                                                return GestureDetector(
+                                                                                  child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsCemetery, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff3498DB),),),
+                                                                                  onTap: () async{
+                                                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMaps(latitude: profile.data!.almMemorial.showMemorialDetails.showMemorialLatitude, longitude: profile.data!.almMemorial.showMemorialDetails.showMemorialLongitude, isMemorial: true, memorialName: profile.data!.almMemorial.showMemorialName, memorialImage: profile.data!.almMemorial.showMemorialProfileImage,)));
+                                                                                  },
+                                                                                );
+                                                                              }
+                                                                            }()),
+
+                                                                            // if(profile.data!.almMemorial.showMemorialDetails.showMemorialLatitude == 0.0 && profile.data!.almMemorial.showMemorialDetails.showMemorialLongitude == 0.0){
+
+                                                                            // }else{
+                                                                            //   GestureDetector(
+                                                                            //     child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsCemetery, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff3498DB),),),
+                                                                            //     onTap: () async{
+                                                                            //       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMaps(latitude: profile.data!.almMemorial.showMemorialDetails.showMemorialLatitude, longitude: profile.data!.almMemorial.showMemorialDetails.showMemorialLongitude, isMemorial: true, memorialName: profile.data!.almMemorial.showMemorialName, memorialImage: profile.data!.almMemorial.showMemorialProfileImage,)));
+                                                                            //     },
+                                                                            //   ),
+                                                                            // }
                                                                           ],
                                                                         ),
                                                                       ],

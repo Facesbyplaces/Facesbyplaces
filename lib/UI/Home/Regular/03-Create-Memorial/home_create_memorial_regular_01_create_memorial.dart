@@ -294,19 +294,23 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                                   includeOkButton: true,
                                 ),
                               );                              
-                            }else if(locationListener == null){
+                            }else if(controller3.text == '' && locationListener == null){
                               await showDialog(
                                 context: context,
                                 builder: (context) => CustomDialog(
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                   title: 'Error',
-                                  description: 'Pin the location of the cemetery first before proceeding.',
+                                  description: 'You can pin the location of the cemetery or put Unknown if you are unsure.',
                                   okButtonColor: const Color(0xfff44336), // RED
                                   includeOkButton: true,
                                 ),
                               );
                             }else{
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreateMemorial2(relationship: _key1.currentState!.currentSelection, birthplace: birthplaceController.text, dob: controller1.text, rip: controller2.text, cemetery: controller3.text, country: _key3.currentState!.controller.text, latitude: '${location.value!.latitude}', longitude: '${location.value!.longitude}',),),);
+                              if(controller3.text != '' && locationListener == null){
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreateMemorial2(relationship: _key1.currentState!.currentSelection, birthplace: birthplaceController.text, dob: controller1.text, rip: controller2.text, cemetery: controller3.text, country: _key3.currentState!.controller.text, latitude: '0.0', longitude: '0.0',),),);
+                              }else{
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreateMemorial2(relationship: _key1.currentState!.currentSelection, birthplace: birthplaceController.text, dob: controller1.text, rip: controller2.text, cemetery: controller3.text, country: _key3.currentState!.controller.text, latitude: '${location.value!.latitude}', longitude: '${location.value!.longitude}',),),);
+                              }
                             }
                           },
                         ),

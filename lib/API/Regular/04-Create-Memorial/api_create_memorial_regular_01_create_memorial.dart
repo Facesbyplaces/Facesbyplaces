@@ -12,9 +12,9 @@ Future<int> apiRegularCreateMemorial({required APIRegularCreateMemorial memorial
 
   formData.files.addAll([
     MapEntry('memorial[name]', MultipartFile.fromString(memorial.almMemorialName,),),
-    // MapEntry('memorial[birthplace]', MultipartFile.fromString(memorial.almBirthPlace,),),
-    // MapEntry('memorial[dob]', MultipartFile.fromString(memorial.almDob,),),
-    // MapEntry('memorial[rip]', MultipartFile.fromString(memorial.almRip,),),
+    MapEntry('memorial[birthplace]', MultipartFile.fromString(memorial.almBirthPlace,),),
+    MapEntry('memorial[dob]', MultipartFile.fromString(memorial.almDob,),),
+    MapEntry('memorial[rip]', MultipartFile.fromString(memorial.almRip,),),
     MapEntry('memorial[cemetery]', MultipartFile.fromString(memorial.almCemetery)),
     MapEntry('memorial[country]', MultipartFile.fromString(memorial.almCountry,),),
     MapEntry('memorial[description]', MultipartFile.fromString(memorial.almDescription,),),
@@ -23,17 +23,17 @@ Future<int> apiRegularCreateMemorial({required APIRegularCreateMemorial memorial
     MapEntry('memorial[longitude]', MultipartFile.fromString(memorial.almLongitude,),)
   ]);
 
-  if(memorial.almBirthPlace != 'Unknown'){
-    formData.files.add(MapEntry('memorial[birthplace]', MultipartFile.fromString(memorial.almBirthPlace,),));
-  }
+  // if(memorial.almBirthPlace != 'Unknown'){
+  //   formData.files.add(MapEntry('memorial[birthplace]', MultipartFile.fromString(memorial.almBirthPlace,),));
+  // }
 
-  if(memorial.almDob != 'Unknown'){
-    formData.files.add(MapEntry('memorial[dob]', MultipartFile.fromString(memorial.almDob,),),);
-  }
+  // if(memorial.almDob != 'Unknown'){
+  //   formData.files.add(MapEntry('memorial[dob]', MultipartFile.fromString(memorial.almDob,),),);
+  // }
 
-  if(memorial.almCemetery != 'Unknown'){
-    formData.files.add(MapEntry('memorial[cemetery]', MultipartFile.fromString(memorial.almCemetery),),);
-  }
+  // if(memorial.almCemetery != 'Unknown'){
+  //   formData.files.add(MapEntry('memorial[cemetery]', MultipartFile.fromString(memorial.almCemetery),),);
+  // }
 
   if(memorial.almBackgroundImage != null || memorial.almBackgroundImage != ''){
     var file = await MultipartFile.fromFile(memorial.almBackgroundImage.path, filename: memorial.almBackgroundImage.path);
