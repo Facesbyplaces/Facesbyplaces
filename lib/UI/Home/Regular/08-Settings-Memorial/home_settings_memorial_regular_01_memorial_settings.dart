@@ -116,114 +116,115 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
   }
 
   Widget settingsTab1(){
-    return Column(
-      children: [
-        ListTile(
-          title: const Text('Page Details', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
-          subtitle: const Text('Update page details', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-          tileColor: const Color(0xffffffff),          
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageDetails(memorialId: widget.memorialId,)));
-          },
-        ),
+    return SingleChildScrollView(
+      physics: const NeverScrollableScrollPhysics(),
+      child: Column(
+        children: [
+          ListTile(
+            title: const Text('Page Details', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+            subtitle: const Text('Update page details', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+            tileColor: const Color(0xffffffff),          
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageDetails(memorialId: widget.memorialId,)));
+            },
+          ),
 
-        Container(height: 5, color: const Color(0xffeeeeee),),
+          Container(height: 5, color: const Color(0xffeeeeee),),
 
-        ListTile(
-          title: const Text('Page Image', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
-          subtitle: const Text('Update Page image and background image', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-          tileColor: const Color(0xffffffff),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialPageImage(memorialId: widget.memorialId,)));
-          },
-        ),
+          ListTile(
+            title: const Text('Page Image', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+            subtitle: const Text('Update Page image and background image', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+            tileColor: const Color(0xffffffff),
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialPageImage(memorialId: widget.memorialId,)));
+            },
+          ),
 
-        Container(height: 5, color: const Color(0xffeeeeee),),
+          Container(height: 5, color: const Color(0xffeeeeee),),
 
-        ListTile(
-          title: const Text('Admins', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
-          subtitle: const Text('Add or remove admins of this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-          tileColor: const Color(0xffffffff),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageManagers(memorialId: widget.memorialId,)));
-          },
-        ),
+          ListTile(
+            title: const Text('Admins', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+            subtitle: const Text('Add or remove admins of this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+            tileColor: const Color(0xffffffff),
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageManagers(memorialId: widget.memorialId,)));
+            },
+          ),
 
-        Container(height: 5, color: const Color(0xffeeeeee),),
+          Container(height: 5, color: const Color(0xffeeeeee),),
 
-        ListTile(
-          title: const Text('Family', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
-          subtitle: const Text('Add or remove family of this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-          tileColor: const Color(0xffffffff),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageFamily(memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)));
-          },
-        ),
+          ListTile(
+            title: const Text('Family', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+            subtitle: const Text('Add or remove family of this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+            tileColor: const Color(0xffffffff),
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageFamily(memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)));
+            },
+          ),
 
-        Container(height: 5, color: const Color(0xffeeeeee),),
+          Container(height: 5, color: const Color(0xffeeeeee),),
 
-        ListTile(
-          title: const Text('Friends', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
-          subtitle: const Text('Add or remove friends of this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-          tileColor: const Color(0xffffffff),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageFriends(memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)));
-          },
-        ),
+          ListTile(
+            title: const Text('Friends', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+            subtitle: const Text('Add or remove friends of this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+            tileColor: const Color(0xffffffff),
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageFriends(memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)));
+            },
+          ),
 
-        Container(height: 5, color: const Color(0xffeeeeee),),
+          Container(height: 5, color: const Color(0xffeeeeee),),
 
-        ListTile(
-          title: const Text('Paypal', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
-          subtitle: const Text('Manage cards that receives the memorial gifts', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-          tileColor: const Color(0xffffffff),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPaypal(pageId: widget.memorialId)));
-          },
-        ),
+          ListTile(
+            title: const Text('Paypal', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+            subtitle: const Text('Manage cards that receives the memorial gifts', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+            tileColor: const Color(0xffffffff),
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPaypal(pageId: widget.memorialId)));
+            },
+          ),
 
-        Container(height: 5, color: const Color(0xffeeeeee),),
+          Container(height: 5, color: const Color(0xffeeeeee),),
 
-        ListTile(
-          title: const Text('Delete Page', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
-          subtitle: const Text('Completely remove the page. This is irreversible', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-          tileColor: const Color(0xffffffff),
-          onTap: () async{
-            bool confirmResult = await showDialog(context: (context), builder: (build) => MiscConfirmDialog(content: 'Are you sure you want to delete "${widget.memorialName}"?',),);
+          ListTile(
+            title: const Text('Delete Page', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+            subtitle: const Text('Completely remove the page. This is irreversible', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+            tileColor: const Color(0xffffffff),
+            onTap: () async{
+              bool confirmResult = await showDialog(context: (context), builder: (build) => MiscConfirmDialog(content: 'Are you sure you want to delete "${widget.memorialName}"?',),);
 
-            if(confirmResult){
-              context.loaderOverlay.show();
-              bool result = await apiRegularDeleteMemorial(memorialId: widget.memorialId);
-              context.loaderOverlay.hide();
+              if(confirmResult){
+                context.loaderOverlay.show();
+                bool result = await apiRegularDeleteMemorial(memorialId: widget.memorialId);
+                context.loaderOverlay.hide();
 
-              if(result){
-                Navigator.popAndPushNamed(context, '/home/regular');
-              }else{
-                await showDialog(
-                  context: context,
-                  builder: (context) => CustomDialog(
-                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: 'Error',
-                    description: 'Something went wrong. Please try again.',
-                    okButtonColor: const Color(0xfff44336), // RED
-                    includeOkButton: true,
-                  ),
-                );
+                if(result){
+                  Navigator.popAndPushNamed(context, '/home/regular');
+                }else{
+                  await showDialog(
+                    context: context,
+                    builder: (context) => CustomDialog(
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      title: 'Error',
+                      description: 'Something went wrong. Please try again.',
+                      okButtonColor: const Color(0xfff44336), // RED
+                      includeOkButton: true,
+                    ),
+                  );
+                }
               }
-            }
-          },
-        ),
+            },
+          ),
 
-        Container(height: 5, color: const Color(0xffeeeeee),),
+          Container(height: 5, color: const Color(0xffeeeeee),),
 
-        const SizedBox(height: 10,),
-        
-        const Expanded(child: SizedBox()),
+          const SizedBox(height: 100,),
 
-        Image.asset('assets/icons/logo.png', height: 100, width: 100,),
+          Image.asset('assets/icons/logo.png', height: 100, width: 100,),
 
-        const SizedBox(height: 30,),
-      ],
+          const SizedBox(height: 30,),
+        ],
+      ),
     );
   }
 
@@ -330,7 +331,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
 
               const SizedBox(height: 80),
 
-              Expanded(child: Container()),
+              const Expanded(child: SizedBox()),
 
               Image.asset('assets/icons/logo.png', height: 100, width: 100,),
 

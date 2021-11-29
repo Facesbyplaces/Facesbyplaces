@@ -167,6 +167,10 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab> with AutomaticKe
                               child: Image.asset('assets/icons/Welcome-new.png', width: SizeConfig.screenWidth, fit: BoxFit.cover,),
                             ),
 
+                            const SizedBox(height: 10,),
+                            
+                            const Text('A Memorial Place', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff2F353D), fontStyle: FontStyle.italic),),
+
                             const SizedBox(height: 50,),
 
                             const Text('Feed is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),

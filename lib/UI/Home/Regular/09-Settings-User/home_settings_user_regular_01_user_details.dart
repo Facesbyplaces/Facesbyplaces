@@ -4,6 +4,7 @@ import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_reg
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_regular_12_update_user_profile_picture.dart';
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_regular_14_check_account.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home_settings_user_regular_05_privacy_settings.dart';
 import 'package:facesbyplaces/UI/ui_01_get_started.dart';
 import 'home_settings_user_regular_02_user_update_details.dart';
 import 'home_settings_user_regular_03_change_password.dart';
@@ -135,7 +136,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                       ListTile(
                         title: const Text('Privacy Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
                         subtitle: const Text('Control what others see', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                        onTap: () => {},
+                        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeRegularUserPrivacySettings()))
                       ),
 
                       const Divider(height: 20, color: Color(0xff888888),),

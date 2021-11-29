@@ -16,7 +16,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 import 'package:loader/loader.dart';
@@ -66,7 +65,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
   void initState(){
     super.initState();
     isGuest();
-    // join.value = widget.newJoin;
     scrollController.addListener((){ // SHOWS WHEN THE USER HAS REACHED THE BOTTOM OF THE LIST
       if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
         if(loaded.value){
@@ -293,20 +291,23 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                 children: [
                                                                   const SizedBox(height: 150,),
 
-                                                                  Center(
-                                                                    child: Text(profile.data!.almMemorial.showMemorialName,
-                                                                      style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),
-                                                                      textAlign: TextAlign.center,
-                                                                      overflow: TextOverflow.clip,
-                                                                      maxLines: 5,
+                                                                  Padding(
+                                                                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                                                    child: Center(
+                                                                      child: Text(profile.data!.almMemorial.showMemorialName,
+                                                                        style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xff000000),),
+                                                                        textAlign: TextAlign.center,
+                                                                        overflow: TextOverflow.clip,
+                                                                        maxLines: 10,
+                                                                      ),
                                                                     ),
                                                                   ),
 
                                                                   const SizedBox(height: 20,),
 
                                                                   TextButton.icon(
-                                                                    label: Text('${profile.data!.almMemorial.showMemorialFollowersCount}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
-                                                                    icon: const CircleAvatar(radius: 15, backgroundColor: Color(0xffE67E22), child: Icon(Icons.card_giftcard, color: Color(0xffffffff), size: 18,),),
+                                                                    label: Text('${profile.data!.almMemorial.showMemorialFollowersCount}', style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+                                                                    icon: const CircleAvatar(radius: 20, backgroundColor: Color(0xffE67E22), child: Icon(Icons.card_giftcard, color: Color(0xffffffff),),),
                                                                     onPressed: (){
                                                                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: widget.memorialId, newToggle: 2)));
                                                                     },
@@ -353,21 +354,37 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                   const SizedBox(height: 20,),
 
                                                                   Row(
+                                                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                                     children: [
-                                                                      const Expanded(child: SizedBox(),),
+                                                                      Column(
+                                                                        children: [
+                                                                          const Text('Pins', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000),),),
 
-                                                                      Expanded(
-                                                                        flex: 2,
-                                                                        child: Padding(
-                                                                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                                                                          child: MaterialButton(
-                                                                            child: const Text('Manage', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),),
-                                                                            minWidth: SizeConfig.screenWidth! / 2,
-                                                                            color: const Color(0xff2F353D),
-                                                                            shape: const StadiumBorder(),
-                                                                            padding: EdgeInsets.zero,
-                                                                            height: 50,
-                                                                            onPressed: () async{
+                                                                          GestureDetector(
+                                                                            child: const CircleAvatar(radius: 25, backgroundColor: Color(0xff3498DB), child: Icon(Icons.location_pin, color: Color(0xffffffff), size: 25,),),
+                                                                            onTap: () async{
+                                                                              await showDialog(
+                                                                                context: context,
+                                                                                builder: (context) => CustomDialog(
+                                                                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                                                  title: 'Pins',
+                                                                                  description: 'Pins functionality are still being created. ',
+                                                                                  okButtonColor: const Color(0xff4caf50), // GREEN
+                                                                                  includeOkButton: true,
+                                                                                ),
+                                                                              );
+                                                                            },
+                                                                          ),
+                                                                        ],
+                                                                      ),
+
+                                                                      Column(
+                                                                        children: [
+                                                                          const Text('Manage', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000),),),
+
+                                                                          GestureDetector(
+                                                                            child: const CircleAvatar(radius: 25, backgroundColor: Color(0xff000000), child: Icon(Icons.manage_accounts, color: Color(0xffffffff), size: 25,),),
+                                                                            onTap: () async{
                                                                               if(widget.managed == true){
                                                                                 context.loaderOverlay.show();
                                                                                 APIRegularShowSwitchStatus result = await apiRegularShowSwitchStatus(memorialId: widget.memorialId);
@@ -381,31 +398,35 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                               }
                                                                             },
                                                                           ),
-                                                                        ),
+                                                                        ],
                                                                       ),
 
-                                                                      Expanded(
-                                                                        child: GestureDetector(
-                                                                          child: const CircleAvatar(radius: 25, backgroundColor: Color(0xff3498DB), child: Icon(Icons.share, color: Color(0xffffffff), size: 25,),),
-                                                                          onTap: () async{
-                                                                            initBranchShare();
-                                                                            FlutterBranchSdk.setIdentity('alm-share-link');
+                                                                      Column(
+                                                                        children: [
+                                                                          const Text('Share', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff000000),),),
 
-                                                                            BranchResponse response = await FlutterBranchSdk.showShareSheet(
-                                                                              buo: buo!,
-                                                                              linkProperties: lp!,
-                                                                              messageText: 'FacesbyPlaces App',
-                                                                              androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
-                                                                              androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
-                                                                            );
+                                                                          GestureDetector(
+                                                                            child: const CircleAvatar(radius: 25, backgroundColor: Color(0xff3498DB), child: Icon(Icons.share, color: Color(0xffffffff), size: 25,),),
+                                                                            onTap: () async{
+                                                                              initBranchShare();
+                                                                              FlutterBranchSdk.setIdentity('alm-share-link');
 
-                                                                            if(response.success){
-                                                                            }else{
-                                                                              FlutterBranchSdk.logout();
-                                                                              throw Exception('Error : ${response.errorCode} - ${response.errorMessage}');
-                                                                            }
-                                                                          },
-                                                                        ),
+                                                                              BranchResponse response = await FlutterBranchSdk.showShareSheet(
+                                                                                buo: buo!,
+                                                                                linkProperties: lp!,
+                                                                                messageText: 'FacesbyPlaces App',
+                                                                                androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                                                                                androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
+                                                                              );
+
+                                                                              if(response.success){
+                                                                              }else{
+                                                                                FlutterBranchSdk.logout();
+                                                                                throw Exception('Error : ${response.errorCode} - ${response.errorMessage}');
+                                                                              }
+                                                                            },
+                                                                          ),
+                                                                        ],
                                                                       ),
                                                                     ],
                                                                   ),
@@ -623,8 +644,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                                                             return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
                                                                                                               betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                                                                 autoPlay: true,
-                                                                                                                deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-                                                                                                                autoDispose: false,
                                                                                                                 aspectRatio: 16 / 9,
                                                                                                                 fit: BoxFit.contain,
                                                                                                               ),
@@ -718,49 +737,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                   ),
                                                                 ),
 
-                                                                // Expanded(
-                                                                //   child: TextButton.icon(
-                                                                //     onPressed: (){}, 
-                                                                //     icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
-                                                                //     label: const Text('Back', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
-                                                                //   ),
-                                                                //       // child: Padding(
-                                                                //       //   padding: EdgeInsets.zero,
-                                                                //       //   child: Row(
-                                                                //       //   children: const [
-                                                                //       //     Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
-
-                                                                //       //     Text('Back', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
-                                                                //       //   ],
-                                                                //       // ),
-                                                                //       // ),
-                                                                //     // ),
-                                                                // ),
-
-                                                                // Expanded(
-                                                                //   child: Padding(
-                                                                //     // padding: const EdgeInsets.only(left: 20.0),
-                                                                //     child: 
-                                                                //     // child: GestureDetector(
-                                                                //     //   onTap: (){
-                                                                //     //     if(widget.newlyCreated == true){
-                                                                //     //       Route newRoute = MaterialPageRoute(builder: (context) => const HomeRegularScreenExtended(newToggleBottom: 1,),);
-                                                                //     //       Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
-                                                                //     //     }else{
-                                                                //     //       Navigator.pop(context);
-                                                                //     //     }
-                                                                //     //   },
-                                                                //     //   child: Row(
-                                                                //     //     children: const [
-                                                                //     //       Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
-
-                                                                //     //       Text('Back', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
-                                                                //     //     ],
-                                                                //     //   ),
-                                                                //     // ),
-                                                                //   ),
-                                                                // ),
-
                                                                 Expanded(
                                                                   child: Align(
                                                                     alignment: Alignment.centerRight,
@@ -771,16 +747,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePost(name: profile.data!.almMemorial.showMemorialName, memorialId: profile.data!.almMemorial.showMemorialId)));
                                                                       },
                                                                       child: const Text('Create Post', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
-                                                                      // onTap: () async{
-                                                                      //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePost(name: profile.data!.almMemorial.showMemorialName, memorialId: profile.data!.almMemorial.showMemorialId)));
-                                                                      // },
                                                                     )
-                                                                    // ? GestureDetector(
-                                                                    //   child: const Text('Create Post', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
-                                                                    //   onTap: () async{
-                                                                    //     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePost(name: profile.data!.almMemorial.showMemorialName, memorialId: profile.data!.almMemorial.showMemorialId)));
-                                                                    //   },
-                                                                    // )
                                                                     : const SizedBox(height: 0,),
                                                                   ),
                                                                 ),
@@ -1181,5 +1148,3 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
     );
   }
 }
-
-
