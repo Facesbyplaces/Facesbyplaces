@@ -1,17 +1,17 @@
 class Memorials::Destroy
 
     def initialize( memorial:, admins:, id:, type: )
-        @memorial   = memorial
-        @admins     = admins
-        @id         = id
-        @type       = type
+        @memorial = memorial
+        @admins   = admins
+        @id       = id
+        @type     = type
     end
 
     def execute
         deleteAdmins
         deleteNotifs
         
-        @memorial.destroy()
+        @memorial.destroy
     end
     
     private
@@ -29,6 +29,6 @@ class Memorials::Destroy
     end
 
     def deleteNotifs
-        Notification.all.where(postId: @memorial.id, notif_type: @type).destroy
+        Notification.all.where(postId: @id, notif_type: @type).destroy
     end
 end

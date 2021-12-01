@@ -64,7 +64,6 @@ class Api::V1::Pages::MemorialsController < ApplicationController
 
     def leaveMemorial       
         # leave memorial page for family and friends
-        # return render json: {message: "Creator cannot leave memorial."}, status: 404 unless @memorial.relationships.where(account: user()).first != nil
         return render json: {message: "Creator cannot leave memorial."}, status: 400 unless @memorial.pageowner.account_id != user().id
         return render json: {message: "User is not part of the family or friends."}, status: 400 unless @memorial.relationships.where(account: user()).first != nil
         
