@@ -29,7 +29,10 @@ class Memorials::Destroy
     end
 
     def deleteNotifs
-        n = Notification.all.where(postId: @id, notif_type: @type)
-        n.destroy
+        @notifs = Notification.all.where(postId: @id, notif_type: @type)
+
+        @notifs.each do |notif|
+            notif.destroy
+        end
     end
 end
