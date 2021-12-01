@@ -273,7 +273,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                       SliverToBoxAdapter(
                                         child: InkWell(
                                           onTap: (){
-                                            filter.value = true;
+                                            if(isGuestLoggedInListener){
+                                              filter.value = true;
+                                            }
                                           },
                                           child: IgnorePointer(
                                             ignoring: isGuestLoggedInListener,
@@ -881,7 +883,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                       SliverToBoxAdapter( // COMMENTS AND REPLIES
                                         child: InkWell(
                                           onTap: (){
-                                            filter.value = true;
+                                            if(isGuestLoggedInListener){
+                                              filter.value = true;
+                                            }
                                           },
                                           child: IgnorePointer(
                                             ignoring: isGuestLoggedInListener,
@@ -1247,7 +1251,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
   showKeyboard({bool isReply = false, String toReply = '',  String replyFrom = '', int currentCommentId = 0}){
     return InkWell(
       onTap: (){
-        filter.value = true;
+        if(isGuestLoggedIn.value){
+          filter.value = true;
+        }
       },
       child: IgnorePointer(
         ignoring: isGuestLoggedIn.value,

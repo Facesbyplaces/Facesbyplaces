@@ -149,7 +149,7 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
 
                               const SizedBox(height: 45,),
 
-                              const Text('Friends list is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
+                              const Text('Friends list is empty', textAlign: TextAlign.center, style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
 
                               SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
                             ],

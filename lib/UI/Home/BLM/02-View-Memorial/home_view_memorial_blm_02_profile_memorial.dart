@@ -241,7 +241,9 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                 if(profile.hasData){
                                   return InkWell(
                                     onTap: (){
-                                      filter.value = true;
+                                      if(isGuestLoggedInListener){
+                                        filter.value = true;
+                                      }
                                     },
                                     child: IgnorePointer(
                                       ignoring: isGuestLoggedInListener,

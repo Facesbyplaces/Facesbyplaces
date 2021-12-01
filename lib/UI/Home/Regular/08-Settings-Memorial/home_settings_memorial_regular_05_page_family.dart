@@ -150,7 +150,7 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
 
                               const SizedBox(height: 45,),
 
-                              const Text('Family list is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
+                              const Text('Family list is empty', textAlign: TextAlign.center, style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
 
                               SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
                             ],

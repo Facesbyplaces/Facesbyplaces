@@ -113,7 +113,6 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> wi
   void initState(){
     super.initState();
     controller = TabController(initialIndex: 0, length: 4, vsync: this);
-    // TabController(initialIndex: 0, length: 4, vsync: HomeRegularScreenExtendedState())
     isGuest();
     var newMessage = PushNotificationService(_firebaseMessaging, context); // PUSH NOTIFICATION
     newMessage.initialise();

@@ -72,8 +72,6 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
 
     admins.add(const Padding(padding: EdgeInsets.only(left: 20.0,), child: Text('Admin', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff9F9F9F),),),),);
 
-    
-
     do{
       newValue = await apiRegularShowAdminSettings(memorialId: widget.memorialId, page: page1).onError((error, stackTrace){
         showDialog(
@@ -278,8 +276,6 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
       }
     }while(newValue.almAdminItemsRemaining != 0 || newValue.almFamilyItemsRemaining != 0
     );
-
-    // lengthOfMemorials.value = memorials.length; // COMPARISON FOR NEXT PAGINATION & NUMBER OF FEEDS
     
     if(admins.length == 2){ // NO DATA FROM THE SERVER EXCEPT FOR THE TWO WIDGETS (MY FAMILY AND MY FRIENDS) AND NEEDS TO BE EMPTY
       lengthOfAdmins.value = 0;
@@ -335,7 +331,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
 
                                 const SizedBox(height: 45,),
 
-                                const Text('Managers list is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
+                                const Text('Managers list is empty', textAlign: TextAlign.center, style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
 
                                 SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
                               ],

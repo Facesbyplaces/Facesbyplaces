@@ -267,7 +267,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                     SliverToBoxAdapter(
                                       child: InkWell(
                                         onTap: (){
-                                          filter.value = true;
+                                          if(isGuestLoggedInListener){
+                                            filter.value = true;
+                                          }
                                         },
                                         child: IgnorePointer(
                                           ignoring: isGuestLoggedInListener,
@@ -875,7 +877,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                     SliverToBoxAdapter( // COMMENTS AND REPLIES
                                       child: InkWell(
                                         onTap: (){
-                                          filter.value = true;
+                                          if(isGuestLoggedInListener){
+                                            filter.value = true;
+                                          }
                                         },
                                         child: IgnorePointer(
                                           ignoring: isGuestLoggedInListener,
