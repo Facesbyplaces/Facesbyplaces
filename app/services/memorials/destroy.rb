@@ -29,6 +29,7 @@ class Memorials::Destroy
     end
 
     def deleteNotifs
-        Notification.all.where(postId: @id, notif_type: @type).destroy
+        n = Notification.all.where(postId: @id, notif_type: @type)
+        n.destroy
     end
 end
