@@ -260,8 +260,13 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                                 var memorialLocation = await Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeRegularCreateMemorialLocateMap()));
 
                                 if(memorialLocation != null){
-                                  location.value = memorialLocation[0];
-                                  controller3.text = memorialLocation[1];
+                                  if(memorialLocation.runtimeType == String){ // CHECKS IF THE USER OPTS OUT OF PINNING ON THE MAPS SCREEN
+                                    controller3.text = memorialLocation;
+                                    location.value = null; // REMOVES THE LISTENER
+                                  }else{
+                                    location.value = memorialLocation[0];
+                                    controller3.text = memorialLocation[1];
+                                  }
                                 }
                               },
                             ),

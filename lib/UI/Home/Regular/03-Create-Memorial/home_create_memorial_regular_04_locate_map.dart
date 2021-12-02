@@ -47,6 +47,26 @@ class HomeRegularCreateMemorialLocateMapState extends State<HomeRegularCreateMem
               backgroundColor: const Color(0xff04ECFF),
               actions: [
                 IconButton(
+                  onPressed: () async{
+                    await showDialog(
+                      context: context,
+                      builder: (context) => CustomDialog(
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: 'Unsure',
+                        description: 'If the person is not buried or if you are unsure, you can opt out on pinning on the maps.',
+                        okButtonColor: const Color(0xff4caf50), // GREEN
+                        includeOkButton: true,
+                        okButton: (){
+                          Navigator.pop(context);
+                          Navigator.pop(context, 'Unavailable');
+                        },
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.help),
+                ),
+
+                IconButton(
                   onPressed: (){
                     setState(() {
                       markers.clear();
