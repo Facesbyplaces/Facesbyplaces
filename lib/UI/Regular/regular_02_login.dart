@@ -16,7 +16,6 @@ import 'package:flutter/services.dart';
 import 'package:dialog/dialog.dart';
 import '../ui_01_get_started.dart';
 import 'package:misc/misc.dart';
-
 import '../ui_02_login.dart';
 
 class RegularLogin extends StatefulWidget{
@@ -322,7 +321,6 @@ class RegularLoginState extends State<RegularLogin>{
                                         context.loaderOverlay.hide();
 
                                         if(result == 'Success'){
-                                          // Navigator.pushReplacementNamed(context, '/home/regular');
                                           Navigator.push(context, MaterialPageRoute(builder: (context) => const UILogin01()));
                                         }else{
                                           await showDialog(
@@ -369,8 +367,6 @@ class RegularLoginState extends State<RegularLogin>{
                                     onTap: () async{
                                       final sharedPrefs = await SharedPreferences.getInstance();
                                       sharedPrefs.setBool('user-guest-session', true);
-                                      // Navigator.pushReplacementNamed(context, '/home/regular');
-                                      // Navigator.pushNamed(context, '/home/regular/search');
                                       Navigator.pushReplacementNamed(context, '/home/regular/search');
                                     },
                                   ),

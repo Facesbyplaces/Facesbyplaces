@@ -73,8 +73,6 @@ void main() async{
         overlayOpacity: 0.5,
         overlayColor: Colors.white,
         child: MaterialApp(
-          // checkerboardRasterCacheImages: true,
-          // showPerformanceOverlay: true,
           debugShowCheckedModeBanner: false,
           title: 'Faces by Places',
           home: ((){

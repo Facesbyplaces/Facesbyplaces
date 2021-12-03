@@ -159,7 +159,6 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
                       controller: scrollController,
                       separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
                       physics: const ClampingScrollPhysics(),
-                      // padding: const EdgeInsets.all(10.0),
                       itemCount: lengthOfFeedsListener,
                       itemBuilder: (c, i) => MiscNotificationDisplayTemplate(
                         imageIcon: notifications.data![i].homeTabNotificationActor.homeTabNotificationActorImage,

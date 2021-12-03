@@ -379,14 +379,14 @@ PODS:
   - Firebase/Messaging (8.9.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 8.9.0)
-  - firebase_auth (3.2.0):
+  - firebase_auth (3.3.0):
     - Firebase/Auth (= 8.9.0)
     - firebase_core
     - Flutter
-  - firebase_core (1.10.0):
+  - firebase_core (1.10.1):
     - Firebase/CoreOnly (= 8.9.0)
     - Flutter
-  - firebase_messaging (11.1.0):
+  - firebase_messaging (11.2.0):
     - Firebase/Messaging (= 8.9.0)
     - firebase_core
     - Flutter
@@ -609,7 +609,7 @@ PODS:
   - PromisesObjC (2.0.0)
   - share (0.0.1):
     - Flutter
-  - shared_preferences (0.0.1):
+  - shared_preferences_ios (0.0.1):
     - Flutter
   - sign_in_with_apple (0.0.1):
     - Flutter
@@ -661,7 +661,7 @@ DEPENDENCIES:
   - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
   - pay_ios (from `.symlinks/plugins/pay_ios/ios`)
   - share (from `.symlinks/plugins/share/ios`)
-  - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
+  - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
   - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - stripe_ios (from `.symlinks/plugins/stripe_ios/ios`)
@@ -754,8 +754,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/pay_ios/ios"
   share:
     :path: ".symlinks/plugins/share/ios"
-  shared_preferences:
-    :path: ".symlinks/plugins/shared_preferences/ios"
+  shared_preferences_ios:
+    :path: ".symlinks/plugins/shared_preferences_ios/ios"
   sign_in_with_apple:
     :path: ".symlinks/plugins/sign_in_with_apple/ios"
   sqflite:
@@ -779,9 +779,9 @@ SPEC CHECKSUMS:
   FBSDKCoreKit_Basics: 39865aff97e5f6951a78fb3e89dc4460e35e1895
   FBSDKLoginKit: e993f97c7cc794c5da4056d8aec3c3d66033a727
   Firebase: 13d8d96499e2635428d5bf0ec675df21f95d9a95
-  firebase_auth: 0d56cc4d105ff70d1547a7fcb10ee574ad05adf5
-  firebase_core: f770e033e790657b3505f04be4cb24c482912f11
-  firebase_messaging: 0c8d1a1732487db7f332fb65232053e93201e2fb
+  firebase_auth: 9b2e9b08f1d64fcf861f0409ac909a5cf9aa52dc
+  firebase_core: a54a31c48d516674649f419aea823585c4652ae0
+  firebase_messaging: 4f7eab3f100c30d0544f5a6f6ca549f7f8c12705
   FirebaseAnalytics: 4ab446ce08a3fe52e8a4303dd997cf26276bf968
   FirebaseAuth: 2b78b2a32c07b3ecfa4970bdf1d3632b8304099b
   FirebaseCore: 599ee609343eaf4941bd188f85e3aa077ffe325b
@@ -826,7 +826,7 @@ SPEC CHECKSUMS:
   PINOperation: 00c935935f1e8cf0d1e2d6b542e75b88fc3e5e20
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   share: 0b2c3e82132f5888bccca3351c504d0003b3b410
-  shared_preferences: 5033afbb22d372e15aff8ff766df9021b845f273
+  shared_preferences_ios: aef470a42dc4675a1cdd50e3158b42e3d1232b32
   sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   Stripe: 41c3d261501e1dc84755b1bdabdaae50ebf92b53

@@ -213,8 +213,6 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab> with Automat
     }while(newValue.almFamilyMemorialList.memorialHomeTabMemorialFamilyItemsRemaining != 0 || newValue.almFamilyMemorialList.blmHomeTabMemorialFamilyItemsRemaining != 0 ||
       newValue.almFriendsMemorialList.memorialHomeTabMemorialFriendsItemsRemaining != 0 || newValue.almFriendsMemorialList.blmHomeTabMemorialFriendsItemsRemaining != 0
     );
-
-    // lengthOfMemorials.value = memorials.length; // COMPARISON FOR NEXT PAGINATION & NUMBER OF FEEDS
     
     if(memorials.length == 2){ // NO DATA FROM THE SERVER EXCEPT FOR THE TWO WIDGETS (MY FAMILY AND MY FRIENDS) AND NEEDS TO BE EMPTY
       lengthOfMemorials.value = 0;
