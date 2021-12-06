@@ -55,7 +55,7 @@ class BlmSerializer < ActiveModel::Serializer
   end
 
   def restInPeace
-    object.rip.to_date == nil ? (return object.rip) : (return object.rip.to_date)
+    object.rip == nil ? (return object.rip) : (return object.rip.to_date)
   end
 
   def manage
