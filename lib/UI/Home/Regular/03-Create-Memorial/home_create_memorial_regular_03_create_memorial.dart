@@ -158,7 +158,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
 
                       const SizedBox(height: 20,),
 
-                      const Text('Upload the best photo of the person in the memorial page.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
+                      const Text('Upload the best photo of the person in the memorial page.', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
 
                       const SizedBox(height: 40,),
 
@@ -235,7 +235,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
 
                       const SizedBox(height: 20,),
 
-                      const Text('Upload your own or select from the pre-mades.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
+                      const Text('Upload your own or select from the pre-mades.', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
 
                       const SizedBox(height: 80,),
 

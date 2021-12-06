@@ -222,13 +222,14 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                           width: SizeConfig.screenWidth,
                                                           child: ((){
                                                             if(profile.data!.almMemorial.showMemorialBackgroundImage == ''){
-                                                              return Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,);
+                                                              return Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,);
+                                                              // scale: 1.0,
                                                             }else{
                                                               return CachedNetworkImage(
                                                                 fit: BoxFit.cover,
                                                                 imageUrl: profile.data!.almMemorial.showMemorialBackgroundImage,
-                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                               );
                                                             }
                                                           }()),
@@ -267,9 +268,12 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                               Expanded(
                                                                                 child: CachedNetworkImage(
                                                                                   fit: BoxFit.contain,
+                                                                                  // 'assets/icons/app-icon.png'
                                                                                   imageUrl: profile.data!.almMemorial.showMemorialBackgroundImage,
-                                                                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain,),
+                                                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain),
+                                                                                  // placeholder: (context, url) => Image.asset('assets/icons/app-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                                  // errorWidget: (context, url, error) => Image.asset('assets/icons/app-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                                 )
                                                                               ),
 
@@ -322,7 +326,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                           if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[0])?.contains('video') == true){
                                                                             return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}',
                                                                               betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                                                autoPlay: true,
+                                                                                // autoPlay: true,
                                                                                 aspectRatio: 16 / 9,
                                                                                 fit: BoxFit.contain,
                                                                               ),
@@ -391,7 +395,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                                 context.loaderOverlay.hide();
 
                                                                                 if(result.showSwitchStatusSuccess){
-                                                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettings(memorialId: widget.memorialId, memorialName: profile.data!.almMemorial.showMemorialName, switchFamily: result.showSwitchStatusFamily, switchFriends: result.showSwitchStatusFriends, switchFollowers: result.showSwitchStatusFollowers,),),);
+                                                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettings(memorialId: widget.memorialId, memorialName: profile.data!.almMemorial.showMemorialName, switchFamily: result.showSwitchStatusFamily, switchFriends: result.showSwitchStatusFriends, switchFollowers: result.showSwitchStatusFollowers, newlyCreated: widget.newlyCreated),),);
                                                                                 }
                                                                               }else{
                                                                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettingsWithHidden(memorialId: widget.memorialId, relationship: widget.relationship,),),);
@@ -643,7 +647,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                                                           if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[next])?.contains('video') == true){
                                                                                                             return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
                                                                                                               betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                                                                                autoPlay: true,
+                                                                                                                // autoPlay: true,
                                                                                                                 aspectRatio: 16 / 9,
                                                                                                                 fit: BoxFit.contain,
                                                                                                               ),
@@ -777,12 +781,17 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                         radius: 100,
                                                                         backgroundColor: const Color(0xff888888),
                                                                         foregroundImage: NetworkImage(profile.data!.almMemorial.showMemorialProfileImage),
-                                                                        backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                                                        // backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                                                        backgroundImage: const AssetImage('assets/icons/cover-icon.png'),
+                                                                        // Image.asset('assets/icons/app-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                        // placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                        // errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                       )
                                                                       : const CircleAvatar(
                                                                         radius: 100,
                                                                         backgroundColor: Color(0xff888888),
-                                                                        foregroundImage: AssetImage('assets/icons/app-icon.png'),
+                                                                        // foregroundImage: AssetImage('assets/icons/app-icon.png'),
+                                                                        foregroundImage: AssetImage('assets/icons/cover-icon.png'),
                                                                       )
                                                                     ),
                                                                   ),
@@ -816,8 +825,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                                     child: CachedNetworkImage(
                                                                                       fit: BoxFit.contain,
                                                                                       imageUrl: profile.data!.almMemorial.showMemorialProfileImage,
-                                                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain,),
+                                                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain,),
                                                                                     )
                                                                                   ),
 

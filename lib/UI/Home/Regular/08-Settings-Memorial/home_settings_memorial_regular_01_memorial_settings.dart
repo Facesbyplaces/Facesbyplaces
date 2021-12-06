@@ -21,7 +21,8 @@ class HomeRegularMemorialSettings extends StatefulWidget{
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
-  const HomeRegularMemorialSettings({Key? key, required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers}) : super(key: key);
+  final bool newlyCreated;
+  const HomeRegularMemorialSettings({Key? key, required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers, required this.newlyCreated}) : super(key: key);
 
   @override
   HomeRegularMemorialSettingsState createState() => HomeRegularMemorialSettingsState();
@@ -58,7 +59,8 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
             icon: const Icon(Icons.arrow_back, size: 35,),
             onPressed: (){
               Navigator.pop(context);
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: widget.memorialId, relationship: '', managed: true, newlyCreated: false,)));
+              // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: widget.memorialId, relationship: '', managed: true, newlyCreated: false,)));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: widget.memorialId, relationship: '', managed: true, newlyCreated: widget.newlyCreated,)));
             },
           ),
         ),

@@ -202,126 +202,130 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                     Positioned(
                       top: SizeConfig.screenHeight! / 2.5,
                       child: SizedBox(
+                        height: SizeConfig.screenHeight! / 2.5,
                         width: SizeConfig.screenWidth,
-                        child: Column(
-                          children: [
-                            Text('${profile.data!.showUserInformationFirstName} ${profile.data!.showUserInformationLastName}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xff000000),),),
+                        child: SingleChildScrollView(
+                          physics: const ClampingScrollPhysics(),
+                          child: Column(
+                            children: [
+                              Text('${profile.data!.showUserInformationFirstName} ${profile.data!.showUserInformationLastName}', style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xff000000),),),
 
-                            const SizedBox(height: 20),
+                              const SizedBox(height: 20),
 
-                            Text(profile.data!.showUserInformationEmailAddress, style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                              Text(profile.data!.showUserInformationEmailAddress, style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
 
-                            const SizedBox(height: 10),
+                              const SizedBox(height: 10),
 
-                            const Text('About', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xff04ECFF),),),
+                              const Text('About', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xff04ECFF),),),
 
-                            const SizedBox(height: 20,),
+                              const SizedBox(height: 20,),
 
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Row(
-                                          children: const [
-                                            Icon(Icons.star_outline, color: Color(0xffBDC3C7), size: 20,),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: Row(
+                                            children: const [
+                                              Icon(Icons.star_outline, color: Color(0xffBDC3C7), size: 20,),
 
-                                            SizedBox(width: 20,),
+                                              SizedBox(width: 20,),
 
-                                            Text('Birthdate', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                                          ],
+                                              Text('Birthdate', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                                            ],
+                                          ),
                                         ),
-                                      ),
 
-                                      Expanded(child: Text(profile.data!.showUserInformationBirthdate, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
-                                    ],
-                                  ),
+                                        Expanded(child: Text(profile.data!.showUserInformationBirthdate, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
+                                      ],
+                                    ),
 
-                                  const SizedBox(height: 20,),
+                                    const SizedBox(height: 20,),
 
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Row(
-                                          children: const [
-                                            Icon(Icons.place, color: Color(0xffBDC3C7), size: 20,),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: Row(
+                                            children: const [
+                                              Icon(Icons.place, color: Color(0xffBDC3C7), size: 20,),
 
-                                            SizedBox(width: 20,),
+                                              SizedBox(width: 20,),
 
-                                            Text('Birthplace', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                                          ],
+                                              Text('Birthplace', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                                            ],
+                                          ),
                                         ),
-                                      ),
 
-                                      Expanded(child: Text(profile.data!.showUserInformationBirthplace, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),)),
-                                    ],
-                                  ),
+                                        Expanded(child: Text(profile.data!.showUserInformationBirthplace, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),)),
+                                      ],
+                                    ),
 
-                                  const SizedBox(height: 20,),
+                                    const SizedBox(height: 20,),
 
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Row(
-                                          children: const [
-                                            Icon(Icons.home, color: Color(0xffBDC3C7), size: 20),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: Row(
+                                            children: const [
+                                              Icon(Icons.home, color: Color(0xffBDC3C7), size: 20),
 
-                                            SizedBox(width: 20),
+                                              SizedBox(width: 20),
 
-                                            Text('Home Address', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                                          ],
+                                              Text('Home Address', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                                            ],
+                                          ),
                                         ),
-                                      ),
 
-                                      Expanded(child: Text(profile.data!.showUserInformationHomeAddress, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
-                                    ],
-                                  ),
+                                        Expanded(child: Text(profile.data!.showUserInformationHomeAddress, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
+                                      ],
+                                    ),
 
-                                  const SizedBox(height: 20,),
+                                    const SizedBox(height: 20,),
 
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Row(
-                                          children: const [
-                                            Icon(Icons.email, color: Color(0xffBDC3C7), size: 20,),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: Row(
+                                            children: const [
+                                              Icon(Icons.email, color: Color(0xffBDC3C7), size: 20,),
 
-                                            SizedBox(width: 20),
+                                              SizedBox(width: 20),
 
-                                            Text('Email Address', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                                          ],
+                                              Text('Email Address', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                                            ],
+                                          ),
                                         ),
-                                      ),
 
-                                      Expanded(child: Text(profile.data!.showUserInformationEmailAddress, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
-                                    ],
-                                  ),
+                                        Expanded(child: Text(profile.data!.showUserInformationEmailAddress, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
+                                      ],
+                                    ),
 
-                                  const SizedBox(height: 20,),
+                                    const SizedBox(height: 20,),
 
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Row(
-                                          children: const [
-                                            Icon(Icons.phone, color: Color(0xffBDC3C7), size: 20,),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: Row(
+                                            children: const [
+                                              Icon(Icons.phone, color: Color(0xffBDC3C7), size: 20,),
 
-                                            SizedBox(width: 20,),
+                                              SizedBox(width: 20,),
 
-                                            Text('Contact Number', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                                          ],
+                                              Text('Contact Number', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                                            ],
+                                          ),
                                         ),
-                                      ),
 
-                                      Expanded(child: Text(profile.data!.showUserInformationContactNumber, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
-                                    ],
-                                  ),
-                                ],
+                                        Expanded(child: Text(profile.data!.showUserInformationContactNumber, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),

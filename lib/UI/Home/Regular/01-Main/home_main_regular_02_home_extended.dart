@@ -42,7 +42,6 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> wi
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   Future<APIRegularShowProfileInformation>? drawerSettings;
   String _scanBarcode = 'Error';
-
   TabController? controller;
 
   Future<APIRegularShowProfileInformation> getDrawerInformation() async{

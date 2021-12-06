@@ -36,14 +36,21 @@ class HomeBLMScreenExtended extends StatefulWidget{
   HomeBLMScreenExtendedState createState() => HomeBLMScreenExtendedState();
 }
 
-class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
-  ValueNotifier<List<bool>> bottomTab = ValueNotifier<List<bool>>([true, false, false, false]);
+class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended> with TickerProviderStateMixin{
+  // ValueNotifier<List<bool>> bottomTab = ValueNotifier<List<bool>>([true, false, false, false]);
+  // ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(true);
+  // ValueNotifier<int> unreadNotifications = ValueNotifier<int>(0);
+  // ValueNotifier<int> toggleBottom = ValueNotifier<int>(0);
+  // final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  // Future<APIBLMShowProfileInformation>? drawerSettings;
+  // String _scanBarcode = 'Error';
+
   ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(true);
   ValueNotifier<int> unreadNotifications = ValueNotifier<int>(0);
-  ValueNotifier<int> toggleBottom = ValueNotifier<int>(0);
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   Future<APIBLMShowProfileInformation>? drawerSettings;
   String _scanBarcode = 'Error';
+  TabController? controller;
 
   Future<APIBLMShowProfileInformation> getDrawerInformation() async{
     return await apiBLMShowProfileInformation();
@@ -113,10 +120,14 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
   @override
   void initState(){
     super.initState();
+    // isGuest();
+    // toggleBottom.value = widget.newToggleBottom;
+    // bottomTab.value = toggleBottom.value == 0 ? [true, false, false, false] : [false, true, false, false];
+    // var newMessage = PushNotificationService(_firebaseMessaging, context);
+    // newMessage.initialise();
+    controller = TabController(initialIndex: 0, length: 4, vsync: this);
     isGuest();
-    toggleBottom.value = widget.newToggleBottom;
-    bottomTab.value = toggleBottom.value == 0 ? [true, false, false, false] : [false, true, false, false];
-    var newMessage = PushNotificationService(_firebaseMessaging, context);
+    var newMessage = PushNotificationService(_firebaseMessaging, context); // PUSH NOTIFICATION
     newMessage.initialise();
   }
 
@@ -135,484 +146,833 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
           }
         },
         child: ValueListenableBuilder(
-          valueListenable: toggleBottom,
-          builder: (_, int toggleBottomListener, __) => ValueListenableBuilder(
-            valueListenable: bottomTab,
-            builder: (_, List<bool> bottomTabListener, __) => ValueListenableBuilder(
-              valueListenable: unreadNotifications,
-              builder: (_, int unreadNotificationListener, __) => ValueListenableBuilder(
-                valueListenable: isGuestLoggedIn,
-                builder: (_, bool isGuestLoggedInListener, __) => Scaffold(
-                  appBar: AppBar(
-                    backgroundColor: const Color(0xff4EC9D4),
-                    leading: FutureBuilder<APIBLMShowProfileInformation>(
-                      future: drawerSettings,
-                      builder: (context, profileImage){
-                        if(profileImage.hasData){
-                          return Builder(
-                            builder: (context){
-                              return IconButton(
-                                icon: Container(
-                                  decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: const Color(0xffffffff), width: 2,),),
-                                  child: profileImage.data!.showProfileInformationImage != ''
-                                  ? CircleAvatar(
-                                    foregroundImage: NetworkImage(profileImage.data!.showProfileInformationImage),
-                                    backgroundColor: const Color(0xff888888),
-                                  )
-                                  : const CircleAvatar(
-                                    foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
-                                    backgroundColor: Color(0xff888888),
-                                  ),
-                                ),
-                                onPressed: () async{
-                                  Scaffold.of(context).openDrawer();
-                                },
-                              );
-                            },
-                          );
-                        }else if(profileImage.hasError || isGuestLoggedInListener){
+          valueListenable: unreadNotifications,
+          builder: (_, int unreadNotificationsListener, __) => ValueListenableBuilder(
+            valueListenable: isGuestLoggedIn,
+            builder: (_, bool isGuestLoggedInListener, __) => Scaffold(
+              appBar: AppBar(
+                title: const Text('FacesByPlaces.com', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xffffffff),),),
+                backgroundColor: const Color(0xff4EC9D4),
+                centerTitle: true,
+                leading: FutureBuilder<APIBLMShowProfileInformation>(
+                  future: drawerSettings,
+                  builder: (context, profileImage){
+                    if(profileImage.hasData){
+                      return Builder(
+                        builder: (context){
                           return IconButton(
-                            icon: const CircleAvatar(backgroundColor: Color(0xff888888), foregroundImage: AssetImage('assets/icons/user-placeholder.png'),),
+                            icon: Container(
+                              decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: const Color(0xffffffff), width: 2,),),
+                              child: profileImage.data!.showProfileInformationImage != ''
+                              ? CircleAvatar(
+                                foregroundImage: NetworkImage(profileImage.data!.showProfileInformationImage),
+                                backgroundColor: const Color(0xff888888),
+                              )
+                              : const CircleAvatar(
+                                foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
+                                backgroundColor: Color(0xff888888),
+                              ),
+                            ),
                             onPressed: () async{
                               Scaffold.of(context).openDrawer();
                             },
                           );
-                        }else{
-                          return const Padding(child: CircularProgressIndicator(), padding: EdgeInsets.all(20.0),);
+                        },
+                      );
+                    }else if(profileImage.hasError || isGuestLoggedInListener){
+                      return IconButton(
+                        icon: const CircleAvatar(backgroundColor: Color(0xff888888), foregroundImage: AssetImage('assets/icons/user-placeholder.png'),),
+                        onPressed: () async{
+                          Scaffold.of(context).openDrawer();
+                        },
+                      );
+                    }else{
+                      return const Padding(child: CircularProgressIndicator(), padding: EdgeInsets.all(20.0),);
+                    }
+                  },
+                ),
+                actions: [
+                  IconButton(
+                    onPressed: (){
+                      Navigator.pushNamed(context, '/home/blm/search');
+                    },
+                    icon: Image.asset('assets/icons/zoom.png',),
+                  ),
+                ],
+              ),
+              body: Stack(
+                children: [
+                  SingleChildScrollView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    child: SizedBox(height: SizeConfig.screenHeight, child: const MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
+                  ),
+
+                  // SizedBox(
+                  //   child: ((){
+                  //     switch (toggleBottomListener){
+                  //       case 0: return const HomeBLMFeedTab();
+                  //       case 1: return const HomeBLMManageTab();
+                  //       case 2: return const HomeBLMPostTab();
+                  //       case 3: return const HomeBLMNotificationsTab();
+                  //     }
+                  //   }()),
+                  // ),
+
+                  TabBarView(
+                    controller: controller,
+                    children: const [
+                      HomeBLMFeedTab(),
+
+                      HomeBLMManageTab(),
+
+                      HomeBLMPostTab(),
+
+                      HomeBLMNotificationsTab(),
+                    ],
+                  ),
+                ],
+              ),
+              floatingActionButton: FloatingActionButton(
+                backgroundColor: const Color(0xffffffff),
+                child: const Icon(Icons.qr_code, color: Color(0xff4EC9D4),),
+                onPressed: () async{
+                  scanQR();
+                },
+              ),
+              floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+              bottomNavigationBar: TabBar(
+                controller: controller,
+                isScrollable: true,
+                labelColor: const Color(0xff04ECFF),
+                indicatorColor: Colors.transparent,
+                unselectedLabelColor: const Color(0xffB1B1B1),
+                physics: const NeverScrollableScrollPhysics(),
+                labelPadding: EdgeInsets.zero,
+                tabs: [
+                  SizedBox(
+                    width: SizeConfig.screenWidth! / 4,
+                    child: const Tab(
+                      icon: Icon(MdiIcons.fire),
+                      child: Text('Feed', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight'),),
+                    ),
+                  ),
+
+                  SizedBox(
+                    width: SizeConfig.screenWidth! / 4,
+                    child: const Tab(
+                      icon: Icon(MdiIcons.graveStone),
+                      child: Text('Memorials', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight'),),
+                    ),
+                  ),
+
+                  SizedBox(
+                    width: SizeConfig.screenWidth! / 4,
+                    child: const Tab(
+                      icon: Icon(MdiIcons.post),
+                      child: Text('Post', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight'),),
+                    ),
+                  ),
+
+                  SizedBox(
+                    width: SizeConfig.screenWidth! / 4,
+                    child: InkWell(
+                      onTap: () async{
+                        controller!.animateTo(3);
+                        
+                        if(isGuestLoggedInListener != true){
+                          await apiBLMReadUnreadNotifications();
+                          unreadNotifications.value = 0;
+                          getUnreadNotifications();
                         }
                       },
-                    ),
-                    title: const Text('FacesByPlaces.com', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xffffffff),),),
-                    centerTitle: true,
-                    actions: [
-                      IconButton(
-                        onPressed: (){
-                          Navigator.pushNamed(context, '/home/blm/search');
-                        },
-                        icon: Image.asset('assets/icons/zoom.png',),
-                      ),
-                    ],
-                  ),
-                  body: Stack(
-                    children: [
-                      SingleChildScrollView(
-                        physics: const NeverScrollableScrollPhysics(),
-                        child: SizedBox(height: SizeConfig.screenHeight, child: const MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
-                      ),
-
-                      SizedBox(
-                        child: ((){
-                          switch (toggleBottomListener){
-                            case 0: return const HomeBLMFeedTab();
-                            case 1: return const HomeBLMManageTab();
-                            case 2: return const HomeBLMPostTab();
-                            case 3: return const HomeBLMNotificationsTab();
-                          }
-                        }()),
-                      ),
-                    ],
-                  ),
-                  floatingActionButton: FloatingActionButton(
-                    backgroundColor: const Color(0xffffffff),
-                    child: const Icon(Icons.qr_code, color: Color(0xff4EC9D4),),
-                    onPressed: () async{
-                      scanQR();
-                    },
-                  ),
-                  floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-                  bottomNavigationBar: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Container(
-                      height: 65,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: const Color(0xffffffff),
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(color: const Color(0xff888888).withOpacity(0.5), blurRadius: 5, spreadRadius: 1, offset: const Offset(0, 0)),
-                        ],
-                      ),
-                      child: ToggleButtons(
-                        selectedColor: const Color(0xff04ECFF),
-                        color: const Color(0xffB1B1B1),
-                        fillColor: Colors.transparent,
-                        isSelected: bottomTabListener,
-                        renderBorder: false,
-                        borderWidth: 0,
+                      child: Stack(
+                        alignment: Alignment.center,
                         children: [
-                          SizedBox(
-                            width: SizeConfig.screenWidth! / 4,
-                            child: Column(
-                              children: const [
-                                Icon(MdiIcons.fire,),
-
-                                SizedBox(height: 5),
-
-                                Text('Feed', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight'),),
-                              ],
-                            ),
+                          const Tab(
+                            icon: Icon(MdiIcons.heart),
+                            child: Text('Notifications', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight'),),
                           ),
 
-                          SizedBox(
-                            width: SizeConfig.screenWidth! / 4,
-                            child: Column(
-                              children: const [
-                                Icon(MdiIcons.graveStone),
-
-                                SizedBox(height: 5),
-
-                                Text('Memorials', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight'),),
-                              ],
-                            ),
-                          ),
-
-                          SizedBox(
-                            width: SizeConfig.screenWidth! / 4,
-                            child: Column(
-                              children: const [
-                                Icon(MdiIcons.post),
-                                
-                                SizedBox(height: 5),
-
-                                Text('Post', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight',),),
-                              ],
-                            ),
-                          ),
-                          
-                          SizedBox(
-                            width: SizeConfig.screenWidth! / 4,
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Column(
-                                  children: const <Widget>[
-                                    Icon(MdiIcons.heart),
-                                    
-                                    SizedBox(height: 5),
-                                    
-                                    Text('Notification', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight',),),
-                                  ],
-                                ),
-
-                                // Positioned(
-                                //   top: 0,
-                                //   right: 20,
-                                //   child: CircleAvatar(
-                                //     radius: 12,
-                                //     backgroundColor: const Color(0xffff0000),
-                                //     child: isGuestLoggedInListener == true
-                                //     ? const Text('0', style: TextStyle(color: Color(0xffffffff), fontSize: 12),)
-                                //     : Text(unreadNotificationListener > 99 ? '99+' : '$unreadNotificationListener', style: const TextStyle(color: Color(0xffffffff), fontSize: 12),),
-                                //   ),
-                                // )
-
-                                Positioned(
-                                  top: 0,
-                                  right: 20,
-                                  child: isGuestLoggedInListener || unreadNotificationListener == 0
-                                  ? const SizedBox(height: 0,)
-                                  : CircleAvatar(
-                                    radius: 12,
-                                    backgroundColor: const Color(0xffff0000),
-                                    child: Text(unreadNotificationListener > 99 ? '99+' : '$unreadNotificationListener', style: const TextStyle(color: Color(0xffffffff), fontSize: 12),),
-                                  ),
-                                ),
-                              ],
+                          Positioned(
+                            top: 0,
+                            right: 20,
+                            child: isGuestLoggedInListener || unreadNotificationsListener == 0
+                            ? const SizedBox(height: 0,)
+                            : CircleAvatar(
+                              radius: 12,
+                              backgroundColor: const Color(0xffff0000),
+                              child: Text(unreadNotificationsListener > 99 ? '99+' : '$unreadNotificationsListener', style: const TextStyle(color: Color(0xffffffff), fontSize: 12),),
                             ),
                           ),
                         ],
-                        onPressed: (int index) async{
-                          toggleBottom.value = index;
-
-                          for(int i = 0; i < bottomTabListener.length; i++){
-                            if(i == toggleBottom.value){
-                              bottomTabListener[i] = true;
-                            }else{
-                              bottomTabListener[i] = false;
-                            }
-                          }
-
-                          if(toggleBottom.value == 3){
-                            if(isGuestLoggedInListener != true){
-                              await apiBLMReadUnreadNotifications();
-                              unreadNotifications.value = 0;
-                              getUnreadNotifications();
-                            }
-                          }
-                        },
                       ),
                     ),
                   ),
-                  drawer: isGuestLoggedInListener != true
-                  ? FutureBuilder<APIBLMShowProfileInformation>(
-                    future: drawerSettings,
-                    builder: (context, manageDrawer){
-                      if(manageDrawer.hasData){
-                        return Drawer(
-                          child: Container(
-                            alignment: Alignment.topCenter,
-                            color: const Color(0xff4EC9D4),
-                            child: SingleChildScrollView(
-                              physics: const ClampingScrollPhysics(),
-                              child: Column(
-                                children: [
-                                  const SizedBox(height: 20),
+                ],
+              ),
+              // bottomNavigationBar: SingleChildScrollView(
+              //   scrollDirection: Axis.horizontal,
+              //   child: Container(
+              //     height: 65,
+              //     alignment: Alignment.center,
+              //     decoration: BoxDecoration(
+              //       color: const Color(0xffffffff),
+              //       boxShadow: <BoxShadow>[
+              //         BoxShadow(color: const Color(0xff888888).withOpacity(0.5), blurRadius: 5, spreadRadius: 1, offset: const Offset(0, 0)),
+              //       ],
+              //     ),
+              //     child: ToggleButtons(
+              //       selectedColor: const Color(0xff04ECFF),
+              //       color: const Color(0xffB1B1B1),
+              //       fillColor: Colors.transparent,
+              //       isSelected: bottomTabListener,
+              //       renderBorder: false,
+              //       borderWidth: 0,
+              //       children: [
+              //         SizedBox(
+              //           width: SizeConfig.screenWidth! / 4,
+              //           child: Column(
+              //             children: const [
+              //               Icon(MdiIcons.fire,),
 
-                                  GestureDetector(
-                                    child: manageDrawer.data!.showProfileInformationImage != ''
-                                    ? Container(
-                                      decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: const Color(0xffffffff), width: 3,),),
-                                      child: CircleAvatar(
-                                        foregroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),
-                                        backgroundColor: const Color(0xff888888),
-                                        radius: 100,
-                                      ),
-                                    )
-                                    : const CircleAvatar(
-                                      foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
-                                      backgroundColor: Color(0xff888888),
-                                      radius: 100,
-                                    ),
-                                    onTap: (){
-                                      showGeneralDialog(
-                                        context: context,
-                                        barrierLabel: 'Dialog',
-                                        barrierDismissible: true,
-                                        transitionDuration: const Duration(milliseconds: 0),
-                                        pageBuilder: (_, __, ___){
-                                          return Scaffold(
-                                            backgroundColor: Colors.black12.withOpacity(0.7),
-                                            body: SizedBox.expand(
-                                              child: SafeArea(
-                                                child: Column(
-                                                  children: [
-                                                    Container(
-                                                      alignment: Alignment.centerRight,
-                                                      padding: const EdgeInsets.only(right: 20.0),
-                                                      child: GestureDetector(
-                                                        child: CircleAvatar(
-                                                          child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),
-                                                          backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                                          radius: 20,
-                                                        ),
-                                                        onTap: (){
-                                                          Navigator.pop(context);
-                                                        },
-                                                      ),
-                                                    ),
+              //               SizedBox(height: 5),
 
-                                                    const SizedBox(height: 20,),
+              //               Text('Feed', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight'),),
+              //             ],
+              //           ),
+              //         ),
 
-                                                    Expanded(
-                                                      child: CachedNetworkImage(
-                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                        placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                        imageUrl: manageDrawer.data!.showProfileInformationImage,
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    ),
+              //         SizedBox(
+              //           width: SizeConfig.screenWidth! / 4,
+              //           child: Column(
+              //             children: const [
+              //               Icon(MdiIcons.graveStone),
 
-                                                    const SizedBox(height: 80,),
-                                                  ],
+              //               SizedBox(height: 5),
+
+              //               Text('Memorials', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight'),),
+              //             ],
+              //           ),
+              //         ),
+
+              //         SizedBox(
+              //           width: SizeConfig.screenWidth! / 4,
+              //           child: Column(
+              //             children: const [
+              //               Icon(MdiIcons.post),
+                            
+              //               SizedBox(height: 5),
+
+              //               Text('Post', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight',),),
+              //             ],
+              //           ),
+              //         ),
+                      
+              //         SizedBox(
+              //           width: SizeConfig.screenWidth! / 4,
+              //           child: Stack(
+              //             alignment: Alignment.center,
+              //             children: [
+              //               Column(
+              //                 children: const <Widget>[
+              //                   Icon(MdiIcons.heart),
+                                
+              //                   SizedBox(height: 5),
+                                
+              //                   Text('Notification', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight',),),
+              //                 ],
+              //               ),
+
+              //               // Positioned(
+              //               //   top: 0,
+              //               //   right: 20,
+              //               //   child: CircleAvatar(
+              //               //     radius: 12,
+              //               //     backgroundColor: const Color(0xffff0000),
+              //               //     child: isGuestLoggedInListener == true
+              //               //     ? const Text('0', style: TextStyle(color: Color(0xffffffff), fontSize: 12),)
+              //               //     : Text(unreadNotificationListener > 99 ? '99+' : '$unreadNotificationListener', style: const TextStyle(color: Color(0xffffffff), fontSize: 12),),
+              //               //   ),
+              //               // )
+
+              //               Positioned(
+              //                 top: 0,
+              //                 right: 20,
+              //                 child: isGuestLoggedInListener || unreadNotificationListener == 0
+              //                 ? const SizedBox(height: 0,)
+              //                 : CircleAvatar(
+              //                   radius: 12,
+              //                   backgroundColor: const Color(0xffff0000),
+              //                   child: Text(unreadNotificationListener > 99 ? '99+' : '$unreadNotificationListener', style: const TextStyle(color: Color(0xffffffff), fontSize: 12),),
+              //                 ),
+              //               ),
+              //             ],
+              //           ),
+              //         ),
+              //       ],
+              //       onPressed: (int index) async{
+              //         toggleBottom.value = index;
+
+              //         for(int i = 0; i < bottomTabListener.length; i++){
+              //           if(i == toggleBottom.value){
+              //             bottomTabListener[i] = true;
+              //           }else{
+              //             bottomTabListener[i] = false;
+              //           }
+              //         }
+
+              //         if(toggleBottom.value == 3){
+              //           if(isGuestLoggedInListener != true){
+              //             await apiBLMReadUnreadNotifications();
+              //             unreadNotifications.value = 0;
+              //             getUnreadNotifications();
+              //           }
+              //         }
+              //       },
+              //     ),
+              //   ),
+              // ),
+              drawer: !isGuestLoggedInListener
+              ? FutureBuilder<APIBLMShowProfileInformation>( // DRAWER
+                future: drawerSettings,
+                builder: (context, manageDrawer){
+                  if(manageDrawer.hasData){
+                    return Drawer(
+                      child: Container(
+                        alignment: Alignment.topCenter,
+                        color: const Color(0xff4EC9D4),
+                        child: SingleChildScrollView(
+                          physics: const ClampingScrollPhysics(),
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 50),
+
+                              GestureDetector(
+                                child: manageDrawer.data!.showProfileInformationImage != ''
+                                ? Container(
+                                  child: CircleAvatar(radius: 100, backgroundColor: const Color(0xff888888), foregroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),),
+                                  decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: const Color(0xffffffff), width: 3,),),
+                                )
+                                : const CircleAvatar(
+                                  radius: 100,
+                                  backgroundColor: Color(0xff888888),
+                                  foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
+                                ),
+                                onTap: (){
+                                  showGeneralDialog(
+                                    context: context,
+                                    transitionDuration: const Duration(milliseconds: 0),
+                                    barrierDismissible: true,
+                                    barrierLabel: 'Dialog',
+                                    pageBuilder: (_, __, ___){
+                                      return Scaffold(
+                                        backgroundColor: Colors.black12.withOpacity(0.7),
+                                        body: SizedBox.expand(
+                                          child: SafeArea(
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  alignment: Alignment.centerRight,
+                                                  padding: const EdgeInsets.only(right: 20.0),
+                                                  child: GestureDetector(
+                                                    child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
+                                                    onTap: (){
+                                                      Navigator.pop(context);
+                                                    },
+                                                  ),
                                                 ),
-                                              ),
+
+                                                const SizedBox(height: 20,),
+
+                                                Expanded(
+                                                  child: CachedNetworkImage(
+                                                    fit: BoxFit.cover,
+                                                    imageUrl: manageDrawer.data!.showProfileInformationImage,
+                                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                  ),
+                                                ),
+
+                                                const SizedBox(height: 80,),
+                                              ],
                                             ),
-                                          );
-                                        },
+                                          ),
+                                        ),
                                       );
                                     },
-                                  ),
-
-                                  const SizedBox(height: 20),
-
-                                  Text(
-                                    manageDrawer.data!.showProfileInformationFirstName + ' ' + manageDrawer.data!.showProfileInformationLastName,
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(fontSize: 28, fontFamily: 'NexaBold', color: Color(0xffffffff),),
-                                  ),
-
-                                  const SizedBox(height: 45),
-
-                                  GestureDetector(
-                                    child: const Text('Home', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
-                                    onTap: (){
-                                      Navigator.pop(context);
-                                    },
-                                  ),
-
-                                  const SizedBox(height: 25),
-
-                                  GestureDetector(
-                                    child: const Text('Create Memorial Page', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
-                                    onTap: (){
-                                      Navigator.pop(context);
-                                      Navigator.pushNamed(context, '/home/blm/create-memorial');
-                                    },
-                                  ),
-
-                                  const SizedBox(height: 20),
-
-                                  GestureDetector(
-                                    child: const Text('Notification Settings', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
-                                    onTap: () async{
-                                      context.loaderOverlay.show();
-                                      APIBLMShowNotificationStatus result = await apiBLMShowNotificationStatus(userId: manageDrawer.data!.showProfileInformationUserId);
-                                      context.loaderOverlay.hide();
-
-                                      Navigator.pop(context);
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMNotificationSettings(newMemorial: result.showNotificationStatusNewMemorial, newActivities: result.showNotificationStatusNewActivities, postLikes: result.showNotificationStatusPostLikes, postComments: result.showNotificationStatusPostComments, addFamily: result.showNotificationStatusAddFamily, addFriends: result.showNotificationStatusAddFriends, addAdmin: result.showNotificationStatusAddAdmin,)));
-                                    },
-                                  ),
-
-                                  const SizedBox(height: 20),
-
-                                  GestureDetector(
-                                    child: const Text('Profile Settings', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
-                                    onTap: () async{
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: manageDrawer.data!.showProfileInformationUserId)));
-                                    },
-                                  ),
-
-                                  const SizedBox(height: 20),
-
-                                  GestureDetector(
-                                    child: const Text('Log Out', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
-                                    onTap: () async{
-                                      bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscConfirmDialog(title: 'Log Out', content: 'Are you sure you want to logout from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),));
-
-                                      if(confirmResult){
-                                        context.loaderOverlay.show();
-                                        bool result = await apiBLMLogout();
-                                        context.loaderOverlay.hide();
-
-                                        if(result){
-                                          Route newRoute = MaterialPageRoute(builder: (BuildContext context) => const UIGetStarted());
-                                          Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
-                                        }else{
-                                          await showDialog(
-                                            context: context,
-                                            builder: (context) => CustomDialog(
-                                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                              title: 'Error',
-                                              description: 'Something went wrong. Please try again. ',
-                                              okButtonColor: const Color(0xfff44336), // RED
-                                              includeOkButton: true,
-                                            ),
-                                          );
-                                        }
-                                      }
-                                    },
-                                  ),
-                                ],
+                                  );
+                                },
                               ),
-                            ),
+
+                              const SizedBox(height: 20),
+
+                              Text(
+                                manageDrawer.data!.showProfileInformationFirstName + ' ' + manageDrawer.data!.showProfileInformationLastName,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(fontSize: 28, fontFamily: 'NexaBold', color: Color(0xffffffff),),
+                              ),
+
+                              const SizedBox(height: 45),
+
+                              GestureDetector(
+                                child: const Text('Home', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+                                onTap: (){
+                                  Navigator.pop(context);
+                                },
+                              ),
+
+                              const SizedBox(height: 25),
+
+                              GestureDetector(
+                                child: const Text('Create Memorial Page', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+                                onTap: (){
+                                  Navigator.pop(context);
+                                  Navigator.pushNamed(context, '/home/regular/create-memorial');
+                                },
+                              ),
+
+                              const SizedBox(height: 20),
+
+                              GestureDetector(
+                                child: const Text('Notification Settings', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+                                onTap: () async{
+                                  context.loaderOverlay.show();
+                                  APIBLMShowNotificationStatus result = await apiBLMShowNotificationStatus(userId: manageDrawer.data!.showProfileInformationUserId);
+                                  context.loaderOverlay.hide();
+
+                                  Navigator.pop(context);
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMNotificationSettings(newMemorial: result.showNotificationStatusNewMemorial, newActivities: result.showNotificationStatusNewActivities, postLikes: result.showNotificationStatusPostLikes, postComments: result.showNotificationStatusPostComments, addFamily: result.showNotificationStatusAddFamily, addFriends: result.showNotificationStatusAddFriends, addAdmin: result.showNotificationStatusAddAdmin,),),);
+                                },
+                              ),
+
+                              const SizedBox(height: 20),
+
+                              GestureDetector(
+                                child: const Text('Profile Settings', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+                                onTap: () async{
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: manageDrawer.data!.showProfileInformationUserId)));
+                                },
+                              ),
+
+                              const SizedBox(height: 20),
+
+                              GestureDetector(
+                                child: const Text('Log Out', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+                                onTap: () async{
+                                  bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscConfirmDialog(title: 'Log Out', content: 'Are you sure you want to logout from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),));
+
+                                  if(confirmResult){
+                                    context.loaderOverlay.show();
+                                    bool result = await apiBLMLogout();
+                                    context.loaderOverlay.hide();
+
+                                    if(result){
+                                      Route newRoute = MaterialPageRoute(builder: (BuildContext context) => const UIGetStarted());
+                                      Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                                    }else{
+                                      await showDialog(
+                                        context: context,
+                                        builder: (context) => CustomDialog(
+                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                          title: 'Error',
+                                          description: 'Something went wrong. Please try again.',
+                                          okButtonColor: const Color(0xfff44336), // RED
+                                          includeOkButton: true,
+                                        ),
+                                      );
+                                    }
+                                  }
+                                },
+                              ),
+
+                              const SizedBox(height: 50),
+                            ],
                           ),
-                        );
-                      }else if(manageDrawer.hasError){
-                        return Drawer(
-                          child: Container(
-                            alignment: Alignment.topCenter,
-                            color: const Color(0xff4EC9D4),
-                            child: Column(
-                              children: [
-                                const SizedBox(height: 20,),
-
-                                const CircleAvatar(radius: 100, backgroundColor: Color(0xff888888), foregroundImage: AssetImage('assets/icons/user-placeholder.png'),),
-
-                                const Expanded(child: SizedBox(),),
-
-                                GestureDetector(
-                                  child: const Text('Something went wrong. Please try again.', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),), textAlign: TextAlign.center,),
-                                  onTap: (){
-                                    Navigator.pop(context);
-                                  },
-                                ),
-
-                                const Expanded(child: SizedBox(),),
-
-                                GestureDetector(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: const [
-                                      Icon(Icons.directions_walk_rounded, color: Color(0xffffffff), size: 16,),
-                                      
-                                      SizedBox(width: 20),
-
-                                      Text('Go back', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),),
-                                    ],
-                                  ),
-                                  onTap: (){
-                                    Route newRoute = MaterialPageRoute(builder: (BuildContext context) => const UIGetStarted());
-                                    Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
-                                  },
-                                ),
-
-                                const Expanded(child: SizedBox(),),
-                              ],
-                            ),
-                          ),
-                        );
-                      }else{
-                        return const Center(child: CustomLoaderThreeDots(),);
-                      }
-                    }
-                  )
-                  : Drawer(
-                    child: Container(
-                      alignment: Alignment.topCenter,
-                      color: const Color(0xff4EC9D4),
-                      child: SingleChildScrollView(
-                        physics: const ClampingScrollPhysics(),
+                        ),
+                      ),
+                    );
+                  }else if(manageDrawer.hasError){
+                    return Drawer(
+                      child: Container(
+                        alignment: Alignment.topCenter,
+                        color: const Color(0xff4EC9D4),
                         child: Column(
                           children: [
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 20,),
 
-                            const CircleAvatar(radius: 100, backgroundColor: Color(0xff888888),foregroundImage: AssetImage('assets/icons/user-placeholder.png'),),
+                            const CircleAvatar(
+                              radius: 100,
+                              backgroundColor: Color(0xff888888),
+                              foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
+                            ),
 
-                            const SizedBox(height: 20),
-
-                            const Text('Guest User', textAlign: TextAlign.center, style: TextStyle(fontSize: 28, fontFamily: 'NexaBold', color: Color(0xffffffff),),),
-
-                            const SizedBox(height: 45),
+                            const Expanded(child: SizedBox(),),
 
                             GestureDetector(
-                              child: const Text('Home', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+                              child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),),
                               onTap: (){
                                 Navigator.pop(context);
                               },
                             ),
-                            
-                            const SizedBox(height: 25),
+
+                            const Expanded(child: SizedBox(),),
 
                             GestureDetector(
-                              child: const Text('Sign up or Sign in', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
-                              onTap: () async{
-                                final sharedPrefs = await SharedPreferences.getInstance();
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Icon(Icons.directions_walk_rounded, color: Color(0xffffffff), size: 16,),
 
-                                sharedPrefs.remove('blm-user-id');
-                                sharedPrefs.remove('blm-access-token');
-                                sharedPrefs.remove('blm-uid');
-                                sharedPrefs.remove('blm-client');
-                                sharedPrefs.remove('blm-user-session');
+                                  SizedBox(width: 20),
 
-                                sharedPrefs.remove('regular-user-id');
-                                sharedPrefs.remove('regular-access-token');
-                                sharedPrefs.remove('regular-uid');
-                                sharedPrefs.remove('regular-client');
-                                sharedPrefs.remove('regular-user-session');
-
-                                sharedPrefs.remove('user-guest-session');
-
+                                  Text('Go back', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),),
+                                ],
+                              ),
+                              onTap: (){
                                 Route newRoute = MaterialPageRoute(builder: (BuildContext context) => const UIGetStarted());
                                 Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
                               },
                             ),
+
+                            const Expanded(child: SizedBox(),),
                           ],
                         ),
                       ),
+                    );
+                  }else{
+                    return const Center(child: CustomLoaderThreeDots(),);
+                  }
+                },
+              )
+              : Drawer( // DRAWER FOR GUEST LOGIN
+                child: Container(
+                  alignment: Alignment.topCenter,
+                  color: const Color(0xff4EC9D4),
+                  child: SingleChildScrollView(
+                    physics: const ClampingScrollPhysics(),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 20,),
+
+                        const CircleAvatar(
+                          radius: 100,
+                          backgroundColor: Color(0xff888888),
+                          foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
+                        ),
+
+                        const SizedBox(height: 20,),
+
+                        const Text('Guest User', textAlign: TextAlign.center, style: TextStyle(fontSize: 28, fontFamily: 'NexaBold', color: Color(0xffffffff),),),
+
+                        const SizedBox(height: 45,),
+
+                        GestureDetector(
+                          child: const Text('Home', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+                          onTap: (){
+                            Navigator.pop(context);
+                          },
+                        ),
+
+                        const SizedBox(height: 25,),
+
+                        GestureDetector(
+                          child: const Text('Sign up or Sign in', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+                          onTap: () async{
+                            final sharedPrefs = await SharedPreferences.getInstance();
+
+                            sharedPrefs.remove('blm-user-id');
+                            sharedPrefs.remove('blm-access-token');
+                            sharedPrefs.remove('blm-uid');
+                            sharedPrefs.remove('blm-client');
+                            sharedPrefs.remove('blm-user-session');
+
+                            sharedPrefs.remove('regular-user-id');
+                            sharedPrefs.remove('regular-access-token');
+                            sharedPrefs.remove('regular-uid');
+                            sharedPrefs.remove('regular-client');
+                            sharedPrefs.remove('regular-user-session');
+
+                            sharedPrefs.remove('user-guest-session');
+
+                            Route newRoute = MaterialPageRoute(builder: (BuildContext context) => const UIGetStarted());
+                            Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                          },
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ),
+
+              // drawer: isGuestLoggedInListener != true
+              // ? FutureBuilder<APIBLMShowProfileInformation>(
+              //   future: drawerSettings,
+              //   builder: (context, manageDrawer){
+              //     if(manageDrawer.hasData){
+              //       return Drawer(
+              //         child: Container(
+              //           alignment: Alignment.topCenter,
+              //           color: const Color(0xff4EC9D4),
+              //           child: SingleChildScrollView(
+              //             physics: const ClampingScrollPhysics(),
+              //             child: Column(
+              //               children: [
+              //                 const SizedBox(height: 20),
+
+              //                 GestureDetector(
+              //                   child: manageDrawer.data!.showProfileInformationImage != ''
+              //                   ? Container(
+              //                     decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: const Color(0xffffffff), width: 3,),),
+              //                     child: CircleAvatar(
+              //                       foregroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),
+              //                       backgroundColor: const Color(0xff888888),
+              //                       radius: 100,
+              //                     ),
+              //                   )
+              //                   : const CircleAvatar(
+              //                     foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
+              //                     backgroundColor: Color(0xff888888),
+              //                     radius: 100,
+              //                   ),
+              //                   onTap: (){
+              //                     showGeneralDialog(
+              //                       context: context,
+              //                       barrierLabel: 'Dialog',
+              //                       barrierDismissible: true,
+              //                       transitionDuration: const Duration(milliseconds: 0),
+              //                       pageBuilder: (_, __, ___){
+              //                         return Scaffold(
+              //                           backgroundColor: Colors.black12.withOpacity(0.7),
+              //                           body: SizedBox.expand(
+              //                             child: SafeArea(
+              //                               child: Column(
+              //                                 children: [
+              //                                   Container(
+              //                                     alignment: Alignment.centerRight,
+              //                                     padding: const EdgeInsets.only(right: 20.0),
+              //                                     child: GestureDetector(
+              //                                       child: CircleAvatar(
+              //                                         child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),
+              //                                         backgroundColor: const Color(0xff000000).withOpacity(0.8),
+              //                                         radius: 20,
+              //                                       ),
+              //                                       onTap: (){
+              //                                         Navigator.pop(context);
+              //                                       },
+              //                                     ),
+              //                                   ),
+
+              //                                   const SizedBox(height: 20,),
+
+              //                                   Expanded(
+              //                                     child: CachedNetworkImage(
+              //                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+              //                                       placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+              //                                       imageUrl: manageDrawer.data!.showProfileInformationImage,
+              //                                       fit: BoxFit.cover,
+              //                                     ),
+              //                                   ),
+
+              //                                   const SizedBox(height: 80,),
+              //                                 ],
+              //                               ),
+              //                             ),
+              //                           ),
+              //                         );
+              //                       },
+              //                     );
+              //                   },
+              //                 ),
+
+              //                 const SizedBox(height: 20),
+
+              //                 Text(
+              //                   manageDrawer.data!.showProfileInformationFirstName + ' ' + manageDrawer.data!.showProfileInformationLastName,
+              //                   textAlign: TextAlign.center,
+              //                   style: const TextStyle(fontSize: 28, fontFamily: 'NexaBold', color: Color(0xffffffff),),
+              //                 ),
+
+              //                 const SizedBox(height: 45),
+
+              //                 GestureDetector(
+              //                   child: const Text('Home', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+              //                   onTap: (){
+              //                     Navigator.pop(context);
+              //                   },
+              //                 ),
+
+              //                 const SizedBox(height: 25),
+
+              //                 GestureDetector(
+              //                   child: const Text('Create Memorial Page', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+              //                   onTap: (){
+              //                     Navigator.pop(context);
+              //                     Navigator.pushNamed(context, '/home/blm/create-memorial');
+              //                   },
+              //                 ),
+
+              //                 const SizedBox(height: 20),
+
+              //                 GestureDetector(
+              //                   child: const Text('Notification Settings', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+              //                   onTap: () async{
+              //                     context.loaderOverlay.show();
+              //                     APIBLMShowNotificationStatus result = await apiBLMShowNotificationStatus(userId: manageDrawer.data!.showProfileInformationUserId);
+              //                     context.loaderOverlay.hide();
+
+              //                     Navigator.pop(context);
+              //                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMNotificationSettings(newMemorial: result.showNotificationStatusNewMemorial, newActivities: result.showNotificationStatusNewActivities, postLikes: result.showNotificationStatusPostLikes, postComments: result.showNotificationStatusPostComments, addFamily: result.showNotificationStatusAddFamily, addFriends: result.showNotificationStatusAddFriends, addAdmin: result.showNotificationStatusAddAdmin,)));
+              //                   },
+              //                 ),
+
+              //                 const SizedBox(height: 20),
+
+              //                 GestureDetector(
+              //                   child: const Text('Profile Settings', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+              //                   onTap: () async{
+              //                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: manageDrawer.data!.showProfileInformationUserId)));
+              //                   },
+              //                 ),
+
+              //                 const SizedBox(height: 20),
+
+              //                 GestureDetector(
+              //                   child: const Text('Log Out', textAlign: TextAlign.center, style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+              //                   onTap: () async{
+              //                     bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscConfirmDialog(title: 'Log Out', content: 'Are you sure you want to logout from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),));
+
+              //                     if(confirmResult){
+              //                       context.loaderOverlay.show();
+              //                       bool result = await apiBLMLogout();
+              //                       context.loaderOverlay.hide();
+
+              //                       if(result){
+              //                         Route newRoute = MaterialPageRoute(builder: (BuildContext context) => const UIGetStarted());
+              //                         Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+              //                       }else{
+              //                         await showDialog(
+              //                           context: context,
+              //                           builder: (context) => CustomDialog(
+              //                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+              //                             title: 'Error',
+              //                             description: 'Something went wrong. Please try again. ',
+              //                             okButtonColor: const Color(0xfff44336), // RED
+              //                             includeOkButton: true,
+              //                           ),
+              //                         );
+              //                       }
+              //                     }
+              //                   },
+              //                 ),
+              //               ],
+              //             ),
+              //           ),
+              //         ),
+              //       );
+              //     }else if(manageDrawer.hasError){
+              //       return Drawer(
+              //         child: Container(
+              //           alignment: Alignment.topCenter,
+              //           color: const Color(0xff4EC9D4),
+              //           child: Column(
+              //             children: [
+              //               const SizedBox(height: 20,),
+
+              //               const CircleAvatar(radius: 100, backgroundColor: Color(0xff888888), foregroundImage: AssetImage('assets/icons/user-placeholder.png'),),
+
+              //               const Expanded(child: SizedBox(),),
+
+              //               GestureDetector(
+              //                 child: const Text('Something went wrong. Please try again.', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),), textAlign: TextAlign.center,),
+              //                 onTap: (){
+              //                   Navigator.pop(context);
+              //                 },
+              //               ),
+
+              //               const Expanded(child: SizedBox(),),
+
+              //               GestureDetector(
+              //                 child: Row(
+              //                   mainAxisAlignment: MainAxisAlignment.center,
+              //                   children: const [
+              //                     Icon(Icons.directions_walk_rounded, color: Color(0xffffffff), size: 16,),
+                                  
+              //                     SizedBox(width: 20),
+
+              //                     Text('Go back', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),),
+              //                   ],
+              //                 ),
+              //                 onTap: (){
+              //                   Route newRoute = MaterialPageRoute(builder: (BuildContext context) => const UIGetStarted());
+              //                   Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+              //                 },
+              //               ),
+
+              //               const Expanded(child: SizedBox(),),
+              //             ],
+              //           ),
+              //         ),
+              //       );
+              //     }else{
+              //       return const Center(child: CustomLoaderThreeDots(),);
+              //     }
+              //   }
+              // )
+              // : Drawer(
+              //   child: Container(
+              //     alignment: Alignment.topCenter,
+              //     color: const Color(0xff4EC9D4),
+              //     child: SingleChildScrollView(
+              //       physics: const ClampingScrollPhysics(),
+              //       child: Column(
+              //         children: [
+              //           const SizedBox(height: 20),
+
+              //           const CircleAvatar(radius: 100, backgroundColor: Color(0xff888888),foregroundImage: AssetImage('assets/icons/user-placeholder.png'),),
+
+              //           const SizedBox(height: 20),
+
+              //           const Text('Guest User', textAlign: TextAlign.center, style: TextStyle(fontSize: 28, fontFamily: 'NexaBold', color: Color(0xffffffff),),),
+
+              //           const SizedBox(height: 45),
+
+              //           GestureDetector(
+              //             child: const Text('Home', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+              //             onTap: (){
+              //               Navigator.pop(context);
+              //             },
+              //           ),
+                        
+              //           const SizedBox(height: 25),
+
+              //           GestureDetector(
+              //             child: const Text('Sign up or Sign in', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: Color(0xffffffff),),),
+              //             onTap: () async{
+              //               final sharedPrefs = await SharedPreferences.getInstance();
+
+              //               sharedPrefs.remove('blm-user-id');
+              //               sharedPrefs.remove('blm-access-token');
+              //               sharedPrefs.remove('blm-uid');
+              //               sharedPrefs.remove('blm-client');
+              //               sharedPrefs.remove('blm-user-session');
+
+              //               sharedPrefs.remove('regular-user-id');
+              //               sharedPrefs.remove('regular-access-token');
+              //               sharedPrefs.remove('regular-uid');
+              //               sharedPrefs.remove('regular-client');
+              //               sharedPrefs.remove('regular-user-session');
+
+              //               sharedPrefs.remove('user-guest-session');
+
+              //               Route newRoute = MaterialPageRoute(builder: (BuildContext context) => const UIGetStarted());
+              //               Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+              //             },
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ),
           ),
         ),

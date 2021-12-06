@@ -21,7 +21,8 @@ class HomeBLMMemorialSettings extends StatefulWidget{
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
-  const HomeBLMMemorialSettings({Key? key, required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers}) : super(key: key);
+  final bool newlyCreated;
+  const HomeBLMMemorialSettings({Key? key, required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers, required this.newlyCreated}) : super(key: key);
 
   @override
   HomeBLMMemorialSettingsState createState() => HomeBLMMemorialSettingsState();
@@ -56,24 +57,24 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
             icon: const Icon(Icons.arrow_back,size: 35,),
             onPressed: (){
               Navigator.pop(context);
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: widget.memorialId, relationship: '', managed: true, newlyCreated: false,)));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: widget.memorialId, relationship: '', managed: true, newlyCreated: widget.newlyCreated,)));
             },
           ),
         ),
-        body: SafeArea(
-          child: LayoutBuilder(
-            builder: (context, constraint){
-              return SingleChildScrollView(
-                physics: const ClampingScrollPhysics(),
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(minHeight: constraint.maxHeight),
-                  child: IntrinsicHeight(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 70,
-                          child: DefaultTabController(
-                            length: 2,
+        body: DefaultTabController(
+          length: 2,
+          child: SafeArea(
+            child: LayoutBuilder(
+              builder: (context, constraint){
+                return SingleChildScrollView(
+                  physics: const ClampingScrollPhysics(),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(minHeight: constraint.maxHeight),
+                    child: IntrinsicHeight(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 70,
                             child: TabBar(
                               labelColor: const Color(0xff04ECFF),
                               unselectedLabelColor: const Color(0xff000000),
@@ -82,149 +83,199 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
                               tabs: const [
                                 Text('Page', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
 
-                                Text('Privacy', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
+                                Text('Privacy', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D)),),
                               ],
                               onTap: (int index){
                                 toggle.value = index;
                               },
                             ),
                           ),
-                        ),
-                        Expanded(
-                          child: SizedBox(
-                            child: ((){
-                              switch (toggleListener){
-                                case 0: return settingsTab1(widget.memorialId);
-                                case 1: return settingsTab2(widget.memorialId);
-                              }
-                            }()),
+
+                          Expanded(
+                            child: SizedBox(
+                              child: ((){
+                                switch (toggleListener){
+                                  case 0: return settingsTab1();
+                                  case 1: return settingsTab2();
+                                }
+                              }()),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              );
-            }
+                );
+              }
+            ),
           ),
         ),
+        // body: SafeArea(
+        //   child: LayoutBuilder(
+        //     builder: (context, constraint){
+        //       return SingleChildScrollView(
+        //         physics: const ClampingScrollPhysics(),
+        //         child: ConstrainedBox(
+        //           constraints: BoxConstraints(minHeight: constraint.maxHeight),
+        //           child: IntrinsicHeight(
+        //             child: Column(
+        //               children: [
+        //                 SizedBox(
+        //                   height: 70,
+        //                   child: DefaultTabController(
+        //                     length: 2,
+        //                     child: TabBar(
+        //                       labelColor: const Color(0xff04ECFF),
+        //                       unselectedLabelColor: const Color(0xff000000),
+        //                       indicatorColor: const Color(0xff04ECFF),
+        //                       indicatorSize: TabBarIndicatorSize.label,
+        //                       tabs: const [
+        //                         Text('Page', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
+
+        //                         Text('Privacy', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
+        //                       ],
+        //                       onTap: (int index){
+        //                         toggle.value = index;
+        //                       },
+        //                     ),
+        //                   ),
+        //                 ),
+        //                 Expanded(
+        //                   child: SizedBox(
+        //                     child: ((){
+        //                       switch (toggleListener){
+        //                         case 0: return settingsTab1(widget.memorialId);
+        //                         case 1: return settingsTab2(widget.memorialId);
+        //                       }
+        //                     }()),
+        //                   ),
+        //                 ),
+        //               ],
+        //             ),
+        //           ),
+        //         ),
+        //       );
+        //     }
+        //   ),
+        // ),
       ),
     );
   }
 
-  settingsTab1(int memorialId){
-    return Column(
-      children: [
-        ListTile(
-          tileColor: const Color(0xffffffff),
-          title: const Text('Page Details', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
-          subtitle: const Text('Update page details', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageDetails(memorialId: memorialId,)));
-          },
-        ),
-        
-        Container(height: 5, color: const Color(0xffeeeeee),),
+  settingsTab1(){
+    return SingleChildScrollView(
+      physics: const NeverScrollableScrollPhysics(),
+      child: Column(
+        children: [
+          ListTile(
+            tileColor: const Color(0xffffffff),
+            title: const Text('Page Details', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+            subtitle: const Text('Update page details', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageDetails(memorialId: widget.memorialId,)));
+            },
+          ),
+          
+          Container(height: 5, color: const Color(0xffeeeeee),),
 
-        ListTile(
-          tileColor: const Color(0xffffffff),
-          title: const Text('Page Image', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
-          subtitle: const Text('Update Page image and background image', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialPageImage(memorialId: memorialId,)));
-          },
-        ),
+          ListTile(
+            tileColor: const Color(0xffffffff),
+            title: const Text('Page Image', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+            subtitle: const Text('Update Page image and background image', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialPageImage(memorialId: widget.memorialId,)));
+            },
+          ),
 
-        Container(height: 5, color: const Color(0xffeeeeee),),
+          Container(height: 5, color: const Color(0xffeeeeee),),
 
-        ListTile(
-          tileColor: const Color(0xffffffff),
-          title: const Text('Admins', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
-          subtitle: const Text('Add or remove admins of this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageManagers(memorialId: memorialId,)));
-          },
-        ),
+          ListTile(
+            tileColor: const Color(0xffffffff),
+            title: const Text('Admins', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+            subtitle: const Text('Add or remove admins of this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageManagers(memorialId: widget.memorialId,)));
+            },
+          ),
 
-        Container(height: 5, color: const Color(0xffeeeeee),),
+          Container(height: 5, color: const Color(0xffeeeeee),),
 
-        ListTile(
-          tileColor: const Color(0xffffffff),
-          title: const Text('Family', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
-          subtitle: const Text('Add or remove family of this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers), settings: const RouteSettings(name: 'memorial-settings'),),);
-          },
-        ),
+          ListTile(
+            tileColor: const Color(0xffffffff),
+            title: const Text('Family', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+            subtitle: const Text('Add or remove family of this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers), settings: const RouteSettings(name: 'memorial-settings'),),);
+            },
+          ),
 
-        Container(height: 5, color: const Color(0xffeeeeee),),
+          Container(height: 5, color: const Color(0xffeeeeee),),
 
-        ListTile(
-          tileColor: const Color(0xffffffff),
-          title: const Text('Friends', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
-          subtitle: const Text('Add or remove friends of this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageFriends(memorialId: memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers,),),);
-          },
-        ),
+          ListTile(
+            tileColor: const Color(0xffffffff),
+            title: const Text('Friends', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+            subtitle: const Text('Add or remove friends of this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageFriends(memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers,),),);
+            },
+          ),
 
-        Container(height: 5, color: const Color(0xffeeeeee),),
+          Container(height: 5, color: const Color(0xffeeeeee),),
 
-        ListTile(
-          tileColor: const Color(0xffffffff),
-          title: const Text('Paypal', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
-          subtitle: const Text('Manage cards that receives the memorial gifts', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPaypal(pageId: memorialId)));
-          },
-        ),
+          ListTile(
+            tileColor: const Color(0xffffffff),
+            title: const Text('Paypal', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+            subtitle: const Text('Manage cards that receives the memorial gifts', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPaypal(pageId: widget.memorialId)));
+            },
+          ),
 
-        Container(height: 5, color: const Color(0xffeeeeee),),
+          Container(height: 5, color: const Color(0xffeeeeee),),
 
-        ListTile(
-          tileColor: const Color(0xffffffff),
-          title: const Text('Delete Page', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
-          subtitle: const Text('Completely remove the page. This is irreversible', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-          onTap: () async{
-            bool confirmResult = await showDialog(context: (context), builder: (build) => MiscConfirmDialog(content: 'Are you sure you want to delete "${widget.memorialName}"?',),);
+          ListTile(
+            tileColor: const Color(0xffffffff),
+            title: const Text('Delete Page', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+            subtitle: const Text('Completely remove the page. This is irreversible', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+            onTap: () async{
+              bool confirmResult = await showDialog(context: (context), builder: (build) => MiscConfirmDialog(content: 'Are you sure you want to delete "${widget.memorialName}"?',),);
 
-            if(confirmResult){
-              context.loaderOverlay.show();
-              bool result = await apiBLMDeleteMemorial(memorialId: memorialId);
-              context.loaderOverlay.hide();
+              if(confirmResult){
+                context.loaderOverlay.show();
+                bool result = await apiBLMDeleteMemorial(memorialId: widget.memorialId);
+                context.loaderOverlay.hide();
 
-              if(result){
-                Navigator.popAndPushNamed(context, '/home/blm');
-              }else{
-                await showDialog(
-                  context: context,
-                  builder: (context) => CustomDialog(
-                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: 'Error',
-                    description: 'Something went wrong. Please try again.',
-                    okButtonColor: const Color(0xfff44336), // RED
-                    includeOkButton: true,
-                  ),
-                );
+                if(result){
+                  Navigator.popAndPushNamed(context, '/home/blm');
+                }else{
+                  await showDialog(
+                    context: context,
+                    builder: (context) => CustomDialog(
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      title: 'Error',
+                      description: 'Something went wrong. Please try again.',
+                      okButtonColor: const Color(0xfff44336), // RED
+                      includeOkButton: true,
+                    ),
+                  );
+                }
               }
-            }
-          },
-        ),
+            },
+          ),
 
-        Container(height: 5, color: const Color(0xffeeeeee),),
+          Container(height: 5, color: const Color(0xffeeeeee),),
 
-        const SizedBox(height: 10,),
+          const SizedBox(height: 100,),
 
-        Expanded(child: Container()),
+          Image.asset('assets/icons/logo.png', height: 100, width: 100,),
 
-        Image.asset('assets/icons/logo.png', height: 100, width: 100,),
-
-        const SizedBox(height: 30,),
-      ],
+          const SizedBox(height: 30,),
+        ],
+      ),
     );
   }
 
-  settingsTab2(int memorialId) {
+  settingsTab2() {
     return ValueListenableBuilder(
       valueListenable: isSwitched1,
       builder: (_, bool isSwitched1Listener, __) => ValueListenableBuilder(
@@ -259,7 +310,7 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
                       activeTrackColor: const Color(0xff3498DB),
                       onChanged: (value) async{
                         isSwitched1.value = value;
-                        await apiBLMUpdateSwitchStatusFamily(memorialId: memorialId, status: value);
+                        await apiBLMUpdateSwitchStatusFamily(memorialId: widget.memorialId, status: value);
                       },
                     ),
                   ],
@@ -286,7 +337,7 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
                       activeTrackColor: const Color(0xff3498DB),
                       onChanged: (value) async{
                         isSwitched2.value = value;
-                        await apiBLMUpdateSwitchStatusFriends(memorialId: memorialId, status: value);
+                        await apiBLMUpdateSwitchStatusFriends(memorialId: widget.memorialId, status: value);
                       },
                     ),
                   ],
@@ -313,7 +364,7 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
                       activeTrackColor: const Color(0xff3498DB),
                       onChanged: (value) async{
                         isSwitched3.value = value;
-                        await apiBLMUpdateSwitchStatusFollowers(memorialId: memorialId, status: value);
+                        await apiBLMUpdateSwitchStatusFollowers(memorialId: widget.memorialId, status: value);
                       },
                     ),
                   ],

@@ -133,11 +133,14 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
 
                         Row(
                           children: [
-                            const Text('Share your Memories', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                            // const Text('Share your Memories', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                            const Flexible(child: Text('Share your Memories', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
+                            // const SizedBox(child: Text('Share your Memories', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xff000000),),)),
 
                             const SizedBox(width: 5,),
 
                             Expanded(
+                              flex: 5,
                               child: DefaultTabController(
                                 length: 3,
                                 child: TabBar(
@@ -145,14 +148,14 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                                   unselectedLabelColor: const Color(0xff000000),
                                   labelColor: const Color(0xff04ECFF),
                                   indicatorColor: Colors.transparent,
-                                  isScrollable: true,
-                                  physics: const ClampingScrollPhysics(),
+                                  // isScrollable: true,
+                                  // physics: const ClampingScrollPhysics(),
                                   tabs: const [
-                                    Center(child: Text('TEXT', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold',),),),
+                                    Center(child: Text('TEXT', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaBold',),),),
 
-                                    Center(child: Text('VIDEO', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold',),),),
+                                    Center(child: Text('VIDEO', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaBold',),),),
 
-                                    Center(child: Text('SLIDE', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold',),),),
+                                    Center(child: Text('SLIDE', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaBold',),),),
                                   ],
                                   onTap: (int number){
                                     toggle.value = number;
@@ -259,10 +262,6 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
               placeholder: videoThumbnailListener.path == ''
               ? Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9)
               : Image.file(videoThumbnailListener, fit: BoxFit.cover, scale: 16 / 9),
-              // deviceOrientationsAfterFullScreen: [
-              //   DeviceOrientation.portraitUp
-              // ],
-              // aspectRatio: 16 / 9,
               controlsConfiguration: const BetterPlayerControlsConfiguration(
                 enableFullscreen: false,
               ),

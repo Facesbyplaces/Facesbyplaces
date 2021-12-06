@@ -185,7 +185,8 @@ class UIGetStartedState extends State<UIGetStarted>{
                               padding: EdgeInsets.zero,
                               height: 50,
                               onPressed: (){
-                                Navigator.pushNamed(context, '/regular/login');
+                                // Navigator.pushNamed(context, '/regular/login');
+                                Navigator.pushNamed(context, '/login');
                               },
                             ),
 
@@ -193,7 +194,7 @@ class UIGetStartedState extends State<UIGetStarted>{
 
                             const Expanded(child: SizedBox(),),
 
-                            const Text('Version: 1.77 / 1.0.0+16', style: TextStyle(fontSize: 14, color: Color(0xffffffff), fontFamily: 'NexaRegular'),),
+                            const Text('Version: 1.78 / 1.0.0+17', style: TextStyle(fontSize: 14, color: Color(0xffffffff), fontFamily: 'NexaRegular'),),
 
                             const SizedBox(height: 10),
                           ],

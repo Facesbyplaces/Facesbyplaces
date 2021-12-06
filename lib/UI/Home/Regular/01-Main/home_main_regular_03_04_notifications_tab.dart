@@ -192,7 +192,7 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
                       ),
                     );
                   }
-                }else if(notifications.connectionState == ConnectionState.none){
+                }else if(notifications.connectionState == ConnectionState.none || notifications.connectionState == ConnectionState.waiting){
                   return const Center(child: CustomLoaderThreeDots(),);
                 }
                 else if(notifications.hasError){

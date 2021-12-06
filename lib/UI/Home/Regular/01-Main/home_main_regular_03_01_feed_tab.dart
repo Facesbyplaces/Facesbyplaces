@@ -622,7 +622,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab> with AutomaticKe
                         }
                       );
                     }
-                  }else if(feeds.connectionState == ConnectionState.none){
+                  }else if(feeds.connectionState == ConnectionState.none || feeds.connectionState == ConnectionState.waiting){
                     return const Center(child: CustomLoaderThreeDots(),);
                   }
                   else if(feeds.hasError){

@@ -1,11 +1,14 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home_create_memorial_blm_03_create_memorial.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:better_player/better_player.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 import 'package:misc/misc.dart';
+import 'dart:typed_data';
 import 'dart:io';
 
 class HomeBLMCreateMemorial2 extends StatefulWidget{
@@ -31,6 +34,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
   ValueNotifier<int> toggle = ValueNotifier<int>(0);
   final picker = ImagePicker();
   final _formKey = GlobalKey<FormState>();
+  ValueNotifier<File> videoThumbnail = ValueNotifier<File>(File(''));
 
   Future getVideo() async{
     try{
@@ -40,6 +44,17 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
 
       if(pickedFile != null){
         videoFile.value = File(pickedFile.path);
+
+        Uint8List? uint8list = await VideoThumbnail.thumbnailData(
+          video: videoFile.value.path,
+          imageFormat: ImageFormat.JPEG,
+        );
+
+        final tempDir = await getTemporaryDirectory();
+        final file = await File('${tempDir.path}/alm-qr-code.png').create();
+        file.writeAsBytesSync(uint8list!);
+
+        videoThumbnail.value = file;
       }
     }catch (error){
       throw Exception('Error: $error');
@@ -107,25 +122,56 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
 
                         const SizedBox(height: 40,),
 
+                        // Row(
+                        //   children: [
+                        //     const Text('Share your Story', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+
+                        //     Expanded(
+                        //       child: DefaultTabController(
+                        //         length: 3,
+                        //         child: TabBar(
+                        //           indicator: const BoxDecoration(border: Border(left: BorderSide(width: 1, color: Color(0xff000000)), right: BorderSide(width: 1, color: Color(0xff000000),),),),
+                        //           unselectedLabelColor: const Color(0xff000000),
+                        //           labelColor: const Color(0xff04ECFF),
+                        //           indicatorColor: Colors.transparent,
+                        //           isScrollable: false,
+                        //           tabs: const [
+                        //             Center(child: Text('Text', style: TextStyle(fontSize: 14, fontFamily: 'NexaRegular',),),),
+
+                        //             Center(child: Text('Video', style: TextStyle(fontSize: 14, fontFamily: 'NexaRegular',),),),
+
+                        //             Center(child: Text('Slide', style: TextStyle(fontSize: 14, fontFamily: 'NexaRegular',),),),
+                        //           ],
+                        //           onTap: (int number){
+                        //             toggle.value = number;
+                        //           },
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
+
                         Row(
                           children: [
-                            const Text('Share your Story', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                            const Flexible(child: Text('Share your Memories', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
+
+                            const SizedBox(width: 5,),
 
                             Expanded(
+                              flex: 5,
                               child: DefaultTabController(
                                 length: 3,
                                 child: TabBar(
-                                  indicator: const BoxDecoration(border: Border(left: BorderSide(width: 1, color: Color(0xff000000)), right: BorderSide(width: 1, color: Color(0xff000000),),),),
+                                  indicator: const BoxDecoration(border: Border(left: BorderSide(width: 1, color: Color(0xff000000)), right: BorderSide(width: 1, color: Color(0xff000000))),),
                                   unselectedLabelColor: const Color(0xff000000),
                                   labelColor: const Color(0xff04ECFF),
                                   indicatorColor: Colors.transparent,
-                                  isScrollable: false,
                                   tabs: const [
-                                    Center(child: Text('Text', style: TextStyle(fontSize: 14, fontFamily: 'NexaRegular',),),),
+                                    Center(child: Text('TEXT', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaBold',),),),
 
-                                    Center(child: Text('Video', style: TextStyle(fontSize: 14, fontFamily: 'NexaRegular',),),),
+                                    Center(child: Text('VIDEO', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaBold',),),),
 
-                                    Center(child: Text('Slide', style: TextStyle(fontSize: 14, fontFamily: 'NexaRegular',),),),
+                                    Center(child: Text('SLIDE', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaBold',),),),
                                   ],
                                   onTap: (int number){
                                     toggle.value = number;
@@ -160,12 +206,22 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                           height: 50,
                           onPressed: () async{
                             if(!(_formKey.currentState!.validate())){
+                              // await showDialog(
+                              //   context: context,
+                              //   builder: (context) => CustomDialog(
+                              //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              //     title: 'Error',
+                              //     description: 'Please complete the form before submitting.',
+                              //     okButtonColor: const Color(0xfff44336), // RED
+                              //     includeOkButton: true,
+                              //   ),
+                              // );
                               await showDialog(
                                 context: context,
                                 builder: (context) => CustomDialog(
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                   title: 'Error',
-                                  description: 'Please complete the form before submitting.',
+                                  description: 'Please input the name of the memorial page before proceeding to the next page.',
                                   okButtonColor: const Color(0xfff44336), // RED
                                   includeOkButton: true,
                                 ),
@@ -222,92 +278,123 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
   shareStory2(){
     return ValueListenableBuilder(
       valueListenable: videoFile,
-      builder: (_, File videoFileListener, __) => SizedBox(
-        width: SizeConfig.screenWidth,
-        child: GestureDetector(
-          onTap: () async{
-            await getVideo();
-          },
+      builder: (_, File videoFileListener, __) => ValueListenableBuilder(
+        valueListenable: videoThumbnail,
+        builder: (_, File videoThumbnailListener, __) => SizedBox(
+          width: SizeConfig.screenWidth,
           child: videoFileListener.path != ''
-          ? Stack(
-            children: [
-              GestureDetector(
-                onTap: (){
-                  showGeneralDialog(
-                    context: context,
-                    barrierLabel: 'Dialog',
-                    barrierDismissible: true,
-                    transitionDuration: const Duration(milliseconds: 0),
-                    pageBuilder: (_, __, ___) {
-                      return Scaffold(
-                        backgroundColor: Colors.black12.withOpacity(0.7),
-                        body: SizedBox.expand(
-                          child: SafeArea(
-                            child: Column(
-                              children: [
-                                Container(
-                                  alignment: Alignment.centerRight,
-                                  padding: const EdgeInsets.only(right: 20.0),
-                                  child: GestureDetector(
-                                    child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
-                                    onTap: (){
-                                      Navigator.pop(context);
-                                    },
-                                  ),
-                                ),
-
-                                const SizedBox(height: 10,),
-
-                                Expanded(
-                                  child: BetterPlayer.file(
-                                    videoFileListener.path,
-                                    betterPlayerConfiguration: BetterPlayerConfiguration(
-                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                      deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-                                      aspectRatio: 16 / 9,
-                                    ),
-                                  ),
-                                ),
-                                
-                                const SizedBox(height: 85,),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                },
-                child: BetterPlayer.file(videoFileListener.path,
-                  betterPlayerConfiguration: BetterPlayerConfiguration(
-                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                    deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-                    aspectRatio: 16 / 9,
-                  ),
-                ),
+          ? BetterPlayer.file(videoFileListener.path,
+              betterPlayerConfiguration: BetterPlayerConfiguration(
+              placeholder: videoThumbnailListener.path == ''
+              ? Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9)
+              : Image.file(videoThumbnailListener, fit: BoxFit.cover, scale: 16 / 9),
+              controlsConfiguration: const BetterPlayerControlsConfiguration(
+                enableFullscreen: false,
               ),
-              Positioned(
-                right: 0,
-                child: IconButton(
-                  icon: const CircleAvatar(backgroundColor: Color(0xff000000), child: Icon(Icons.close, color: Color(0xffffffff),),),
-                  iconSize: 25,
-                  onPressed: (){
-                    videoFile.value = File('');
-                  },
-                ),
-              ),
-            ],
+            ),
           )
-          : Container(
-            decoration: BoxDecoration(color: const Color(0xffcccccc), border: Border.all(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
-            child: const Icon(Icons.file_upload, color: Color(0xff888888), size: 100,),
-            width: SizeConfig.screenWidth,
-            height: 260,
+          : GestureDetector(
+            onTap: () async{
+              await getVideo();
+            },
+            child: Container(
+              decoration: BoxDecoration(color: const Color(0xffcccccc), border: Border.all(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
+              child: const Icon(Icons.file_upload, color: Color(0xff888888), size: 100,),
+              width: SizeConfig.screenWidth,
+              height: 260,
+            ),
           ),
         ),
       ),
     );
+    // return ValueListenableBuilder(
+    //   valueListenable: videoFile,
+    //   builder: (_, File videoFileListener, __) => SizedBox(
+    //     width: SizeConfig.screenWidth,
+    //     child: GestureDetector(
+    //       onTap: () async{
+    //         await getVideo();
+    //       },
+    //       child: videoFileListener.path != ''
+    //       ? Stack(
+    //         children: [
+    //           GestureDetector(
+    //             onTap: (){
+    //               showGeneralDialog(
+    //                 context: context,
+    //                 barrierLabel: 'Dialog',
+    //                 barrierDismissible: true,
+    //                 transitionDuration: const Duration(milliseconds: 0),
+    //                 pageBuilder: (_, __, ___) {
+    //                   return Scaffold(
+    //                     backgroundColor: Colors.black12.withOpacity(0.7),
+    //                     body: SizedBox.expand(
+    //                       child: SafeArea(
+    //                         child: Column(
+    //                           children: [
+    //                             Container(
+    //                               alignment: Alignment.centerRight,
+    //                               padding: const EdgeInsets.only(right: 20.0),
+    //                               child: GestureDetector(
+    //                                 child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
+    //                                 onTap: (){
+    //                                   Navigator.pop(context);
+    //                                 },
+    //                               ),
+    //                             ),
+
+    //                             const SizedBox(height: 10,),
+
+    //                             Expanded(
+    //                               child: BetterPlayer.file(
+    //                                 videoFileListener.path,
+    //                                 betterPlayerConfiguration: BetterPlayerConfiguration(
+    //                                   placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+    //                                   deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+    //                                   aspectRatio: 16 / 9,
+    //                                 ),
+    //                               ),
+    //                             ),
+                                
+    //                             const SizedBox(height: 85,),
+    //                           ],
+    //                         ),
+    //                       ),
+    //                     ),
+    //                   );
+    //                 },
+    //               );
+    //             },
+    //             child: BetterPlayer.file(videoFileListener.path,
+    //               betterPlayerConfiguration: BetterPlayerConfiguration(
+    //                 placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+    //                 controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+    //                 deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+    //                 aspectRatio: 16 / 9,
+    //               ),
+    //             ),
+    //           ),
+    //           Positioned(
+    //             right: 0,
+    //             child: IconButton(
+    //               icon: const CircleAvatar(backgroundColor: Color(0xff000000), child: Icon(Icons.close, color: Color(0xffffffff),),),
+    //               iconSize: 25,
+    //               onPressed: (){
+    //                 videoFile.value = File('');
+    //               },
+    //             ),
+    //           ),
+    //         ],
+    //       )
+    //       : Container(
+    //         decoration: BoxDecoration(color: const Color(0xffcccccc), border: Border.all(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
+    //         child: const Icon(Icons.file_upload, color: Color(0xff888888), size: 100,),
+    //         width: SizeConfig.screenWidth,
+    //         height: 260,
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 
   shareStory3(){

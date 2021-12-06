@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:loader/loader.dart';
 import 'package:misc/misc.dart';
 import 'dart:typed_data';
 import 'dart:io';
@@ -164,7 +165,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
 
                       const SizedBox(height: 20,),
 
-                      const Text('Upload the best photo of the person in the memorial page.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
+                      const Text('Upload the best photo of the person in the memorial page.', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
 
                       const SizedBox(height: 40,),
 
@@ -241,7 +242,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
 
                       const SizedBox(height: 20,),
 
-                      const Text('Upload your own or select from the pre-mades.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
+                      const Text('Upload your own or select from the pre-mades.', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
 
                       const SizedBox(height: 80,),
 
@@ -288,7 +289,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                             blmLongitude: widget.longitude,
                           );
 
-                          context.loaderOverlay.show();
+                          context.loaderOverlay.show(widget: const CustomLoaderTextLoader());
                           int result = await apiBLMCreateMemorial(blmMemorial: memorial);
                           context.loaderOverlay.hide();
 

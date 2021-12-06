@@ -1,6 +1,6 @@
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'home_create_memorial_regular_02_create_memorial.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -249,6 +249,11 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                           maxLines: 1,
                           cursorColor: const Color(0xff000000),
                           style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
+                          onChanged: (value){
+                            if(value == ''){
+                              location.value = null;
+                            }
+                          },
                           decoration: InputDecoration(
                             alignLabelWithHint: true, 
                             labelText: 'Cemetery', 

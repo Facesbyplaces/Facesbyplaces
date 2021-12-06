@@ -16,7 +16,6 @@ import 'package:flutter/services.dart';
 import 'package:dialog/dialog.dart';
 import '../ui_01_get_started.dart';
 import 'package:misc/misc.dart';
-import '../ui_02_login.dart';
 
 class RegularLogin extends StatefulWidget{
   const RegularLogin({Key? key}) : super(key: key);
@@ -320,8 +319,22 @@ class RegularLoginState extends State<RegularLogin>{
                                         String result = await apiRegularLogin(email: _key1.currentState!.controller.text, password: _key2.currentState!.controller.text, deviceToken: deviceToken);
                                         context.loaderOverlay.hide();
 
+                                        // if(result == 'Success'){
+                                        //   Navigator.push(context, MaterialPageRoute(builder: (context) => const UILogin01()));
+                                        // }else{
+                                        //   await showDialog(
+                                        //     context: context,
+                                        //     builder: (context) => CustomDialog(
+                                        //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        //       title: 'Error',
+                                        //       description: 'Error: $result',
+                                        //       okButtonColor: const Color(0xfff44336), // RED
+                                        //       includeOkButton: true,
+                                        //     ),
+                                        //   );
+                                        // }
                                         if(result == 'Success'){
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => const UILogin01()));
+                                          Navigator.pushReplacementNamed(context, '/home/regular');
                                         }else{
                                           await showDialog(
                                             context: context,
