@@ -34,12 +34,12 @@ Future<APIRegularSearchUsersMain> apiRegularSearchUsers({required String keyword
 
 class APIRegularSearchUsersMain{
   int almItemsRemaining;
-  List<APIBLMSearchUsersExtended> almSearchUsers;
+  List<APIRegularSearchUsersExtended> almSearchUsers;
   APIRegularSearchUsersMain({required this.almItemsRemaining, required this.almSearchUsers});
 
   factory APIRegularSearchUsersMain.fromJson(Map<String, dynamic> parsedJson){
     var newValue = parsedJson['users'] as List;
-    List<APIBLMSearchUsersExtended> newBLMList = newValue.map((e) => APIBLMSearchUsersExtended.fromJson(e)).toList();
+    List<APIRegularSearchUsersExtended> newBLMList = newValue.map((e) => APIRegularSearchUsersExtended.fromJson(e)).toList();
 
     return APIRegularSearchUsersMain(
       almItemsRemaining: parsedJson['itemsremaining'],
@@ -48,17 +48,17 @@ class APIRegularSearchUsersMain{
   }
 }
 
-class APIBLMSearchUsersExtended{
+class APIRegularSearchUsersExtended{
   int searchUsersId;
   String searchUsersFirstName;
   String searchUsersLastName;
   String searchUsersEmail;
   int searchUsersAccountType;
   String searchUsersImage;
-  APIBLMSearchUsersExtended({required this.searchUsersId, required this.searchUsersFirstName, required this.searchUsersLastName, required this.searchUsersEmail, required this.searchUsersAccountType, required this.searchUsersImage});
+  APIRegularSearchUsersExtended({required this.searchUsersId, required this.searchUsersFirstName, required this.searchUsersLastName, required this.searchUsersEmail, required this.searchUsersAccountType, required this.searchUsersImage});
 
-  factory APIBLMSearchUsersExtended.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMSearchUsersExtended(
+  factory APIRegularSearchUsersExtended.fromJson(Map<String, dynamic> parsedJson){
+    return APIRegularSearchUsersExtended(
       searchUsersId: parsedJson['id'],
       searchUsersFirstName: parsedJson['first_name'] ?? '',
       searchUsersLastName: parsedJson['last_name'] ?? '',

@@ -14,7 +14,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:flutter/services.dart';
+import 'home_view_memorial_blm_03_connection_list.dart';
+import 'home_view_memorial_blm_04_maps.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 import 'package:loader/loader.dart';
@@ -22,9 +23,6 @@ import 'package:mime/mime.dart';
 import 'package:misc/misc.dart';
 import 'dart:io';
 import 'dart:ui';
-
-import 'home_view_memorial_blm_03_connection_list.dart';
-import 'home_view_memorial_blm_04_maps.dart';
 
 class HomeBLMMemorialProfile extends StatefulWidget{
   final int memorialId;
@@ -307,13 +305,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                                                                   const SizedBox(height: 20,),
 
-                                                                  // TextButton.icon(
-                                                                  //   label: Text('${profile.data!.blmMemorial.memorialFollowersCount}', style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
-                                                                  //   icon: const CircleAvatar(radius: 20, backgroundColor: Color(0xffE67E22), child: Icon(Icons.card_giftcard, color: Color(0xffffffff),),),
-                                                                  //   onPressed: (){
-                                                                  //     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: widget.memorialId, newToggle: 2)));
-                                                                  //   },
-                                                                  // ),
                                                                   TextButton.icon(
                                                                     label: Text('${profile.data!.blmMemorial.memorialFollowersCount}', style: const TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
                                                                     icon: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000), child: Image.asset('assets/icons/fist.png')),
@@ -665,18 +656,16 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                                                           if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[next])?.contains('video') == true){
                                                                                                             return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[index]}',
                                                                                                               betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                                                                                autoPlay: true,
-                                                                                                                deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-                                                                                                                autoDispose: false,
                                                                                                                 aspectRatio: 16 / 9,
                                                                                                                 fit: BoxFit.contain,
+                                                                                                                autoDispose: false, // NEEDS TO BE FALSE SO THE VIDEO WOULD STILL PLAY CONTENT IN THE SLIDER IS CHANGED
                                                                                                               ),
                                                                                                             );
                                                                                                           }else{
                                                                                                             return CachedNetworkImage(
                                                                                                               fit: BoxFit.contain,
                                                                                                               imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[next],
-                                                                                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                                                             );
                                                                                                           }

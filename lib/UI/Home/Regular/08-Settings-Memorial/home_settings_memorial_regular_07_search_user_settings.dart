@@ -25,7 +25,7 @@ class HomeRegularSearchUser extends StatefulWidget{
 
 class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
   TextEditingController controller = TextEditingController();
-  Future<List<APIBLMSearchUsersExtended>>? showListOfSearchUsers;
+  Future<List<APIRegularSearchUsersExtended>>? showListOfSearchUsers;
   ScrollController scrollController = ScrollController();
   ValueNotifier<int> lengthOfSearchUsers = ValueNotifier<int>(0);
   int page1 = 1;
@@ -75,9 +75,9 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
     });
   }
 
-  Future<List<APIBLMSearchUsersExtended>> getListOfSearchUsers({required String keywords, required int page}) async{
+  Future<List<APIRegularSearchUsersExtended>> getListOfSearchUsers({required String keywords, required int page}) async{
     APIRegularSearchUsersMain? newValue;
-    List<APIBLMSearchUsersExtended> listOfSearchUsers = [];
+    List<APIRegularSearchUsersExtended> listOfSearchUsers = [];
 
     do{
       newValue = await apiRegularSearchUsers(keywords: keywords, page: page).onError((error, stackTrace){
@@ -217,7 +217,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                   body: onSearchListener
                   ? RefreshIndicator(
                     onRefresh: onRefresh,
-                    child: FutureBuilder<List<APIBLMSearchUsersExtended>>(
+                    child: FutureBuilder<List<APIRegularSearchUsersExtended>>(
                       future: showListOfSearchUsers,
                       builder: (context, searchUsers){
                         if(searchUsers.connectionState == ConnectionState.done){

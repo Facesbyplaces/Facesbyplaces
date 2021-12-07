@@ -194,7 +194,7 @@ class UIGetStartedState extends State<UIGetStarted>{
 
                             const Expanded(child: SizedBox(),),
 
-                            const Text('Version: 1.78 / 1.0.0+17', style: TextStyle(fontSize: 14, color: Color(0xffffffff), fontFamily: 'NexaRegular'),),
+                            const Text('Version: 1.79 / 1.0.0+18', style: TextStyle(fontSize: 14, color: Color(0xffffffff), fontFamily: 'NexaRegular'),),
 
                             const SizedBox(height: 10),
                           ],

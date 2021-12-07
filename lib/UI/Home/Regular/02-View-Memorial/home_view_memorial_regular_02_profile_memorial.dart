@@ -16,7 +16,6 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'home_view_memorial_regular_04_maps.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 import 'package:loader/loader.dart';
@@ -687,18 +686,16 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                                                           if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[next])?.contains('video') == true){
                                                                                                             return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
                                                                                                               betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                                                                                autoPlay: true,
-                                                                                                                deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-                                                                                                                autoDispose: false,
                                                                                                                 aspectRatio: 16 / 9,
                                                                                                                 fit: BoxFit.contain,
+                                                                                                                autoDispose: false, // NEEDS TO BE FALSE SO THE VIDEO WOULD STILL PLAY CONTENT IN THE SLIDER IS CHANGED
                                                                                                               ),
                                                                                                             );
                                                                                                           }else{
                                                                                                             return CachedNetworkImage(
                                                                                                               fit: BoxFit.contain,
                                                                                                               imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[next],
-                                                                                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                                                             );
                                                                                                           }

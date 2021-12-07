@@ -110,54 +110,6 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
             ),
           ),
         ),
-        // body: SafeArea(
-        //   child: LayoutBuilder(
-        //     builder: (context, constraint){
-        //       return SingleChildScrollView(
-        //         physics: const ClampingScrollPhysics(),
-        //         child: ConstrainedBox(
-        //           constraints: BoxConstraints(minHeight: constraint.maxHeight),
-        //           child: IntrinsicHeight(
-        //             child: Column(
-        //               children: [
-        //                 SizedBox(
-        //                   height: 70,
-        //                   child: DefaultTabController(
-        //                     length: 2,
-        //                     child: TabBar(
-        //                       labelColor: const Color(0xff04ECFF),
-        //                       unselectedLabelColor: const Color(0xff000000),
-        //                       indicatorColor: const Color(0xff04ECFF),
-        //                       indicatorSize: TabBarIndicatorSize.label,
-        //                       tabs: const [
-        //                         Text('Page', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
-
-        //                         Text('Privacy', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
-        //                       ],
-        //                       onTap: (int index){
-        //                         toggle.value = index;
-        //                       },
-        //                     ),
-        //                   ),
-        //                 ),
-        //                 Expanded(
-        //                   child: SizedBox(
-        //                     child: ((){
-        //                       switch (toggleListener){
-        //                         case 0: return settingsTab1(widget.memorialId);
-        //                         case 1: return settingsTab2(widget.memorialId);
-        //                       }
-        //                     }()),
-        //                   ),
-        //                 ),
-        //               ],
-        //             ),
-        //           ),
-        //         ),
-        //       );
-        //     }
-        //   ),
-        // ),
       ),
     );
   }

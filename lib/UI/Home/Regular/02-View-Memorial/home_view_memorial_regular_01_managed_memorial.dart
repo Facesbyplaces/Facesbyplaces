@@ -223,7 +223,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                           child: ((){
                                                             if(profile.data!.almMemorial.showMemorialBackgroundImage == ''){
                                                               return Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,);
-                                                              // scale: 1.0,
                                                             }else{
                                                               return CachedNetworkImage(
                                                                 fit: BoxFit.cover,
@@ -268,12 +267,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                               Expanded(
                                                                                 child: CachedNetworkImage(
                                                                                   fit: BoxFit.contain,
-                                                                                  // 'assets/icons/app-icon.png'
                                                                                   imageUrl: profile.data!.almMemorial.showMemorialBackgroundImage,
                                                                                   placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain,),
                                                                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain),
-                                                                                  // placeholder: (context, url) => Image.asset('assets/icons/app-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                                  // errorWidget: (context, url, error) => Image.asset('assets/icons/app-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                                 )
                                                                               ),
 
@@ -326,7 +322,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                           if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[0])?.contains('video') == true){
                                                                             return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}',
                                                                               betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                                                // autoPlay: true,
                                                                                 aspectRatio: 16 / 9,
                                                                                 fit: BoxFit.contain,
                                                                               ),
@@ -647,16 +642,16 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                                                           if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[next])?.contains('video') == true){
                                                                                                             return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
                                                                                                               betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                                                                                // autoPlay: true,
                                                                                                                 aspectRatio: 16 / 9,
                                                                                                                 fit: BoxFit.contain,
+                                                                                                                autoDispose: false, // NEEDS TO BE FALSE SO THE VIDEO WOULD STILL PLAY CONTENT IN THE SLIDER IS CHANGED
                                                                                                               ),
                                                                                                             );
                                                                                                           }else{
                                                                                                             return CachedNetworkImage(
                                                                                                               fit: BoxFit.contain,
                                                                                                               imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[next],
-                                                                                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                                                             );
                                                                                                           }
@@ -723,7 +718,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                 const SizedBox(width: 10,),
 
                                                                 MaterialButton(
-                                                                  color: Colors.green,
+                                                                  padding: const EdgeInsets.all(5),
+                                                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                                                                  color: const Color(0xff04ECFF),
                                                                   onPressed: (){
                                                                     if(widget.newlyCreated == true){
                                                                       Route newRoute = MaterialPageRoute(builder: (context) => const HomeRegularScreenExtended(newToggleBottom: 1,),);
@@ -746,7 +743,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                     alignment: Alignment.centerRight,
                                                                     child: widget.managed == true
                                                                     ? MaterialButton(
-                                                                      color: Colors.green,
+                                                                      padding: const EdgeInsets.all(5),
+                                                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                                                                      color: const Color(0xff04ECFF),
                                                                       onPressed: (){
                                                                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePost(name: profile.data!.almMemorial.showMemorialName, memorialId: profile.data!.almMemorial.showMemorialId)));
                                                                       },
@@ -781,16 +780,11 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                         radius: 100,
                                                                         backgroundColor: const Color(0xff888888),
                                                                         foregroundImage: NetworkImage(profile.data!.almMemorial.showMemorialProfileImage),
-                                                                        // backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                                                         backgroundImage: const AssetImage('assets/icons/cover-icon.png'),
-                                                                        // Image.asset('assets/icons/app-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                        // placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                        // errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                       )
                                                                       : const CircleAvatar(
                                                                         radius: 100,
                                                                         backgroundColor: Color(0xff888888),
-                                                                        // foregroundImage: AssetImage('assets/icons/app-icon.png'),
                                                                         foregroundImage: AssetImage('assets/icons/cover-icon.png'),
                                                                       )
                                                                     ),

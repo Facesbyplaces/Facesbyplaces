@@ -64,7 +64,7 @@ class APIRegularShowAdminsSettingsExtended{
     return APIRegularShowAdminsSettingsExtended(
       showAdminsSettingsUser: APIRegularShowAdminsSettingsExtendedUser.fromJson(parsedJson['user']),
       showAdminsSettingsRelationship: parsedJson['relationship'],
-      showAdminsSettingsPageOwner: parsedJson['pageowner'],
+      showAdminsSettingsPageOwner: parsedJson['pageowner'] ?? false,
     );
   }
 }

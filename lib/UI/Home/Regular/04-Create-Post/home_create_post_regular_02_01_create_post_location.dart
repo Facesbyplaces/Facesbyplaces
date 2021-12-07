@@ -87,6 +87,7 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
                                     }else{
                                       context.loaderOverlay.show();
                                       GooglePlace googlePlace = GooglePlace("AIzaSyCTPIQSGBS0cdzWRv9VGqrRuVwd2KuuhNg");
+                                      
                                       var result = await googlePlace.autocomplete.get(newPlaces);
                                       context.loaderOverlay.hide();
 

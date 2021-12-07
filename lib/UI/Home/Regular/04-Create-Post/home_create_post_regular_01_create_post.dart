@@ -33,7 +33,8 @@ class HomeRegularCreatePost extends StatefulWidget{
 }
 
 class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
-  ValueNotifier<List<File>> slideImages = ValueNotifier<List<File>>([]);
+  // ValueNotifier<List<File>> slideImages = ValueNotifier<List<File>>([]);
+  ValueNotifier<List<XFile>> slideImages = ValueNotifier<List<XFile>>([]);
   ValueNotifier<String> newLocation = ValueNotifier<String>('');
   ValueNotifier<int> currentIdSelected = ValueNotifier<int>(0);
   ValueNotifier<int> removeAttachment = ValueNotifier<int>(0);
@@ -67,7 +68,8 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
       });
 
       if(pickedFile != null){
-        slideImages.value.add(File(pickedFile.path));
+        // slideImages.value.add(File(pickedFile.path));
+        slideImages.value.add(pickedFile);
         slideCount.value++;
       }
     }catch (error){
@@ -76,14 +78,27 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
   }
 
   Future getSlideFiles() async{
+    // try{
+    //   final pickedFile = await picker.pickImage(source: ImageSource.gallery).then((picture){
+    //     return picture;
+    //   });
+
+    //   if(pickedFile != null){
+    //     slideImages.value.add(File(pickedFile.path));
+    //     slideCount.value++;
+    //   }
+    // }catch (error){
+    //   throw Exception('Error: $error');
+    // }
+
     try{
-      final pickedFile = await picker.pickImage(source: ImageSource.gallery).then((picture){
+      final pickedFile = await picker.pickMultiImage().then((picture){
         return picture;
       });
 
       if(pickedFile != null){
-        slideImages.value.add(File(pickedFile.path));
-        slideCount.value++;
+        slideImages.value.addAll(pickedFile);
+        slideCount.value += pickedFile.length;
       }
     }catch (error){
       throw Exception('Error: $error');
@@ -108,7 +123,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
           valueListenable: removeAttachment,
           builder: (_, int removeAttachmentListener, __) => ValueListenableBuilder(
             valueListenable: slideImages,
-            builder: (_, List<File> slideImagesListener, __) => ValueListenableBuilder(
+            builder: (_, List<XFile> slideImagesListener, __) => ValueListenableBuilder(
               valueListenable: slideCount,
               builder: (_, int slideCountListener, __) => ValueListenableBuilder(
                 valueListenable: userCount,
@@ -134,89 +149,102 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                               child: Center(child: Text('Post', style: TextStyle(fontSize: 28, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),),
                             ),
                             onTap: () async{
-                              List<RegularTaggedPeople> userIds = [];
-                              List<File> newFiles = [];
-                              APIRegularCreatePost? post;
-
-                              if(userCount.value != 0){
-                                for(int i = 0; i < userCount.value; i++){
-                                  userIds.add(RegularTaggedPeople(userId: users[i].userId, accountType: users[i].accountType,),);
-                                }
-                              }
-                              
+                              List<XFile> newFiles = [];
                               newFiles.addAll(slideImages.value);
 
-                              if(newLocation.value == ''){
-                                Location.Location location = Location.Location();
-
-                                bool serviceEnabled = await location.serviceEnabled();
-                                if(!serviceEnabled){
-                                  serviceEnabled = await location.requestService();
-                                  if(!serviceEnabled){
-                                    return;
-                                  }
-                                }
-
-                                Location.PermissionStatus permissionGranted = await location.hasPermission();
-                                if(permissionGranted == Location.PermissionStatus.denied){
-                                  permissionGranted = await location.requestPermission();
-                                  if(permissionGranted != Location.PermissionStatus.granted){
-                                    await showDialog(
-                                      context: context,
-                                      builder: (context) => CustomDialog(
-                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        title: 'Error',
-                                        description: 'Permission to access location has been denied from this app. In order to turn it on, go to settings and allow location access permission for this app.',
-                                        okButtonColor: const Color(0xfff44336), // RED
-                                        includeOkButton: true,
-                                      ),
-                                    );
-                                    return;
-                                  }
-                                }
-
-                                Location.LocationData locationData = await location.getLocation();
-
-                                post = APIRegularCreatePost(
-                                  almPageType: 'Memorial',
-                                  almPostBody: controller.text,
-                                  almPageId: currentIdSelected.value,
-                                  almLocation: '',
-                                  almImagesOrVideos: newFiles,
-                                  almLatitude: locationData.latitude!,
-                                  almLongitude: locationData.longitude!,
-                                  almTagPeople: userIds,
-                                );
-                              }else{
-                                post = APIRegularCreatePost(
-                                  almPageType: 'Memorial',
-                                  almPostBody: controller.text,
-                                  almPageId: currentIdSelected.value,
-                                  almLocation: newLocation.value,
-                                  almImagesOrVideos: newFiles,
-                                  almLatitude: latitude,
-                                  almLongitude: longitude,
-                                  almTagPeople: userIds,
-                                );
-                              }
-
-                              context.loaderOverlay.show();
-                              bool result = await apiRegularHomeCreatePost(post: post);
-                              context.loaderOverlay.hide();
-
-                              if(result){
-                                Navigator.popAndPushNamed(context, '/home/regular');
-                              }else{
+                              if(controller.text == '' && newFiles.isEmpty){
                                 await showDialog(
                                   context: context,
                                   builder: (context) => CustomDialog(
                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                     title: 'Error',
-                                    description: 'Something went wrong. Please try again.',
+                                    description: 'Please input a post before proceeding.',
                                     okButtonColor: const Color(0xfff44336), // RED
                                     includeOkButton: true,
                                   ),
                                 );
+                              }else{
+                                List<RegularTaggedPeople> userIds = [];
+                                APIRegularCreatePost? post;
+
+                                if(userCount.value != 0){
+                                  for(int i = 0; i < userCount.value; i++){
+                                    userIds.add(RegularTaggedPeople(userId: users[i].userId, accountType: users[i].accountType,),);
+                                  }
+                                }
+
+                                if(newLocation.value == ''){
+                                  Location.Location location = Location.Location();
+
+                                  bool serviceEnabled = await location.serviceEnabled();
+                                  if(!serviceEnabled){
+                                    serviceEnabled = await location.requestService();
+                                    if(!serviceEnabled){
+                                      return;
+                                    }
+                                  }
+
+                                  Location.PermissionStatus permissionGranted = await location.hasPermission();
+                                  if(permissionGranted == Location.PermissionStatus.denied){
+                                    permissionGranted = await location.requestPermission();
+                                    if(permissionGranted != Location.PermissionStatus.granted){
+                                      await showDialog(
+                                        context: context,
+                                        builder: (context) => CustomDialog(
+                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                          title: 'Error',
+                                          description: 'Permission to access location has been denied from this app. In order to turn it on, go to settings and allow location access permission for this app.',
+                                          okButtonColor: const Color(0xfff44336), // RED
+                                          includeOkButton: true,
+                                        ),
+                                      );
+                                      return;
+                                    }
+                                  }
+
+                                  Location.LocationData locationData = await location.getLocation();
+
+                                  post = APIRegularCreatePost(
+                                    almPageType: 'Memorial',
+                                    almPostBody: controller.text,
+                                    almPageId: currentIdSelected.value,
+                                    almLocation: '',
+                                    almImagesOrVideos: newFiles,
+                                    almLatitude: locationData.latitude!,
+                                    almLongitude: locationData.longitude!,
+                                    almTagPeople: userIds,
+                                  );
+                                }else{
+                                  post = APIRegularCreatePost(
+                                    almPageType: 'Memorial',
+                                    almPostBody: controller.text,
+                                    almPageId: currentIdSelected.value,
+                                    almLocation: newLocation.value,
+                                    almImagesOrVideos: newFiles,
+                                    almLatitude: latitude,
+                                    almLongitude: longitude,
+                                    almTagPeople: userIds,
+                                  );
+                                }
+
+                                context.loaderOverlay.show();
+                                bool result = await apiRegularHomeCreatePost(post: post);
+                                context.loaderOverlay.hide();
+
+                                if(result){
+                                  Navigator.popAndPushNamed(context, '/home/regular');
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (context) => CustomDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: 'Error',
+                                      description: 'Something went wrong. Please try again.',
+                                      okButtonColor: const Color(0xfff44336), // RED
+                                      includeOkButton: true,
+                                    ),
+                                  );
+                                }
                               }
                             },
                           ),
@@ -450,7 +478,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                                   children: [
                                                     ClipRRect(
                                                       borderRadius: BorderRadius.circular(10),
-                                                      child: Image.file(slideImagesListener[index], fit: BoxFit.cover,),
+                                                      child: Image.file(File(slideImagesListener[index].path), fit: BoxFit.cover,),
                                                     ),
 
                                                     Center(
@@ -521,7 +549,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                                                       ),
                                                                     );
                                                                   }else{
-                                                                    return Image.file(slideImagesListener[index], fit: BoxFit.contain,);
+                                                                    return Image.file(File(slideImagesListener[index].path), fit: BoxFit.contain,);
                                                                   }
                                                                 }()),
                                                               ),

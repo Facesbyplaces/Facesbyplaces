@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
-Future<APIBLMShowAdminsSettingMain> apiBLMShowAdminSettings({required int memorialId, required int page}) async{
+Future<APIBLMShowAdminsSettingsMain> apiBLMShowAdminSettings({required int memorialId, required int page}) async{
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
@@ -25,27 +25,27 @@ Future<APIBLMShowAdminsSettingMain> apiBLMShowAdminSettings({required int memori
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
-    return APIBLMShowAdminsSettingMain.fromJson(newData);
+    return APIBLMShowAdminsSettingsMain.fromJson(newData);
   }else{
     throw Exception('Failed to get the admin settings.');
   }
 }
 
-class APIBLMShowAdminsSettingMain{
+class APIBLMShowAdminsSettingsMain{
   int blmAdminItemsRemaining;
   int blmFamilyItemsRemaining;
   List<APIBLMShowAdminsSettingExtended> blmAdminList;
   List<APIBLMShowAdminsSettingExtended> blmFamilyList;
-  APIBLMShowAdminsSettingMain({required this.blmAdminItemsRemaining, required this.blmFamilyItemsRemaining, required this.blmAdminList, required this.blmFamilyList});
+  APIBLMShowAdminsSettingsMain({required this.blmAdminItemsRemaining, required this.blmFamilyItemsRemaining, required this.blmAdminList, required this.blmFamilyList});
 
-  factory APIBLMShowAdminsSettingMain.fromJson(Map<String, dynamic> parsedJson){
+  factory APIBLMShowAdminsSettingsMain.fromJson(Map<String, dynamic> parsedJson){
     var adminList = parsedJson['admins'] as List;
     var familyList = parsedJson['family'] as List;
 
     List<APIBLMShowAdminsSettingExtended> newList1 = adminList.map((i) => APIBLMShowAdminsSettingExtended.fromJson(i)).toList();
     List<APIBLMShowAdminsSettingExtended> newList2 = familyList.map((i) => APIBLMShowAdminsSettingExtended.fromJson(i)).toList();
 
-    return APIBLMShowAdminsSettingMain(
+    return APIBLMShowAdminsSettingsMain(
       blmAdminItemsRemaining: parsedJson['adminsitemsremaining'],
       blmFamilyItemsRemaining: parsedJson['familyitemsremaining'],
       blmAdminList: newList1,
@@ -57,12 +57,14 @@ class APIBLMShowAdminsSettingMain{
 class APIBLMShowAdminsSettingExtended{
   APIBLMShowAdminsSettingExtendedUser showAdminsSettingsUser;
   String showAdminsSettingsRelationship;
-  APIBLMShowAdminsSettingExtended({required this.showAdminsSettingsUser, required this.showAdminsSettingsRelationship});
+  bool showAdminsSettingsPageOwner;
+  APIBLMShowAdminsSettingExtended({required this.showAdminsSettingsUser, required this.showAdminsSettingsRelationship, required this.showAdminsSettingsPageOwner});
 
   factory APIBLMShowAdminsSettingExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowAdminsSettingExtended(
       showAdminsSettingsUser: APIBLMShowAdminsSettingExtendedUser.fromJson(parsedJson['user']),
       showAdminsSettingsRelationship: parsedJson['relationship'] ?? '',
+      showAdminsSettingsPageOwner: parsedJson['pageowner'] ?? false,
     );
   }
 }

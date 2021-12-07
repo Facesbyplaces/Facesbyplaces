@@ -4,17 +4,8 @@ import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api_settings_memorial
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
+import 'package:loader/loader.dart';
 import 'package:dialog/dialog.dart';
-
-class BLMShowAdminSettings{
-  final int userId;
-  final String firstName;
-  final String lastName;
-  final String image;
-  final String relationship;
-  final String email;
-  const BLMShowAdminSettings({required this.userId, required this.firstName, required this.lastName, required this.image, required this.relationship, required this.email});
-}
 
 class HomeBLMPageManagers extends StatefulWidget{
   final int memorialId;
@@ -25,96 +16,79 @@ class HomeBLMPageManagers extends StatefulWidget{
 }
 
 class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
+  Future<List<Widget>>? showListOfAdmins;
   ScrollController scrollController = ScrollController();
-  ValueNotifier<int> count = ValueNotifier<int>(0);
-  List<Widget> managers = [];
-  int adminItemsRemaining = 1;
-  int familyItemsRemaining = 1;
+  ValueNotifier<int> lengthOfAdmins = ValueNotifier<int>(0);
+  ValueNotifier<bool> loaded = ValueNotifier<bool>(false);
+  ValueNotifier<int> flag = ValueNotifier<int>(0);
+  bool updatedAdminsData = false;
   int page1 = 1;
-  int page2 = 1;
-  bool flag1 = false;
+  bool added = false;
 
   @override
   void initState(){
     super.initState();
-    addManagers1();
-    onLoading();
+    showListOfAdmins = getListOfAdmins(page: page1);
     scrollController.addListener((){
       if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
-        if(adminItemsRemaining != 0 && familyItemsRemaining != 0){
-          onLoading();
-        }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('No more users to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
-            ),
-          );
+        if(loaded.value){
+          page1 = 1; // RESET BACK TO ONE FOR PAGINATION OF THE API
+          showListOfAdmins = getListOfAdmins(page: page1);
+
+          if(updatedAdminsData){
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                elevation: 0,
+                content: const Text('New admins available. Reload to view.'), 
+                duration: const Duration(seconds: 3), backgroundColor: const Color(0xff4EC9D4),
+                action: SnackBarAction(
+                  label: 'Reload',
+                  onPressed: (){
+                    onRefresh();
+                  },
+                  textColor: Colors.blue,
+                ),
+              ),
+            );
+          }else{
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No more admins to show.'), elevation: 0, duration: Duration(seconds: 1), backgroundColor: Color(0xff4EC9D4),),);
+          }
         }
       }
     });
   }
 
-  void onLoading() async{
-    if(flag1 == false){
-      onLoading1();
-    }else{
-      onLoading2();
-    }
-  }
-
   Future<void> onRefresh() async{
-    if(adminItemsRemaining == 0 && flag1 == false){
-      flag1 = true;
-      onLoading1();
-    }else{
-      adminItemsRemaining = 1;
-      familyItemsRemaining = 1;
-      page1 = 1;
-      page2 = 1;
-      count.value = 0;
-      flag1 = false;
-      onLoading2();
-    }
+    page1 = 1;
+    loaded.value = false;
+    updatedAdminsData = false;
+    lengthOfAdmins.value = 0;
+    showListOfAdmins = getListOfAdmins(page: page1);
   }
 
-  void addManagers1(){
-    managers.add(const Padding(padding: EdgeInsets.only(left: 20.0,), child: Text('Admin', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff9F9F9F),),),),);
-  }
+  Future<List<Widget>> getListOfAdmins({required int page}) async{
+    List<Widget> admins = [];
+    APIBLMShowAdminsSettingsMain? newValue;
 
-  void addManagers2(){
-    managers.add(const Padding(padding: EdgeInsets.only(left: 20.0,), child: Text('Family', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff9F9F9F),),),),);
-  }
+    admins.add(const Padding(padding: EdgeInsets.only(left: 20.0,), child: Text('Admin', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff9F9F9F),),),),);
 
-  void onLoading1() async{
-    if(adminItemsRemaining != 0){
-      context.loaderOverlay.show();
-      var newValue = await apiBLMShowAdminSettings(memorialId: widget.memorialId, page: page1).onError((error, stackTrace){
-        context.loaderOverlay.hide();
+    do{
+      newValue = await apiBLMShowAdminSettings(memorialId: widget.memorialId, page: page1).onError((error, stackTrace){
         showDialog(
           context: context,
           builder: (context) => CustomDialog(
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             title: 'Error',
-            description: 'Error: $error.',
+            description: 'Something went wrong. Please try again.',
             okButtonColor: const Color(0xfff44336), // RED
             includeOkButton: true,
-            okButton: (){
-              Navigator.pop(context, true);
-              Navigator.pop(context, true);
-            }
           ),
         );
         throw Exception('$error');
       });
-      context.loaderOverlay.hide();
-
-      adminItemsRemaining = newValue.blmAdminItemsRemaining;
-      count.value = count.value + newValue.blmAdminList.length;
 
       for(int i = 0; i < newValue.blmAdminList.length; i++){
-        managers.add(
+        admins.add(
           ListTile(
             leading: newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserImage != ''
             ? CircleAvatar(
@@ -141,9 +115,10 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                 color: Color(0xffBDC3C7),
               ),
             ),
-            trailing: MaterialButton(
+            trailing: !newValue.blmAdminList[i].showAdminsSettingsPageOwner
+            ? MaterialButton(
               child: const Text('Remove', style: TextStyle(fontSize: 20, fontFamily: 'HelveticaRegular', color: Color(0xffffffff),),),
-              shape: const StadiumBorder(side: BorderSide(color: Color(0xffE74C3C),),),
+              shape: const StadiumBorder(side: BorderSide(color: Color(0xffE74C3C)),),
               minWidth: SizeConfig.screenWidth! / 3.5,
               splashColor: const Color(0xff04ECFF),
               textColor: const Color(0xffffffff),
@@ -164,7 +139,7 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
 
                 if(confirmation){
                   context.loaderOverlay.show();
-                  String result = await apiBLMDeleteMemorialAdmin(pageType: 'Blm', pageId: widget.memorialId, userId: newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserId);
+                  String result = await apiBLMDeleteMemorialAdmin(pageType: 'Memorial', pageId: widget.memorialId, userId: newValue!.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserId);
                   context.loaderOverlay.hide();
 
                   if(result != 'Success'){
@@ -188,14 +163,7 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                         okButtonColor: const Color(0xff4caf50), // GREEN
                         includeOkButton: true,
                         okButton: (){
-                          managers = [];
-                          adminItemsRemaining = 1;
-                          familyItemsRemaining = 1;
-                          page1 = 1;
-                          page2 = 1;
-                          flag1 = false;
-                          addManagers1();
-                          onLoading();
+                          onRefresh();
 
                           Navigator.pop(context, true);
                         },
@@ -204,34 +172,16 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                   }
                 }
               },
-            ),
+            ) 
+            : const SizedBox(height: 0,),
           ),
         );
       }
-    }
 
-    if(mounted){
-      page1++;
-    }
-
-    if(adminItemsRemaining == 0){
-      addManagers2();
-      flag1 = true;
-      onLoading();
-    }
-  }
-
-  void onLoading2() async{
-    if(familyItemsRemaining != 0){
-      context.loaderOverlay.show();
-      var newValue = await apiBLMShowAdminSettings(memorialId: widget.memorialId, page: page2);
-      context.loaderOverlay.hide();
-
-      familyItemsRemaining = newValue.blmFamilyItemsRemaining;
-      count.value = count.value + newValue.blmFamilyList.length;
+      admins.add(const Padding(padding: EdgeInsets.only(left: 20.0,), child: Text('Family', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff9F9F9F),),),),);
 
       for(int i = 0; i < newValue.blmFamilyList.length; i++){
-        managers.add(
+        admins.add(
           ListTile(
             leading: newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserImage != ''
             ? CircleAvatar(
@@ -246,21 +196,21 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
             ),
             title: Text('${newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}',
               style: const TextStyle(
-                fontSize: 20,
-                fontFamily: 'NexaBold',
+                fontSize: 20, 
+                fontFamily: 'NexaBold', 
                 color: Color(0xff000000),
               ),
             ),
             subtitle: Text(newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail,
               style: const TextStyle(
-                fontSize: 16,
-                fontFamily: 'NexaRegular',
+                fontSize: 16, 
+                fontFamily: 'NexaRegular', 
                 color: Color(0xffBDC3C7),
               ),
             ),
             trailing: MaterialButton(
-              child: const Text('Make Manager', style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular'),),
-              shape: const StadiumBorder(side: BorderSide(color: Color(0xff04ECFF),),),
+              child: const Text('Make Manager', style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular',),),
+              shape: const StadiumBorder(side: BorderSide(color: Color(0xff04ECFF)),),
               minWidth: SizeConfig.screenWidth! / 3.5,
               splashColor: const Color(0xff04ECFF),
               textColor: const Color(0xffffffff),
@@ -281,7 +231,7 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
 
                 if(confirmation){
                   context.loaderOverlay.show();
-                  String result = await apiBLMAddMemorialAdmin(pageType: 'Blm', pageId: widget.memorialId, userId: newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserId);
+                  String result = await apiBLMAddMemorialAdmin(pageType: 'Memorial', pageId: widget.memorialId, userId: newValue!.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserId);
                   context.loaderOverlay.hide();
 
                   if(result != 'Success'){
@@ -305,14 +255,7 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                         okButtonColor: const Color(0xff4caf50), // GREEN
                         includeOkButton: true,
                         okButton: (){
-                          managers = [];
-                          adminItemsRemaining = 1;
-                          familyItemsRemaining = 1;
-                          page1 = 1;
-                          page2 = 1;
-                          flag1 = false;
-                          addManagers1();
-                          onLoading();
+                          onRefresh();
 
                           Navigator.pop(context, true);
                         },
@@ -325,60 +268,107 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
           ),
         );
       }
+
+      if(newValue.blmAdminItemsRemaining != 0 || newValue.blmFamilyItemsRemaining != 0){
+        page++;
+      }else if(lengthOfAdmins.value > 0 && admins.length > lengthOfAdmins.value){
+        updatedAdminsData = true;
+      }
+    }while(newValue.blmAdminItemsRemaining != 0 || newValue.blmFamilyItemsRemaining != 0
+    );
+    
+    if(admins.length == 2){ // NO DATA FROM THE SERVER EXCEPT FOR THE TWO WIDGETS (MY FAMILY AND MY FRIENDS) AND NEEDS TO BE EMPTY
+      lengthOfAdmins.value = 0;
+    }else{
+      lengthOfAdmins.value = admins.length;
     }
 
-    if(mounted){
-      page2++;
-    }
+    page1 = page;
+    loaded.value = true;
+    
+    return admins;
   }
 
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
     return ValueListenableBuilder(
-      valueListenable: count,
-      builder: (_, int countListener, __) => Scaffold(
-        appBar: AppBar(
-          backgroundColor: const Color(0xff04ECFF),
-          title: const Text('Page Managers', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
-          centerTitle: false,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back,size: 35,),
-            onPressed: (){
-              Navigator.pop(context);
-            },
-          ),
-        ),
-        body: SizedBox(
-          width: SizeConfig.screenWidth,
-          child: countListener != 0
-          ? RefreshIndicator(
-            onRefresh: onRefresh,
-            child: ListView.separated(
-              controller: scrollController,
-              separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-              physics: const ClampingScrollPhysics(),
-              itemBuilder: (c, i) => managers[i],
-              itemCount: managers.length,
+      valueListenable: lengthOfAdmins,
+      builder: (_, int lengthOfAdminsListener, __) => ValueListenableBuilder(
+        valueListenable: loaded,
+        builder: (_, bool loadedListener, __) => ValueListenableBuilder(
+          valueListenable: flag,
+          builder: (_, int flagListener, __) => Scaffold(
+            appBar: AppBar(
+              backgroundColor: const Color(0xff04ECFF),
+              centerTitle: false,
+              title: const Text('Page Managers', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff),),),
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back,size: 35,),
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+              ),
             ),
-          )
-          : SingleChildScrollView(
-            physics: const ClampingScrollPhysics(),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+            body: SafeArea(
+              child: RefreshIndicator(
+                onRefresh: onRefresh,
+                child: FutureBuilder<List<Widget>>(
+                  future: showListOfAdmins,
+                  builder: (context, admins){
+                    if(admins.connectionState == ConnectionState.done){
+                      if(loadedListener && lengthOfAdminsListener == 0){
+                        return SingleChildScrollView(
+                          physics: const ClampingScrollPhysics(),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
 
-                Image.asset('assets/icons/app-icon.png', height: 200, width: 200,),
+                                Image.asset('assets/icons/app-icon.png', height: 200, width: 200,),
 
-                const SizedBox(height: 45,),
+                                const SizedBox(height: 45,),
 
-                const Text('Managers list is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
+                                const Text('Managers list is empty', textAlign: TextAlign.center, style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
 
-                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
-              ],
+                                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+                              ],
+                            ),
+                          ),
+                        );
+                      }else{
+                        return ListView.separated(
+                          controller: scrollController,
+                          separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+                          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+                          physics: const ClampingScrollPhysics(),
+                          itemCount: admins.data!.length,
+                          itemBuilder: (c, i){
+                            return admins.data![i];
+                          }
+                        );
+                      }
+                    }else if(admins.connectionState == ConnectionState.none || admins.connectionState == ConnectionState.waiting){
+                      return const Center(child: CustomLoaderThreeDots(),);
+                    }
+                    else if(admins.hasError){
+                      return Center(
+                        child: MaterialButton(
+                          onPressed: (){
+                            onRefresh();
+                          },
+                          child: const Text('Refresh', style: TextStyle(color: Color(0xffffffff))),
+                          color: const Color(0xff4EC9D4),
+                        ),
+                      );
+                    }else{
+                      return const SizedBox(height: 0,);
+                    }
+                  }
+                ),
+              ),
             ),
           ),
         ),

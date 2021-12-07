@@ -59,7 +59,6 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
             icon: const Icon(Icons.arrow_back, size: 35,),
             onPressed: (){
               Navigator.pop(context);
-              // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: widget.memorialId, relationship: '', managed: true, newlyCreated: false,)));
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: widget.memorialId, relationship: '', managed: true, newlyCreated: widget.newlyCreated,)));
             },
           ),
