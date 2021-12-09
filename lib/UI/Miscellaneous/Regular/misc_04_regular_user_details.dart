@@ -201,9 +201,9 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                                     if(posts.data![i].showUsersPostsImagesOrVideos.length == 1){
                                       if(lookupMimeType(posts.data![i].showUsersPostsImagesOrVideos[0])?.contains('video') == true){
                                         return BetterPlayer.network('${posts.data![i].showUsersPostsImagesOrVideos[0]}',
-                                          betterPlayerConfiguration: BetterPlayerConfiguration(
-                                            placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                            controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                            overlay: Center(child: Icon(Icons.play_circle_fill, color: Color(0xffffffff))),
+                                            controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),
                                             aspectRatio: 16 / 9,
                                             fit: BoxFit.contain,
                                           ),
@@ -228,8 +228,9 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                                         itemCount: 2,
                                         itemBuilder: (BuildContext context, int index) => lookupMimeType(posts.data![i].showUsersPostsImagesOrVideos[index])?.contains('video') == true
                                         ? BetterPlayer.network('${posts.data![i].showUsersPostsImagesOrVideos[index]}',
-                                            betterPlayerConfiguration: BetterPlayerConfiguration(placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                            controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                            overlay: Center(child: Icon(Icons.play_circle_fill, color: Color(0xffffffff))),
+                                            controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),
                                             aspectRatio: 16 / 9,
                                             fit: BoxFit.contain,
                                           ),
@@ -256,9 +257,9 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                                           if(index != 1){
                                             return lookupMimeType(posts.data![i].showUsersPostsImagesOrVideos[index])?.contains('video') == true
                                             ? BetterPlayer.network('${posts.data![i].showUsersPostsImagesOrVideos[index]}',
-                                              betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                overlay: Center(child: Icon(Icons.play_circle_fill, color: Color(0xffffffff))),
+                                                controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),
                                                 aspectRatio: 16 / 9,
                                                 fit: BoxFit.contain,
                                               ),
@@ -277,9 +278,9 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                                                     fit: StackFit.expand,
                                                     children: [
                                                       BetterPlayer.network('${posts.data![i].showUsersPostsImagesOrVideos[index]}',
-                                                        betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                          placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                          controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                        betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                          overlay: Center(child: Icon(Icons.play_circle_fill, color: Color(0xffffffff))),
+                                                          controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),
                                                           aspectRatio: 16 / 9,
                                                           fit: BoxFit.contain,
                                                         ),
@@ -322,9 +323,9 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                                               }else{
                                                 if(lookupMimeType(posts.data![i].showUsersPostsImagesOrVideos[index])?.contains('video') == true) {
                                                   return BetterPlayer.network('${posts.data![i].showUsersPostsImagesOrVideos[index]}',
-                                                    betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                    betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                      overlay: Center(child: Icon(Icons.play_circle_fill, color: Color(0xffffffff))),
+                                                      controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),
                                                       aspectRatio: 16 / 9,
                                                       fit: BoxFit.contain,
                                                     ),

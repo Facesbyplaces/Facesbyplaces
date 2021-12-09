@@ -33,7 +33,6 @@ class HomeBLMCreatePost extends StatefulWidget{
 }
 
 class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
-  // ValueNotifier<List<File>> slideImages = ValueNotifier<List<File>>([]);
   ValueNotifier<List<XFile>> slideImages = ValueNotifier<List<XFile>>([]);
   ValueNotifier<String> newLocation = ValueNotifier<String>('');
   ValueNotifier<int> currentIdSelected = ValueNotifier<int>(0);
@@ -68,7 +67,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
       });
 
       if(pickedFile != null){
-        // slideImages.value.add(File(pickedFile.path));
         slideImages.value.add(pickedFile);
         slideCount.value++;
       }
@@ -78,19 +76,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
   }
 
   Future getSlideFiles() async{
-    // try{
-    //   final pickedFile = await picker.pickImage(source: ImageSource.gallery).then((picture){
-    //     return picture;
-    //   });
-
-    //   if(pickedFile != null){
-    //     slideImages.value.add(File(pickedFile.path));
-    //     slideCount.value++;
-    //   }
-    // }catch (error){
-    //   throw Exception('Error: $error');
-    // }
-
     try{
       final pickedFile = await picker.pickMultiImage().then((picture){
         return picture;
@@ -440,9 +425,8 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                               ? Stack(
                                                 children: [
                                                   BetterPlayer.file(slideImagesListener[index].path,
-                                                    betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                    betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                      controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),
                                                       aspectRatio: 1,
                                                       fit: BoxFit.contain,
                                                     ),
@@ -538,11 +522,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                                 child: ((){
                                                                   if(lookupMimeType(slideImagesListener[index].path)?.contains('video') == true){
                                                                     return BetterPlayer.file(slideImagesListener[index].path,
-                                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                        placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                                                        deviceOrientationsAfterFullScreen: [
-                                                                          DeviceOrientation.portraitUp
-                                                                        ],
+                                                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                         autoDispose: false,
                                                                         aspectRatio: 16 / 9,
                                                                         fit: BoxFit.contain,

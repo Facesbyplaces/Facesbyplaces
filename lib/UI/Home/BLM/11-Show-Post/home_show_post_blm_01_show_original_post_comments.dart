@@ -401,10 +401,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                             child: ((){
                                                                               if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                                                 return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0]}',
-                                                                                  betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                                                    placeholderOnTop: false,
-                                                                                    deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+                                                                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                                     aspectRatio: 16 / 9,
                                                                                     fit: BoxFit.contain,
                                                                                   ),
@@ -436,11 +433,11 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                           child: ((){
                                                             if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                               return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0]}',
-                                                                betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                  overlay: Center(child: Icon(Icons.play_circle_fill, color: Color(0xffffffff))),
                                                                   aspectRatio: 16 / 9,
                                                                   fit: BoxFit.contain,
-                                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                  controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),
                                                                 ),
                                                               );
                                                             }else{
@@ -467,9 +464,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                             child: ((){
                                                               if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
                                                                 return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
-                                                                  betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                    overlay: Center(child: Icon(Icons.play_circle_fill, color: Color(0xffffffff))),
+                                                                    controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),
                                                                     aspectRatio: 16 / 9,
                                                                     fit: BoxFit.contain,
                                                                   ),
@@ -516,9 +513,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                                   originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length, (next) => ((){
                                                                                     if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
                                                                                       return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
-                                                                                        betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                                          placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                                                                          deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+                                                                                        betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                                           autoDispose: false,
                                                                                           aspectRatio: 16 / 9,
                                                                                           fit: BoxFit.contain,
@@ -588,9 +583,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                               if(index != 1){
                                                                 return lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true 
                                                                 ? BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
-                                                                  betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                    overlay: Center(child: Icon(Icons.play_circle_fill, color: Color(0xffffffff))),
+                                                                    controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),
                                                                     aspectRatio: 16 / 9,
                                                                     fit: BoxFit.contain,
                                                                   ),
@@ -609,9 +604,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                         fit: StackFit.expand,
                                                                         children: [
                                                                           BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
-                                                                            betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                              placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                                              controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                            betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                              overlay: Center(child: Icon(Icons.play_circle_fill, color: Color(0xffffffff))),
+                                                                              controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),
                                                                               aspectRatio: 16 / 9,
                                                                               fit: BoxFit.contain,
                                                                             ),
@@ -654,9 +649,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                   }else{
                                                                     if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
                                                                       return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
-                                                                        betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                          placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                                          controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                        betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                          overlay: Center(child: Icon(Icons.play_circle_fill, color: Color(0xffffffff))),
+                                                                          controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),
                                                                           aspectRatio: 16 / 9,
                                                                           fit: BoxFit.contain,
                                                                         ),
@@ -706,9 +701,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                                   originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length, (next) => ((){
                                                                                     if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
                                                                                       return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next]}',
-                                                                                        betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                                          placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                                                                          deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+                                                                                        betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                                           autoDispose: false,
                                                                                           aspectRatio: 16 / 9,
                                                                                           fit: BoxFit.contain,

@@ -633,6 +633,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                                         height: 100,
                                                                                         child: BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
                                                                                           betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                            overlay: Center(child: Icon(Icons.play_circle_fill, color: Color(0xffffffff))),
                                                                                             controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),
                                                                                             aspectRatio: 16 / 9,
                                                                                             fit: BoxFit.contain,
@@ -951,9 +952,9 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                         if(posts.data![i].homeProfilePostImagesOrVideos.length == 1){
                                                                           if(lookupMimeType(posts.data![i].homeProfilePostImagesOrVideos[0])?.contains('video') == true){
                                                                             return BetterPlayer.network('${posts.data![i].homeProfilePostImagesOrVideos[0]}',
-                                                                              betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                                placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                                                                controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                overlay: Center(child: Icon(Icons.play_circle_fill, color: Color(0xffffffff))),
+                                                                                controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),
                                                                                 aspectRatio: 16 / 9,
                                                                                 fit: BoxFit.contain,
                                                                               ),
@@ -978,8 +979,9 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                             itemCount: 2,
                                                                             itemBuilder: (BuildContext context, int index) => lookupMimeType(posts.data![i].homeProfilePostImagesOrVideos[index])?.contains('video') == true
                                                                             ? BetterPlayer.network('${posts.data![i].homeProfilePostImagesOrVideos[index]}',
-                                                                                betterPlayerConfiguration: BetterPlayerConfiguration(placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                                                controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                overlay: Center(child: Icon(Icons.play_circle_fill, color: Color(0xffffffff))),
+                                                                                controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),
                                                                                 aspectRatio: 16 / 9,
                                                                                 fit: BoxFit.contain,
                                                                               ),
@@ -1006,9 +1008,9 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                               if(index != 1){
                                                                                 return lookupMimeType(posts.data![i].homeProfilePostImagesOrVideos[index])?.contains('video') == true
                                                                                 ? BetterPlayer.network('${posts.data![i].homeProfilePostImagesOrVideos[index]}',
-                                                                                  betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                                                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                    overlay: Center(child: Icon(Icons.play_circle_fill, color: Color(0xffffffff))),
+                                                                                    controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),
                                                                                     aspectRatio: 16 / 9,
                                                                                     fit: BoxFit.contain,
                                                                                   ),
@@ -1027,9 +1029,9 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                                         fit: StackFit.expand,
                                                                                         children: [
                                                                                           BetterPlayer.network('${posts.data![i].homeProfilePostImagesOrVideos[index]}',
-                                                                                            betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                                              placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                                                              controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                                            betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                              overlay: Center(child: Icon(Icons.play_circle_fill, color: Color(0xffffffff))),
+                                                                                              controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),
                                                                                               aspectRatio: 16 / 9,
                                                                                               fit: BoxFit.contain,
                                                                                             ),
@@ -1072,9 +1074,9 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                                   }else{
                                                                                     if(lookupMimeType(posts.data![i].homeProfilePostImagesOrVideos[index])?.contains('video') == true) {
                                                                                       return BetterPlayer.network('${posts.data![i].homeProfilePostImagesOrVideos[index]}',
-                                                                                        betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                                          placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                                                          controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                                        betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                          overlay: Center(child: Icon(Icons.play_circle_fill, color: Color(0xffffffff))),
+                                                                                          controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),
                                                                                           aspectRatio: 16 / 9,
                                                                                           fit: BoxFit.contain,
                                                                                         ),
