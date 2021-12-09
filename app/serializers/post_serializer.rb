@@ -49,7 +49,7 @@ class PostSerializer < ActiveModel::Serializer
   end
 
   def likeStatus
-    if object.postslikes.where(account: object.currentUser).first
+    if object.postslikes.where(account: object.currentUser || object.currentAlmUser).first
       true
     else
       false
