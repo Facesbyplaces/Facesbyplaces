@@ -255,6 +255,7 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
 
                                                 if(result){
                                                   toggle5.value = value;
+                                                }else{
                                                   await showDialog(
                                                     context: context,
                                                     builder: (context) => CustomDialog(

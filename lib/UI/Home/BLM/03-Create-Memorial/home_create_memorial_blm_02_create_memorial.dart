@@ -562,15 +562,33 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> with Tic
         builder: (_, File videoThumbnailListener, __) => SizedBox(
           width: SizeConfig.screenWidth,
           child: videoFileListener.path != ''
-          ? BetterPlayer.file(videoFileListener.path,
-              betterPlayerConfiguration: BetterPlayerConfiguration(
-              placeholder: videoThumbnailListener.path == ''
-              ? Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9)
-              : Image.file(videoThumbnailListener, fit: BoxFit.cover, scale: 16 / 9),
-              controlsConfiguration: const BetterPlayerControlsConfiguration(
-                enableFullscreen: false,
+          ? Stack(
+            fit: StackFit.expand,
+            children: [
+              BetterPlayer.file(videoFileListener.path,
+                  betterPlayerConfiguration: BetterPlayerConfiguration(
+                  aspectRatio: 16 / 9,
+                  fit: BoxFit.contain,
+                  placeholder: videoThumbnailListener.path == ''
+                  ? Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9)
+                  : Image.file(videoThumbnailListener, fit: BoxFit.contain, scale: 16 / 9),
+                  controlsConfiguration: const BetterPlayerControlsConfiguration(
+                    enableFullscreen: false,
+                  ),
+                ),
               ),
-            ),
+
+              Positioned(
+                right: 0,
+                child: IconButton(
+                  iconSize: 25,
+                  icon: const CircleAvatar(backgroundColor: Color(0xff000000), child: Icon(Icons.close, color: Color(0xffffffff),),),
+                  onPressed: (){
+                    videoFile.value = File('');
+                  },
+                ),
+              ),
+            ],
           )
           : GestureDetector(
             onTap: () async{

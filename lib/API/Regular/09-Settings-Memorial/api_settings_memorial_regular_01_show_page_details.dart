@@ -59,19 +59,25 @@ class APIRegularShowPageDetailsExtended{
 
 class APIRegularShowPageDetailsExtendedDetails{
   String showPageDetailsDetailsDescription;
+  String showPageDetailsDetailsBirthplace;
   String showPageDetailsDetailsCemetery;
   String showPageDetailsDetailsDob;
   String showPageDetailsDetailsRip;
   String showPageDetailsDetailsCountry;
-  APIRegularShowPageDetailsExtendedDetails({required this.showPageDetailsDetailsDescription, required this.showPageDetailsDetailsCemetery, required this.showPageDetailsDetailsDob, required this.showPageDetailsDetailsRip, required this.showPageDetailsDetailsCountry});
+  double showPageDetailsDetailsLatitude;
+  double showPageDetailsDetailsLongitude;
+  APIRegularShowPageDetailsExtendedDetails({required this.showPageDetailsDetailsDescription, required this.showPageDetailsDetailsBirthplace, required this.showPageDetailsDetailsCemetery, required this.showPageDetailsDetailsDob, required this.showPageDetailsDetailsRip, required this.showPageDetailsDetailsCountry, required this.showPageDetailsDetailsLatitude, required this.showPageDetailsDetailsLongitude});
 
   factory APIRegularShowPageDetailsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowPageDetailsExtendedDetails(
       showPageDetailsDetailsDescription: parsedJson['description'] ?? '',
+      showPageDetailsDetailsBirthplace: parsedJson['birthplace'] ?? '',
       showPageDetailsDetailsCemetery: parsedJson['cemetery'] ?? '',
       showPageDetailsDetailsDob: parsedJson['dob'] ?? '',
       showPageDetailsDetailsRip: parsedJson['rip'] ?? '',
       showPageDetailsDetailsCountry: parsedJson['country'] ?? '',
+      showPageDetailsDetailsLatitude: parsedJson['latitude'] ?? 0.0,
+      showPageDetailsDetailsLongitude: parsedJson['longitude'] ?? 0.0,
     );
   }
 }

@@ -50,7 +50,9 @@ class MiscRegularPostState extends State<MiscRegularPost>{
   @override
   void initState(){
     super.initState();
+    // print('The like status is ${widget.likeStatus}');
     likePost.value = widget.likeStatus;
+    // print('The like status is ${likePost.value}');
     likesCount = widget.numberOfLikes;
     commentsCount.value = widget.numberOfComments;
   }

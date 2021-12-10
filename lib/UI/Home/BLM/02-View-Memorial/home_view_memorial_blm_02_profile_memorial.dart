@@ -463,14 +463,26 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                                                                             const SizedBox(width: 20,),
 
-                                                                            Flexible(
-                                                                              child: GestureDetector(
-                                                                              child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsLocation, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff3498DB),),),
-                                                                                onTap: () async{
-                                                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMaps(latitude: profile.data!.blmMemorial.memorialDetails.memorialLatitude, longitude: profile.data!.blmMemorial.memorialDetails.memorialLongitude, isMemorial: true, memorialName: profile.data!.blmMemorial.memorialName, memorialImage: profile.data!.blmMemorial.memorialBackgroundImage)));
-                                                                                },
-                                                                              ),
-                                                                            ),
+                                                                            // Flexible(
+                                                                            //   child: GestureDetector(
+                                                                            //   child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsLocation, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff3498DB),),),
+                                                                            //     onTap: () async{
+                                                                            //       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMaps(latitude: profile.data!.blmMemorial.memorialDetails.memorialLatitude, longitude: profile.data!.blmMemorial.memorialDetails.memorialLongitude, isMemorial: true, memorialName: profile.data!.blmMemorial.memorialName, memorialImage: profile.data!.blmMemorial.memorialBackgroundImage)));
+                                                                            //     },
+                                                                            //   ),
+                                                                            // ),
+                                                                            ((){
+                                                                              if(profile.data!.blmMemorial.memorialDetails.memorialLatitude == 0.0 && profile.data!.blmMemorial.memorialDetails.memorialLongitude == 0.0){
+                                                                                return Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsLocation, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),);
+                                                                              }else{
+                                                                                return GestureDetector(
+                                                                                  child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsLocation, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff3498DB),),),
+                                                                                  onTap: () async{
+                                                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMaps(latitude: profile.data!.blmMemorial.memorialDetails.memorialLatitude, longitude: profile.data!.blmMemorial.memorialDetails.memorialLongitude, isMemorial: true, memorialName: profile.data!.blmMemorial.memorialName, memorialImage: profile.data!.blmMemorial.memorialProfileImage,)));
+                                                                                  },
+                                                                                );
+                                                                              }
+                                                                            }()),
                                                                           ],
                                                                         ),
 

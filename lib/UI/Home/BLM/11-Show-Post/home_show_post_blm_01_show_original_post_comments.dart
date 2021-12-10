@@ -915,7 +915,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                   return const SizedBox(height: 0,);
                                                                 }
                                                                 else if(commentStatus.hasData){
-                                                                  return MiscLikeButtonTemplate(likeStatus: commentStatus.data!.showCommentOrReplyLikeStatus, numberOfLikes: commentStatus.data!.showCommentOrReplyNumberOfLikes, commentableType: 'Comment', commentableId: listOfComments.data![i].showListCommentsCommentId, postType: 2);
+                                                                  return MiscLikeButtonTemplate(likeStatus: commentStatus.data!.showCommentOrReplyLikeStatus, numberOfLikes: commentStatus.data!.showCommentOrReplyNumberOfLikes, commentableType: 'Comment', commentableId: listOfComments.data![i].showListCommentsCommentId, postType: 1);
                                                                 }else{
                                                                   return const SizedBox(height: 0,);
                                                                 }
@@ -1009,7 +1009,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                                 return const SizedBox(height: 0,);
                                                                               }
                                                                               else if(replyStatus.hasData){
-                                                                                return MiscLikeButtonTemplate(likeStatus: replyStatus.data!.showCommentOrReplyLikeStatus, numberOfLikes: replyStatus.data!.showCommentOrReplyNumberOfLikes, commentableType: 'Reply', commentableId: listOfReplies.data![index].showListRepliesReplyId, postType: 2);
+                                                                                return MiscLikeButtonTemplate(likeStatus: replyStatus.data!.showCommentOrReplyLikeStatus, numberOfLikes: replyStatus.data!.showCommentOrReplyNumberOfLikes, commentableType: 'Reply', commentableId: listOfReplies.data![index].showListRepliesReplyId, postType: 1);
                                                                               }else{
                                                                                 return const SizedBox(height: 0,);
                                                                               }
