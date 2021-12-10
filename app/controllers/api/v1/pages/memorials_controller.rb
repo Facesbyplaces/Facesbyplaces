@@ -131,15 +131,15 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     end
 
     def verify_create_params
-        return render json: {error: "#{check} is empty"} unless params_presence(memorial_params) == true
+        return render json: {status: 400, message: "Params is empty"} unless params_presence(memorial_params) == true
     end
 
     def verify_update_params
-        return render json: {error: "#{check} is empty"} unless params_presence(memorial_details_params) == true
+        return render json: {status: 400, message: "Params is empty"} unless params_presence(memorial_details_params) == true
     end
 
     def verify_update_images_params
-        return render json: {error: "#{check} is empty"} unless params_presence(memorial_images_params) == true
+        return render json: {status: 400, message: "Params is empty"} unless params_presence(memorial_images_params) == true
     end
 
     def verify_relationship
