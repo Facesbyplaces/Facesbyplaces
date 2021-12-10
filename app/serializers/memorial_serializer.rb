@@ -52,11 +52,11 @@ class MemorialSerializer < ActiveModel::Serializer
   end
 
   def dateOfBirth
-    object.dob == nil ? (return object.dob) : (return object.dob.to_date)
+    object.dob == nil ? (return "Unknown") : (return object.dob.to_date)
   end
 
   def restInPeace
-    object.rip == nil ? (return object.rip) : (return object.rip.to_date)
+    object.rip == nil ? (return "Unknown") : (return object.rip.to_date)
   end
 
   def manage
