@@ -173,6 +173,8 @@ Rails.application.routes.draw do
         post '/', to: 'posts#create'
         # Show Post
         get '/:id', to: 'posts#show', as: "show_post"
+        # Delete Post
+        delete '/:id', to: 'posts#delete', as: "delete_post"
         # Posts of the page
         get '/page/:page_type/:page_id', to: 'posts#pagePosts'
         # Like Status

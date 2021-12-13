@@ -31,7 +31,7 @@ class Api::V1::Posts::PostsController < ApplicationController
         render json: {post: PostSerializer.new( @post ).attributes}
     end
 
-    def deletePost
+    def delete
         if user().has_role? :pageadmin, @post.page || user().pageowners.where(page_id: @post.page.id).first
             delete_post_replies(@post)
             delete_post_comments(@post)
