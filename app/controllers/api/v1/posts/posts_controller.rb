@@ -6,7 +6,7 @@ class Api::V1::Posts::PostsController < ApplicationController
     before_action :set_posts, only: [:index]
     before_action :set_page_posts, only: [:pagePosts]
     before_action :set_pages, only: [:listOfPages]
-    before_action :set_post, only: [:show]    
+    before_action :set_post, only: [:show, :delete]    
 
     def index  
         render json: {  itemsremaining:  itemsRemaining(@posts),
@@ -29,6 +29,18 @@ class Api::V1::Posts::PostsController < ApplicationController
 
     def show
         render json: {post: PostSerializer.new( @post ).attributes}
+    end
+
+    def deletePost
+        if user().has_role? :pageadmin, @post.page || user().pageowners.where(page_id: @post.page.id).first
+            delete_post_replies(@post)
+            delete_post_comments(@post)
+
+            @post.destroy
+            render json: { status: :deleted }
+        else 
+            render json: { error: "Post is not deletable or you are not an admin of the memorial." }, status: 400
+        end
     end
 
     def pagePosts
@@ -65,6 +77,18 @@ class Api::V1::Posts::PostsController < ApplicationController
     end
 
     private
+
+    def delete_post_replies(post)
+        post.comments.map { |comment|
+            comment.replies.map{ |reply| reply.destroy }
+        }
+    end
+
+    def delete_post_comments(post)
+        post.comments.map{ |comment| 
+            comment.destroy
+        }
+    end
 
     def post_params
         params.require(:post).permit(:page_type, :page_id, :body, :location, :longitude, :latitude, imagesOrVideos: [])
