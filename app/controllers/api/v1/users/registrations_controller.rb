@@ -17,7 +17,7 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
   private
 
   def sign_up_params
-    params.permit(:facebook_id, :google_id, :account_type, :first_name, :last_name, :phone_number, :email, :username, :password, :device_token)
+    params.permit(:facebook_id, :google_id, :account_type, :first_name, :last_name, :phone_number, :email, :username, :password, :device_token, :question, :security_answer)
   end
 
   def user 
@@ -33,7 +33,6 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
   def set_user_details(user)
     code = rand(100..999)
     user.verification_code = code
-    user.question = "What's the name of your first dog?"
     user.hideBirthdate = false 
     user.hideBirthplace = false 
     user.hideEmail = false 

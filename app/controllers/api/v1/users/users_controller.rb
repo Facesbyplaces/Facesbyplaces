@@ -60,7 +60,8 @@ class Api::V1::Users::UsersController < ApplicationController
             last_name: user().last_name,
             email: user().email,
             phone_number: user().phone_number,
-            question: user().question
+            question: user().question,
+            answer: user().security_answer
         }
     end
 
@@ -144,7 +145,7 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     def updateDetails_params
-        params.permit(:first_name, :last_name, :email, :phone_number, :question)
+        params.permit(:first_name, :last_name, :email, :phone_number, :question, :security_answer)
     end
 
     def updateOtherInfos_params
