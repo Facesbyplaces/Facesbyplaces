@@ -61,7 +61,7 @@ class Api::V1::Users::UsersController < ApplicationController
             email: user().email,
             phone_number: user().phone_number,
             question: user().question,
-            answer: user().security_answer
+            security_answer: user().security_answer
         }
     end
 
