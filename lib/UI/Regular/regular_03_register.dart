@@ -15,6 +15,8 @@ class RegularRegister extends StatelessWidget{
   final GlobalKey<MiscInputFieldTemplateState> _key4 = GlobalKey<MiscInputFieldTemplateState>();
   final GlobalKey<MiscInputFieldTemplateState> _key5 = GlobalKey<MiscInputFieldTemplateState>();
   final GlobalKey<MiscInputFieldTemplateState> _key6 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldSecurityQuestionsState> _key7 = GlobalKey<MiscInputFieldSecurityQuestionsState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key8 = GlobalKey<MiscInputFieldTemplateState>();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -74,7 +76,7 @@ class RegularRegister extends StatelessWidget{
                                   const SizedBox(height: 10,),
 
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                                    padding: const EdgeInsets.symmetric(horizontal: 20),
                                     child: Column(
                                       children: [
                                         MiscInputFieldTemplate(
@@ -112,6 +114,16 @@ class RegularRegister extends StatelessWidget{
                                           labelText: 'Password',
                                           type: TextInputType.text,
                                           obscureText: true,
+                                        ),
+
+                                        MiscInputFieldSecurityQuestions(
+                                          key: _key7,
+                                        ),
+
+                                        MiscInputFieldTemplate(
+                                          key: _key8,
+                                          labelText: 'Answer',
+                                          type: TextInputType.text,
                                         ),
                                       ],
                                     ),
@@ -154,7 +166,16 @@ class RegularRegister extends StatelessWidget{
                                           ),
                                         );
                                       }else{
-                                        APIRegularAccountRegistration account = APIRegularAccountRegistration(firstName: _key1.currentState!.controller.text, lastName: _key2.currentState!.controller.text, phoneNumber: _key3.currentState!.controller.text, email: _key4.currentState!.controller.text, username: _key5.currentState!.controller.text, password: _key6.currentState!.controller.text,);
+                                        APIRegularAccountRegistration account = APIRegularAccountRegistration(
+                                          firstName: _key1.currentState!.controller.text, 
+                                          lastName: _key2.currentState!.controller.text, 
+                                          phoneNumber: _key3.currentState!.controller.text, 
+                                          email: _key4.currentState!.controller.text, 
+                                          username: _key5.currentState!.controller.text, 
+                                          password: _key6.currentState!.controller.text,
+                                          question: _key7.currentState!.currentSelection,
+                                          answer: _key8.currentState!.controller.text,
+                                        );
 
                                         context.loaderOverlay.show();
                                         String result = await apiRegularRegistration(account: account);

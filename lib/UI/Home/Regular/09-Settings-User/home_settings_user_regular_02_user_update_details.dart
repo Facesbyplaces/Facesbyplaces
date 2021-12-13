@@ -22,6 +22,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
   final GlobalKey<MiscInputFieldTemplateState> _key3 = GlobalKey<MiscInputFieldTemplateState>();
   final GlobalKey<MiscPhoneNumberTemplateState> _key4 = GlobalKey<MiscPhoneNumberTemplateState>();
   final GlobalKey<MiscInputFieldSecurityQuestionsState> _key5 = GlobalKey<MiscInputFieldSecurityQuestionsState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key6 = GlobalKey<MiscInputFieldTemplateState>();
   Future<APIRegularShowAccountDetails>? accountDetails;
 
   @override
@@ -116,6 +117,16 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                           displayText: details.data!.showAccountDetailsQuestion != '' ? details.data!.showAccountDetailsQuestion : 'What\'s the name of your first dog?',
                         ),
 
+                        const SizedBox(height: 20,),
+
+                        MiscInputFieldTemplate(
+                          key: _key6,
+                          labelText: 'Answer',
+                          displayText: details.data!.showAccountDetailsAnswer,
+                          type: TextInputType.text,
+                          labelTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),
+                        ),
+
                         const SizedBox(height: 80,),
 
                         MiscButtonTemplate(
@@ -125,12 +136,19 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                           buttonText: 'Update',
                           height: 50,
                           onPressed: () async{
-                            if(details.data!.showAccountDetailsFirstName != _key1.currentState!.controller.text || details.data!.showAccountDetailsLastName != _key2.currentState!.controller.text || details.data!.showAccountDetailsEmail != _key3.currentState!.controller.text || details.data!.showAccountDetailsPhoneNumber != _key4.currentState!.controller.text || details.data!.showAccountDetailsQuestion != _key5.currentState!.currentSelection){
+                            if(details.data!.showAccountDetailsFirstName != _key1.currentState!.controller.text || details.data!.showAccountDetailsLastName != _key2.currentState!.controller.text || details.data!.showAccountDetailsEmail != _key3.currentState!.controller.text || details.data!.showAccountDetailsPhoneNumber != _key4.currentState!.controller.text || details.data!.showAccountDetailsQuestion != _key5.currentState!.currentSelection || details.data!.showAccountDetailsAnswer != _key6.currentState!.controller.text){
                               bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000), ),);
 
                               if(confirmResult){
                                 context.loaderOverlay.show();
-                                bool result = await apiRegularUpdateAccountDetails(firstName: _key1.currentState!.controller.text, lastName: _key2.currentState!.controller.text, email: _key3.currentState!.controller.text, phoneNumber: _key4.currentState!.controller.text, question: _key5.currentState!.currentSelection,);
+                                bool result = await apiRegularUpdateAccountDetails(
+                                  firstName: _key1.currentState!.controller.text, 
+                                  lastName: _key2.currentState!.controller.text, 
+                                  email: _key3.currentState!.controller.text, 
+                                  phoneNumber: _key4.currentState!.controller.text, 
+                                  question: _key5.currentState!.currentSelection,
+                                  answer: _key6.currentState!.controller.text,
+                                );
                                 context.loaderOverlay.hide();
 
                                 if(result){

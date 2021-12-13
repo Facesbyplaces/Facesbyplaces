@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 Future<String> apiRegularRegistration({required APIRegularAccountRegistration account}) async{
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.post('https://www.facesbyplaces.com/alm_auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=2',
+  var response = await dioRequest.post('https://www.facesbyplaces.com/alm_auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=2&question=${account.question}&security_answer=${account.answer}',
     options: Options(
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
@@ -45,5 +45,7 @@ class APIRegularAccountRegistration{
   final String email;
   final String username;
   final String password;
-  APIRegularAccountRegistration({required this.firstName, required this.lastName, required this.phoneNumber, required this.email, required this.username, required this.password});
+  final String question;
+  final String answer;
+  APIRegularAccountRegistration({required this.firstName, required this.lastName, required this.phoneNumber, required this.email, required this.username, required this.password, required this.question, required this.answer});
 }

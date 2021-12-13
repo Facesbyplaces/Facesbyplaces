@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 Future<String> apiBLMRegistration({required APIBLMAccountRegistration account}) async{
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.post('https://www.facesbyplaces.com/auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=1',
+  var response = await dioRequest.post('https://www.facesbyplaces.com/auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=1&question=${account.question}&security_answer=${account.answer}',
     options: Options(
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
@@ -46,5 +46,7 @@ class APIBLMAccountRegistration{
   String email;
   String username;
   String password;
-  APIBLMAccountRegistration({required this.firstName, required this.lastName, required this.phoneNumber, required this.email, required this.username, required this.password});
+  final String question;
+  final String answer;
+  APIBLMAccountRegistration({required this.firstName, required this.lastName, required this.phoneNumber, required this.email, required this.username, required this.password, required this.question, required this.answer});
 }

@@ -226,19 +226,15 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                   children: [
                                     Row(
                                       children: [
-                                        Expanded(
-                                          child: Row(
-                                            children: const [
-                                              Icon(Icons.star_outline, color: Color(0xffBDC3C7), size: 20,),
+                                        const Icon(Icons.star_outline, color: Color(0xffBDC3C7), size: 20,),
 
-                                              SizedBox(width: 20,),
+                                        const SizedBox(width: 20),
 
-                                              Text('Birthdate', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                                            ],
-                                          ),
-                                        ),
+                                        const Text('Birthdate', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
 
-                                        Expanded(child: Text(profile.data!.showUserInformationBirthdate, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
+                                        const SizedBox(width: 20,),
+
+                                        Flexible(child: Text(profile.data!.showUserInformationBirthdate, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
                                       ],
                                     ),
 
@@ -246,19 +242,15 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
 
                                     Row(
                                       children: [
-                                        Expanded(
-                                          child: Row(
-                                            children: const [
-                                              Icon(Icons.place, color: Color(0xffBDC3C7), size: 20,),
+                                        const Icon(Icons.place, color: Color(0xffBDC3C7), size: 20,),
 
-                                              SizedBox(width: 20,),
+                                        const SizedBox(width: 20),
 
-                                              Text('Birthplace', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                                            ],
-                                          ),
-                                        ),
+                                        const Text('Birthplace', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
 
-                                        Expanded(child: Text(profile.data!.showUserInformationBirthplace, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),)),
+                                        const SizedBox(width: 20,),
+
+                                        Flexible(child: Text(profile.data!.showUserInformationBirthplace, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
                                       ],
                                     ),
 
@@ -266,19 +258,31 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
 
                                     Row(
                                       children: [
-                                        Expanded(
-                                          child: Row(
-                                            children: const [
-                                              Icon(Icons.home, color: Color(0xffBDC3C7), size: 20),
+                                        const Icon(Icons.home, color: Color(0xffBDC3C7), size: 20),
 
-                                              SizedBox(width: 20),
+                                        const SizedBox(width: 20),
 
-                                              Text('Home Address', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                                            ],
-                                          ),
-                                        ),
+                                        const Text('Home Address', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
 
-                                        Expanded(child: Text(profile.data!.showUserInformationHomeAddress, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
+                                        const SizedBox(width: 20,),
+
+                                        Flexible(child: Text(profile.data!.showUserInformationHomeAddress, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
+                                      ],
+                                    ),
+
+                                    const SizedBox(height: 10,),
+
+                                    Row(
+                                      children: [
+                                        const Icon(Icons.email, color: Color(0xffBDC3C7), size: 20,),
+
+                                        const SizedBox(width: 20),
+
+                                        const Text('Email Address', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+
+                                        const SizedBox(width: 20,),
+
+                                        Flexible(child: Text(profile.data!.showUserInformationEmailAddress, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
                                       ],
                                     ),
 
@@ -286,41 +290,115 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
 
                                     Row(
                                       children: [
-                                        Expanded(
-                                          child: Row(
-                                            children: const [
-                                              Icon(Icons.email, color: Color(0xffBDC3C7), size: 20,),
+                                        const Icon(Icons.phone, color: Color(0xffBDC3C7), size: 20,),
 
-                                              SizedBox(width: 20),
+                                        const SizedBox(width: 20),
 
-                                              Text('Email Address', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                                            ],
-                                          ),
-                                        ),
+                                        const Text('Contact Number', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
 
-                                        Expanded(child: Text(profile.data!.showUserInformationEmailAddress, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
+                                        const SizedBox(width: 20,),
+
+                                        Flexible(child: Text(profile.data!.showUserInformationContactNumber, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
                                       ],
                                     ),
 
-                                    const SizedBox(height: 20,),
+                                    // Row(
+                                    //   children: [
+                                    //     Expanded(
+                                    //       child: Row(
+                                    //         children: const [
+                                    //           Icon(Icons.star_outline, color: Color(0xffBDC3C7), size: 20,),
 
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: Row(
-                                            children: const [
-                                              Icon(Icons.phone, color: Color(0xffBDC3C7), size: 20,),
+                                    //           SizedBox(width: 20,),
 
-                                              SizedBox(width: 20,),
+                                    //           Text('Birthdate', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                                    //         ],
+                                    //       ),
+                                    //     ),
 
-                                              Text('Contact Number', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                                            ],
-                                          ),
-                                        ),
+                                    //     Expanded(child: Text(profile.data!.showUserInformationBirthdate, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
+                                    //   ],
+                                    // ),
 
-                                        Expanded(child: Text(profile.data!.showUserInformationContactNumber, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
-                                      ],
-                                    ),
+                                    // const SizedBox(height: 20,),
+
+                                    // Row(
+                                    //   children: [
+                                    //     Expanded(
+                                    //       child: Row(
+                                    //         children: const [
+                                    //           Icon(Icons.place, color: Color(0xffBDC3C7), size: 20,),
+
+                                    //           SizedBox(width: 20,),
+
+                                    //           Text('Birthplace', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                                    //         ],
+                                    //       ),
+                                    //     ),
+
+                                    //     Expanded(child: Text(profile.data!.showUserInformationBirthplace, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),)),
+                                    //   ],
+                                    // ),
+
+                                    // const SizedBox(height: 20,),
+
+                                    // Row(
+                                    //   children: [
+                                    //     Expanded(
+                                    //       child: Row(
+                                    //         children: const [
+                                    //           Icon(Icons.home, color: Color(0xffBDC3C7), size: 20),
+
+                                    //           SizedBox(width: 20),
+
+                                    //           Text('Home Address', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                                    //         ],
+                                    //       ),
+                                    //     ),
+
+                                    //     Expanded(child: Text(profile.data!.showUserInformationHomeAddress, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
+                                    //   ],
+                                    // ),
+
+                                    // const SizedBox(height: 20,),
+
+                                    // Row(
+                                    //   children: [
+                                    //     Expanded(
+                                    //       child: Row(
+                                    //         children: const [
+                                    //           Icon(Icons.email, color: Color(0xffBDC3C7), size: 20,),
+
+                                    //           SizedBox(width: 20),
+
+                                    //           Text('Email Address', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                                    //         ],
+                                    //       ),
+                                    //     ),
+
+                                    //     Expanded(child: Text(profile.data!.showUserInformationEmailAddress, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
+                                    //   ],
+                                    // ),
+
+                                    // const SizedBox(height: 20,),
+
+                                    // Row(
+                                    //   children: [
+                                    //     Expanded(
+                                    //       child: Row(
+                                    //         children: const [
+                                    //           Icon(Icons.phone, color: Color(0xffBDC3C7), size: 20,),
+
+                                    //           SizedBox(width: 20,),
+
+                                    //           Text('Contact Number', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                                    //         ],
+                                    //       ),
+                                    //     ),
+
+                                    //     Expanded(child: Text(profile.data!.showUserInformationContactNumber, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
+                                    //   ],
+                                    // ),
                                   ],
                                 ),
                               ),

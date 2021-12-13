@@ -37,7 +37,8 @@ class APIRegularShowAccountDetails{
   String showAccountDetailsEmail;
   String showAccountDetailsPhoneNumber;
   String showAccountDetailsQuestion;
-  APIRegularShowAccountDetails({required this.showAccountDetailsFirstName, required this.showAccountDetailsLastName, required this.showAccountDetailsEmail, required this.showAccountDetailsPhoneNumber, required this.showAccountDetailsQuestion});
+  String showAccountDetailsAnswer;
+  APIRegularShowAccountDetails({required this.showAccountDetailsFirstName, required this.showAccountDetailsLastName, required this.showAccountDetailsEmail, required this.showAccountDetailsPhoneNumber, required this.showAccountDetailsQuestion, required this.showAccountDetailsAnswer});
 
   factory APIRegularShowAccountDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowAccountDetails(
@@ -46,6 +47,7 @@ class APIRegularShowAccountDetails{
       showAccountDetailsEmail: parsedJson['email'] ?? '',
       showAccountDetailsPhoneNumber: parsedJson['phone_number'] ?? '',
       showAccountDetailsQuestion: parsedJson['question'] ?? '',
+      showAccountDetailsAnswer: parsedJson['security_answer'] ?? '',
     );
   }
 }

@@ -113,14 +113,10 @@ class APIBLMShowMemorialExtendedDetails{
   APIBLMShowMemorialExtendedDetails({required this.memorialDetailsDescription, required this.memorialDetailsLocation, required this.memorialDetailsPrecinct, required this.memorialDetailsRip, required this.memorialDetailsState, required this.memorialDetailsCountry, required this.memorialAcceptDonations, required this.memorialLatitude, required this.memorialLongitude});
 
   factory APIBLMShowMemorialExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
-    // String newRIP = parsedJson['rip'];
-    // DateTime rip = DateTime.parse(newRIP);
-
     return APIBLMShowMemorialExtendedDetails(
       memorialDetailsDescription: parsedJson['description'] ?? '',
       memorialDetailsLocation: parsedJson['location'] ?? '',
       memorialDetailsPrecinct: parsedJson['precinct'] ?? '',
-      // memorialDetailsRip: rip.format(AmericanDateFormats.standardWithComma),
       memorialDetailsRip: ((){
         if(parsedJson['rip'] == null || parsedJson['rip'] == 'Unknown'){
           return 'Unknown';

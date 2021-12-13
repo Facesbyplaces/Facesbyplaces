@@ -38,7 +38,8 @@ class APIBLMShowAccountDetails{
   String showAccountDetailsEmail;
   String showAccountDetailsPhoneNumber;
   String showAccountDetailsQuestion;
-  APIBLMShowAccountDetails({required this.showAccountDetailsFirstName, required this.showAccountDetailsLastName, required this.showAccountDetailsEmail, required this.showAccountDetailsPhoneNumber, required this.showAccountDetailsQuestion});
+  String showAccountDetailsAnswer;
+  APIBLMShowAccountDetails({required this.showAccountDetailsFirstName, required this.showAccountDetailsLastName, required this.showAccountDetailsEmail, required this.showAccountDetailsPhoneNumber, required this.showAccountDetailsQuestion, required this.showAccountDetailsAnswer});
 
   factory APIBLMShowAccountDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowAccountDetails(
@@ -47,6 +48,7 @@ class APIBLMShowAccountDetails{
       showAccountDetailsEmail: parsedJson['email'] ?? '',
       showAccountDetailsPhoneNumber: parsedJson['phone_number'] ?? '',
       showAccountDetailsQuestion: parsedJson['question'] ?? '',
+      showAccountDetailsAnswer: parsedJson['security_answer'] ?? '',
     );
   }
 }
