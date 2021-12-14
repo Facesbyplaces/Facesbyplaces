@@ -307,8 +307,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
                                                                   TextButton.icon(
                                                                     label: Text('${profile.data!.almMemorial.showMemorialFollowersCount}', style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
-                                                                    // icon: const CircleAvatar(radius: 20, backgroundColor: Color(0xffE67E22), child: Icon(Icons.card_giftcard, color: Color(0xffffffff),),),
-                                                                    icon: const HeartBeat(),
+                                                                    icon: const CircleAvatar(radius: 20, backgroundColor: Color(0xffE67E22), child: Icon(Icons.card_giftcard, color: Color(0xffffffff),),),
+                                                                    // icon: const HeartBeat(),
                                                                     onPressed: (){
                                                                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: widget.memorialId, newToggle: 2)));
                                                                     },

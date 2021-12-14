@@ -4,6 +4,7 @@ import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_03_
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_12_update_user_profile_picture.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api_settings_user_blm_14_check_account.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'home_settings_user_blm_02_user_update_details.dart';
 import 'home_settings_user_blm_03_change_password.dart';
@@ -32,6 +33,8 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
   WeSlideController controller = WeSlideController();
   final picker = ImagePicker();
 
+  bool changedProfile = false;
+
   Future<APIBLMShowProfileInformation> getProfileInformation() async{
     return await apiBLMShowProfileInformation();
   }
@@ -40,11 +43,21 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if(pickedFile != null){
-      profileImage.value = File(pickedFile.path);
+
+      File newFile = await compressImage(File(pickedFile.path));
+      profileImage.value = newFile;
+      changedProfile = true;
+      // profileImage.value = File(pickedFile.path);
       return true;
     }else{
       return false;
     }
+  }
+
+  Future<File> compressImage(File file) async{
+    File compressedFile = await FlutterNativeImage.compressImage(file.path, percentage: 5);
+
+    return compressedFile;
   }
 
   @override
@@ -198,23 +211,52 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                             child: Container(
                               padding: const EdgeInsets.only(bottom: 20.0),
                               alignment: Alignment.bottomCenter,
-                              child: profile.data!.showProfileInformationImage != ''
-                              ? Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(color: Colors.white, width: 3,),
-                                ),
-                                child: CircleAvatar(
-                                  radius: 100,
-                                  backgroundColor: const Color(0xff888888),
-                                  foregroundImage: NetworkImage(profile.data!.showProfileInformationImage),
-                                ),
-                              )
-                              : const CircleAvatar(
-                                radius: 100, 
-                                backgroundColor: Color(0xff888888), 
-                                foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
-                              ),
+                              child: ((){
+                                if(changedProfile){
+                                  return CircleAvatar(
+                                    radius: 100, 
+                                    backgroundColor: const Color(0xff888888), 
+                                    foregroundImage: FileImage(profileImageListener,)
+                                  );
+                                }else{
+                                  if(profile.data!.showProfileInformationImage != ''){
+                                    return Container(
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(color: Colors.white, width: 3,),
+                                      ),
+                                      child: CircleAvatar(
+                                        radius: 100,
+                                        backgroundColor: const Color(0xff888888),
+                                        foregroundImage: NetworkImage(profile.data!.showProfileInformationImage),
+                                      ),
+                                    );
+                                  }else{
+                                    return const CircleAvatar(
+                                      radius: 100, 
+                                      backgroundColor: Color(0xff888888), 
+                                      foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
+                                    );
+                                  }
+                                }
+                              }()),
+                              // child: profile.data!.showProfileInformationImage != ''
+                              // ? Container(
+                              //   decoration: BoxDecoration(
+                              //     shape: BoxShape.circle,
+                              //     border: Border.all(color: Colors.white, width: 3,),
+                              //   ),
+                              //   child: CircleAvatar(
+                              //     radius: 100,
+                              //     backgroundColor: const Color(0xff888888),
+                              //     foregroundImage: NetworkImage(profile.data!.showProfileInformationImage),
+                              //   ),
+                              // )
+                              // : const CircleAvatar(
+                              //   radius: 100, 
+                              //   backgroundColor: Color(0xff888888), 
+                              //   foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
+                              // ),
                             ),
                             onTap: () async{
                               bool getImage = await getProfileImage();

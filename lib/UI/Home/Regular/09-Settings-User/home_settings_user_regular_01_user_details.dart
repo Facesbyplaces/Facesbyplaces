@@ -1,10 +1,11 @@
+import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home_settings_user_regular_05_privacy_settings.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api_main_regular_01_logout.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api_main_regular_02_show_user_information.dart';
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_regular_03_show_other_details_status.dart';
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_regular_12_update_user_profile_picture.dart';
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api_settings_user_regular_14_check_account.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home_settings_user_regular_05_privacy_settings.dart';
+import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:facesbyplaces/UI/ui_01_get_started.dart';
 import 'home_settings_user_regular_02_user_update_details.dart';
 import 'home_settings_user_regular_03_change_password.dart';
@@ -33,6 +34,8 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
   WeSlideController controller = WeSlideController();
   final picker = ImagePicker();
 
+  bool changedProfile = false;
+
   Future<APIRegularShowProfileInformation> getProfileInformation() async{
     return await apiRegularShowProfileInformation();
   }
@@ -41,11 +44,22 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if(pickedFile != null){
-      profileImage.value = File(pickedFile.path);
+      // profileImage.value = File(pickedFile.path);
+
+      File newFile = await compressImage(File(pickedFile.path));
+      profileImage.value = newFile;
+      changedProfile = true;
+      
       return true;
     }else{
       return false;
     }
+  }
+
+  Future<File> compressImage(File file) async{
+    File compressedFile = await FlutterNativeImage.compressImage(file.path, percentage: 5);
+
+    return compressedFile;
   }
 
   @override
@@ -200,23 +214,52 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                               child: Container(
                                 padding: const EdgeInsets.only(bottom: 20.0),
                                 alignment: Alignment.bottomCenter,
-                                child: profile.data!.showProfileInformationImage != ''
-                                ? Container(
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(color: const Color(0xffffffff), width: 3,),
-                                  ),
-                                  child: CircleAvatar(
-                                    radius: 100,
-                                    backgroundColor: const Color(0xff888888),
-                                    foregroundImage: NetworkImage(profile.data!.showProfileInformationImage),
-                                  ),
-                                )
-                                : const CircleAvatar(
-                                  radius: 100, 
-                                  backgroundColor: Color(0xff888888), 
-                                  foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
-                                ),
+                                child: ((){
+                                  if(changedProfile){
+                                    return CircleAvatar(
+                                      radius: 100, 
+                                      backgroundColor: const Color(0xff888888), 
+                                      foregroundImage: FileImage(profileImageListener,)
+                                    );
+                                  }else{
+                                    if(profile.data!.showProfileInformationImage != ''){
+                                      return Container(
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: Border.all(color: Colors.white, width: 3,),
+                                        ),
+                                        child: CircleAvatar(
+                                          radius: 100,
+                                          backgroundColor: const Color(0xff888888),
+                                          foregroundImage: NetworkImage(profile.data!.showProfileInformationImage),
+                                        ),
+                                      );
+                                    }else{
+                                      return const CircleAvatar(
+                                        radius: 100, 
+                                        backgroundColor: Color(0xff888888), 
+                                        foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
+                                      );
+                                    }
+                                  }
+                                }()),
+                                // child: profile.data!.showProfileInformationImage != ''
+                                // ? Container(
+                                //   decoration: BoxDecoration(
+                                //     shape: BoxShape.circle,
+                                //     border: Border.all(color: const Color(0xffffffff), width: 3,),
+                                //   ),
+                                //   child: CircleAvatar(
+                                //     radius: 100,
+                                //     backgroundColor: const Color(0xff888888),
+                                //     foregroundImage: NetworkImage(profile.data!.showProfileInformationImage),
+                                //   ),
+                                // )
+                                // : const CircleAvatar(
+                                //   radius: 100, 
+                                //   backgroundColor: Color(0xff888888), 
+                                //   foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
+                                // ),
                               ),
                               onTap: () async{
                                 bool getImage = await getProfileImage();
