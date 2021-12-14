@@ -173,6 +173,8 @@ Rails.application.routes.draw do
         post '/', to: 'posts#create'
         # Show Post
         get '/:id', to: 'posts#show', as: "show_post"
+        # Set Post Deletable 
+        put '/:id', to: 'posts#setPostDeletable', as: "set_post_deletable"
         # Delete Post
         delete '/:id', to: 'posts#delete', as: "delete_post"
         # Posts of the page

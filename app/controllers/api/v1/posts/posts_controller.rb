@@ -2,11 +2,12 @@ class Api::V1::Posts::PostsController < ApplicationController
     include Postable
     before_action :authenticate_user, except: [:index, :show, :pagePosts]
     before_action :set_page, only: [:create]
-    before_action :verify_page_admin, only: [:create]
+    before_action :set_post, only: [:show, :delete, :setPostDeletable]    
+    before_action :verify_page_admin, only: [:create, :delete, :setPostDeletable]
+    before_action :verify_page_owner, only: [:delete, :setPostDeletable]
     before_action :set_posts, only: [:index]
     before_action :set_page_posts, only: [:pagePosts]
     before_action :set_pages, only: [:listOfPages]
-    before_action :set_post, only: [:show, :delete]    
 
     def index  
         render json: {  itemsremaining:  itemsRemaining(@posts),
@@ -31,15 +32,20 @@ class Api::V1::Posts::PostsController < ApplicationController
         render json: {post: PostSerializer.new( @post ).attributes}
     end
 
+    def setPostDeletable
+        @post.update(deletable: params[:deletable])
+        render json: { success: "Post is now deletable." }, status: 200
+    end
+
     def delete
-        if user().has_role? :pageadmin, @post.page || user().pageowners.where(page_id: @post.page.id).first
+        if @post.deletable
             delete_post_replies(@post)
             delete_post_comments(@post)
 
             @post.destroy
             render json: { status: :deleted }
         else 
-            render json: { error: "Post is not deletable or you are not an admin of the memorial." }, status: 400
+            render json: { error: "Post is not deletable." }, status: 400
         end
     end
 
@@ -78,10 +84,8 @@ class Api::V1::Posts::PostsController < ApplicationController
 
     private
 
-    def delete_post_replies(post)
-        post.comments.map { |comment|
-            comment.replies.map{ |reply| reply.destroy }
-        }
+    def post_params
+        params.require(:post).permit(:page_type, :page_id, :body, :location, :longitude, :latitude, imagesOrVideos: [])
     end
 
     def delete_post_comments(post)
@@ -90,13 +94,21 @@ class Api::V1::Posts::PostsController < ApplicationController
         }
     end
 
-    def post_params
-        params.require(:post).permit(:page_type, :page_id, :body, :location, :longitude, :latitude, imagesOrVideos: [])
+    def delete_post_replies(post)
+        post.comments.map { |comment|
+            comment.replies.map{ |reply| reply.destroy }
+        }
     end
 
     def verify_page_admin
-        if user().has_role? :pageadmin, @page == true
-            return render json: {error: "Access Denied."}, status: 401
+        unless user().has_role? :pageadmin, @page || @post.page
+            return render json: {error: "Access Denied. You are not a pageadmin of this Memorial."}, status: 401
+        end
+    end
+
+    def verify_page_owner
+        unless user().pageowners.where(page_id: @post.page.id).first
+            return render json: {error: "Access Denied. You are not a pageadmin of this Memorial."}, status: 401
         end
     end
 
