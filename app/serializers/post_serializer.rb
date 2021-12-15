@@ -1,6 +1,6 @@
 class PostSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :page, :body, :location, :latitude, :longitude, :imagesOrVideos, :user, :tag_people, :created_at, :numberOfLikes, :numberOfComments, :likeStatus
+  attributes :id, :page, :body, :location, :latitude, :longitude, :imagesOrVideos, :user, :tag_people, :created_at, :numberOfLikes, :numberOfComments, :likeStatus, :deletable
 
   def imagesOrVideos
     if object.imagesOrVideos.attached?
@@ -64,6 +64,16 @@ class PostSerializer < ActiveModel::Serializer
     commentsCount = object.comments.count 
     repliesCount = object.comments.joins(:replies).count 
     commentsCount + repliesCount
+  end
+
+  def deletable
+    if (object.currentUser || object.currentAlmUser) == nil
+      false
+    elsif ((object.currentUser || object.currentAlmUser).has_role? :pageadmin, object.page) && (object.currentUser || object.currentAlmUser).pageowners.where(page_id: object.page.id).first
+      true
+    else 
+      false
+    end
   end
 
   private
