@@ -61,7 +61,8 @@ class APIBLMHomeTabPostExtended{
   int homeTabPostNumberOfLikes;
   int homeTabPostNumberOfComments;
   bool homeTabPostLikeStatus;
-  APIBLMHomeTabPostExtended({required this.homeTabPostId, required this.homeTabPostPage, required this.homeTabPostBody, required this.homeTabPostLocation, required this.homeTabPostLatitude, required this.homeTabPostLongitude, required this.homeTabPostImagesOrVideos, required this.homeTabPostPostTagged, required this.homeTabPostCreatedAt, required this.homeTabPostNumberOfLikes, required this.homeTabPostNumberOfComments, required this.homeTabPostLikeStatus});
+  bool homeTabPostDeletable;
+  APIBLMHomeTabPostExtended({required this.homeTabPostId, required this.homeTabPostPage, required this.homeTabPostBody, required this.homeTabPostLocation, required this.homeTabPostLatitude, required this.homeTabPostLongitude, required this.homeTabPostImagesOrVideos, required this.homeTabPostPostTagged, required this.homeTabPostCreatedAt, required this.homeTabPostNumberOfLikes, required this.homeTabPostNumberOfComments, required this.homeTabPostLikeStatus, required this.homeTabPostDeletable});
 
   factory APIBLMHomeTabPostExtended.fromJson(Map<String, dynamic> parsedJson){
     List<dynamic>? newList1;
@@ -87,6 +88,7 @@ class APIBLMHomeTabPostExtended{
       homeTabPostNumberOfLikes: parsedJson['numberOfLikes'],
       homeTabPostNumberOfComments: parsedJson['numberOfComments'],
       homeTabPostLikeStatus: parsedJson['likeStatus'],
+      homeTabPostDeletable: parsedJson['deletable'] ?? false,
     );
   }
 }

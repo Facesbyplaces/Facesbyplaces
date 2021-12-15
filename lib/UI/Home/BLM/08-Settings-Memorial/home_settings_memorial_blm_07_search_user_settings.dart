@@ -189,7 +189,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                                     }else{
                                       onSearch.value = true;
                                       searchKey.value = controller.text;
-                                      onRefresh();
+                                      // onRefresh();
                                     }
                                   },
                                   onFieldSubmitted: (search){

@@ -1,7 +1,10 @@
+import 'package:facesbyplaces/API/Regular/15-Delete-Post/api_delete_post_regular_01_delete_post.dart';
+import 'package:facesbyplaces/UI/Home/Regular/01-Main/home_main_regular_02_home_extended.dart';
 import 'package:facesbyplaces/UI/Home/Regular/06-Report/home_report_regular_01_report.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc_03_bloc_regular_misc.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -23,7 +26,8 @@ class MiscRegularDropDownTemplate extends StatefulWidget{
   final String reportType;
   final String pageType;
   final String pageName;
-  const MiscRegularDropDownTemplate({Key? key, required this.postId, required this.likePost, required this.likesCount, required this.reportType, required this.pageType, required this.pageName}) : super(key: key);
+  final bool deletable;
+  const MiscRegularDropDownTemplate({Key? key, required this.postId, required this.likePost, required this.likesCount, required this.reportType, required this.pageType, required this.pageName, required this.deletable}) : super(key: key);
 
   @override
   MiscRegularDropDownTemplateState createState() => MiscRegularDropDownTemplateState();
@@ -107,7 +111,20 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
             underline: Container(height: 0),
             icon: const Center(child: Icon(Icons.more_vert, color: Color(0xffaaaaaa)),),
             style: const TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Color(0xff888888)),
-            items: const <String>['Copy Link', 'Share', 'QR Code', 'Report'].map((String value){
+            // items: const <String>['Copy Link', 'Share', 'QR Code', 'Report'].map((String value){
+            //   return DropdownMenuItem<String>(
+            //     child: Text(value),
+            //     value: value,
+            //   );
+            // }).toList(),
+            items: widget.deletable
+            ? const <String>['Copy Link', 'Share', 'QR Code', 'Report', 'Delete Post'].map((String value){
+              return DropdownMenuItem<String>(
+                child: Text(value),
+                value: value,
+              );
+            }).toList()
+            : const <String>['Copy Link', 'Share', 'QR Code', 'Report'].map((String value){
               return DropdownMenuItem<String>(
                 child: Text(value),
                 value: value,
@@ -220,7 +237,7 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                     );
                   },
                 );
-              }else{
+              }else if(dropDownList == 'Copy Link'){
                 initBranchShare();
                 FlutterBranchSdk.setIdentity('alm-share-copied-link');
 
@@ -242,6 +259,39 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                 }
 
                 FlutterClipboard.copy(response.result).then((value) => const ScaffoldMessenger(child: Text('Link copied!'),));
+              }else{
+                bool confirmation = await showDialog(
+                  context: context,
+                  builder: (context) => CustomDialog(
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    title: 'Confirm',
+                    description: 'Are you sure you want to delete this post?',
+                    includeOkButton: true,
+                    includeCancelButton: true,
+                  ),
+                );
+
+                if(confirmation){
+                  context.loaderOverlay.show();
+                  bool result = await apiRegularDeletePost(postId: widget.postId);
+                  context.loaderOverlay.hide();
+
+                  if(result){
+                    Route newRoute = MaterialPageRoute(builder: (context) => const HomeRegularScreenExtended(newToggleBottom: 1,),);
+                    Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                  }else{
+                    await showDialog(
+                      context: context,
+                      builder: (context) => CustomDialog(
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: 'Error',
+                        description: 'Something went wrong. Please try again.',
+                        okButtonColor: const Color(0xfff44336), // RED
+                        includeOkButton: true,
+                      ),
+                    );
+                  }
+                }
               }
             },
           );

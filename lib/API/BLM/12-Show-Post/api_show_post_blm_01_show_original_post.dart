@@ -68,7 +68,8 @@ class APIBLMShowOriginalPostExtended{
   int showOriginalPostNumberOfLikes;
   int showOriginalPostNumberOfComments;
   bool showOriginalPostLikeStatus;
-  APIBLMShowOriginalPostExtended({required this.showOriginalPostId, required this.showOriginalPostPage, required this.showOriginalPostBody, required this.showOriginalPostLocation, required this.showOriginalPostLatitude, required this.showOriginalPostLongitude, required this.showOriginalPostImagesOrVideos, required this.showOriginalPostPostTagged, required this.showOriginalPostCreatedAt, required this.showOriginalPostNumberOfLikes, required this.showOriginalPostNumberOfComments, required this.showOriginalPostLikeStatus});
+  bool showOriginalPostDeletable;
+  APIBLMShowOriginalPostExtended({required this.showOriginalPostId, required this.showOriginalPostPage, required this.showOriginalPostBody, required this.showOriginalPostLocation, required this.showOriginalPostLatitude, required this.showOriginalPostLongitude, required this.showOriginalPostImagesOrVideos, required this.showOriginalPostPostTagged, required this.showOriginalPostCreatedAt, required this.showOriginalPostNumberOfLikes, required this.showOriginalPostNumberOfComments, required this.showOriginalPostLikeStatus, required this.showOriginalPostDeletable});
 
   factory APIBLMShowOriginalPostExtended.fromJson(Map<String, dynamic> parsedJson){
     List<dynamic>? newList;
@@ -94,6 +95,7 @@ class APIBLMShowOriginalPostExtended{
       showOriginalPostNumberOfLikes: parsedJson['numberOfLikes'],
       showOriginalPostNumberOfComments: parsedJson['numberOfComments'],
       showOriginalPostLikeStatus: parsedJson['likeStatus'],
+      showOriginalPostDeletable: parsedJson['deletable'] ?? false,
     );
   }
 }

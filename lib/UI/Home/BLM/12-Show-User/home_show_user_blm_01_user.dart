@@ -225,180 +225,122 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                 child: Column(
                                   children: [
                                     Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         const Icon(Icons.star_outline, color: Color(0xffBDC3C7), size: 20,),
 
                                         const SizedBox(width: 20),
 
-                                        const Text('Birthdate', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                                        Flexible(
+                                          child: RichText(
+                                            text: TextSpan(
+                                              children: <TextSpan>[
+                                                const TextSpan(text: 'Birthdate:\n', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
 
-                                        const SizedBox(width: 20,),
+                                                TextSpan(text: profile.data!.showUserInformationBirthdate == '' ? 'Not Available' : profile.data!.showUserInformationBirthdate, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
 
-                                        Flexible(child: Text(profile.data!.showUserInformationBirthdate, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
                                       ],
                                     ),
 
                                     const SizedBox(height: 20,),
 
                                     Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         const Icon(Icons.place, color: Color(0xffBDC3C7), size: 20,),
 
                                         const SizedBox(width: 20),
 
-                                        const Text('Birthplace', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                                        Flexible(
+                                          child: RichText(
+                                            text: TextSpan(
+                                              children: <TextSpan>[
+                                                const TextSpan(text: 'Birthplace:\n', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
 
-                                        const SizedBox(width: 20,),
+                                                TextSpan(text: profile.data!.showUserInformationBirthplace == '' ? 'Not Available' : profile.data!.showUserInformationBirthplace, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
 
-                                        Flexible(child: Text(profile.data!.showUserInformationBirthplace, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
                                       ],
                                     ),
 
                                     const SizedBox(height: 20,),
 
                                     Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         const Icon(Icons.home, color: Color(0xffBDC3C7), size: 20),
 
                                         const SizedBox(width: 20),
 
-                                        const Text('Home Address', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                                        Flexible(
+                                          child: RichText(
+                                            text: TextSpan(
+                                              children: <TextSpan>[
+                                                const TextSpan(text: 'Home Address:\n', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
 
-                                        const SizedBox(width: 20,),
+                                                TextSpan(text: profile.data!.showUserInformationHomeAddress == '' ? 'Not Available' : profile.data!.showUserInformationHomeAddress, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
 
-                                        Flexible(child: Text(profile.data!.showUserInformationHomeAddress, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
-                                      ],
-                                    ),
-
-                                    const SizedBox(height: 10,),
-
-                                    Row(
-                                      children: [
-                                        const Icon(Icons.email, color: Color(0xffBDC3C7), size: 20,),
-
-                                        const SizedBox(width: 20),
-
-                                        const Text('Email Address', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-
-                                        const SizedBox(width: 20,),
-
-                                        Flexible(child: Text(profile.data!.showUserInformationEmailAddress, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
                                       ],
                                     ),
 
                                     const SizedBox(height: 20,),
 
                                     Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        const Icon(Icons.email, color: Color(0xffBDC3C7), size: 20,),
+
+                                        const SizedBox(width: 20),
+
+                                        Flexible(
+                                          child: RichText(
+                                            text: TextSpan(
+                                              children: <TextSpan>[
+                                                const TextSpan(text: 'Email Address:\n', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+
+                                                TextSpan(text: profile.data!.showUserInformationEmailAddress == '' ? 'Not Available' : profile.data!.showUserInformationEmailAddress, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
+
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+
+                                    const SizedBox(height: 20,),
+
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         const Icon(Icons.phone, color: Color(0xffBDC3C7), size: 20,),
 
                                         const SizedBox(width: 20),
 
-                                        const Text('Contact Number', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                                        Flexible(
+                                          child: RichText(
+                                            text: TextSpan(
+                                              children: <TextSpan>[
+                                                const TextSpan(text: 'Contact Number:\n', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
 
-                                        const SizedBox(width: 20,),
+                                                TextSpan(text: profile.data!.showUserInformationContactNumber == '' ? 'Not Available' : profile.data!.showUserInformationContactNumber, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),
 
-                                        Flexible(child: Text(profile.data!.showUserInformationContactNumber, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
                                       ],
                                     ),
-
-                                    // Row(
-                                    //   children: [
-                                    //     Expanded(
-                                    //       child: Row(
-                                    //         children: const [
-                                    //           Icon(Icons.star_outline, color: Color(0xffBDC3C7), size: 20,),
-
-                                    //           SizedBox(width: 20,),
-
-                                    //           Text('Birthdate', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                                    //         ],
-                                    //       ),
-                                    //     ),
-
-                                    //     Expanded(child: Text(profile.data!.showUserInformationBirthdate, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
-                                    //   ],
-                                    // ),
-
-                                    // const SizedBox(height: 20,),
-
-                                    // Row(
-                                    //   children: [
-                                    //     Expanded(
-                                    //       child: Row(
-                                    //         children: const [
-                                    //           Icon(Icons.place, color: Color(0xffBDC3C7), size: 20,),
-
-                                    //           SizedBox(width: 20,),
-
-                                    //           Text('Birthplace', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                                    //         ],
-                                    //       ),
-                                    //     ),
-
-                                    //     Expanded(child: Text(profile.data!.showUserInformationBirthplace, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),)),
-                                    //   ],
-                                    // ),
-
-                                    // const SizedBox(height: 20,),
-
-                                    // Row(
-                                    //   children: [
-                                    //     Expanded(
-                                    //       child: Row(
-                                    //         children: const [
-                                    //           Icon(Icons.home, color: Color(0xffBDC3C7), size: 20),
-
-                                    //           SizedBox(width: 20),
-
-                                    //           Text('Home Address', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                                    //         ],
-                                    //       ),
-                                    //     ),
-
-                                    //     Expanded(child: Text(profile.data!.showUserInformationHomeAddress, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
-                                    //   ],
-                                    // ),
-
-                                    // const SizedBox(height: 20,),
-
-                                    // Row(
-                                    //   children: [
-                                    //     Expanded(
-                                    //       child: Row(
-                                    //         children: const [
-                                    //           Icon(Icons.email, color: Color(0xffBDC3C7), size: 20,),
-
-                                    //           SizedBox(width: 20),
-
-                                    //           Text('Email Address', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                                    //         ],
-                                    //       ),
-                                    //     ),
-
-                                    //     Expanded(child: Text(profile.data!.showUserInformationEmailAddress, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
-                                    //   ],
-                                    // ),
-
-                                    // const SizedBox(height: 20,),
-
-                                    // Row(
-                                    //   children: [
-                                    //     Expanded(
-                                    //       child: Row(
-                                    //         children: const [
-                                    //           Icon(Icons.phone, color: Color(0xffBDC3C7), size: 20,),
-
-                                    //           SizedBox(width: 20,),
-
-                                    //           Text('Contact Number', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                                    //         ],
-                                    //       ),
-                                    //     ),
-
-                                    //     Expanded(child: Text(profile.data!.showUserInformationContactNumber, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
-                                    //   ],
-                                    // ),
                                   ],
                                 ),
                               ),

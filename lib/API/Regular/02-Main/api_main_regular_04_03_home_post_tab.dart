@@ -60,7 +60,8 @@ class APIRegularHomeTabPostExtended{
   int homeTabPostNumberOfLikes;
   int homeTabPostNumberOfComments;
   bool homeTabPostLikeStatus;
-  APIRegularHomeTabPostExtended({required this.homeTabPostId, required this.homeTabPostPage, required this.homeTabPostBody, required this.homeTabPostLocation, required this.homeTabPostLatitude, required this.homeTabPostLongitude, required this.homeTabPostImagesOrVideos, required this.homeTabPostPostTagged, required this.homeTabPostCreatedAt, required this.homeTabPostNumberOfLikes, required this.homeTabPostNumberOfComments, required this.homeTabPostLikeStatus});
+  bool homeTabPostDeletable;
+  APIRegularHomeTabPostExtended({required this.homeTabPostId, required this.homeTabPostPage, required this.homeTabPostBody, required this.homeTabPostLocation, required this.homeTabPostLatitude, required this.homeTabPostLongitude, required this.homeTabPostImagesOrVideos, required this.homeTabPostPostTagged, required this.homeTabPostCreatedAt, required this.homeTabPostNumberOfLikes, required this.homeTabPostNumberOfComments, required this.homeTabPostLikeStatus, required this.homeTabPostDeletable});
 
   factory APIRegularHomeTabPostExtended.fromJson(Map<String, dynamic> parsedJson){
     List<dynamic>? newList1;
@@ -86,6 +87,7 @@ class APIRegularHomeTabPostExtended{
       homeTabPostNumberOfLikes: parsedJson['numberOfLikes'],
       homeTabPostNumberOfComments: parsedJson['numberOfComments'],
       homeTabPostLikeStatus: parsedJson['likeStatus'],
+      homeTabPostDeletable: parsedJson['deletable'] ?? false,
     );
   }
 }

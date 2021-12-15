@@ -657,6 +657,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                           latitude: searchPosts.data![i].searchPostLatitude,
                           longitude: searchPosts.data![i].searchPostLongitude,
                           isGuest: isGuestLoggedIn.value,
+                          deletable: searchPosts.data![i].searchPostDeletable,
                           contents: [
                             Align(alignment: Alignment.centerLeft, child: Text(searchPosts.data![i].searchPostBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                                 
@@ -862,6 +863,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                           latitude: searchPosts.data![i].searchPostLatitude,
                           longitude: searchPosts.data![i].searchPostLongitude,
                           isGuest: isGuestLoggedIn.value,
+                          deletable: searchPosts.data![i].searchPostDeletable,
                           contents: [
                             Align(alignment: Alignment.centerLeft, child: Text(searchPosts.data![i].searchPostBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                                 
@@ -1082,6 +1084,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                           location: searchPosts.data![i].searchPostLocation,
                           latitude: searchPosts.data![i].searchPostLatitude,
                           longitude: searchPosts.data![i].searchPostLongitude,
+                          deletable: searchPosts.data![i].searchPostDeletable,
                           contents: [
                             Align(alignment: Alignment.centerLeft, child: Text(searchPosts.data![i].searchPostBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                                 
@@ -1287,6 +1290,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                           latitude: searchPosts.data![i].searchPostLatitude,
                           longitude: searchPosts.data![i].searchPostLongitude,
                           isGuest: isGuestLoggedIn.value,
+                          deletable: searchPosts.data![i].searchPostDeletable,
                           contents: [
                             Align(alignment: Alignment.centerLeft, child: Text(searchPosts.data![i].searchPostBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                                 

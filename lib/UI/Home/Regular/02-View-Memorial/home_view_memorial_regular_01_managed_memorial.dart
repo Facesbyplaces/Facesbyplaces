@@ -307,8 +307,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                                                   TextButton.icon(
                                                                     label: Text('${profile.data!.almMemorial.showMemorialFollowersCount}', style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
-                                                                    icon: const CircleAvatar(radius: 20, backgroundColor: Color(0xffE67E22), child: Icon(Icons.card_giftcard, color: Color(0xffffffff),),),
-                                                                    // icon: const HeartBeat(),
+                                                                    // icon: const CircleAvatar(radius: 20, backgroundColor: Color(0xffE67E22), child: Icon(Icons.card_giftcard, color: Color(0xffffffff),),),
+                                                                    icon: const HeartBeat(),
                                                                     onPressed: (){
                                                                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: widget.memorialId, newToggle: 2)));
                                                                     },
@@ -924,6 +924,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                 latitude: posts.data![i].homeProfilePostLatitude,
                                                                 longitude: posts.data![i].homeProfilePostLongitude,
                                                                 isGuest: isGuestLoggedIn.value,
+                                                                deletable: posts.data![i].homeProfilePostDeletable,
                                                                 contents: [
                                                                   Align(alignment: Alignment.centerLeft, child: Text(posts.data![i].homeProfilePostBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                                                                       

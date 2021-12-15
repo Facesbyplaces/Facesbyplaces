@@ -253,6 +253,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab> with AutomaticKeepAliveC
                             latitude: feeds.data![i].homeTabFeedLatitude,
                             longitude: feeds.data![i].homeTabFeedLongitude,
                             isGuest: isGuestLoggedIn.value,
+                            deletable: feeds.data![i].homeTabFeedDeletable,
                             contents: [
                               Align(alignment: Alignment.centerLeft, child: Text(feeds.data![i].homeTabFeedBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                                   
@@ -458,6 +459,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab> with AutomaticKeepAliveC
                             latitude: feeds.data![i].homeTabFeedLatitude,
                             longitude: feeds.data![i].homeTabFeedLongitude,
                             isGuest: isGuestLoggedInListener,
+                            deletable: feeds.data![i].homeTabFeedDeletable,
                             contents: [
                               Align(alignment: Alignment.centerLeft, child: Text(feeds.data![i].homeTabFeedBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                                   

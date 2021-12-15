@@ -61,7 +61,8 @@ class APIRegularHomeProfilePostExtended{
   int homeProfilePostNumberOfLikes;
   int homeProfilePostNumberOfComments;
   bool homeProfilePostLikeStatus;
-  APIRegularHomeProfilePostExtended({required this.homeProfilePostId, required this.homeProfilePostPage, required this.homeProfilePostBody, required this.homeProfilePostLocation, required this.homeProfilePostLatitude, required this.homeProfilePostLongitude, required this.homeProfilePostImagesOrVideos, required this.homeProfilePostTagged, required this.homeProfilePostCreatedAt, required this.homeProfilePostNumberOfLikes, required this.homeProfilePostNumberOfComments, required this.homeProfilePostLikeStatus});
+  bool homeProfilePostDeletable;
+  APIRegularHomeProfilePostExtended({required this.homeProfilePostId, required this.homeProfilePostPage, required this.homeProfilePostBody, required this.homeProfilePostLocation, required this.homeProfilePostLatitude, required this.homeProfilePostLongitude, required this.homeProfilePostImagesOrVideos, required this.homeProfilePostTagged, required this.homeProfilePostCreatedAt, required this.homeProfilePostNumberOfLikes, required this.homeProfilePostNumberOfComments, required this.homeProfilePostLikeStatus, required this.homeProfilePostDeletable});
 
   factory APIRegularHomeProfilePostExtended.fromJson(Map<String, dynamic> parsedJson){
     List<dynamic>? newList1;
@@ -87,6 +88,7 @@ class APIRegularHomeProfilePostExtended{
       homeProfilePostNumberOfLikes: parsedJson['numberOfLikes'],
       homeProfilePostNumberOfComments: parsedJson['numberOfComments'],
       homeProfilePostLikeStatus: parsedJson['likeStatus'],
+      homeProfilePostDeletable: parsedJson['deletable'] ?? false,
     );
   }
 }

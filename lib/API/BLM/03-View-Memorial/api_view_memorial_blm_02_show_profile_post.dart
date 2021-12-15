@@ -61,7 +61,8 @@ class APIBLMHomeProfilePostExtended{
   int profilePostNumberOfLikes;
   int profilePostNumberOfComments;
   bool profilePostLikeStatus;
-  APIBLMHomeProfilePostExtended({required this.profilePostId, required this.profilePostPage, required this.profilePostBody, required this.homeProfilePostLocation, required this.homeProfilePostLatitude, required this.homeProfilePostLongitude, required this.profilePostImagesOrVideos, required this.profilePostPostTagged, required this.profilePostCreatedAt, required this.profilePostNumberOfLikes, required this.profilePostNumberOfComments, required this.profilePostLikeStatus});
+  bool profilePostDeletable;
+  APIBLMHomeProfilePostExtended({required this.profilePostId, required this.profilePostPage, required this.profilePostBody, required this.homeProfilePostLocation, required this.homeProfilePostLatitude, required this.homeProfilePostLongitude, required this.profilePostImagesOrVideos, required this.profilePostPostTagged, required this.profilePostCreatedAt, required this.profilePostNumberOfLikes, required this.profilePostNumberOfComments, required this.profilePostLikeStatus, required this.profilePostDeletable});
 
   factory APIBLMHomeProfilePostExtended.fromJson(Map<String, dynamic> parsedJson){
     List<dynamic>? newList1;
@@ -87,6 +88,7 @@ class APIBLMHomeProfilePostExtended{
       profilePostNumberOfLikes: parsedJson['numberOfLikes'],
       profilePostNumberOfComments: parsedJson['numberOfComments'],
       profilePostLikeStatus: parsedJson['likeStatus'],
+      profilePostDeletable: parsedJson['deletable'] ?? false,
     );
   }
 }

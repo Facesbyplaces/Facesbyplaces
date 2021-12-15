@@ -68,6 +68,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
   bool loaded = false;
   int lengthOfComments = 0;
   bool updatedCommentsData = false;
+  bool deletable = false;
 
   @override
   void initState(){
@@ -149,7 +150,12 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
   }
 
   Future<APIBLMShowOriginalPostMain> getOriginalPost(postId) async{
-    return await apiBLMShowOriginalPost(postId: postId);
+    // return await apiBLMShowOriginalPost(postId: postId);
+
+    APIBLMShowOriginalPostMain newValue = await apiBLMShowOriginalPost(postId: postId);
+
+    deletable = newValue.blmPost.showOriginalPostDeletable;
+    return newValue;
   }
 
   Future<List<APIBLMShowListOfCommentsExtended>> getListOfComments({required int page}) async{
@@ -228,7 +234,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                     },
                   ),
                   actions: [
-                    MiscBLMDropDownTemplate(postId: widget.postId, likePost: likePost, likesCount: numberOfLikes, reportType: 'Post', pageType: 'Blm', pageName: pageName),
+                    MiscBLMDropDownTemplate(postId: widget.postId, likePost: likePost, likesCount: numberOfLikes, reportType: 'Post', pageType: 'Blm', pageName: pageName, deletable: deletable,),
                   ],
                 ),
                 floatingActionButton: updatedCommentsData
@@ -883,7 +889,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                 return const Center(child: CustomLoaderThreeDots());
                                               }
                                               else if(listOfComments.hasData){
-                                                return Column(
+                                                return listOfComments.data!.isNotEmpty
+                                                ? Column(
                                                   children: List.generate(listOfComments.data!.length, (i) => ListTile(
                                                     visualDensity: const VisualDensity(vertical: 4.0),
                                                     leading: listOfComments.data![i].showListCommentsUser.showListCommentsUserImage != ''
@@ -1196,6 +1203,23 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                       }
                                                     },
                                                     ),
+                                                  ),
+                                                )
+                                                : Align(
+                                                  child: Column(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    children: [
+                                                      SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+
+                                                      Image.asset('assets/icons/app-icon.png', height: 200, width: 200,),
+
+                                                      const SizedBox(height: 45,),
+
+                                                      const Text('Post is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: Color(0xffB1B1B1),),),
+
+                                                      SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+                                                    ],
                                                   ),
                                                 );
                                               }else if(listOfComments.hasError){

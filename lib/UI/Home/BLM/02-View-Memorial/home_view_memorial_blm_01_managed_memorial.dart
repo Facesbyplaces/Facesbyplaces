@@ -909,6 +909,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                                 latitude: posts.data![i].homeProfilePostLatitude,
                                                                 longitude: posts.data![i].homeProfilePostLongitude,
                                                                 isGuest: isGuestLoggedIn.value,
+                                                                deletable: posts.data![i].profilePostDeletable,
                                                                 contents: [
                                                                   Align(alignment: Alignment.centerLeft, child: Text(posts.data![i].profilePostBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                                                                       

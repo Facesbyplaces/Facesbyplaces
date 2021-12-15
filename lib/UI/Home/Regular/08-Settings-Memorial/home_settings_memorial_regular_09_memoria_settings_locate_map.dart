@@ -206,42 +206,6 @@ class HomeRegularMemorialSettingsLocateMapState extends State<HomeRegularMemoria
 
                                 APIRegularConvertCoordinates location = await apiRegularConvertCoordinates(latLng: LatLng(newResult!.result!.geometry!.location!.lat!, newResult.result!.geometry!.location!.lng!));
                                 Navigator.pop(context, [LatLng(newResult.result!.geometry!.location!.lat!, newResult.result!.geometry!.location!.lng!), location.result[0].formatttedAddress]);
-
-                                // _addMarker(LatLng(newResult!.result!.geometry!.location!.lat!, newResult.result!.geometry!.location!.lng!));
-                                // empty.value = true;
-
-
-                                // if(!pinned){
-                                //   await showDialog(
-                                //     context: context,
-                                //     builder: (context) => CustomDialog(
-                                //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                //       title: 'Error',
-                                //       description: 'Pin the location of the cemetery first before proceeding by long pressing the location of the memorial on the map.',
-                                //       okButtonColor: const Color(0xfff44336), // RED
-                                //       includeOkButton: true,
-                                //     ),
-                                //   );
-                                // }else{
-                                //   APIRegularConvertCoordinates location = await apiRegularConvertCoordinates(latLng: memorial!);
-                                //   Navigator.pop(context, [memorial, location.result[0].formatttedAddress]);
-                                // }
-
-                                // if(!pinned){
-                                //   await showDialog(
-                                //     context: context,
-                                //     builder: (context) => CustomDialog(
-                                //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                //       title: 'Error',
-                                //       description: 'Pin the location of the cemetery first before proceeding by long pressing the location of the memorial on the map.',
-                                //       okButtonColor: const Color(0xfff44336), // RED
-                                //       includeOkButton: true,
-                                //     ),
-                                //   );
-                                // }else{
-                                //   APIRegularConvertCoordinates location = await apiRegularConvertCoordinates(latLng: memorial!);
-                                //   Navigator.pop(context, [memorial, location.result[0].formatttedAddress]);
-                                // }
                               },
                             );
                           },

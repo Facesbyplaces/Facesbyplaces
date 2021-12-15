@@ -61,7 +61,8 @@ class APIRegularSearchPostExtended{
   int searchPostNumberOfLikes;
   int searchPostNumberOfComments;
   bool searchPostLikeStatus;
-  APIRegularSearchPostExtended({required this.searchPostId, required this.searchPostPage, required this.searchPostBody, required this.searchPostLocation, required this.searchPostLatitude, required this.searchPostLongitude, required this.searchPostImagesOrVideos, required this.searchPostPostTagged, required this.searchPostCreatedAt, required this.searchPostNumberOfLikes, required this.searchPostNumberOfComments, required this.searchPostLikeStatus});
+  bool searchPostDeletable;
+  APIRegularSearchPostExtended({required this.searchPostId, required this.searchPostPage, required this.searchPostBody, required this.searchPostLocation, required this.searchPostLatitude, required this.searchPostLongitude, required this.searchPostImagesOrVideos, required this.searchPostPostTagged, required this.searchPostCreatedAt, required this.searchPostNumberOfLikes, required this.searchPostNumberOfComments, required this.searchPostLikeStatus, required this.searchPostDeletable});
 
   factory APIRegularSearchPostExtended.fromJson(Map<String, dynamic> parsedJson){
     List<dynamic>? newList1;
@@ -87,6 +88,7 @@ class APIRegularSearchPostExtended{
       searchPostNumberOfLikes: parsedJson['numberOfLikes'],
       searchPostNumberOfComments: parsedJson['numberOfComments'],
       searchPostLikeStatus: parsedJson['likeStatus'],
+      searchPostDeletable: parsedJson['deletable'] ?? false,
     );
   }
 }

@@ -200,6 +200,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab> with AutomaticKeepAliveC
                           latitude: posts.data![i].homeTabPostLatitude,
                           longitude: posts.data![i].homeTabPostLongitude,
                           isGuest: isGuestLoggedIn.value,
+                          deletable: posts.data![i].homeTabPostDeletable,
                           contents: [
                             Align(alignment: Alignment.centerLeft, child: Text(posts.data![i].homeTabPostBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                                 

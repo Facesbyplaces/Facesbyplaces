@@ -189,6 +189,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                           latitude: posts.data![i].showUsersPostsLatitude,
                           longitude: posts.data![i].showUsersPostsLongitude,
                           isGuest: false,
+                          deletable: posts.data![i].showUsersPostsDeletable,
                           contents: [
                             Align(alignment: Alignment.centerLeft, child: Text(posts.data![i].showUsersPostsBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                                 

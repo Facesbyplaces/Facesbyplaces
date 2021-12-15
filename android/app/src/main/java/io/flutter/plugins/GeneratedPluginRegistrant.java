@@ -146,6 +146,11 @@ public final class GeneratedPluginRegistrant {
       Log.e(TAG, "Error registering plugin stripe_android, com.flutter.stripe.StripeAndroidPlugin", e);
     }
     try {
+      flutterEngine.getPlugins().add(new com.example.video_compress.VideoCompressPlugin());
+    } catch(Exception e) {
+      Log.e(TAG, "Error registering plugin video_compress, com.example.video_compress.VideoCompressPlugin", e);
+    }
+    try {
       flutterEngine.getPlugins().add(new xyz.justsoft.video_thumbnail.VideoThumbnailPlugin());
     } catch(Exception e) {
       Log.e(TAG, "Error registering plugin video_thumbnail, xyz.justsoft.video_thumbnail.VideoThumbnailPlugin", e);

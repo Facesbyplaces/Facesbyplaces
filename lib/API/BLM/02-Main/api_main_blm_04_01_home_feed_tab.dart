@@ -60,7 +60,8 @@ class APIBLMHomeTabFeedExtended{
   int homeTabFeedNumberOfLikes;
   int homeTabFeedNumberOfComments;
   bool homeTabFeedLikeStatus;
-  APIBLMHomeTabFeedExtended({required this.homeTabFeedId, required this.homeTabFeedPage, required this.homeTabFeedBody, required this.homeTabFeedLocation, required this.homeTabFeedLatitude, required this.homeTabFeedLongitude, required this.homeTabFeedImagesOrVideos, required this.homeTabFeedPostTagged, required this.homeTabFeedCreatedAt, required this.homeTabFeedNumberOfLikes, required this.homeTabFeedNumberOfComments, required this.homeTabFeedLikeStatus});
+  bool homeTabFeedDeletable;
+  APIBLMHomeTabFeedExtended({required this.homeTabFeedId, required this.homeTabFeedPage, required this.homeTabFeedBody, required this.homeTabFeedLocation, required this.homeTabFeedLatitude, required this.homeTabFeedLongitude, required this.homeTabFeedImagesOrVideos, required this.homeTabFeedPostTagged, required this.homeTabFeedCreatedAt, required this.homeTabFeedNumberOfLikes, required this.homeTabFeedNumberOfComments, required this.homeTabFeedLikeStatus, required this.homeTabFeedDeletable});
 
   factory APIBLMHomeTabFeedExtended.fromJson(Map<String, dynamic> parsedJson){
     List<dynamic>? newList1;
@@ -86,6 +87,7 @@ class APIBLMHomeTabFeedExtended{
       homeTabFeedNumberOfLikes: parsedJson['numberOfLikes'],
       homeTabFeedNumberOfComments: parsedJson['numberOfComments'],
       homeTabFeedLikeStatus: parsedJson['likeStatus'],
+      homeTabFeedDeletable: parsedJson['deletable'] ?? false,
     );
   }
 }

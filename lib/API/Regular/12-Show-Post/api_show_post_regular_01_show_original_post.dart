@@ -66,7 +66,8 @@ class APIRegularShowOriginalPostMainExtended{
   int showOriginalPostNumberOfLikes;
   int showOriginalPostNumberOfComments;
   bool showOriginalPostLikeStatus;
-  APIRegularShowOriginalPostMainExtended({required this.showOriginalPostPage, required this.showOriginalPostBody, required this.showOriginalPostLocation, required this.showOriginalPostLatitude, required this.showOriginalPostLongitude, required this.showOriginalPostImagesOrVideos, required this.showOriginalPostPostTagged, required this.showOriginalPostCreatedAt, required this.showOriginalPostNumberOfLikes, required this.showOriginalPostNumberOfComments, required this.showOriginalPostLikeStatus});
+  bool showOriginalPostDeletable;
+  APIRegularShowOriginalPostMainExtended({required this.showOriginalPostPage, required this.showOriginalPostBody, required this.showOriginalPostLocation, required this.showOriginalPostLatitude, required this.showOriginalPostLongitude, required this.showOriginalPostImagesOrVideos, required this.showOriginalPostPostTagged, required this.showOriginalPostCreatedAt, required this.showOriginalPostNumberOfLikes, required this.showOriginalPostNumberOfComments, required this.showOriginalPostLikeStatus, required this.showOriginalPostDeletable});
 
   factory APIRegularShowOriginalPostMainExtended.fromJson(Map<String, dynamic> parsedJson){
     List<dynamic>? newList1;
@@ -91,6 +92,7 @@ class APIRegularShowOriginalPostMainExtended{
       showOriginalPostNumberOfLikes: parsedJson['numberOfLikes'],
       showOriginalPostNumberOfComments: parsedJson['numberOfComments'],
       showOriginalPostLikeStatus: parsedJson['likeStatus'],
+      showOriginalPostDeletable: parsedJson['deletable'] ?? false,
     );
   }
 }

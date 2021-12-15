@@ -47,7 +47,6 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
       File newFile = await compressImage(File(pickedFile.path));
       profileImage.value = newFile;
       changedProfile = true;
-      // profileImage.value = File(pickedFile.path);
       return true;
     }else{
       return false;
@@ -240,23 +239,6 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                                   }
                                 }
                               }()),
-                              // child: profile.data!.showProfileInformationImage != ''
-                              // ? Container(
-                              //   decoration: BoxDecoration(
-                              //     shape: BoxShape.circle,
-                              //     border: Border.all(color: Colors.white, width: 3,),
-                              //   ),
-                              //   child: CircleAvatar(
-                              //     radius: 100,
-                              //     backgroundColor: const Color(0xff888888),
-                              //     foregroundImage: NetworkImage(profile.data!.showProfileInformationImage),
-                              //   ),
-                              // )
-                              // : const CircleAvatar(
-                              //   radius: 100, 
-                              //   backgroundColor: Color(0xff888888), 
-                              //   foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
-                              // ),
                             ),
                             onTap: () async{
                               bool getImage = await getProfileImage();

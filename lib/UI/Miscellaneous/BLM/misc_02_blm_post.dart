@@ -36,7 +36,8 @@ class MiscBLMPost extends StatefulWidget{
   final double latitude;
   final double longitude;
   final bool isGuest;
-  const MiscBLMPost({required Key key, required this.contents, required this.userId, required this.postId, required this.memorialId, required this.profileImage, this.memorialName = '', this.timeCreated = '', required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship, required this.location, required this.latitude, required this.longitude, required this.isGuest}) : super(key: key);
+  final bool deletable;
+  const MiscBLMPost({required Key key, required this.contents, required this.userId, required this.postId, required this.memorialId, required this.profileImage, this.memorialName = '', this.timeCreated = '', required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship, required this.location, required this.latitude, required this.longitude, required this.isGuest, required this.deletable}) : super(key: key);
 
   @override
   MiscBLMPostState createState() => MiscBLMPostState();
@@ -100,7 +101,7 @@ class MiscBLMPostState extends State<MiscBLMPost>{
                   ),
                   title: Text(widget.memorialName, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
                   subtitle: Text(widget.timeCreated, maxLines: 1, style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),),
-                  trailing: MiscBLMDropDownTemplate(postId: widget.postId, likePost: likePostListener, likesCount: likesCount, reportType: 'Post', pageType: widget.pageType, pageName: widget.memorialName),
+                  trailing: MiscBLMDropDownTemplate(postId: widget.postId, likePost: likePostListener, likesCount: likesCount, reportType: 'Post', pageType: widget.pageType, pageName: widget.memorialName, deletable: widget.deletable),
                   onTap: (){
                     if(widget.pageType == 'Memorial'){
                       if(widget.managed == true || widget.famOrFriends == true){

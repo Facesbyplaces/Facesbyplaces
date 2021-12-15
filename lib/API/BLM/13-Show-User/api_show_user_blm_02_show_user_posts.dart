@@ -73,7 +73,8 @@ class APIBLMShowUsersPostsExtended{
   int showUsersPostsNumberOfLikes;
   int showUsersPostsNumberOfComments;
   bool showUsersPostsLikeStatus;
-  APIBLMShowUsersPostsExtended({required this.showUsersPostsId, required this.showUsersPostsPage, required this.showUsersPostsBody, required this.showUsersPostsLocation, required this.showUsersPostsLatitude, required this.showUsersPostsLongitude, required this.showUsersPostsImagesOrVideos, required this.showUsersPostsPostTagged, required this.showUsersPostsCreatedAt, required this.showUsersPostsNumberOfLikes, required this.showUsersPostsNumberOfComments, required this.showUsersPostsLikeStatus});
+  bool showUsersPostsDeletable;
+  APIBLMShowUsersPostsExtended({required this.showUsersPostsId, required this.showUsersPostsPage, required this.showUsersPostsBody, required this.showUsersPostsLocation, required this.showUsersPostsLatitude, required this.showUsersPostsLongitude, required this.showUsersPostsImagesOrVideos, required this.showUsersPostsPostTagged, required this.showUsersPostsCreatedAt, required this.showUsersPostsNumberOfLikes, required this.showUsersPostsNumberOfComments, required this.showUsersPostsLikeStatus, required this.showUsersPostsDeletable});
 
   factory APIBLMShowUsersPostsExtended.fromJson(Map<String, dynamic> parsedJson){
     List<dynamic>? newList1;
@@ -99,6 +100,7 @@ class APIBLMShowUsersPostsExtended{
       showUsersPostsNumberOfLikes: parsedJson['numberOfLikes'],
       showUsersPostsNumberOfComments: parsedJson['numberOfComments'],
       showUsersPostsLikeStatus: parsedJson['likeStatus'],
+      showUsersPostsDeletable: parsedJson['deletable'] ?? false,
     );
   }
 }
