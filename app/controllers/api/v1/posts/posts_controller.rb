@@ -38,14 +38,14 @@ class Api::V1::Posts::PostsController < ApplicationController
     end
 
     def delete
-        if @post.deletable
-            delete_post_replies(@post)
-            delete_post_comments(@post)
+        delete_post_replies(@post)
+        delete_post_comments(@post)
 
-            @post.destroy
+        if @post.destroy
             render json: { status: :deleted }
+
         else 
-            render json: { error: "Post is not deletable." }, status: 400
+            render json: { error: 'Error while deleting post. Try again.' }, status: 400
         end
     end
 
