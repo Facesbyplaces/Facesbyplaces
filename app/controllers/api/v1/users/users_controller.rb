@@ -67,11 +67,11 @@ class Api::V1::Users::UsersController < ApplicationController
 
     def getOtherInfos
         render json: {
-            birthdate:      !user().hideBirthdate ? user().birthdate : "", 
-            birthplace:     !user().hideBirthplace ? user().birthplace : "",
-            email:          !user().hideEmail ? user().email : "",
-            address:        !user().hideAddress ? user().address : "",
-            phone_number:   !user().hidePhonenumber ? user().phone_number : "",
+            birthdate:      user().birthdate, 
+            birthplace:     user().birthplace,
+            email:          user().email,
+            address:        user().address,
+            phone_number:   user().phone_number,
         }
     end
 
