@@ -22,7 +22,8 @@ class HomeRegularMemorialSettings extends StatefulWidget{
   final bool switchFriends;
   final bool switchFollowers;
   final bool newlyCreated;
-  const HomeRegularMemorialSettings({Key? key, required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers, required this.newlyCreated}) : super(key: key);
+  final bool managed;
+  const HomeRegularMemorialSettings({Key? key, required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers, required this.newlyCreated, required this.managed}) : super(key: key);
 
   @override
   HomeRegularMemorialSettingsState createState() => HomeRegularMemorialSettingsState();
@@ -59,7 +60,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
             icon: const Icon(Icons.arrow_back, size: 35,),
             onPressed: (){
               Navigator.pop(context);
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: widget.memorialId, relationship: '', managed: true, newlyCreated: widget.newlyCreated,)));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: widget.memorialId, relationship: '', managed: widget.managed, newlyCreated: widget.newlyCreated,)));
             },
           ),
         ),
@@ -148,7 +149,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
             subtitle: const Text('Add or remove admins of this page', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
             tileColor: const Color(0xffffffff),
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageManagers(memorialId: widget.memorialId,)));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageManagers(memorialId: widget.memorialId, managed: widget.managed)));
             },
           ),
 

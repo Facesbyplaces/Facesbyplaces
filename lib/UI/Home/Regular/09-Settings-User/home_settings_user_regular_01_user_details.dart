@@ -141,7 +141,13 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                           APIRegularShowOtherDetailsStatus result = await apiRegularShowOtherDetailsStatus(userId: widget.userId);
                           context.loaderOverlay.hide();
 
-                          Navigator.push(context, MaterialPageRoute(builder: (context) =>  HomeRegularUserOtherDetails(userId: widget.userId, toggleBirthdate: result.showOtherDetailsStatusHideBirthdate, toggleBirthplace: result.showOtherDetailsStatusHideBirthplace, toggleAddress: result.showOtherDetailsStatusHideAddress, toggleEmail: result.showOtherDetailsStatusHideEmail, toggleNumber: result.showOtherDetailsStatusHidePhoneNumber,),),);
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>  HomeRegularUserOtherDetails(
+                            userId: widget.userId, 
+                            toggleBirthdate: result.showOtherDetailsStatusHideBirthdate, 
+                            toggleBirthplace: result.showOtherDetailsStatusHideBirthplace, 
+                            toggleAddress: result.showOtherDetailsStatusHideAddress, 
+                            toggleEmail: result.showOtherDetailsStatusHideEmail, 
+                            toggleNumber: result.showOtherDetailsStatusHidePhoneNumber,),),);
                         },
                       ),
 

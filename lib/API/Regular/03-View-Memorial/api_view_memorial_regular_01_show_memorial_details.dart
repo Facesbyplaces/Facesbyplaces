@@ -134,7 +134,7 @@ class APIRegularShowMemorialExtendedDetails{
         }
       }()),
       showMemorialDetailsRip: ((){
-        if(parsedJson['rip'] == null || parsedJson['dob'] == 'Unknown'){
+        if(parsedJson['rip'] == null || parsedJson['rip'] == 'Unknown'){
           return 'Unknown';
         }else{
           String newRIP = parsedJson['rip'];

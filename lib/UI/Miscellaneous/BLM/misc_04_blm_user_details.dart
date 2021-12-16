@@ -443,6 +443,7 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
   Future<List<Widget>> getListOfUserMemorials({required int page}) async{
     List<Widget> memorials = [];
     APIBLMShowUserMemorialsMain? newValue;
+    bool added = false;
 
     memorials.add(
       Container(
@@ -485,14 +486,18 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
         );
       }
 
-      memorials.add(
-        Container(
-          height: 80,
-          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-          color: const Color(0xffeeeeee),
-          child: const Align(alignment: Alignment.centerLeft, child: Text('Followed', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),),
-        ),
-      );
+      if(!added){
+        memorials.add(
+          Container(
+            height: 80,
+            padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+            color: const Color(0xffeeeeee),
+            child: const Align(alignment: Alignment.centerLeft, child: Text('Followed', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),),
+          ),
+        );
+
+        added = true; // SO THIS WIDGET WON'T GET REPEATED 
+      }
 
       for(int i = 0; i < newValue.blmFollowed.length; i++){
         memorials.add(

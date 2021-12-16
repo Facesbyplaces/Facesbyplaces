@@ -35,15 +35,18 @@ class APIRegularShowSwitchStatus{
   bool showSwitchStatusFamily;
   bool showSwitchStatusFriends;
   bool showSwitchStatusFollowers;
-  bool showSwitchStatusSuccess;
-  APIRegularShowSwitchStatus({required this.showSwitchStatusFamily, required this.showSwitchStatusFriends, required this.showSwitchStatusFollowers, required this.showSwitchStatusSuccess});
+  bool showSwitchStatusManaged;
+  // bool showSwitchStatusSuccess;
+  // APIRegularShowSwitchStatus({required this.showSwitchStatusFamily, required this.showSwitchStatusFriends, required this.showSwitchStatusFollowers, required this.showSwitchStatusSuccess});
+  APIRegularShowSwitchStatus({required this.showSwitchStatusFamily, required this.showSwitchStatusFriends, required this.showSwitchStatusFollowers, required this.showSwitchStatusManaged});
 
   factory APIRegularShowSwitchStatus.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowSwitchStatus(
-      showSwitchStatusFamily: parsedJson['family'],
-      showSwitchStatusFriends: parsedJson['friends'],
-      showSwitchStatusFollowers: parsedJson['followers'],
-      showSwitchStatusSuccess: true,
+      showSwitchStatusFamily: parsedJson['family'] ?? false,
+      showSwitchStatusFriends: parsedJson['friends'] ?? false,
+      showSwitchStatusFollowers: parsedJson['followers'] ?? false,
+      showSwitchStatusManaged: parsedJson['manage'] ?? false,
+      // showSwitchStatusSuccess: true,
     );
   }
 }

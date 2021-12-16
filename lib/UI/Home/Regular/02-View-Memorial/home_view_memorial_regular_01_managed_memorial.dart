@@ -390,9 +390,12 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                                 APIRegularShowSwitchStatus result = await apiRegularShowSwitchStatus(memorialId: widget.memorialId);
                                                                                 context.loaderOverlay.hide();
 
-                                                                                if(result.showSwitchStatusSuccess){
-                                                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettings(memorialId: widget.memorialId, memorialName: profile.data!.almMemorial.showMemorialName, switchFamily: result.showSwitchStatusFamily, switchFriends: result.showSwitchStatusFriends, switchFollowers: result.showSwitchStatusFollowers, newlyCreated: widget.newlyCreated),),);
-                                                                                }
+                                                                                // print('The result is ${result.showSwitchStatusSuccess}');
+
+                                                                                // if(result.showSwitchStatusSuccess){
+                                                                                //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettings(memorialId: widget.memorialId, memorialName: profile.data!.almMemorial.showMemorialName, switchFamily: result.showSwitchStatusFamily, switchFriends: result.showSwitchStatusFriends, switchFollowers: result.showSwitchStatusFollowers, newlyCreated: widget.newlyCreated,),),);
+                                                                                // }
+                                                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettings(memorialId: widget.memorialId, memorialName: profile.data!.almMemorial.showMemorialName, switchFamily: result.showSwitchStatusFamily, switchFriends: result.showSwitchStatusFriends, switchFollowers: result.showSwitchStatusFollowers, newlyCreated: widget.newlyCreated, managed: result.showSwitchStatusManaged),),);
                                                                               }else{
                                                                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettingsWithHidden(memorialId: widget.memorialId, relationship: widget.relationship,),),);
                                                                               }
@@ -443,9 +446,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                                                             const SizedBox(width: 20,),
 
-                                                                            Flexible(
-                                                                              child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsCountry, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
-                                                                            ),
+                                                                            Flexible(child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsCountry, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                                                                           ],
                                                                         ),
 
@@ -457,7 +458,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                                                             const SizedBox(width: 20,),
 
-                                                                            Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDob, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                                                                            Flexible(child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDob, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                                                                           ],
                                                                         ),
 
@@ -469,7 +470,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                                                             const SizedBox(width: 20,),
 
-                                                                            Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsRip, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                                                                            Flexible(child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsRip, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
                                                                           ],
                                                                         ),
                                                                       ],

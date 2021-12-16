@@ -80,6 +80,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab> with Automat
   Future<List<Widget>> getListOfMemorials({required int page}) async{
     List<Widget> memorials = [];
     APIRegularHomeTabMemorialMain? newValue;
+    bool added = false;
 
     memorials.add(
       Container(
@@ -160,14 +161,18 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab> with Automat
         );
       }
 
-      memorials.add(
-        Container(
-          height: 80,
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          color: const Color(0xffeeeeee),
-          child: const Align(alignment: Alignment.centerLeft, child: Text('My Friends', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),),
-        ),
-      );
+      if(!added){
+        memorials.add(
+          Container(
+            height: 80,
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            color: const Color(0xffeeeeee),
+            child: const Align(alignment: Alignment.centerLeft, child: Text('My Friends', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),),
+          ),
+        );
+
+        added = true; // SO THIS WIDGET WON'T GET REPEATED 
+      }
 
       for(int i = 0; i < newValue.almFriendsMemorialList.memorialHomeTabMemorialPage.length; i++){
         memorials.add(

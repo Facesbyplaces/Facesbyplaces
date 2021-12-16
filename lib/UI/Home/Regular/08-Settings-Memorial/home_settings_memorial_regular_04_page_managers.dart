@@ -9,7 +9,8 @@ import 'package:dialog/dialog.dart';
 
 class HomeRegularPageManagers extends StatefulWidget{
   final int memorialId;
-  const HomeRegularPageManagers({Key? key, required this.memorialId}) : super(key: key);
+  final bool managed;
+  const HomeRegularPageManagers({Key? key, required this.memorialId, required this.managed}) : super(key: key);
 
   @override
   HomeRegularPageManagersState createState() => HomeRegularPageManagersState();
@@ -229,7 +230,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                   ),
                 );
 
-                if(confirmation){
+                if(confirmation && widget.managed){
                   context.loaderOverlay.show();
                   String result = await apiRegularAddMemorialAdmin(pageType: 'Memorial', pageId: widget.memorialId, userId: newValue!.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserId);
                   context.loaderOverlay.hide();
@@ -262,6 +263,17 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                       ),
                     );
                   }
+                }else{
+                  await showDialog(
+                    context: context,
+                    builder: (context) => CustomDialog(
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      title: 'Error',
+                      description: 'You can\'t make this user a manager of the memorial page because you are not an administrator.',
+                      okButtonColor: const Color(0xfff44336), // RED
+                      includeOkButton: true,
+                    ),
+                  );
                 }
               },
             ),
