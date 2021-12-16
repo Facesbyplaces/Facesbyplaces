@@ -71,7 +71,8 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
         render json: {
             family: @page.hideFamily,
             friends: @page.hideFriends,
-            followers: @page.hideFollowers
+            followers: @page.hideFollowers,
+            manage: (user().has_role? :pageadmin, @page),
         }
     end
 
@@ -93,7 +94,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
     end
 
     def verify_page_admin
-        unless user().has_role? :pageadmin, @page 
+        unless user().has_role? :pageadmin, @page || user().pageowners.where(page_id: @page.id).first
             return render json: {status: "Access Denied"}, status: 401
         end
     end
