@@ -94,7 +94,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
     end
 
     def verify_page_admin
-        unless user().has_role? :pageadmin, @page || user().pageowners.where(page_id: @page.id).first
+        unless user().has_role? :pageadmin, @page || @page.pageowner.account
             return render json: {status: "Access Denied"}, status: 401
         end
     end
