@@ -181,7 +181,20 @@ class BLMRegister extends StatelessWidget{
                                       );
 
                                       context.loaderOverlay.show();
-                                      String result = await apiBLMRegistration(account: account);
+                                      String result = await apiBLMRegistration(account: account).onError((error, stackTrace){
+                                        context.loaderOverlay.hide();
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) => CustomDialog(
+                                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                            title: 'Error',
+                                            description: 'Something went wrong. Please check your internet connection.',
+                                            okButtonColor: const Color(0xfff44336), // RED
+                                            includeOkButton: true,
+                                          ),
+                                        );
+                                        throw Exception('Something went wrong. Please check your internet connection.');
+                                      });
                                       context.loaderOverlay.hide();
 
                                       if(result == 'Success'){

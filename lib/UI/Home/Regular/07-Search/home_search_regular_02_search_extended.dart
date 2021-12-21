@@ -229,10 +229,11 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       newValue = await apiRegularSearchPosts(keywords: widget.keyword, page: page).onError((error, stackTrace){
         showDialog(
           context: context,
+          barrierColor: Colors.transparent,
           builder: (context) => CustomDialog(
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             title: 'Error',
-            description: 'Something went wrong. Please try again.',
+            description: 'Something went wrong. Please check your internet connection.',
             okButtonColor: const Color(0xfff44336), // RED
             includeOkButton: true,
           ),
@@ -263,10 +264,11 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       newValue = await apiRegularSearchSuggested(page: page).onError((error, stackTrace){
         showDialog(
           context: context,
+          barrierColor: Colors.transparent,
           builder: (context) => CustomDialog(
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             title: 'Error',
-            description: 'Something went wrong. Please try again.',
+            description: 'Something went wrong. Please check your internet connection.',
             okButtonColor: const Color(0xfff44336), // RED
             includeOkButton: true,
           ),
@@ -297,10 +299,11 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       newValue = await apiRegularSearchNearby(page: page, latitude: widget.latitude, longitude: widget.longitude).onError((error, stackTrace){
         showDialog(
           context: context,
+          barrierColor: Colors.transparent,
           builder: (context) => CustomDialog(
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             title: 'Error',
-            description: 'Something went wrong. Please try again.',
+            description: 'Something went wrong. Please check your internet connection.',
             okButtonColor: const Color(0xfff44336), // RED
             includeOkButton: true,
           ),
@@ -332,10 +335,11 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       newValue = await apiRegularSearchBLM(page: page, keywords: widget.keyword).onError((error, stackTrace){
         showDialog(
           context: context,
+          barrierColor: Colors.transparent,
           builder: (context) => CustomDialog(
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             title: 'Error',
-            description: 'Something went wrong. Please try again.',
+            description: 'Something went wrong. Please check your internet connection.',
             okButtonColor: const Color(0xfff44336), // RED
             includeOkButton: true,
           ),

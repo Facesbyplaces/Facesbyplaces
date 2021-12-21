@@ -135,7 +135,20 @@ class RegularPasswordResetEmail extends StatelessWidget{
 
                                 if(response.success){
                                   context.loaderOverlay.show();
-                                  List<dynamic> result = await apiRegularPasswordReset(email: controller.text, redirectLink: response.result);
+                                  List<dynamic> result = await apiRegularPasswordReset(email: controller.text, redirectLink: response.result).onError((error, stackTrace){
+                                    context.loaderOverlay.hide();
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => CustomDialog(
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        title: 'Error',
+                                        description: 'Something went wrong. Please check your internet connection.',
+                                        okButtonColor: const Color(0xfff44336), // RED
+                                        includeOkButton: true,
+                                      ),
+                                    );
+                                    throw Exception('Something went wrong. Please check your internet connection.');
+                                  });
                                   context.loaderOverlay.hide();
 
                                   FlutterClipboard.copy('${response.result}').then((value){});
@@ -169,7 +182,7 @@ class RegularPasswordResetEmail extends StatelessWidget{
                                     builder: (context) => CustomDialog(
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                       title: 'Error',
-                                      description: 'Something went wrong. Please try again.',
+                                      description: 'Something went wrong. Please check your internet connection.',
                                       okButtonColor: const Color(0xfff44336), // RED
                                       includeOkButton: true,
                                     ),

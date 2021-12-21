@@ -304,8 +304,35 @@ class BLMLogin extends StatelessWidget{
                                       final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
                                       final pushNotificationService = PushNotificationService(_firebaseMessaging, context);
                                       pushNotificationService.initialise();
-                                      deviceToken = (await pushNotificationService.fcm.getToken())!;
-                                      String result = await apiBLMLogin(email: _key1.currentState!.controller.text, password: _key2.currentState!.controller.text, deviceToken: deviceToken);
+
+                                      deviceToken = (await pushNotificationService.fcm.getToken().onError((error, stackTrace){
+                                        context.loaderOverlay.hide();
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) => CustomDialog(
+                                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                            title: 'Error',
+                                            description: 'Something went wrong. Please check your internet connection.',
+                                            okButtonColor: const Color(0xfff44336), // RED
+                                            includeOkButton: true,
+                                          ),
+                                        );
+                                      }))!;
+
+                                      String result = await apiBLMLogin(email: _key1.currentState!.controller.text, password: _key2.currentState!.controller.text, deviceToken: deviceToken).onError((error, stackTrace){
+                                        context.loaderOverlay.hide();
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) => CustomDialog(
+                                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                            title: 'Error',
+                                            description: 'Something went wrong. Please check your internet connection.',
+                                            okButtonColor: const Color(0xfff44336), // RED
+                                            includeOkButton: true,
+                                          ),
+                                        );
+                                        throw Exception('Something went wrong. Please check your internet connection.');
+                                      });
                                       context.loaderOverlay.hide();
 
                                       if(result == 'Success'){
@@ -355,7 +382,8 @@ class BLMLogin extends StatelessWidget{
                                   onTap: () async{
                                     final sharedPrefs = await SharedPreferences.getInstance();
                                     sharedPrefs.setBool('user-guest-session', true);
-                                    Navigator.pushReplacementNamed(context, '/home/blm');
+                                    // Navigator.pushReplacementNamed(context, '/home/blm');
+                                    Navigator.pushReplacementNamed(context, '/home/blm/search');
                                   },
                                 ),
 
