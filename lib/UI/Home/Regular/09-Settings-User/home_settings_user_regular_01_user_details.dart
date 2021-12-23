@@ -33,7 +33,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
   Future<APIRegularShowProfileInformation>? showProfile;
   WeSlideController controller = WeSlideController();
   final picker = ImagePicker();
-
   bool changedProfile = false;
 
   Future<APIRegularShowProfileInformation> getProfileInformation() async{
@@ -44,8 +43,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if(pickedFile != null){
-      // profileImage.value = File(pickedFile.path);
-
       File newFile = await compressImage(File(pickedFile.path));
       profileImage.value = newFile;
       changedProfile = true;
@@ -141,13 +138,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                           APIRegularShowOtherDetailsStatus result = await apiRegularShowOtherDetailsStatus(userId: widget.userId);
                           context.loaderOverlay.hide();
 
-                          Navigator.push(context, MaterialPageRoute(builder: (context) =>  HomeRegularUserOtherDetails(
-                            userId: widget.userId, 
-                            toggleBirthdate: result.showOtherDetailsStatusHideBirthdate, 
-                            toggleBirthplace: result.showOtherDetailsStatusHideBirthplace, 
-                            toggleAddress: result.showOtherDetailsStatusHideAddress, 
-                            toggleEmail: result.showOtherDetailsStatusHideEmail, 
-                            toggleNumber: result.showOtherDetailsStatusHidePhoneNumber,),),);
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>  HomeRegularUserOtherDetails(userId: widget.userId, toggleBirthdate: result.showOtherDetailsStatusHideBirthdate, toggleBirthplace: result.showOtherDetailsStatusHideBirthplace, toggleAddress: result.showOtherDetailsStatusHideAddress, toggleEmail: result.showOtherDetailsStatusHideEmail, toggleNumber: result.showOtherDetailsStatusHidePhoneNumber,),),);
                         },
                       ),
 
@@ -249,23 +240,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                     }
                                   }
                                 }()),
-                                // child: profile.data!.showProfileInformationImage != ''
-                                // ? Container(
-                                //   decoration: BoxDecoration(
-                                //     shape: BoxShape.circle,
-                                //     border: Border.all(color: const Color(0xffffffff), width: 3,),
-                                //   ),
-                                //   child: CircleAvatar(
-                                //     radius: 100,
-                                //     backgroundColor: const Color(0xff888888),
-                                //     foregroundImage: NetworkImage(profile.data!.showProfileInformationImage),
-                                //   ),
-                                // )
-                                // : const CircleAvatar(
-                                //   radius: 100, 
-                                //   backgroundColor: Color(0xff888888), 
-                                //   foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
-                                // ),
                               ),
                               onTap: () async{
                                 bool getImage = await getProfileImage();

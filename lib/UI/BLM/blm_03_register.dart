@@ -118,9 +118,6 @@ class BLMRegister extends StatelessWidget{
 
                                       MiscInputFieldSecurityQuestions(
                                         key: _key7,
-                                        // labelText: 'Password',
-                                        // type: TextInputType.text,
-                                        // obscureText: true,
                                       ),
 
                                       MiscInputFieldTemplate(

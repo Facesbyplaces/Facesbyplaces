@@ -111,12 +111,6 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
             underline: Container(height: 0),
             icon: const Center(child: Icon(Icons.more_vert, color: Color(0xffaaaaaa)),),
             style: const TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Color(0xff888888)),
-            // items: <String>['Copy Link', 'Share', 'QR Code', 'Report'].map((String value) {
-            //   return DropdownMenuItem<String>(
-            //     value: value,
-            //     child: Text(value),
-            //   );
-            // }).toList(),
             items: widget.deletable
             ? <String>['Copy Link', 'Share', 'QR Code', 'Report', 'Delete Post'].map((String value) {
               return DropdownMenuItem<String>(
@@ -258,8 +252,6 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
 
                 FlutterClipboard.copy(response.result).then((value) => const ScaffoldMessenger(child: Text('Link copied!'),));
               }else{
-                // print('Delete post blm');
-
                 bool confirmation = await showDialog(
                   context: context,
                   builder: (context) => CustomDialog(

@@ -359,44 +359,6 @@ class RegularLoginState extends State<RegularLogin>{
                                             ),
                                           );
                                         }
-
-                                        // context.loaderOverlay.show();
-                                        // String deviceToken = '';
-                                        // final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
-                                        // final pushNotificationService = PushNotificationService(_firebaseMessaging, context);
-                                        // pushNotificationService.initialise();
-                                        // deviceToken = (await pushNotificationService.fcm.getToken())!;
-                                        // String result = await apiRegularLogin(email: _key1.currentState!.controller.text, password: _key2.currentState!.controller.text, deviceToken: deviceToken);
-                                        // context.loaderOverlay.hide();
-
-                                        // // if(result == 'Success'){
-                                        // //   Navigator.push(context, MaterialPageRoute(builder: (context) => const UILogin01()));
-                                        // // }else{
-                                        // //   await showDialog(
-                                        // //     context: context,
-                                        // //     builder: (context) => CustomDialog(
-                                        // //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        // //       title: 'Error',
-                                        // //       description: 'Error: $result',
-                                        // //       okButtonColor: const Color(0xfff44336), // RED
-                                        // //       includeOkButton: true,
-                                        // //     ),
-                                        // //   );
-                                        // // }
-                                        // if(result == 'Success'){
-                                        //   Navigator.pushReplacementNamed(context, '/home/regular');
-                                        // }else{
-                                        //   await showDialog(
-                                        //     context: context,
-                                        //     builder: (context) => CustomDialog(
-                                        //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        //       title: 'Error',
-                                        //       description: 'Error: $result',
-                                        //       okButtonColor: const Color(0xfff44336), // RED
-                                        //       includeOkButton: true,
-                                        //     ),
-                                        //   );
-                                        // }
                                       }
                                     },
                                   ),

@@ -111,12 +111,6 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
             underline: Container(height: 0),
             icon: const Center(child: Icon(Icons.more_vert, color: Color(0xffaaaaaa)),),
             style: const TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Color(0xff888888)),
-            // items: const <String>['Copy Link', 'Share', 'QR Code', 'Report'].map((String value){
-            //   return DropdownMenuItem<String>(
-            //     child: Text(value),
-            //     value: value,
-            //   );
-            // }).toList(),
             items: widget.deletable
             ? const <String>['Copy Link', 'Share', 'QR Code', 'Report', 'Delete Post'].map((String value){
               return DropdownMenuItem<String>(

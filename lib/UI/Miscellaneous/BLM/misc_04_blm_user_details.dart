@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 import 'package:loader/loader.dart';
 import 'package:mime/mime.dart';
-
 import 'misc_01_blm_manage_memorial.dart';
 import 'misc_02_blm_post.dart';
 

@@ -61,7 +61,7 @@ class APIBLMShowUserInformation{
     DateTime dateTime;
     String newBirthdate;
 
-    if(parsedJson['birthdate'] != null){
+    if(parsedJson['birthdate'] != null && parsedJson['birthdate'] != ''){
       String newValue = parsedJson['birthdate'];
       dateTime = DateTime.parse(newValue);
       newBirthdate = dateTime.format(AmericanDateFormats.standardWithComma);
