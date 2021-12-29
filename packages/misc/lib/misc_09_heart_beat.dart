@@ -26,7 +26,7 @@ class HeartBeatState extends State<HeartBeat> with SingleTickerProviderStateMixi
 
   @override
   Widget build(BuildContext context) {
-    return ScaleTransition(scale: _animation, child: const Icon(Icons.favorite, color: Colors.red,));
+    return ScaleTransition(scale: _animation, child: const Icon(Icons.favorite, color: Colors.red, size: 35));
   }
 }
 

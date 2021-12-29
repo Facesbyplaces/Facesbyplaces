@@ -169,6 +169,15 @@ class MiscRelationshipFromDialog extends StatelessWidget{
             ),
 
             const SizedBox(height: 40,),
+
+            GestureDetector(
+              child: Text('Friend', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),
+              onTap: (){
+                Navigator.pop(context, 'Friend');
+              },
+            ),
+
+            const SizedBox(height: 40,),
           ],
         ),
       ),

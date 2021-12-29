@@ -322,6 +322,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                           if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[0])?.contains('video') == true){
                                                                             return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}',
                                                                               betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                autoPlay: true,
                                                                                 aspectRatio: 16 / 9,
                                                                                 fit: BoxFit.contain,
                                                                               ),
@@ -771,6 +772,94 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                             child: Row(
                                                               mainAxisAlignment: MainAxisAlignment.center,
                                                               children: [
+                                                                // Stack(
+                                                                //   children: [
+                                                                //     // Positioned(
+                                                                //     //   bottom: 0,
+                                                                //     //   right: 0,
+                                                                //     //   child: Image.asset('assets/icons/rose-filter-2.png', height: 160),
+                                                                //     // ),
+
+                                                                //     GestureDetector(
+                                                                //       child: CircleAvatar(
+                                                                //         radius: 100,
+                                                                //         backgroundColor: const Color(0xff04ECFF),
+                                                                //         child: Padding(
+                                                                //           padding: const EdgeInsets.all(5),
+                                                                //           child: profile.data!.almMemorial.showMemorialProfileImage != ''
+                                                                //           ? CircleAvatar(
+                                                                //             radius: 100,
+                                                                //             backgroundColor: const Color(0xff888888),
+                                                                //             foregroundImage: NetworkImage(profile.data!.almMemorial.showMemorialProfileImage),
+                                                                //             backgroundImage: const AssetImage('assets/icons/cover-icon.png'),
+                                                                //           )
+                                                                //           : const CircleAvatar(
+                                                                //             radius: 100,
+                                                                //             backgroundColor: Color(0xff888888),
+                                                                //             foregroundImage: AssetImage('assets/icons/cover-icon.png'),
+                                                                //           )
+                                                                //         ),
+                                                                //       ),
+                                                                //       onTap: (){
+                                                                //         showGeneralDialog(
+                                                                //           context: context,
+                                                                //           transitionDuration: const Duration(milliseconds: 0),
+                                                                //           barrierDismissible: true,
+                                                                //           barrierLabel: 'Dialog',
+                                                                //           pageBuilder: (_, __, ___) {
+                                                                //             return Scaffold(
+                                                                //               backgroundColor: Colors.black12.withOpacity(0.7),
+                                                                //               body: SizedBox.expand(
+                                                                //                 child: SafeArea(
+                                                                //                   child: Column(
+                                                                //                     children: [
+                                                                //                       Container(
+                                                                //                         padding: const EdgeInsets.only(right: 20.0),
+                                                                //                         alignment: Alignment.centerRight,
+                                                                //                         child: GestureDetector(
+                                                                //                           child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
+                                                                //                           onTap: (){
+                                                                //                             Navigator.pop(context);
+                                                                //                           },
+                                                                //                         ),
+                                                                //                       ),
+
+                                                                //                       const SizedBox(height: 20,),
+
+                                                                //                       Expanded(
+                                                                //                         child: CachedNetworkImage(
+                                                                //                           fit: BoxFit.contain,
+                                                                //                           imageUrl: profile.data!.almMemorial.showMemorialProfileImage,
+                                                                //                           placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain,),
+                                                                //                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain,),
+                                                                //                         )
+                                                                //                       ),
+
+                                                                //                       const SizedBox(height: 80,),
+                                                                //                     ],
+                                                                //                   ),
+                                                                //                 ),
+                                                                //               ),
+                                                                //             );
+                                                                //           },
+                                                                //         );
+                                                                //       },
+                                                                //     ),
+
+                                                                //     Positioned(
+                                                                //       bottom: 0,
+                                                                //       right: 0,
+                                                                //       child: Image.asset('assets/icons/rose-filter-2.png', height: 160, width: 200),
+                                                                //     ),
+
+                                                                //     // Container(
+                                                                //     //   width: SizeConfig.screenWidth,
+                                                                //     //   height: 160,
+                                                                //     //   color: Colors.red
+                                                                //     // ),
+                                                                //   ],
+                                                                // ),
+
                                                                 GestureDetector(
                                                                   child: CircleAvatar(
                                                                     radius: 100,

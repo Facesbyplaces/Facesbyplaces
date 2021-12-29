@@ -159,6 +159,10 @@ class UIGetStartedState extends State<UIGetStarted>{
                           children: [
                             const Center(child: Text('FacesByPlaces.com', style: TextStyle(fontSize: 28, color: Color(0xff04ECFF), fontFamily: 'NexaBold',),),),
 
+                            const SizedBox(height: 5),
+
+                            const Text('A Memorial Place', textAlign: TextAlign.center, style: TextStyle(fontSize: 22, fontFamily: 'NexaBold', color: Color(0xffffffff), fontStyle: FontStyle.italic),),
+
                             const SizedBox(height: 30),
 
                             const Padding(
@@ -194,7 +198,7 @@ class UIGetStartedState extends State<UIGetStarted>{
 
                             const Expanded(child: SizedBox(),),
 
-                            const Text('Version: 1.83 / 1.0.0+24', style: TextStyle(fontSize: 14, color: Color(0xffffffff), fontFamily: 'NexaRegular'),),
+                            const Text('Version: 1.86 / 1.0.0+27', style: TextStyle(fontSize: 14, color: Color(0xffffffff), fontFamily: 'NexaRegular'),),
 
                             const SizedBox(height: 10),
                           ],

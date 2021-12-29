@@ -91,7 +91,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab> with AutomaticKeepAliveC
           builder: (context) => CustomDialog(
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             title: 'Error',
-            description: 'Something went wrong. Please try again.',
+            description: 'Something went wrong. Please check your internet connection.',
             okButtonColor: const Color(0xfff44336), // RED
             includeOkButton: true,
           ),

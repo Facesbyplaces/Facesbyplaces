@@ -167,7 +167,8 @@ class MiscInputFieldDropDown extends StatefulWidget{
 }
 
 class MiscInputFieldDropDownState extends State<MiscInputFieldDropDown>{
-  List<String> relationship = ['Father', 'Mother', 'Sister', 'Brother', 'Son', 'Daughter', 'Aunt', 'Uncle', 'Nephew', 'Grandmother', 'Grandfather', 'Unknown'];
+  // List<String> relationship = ['Father', 'Mother', 'Sister', 'Brother', 'Son', 'Daughter', 'Aunt', 'Uncle', 'Nephew', 'Grandmother', 'Grandfather', 'Unknown'];
+  List<String> relationship = ['Father', 'Mother', 'Sister', 'Brother', 'Son', 'Daughter', 'Aunt', 'Uncle', 'Nephew', 'Grandmother', 'Grandfather', 'Unknown', 'Friend'];
   String currentSelection = 'Father';
 
   @override

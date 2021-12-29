@@ -322,6 +322,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                                           if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[0])?.contains('video') == true){
                                                                             return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
                                                                               betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                autoPlay: true,
                                                                                 aspectRatio: 16 / 9,
                                                                                 fit: BoxFit.contain,
                                                                               ),
