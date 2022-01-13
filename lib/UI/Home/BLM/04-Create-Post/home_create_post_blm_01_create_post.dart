@@ -10,7 +10,6 @@ import 'package:location/location.dart' as Location;
 import 'package:video_compress/video_compress.dart';
 import 'package:better_player/better_player.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:loader/loader.dart';
 import 'package:dialog/dialog.dart';

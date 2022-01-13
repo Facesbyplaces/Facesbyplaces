@@ -9,15 +9,12 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:clipboard/clipboard.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:dialog/dialog.dart';
 import 'package:share/share.dart';
 import 'package:misc/misc.dart';
 import 'dart:typed_data';
 import 'dart:io';
-import 'dart:ui';
 
 class MiscBLMDropDownTemplate extends StatefulWidget{
   final int postId;

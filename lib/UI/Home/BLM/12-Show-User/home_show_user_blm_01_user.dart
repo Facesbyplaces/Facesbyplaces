@@ -3,11 +3,9 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc_04_blm_user_details.dart
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:we_slide/we_slide.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'package:loader/loader.dart';
 import 'package:misc/misc.dart';
-import 'dart:ui';
 
 class HomeBLMUserProfile extends StatefulWidget{
   final int userId;

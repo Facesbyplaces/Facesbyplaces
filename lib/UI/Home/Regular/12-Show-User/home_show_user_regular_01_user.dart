@@ -3,11 +3,9 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc_04_regular_user_deta
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:we_slide/we_slide.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'package:loader/loader.dart';
 import 'package:misc/misc.dart';
-import 'dart:ui';
 
 class HomeRegularUserProfile extends StatefulWidget{
   final int userId;

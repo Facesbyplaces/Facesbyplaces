@@ -7,7 +7,6 @@ import 'package:facesbyplaces/API/Regular/12-Show-Post/api_show_post_regular_05_
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import '../../../Configurations/size_configuration.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'misc_03_regular_dropdown.dart';
 import 'package:dialog/dialog.dart';

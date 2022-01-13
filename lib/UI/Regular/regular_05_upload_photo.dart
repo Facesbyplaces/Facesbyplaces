@@ -7,7 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 import 'package:misc/misc.dart';
-import 'dart:io';
 
 class RegularUploadPhoto extends StatefulWidget{
   const RegularUploadPhoto({Key? key}) : super(key: key);

@@ -27,7 +27,6 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:dialog/dialog.dart';

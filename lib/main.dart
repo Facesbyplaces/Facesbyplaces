@@ -12,7 +12,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'UI/Regular/regular_01_join.dart';
 import 'UI/Regular/regular_02_login.dart';

@@ -8,7 +8,6 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:better_player/better_player.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';

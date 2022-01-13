@@ -15,7 +15,6 @@ import 'package:flutter/material.dart';
 import 'package:loader/loader.dart';
 import 'package:dialog/dialog.dart';
 import 'package:mime/mime.dart';
-import 'dart:ui';
 
 class HomeBLMPost extends StatefulWidget{
   final String keyword;

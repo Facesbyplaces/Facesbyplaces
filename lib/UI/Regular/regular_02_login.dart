@@ -12,7 +12,6 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:dialog/dialog.dart';
 import '../ui_01_get_started.dart';
 import 'package:misc/misc.dart';
