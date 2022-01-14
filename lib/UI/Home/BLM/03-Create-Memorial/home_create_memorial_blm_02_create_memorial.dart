@@ -5,6 +5,7 @@ import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 import 'package:video_compress/video_compress.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:better_player/better_player.dart';
 import 'package:image_picker/image_picker.dart';
@@ -102,6 +103,28 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> with Tic
     }
   }
 
+  Future getCroppedImage() async{
+    try{
+      File? croppedFile = await ImageCropper.cropImage(
+        sourcePath: profileImage.value.path,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.square,
+          CropAspectRatioPreset.ratio3x2,
+          CropAspectRatioPreset.original,
+          CropAspectRatioPreset.ratio4x3,
+          CropAspectRatioPreset.ratio16x9
+        ],
+        androidUiSettings: const AndroidUiSettings(toolbarTitle: 'Cropper', toolbarColor: Colors.deepOrange, toolbarWidgetColor: Colors.white, initAspectRatio: CropAspectRatioPreset.original, lockAspectRatio: false), iosUiSettings: const IOSUiSettings( minimumAspectRatio: 1.0,),
+      );
+
+      if(croppedFile != null){
+        profileImage.value = croppedFile;
+      }
+    }catch (error){
+      throw Exception('Error: $error');
+    }
+  }
+
   Future getProfileImage() async{
     try{
       final pickedFile = await picker.pickImage(source: ImageSource.gallery).then((picture){
@@ -112,6 +135,8 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> with Tic
         File newFile = await compressImage(File(pickedFile.path));
         profileImage.value = newFile;
       }
+
+      await getCroppedImage();
     }catch (error){
       throw Exception('Error: $error');
     }
@@ -444,12 +469,12 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> with Tic
                         radius: 100,
                         backgroundColor: const Color(0xff888888),
                         foregroundImage: FileImage(profileImageListener),
-                        backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                        backgroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                       )
                       : const CircleAvatar(
                         radius: 100,
                         backgroundColor: Color(0xff888888),
-                        foregroundImage: AssetImage('assets/icons/app-icon.png'),
+                        foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
                       ),
                     ),
                   ),

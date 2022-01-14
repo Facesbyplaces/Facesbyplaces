@@ -22,7 +22,13 @@
     "Cache": [
       "~> 6.0.0"
     ],
+    "GCDWebServer": [
+
+    ],
     "HLSCachingReverseProxyServer": [
+
+    ],
+    "PINCache": [
 
     ]
   },
