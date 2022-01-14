@@ -756,28 +756,28 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                         ),
 
                                                         Positioned(
-                                                          top: SizeConfig.screenHeight! / 6,
+                                                          top: SizeConfig.screenHeight! / 5,
                                                           child: SizedBox(
                                                             width: SizeConfig.screenWidth,
-                                                            height: 250,
+                                                            height: 160,
                                                             child: Row(
                                                               mainAxisAlignment: MainAxisAlignment.center,
                                                               children: [
                                                                 GestureDetector( // PROFILE PICTURE
                                                                   child: CircleAvatar(
-                                                                    radius: 200,
+                                                                    radius: 100,
                                                                     backgroundColor: const Color(0xff04ECFF),
                                                                     child: Padding(
                                                                       padding: const EdgeInsets.all(5),
                                                                       child: profile.data!.blmMemorial.memorialProfileImage != ''
                                                                       ? CircleAvatar(
-                                                                        radius: 200,
+                                                                        radius: 100,
                                                                         backgroundColor: const Color(0xff888888),
                                                                         foregroundImage: NetworkImage(profile.data!.blmMemorial.memorialProfileImage),
                                                                         backgroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                                                                       )
                                                                       : const CircleAvatar(
-                                                                        radius: 200,
+                                                                        radius: 100,
                                                                         backgroundColor: Color(0xff888888),
                                                                         foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
                                                                       )

@@ -765,30 +765,30 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                         ),
 
                                                         Positioned(
-                                                          top: SizeConfig.screenHeight! / 6,
+                                                          top: SizeConfig.screenHeight! / 5,
                                                           child: SizedBox(
                                                             width: SizeConfig.screenWidth,
-                                                            height: 250,
+                                                            height: 160,
                                                             child: Row(
                                                               mainAxisAlignment: MainAxisAlignment.center,
                                                               children: [
-                                                                GestureDetector( // PROFILE PICTURE
+                                                                GestureDetector(
                                                                   child: CircleAvatar(
-                                                                    radius: 200,
+                                                                    radius: 100,
                                                                     backgroundColor: const Color(0xff04ECFF),
                                                                     child: Padding(
                                                                       padding: const EdgeInsets.all(5),
                                                                       child: profile.data!.almMemorial.showMemorialProfileImage != ''
                                                                       ? CircleAvatar(
-                                                                        radius: 200,
+                                                                        radius: 100,
                                                                         backgroundColor: const Color(0xff888888),
                                                                         foregroundImage: NetworkImage(profile.data!.almMemorial.showMemorialProfileImage),
-                                                                        backgroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                                                        backgroundImage: const AssetImage('assets/icons/cover-icon.png'),
                                                                       )
                                                                       : const CircleAvatar(
-                                                                        radius: 200,
+                                                                        radius: 100,
                                                                         backgroundColor: Color(0xff888888),
-                                                                        foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
+                                                                        foregroundImage: AssetImage('assets/icons/cover-icon.png'),
                                                                       )
                                                                     ),
                                                                   ),
@@ -841,6 +841,84 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                             ),
                                                           ),
                                                         ),
+
+                                                        // Positioned(
+                                                        //   top: SizeConfig.screenHeight! / 6,
+                                                        //   child: SizedBox(
+                                                        //     width: SizeConfig.screenWidth,
+                                                        //     height: 250,
+                                                        //     child: Row(
+                                                        //       mainAxisAlignment: MainAxisAlignment.center,
+                                                        //       children: [
+                                                        //         GestureDetector( // PROFILE PICTURE
+                                                        //           child: CircleAvatar(
+                                                        //             radius: 200,
+                                                        //             backgroundColor: const Color(0xff04ECFF),
+                                                        //             child: Padding(
+                                                        //               padding: const EdgeInsets.all(5),
+                                                        //               child: profile.data!.almMemorial.showMemorialProfileImage != ''
+                                                        //               ? CircleAvatar(
+                                                        //                 radius: 200,
+                                                        //                 backgroundColor: const Color(0xff888888),
+                                                        //                 foregroundImage: NetworkImage(profile.data!.almMemorial.showMemorialProfileImage),
+                                                        //                 backgroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                                        //               )
+                                                        //               : const CircleAvatar(
+                                                        //                 radius: 200,
+                                                        //                 backgroundColor: Color(0xff888888),
+                                                        //                 foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
+                                                        //               )
+                                                        //             ),
+                                                        //           ),
+                                                        //           onTap: (){
+                                                        //             showGeneralDialog(
+                                                        //               context: context,
+                                                        //               transitionDuration: const Duration(milliseconds: 0),
+                                                        //               barrierDismissible: true,
+                                                        //               barrierLabel: 'Dialog',
+                                                        //               pageBuilder: (_, __, ___) {
+                                                        //                 return Scaffold(
+                                                        //                   backgroundColor: Colors.black12.withOpacity(0.7),
+                                                        //                   body: SizedBox.expand(
+                                                        //                     child: SafeArea(
+                                                        //                       child: Column(
+                                                        //                         children: [
+                                                        //                           Container(
+                                                        //                             padding: const EdgeInsets.only(right: 20.0),
+                                                        //                             alignment: Alignment.centerRight,
+                                                        //                             child: GestureDetector(
+                                                        //                               child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
+                                                        //                               onTap: (){
+                                                        //                                 Navigator.pop(context);
+                                                        //                               },
+                                                        //                             ),
+                                                        //                           ),
+
+                                                        //                           const SizedBox(height: 20,),
+
+                                                        //                           Expanded(
+                                                        //                             child: CachedNetworkImage(
+                                                        //                               fit: BoxFit.contain,
+                                                        //                               imageUrl: profile.data!.almMemorial.showMemorialProfileImage,
+                                                        //                               placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain,),
+                                                        //                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain,),
+                                                        //                             )
+                                                        //                           ),
+
+                                                        //                           const SizedBox(height: 80,),
+                                                        //                         ],
+                                                        //                       ),
+                                                        //                     ),
+                                                        //                   ),
+                                                        //                 );
+                                                        //               },
+                                                        //             );
+                                                        //           },
+                                                        //         ),
+                                                        //       ],
+                                                        //     ),
+                                                        //   ),
+                                                        // ),
                                                       ],
                                                     ),
                                                   ],
