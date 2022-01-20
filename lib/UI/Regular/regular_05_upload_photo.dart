@@ -23,8 +23,9 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if(pickedFile != null){
-      File newFile = await compressImage(File(pickedFile.path));
-      image.value = newFile;
+      // File newFile = await compressImage(File(pickedFile.path));
+      // image.value = newFile;
+      image.value = File(pickedFile.path);
     }
   }
 
@@ -32,8 +33,9 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
     final profilePicture = await picker.pickImage(source: ImageSource.camera);
 
     if(profilePicture != null){
-      File newFile = await compressImage(File(profilePicture.path));
-      image.value = newFile;
+      // File newFile = await compressImage(File(profilePicture.path));
+      // image.value = newFile;
+      image.value = File(profilePicture.path);
     }
   }
 
@@ -131,6 +133,9 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                             onPressed: () async{
                               if(imageListener.path != ''){
                                 context.loaderOverlay.show();
+                                File newFile = await compressImage(imageListener);
+                                imageListener = newFile;
+
                                 bool result = await apiRegularUploadPhoto(image: imageListener);
                                 context.loaderOverlay.hide();
 

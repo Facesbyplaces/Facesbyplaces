@@ -30,25 +30,21 @@ class UILogin01 extends StatelessWidget{
 
                         const SizedBox(height: 50,),
 
-                        const Text('Black Lives Matter', style: TextStyle(fontSize: 28, color: Color(0xff000000), fontFamily: 'NexaRegular'),),
+                        const Text('Memorial', style: TextStyle(fontSize: 28, color: Color(0xff000000), fontFamily: 'NexaRegular'),),
 
                         const SizedBox(height: 10,),
 
                         MaterialButton(
                           padding: EdgeInsets.zero,
                           color: const Color(0xff000000),
-                          // child: const Icon(Icons.search, size: 80, color: Color(0xffffffff),),
-                          child: Image.asset('assets/icons/fist.png', height: 80, width: 80),
+                          child: const Icon(Icons.search, size: 80, color: Color(0xffffffff),),
                           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-                          onPressed: (){
-                            // Navigator.pushNamed(context, '/blm/join');
-                            Navigator.pushNamed(context, '/blm/login');
-                          },
+                          onPressed: (){},
                         ),
 
                         const SizedBox(height: 10,),
 
-                        const Text('Memorial', style: TextStyle(fontSize: 28, color: Color(0xff000000), fontFamily: 'NexaRegular'),),
+                        const Text('Resources', style: TextStyle(fontSize: 28, color: Color(0xff000000), fontFamily: 'NexaRegular'),),
 
                         const SizedBox(height: 30,),
 
@@ -62,7 +58,6 @@ class UILogin01 extends StatelessWidget{
                           child: const Icon(Icons.favorite, size: 80, color: Color(0xffffffff),),
                           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
                           onPressed: (){
-                            // Navigator.pushReplacementNamed(context, '/home/regular');
                             Navigator.pushNamed(context, '/regular/login');
                           },
                         ),

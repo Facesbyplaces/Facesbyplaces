@@ -38,8 +38,10 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
       });
 
       if(pickedFile != null){
-        File newFile = await compressImage(File(pickedFile.path));
-        profileImage.value = newFile;
+        // File newFile = await compressImage(File(pickedFile.path));
+        // profileImage.value = newFile;
+
+        profileImage.value = File(pickedFile.path);
       }
     }catch (error){
       throw Exception('Error: $error');
@@ -53,8 +55,10 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
       });
 
       if(pickedFile != null){
-        File newFile = await compressImage(File(pickedFile.path));
-        backgroundImage.value = newFile;
+        // File newFile = await compressImage(File(pickedFile.path));
+        // backgroundImage.value = newFile;
+
+        backgroundImage.value = File(pickedFile.path);
       }
     }catch (error){
       throw Exception('Error: $error');
@@ -251,10 +255,11 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                           final file = await File('${tempDir.path}/regular-background-image-$index.png').create();
                                           file.writeAsBytesSync(list);
 
-                                          File newFile = await compressImage(file);
+                                          // File newFile = await compressImage(file);
 
                                           backgroundImageToggle.value = index;
-                                          backgroundImage.value = newFile;
+                                          // backgroundImage.value = newFile;
+                                          backgroundImage.value = file;
                                         },
                                       );
                                     }
@@ -277,6 +282,16 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                               height: 50,
                               onPressed: () async{
                                 if(profileImage.value.path != '' || backgroundImage.value.path != ''){
+                                  if(profileImage.value.path != ''){
+                                    File newFile = await compressImage(profileImage.value);
+                                    profileImage.value = newFile;
+                                  }
+
+                                  if(backgroundImage.value.path != ''){
+                                    File newFile = await compressImage(backgroundImage.value);
+                                    backgroundImage.value = newFile;
+                                  }
+
                                   context.loaderOverlay.show();
                                   bool result = await apiRegularUpdatePageImages(memorialId: widget.memorialId, backgroundImage: backgroundImage.value, profileImage: profileImage.value);
                                   context.loaderOverlay.hide();

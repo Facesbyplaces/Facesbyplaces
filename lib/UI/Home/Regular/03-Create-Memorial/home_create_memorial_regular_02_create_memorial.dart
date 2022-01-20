@@ -34,7 +34,8 @@ class HomeRegularCreateMemorial2 extends StatefulWidget{
 
 class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> with TickerProviderStateMixin{
   final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
-  ValueNotifier<List<File>> slideImages = ValueNotifier<List<File>>([]);
+  // ValueNotifier<List<File>> slideImages = ValueNotifier<List<File>>([]);
+  ValueNotifier<List<XFile>> slideImages = ValueNotifier<List<XFile>>([]);
   TextEditingController controllerStory = TextEditingController();
   ValueNotifier<File> videoFile = ValueNotifier<File>(File(''));
   ValueNotifier<int> slideCount = ValueNotifier<int>(0);
@@ -93,9 +94,18 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
         return picture;
       });
 
+      // if(pickedFile != null){
+      //   List<File> newFiles = await compressMultipleImages(pickedFile);
+      //   slideImages.value.addAll(newFiles);
+      //   slideCount.value += pickedFile.length;
+      // }
+
       if(pickedFile != null){
-        List<File> newFiles = await compressMultipleImages(pickedFile);
-        slideImages.value.addAll(newFiles);
+        // List<File> newFiles = await compressMultipleImages(pickedFile);
+        // slideImages.value.addAll(newFiles);
+        // slideCount.value += pickedFile.length;
+
+        slideImages.value.addAll(pickedFile);
         slideCount.value += pickedFile.length;
       }
     }catch (error){
@@ -132,8 +142,9 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
       });
 
       if(pickedFile != null){
-        File newFile = await compressImage(File(pickedFile.path));
-        profileImage.value = newFile;
+        // File newFile = await compressImage(File(pickedFile.path));
+        // profileImage.value = newFile;
+        profileImage.value = File(pickedFile.path);
       }
 
       // await getCroppedImage();
@@ -149,8 +160,9 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
       });
 
       if(pickedFile != null){
-        File newFile = await compressImage(File(pickedFile.path));
-        backgroundImage.value = newFile;
+        // File newFile = await compressImage(File(pickedFile.path));
+        // backgroundImage.value = newFile;
+        backgroundImage.value = File(pickedFile.path);
       }
     }catch (error){
       throw Exception('Error: $error');
@@ -374,6 +386,9 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
                                   File newFile = await compressImage(file);
                                   backgroundImage.value = newFile;
                                 }
+                              }else{
+                                File newFile = await compressImage(backgroundImage.value);
+                                backgroundImage.value = newFile;
                               }
 
                               if(profileImage.value.path == ''){
@@ -385,6 +400,9 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
                                 file.writeAsBytesSync(list);
 
                                 profileImage.value = file;
+                              }else{
+                                File newFile = await compressImage(profileImage.value);
+                                profileImage.value = newFile;
                               }
 
                               List<dynamic> newFiles = [];
@@ -394,7 +412,8 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
                               }
 
                               if(slideImages.value != []){
-                                newFiles.addAll(slideImages.value);
+                                List<File> newCompressedFiles = await compressMultipleImages(slideImages.value);
+                                newFiles.addAll(newCompressedFiles);
                               }
 
                               APIRegularCreateMemorial memorial = APIRegularCreateMemorial(
@@ -677,7 +696,8 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
   shareStory3(){
     return ValueListenableBuilder(
       valueListenable: slideImages,
-      builder: (_, List<File> slideImagesListener, __) => ValueListenableBuilder(
+      // builder: (_, List<File> slideImagesListener, __) => ValueListenableBuilder(
+      builder: (_, List<XFile> slideImagesListener, __) => ValueListenableBuilder(
         valueListenable: slideCount,
         builder: (_, int slideCountListener, __) => Column(
           children: [
@@ -713,7 +733,8 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
                               children: [
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
-                                  child: Image.file(slideImagesListener[index], fit: BoxFit.cover,)
+                                  // child: Image.file(slideImagesListener[index], fit: BoxFit.cover,)
+                                  child: Image.file(File(slideImagesListener[index].path), fit: BoxFit.cover,),
                                 ),
 
                                 Stack(
@@ -760,7 +781,8 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
 
                                           const SizedBox(height: 20,),
 
-                                          Expanded(child: Image.file(slideImagesListener[index], fit: BoxFit.contain,),),
+                                          // Expanded(child: Image.file(slideImagesListener[index], fit: BoxFit.contain,),),
+                                          Expanded(child: Image.file(File(slideImagesListener[index].path), fit: BoxFit.contain,),),
 
                                           const SizedBox(height: 80,),
                                         ],
