@@ -2,6 +2,7 @@ import 'package:facesbyplaces/API/BLM/01-Start/api_start_blm_04_upload_photo.dar
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
@@ -25,6 +26,29 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
     if(pickedFile != null){
       File newFile = await compressImage(File(pickedFile.path));
       image.value = newFile;
+      await getCroppedImage();
+    }
+  }
+
+  Future getCroppedImage() async{
+    try{
+      File? croppedFile = await ImageCropper.cropImage(
+        sourcePath: image.value.path,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.square,
+          CropAspectRatioPreset.ratio3x2,
+          CropAspectRatioPreset.original,
+          CropAspectRatioPreset.ratio4x3,
+          CropAspectRatioPreset.ratio16x9
+        ],
+        androidUiSettings: const AndroidUiSettings(toolbarTitle: 'Cropper', toolbarColor: Colors.deepOrange, toolbarWidgetColor: Colors.white, initAspectRatio: CropAspectRatioPreset.original, lockAspectRatio: false), iosUiSettings: const IOSUiSettings( minimumAspectRatio: 1.0,),
+      );
+
+      if(croppedFile != null){
+        image.value = croppedFile;
+      }
+    }catch (error){
+      throw Exception('Error: $error');
     }
   }
 

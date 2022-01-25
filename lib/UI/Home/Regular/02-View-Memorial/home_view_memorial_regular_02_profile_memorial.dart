@@ -780,28 +780,28 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                         ),
 
                                                         Positioned(
-                                                          top: SizeConfig.screenHeight! / 5,
+                                                          top: SizeConfig.screenHeight! / 6,
                                                           child: SizedBox(
                                                             width: SizeConfig.screenWidth,
-                                                            height: 160,
+                                                            height: 250,
                                                             child: Row(
                                                               mainAxisAlignment: MainAxisAlignment.center,
                                                               children: [
                                                                 GestureDetector(
                                                                   child: CircleAvatar(
-                                                                    radius: 100,
+                                                                    radius: 200,
                                                                     backgroundColor: const Color(0xff04ECFF),
                                                                     child: Padding(
                                                                       padding: const EdgeInsets.all(5),
                                                                       child: profile.data!.almMemorial.showMemorialProfileImage != ''
                                                                       ? CircleAvatar(
-                                                                        radius: 100,
+                                                                        radius: 200,
                                                                         backgroundColor: const Color(0xff888888),
                                                                         foregroundImage: NetworkImage(profile.data!.almMemorial.showMemorialProfileImage),
                                                                         backgroundImage: const AssetImage('assets/icons/cover-icon.png'),
                                                                       )
                                                                       : const CircleAvatar(
-                                                                        radius: 100,
+                                                                        radius: 200,
                                                                         backgroundColor: Color(0xff888888),
                                                                         foregroundImage: AssetImage('assets/icons/cover-icon.png'),
                                                                       )

@@ -5,6 +5,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +42,8 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
         File newFile = await compressImage(File(pickedFile.path));
         profileImage.value = newFile;
       }
+
+      await getCroppedImage();
     }catch (error){
       throw Exception('Error: $error');
     }
@@ -55,6 +58,28 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
       if(pickedFile != null){
         File newFile = await compressImage(File(pickedFile.path));
         backgroundImage.value = newFile;
+      }
+    }catch (error){
+      throw Exception('Error: $error');
+    }
+  }
+
+  Future getCroppedImage() async{
+    try{
+      File? croppedFile = await ImageCropper.cropImage(
+        sourcePath: profileImage.value.path,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.square,
+          CropAspectRatioPreset.ratio3x2,
+          CropAspectRatioPreset.original,
+          CropAspectRatioPreset.ratio4x3,
+          CropAspectRatioPreset.ratio16x9
+        ],
+        androidUiSettings: const AndroidUiSettings(toolbarTitle: 'Cropper', toolbarColor: Colors.deepOrange, toolbarWidgetColor: Colors.white, initAspectRatio: CropAspectRatioPreset.original, lockAspectRatio: false), iosUiSettings: const IOSUiSettings( minimumAspectRatio: 1.0,),
+      );
+
+      if(croppedFile != null){
+        profileImage.value = croppedFile;
       }
     }catch (error){
       throw Exception('Error: $error');

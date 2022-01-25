@@ -113,27 +113,27 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
     }
   }
 
-  // Future getCroppedImage() async{
-  //   try{
-  //     File? croppedFile = await ImageCropper.cropImage(
-  //       sourcePath: profileImage.value.path,
-  //       aspectRatioPresets: [
-  //         CropAspectRatioPreset.square,
-  //         CropAspectRatioPreset.ratio3x2,
-  //         CropAspectRatioPreset.original,
-  //         CropAspectRatioPreset.ratio4x3,
-  //         CropAspectRatioPreset.ratio16x9
-  //       ],
-  //       androidUiSettings: const AndroidUiSettings(toolbarTitle: 'Cropper', toolbarColor: Colors.deepOrange, toolbarWidgetColor: Colors.white, initAspectRatio: CropAspectRatioPreset.original, lockAspectRatio: false), iosUiSettings: const IOSUiSettings( minimumAspectRatio: 1.0,),
-  //     );
+  Future getCroppedImage() async{
+    try{
+      File? croppedFile = await ImageCropper.cropImage(
+        sourcePath: profileImage.value.path,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.square,
+          CropAspectRatioPreset.ratio3x2,
+          CropAspectRatioPreset.original,
+          CropAspectRatioPreset.ratio4x3,
+          CropAspectRatioPreset.ratio16x9
+        ],
+        androidUiSettings: const AndroidUiSettings(toolbarTitle: 'Cropper', toolbarColor: Colors.deepOrange, toolbarWidgetColor: Colors.white, initAspectRatio: CropAspectRatioPreset.original, lockAspectRatio: false), iosUiSettings: const IOSUiSettings( minimumAspectRatio: 1.0,),
+      );
 
-  //     if(croppedFile != null){
-  //       profileImage.value = croppedFile;
-  //     }
-  //   }catch (error){
-  //     throw Exception('Error: $error');
-  //   }
-  // }
+      if(croppedFile != null){
+        profileImage.value = croppedFile;
+      }
+    }catch (error){
+      throw Exception('Error: $error');
+    }
+  }
 
   Future getProfileImage() async{
     try{
@@ -147,7 +147,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
         profileImage.value = File(pickedFile.path);
       }
 
-      // await getCroppedImage();
+      await getCroppedImage();
     }catch (error){
       throw Exception('Error: $error');
     }
