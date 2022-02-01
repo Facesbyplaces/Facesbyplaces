@@ -390,11 +390,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                                 APIRegularShowSwitchStatus result = await apiRegularShowSwitchStatus(memorialId: widget.memorialId);
                                                                                 context.loaderOverlay.hide();
 
-                                                                                // print('The result is ${result.showSwitchStatusSuccess}');
-
-                                                                                // if(result.showSwitchStatusSuccess){
-                                                                                //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettings(memorialId: widget.memorialId, memorialName: profile.data!.almMemorial.showMemorialName, switchFamily: result.showSwitchStatusFamily, switchFriends: result.showSwitchStatusFriends, switchFollowers: result.showSwitchStatusFollowers, newlyCreated: widget.newlyCreated,),),);
-                                                                                // }
                                                                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettings(memorialId: widget.memorialId, memorialName: profile.data!.almMemorial.showMemorialName, switchFamily: result.showSwitchStatusFamily, switchFriends: result.showSwitchStatusFriends, switchFollowers: result.showSwitchStatusFollowers, newlyCreated: widget.newlyCreated, managed: result.showSwitchStatusManaged),),);
                                                                               }else{
                                                                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettingsWithHidden(memorialId: widget.memorialId, relationship: widget.relationship,),),);
@@ -772,24 +767,20 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                             child: Row(
                                                               mainAxisAlignment: MainAxisAlignment.center,
                                                               children: [
-                                                                GestureDetector(
+                                                                GestureDetector( // PROFILE PICTURE
                                                                   child: CircleAvatar(
                                                                     radius: 200,
                                                                     backgroundColor: const Color(0xff04ECFF),
-                                                                    child: Padding(
-                                                                      padding: const EdgeInsets.all(5),
-                                                                      child: profile.data!.almMemorial.showMemorialProfileImage != ''
-                                                                      ? CircleAvatar(
-                                                                        radius: 200,
-                                                                        backgroundColor: const Color(0xff888888),
-                                                                        foregroundImage: NetworkImage(profile.data!.almMemorial.showMemorialProfileImage),
-                                                                        backgroundImage: const AssetImage('assets/icons/cover-icon.png'),
-                                                                      )
-                                                                      : const CircleAvatar(
-                                                                        radius: 200,
-                                                                        backgroundColor: Color(0xff888888),
-                                                                        foregroundImage: AssetImage('assets/icons/cover-icon.png'),
-                                                                      )
+                                                                    child: Container(
+                                                                      height: 240,
+                                                                      width: 240,
+                                                                      decoration: BoxDecoration(
+                                                                        shape: BoxShape.circle,
+                                                                        image: DecorationImage(
+                                                                          image: NetworkImage(profile.data!.almMemorial.showMemorialProfileImage),
+                                                                          fit: BoxFit.cover,
+                                                                        ),
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                   onTap: (){
@@ -841,84 +832,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                             ),
                                                           ),
                                                         ),
-
-                                                        // Positioned(
-                                                        //   top: SizeConfig.screenHeight! / 6,
-                                                        //   child: SizedBox(
-                                                        //     width: SizeConfig.screenWidth,
-                                                        //     height: 250,
-                                                        //     child: Row(
-                                                        //       mainAxisAlignment: MainAxisAlignment.center,
-                                                        //       children: [
-                                                        //         GestureDetector( // PROFILE PICTURE
-                                                        //           child: CircleAvatar(
-                                                        //             radius: 200,
-                                                        //             backgroundColor: const Color(0xff04ECFF),
-                                                        //             child: Padding(
-                                                        //               padding: const EdgeInsets.all(5),
-                                                        //               child: profile.data!.almMemorial.showMemorialProfileImage != ''
-                                                        //               ? CircleAvatar(
-                                                        //                 radius: 200,
-                                                        //                 backgroundColor: const Color(0xff888888),
-                                                        //                 foregroundImage: NetworkImage(profile.data!.almMemorial.showMemorialProfileImage),
-                                                        //                 backgroundImage: const AssetImage('assets/icons/user-placeholder.png'),
-                                                        //               )
-                                                        //               : const CircleAvatar(
-                                                        //                 radius: 200,
-                                                        //                 backgroundColor: Color(0xff888888),
-                                                        //                 foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
-                                                        //               )
-                                                        //             ),
-                                                        //           ),
-                                                        //           onTap: (){
-                                                        //             showGeneralDialog(
-                                                        //               context: context,
-                                                        //               transitionDuration: const Duration(milliseconds: 0),
-                                                        //               barrierDismissible: true,
-                                                        //               barrierLabel: 'Dialog',
-                                                        //               pageBuilder: (_, __, ___) {
-                                                        //                 return Scaffold(
-                                                        //                   backgroundColor: Colors.black12.withOpacity(0.7),
-                                                        //                   body: SizedBox.expand(
-                                                        //                     child: SafeArea(
-                                                        //                       child: Column(
-                                                        //                         children: [
-                                                        //                           Container(
-                                                        //                             padding: const EdgeInsets.only(right: 20.0),
-                                                        //                             alignment: Alignment.centerRight,
-                                                        //                             child: GestureDetector(
-                                                        //                               child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: Color(0xffffffff),),),
-                                                        //                               onTap: (){
-                                                        //                                 Navigator.pop(context);
-                                                        //                               },
-                                                        //                             ),
-                                                        //                           ),
-
-                                                        //                           const SizedBox(height: 20,),
-
-                                                        //                           Expanded(
-                                                        //                             child: CachedNetworkImage(
-                                                        //                               fit: BoxFit.contain,
-                                                        //                               imageUrl: profile.data!.almMemorial.showMemorialProfileImage,
-                                                        //                               placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain,),
-                                                        //                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain,),
-                                                        //                             )
-                                                        //                           ),
-
-                                                        //                           const SizedBox(height: 80,),
-                                                        //                         ],
-                                                        //                       ),
-                                                        //                     ),
-                                                        //                   ),
-                                                        //                 );
-                                                        //               },
-                                                        //             );
-                                                        //           },
-                                                        //         ),
-                                                        //       ],
-                                                        //     ),
-                                                        //   ),
-                                                        // ),
                                                       ],
                                                     ),
                                                   ],

@@ -105,7 +105,6 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
     lengthOfSearchUsers.value = listOfSearchUsers.length; // COMPARISON FOR NEXT PAGINATION & NUMBER OF FEEDS
     page1 = page;
     loaded.value = true;
-    // print('hehehehe');
     
     return listOfSearchUsers;
   }
@@ -190,7 +189,6 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                                     }else{
                                       onSearch.value = true;
                                       searchKey.value = controller.text;
-                                      // onRefresh();
                                     }
                                   },
                                   onFieldSubmitted: (search){

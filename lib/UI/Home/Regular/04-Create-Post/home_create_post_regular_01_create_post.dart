@@ -35,7 +35,6 @@ class HomeRegularCreatePost extends StatefulWidget{
 
 class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
   ValueNotifier<List<File>> slideImages = ValueNotifier<List<File>>([]);
-  // ValueNotifier<List<XFile>> slideImages = ValueNotifier<List<XFile>>([]);
   ValueNotifier<String> newLocation = ValueNotifier<String>('');
   ValueNotifier<int> currentIdSelected = ValueNotifier<int>(0);
   ValueNotifier<int> removeAttachment = ValueNotifier<int>(0);
@@ -90,11 +89,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
       });
 
       if(pickedFile != null){
-        // List<File> newFiles = await compressMultipleImages(pickedFile);
-        // slideImages.value.addAll(newFiles);
-        // slideCount.value += pickedFile.length;
-
-        // slideImages.value.addAll(pickedFile);
         for(int i = 0; i < pickedFile.length; i++){
           slideImages.value.add(File(pickedFile[i].path));
         }
@@ -105,12 +99,11 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
     }
   }
 
-  // Future<List<File>> compressMultipleImages(List<XFile> files) async {
   Future<List<File>> compressMultipleImages(List<File> files) async {
     List<File> newFiles = [];
 
     for(int i = 0; i < files.length; i++){
-      File compressedFile = await FlutterNativeImage.compressImage(File(files[i].path).path, percentage: 5);
+      File compressedFile = await FlutterNativeImage.compressImage(File(files[i].path).path, percentage: 50);
       newFiles.add(compressedFile);
     }
 
@@ -164,13 +157,8 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                               List<File> newFiles = [];
                               if(slideImages.value.isNotEmpty){
                                 List<File> newCompressedFiles = await compressMultipleImages(slideImages.value);
-                                // slideImages.value.addAll(newFiles);
-
-                                // newFiles.addAll(slideImages.value);
                                 newFiles.addAll(newCompressedFiles);
                               }
-
-                              
 
                               if(controller.text == '' && newFiles.isEmpty){
                                 await showDialog(

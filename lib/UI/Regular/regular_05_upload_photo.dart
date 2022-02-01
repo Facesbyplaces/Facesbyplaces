@@ -19,13 +19,12 @@ class RegularUploadPhoto extends StatefulWidget{
 class RegularUploadPhotoState extends State<RegularUploadPhoto>{
   ValueNotifier<File> image = ValueNotifier<File>(File(''));
   final picker = ImagePicker();
+  ValueNotifier<bool> isCroppedProfile = ValueNotifier<bool>(false);
 
   Future getImage() async{
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if(pickedFile != null){
-      // File newFile = await compressImage(File(pickedFile.path));
-      // image.value = newFile;
       image.value = File(pickedFile.path);
       await getCroppedImage();
     }
@@ -37,15 +36,12 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
         sourcePath: image.value.path,
         aspectRatioPresets: [
           CropAspectRatioPreset.square,
-          CropAspectRatioPreset.ratio3x2,
-          CropAspectRatioPreset.original,
-          CropAspectRatioPreset.ratio4x3,
-          CropAspectRatioPreset.ratio16x9
         ],
         androidUiSettings: const AndroidUiSettings(toolbarTitle: 'Cropper', toolbarColor: Colors.deepOrange, toolbarWidgetColor: Colors.white, initAspectRatio: CropAspectRatioPreset.original, lockAspectRatio: false), iosUiSettings: const IOSUiSettings( minimumAspectRatio: 1.0,),
       );
 
       if(croppedFile != null){
+        isCroppedProfile.value = true;
         image.value = croppedFile;
       }
     }catch (error){
@@ -57,14 +53,13 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
     final profilePicture = await picker.pickImage(source: ImageSource.camera);
 
     if(profilePicture != null){
-      // File newFile = await compressImage(File(profilePicture.path));
-      // image.value = newFile;
       image.value = File(profilePicture.path);
+      await getCroppedImage();
     }
   }
 
   Future<File> compressImage(File file) async{
-    File compressedFile = await FlutterNativeImage.compressImage(file.path, percentage: 5);
+    File compressedFile = await FlutterNativeImage.compressImage(file.path, percentage: 50);
 
     return compressedFile;
   }
@@ -74,145 +69,151 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
     SizeConfig.init(context);
     return ValueListenableBuilder(
       valueListenable: image,
-      builder: (_, File imageListener, __) => RepaintBoundary(
-        child: Scaffold(
-          backgroundColor: const Color(0xffffffff),
-          body: SafeArea(
-            child: LayoutBuilder(
-              builder: (context, constraint){
-                return SingleChildScrollView(
-                  physics: const ClampingScrollPhysics(),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(minHeight: constraint.maxHeight),
-                    child: IntrinsicHeight(
-                      child: Column(
-                        children: [
-                          const SizedBox(height: 40),
+      builder: (_, File imageListener, __) => ValueListenableBuilder(
+        valueListenable: isCroppedProfile,
+        builder: (_, bool isCroppedProfileListener, __) => RepaintBoundary(
+          child: Scaffold(
+            backgroundColor: const Color(0xffffffff),
+            body: SafeArea(
+              child: LayoutBuilder(
+                builder: (context, constraint){
+                  return SingleChildScrollView(
+                    physics: const ClampingScrollPhysics(),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(minHeight: constraint.maxHeight),
+                      child: IntrinsicHeight(
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 40),
 
-                          const Center(child: Text('Upload Photo', style: TextStyle(fontSize: 42, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),),
+                            const Center(child: Text('Upload Photo', style: TextStyle(fontSize: 42, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),),
 
-                          const SizedBox(height: 40),
+                            const SizedBox(height: 40),
 
-                          GestureDetector(
-                            child: Container(
-                              height: SizeConfig.screenWidth! / 1.2,
-                              width: SizeConfig.screenWidth! / 1.2,
-                              color: const Color(0xffF9F8EE),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Stack(
-                                        children: [
-                                          Container(color: const Color(0xffffffff),),
+                            GestureDetector(
+                              child: Container(
+                                height: SizeConfig.screenWidth! / 1.2,
+                                width: SizeConfig.screenWidth! / 1.2,
+                                color: const Color(0xffF9F8EE),
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(15.0),
+                                        child: Stack(
+                                          children: [
+                                            Container(color: const Color(0xffffffff),),
 
-                                          imageListener.path != ''
-                                          ? Align(
-                                            alignment: Alignment.center,
-                                            child: Container(
-                                            decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: FileImage(imageListener),),),),
-                                          )
-                                          : const Align(
-                                            alignment: Alignment.center,
-                                            child: Icon(Icons.add, color: Color(0xffE3E3E3), size: 250,),
-                                          ),
-                                        ],
+                                            imageListener.path != ''
+                                            ? Align(
+                                              alignment: Alignment.center,
+                                              child: Container(
+                                              decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: FileImage(imageListener),),),),
+                                            )
+                                            : const Align(
+                                              alignment: Alignment.center,
+                                              child: Icon(Icons.add, color: Color(0xffE3E3E3), size: 250,),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
 
-                                  const Text('A valid photo of yourself would be a better choice because it would be worth a thousand words.',
-                                    style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
+                                    const Text('A valid photo of yourself would be a better choice because it would be worth a thousand words.',
+                                      style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            onTap: () async{
-                              var choice = await showDialog(context: (context), builder: (build) => const MiscUploadFromDialog());
+                              onTap: () async{
+                                var choice = await showDialog(context: (context), builder: (build) => const MiscUploadFromDialog());
 
-                              if(choice == null){
-                                choice = 0;
-                              }else{
-                                if(choice == 1){
-                                  await openCamera();
+                                if(choice == null){
+                                  choice = 0;
                                 }else{
-                                  await getImage();
+                                  if(choice == 1){
+                                    await openCamera();
+                                  }else{
+                                    await getImage();
+                                  }
                                 }
-                              }
-                            },
-                          ),
+                              },
+                            ),
 
-                          const Expanded(child: SizedBox()),
+                            const Expanded(child: SizedBox()),
 
-                          const SizedBox(height: 50),
+                            const SizedBox(height: 50),
 
-                          MiscButtonTemplate(
-                            buttonText: imageListener.path != '' ? 'Sign Up' : 'Next',
-                            buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
-                            buttonColor: const Color(0xff04ECFF),
-                            width: SizeConfig.screenWidth! / 2,
-                            height: 50,
-                            onPressed: () async{
-                              if(imageListener.path != ''){
-                                context.loaderOverlay.show();
-                                File newFile = await compressImage(imageListener);
-                                imageListener = newFile;
+                            MiscButtonTemplate(
+                              buttonText: imageListener.path != '' ? 'Sign Up' : 'Next',
+                              buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
+                              buttonColor: const Color(0xff04ECFF),
+                              width: SizeConfig.screenWidth! / 2,
+                              height: 50,
+                              onPressed: () async{
+                                if(imageListener.path != ''){
+                                  context.loaderOverlay.show();
+                                  
+                                  if(!isCroppedProfile.value){
+                                    File newFile = await compressImage(imageListener);
+                                    image.value = newFile;
+                                  }
 
-                                bool result = await apiRegularUploadPhoto(image: imageListener);
-                                context.loaderOverlay.hide();
+                                  bool result = await apiRegularUploadPhoto(image: imageListener);
+                                  context.loaderOverlay.hide();
 
-                                if(result){
-                                  Navigator.pushReplacementNamed(context, '/home/regular');
+                                  if(result){
+                                    Navigator.pushReplacementNamed(context, '/home/regular');
+                                  }else{
+                                    await showDialog(
+                                      context: context,
+                                      builder: (context) => CustomDialog(
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        title: 'Error',
+                                        description: 'Something went wrong. Please try again.',
+                                        okButtonColor: const Color(0xfff44336), // RED
+                                        includeOkButton: true,
+                                      ),
+                                    );
+                                  }
                                 }else{
                                   await showDialog(
                                     context: context,
                                     builder: (context) => CustomDialog(
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                       title: 'Error',
-                                      description: 'Something went wrong. Please try again.',
+                                      description: 'Please upload a photo.',
                                       okButtonColor: const Color(0xfff44336), // RED
                                       includeOkButton: true,
                                     ),
                                   );
                                 }
-                              }else{
-                                await showDialog(
-                                  context: context,
-                                  builder: (context) => CustomDialog(
-                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    title: 'Error',
-                                    description: 'Please upload a photo.',
-                                    okButtonColor: const Color(0xfff44336), // RED
-                                    includeOkButton: true,
-                                  ),
-                                );
-                              }
-                            },
-                          ),
-
-                          const SizedBox(height: 50),
-
-                          RichText(
-                            text: const TextSpan(
-                              children: <TextSpan>[
-                                TextSpan(text: 'Connect / ', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w300, color: Color(0xff888888),),),
-
-                                TextSpan(text: 'Remember / ', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w300, color: Color(0xff888888),),),
-
-                                TextSpan(text: 'Honor', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w300, color: Color(0xff888888),),),
-                              ],
+                              },
                             ),
-                          ),
 
-                          const SizedBox(height: 20),
-                        ],
+                            const SizedBox(height: 50),
+
+                            RichText(
+                              text: const TextSpan(
+                                children: <TextSpan>[
+                                  TextSpan(text: 'Connect / ', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w300, color: Color(0xff888888),),),
+
+                                  TextSpan(text: 'Remember / ', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w300, color: Color(0xff888888),),),
+
+                                  TextSpan(text: 'Honor', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w300, color: Color(0xff888888),),),
+                                ],
+                              ),
+                            ),
+
+                            const SizedBox(height: 20),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                );
-              }
+                  );
+                }
+              ),
             ),
           ),
         ),

@@ -33,7 +33,6 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
   Future<APIBLMShowProfileInformation>? showProfile;
   WeSlideController controller = WeSlideController();
   final picker = ImagePicker();
-
   bool changedProfile = false;
 
   Future<APIBLMShowProfileInformation> getProfileInformation() async{
@@ -62,10 +61,6 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
         sourcePath: profileImage.value.path,
         aspectRatioPresets: [
           CropAspectRatioPreset.square,
-          CropAspectRatioPreset.ratio3x2,
-          CropAspectRatioPreset.original,
-          CropAspectRatioPreset.ratio4x3,
-          CropAspectRatioPreset.ratio16x9
         ],
         androidUiSettings: const AndroidUiSettings(toolbarTitle: 'Cropper', toolbarColor: Colors.deepOrange, toolbarWidgetColor: Colors.white, initAspectRatio: CropAspectRatioPreset.original, lockAspectRatio: false), iosUiSettings: const IOSUiSettings( minimumAspectRatio: 1.0,),
       );
@@ -79,7 +74,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
   }
 
   Future<File> compressImage(File file) async{
-    File compressedFile = await FlutterNativeImage.compressImage(file.path, percentage: 5);
+    File compressedFile = await FlutterNativeImage.compressImage(file.path, percentage: 50);
 
     return compressedFile;
   }
@@ -231,7 +226,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                         children: [
                           CustomPaint(size: Size.infinite, painter: MiscCurvePainter(),),
 
-                          GestureDetector( // BACKGROUND IMAGE FOR ZOOMING IN
+                          GestureDetector( // CHANGE PROFILE PICTURE
                             child: Container(
                               padding: const EdgeInsets.only(bottom: 20.0),
                               alignment: Alignment.bottomCenter,

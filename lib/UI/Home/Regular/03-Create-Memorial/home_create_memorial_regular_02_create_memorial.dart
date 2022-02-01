@@ -34,7 +34,6 @@ class HomeRegularCreateMemorial2 extends StatefulWidget{
 
 class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> with TickerProviderStateMixin{
   final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
-  // ValueNotifier<List<File>> slideImages = ValueNotifier<List<File>>([]);
   ValueNotifier<List<XFile>> slideImages = ValueNotifier<List<XFile>>([]);
   TextEditingController controllerStory = TextEditingController();
   ValueNotifier<File> videoFile = ValueNotifier<File>(File(''));
@@ -47,6 +46,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
   ValueNotifier<File> backgroundImage = ValueNotifier<File>(File(''));
   ValueNotifier<File> profileImage = ValueNotifier<File>(File(''));
   ValueNotifier<int> backgroundImageToggle = ValueNotifier<int>(0);
+  ValueNotifier<bool> isCroppedProfile = ValueNotifier<bool>(false);
   List<String> backgroundImages = ['assets/icons/alm-memorial-cover-1.jpeg', 'assets/icons/alm-memorial-cover-2.jpeg'];
 
   @override
@@ -94,17 +94,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
         return picture;
       });
 
-      // if(pickedFile != null){
-      //   List<File> newFiles = await compressMultipleImages(pickedFile);
-      //   slideImages.value.addAll(newFiles);
-      //   slideCount.value += pickedFile.length;
-      // }
-
       if(pickedFile != null){
-        // List<File> newFiles = await compressMultipleImages(pickedFile);
-        // slideImages.value.addAll(newFiles);
-        // slideCount.value += pickedFile.length;
-
         slideImages.value.addAll(pickedFile);
         slideCount.value += pickedFile.length;
       }
@@ -119,15 +109,14 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
         sourcePath: profileImage.value.path,
         aspectRatioPresets: [
           CropAspectRatioPreset.square,
-          CropAspectRatioPreset.ratio3x2,
-          CropAspectRatioPreset.original,
-          CropAspectRatioPreset.ratio4x3,
-          CropAspectRatioPreset.ratio16x9
         ],
-        androidUiSettings: const AndroidUiSettings(toolbarTitle: 'Cropper', toolbarColor: Colors.deepOrange, toolbarWidgetColor: Colors.white, initAspectRatio: CropAspectRatioPreset.original, lockAspectRatio: false), iosUiSettings: const IOSUiSettings( minimumAspectRatio: 1.0,),
+        androidUiSettings: const AndroidUiSettings(toolbarTitle: 'Cropper', toolbarColor: Colors.deepOrange, toolbarWidgetColor: Colors.white, initAspectRatio: CropAspectRatioPreset.original, lockAspectRatio: false), 
+        iosUiSettings: const IOSUiSettings( minimumAspectRatio: 1.0,),
+        compressQuality: 5,
       );
 
       if(croppedFile != null){
+        isCroppedProfile.value = true;
         profileImage.value = croppedFile;
       }
     }catch (error){
@@ -142,8 +131,6 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
       });
 
       if(pickedFile != null){
-        // File newFile = await compressImage(File(pickedFile.path));
-        // profileImage.value = newFile;
         profileImage.value = File(pickedFile.path);
       }
 
@@ -160,8 +147,6 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
       });
 
       if(pickedFile != null){
-        // File newFile = await compressImage(File(pickedFile.path));
-        // backgroundImage.value = newFile;
         backgroundImage.value = File(pickedFile.path);
       }
     }catch (error){
@@ -170,7 +155,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
   }
 
   Future<File> compressImage(File file) async{
-    File compressedFile = await FlutterNativeImage.compressImage(file.path, percentage: 5);
+    File compressedFile = await FlutterNativeImage.compressImage(file.path, percentage: 50);
 
     return compressedFile;
   }
@@ -179,7 +164,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
     List<File> newFiles = [];
 
     for(int i = 0; i < files.length; i++){
-      File compressedFile = await FlutterNativeImage.compressImage(File(files[i].path).path, percentage: 5);
+      File compressedFile = await FlutterNativeImage.compressImage(File(files[i].path).path, percentage: 50);
       newFiles.add(compressedFile);
     }
 
@@ -200,268 +185,273 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
             currentFocus.unfocus();
           }
         },
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Create a Memorial Page for Friends and family.', maxLines: 2, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff))),
-            backgroundColor: const Color(0xff04ECFF),
-            centerTitle: true,
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
-              onPressed: (){
-                Navigator.pop(context);
-              },
-            ),
-          ),
-          body: Stack(
-            children: [
-              SingleChildScrollView(
-                physics: const NeverScrollableScrollPhysics(),
-                child: SizedBox(height: SizeConfig.screenHeight, child: const MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
+        child: ValueListenableBuilder(
+          valueListenable: isCroppedProfile,
+          builder: (_, bool isCroppedProfileListener, __) => Scaffold(
+            appBar: AppBar(
+              title: const Text('Create a Memorial Page for Friends and family.', maxLines: 2, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffffffff))),
+              backgroundColor: const Color(0xff04ECFF),
+              centerTitle: true,
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
+                onPressed: (){
+                  Navigator.pop(context);
+                },
               ),
+            ),
+            body: Stack(
+              children: [
+                SingleChildScrollView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  child: SizedBox(height: SizeConfig.screenHeight, child: const MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
+                ),
 
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                child: Form(
-                  key: _formKey,
-                  child: SingleChildScrollView(
-                    physics: const ClampingScrollPhysics(),
-                    child: Column(
-                      children: [
-                        MiscInputFieldTemplate(
-                          key: _key1, 
-                          labelText: 'Name of your Memorial Page',
-                        ),
-
-                        const SizedBox(height: 20,),
-
-                        DefaultTabController(
-                          length: 2,
-                          child: TabBar(
-                            indicator: const BoxDecoration(border: Border(left: BorderSide(width: 1, color: Color(0xff000000)), right: BorderSide(width: 1, color: Color(0xff000000))),),
-                            unselectedLabelColor: const Color(0xff888888),
-                            labelColor: const Color(0xff000000),
-                            indicatorColor: Colors.transparent,
-                            tabs: [
-                              Container(
-                                padding: const EdgeInsets.all(10),
-                                child: const Text('PROFILE PICTURE', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaBold',),),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xff04ECFF),
-                                  borderRadius: BorderRadius.circular(5)
-                                ),
-                              ),
-
-                              Container(
-                                padding: const EdgeInsets.all(10),
-                                child: const Text('BACKGROUND PICTURE', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaBold',),),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xff04ECFF),
-                                  borderRadius: BorderRadius.circular(5)
-                                ),
-                              ),
-
-                            ],
-                            onTap: (int number){
-                              controller1!.animateTo(number);
-                            },
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                  child: Form(
+                    key: _formKey,
+                    child: SingleChildScrollView(
+                      physics: const ClampingScrollPhysics(),
+                      child: Column(
+                        children: [
+                          MiscInputFieldTemplate(
+                            key: _key1, 
+                            labelText: 'Name of your Memorial Page',
                           ),
-                        ),
 
-                        const SizedBox(height: 20,),
+                          const SizedBox(height: 20,),
 
-                        SizedBox(
-                          height: 400,
-                          child: TabBarView(
-                            controller: controller1,
-                            children: [
-                              profilePicture(),
+                          DefaultTabController(
+                            length: 2,
+                            child: TabBar(
+                              indicator: const BoxDecoration(border: Border(left: BorderSide(width: 1, color: Color(0xff000000)), right: BorderSide(width: 1, color: Color(0xff000000))),),
+                              unselectedLabelColor: const Color(0xff888888),
+                              labelColor: const Color(0xff000000),
+                              indicatorColor: Colors.transparent,
+                              tabs: [
+                                Container(
+                                  padding: const EdgeInsets.all(10),
+                                  child: const Text('PROFILE PICTURE', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaBold',),),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xff04ECFF),
+                                    borderRadius: BorderRadius.circular(5)
+                                  ),
+                                ),
 
-                              backgroundPicture(),
-                            ],
+                                Container(
+                                  padding: const EdgeInsets.all(10),
+                                  child: const Text('BACKGROUND PICTURE', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaBold',),),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xff04ECFF),
+                                    borderRadius: BorderRadius.circular(5)
+                                  ),
+                                ),
+
+                              ],
+                              onTap: (int number){
+                                controller1!.animateTo(number);
+                              },
+                            ),
                           ),
-                        ),
 
-                        const SizedBox(height: 50,),
+                          const SizedBox(height: 20,),
 
-                        DefaultTabController(
-                          length: 3,
-                          child: TabBar(
-                            indicator: const BoxDecoration(border: Border(left: BorderSide(width: 1, color: Color(0xff000000)), right: BorderSide(width: 1, color: Color(0xff000000))),),
-                            unselectedLabelColor: const Color(0xff888888),
-                            labelColor: const Color(0xff000000),
-                            indicatorColor: Colors.transparent,
-                            tabs: [
-                              Container(
-                                padding: const EdgeInsets.all(10),
-                                child: const Text('TEXT', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaBold',),),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xff04ECFF),
-                                  borderRadius: BorderRadius.circular(5)
-                                ),
-                              ),
+                          SizedBox(
+                            height: 400,
+                            child: TabBarView(
+                              controller: controller1,
+                              children: [
+                                profilePicture(),
 
-                              Container(
-                                padding: const EdgeInsets.all(10),
-                                child: const Text('VIDEO', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaBold',),),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xff04ECFF),
-                                  borderRadius: BorderRadius.circular(5)
-                                ),
-                              ),
-
-                              Container(
-                                padding: const EdgeInsets.all(10),
-                                child: const Text('SLIDE', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaBold',),),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xff04ECFF),
-                                  borderRadius: BorderRadius.circular(5)
-                                ),
-                              ),
-                            ],
-                            onTap: (int number){
-                              controller2!.animateTo(number);
-                            },
+                                backgroundPicture(),
+                              ],
+                            ),
                           ),
-                        ),
 
-                        const SizedBox(height: 20,),
+                          const SizedBox(height: 50,),
 
-                        SizedBox(
-                          height: 400,
-                          child: TabBarView(
-                            controller: controller2,
-                            children: [
-                              shareStory1(),
-
-                              shareStory2(),
-
-                              shareStory3(),
-                            ],
-                          ),
-                        ),
-
-                        const SizedBox(height: 20,),
-
-                        const Center(child: Text('Share your Memories', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
-
-                        const SizedBox(height: 80,),
-
-                        MiscButtonTemplate(
-                          buttonText: 'Create my Memorial Page',
-                          buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),
-                          width: SizeConfig.screenWidth! / 1.2,
-                          height: 50,
-                          onPressed: () async{
-                            if(!(_formKey.currentState!.validate())){
-                              await showDialog(
-                                context: context,
-                                builder: (context) => CustomDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: 'Error',
-                                  description: 'Please input the name of the memorial page.',
-                                  okButtonColor: const Color(0xfff44336), // RED
-                                  includeOkButton: true,
+                          DefaultTabController(
+                            length: 3,
+                            child: TabBar(
+                              indicator: const BoxDecoration(border: Border(left: BorderSide(width: 1, color: Color(0xff000000)), right: BorderSide(width: 1, color: Color(0xff000000))),),
+                              unselectedLabelColor: const Color(0xff888888),
+                              labelColor: const Color(0xff000000),
+                              indicatorColor: Colors.transparent,
+                              tabs: [
+                                Container(
+                                  padding: const EdgeInsets.all(10),
+                                  child: const Text('TEXT', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaBold',),),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xff04ECFF),
+                                    borderRadius: BorderRadius.circular(5)
+                                  ),
                                 ),
-                              );
-                            }else{
-                              if(backgroundImageToggle.value == 0 || backgroundImageToggle.value == 1){
-                                if(backgroundImageToggle.value == 0){
-                                  final ByteData bytes = await rootBundle.load('assets/icons/alm-memorial-cover-1.jpeg');
-                                  final Uint8List list = bytes.buffer.asUint8List();
 
-                                  final tempDir = await getTemporaryDirectory();
-                                  final file = await File('${tempDir.path}/regular-background-image-${backgroundImageToggle.value}.png').create();
-                                  file.writeAsBytesSync(list);
+                                Container(
+                                  padding: const EdgeInsets.all(10),
+                                  child: const Text('VIDEO', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaBold',),),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xff04ECFF),
+                                    borderRadius: BorderRadius.circular(5)
+                                  ),
+                                ),
 
-                                  File newFile = await compressImage(file);
-                                  backgroundImage.value = newFile;
-                                }else if(backgroundImageToggle.value == 1){
-                                  final ByteData bytes = await rootBundle.load('assets/icons/alm-memorial-cover-2.jpeg');
-                                  final Uint8List list = bytes.buffer.asUint8List();
+                                Container(
+                                  padding: const EdgeInsets.all(10),
+                                  child: const Text('SLIDE', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontFamily: 'NexaBold',),),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xff04ECFF),
+                                    borderRadius: BorderRadius.circular(5)
+                                  ),
+                                ),
+                              ],
+                              onTap: (int number){
+                                controller2!.animateTo(number);
+                              },
+                            ),
+                          ),
 
-                                  final tempDir = await getTemporaryDirectory();
-                                  final file = await File('${tempDir.path}/regular-background-image-${backgroundImageToggle.value}.png').create();
-                                  file.writeAsBytesSync(list);
+                          const SizedBox(height: 20,),
 
-                                  File newFile = await compressImage(file);
-                                  backgroundImage.value = newFile;
-                                }
-                              }else{
-                                File newFile = await compressImage(backgroundImage.value);
-                                backgroundImage.value = newFile;
-                              }
+                          SizedBox(
+                            height: 400,
+                            child: TabBarView(
+                              controller: controller2,
+                              children: [
+                                shareStory1(),
 
-                              if(profileImage.value.path == ''){
-                                final ByteData bytes = await rootBundle.load('assets/icons/cover-icon.png');
-                                final Uint8List list = bytes.buffer.asUint8List();
+                                shareStory2(),
 
-                                final tempDir = await getTemporaryDirectory();
-                                final file = await File('${tempDir.path}/regular-profile-image.png').create();
-                                file.writeAsBytesSync(list);
+                                shareStory3(),
+                              ],
+                            ),
+                          ),
 
-                                profileImage.value = file;
-                              }else{
-                                File newFile = await compressImage(profileImage.value);
-                                profileImage.value = newFile;
-                              }
+                          const SizedBox(height: 20,),
 
-                              List<dynamic> newFiles = [];
+                          const Center(child: Text('Share your Memories', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),),),
 
-                              if(videoFile.value.path != ''){
-                                newFiles.add(videoFile.value);
-                              }
+                          const SizedBox(height: 80,),
 
-                              if(slideImages.value != []){
-                                List<File> newCompressedFiles = await compressMultipleImages(slideImages.value);
-                                newFiles.addAll(newCompressedFiles);
-                              }
-
-                              APIRegularCreateMemorial memorial = APIRegularCreateMemorial(
-                                almRelationship: widget.relationship,
-                                almBirthPlace: widget.birthplace,
-                                almDob: widget.dob,
-                                almRip: widget.rip,
-                                almCemetery: widget.cemetery,
-                                almCountry: widget.country,
-                                almMemorialName: _key1.currentState!.controller.text,
-                                almDescription: controllerStory.text,
-                                almBackgroundImage: backgroundImage.value,
-                                almProfileImage: profileImage.value,
-                                almImagesOrVideos: newFiles,
-                                almLatitude: widget.latitude,
-                                almLongitude: widget.longitude,
-                              );
-
-                              context.loaderOverlay.show(widget: const CustomLoaderTextLoader());
-                              int result = await apiRegularCreateMemorial(memorial: memorial);
-                              context.loaderOverlay.hide();
-
-                              if(result != 0){
-                                Route newRoute = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: result, managed: true, newlyCreated: true, relationship: widget.relationship,),);
-                                Navigator.pushReplacement(context, newRoute); 
-                              }else{
+                          MiscButtonTemplate(
+                            buttonText: 'Create my Memorial Page',
+                            buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),
+                            width: SizeConfig.screenWidth! / 1.2,
+                            height: 50,
+                            onPressed: () async{
+                              if(!(_formKey.currentState!.validate())){
                                 await showDialog(
                                   context: context,
                                   builder: (context) => CustomDialog(
                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                     title: 'Error',
-                                    description: 'Something went wrong. Please try again.',
+                                    description: 'Please input the name of the memorial page.',
                                     okButtonColor: const Color(0xfff44336), // RED
                                     includeOkButton: true,
                                   ),
                                 );
-                              }
-                            }
-                          },
-                        ),
+                              }else{
+                                if(backgroundImageToggle.value == 0 || backgroundImageToggle.value == 1){
+                                  if(backgroundImageToggle.value == 0){
+                                    final ByteData bytes = await rootBundle.load('assets/icons/alm-memorial-cover-1.jpeg');
+                                    final Uint8List list = bytes.buffer.asUint8List();
 
-                        const SizedBox(height: 20,),
-                      ],
+                                    final tempDir = await getTemporaryDirectory();
+                                    final file = await File('${tempDir.path}/regular-background-image-${backgroundImageToggle.value}.png').create();
+                                    file.writeAsBytesSync(list);
+
+                                    File newFile = await compressImage(file);
+                                    backgroundImage.value = newFile;
+                                  }else if(backgroundImageToggle.value == 1){
+                                    final ByteData bytes = await rootBundle.load('assets/icons/alm-memorial-cover-2.jpeg');
+                                    final Uint8List list = bytes.buffer.asUint8List();
+
+                                    final tempDir = await getTemporaryDirectory();
+                                    final file = await File('${tempDir.path}/regular-background-image-${backgroundImageToggle.value}.png').create();
+                                    file.writeAsBytesSync(list);
+
+                                    File newFile = await compressImage(file);
+                                    backgroundImage.value = newFile;
+                                  }
+                                }else{
+                                  File newFile = await compressImage(backgroundImage.value);
+                                  backgroundImage.value = newFile;
+                                }
+
+                                if(profileImage.value.path == ''){
+                                  final ByteData bytes = await rootBundle.load('assets/icons/cover-icon.png');
+                                  final Uint8List list = bytes.buffer.asUint8List();
+
+                                  final tempDir = await getTemporaryDirectory();
+                                  final file = await File('${tempDir.path}/regular-profile-image.png').create();
+                                  file.writeAsBytesSync(list);
+
+                                  profileImage.value = file;
+                                }else{
+                                  if(!isCroppedProfile.value){
+                                    File newFile = await compressImage(profileImage.value);
+                                    profileImage.value = newFile;
+                                  }
+                                }
+
+                                List<dynamic> newFiles = [];
+
+                                if(videoFile.value.path != ''){
+                                  newFiles.add(videoFile.value);
+                                }
+
+                                if(slideImages.value != []){
+                                  List<File> newCompressedFiles = await compressMultipleImages(slideImages.value);
+                                  newFiles.addAll(newCompressedFiles);
+                                }
+
+                                APIRegularCreateMemorial memorial = APIRegularCreateMemorial(
+                                  almRelationship: widget.relationship,
+                                  almBirthPlace: widget.birthplace,
+                                  almDob: widget.dob,
+                                  almRip: widget.rip,
+                                  almCemetery: widget.cemetery,
+                                  almCountry: widget.country,
+                                  almMemorialName: _key1.currentState!.controller.text,
+                                  almDescription: controllerStory.text,
+                                  almBackgroundImage: backgroundImage.value,
+                                  almProfileImage: profileImage.value,
+                                  almImagesOrVideos: newFiles,
+                                  almLatitude: widget.latitude,
+                                  almLongitude: widget.longitude,
+                                );
+
+                                context.loaderOverlay.show(widget: const CustomLoaderTextLoader());
+                                int result = await apiRegularCreateMemorial(memorial: memorial);
+                                context.loaderOverlay.hide();
+
+                                if(result != 0){
+                                  Route newRoute = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: result, managed: true, newlyCreated: true, relationship: widget.relationship,),);
+                                  Navigator.pushReplacement(context, newRoute); 
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (context) => CustomDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: 'Error',
+                                      description: 'Something went wrong. Please try again.',
+                                      okButtonColor: const Color(0xfff44336), // RED
+                                      includeOkButton: true,
+                                    ),
+                                  );
+                                }
+                              }
+                            },
+                          ),
+
+                          const SizedBox(height: 20,),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -696,7 +686,6 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
   shareStory3(){
     return ValueListenableBuilder(
       valueListenable: slideImages,
-      // builder: (_, List<File> slideImagesListener, __) => ValueListenableBuilder(
       builder: (_, List<XFile> slideImagesListener, __) => ValueListenableBuilder(
         valueListenable: slideCount,
         builder: (_, int slideCountListener, __) => Column(
@@ -733,7 +722,6 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
                               children: [
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
-                                  // child: Image.file(slideImagesListener[index], fit: BoxFit.cover,)
                                   child: Image.file(File(slideImagesListener[index].path), fit: BoxFit.cover,),
                                 ),
 
@@ -781,7 +769,6 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
 
                                           const SizedBox(height: 20,),
 
-                                          // Expanded(child: Image.file(slideImagesListener[index], fit: BoxFit.contain,),),
                                           Expanded(child: Image.file(File(slideImagesListener[index].path), fit: BoxFit.contain,),),
 
                                           const SizedBox(height: 80,),

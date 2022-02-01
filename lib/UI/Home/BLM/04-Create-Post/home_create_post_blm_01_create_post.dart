@@ -102,7 +102,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
     List<File> newFiles = [];
 
     for(int i = 0; i < files.length; i++){
-      File compressedFile = await FlutterNativeImage.compressImage(File(files[i].path).path, percentage: 5);
+      File compressedFile = await FlutterNativeImage.compressImage(File(files[i].path).path, percentage: 50);
       newFiles.add(compressedFile);
     }
 

@@ -4,7 +4,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'home_create_memorial_blm_02_create_memorial.dart';
-import 'home_create_memorial_blm_04_locate_map.dart';
+import 'home_create_memorial_blm_03_locate_map.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 import 'package:misc/misc.dart';

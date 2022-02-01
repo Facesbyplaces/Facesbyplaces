@@ -36,10 +36,6 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
         sourcePath: image.value.path,
         aspectRatioPresets: [
           CropAspectRatioPreset.square,
-          CropAspectRatioPreset.ratio3x2,
-          CropAspectRatioPreset.original,
-          CropAspectRatioPreset.ratio4x3,
-          CropAspectRatioPreset.ratio16x9
         ],
         androidUiSettings: const AndroidUiSettings(toolbarTitle: 'Cropper', toolbarColor: Colors.deepOrange, toolbarWidgetColor: Colors.white, initAspectRatio: CropAspectRatioPreset.original, lockAspectRatio: false), iosUiSettings: const IOSUiSettings( minimumAspectRatio: 1.0,),
       );
@@ -62,7 +58,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
   }
 
   Future<File> compressImage(File file) async{
-    File compressedFile = await FlutterNativeImage.compressImage(file.path, percentage: 5);
+    File compressedFile = await FlutterNativeImage.compressImage(file.path, percentage: 50);
 
     return compressedFile;
   }

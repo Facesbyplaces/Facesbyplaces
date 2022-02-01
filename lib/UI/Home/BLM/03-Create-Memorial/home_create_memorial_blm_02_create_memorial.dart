@@ -109,10 +109,6 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> with Tic
         sourcePath: profileImage.value.path,
         aspectRatioPresets: [
           CropAspectRatioPreset.square,
-          CropAspectRatioPreset.ratio3x2,
-          CropAspectRatioPreset.original,
-          CropAspectRatioPreset.ratio4x3,
-          CropAspectRatioPreset.ratio16x9
         ],
         androidUiSettings: const AndroidUiSettings(toolbarTitle: 'Cropper', toolbarColor: Colors.deepOrange, toolbarWidgetColor: Colors.white, initAspectRatio: CropAspectRatioPreset.original, lockAspectRatio: false), iosUiSettings: const IOSUiSettings( minimumAspectRatio: 1.0,),
       );
@@ -158,7 +154,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> with Tic
   }
 
   Future<File> compressImage(File file) async{
-    File compressedFile = await FlutterNativeImage.compressImage(file.path, percentage: 5);
+    File compressedFile = await FlutterNativeImage.compressImage(file.path, percentage: 50);
 
     return compressedFile;
   }
@@ -167,7 +163,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> with Tic
     List<File> newFiles = [];
 
     for(int i = 0; i < files.length; i++){
-      File compressedFile = await FlutterNativeImage.compressImage(File(files[i].path).path, percentage: 5);
+      File compressedFile = await FlutterNativeImage.compressImage(File(files[i].path).path, percentage: 50);
       newFiles.add(compressedFile);
     }
 

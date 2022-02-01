@@ -34,7 +34,8 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
   Future<APIRegularShowProfileInformation>? showProfile;
   WeSlideController controller = WeSlideController();
   final picker = ImagePicker();
-  bool changedProfile = false;
+  ValueNotifier<bool> changedProfile = ValueNotifier<bool>(false);
+  ValueNotifier<bool> isCroppedProfile = ValueNotifier<bool>(false);
 
   Future<APIRegularShowProfileInformation> getProfileInformation() async{
     return await apiRegularShowProfileInformation();
@@ -44,11 +45,15 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if(pickedFile != null){
-      File newFile = await compressImage(File(pickedFile.path));
+      File newFile = File(pickedFile.path);
       profileImage.value = newFile;
-      changedProfile = true;
 
       await getCroppedImage();
+
+      if(!isCroppedProfile.value){
+        profileImage.value = await compressImage(profileImage.value);
+        changedProfile.value = true;
+      }
       
       return true;
     }else{
@@ -62,15 +67,14 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
         sourcePath: profileImage.value.path,
         aspectRatioPresets: [
           CropAspectRatioPreset.square,
-          CropAspectRatioPreset.ratio3x2,
-          CropAspectRatioPreset.original,
-          CropAspectRatioPreset.ratio4x3,
-          CropAspectRatioPreset.ratio16x9
         ],
-        androidUiSettings: const AndroidUiSettings(toolbarTitle: 'Cropper', toolbarColor: Colors.deepOrange, toolbarWidgetColor: Colors.white, initAspectRatio: CropAspectRatioPreset.original, lockAspectRatio: false), iosUiSettings: const IOSUiSettings( minimumAspectRatio: 1.0,),
+        androidUiSettings: const AndroidUiSettings(toolbarTitle: 'Cropper', toolbarColor: Colors.deepOrange, toolbarWidgetColor: Colors.white, initAspectRatio: CropAspectRatioPreset.original, lockAspectRatio: false), 
+        iosUiSettings: const IOSUiSettings( minimumAspectRatio: 1.0,),
+        compressQuality: 5,
       );
 
       if(croppedFile != null){
+        isCroppedProfile.value = true;
         profileImage.value = croppedFile;
       }
     }catch (error){
@@ -79,7 +83,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
   }
 
   Future<File> compressImage(File file) async{
-    File compressedFile = await FlutterNativeImage.compressImage(file.path, percentage: 5);
+    File compressedFile = await FlutterNativeImage.compressImage(file.path, percentage: 50);
 
     return compressedFile;
   }
@@ -95,254 +99,257 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
     SizeConfig.init(context);
     return ValueListenableBuilder(
       valueListenable: profileImage,
-      builder: (_, File profileImageListener, __) => Scaffold(
-        body: FutureBuilder<APIRegularShowProfileInformation>(
-          future: showProfile,
-          builder: (context, profile){
-            if(profile.hasData){
-              return WeSlide(
-                controller: controller,
-                panelMaxSize: SizeConfig.screenHeight! / 1.5,
-                backgroundColor: const Color(0xffECF0F1),
-                panel: Container(
-                  height: SizeConfig.screenHeight! / 1.5,
-                  padding: const EdgeInsets.only(left: 50.0, right: 50.0),
-                  decoration: const BoxDecoration(color: Color(0xffffffff), borderRadius: BorderRadius.only(topLeft: Radius.circular(50.0),),),
-                  child: Column(
-                    children: [
-                      const Expanded(child: SizedBox(),),
+      builder: (_, File profileImageListener, __) => ValueListenableBuilder(
+        valueListenable: changedProfile,
+        builder: (_, bool changedProfileListener, __) => Scaffold(
+          body: FutureBuilder<APIRegularShowProfileInformation>(
+            future: showProfile,
+            builder: (context, profile){
+              if(profile.hasData){
+                return WeSlide(
+                  controller: controller,
+                  panelMaxSize: SizeConfig.screenHeight! / 1.5,
+                  backgroundColor: const Color(0xffECF0F1),
+                  panel: Container(
+                    height: SizeConfig.screenHeight! / 1.5,
+                    padding: const EdgeInsets.only(left: 50.0, right: 50.0),
+                    decoration: const BoxDecoration(color: Color(0xffffffff), borderRadius: BorderRadius.only(topLeft: Radius.circular(50.0),),),
+                    child: Column(
+                      children: [
+                        const Expanded(child: SizedBox(),),
 
-                      ListTile(
-                        title: const Text('Update Details', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
-                        subtitle: const Text('Update your account details', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserUpdateDetails(userId: widget.userId,)));
-                        },
-                      ),
+                        ListTile(
+                          title: const Text('Update Details', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
+                          subtitle: const Text('Update your account details', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserUpdateDetails(userId: widget.userId,)));
+                          },
+                        ),
 
-                      const Divider(height: 20, color: Color(0xff888888),),
+                        const Divider(height: 20, color: Color(0xff888888),),
 
-                      ListTile(
-                        title: const Text('Password', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
-                        subtitle: const Text('Change your login password', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                        onTap: () async{
-                          final sharedPrefs = await SharedPreferences.getInstance();
-                          bool socialAppSession = sharedPrefs.getBool('regular-social-app-session') ?? false;
-                          context.loaderOverlay.show();
-                          bool checkAccount = await apiRegularCheckAccount(email: profile.data!.showProfileInformationEmail).onError((error, stackTrace){
-                            context.loaderOverlay.hide();
-                            showDialog(
-                              context: context,
-                              builder: (context) => CustomDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: 'Error',
-                                description: 'Error: $error.',
-                                okButtonColor: const Color(0xfff44336), // RED
-                                includeOkButton: true,
-                              ),
-                            );
-                            throw Exception('$error');
-                          });
-                          context.loaderOverlay.hide();
-
-                          if(socialAppSession == true && checkAccount == false){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserChangePassword(userId: widget.userId, isAddPassword: true,)));
-                          }else{
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserChangePassword(userId: widget.userId, isAddPassword: false,)));
-                          }
-                        },
-                      ),
-
-                      const Divider(height: 20, color: Color(0xff888888),),
-
-                      ListTile(
-                        title: const Text('Other info', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
-                        subtitle: const Text('Optional informations you can share', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                        onTap: () async{
-                          context.loaderOverlay.show();
-                          APIRegularShowOtherDetailsStatus result = await apiRegularShowOtherDetailsStatus(userId: widget.userId);
-                          context.loaderOverlay.hide();
-
-                          Navigator.push(context, MaterialPageRoute(builder: (context) =>  HomeRegularUserOtherDetails(userId: widget.userId, toggleBirthdate: result.showOtherDetailsStatusHideBirthdate, toggleBirthplace: result.showOtherDetailsStatusHideBirthplace, toggleAddress: result.showOtherDetailsStatusHideAddress, toggleEmail: result.showOtherDetailsStatusHideEmail, toggleNumber: result.showOtherDetailsStatusHidePhoneNumber,),),);
-                        },
-                      ),
-
-                      const Divider(height: 20, color: Color(0xff888888),),
-
-                      ListTile(
-                        title: const Text('Privacy Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
-                        subtitle: const Text('Control what others see', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
-                        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeRegularUserPrivacySettings()))
-                      ),
-
-                      const Divider(height: 20, color: Color(0xff888888),),
-
-                      const SizedBox(height: 20,),
-
-                      MiscButtonTemplate(
-                        buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
-                        buttonColor: const Color(0xff04ECFF),
-                        width: SizeConfig.screenWidth! / 2,
-                        buttonText: 'Logout',
-                        height: 50,
-                        onPressed: () async{
-                          bool logoutResult = await showDialog(context: (context), builder: (build) => const MiscConfirmDialog(title: 'Log out', content: 'Are you sure you want to logout from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),),);
-
-                          if(logoutResult){
+                        ListTile(
+                          title: const Text('Password', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
+                          subtitle: const Text('Change your login password', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                          onTap: () async{
+                            final sharedPrefs = await SharedPreferences.getInstance();
+                            bool socialAppSession = sharedPrefs.getBool('regular-social-app-session') ?? false;
                             context.loaderOverlay.show();
-                            bool result = await apiRegularLogout();
-                            context.loaderOverlay.hide();
-
-                            if(result){
-                              Route newRoute = MaterialPageRoute(builder: (BuildContext context) => const UIGetStarted());
-                              Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
-                            }else{
-                              await showDialog(
+                            bool checkAccount = await apiRegularCheckAccount(email: profile.data!.showProfileInformationEmail).onError((error, stackTrace){
+                              context.loaderOverlay.hide();
+                              showDialog(
                                 context: context,
                                 builder: (context) => CustomDialog(
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                   title: 'Error',
-                                  description: 'Something went wrong. Please try again.',
+                                  description: 'Error: $error.',
                                   okButtonColor: const Color(0xfff44336), // RED
                                   includeOkButton: true,
                                 ),
                               );
+                              throw Exception('$error');
+                            });
+                            context.loaderOverlay.hide();
+
+                            if(socialAppSession == true && checkAccount == false){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserChangePassword(userId: widget.userId, isAddPassword: true,)));
+                            }else{
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserChangePassword(userId: widget.userId, isAddPassword: false,)));
                             }
-                          }
-                        },
-                      ),
+                          },
+                        ),
 
-                      const SizedBox(height: 20,),
+                        const Divider(height: 20, color: Color(0xff888888),),
 
-                      const Text('V.1.1.0', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff888888),),),
+                        ListTile(
+                          title: const Text('Other info', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
+                          subtitle: const Text('Optional informations you can share', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                          onTap: () async{
+                            context.loaderOverlay.show();
+                            APIRegularShowOtherDetailsStatus result = await apiRegularShowOtherDetailsStatus(userId: widget.userId);
+                            context.loaderOverlay.hide();
 
-                      const Expanded(child: SizedBox(),),
-                    ],
+                            Navigator.push(context, MaterialPageRoute(builder: (context) =>  HomeRegularUserOtherDetails(userId: widget.userId, toggleBirthdate: result.showOtherDetailsStatusHideBirthdate, toggleBirthplace: result.showOtherDetailsStatusHideBirthplace, toggleAddress: result.showOtherDetailsStatusHideAddress, toggleEmail: result.showOtherDetailsStatusHideEmail, toggleNumber: result.showOtherDetailsStatusHidePhoneNumber,),),);
+                          },
+                        ),
+
+                        const Divider(height: 20, color: Color(0xff888888),),
+
+                        ListTile(
+                          title: const Text('Privacy Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: Color(0xff000000),),),
+                          subtitle: const Text('Control what others see', style: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),
+                          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeRegularUserPrivacySettings()))
+                        ),
+
+                        const Divider(height: 20, color: Color(0xff888888),),
+
+                        const SizedBox(height: 20,),
+
+                        MiscButtonTemplate(
+                          buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xffffffff),),
+                          buttonColor: const Color(0xff04ECFF),
+                          width: SizeConfig.screenWidth! / 2,
+                          buttonText: 'Logout',
+                          height: 50,
+                          onPressed: () async{
+                            bool logoutResult = await showDialog(context: (context), builder: (build) => const MiscConfirmDialog(title: 'Log out', content: 'Are you sure you want to logout from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),),);
+
+                            if(logoutResult){
+                              context.loaderOverlay.show();
+                              bool result = await apiRegularLogout();
+                              context.loaderOverlay.hide();
+
+                              if(result){
+                                Route newRoute = MaterialPageRoute(builder: (BuildContext context) => const UIGetStarted());
+                                Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                              }else{
+                                await showDialog(
+                                  context: context,
+                                  builder: (context) => CustomDialog(
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    title: 'Error',
+                                    description: 'Something went wrong. Please try again.',
+                                    okButtonColor: const Color(0xfff44336), // RED
+                                    includeOkButton: true,
+                                  ),
+                                );
+                              }
+                            }
+                          },
+                        ),
+
+                        const SizedBox(height: 20,),
+
+                        const Text('V.1.1.0', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: Color(0xff888888),),),
+
+                        const Expanded(child: SizedBox(),),
+                      ],
+                    ),
                   ),
-                ),
-                body: SingleChildScrollView(
-                  physics: const ClampingScrollPhysics(),
-                  child: Stack(
-                    children: [
-                      Container(height: SizeConfig.screenHeight, color: const Color(0xffECF0F1),),
+                  body: SingleChildScrollView(
+                    physics: const ClampingScrollPhysics(),
+                    child: Stack(
+                      children: [
+                        Container(height: SizeConfig.screenHeight, color: const Color(0xffECF0F1),),
 
-                      SizedBox(
-                        height: SizeConfig.screenHeight! / 2.5,
-                        child: Stack(
-                          children: [
-                            CustomPaint(size: Size.infinite, painter: MiscCurvePainter(),),
+                        SizedBox(
+                          height: SizeConfig.screenHeight! / 2.5,
+                          child: Stack(
+                            children: [
+                              CustomPaint(size: Size.infinite, painter: MiscCurvePainter(),),
 
-                            GestureDetector( // BACKGROUND IMAGE FOR ZOOMING IN
-                              child: Container(
-                                padding: const EdgeInsets.only(bottom: 20.0),
-                                alignment: Alignment.bottomCenter,
-                                child: ((){
-                                  if(changedProfile){
-                                    return CircleAvatar(
-                                      radius: 100, 
-                                      backgroundColor: const Color(0xff888888), 
-                                      foregroundImage: FileImage(profileImageListener,)
-                                    );
-                                  }else{
-                                    if(profile.data!.showProfileInformationImage != ''){
-                                      return Container(
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          border: Border.all(color: Colors.white, width: 3,),
-                                        ),
-                                        child: CircleAvatar(
-                                          radius: 100,
-                                          backgroundColor: const Color(0xff888888),
-                                          foregroundImage: NetworkImage(profile.data!.showProfileInformationImage),
+                              GestureDetector( // CHANGE PROFILE PICTURE
+                                child: Container(
+                                  padding: const EdgeInsets.only(bottom: 20.0),
+                                  alignment: Alignment.bottomCenter,
+                                  child: ((){
+                                    if(changedProfileListener){
+                                      return CircleAvatar(
+                                        radius: 100, 
+                                        backgroundColor: const Color(0xff888888), 
+                                        foregroundImage: FileImage(profileImage.value,)
+                                      );
+                                    }else{
+                                      if(profile.data!.showProfileInformationImage != ''){
+                                        return Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(color: Colors.white, width: 3,),
+                                          ),
+                                          child: CircleAvatar(
+                                            radius: 100,
+                                            backgroundColor: const Color(0xff888888),
+                                            foregroundImage: NetworkImage(profile.data!.showProfileInformationImage),
+                                          ),
+                                        );
+                                      }else{
+                                        return const CircleAvatar(
+                                          radius: 100, 
+                                          backgroundColor: Color(0xff888888), 
+                                          foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
+                                        );
+                                      }
+                                    }
+                                  }()),
+                                ),
+                                onTap: () async{
+                                  bool getImage = await getProfileImage();
+
+                                  if(getImage){
+                                    context.loaderOverlay.show();
+                                    bool result = await apiRegularUpdateUserProfilePicture(image: profileImage.value);
+                                    context.loaderOverlay.hide();
+
+                                    if(result){
+                                      await showDialog(
+                                        context: context,
+                                        builder: (context) => CustomDialog(
+                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                          title: 'Success',
+                                          description: 'Successfully updated the profile picture.',
+                                          okButtonColor: const Color(0xff4caf50), // GREEN
+                                          includeOkButton: true,
                                         ),
                                       );
                                     }else{
-                                      return const CircleAvatar(
-                                        radius: 100, 
-                                        backgroundColor: Color(0xff888888), 
-                                        foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
+                                      await showDialog(
+                                        context: context,
+                                        builder: (context) => CustomDialog(
+                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                          title: 'Error',
+                                          description: 'Something went wrong. Please try again.',
+                                          okButtonColor: const Color(0xfff44336), // RED
+                                          includeOkButton: true,
+                                        ),
                                       );
                                     }
                                   }
-                                }()),
+                                },
                               ),
-                              onTap: () async{
-                                bool getImage = await getProfileImage();
-
-                                if(getImage){
-                                  context.loaderOverlay.show();
-                                  bool result = await apiRegularUpdateUserProfilePicture(image: profileImage.value);
-                                  context.loaderOverlay.hide();
-
-                                  if(result){
-                                    await showDialog(
-                                      context: context,
-                                      builder: (context) => CustomDialog(
-                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        title: 'Success',
-                                        description: 'Successfully updated the profile picture.',
-                                        okButtonColor: const Color(0xff4caf50), // GREEN
-                                        includeOkButton: true,
-                                      ),
-                                    );
-                                  }else{
-                                    await showDialog(
-                                      context: context,
-                                      builder: (context) => CustomDialog(
-                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        title: 'Error',
-                                        description: 'Something went wrong. Please try again.',
-                                        okButtonColor: const Color(0xfff44336), // RED
-                                        includeOkButton: true,
-                                      ),
-                                    );
-                                  }
-                                }
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      SafeArea(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: IconButton(
-                            icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35),
-                            onPressed: (){
-                              Navigator.of(context).popAndPushNamed('/home/regular');
-                            },
-                          ),
-                        ),
-                      ),
-                      
-                      Positioned(
-                        top: SizeConfig.screenHeight! / 2.5,
-                        child: SizedBox(
-                          width: SizeConfig.screenWidth,
-                          child: Column(
-                            children: [
-                              Center(child: Text(profile.data!.showProfileInformationFirstName + ' ' + profile.data!.showProfileInformationLastName, style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xff000000),),),),
-
-                              const SizedBox(height: 20),
-
-                              Center(child: Text(profile.data!.showProfileInformationEmail, style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),),
-
-                              const SizedBox(height: 40,),
                             ],
                           ),
                         ),
-                      ),
-                    ],
+
+                        SafeArea(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: IconButton(
+                              icon: const Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35),
+                              onPressed: (){
+                                Navigator.of(context).popAndPushNamed('/home/regular');
+                              },
+                            ),
+                          ),
+                        ),
+                        
+                        Positioned(
+                          top: SizeConfig.screenHeight! / 2.5,
+                          child: SizedBox(
+                            width: SizeConfig.screenWidth,
+                            child: Column(
+                              children: [
+                                Center(child: Text(profile.data!.showProfileInformationFirstName + ' ' + profile.data!.showProfileInformationLastName, style: const TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: Color(0xff000000),),),),
+
+                                const SizedBox(height: 20),
+
+                                Center(child: Text(profile.data!.showProfileInformationEmail, style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: Color(0xffBDC3C7),),),),
+
+                                const SizedBox(height: 40,),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              );
-            }else if(profile.hasError){
-              return const MiscErrorMessageTemplate();
-            }else{
-              return const Center(child: CustomLoaderThreeDots(),);
-            }
-          },
+                );
+              }else if(profile.hasError){
+                return const MiscErrorMessageTemplate();
+              }else{
+                return const Center(child: CustomLoaderThreeDots(),);
+              }
+            },
+          ),
         ),
       ),
     );

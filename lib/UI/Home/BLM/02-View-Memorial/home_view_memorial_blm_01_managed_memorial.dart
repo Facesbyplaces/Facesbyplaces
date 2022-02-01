@@ -759,20 +759,16 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                                   child: CircleAvatar(
                                                                     radius: 200,
                                                                     backgroundColor: const Color(0xff04ECFF),
-                                                                    child: Padding(
-                                                                      padding: const EdgeInsets.all(5),
-                                                                      child: profile.data!.blmMemorial.memorialProfileImage != ''
-                                                                      ? CircleAvatar(
-                                                                        radius: 200,
-                                                                        backgroundColor: const Color(0xff888888),
-                                                                        foregroundImage: NetworkImage(profile.data!.blmMemorial.memorialProfileImage),
-                                                                        backgroundImage: const AssetImage('assets/icons/user-placeholder.png'),
-                                                                      )
-                                                                      : const CircleAvatar(
-                                                                        radius: 200,
-                                                                        backgroundColor: Color(0xff888888),
-                                                                        foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
-                                                                      )
+                                                                    child: Container(
+                                                                      height: 240,
+                                                                      width: 240,
+                                                                      decoration: BoxDecoration(
+                                                                        shape: BoxShape.circle,
+                                                                        image: DecorationImage(
+                                                                          image: NetworkImage(profile.data!.blmMemorial.memorialProfileImage),
+                                                                          fit: BoxFit.cover,
+                                                                        ),
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                   onTap: (){
