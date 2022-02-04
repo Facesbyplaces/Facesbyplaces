@@ -23,7 +23,6 @@ import 'UI/BLM/blm_03_register.dart';
 import 'UI/BLM/blm_05_upload_photo.dart';
 import 'UI/ui_01_get_started.dart';
 import 'UI/ui_02_login.dart';
-import 'UI/ui_03_newly_installed.dart';
 import 'package:loader/loader.dart';
 import 'dart:async';
 
@@ -60,7 +59,6 @@ void main() async{
   );
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  final newlyInstalled = sharedPrefs.getBool('newly-installed') ?? true;
   final blmSession = sharedPrefs.getBool('blm-user-session') ?? false;
   final regularSession = sharedPrefs.getBool('regular-user-session') ?? false;
 
@@ -75,16 +73,12 @@ void main() async{
           debugShowCheckedModeBanner: false,
           title: 'Faces by Places',
           home: ((){
-            if(newlyInstalled){
-              return const UINewlyInstalled();
+            if(blmSession){
+              return const HomeBLMScreen();
+            }else if(regularSession){
+              return const HomeRegularScreen();
             }else{
-              if(blmSession){
-                return const HomeBLMScreen();
-              }else if(regularSession){
-                return const HomeRegularScreen();
-              }else{
-                return const UIGetStarted();
-              }
+              return const UIGetStarted();
             }
           }()),
           builder: (context, widget) => ResponsiveWrapper.builder(

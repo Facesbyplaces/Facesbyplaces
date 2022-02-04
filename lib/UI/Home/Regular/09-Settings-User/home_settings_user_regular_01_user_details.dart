@@ -52,8 +52,9 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
 
       if(!isCroppedProfile.value){
         profileImage.value = await compressImage(profileImage.value);
-        changedProfile.value = true;
       }
+
+      changedProfile.value = true;
       
       return true;
     }else{
@@ -74,7 +75,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
       );
 
       if(croppedFile != null){
-        isCroppedProfile.value = true;
         profileImage.value = croppedFile;
       }
     }catch (error){
