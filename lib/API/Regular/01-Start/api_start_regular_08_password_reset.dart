@@ -15,6 +15,9 @@ Future<List<dynamic>> apiRegularPasswordReset({required String email, required S
     ),  
   );
 
+  print('The status code of password reset is ${response.statusCode}');
+  print('The status data of password reset is ${response.data}');
+
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     bool status = newData['success'];
