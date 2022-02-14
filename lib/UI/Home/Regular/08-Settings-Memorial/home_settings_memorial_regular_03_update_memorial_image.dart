@@ -32,6 +32,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
   Future<APIRegularShowPageImagesMain>? futureMemorialSettings;
   final picker = ImagePicker();
   ValueNotifier<bool> isCroppedProfile = ValueNotifier<bool>(false);
+  ValueNotifier<bool> isCroppedBackground = ValueNotifier<bool>(false);
 
   Future getProfileImage() async{
     try{
@@ -41,9 +42,10 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
 
       if(pickedFile != null){
         profileImage.value = File(pickedFile.path);
+        await getCroppedImage();
       }
 
-      await getCroppedImage();
+      
     }catch (error){
       throw Exception('Error: $error');
     }
@@ -57,6 +59,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
 
       if(pickedFile != null){
         backgroundImage.value = File(pickedFile.path);
+        await getCroppedImage(isProfile: false);
       }
     }catch (error){
       throw Exception('Error: $error');
@@ -72,21 +75,27 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
     return await apiRegularShowPageImages(memorialId: memorialId);
   }
 
-  Future getCroppedImage() async{
+  Future getCroppedImage({bool isProfile = true}) async{
     try{
       File? croppedFile = await ImageCropper.cropImage(
-        sourcePath: profileImage.value.path,
+        sourcePath: isProfile ? profileImage.value.path : backgroundImage.value.path,
         aspectRatioPresets: [
           CropAspectRatioPreset.square,
         ],
+        cropStyle: isProfile ? CropStyle.circle : CropStyle.rectangle,
         androidUiSettings: const AndroidUiSettings(toolbarTitle: 'Cropper', toolbarColor: Colors.deepOrange, toolbarWidgetColor: Colors.white, initAspectRatio: CropAspectRatioPreset.original, lockAspectRatio: false), 
         iosUiSettings: const IOSUiSettings( minimumAspectRatio: 1.0,),
         compressQuality: 5,
       );
 
       if(croppedFile != null){
-        isCroppedProfile.value = true;
-        profileImage.value = croppedFile;
+        if(isProfile){
+          isCroppedProfile.value = true;
+          profileImage.value = croppedFile;
+        }else{
+          isCroppedBackground.value = true;
+          backgroundImage.value = croppedFile;
+        }
       }
     }catch (error){
       throw Exception('Error: $error');
@@ -277,6 +286,8 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
 
                                             backgroundImageToggle.value = index;
                                             backgroundImage.value = file;
+
+                                            await getCroppedImage(isProfile: false);
                                           },
                                         );
                                       }

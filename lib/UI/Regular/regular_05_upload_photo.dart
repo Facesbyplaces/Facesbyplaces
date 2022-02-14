@@ -37,7 +37,9 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
         aspectRatioPresets: [
           CropAspectRatioPreset.square,
         ],
-        androidUiSettings: const AndroidUiSettings(toolbarTitle: 'Cropper', toolbarColor: Colors.deepOrange, toolbarWidgetColor: Colors.white, initAspectRatio: CropAspectRatioPreset.original, lockAspectRatio: false), iosUiSettings: const IOSUiSettings( minimumAspectRatio: 1.0,),
+        cropStyle: CropStyle.circle,
+        androidUiSettings: const AndroidUiSettings(toolbarTitle: 'Cropper', toolbarColor: Colors.deepOrange, toolbarWidgetColor: Colors.white, initAspectRatio: CropAspectRatioPreset.original, lockAspectRatio: false), 
+        iosUiSettings: const IOSUiSettings( minimumAspectRatio: 1.0,),
       );
 
       if(croppedFile != null){

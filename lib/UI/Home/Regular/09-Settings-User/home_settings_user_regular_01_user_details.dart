@@ -68,7 +68,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
         sourcePath: profileImage.value.path,
         aspectRatioPresets: [
           CropAspectRatioPreset.square,
-          CropAspectRatioPreset.ratio16x9
         ],
         cropStyle: CropStyle.circle,
         androidUiSettings: const AndroidUiSettings(toolbarTitle: 'Cropper', toolbarColor: Colors.deepOrange, toolbarWidgetColor: Colors.white, initAspectRatio: CropAspectRatioPreset.original, lockAspectRatio: false), 

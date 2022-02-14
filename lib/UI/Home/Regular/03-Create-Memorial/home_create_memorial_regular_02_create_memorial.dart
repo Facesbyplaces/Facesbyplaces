@@ -47,6 +47,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
   ValueNotifier<File> profileImage = ValueNotifier<File>(File(''));
   ValueNotifier<int> backgroundImageToggle = ValueNotifier<int>(0);
   ValueNotifier<bool> isCroppedProfile = ValueNotifier<bool>(false);
+  ValueNotifier<bool> isCroppedBackground = ValueNotifier<bool>(false);
   List<String> backgroundImages = ['assets/icons/alm-memorial-cover-1.jpeg', 'assets/icons/alm-memorial-cover-2.jpeg'];
 
   @override
@@ -103,21 +104,28 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
     }
   }
 
-  Future getCroppedImage() async{
+  Future getCroppedImage({bool isProfile = true}) async{
     try{
       File? croppedFile = await ImageCropper.cropImage(
-        sourcePath: profileImage.value.path,
+        // sourcePath: profileImage.value.path,
+        sourcePath: isProfile ? profileImage.value.path : backgroundImage.value.path,
         aspectRatioPresets: [
           CropAspectRatioPreset.square,
         ],
+        cropStyle: isProfile ? CropStyle.circle : CropStyle.rectangle,
         androidUiSettings: const AndroidUiSettings(toolbarTitle: 'Cropper', toolbarColor: Colors.deepOrange, toolbarWidgetColor: Colors.white, initAspectRatio: CropAspectRatioPreset.original, lockAspectRatio: false), 
         iosUiSettings: const IOSUiSettings( minimumAspectRatio: 1.0,),
         compressQuality: 5,
       );
 
       if(croppedFile != null){
-        isCroppedProfile.value = true;
-        profileImage.value = croppedFile;
+        if(isProfile){
+          isCroppedProfile.value = true;
+          profileImage.value = croppedFile;
+        }else{
+          isCroppedBackground.value = true;
+          backgroundImage.value = croppedFile;
+        }
       }
     }catch (error){
       throw Exception('Error: $error');
@@ -132,9 +140,10 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
 
       if(pickedFile != null){
         profileImage.value = File(pickedFile.path);
+        await getCroppedImage();
       }
 
-      await getCroppedImage();
+      
     }catch (error){
       throw Exception('Error: $error');
     }
@@ -148,7 +157,10 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
 
       if(pickedFile != null){
         backgroundImage.value = File(pickedFile.path);
+        await getCroppedImage(isProfile: false);
       }
+
+      
     }catch (error){
       throw Exception('Error: $error');
     }
@@ -353,24 +365,10 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
                               }else{
                                 if(backgroundImageToggle.value == 0 || backgroundImageToggle.value == 1){
                                   if(backgroundImageToggle.value == 0){
-                                    final ByteData bytes = await rootBundle.load('assets/icons/alm-memorial-cover-1.jpeg');
-                                    final Uint8List list = bytes.buffer.asUint8List();
-
-                                    final tempDir = await getTemporaryDirectory();
-                                    final file = await File('${tempDir.path}/regular-background-image-${backgroundImageToggle.value}.png').create();
-                                    file.writeAsBytesSync(list);
-
-                                    File newFile = await compressImage(file);
+                                    File newFile = await compressImage(backgroundImage.value);
                                     backgroundImage.value = newFile;
                                   }else if(backgroundImageToggle.value == 1){
-                                    final ByteData bytes = await rootBundle.load('assets/icons/alm-memorial-cover-2.jpeg');
-                                    final Uint8List list = bytes.buffer.asUint8List();
-
-                                    final tempDir = await getTemporaryDirectory();
-                                    final file = await File('${tempDir.path}/regular-background-image-${backgroundImageToggle.value}.png').create();
-                                    file.writeAsBytesSync(list);
-
-                                    File newFile = await compressImage(file);
+                                    File newFile = await compressImage(backgroundImage.value);
                                     backgroundImage.value = newFile;
                                   }
                                 }else{
@@ -596,8 +594,12 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2> 
                           final file = await File('${tempDir.path}/regular-background-image-$index.png').create();
                           file.writeAsBytesSync(list);
 
+                          
+
                           backgroundImageToggle.value = index;
                           backgroundImage.value = file;
+
+                          await getCroppedImage(isProfile: false);
                         },
                       );
                     }
