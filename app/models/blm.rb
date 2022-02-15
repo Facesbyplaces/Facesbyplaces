@@ -3,6 +3,7 @@ class Blm < ApplicationRecord
   has_one_attached :backgroundImage
   has_one_attached :profileImage
   has_many_attached :imagesOrVideos
+  has_one_attached :qrCode
 
   # Paypal Account
   has_one :paypal_account, as: :paypalable

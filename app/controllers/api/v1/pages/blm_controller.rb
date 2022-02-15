@@ -145,7 +145,7 @@ class Api::V1::Pages::BlmController < ApplicationController
     end
 
     def blm_details_params
-        params.permit(:name, :description, :location, :rip, :state, :country, :longitude, :latitude)
+        params.permit(:name, :description, :location, :rip, :state, :country, :longitude, :latitude, :qrCode)
     end
 
     def blm_images_params
