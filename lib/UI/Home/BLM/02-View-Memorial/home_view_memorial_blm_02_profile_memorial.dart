@@ -16,6 +16,7 @@ import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'home_view_memorial_blm_03_connection_list.dart';
 import 'home_view_memorial_blm_04_maps.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 import 'package:loader/loader.dart';
@@ -59,10 +60,12 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
   String thumbnail = 'assets/icons/cover-icon.png';
   File thumbFile = File('');
+  String qrData = '';
 
   @override
   void initState(){
     super.initState();
+    qrData = 'Memorial-${widget.memorialId}-Blm';
     isGuest();
     join.value = widget.newJoin;
     scrollController.addListener((){ // SHOWS WHEN THE USER HAS REACHED THE BOTTOM OF THE LIST
@@ -348,6 +351,12 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                           return const SizedBox(height: 0,);
                                                                         }
                                                                       }()),
+
+                                                                      const SizedBox(height: 10),
+
+                                                                      QrImage(data: qrData, version: QrVersions.auto, size: 320, gapless: false,),
+
+                                                                      const SizedBox(height: 10),
                                                                     ],
                                                                   ),
 

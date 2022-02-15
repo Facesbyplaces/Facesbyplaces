@@ -79,9 +79,10 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
     try{
       File? croppedFile = await ImageCropper.cropImage(
         sourcePath: isProfile ? profileImage.value.path : backgroundImage.value.path,
-        aspectRatioPresets: [
-          CropAspectRatioPreset.square,
-        ],
+        // aspectRatioPresets: [
+        //   CropAspectRatioPreset.square,
+        // ],
+        aspectRatioPresets: isProfile ? [CropAspectRatioPreset.square,] : [CropAspectRatioPreset.ratio16x9,],
         cropStyle: isProfile ? CropStyle.circle : CropStyle.rectangle,
         androidUiSettings: const AndroidUiSettings(toolbarTitle: 'Cropper', toolbarColor: Colors.deepOrange, toolbarWidgetColor: Colors.white, initAspectRatio: CropAspectRatioPreset.original, lockAspectRatio: false), 
         iosUiSettings: const IOSUiSettings( minimumAspectRatio: 1.0,),

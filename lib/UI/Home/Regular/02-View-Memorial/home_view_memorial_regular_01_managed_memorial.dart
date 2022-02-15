@@ -16,6 +16,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 import 'package:loader/loader.dart';
@@ -60,10 +61,12 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
   String thumbnail = 'assets/icons/cover-icon.png';
   File thumbFile = File('');
+  String qrData = '';
 
   @override
   void initState(){
     super.initState();
+    qrData = 'Memorial-${widget.memorialId}-Alm';
     isGuest();
     scrollController.addListener((){ // SHOWS WHEN THE USER HAS REACHED THE BOTTOM OF THE LIST
       if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
@@ -99,6 +102,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
     showProfile = getProfileInformation(widget.memorialId);
     showListOfMemorialPosts = getListOfMemorialPosts(page: page1);
+    // String qrData = 'Post-${widget.postId}-${widget.likePost == true ? 1 : 0}-${widget.likesCount}-${widget.pageType == 'Blm' ? 'Blm' : 'Alm'}'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
+    // String qrData = 'Memorial-${widget.memorialId}-${pageType == 'Blm' ? 'Blm' : 'Alm'}'; // 'link-category' - 'link-type-of-account' - 'link-type-of-account'
+    // String qrData = 'Memorial-${widget.memorialId}-Alm'; // 'link-category' - 'link-type-of-account' - 'link-type-of-account'
   }
 
   Future<void> onRefresh() async{
@@ -348,6 +354,24 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                           return const SizedBox(height: 0,);
                                                                         }
                                                                       }()),
+
+                                                                      const SizedBox(height: 10),
+
+                                                                      QrImage(data: qrData, version: QrVersions.auto, size: 320, gapless: false,),
+
+                                                                      const SizedBox(height: 10),
+
+                                                                      // ((){
+                                                                      //   if(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDescription != ''){
+                                                                      //     return Container(
+                                                                      //       alignment: Alignment.center,
+                                                                      //       padding: const EdgeInsets.symmetric(horizontal: 20.0,),
+                                                                      //       child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDescription, textAlign: TextAlign.center, style: const TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                                                                      //     );
+                                                                      //   }else{
+                                                                      //     return const SizedBox(height: 0,);
+                                                                      //   }
+                                                                      // }()),
                                                                     ],
                                                                   ),
 

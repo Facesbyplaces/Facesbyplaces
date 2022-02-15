@@ -16,6 +16,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog/dialog.dart';
 import 'package:loader/loader.dart';
@@ -60,10 +61,12 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
   String thumbnail = 'assets/icons/cover-icon.png';
   File thumbFile = File('');
+  String qrData = '';
 
   @override
   void initState(){
     super.initState();
+    qrData = 'Memorial-${widget.memorialId}-Blm';
     isGuest();
     scrollController.addListener((){ // SHOWS WHEN THE USER HAS REACHED THE BOTTOM OF THE LIST
       if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
@@ -348,6 +351,12 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                                           return const SizedBox(height: 0,);
                                                                         }
                                                                       }()),
+
+                                                                      const SizedBox(height: 10),
+
+                                                                      QrImage(data: qrData, version: QrVersions.auto, size: 320, gapless: false,),
+
+                                                                      const SizedBox(height: 10),
                                                                     ],
                                                                   ),
 
