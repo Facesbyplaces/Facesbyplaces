@@ -153,7 +153,8 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
               }else if(dropDownList == 'Report'){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: widget.postId, reportType: widget.reportType,)));
               }else if(dropDownList == 'QR Code'){
-                String qrData = 'Post-${widget.postId}-${widget.likePost == true ? 1 : 0}-${widget.likesCount}-${widget.pageType == 'Blm' ? 'Blm' : 'Alm'}'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
+                // String qrData = 'Post-${widget.postId}-${widget.likePost == true ? 1 : 0}-${widget.likesCount}-${widget.pageType == 'Blm' ? 'Blm' : 'Alm'}'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
+                String qrData = 'www.facesbyplaces.com/?q=Post-${widget.postId}-${widget.likePost == true ? 1 : 0}-${widget.likesCount}-${widget.pageType == 'Blm' ? 'Blm' : 'Alm'}'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
 
                 showGeneralDialog(
                   context: context,
@@ -421,7 +422,8 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
               }else if(dropDownList == 'Report'){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: widget.memorialId, reportType: widget.reportType,)));
               }else if(dropDownList == 'QR Code'){
-                String qrData = 'Memorial-${widget.memorialId}-${widget.pageType == 'Blm' ? 'Blm' : 'Alm'}'; // 'link-category' - 'link-type-of-account' - 'link-type-of-account'
+                // String qrData = 'Memorial-${widget.memorialId}-${widget.pageType == 'Blm' ? 'Blm' : 'Alm'}'; // 'link-category' - 'link-type-of-account' - 'link-type-of-account'
+                String qrData = 'www.facesbyplaces.com/?q=Memorial-${widget.memorialId}-${widget.pageType == 'Blm' ? 'Blm' : 'Alm'}'; // 'link-category' - 'link-type-of-account' - 'link-type-of-account'
 
                 showGeneralDialog(
                   context: context,

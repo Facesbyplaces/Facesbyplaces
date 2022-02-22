@@ -1,6 +1,6 @@
 {
   "name": "flutter_login_facebook",
-  "version": "1.2.0",
+  "version": "1.4.0",
   "summary": "Login via Facebook for Flutter projects.",
   "description": "Login via Facebook for Flutter projects.",
   "homepage": "https://github.com/Innim/flutter_login_facebook",
@@ -19,7 +19,7 @@
 
     ],
     "FBSDKLoginKit": [
-      "~> 12.0"
+      "~> 12.3"
     ]
   },
   "platforms": {

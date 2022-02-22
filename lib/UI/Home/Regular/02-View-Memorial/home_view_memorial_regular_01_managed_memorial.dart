@@ -66,7 +66,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
   @override
   void initState(){
     super.initState();
-    qrData = 'Memorial-${widget.memorialId}-Alm';
+    qrData = 'www.facesbyplaces.com/?q=Memorial-${widget.memorialId}-Alm';
     isGuest();
     scrollController.addListener((){ // SHOWS WHEN THE USER HAS REACHED THE BOTTOM OF THE LIST
       if(scrollController.position.pixels == scrollController.position.maxScrollExtent){

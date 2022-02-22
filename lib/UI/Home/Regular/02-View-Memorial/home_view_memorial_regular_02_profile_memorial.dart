@@ -65,7 +65,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
   @override
   void initState(){
     super.initState();
-    qrData = 'Memorial-${widget.memorialId}-Alm';
+    qrData = 'www.facesbyplaces.com/?q=Memorial-${widget.memorialId}-Alm';
     isGuest();
     join.value = widget.newJoin;
     scrollController.addListener((){ // SHOWS WHEN THE USER HAS REACHED THE BOTTOM OF THE LIST

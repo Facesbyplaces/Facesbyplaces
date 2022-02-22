@@ -65,7 +65,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
   @override
   void initState(){
     super.initState();
-    qrData = 'Memorial-${widget.memorialId}-Blm';
+    qrData = 'www.facesbyplaces.com/?q=Memorial-${widget.memorialId}-Blm';
     isGuest();
     join.value = widget.newJoin;
     scrollController.addListener((){ // SHOWS WHEN THE USER HAS REACHED THE BOTTOM OF THE LIST

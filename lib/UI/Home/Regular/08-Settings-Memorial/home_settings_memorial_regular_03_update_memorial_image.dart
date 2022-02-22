@@ -77,11 +77,9 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
 
   Future getCroppedImage({bool isProfile = true}) async{
     try{
-      File? croppedFile = await ImageCropper.cropImage(
+      final imageCropper = ImageCropper();
+      File? croppedFile = await imageCropper.cropImage(
         sourcePath: isProfile ? profileImage.value.path : backgroundImage.value.path,
-        // aspectRatioPresets: [
-        //   CropAspectRatioPreset.square,
-        // ],
         aspectRatioPresets: isProfile ? [CropAspectRatioPreset.square,] : [CropAspectRatioPreset.ratio16x9,],
         cropStyle: isProfile ? CropStyle.circle : CropStyle.rectangle,
         androidUiSettings: const AndroidUiSettings(toolbarTitle: 'Cropper', toolbarColor: Colors.deepOrange, toolbarWidgetColor: Colors.white, initAspectRatio: CropAspectRatioPreset.original, lockAspectRatio: false), 

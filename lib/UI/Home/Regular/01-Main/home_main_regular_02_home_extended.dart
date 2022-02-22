@@ -78,7 +78,11 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> wi
       _scanBarcode = barcodeScanRes;
     });
 
-    List<dynamic> newValue = _scanBarcode.split('-');
+    // List<dynamic> newValue = _scanBarcode.replaceAll('www.facesbyplaces.com/?q=', '');
+
+    List<dynamic> newValue = _scanBarcode.replaceAll('www.facesbyplaces.com/?q=', '').split('-');
+
+    // List<dynamic> newValue = _scanBarcode.split('-');
 
     if(_scanBarcode != 'Error'){
       if(newValue[0] == 'Memorial'){

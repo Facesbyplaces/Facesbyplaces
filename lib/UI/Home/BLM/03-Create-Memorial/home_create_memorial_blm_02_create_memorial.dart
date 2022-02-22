@@ -105,7 +105,8 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> with Tic
 
   Future getCroppedImage() async{
     try{
-      File? croppedFile = await ImageCropper.cropImage(
+      final imageCropper = ImageCropper();
+      File? croppedFile = await imageCropper.cropImage(
         sourcePath: profileImage.value.path,
         aspectRatioPresets: [
           CropAspectRatioPreset.square,

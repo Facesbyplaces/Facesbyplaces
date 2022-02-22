@@ -32,7 +32,8 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
 
   Future getCroppedImage() async{
     try{
-      File? croppedFile = await ImageCropper.cropImage(
+      final imageCropper = ImageCropper();
+      File? croppedFile = await imageCropper.cropImage(
         sourcePath: image.value.path,
         aspectRatioPresets: [
           CropAspectRatioPreset.square,

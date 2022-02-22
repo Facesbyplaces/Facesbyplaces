@@ -57,7 +57,8 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
 
   Future getCroppedImage() async{
     try{
-      File? croppedFile = await ImageCropper.cropImage(
+      final imageCropper = ImageCropper();
+      File? croppedFile = await imageCropper.cropImage(
         sourcePath: profileImage.value.path,
         aspectRatioPresets: [
           CropAspectRatioPreset.square,
